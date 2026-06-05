@@ -1,5 +1,7 @@
 event_inherited();
 
+faction = "player";
+
 cursor = global.cursor;
 
 audio_listener_position(x, y, 0);

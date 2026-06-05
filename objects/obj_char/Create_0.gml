@@ -33,13 +33,11 @@ meleeHitList = [];
 
 sprites = {
 
-	//left: spr_playerLeft,
-	//right: spr_playerRight,
-	//proneLeft: spr_playerProneLeft,
-	//proneRight: spr_playerProneRight,
-	//climbLeft: spr_playerClimbLeft,
-	//climbRight: spr_playerClimbRight,
-	//death: spr_berthaDeath
+	left: spr_player,
+	right: spr_player,
+	up: spr_player,
+	down: spr_player,
+	death: spr_death
 	
 }
 

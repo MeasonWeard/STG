@@ -1,19 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_test",
+  "%Name":"obj_enemy",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_test",
+  "name":"obj_enemy",
   "overriddenProperties":[],
   "parent":{
     "name":"Chars",
     "path":"folders/Objects/Chars.yy",
   },
   "parentObjectId":{
-    "name":"obj_enemy",
-    "path":"objects/obj_enemy/obj_enemy.yy",
+    "name":"obj_char",
+    "path":"objects/obj_char/obj_char.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -32,10 +32,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_test",
-    "path":"sprites/spr_test/spr_test.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

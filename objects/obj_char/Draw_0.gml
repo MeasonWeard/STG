@@ -2,6 +2,11 @@ event_inherited();
 
 draw_self();
 
+if (damageFlash > 0) {
+
+	draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_red, image_alpha);
+	
+}
 
 if (global.debug) {
 	

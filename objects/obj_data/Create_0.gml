@@ -37,6 +37,7 @@ enum layers {
 	physical = 0,
 	decorations = 800,
 	ground = 900,
+	projectiles = -400,
 	effects = -500,
 	lighting = -700,
 	borders = -800,

@@ -4,7 +4,7 @@ tilemap = layer_tilemap_get_id("tiles_collision");
 
 destroyEffect = spr_bulletExplosion;
 
-depth = layers.physical -y;
+depth = layers.projectiles;
 
 dir = 0;
 spd = 12;
