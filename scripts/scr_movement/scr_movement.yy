@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_movement",
+  "parent":{
+    "name":"stg",
+    "path":"stg.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

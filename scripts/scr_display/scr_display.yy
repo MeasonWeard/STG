@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_display",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_display",
+  "parent":{
+    "name":"stg",
+    "path":"stg.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

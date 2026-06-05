@@ -1,0 +1,1 @@
+camera_set_view_pos(cam, x - viewW * 0.5, y - viewH * 0.5);
