@@ -18,6 +18,72 @@ function scr_stages_getStageData(key) {
 
 }
 
+function scr_stages_isCellValid(xx, yy) {
+	
+	var map = global.runController.map;
+	
+	if (!is_array(map)) return false;
+	
+	var width = array_length(map);
+	
+	if (xx < 0 or xx >= width) return false;
+	
+	var height = array_length(map[xx]);
+	
+	if (yy < 0 or yy >= height) return false;
+	
+	var cell = map[xx][yy];
+	
+	if (!is_struct(cell)) return false;
+	
+	if (!variable_struct_exists(cell, "room")) return false;
+	if (is_undefined(cell.room)) return false;
+	
+	return true;
+	
+}
+
+function scr_stages_isCellInDirValid(dir) {
+
+	var cell = scr_stages_getCellInDir(dir);
+	
+	if (cell == undefined) return false;
+	
+	return true;
+	
+}
+
+function scr_stages_getCellAt(xx, yy) {
+	
+	var valid = scr_stages_isCellValid(xx, yy);
+	
+	if (!valid) return undefined;
+	
+	return global.runController.map[xx][yy];
+	
+}
+
+function scr_stages_getCellInDir(dir) {
+
+	var rc = global.runController;
+	var map = rc.map;
+	
+	var xx = rc.posX;
+	var yy = rc.posY;
+	
+	if (dir == 0 or dir == "up") yy --;
+	else if (dir == 1 or dir == "right") xx ++;
+	else if (dir == 2 or dir == "down") yy ++;
+	else if (dir == 3 or dir == "left") xx --;
+	else return undefined;
+	
+	var valid = scr_stages_isCellValid(xx, yy);
+	
+	if (!valid) return undefined;
+	
+	return map[xx][yy];
+	
+}
 
 /// @function scr_stages_goToStage(stageRef)
 /// @param {string|struct} stageRef Stage key or map cell struct.

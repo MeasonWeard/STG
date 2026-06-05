@@ -20,9 +20,9 @@ defaultSettings = {
 
 enum layers {
 	
-	physical = -100,
-	ground = 0,
-	items = -200,
+	physical = 0,
+	decorations = 800,
+	ground = 900,
 	effects = -500,
 	lighting = -700,
 	borders = -800,

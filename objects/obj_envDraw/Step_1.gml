@@ -6,7 +6,6 @@ if (buildWallList) {
 
 	with (obj_wall) {
 		array_push(wallObjList, id);
-		show_debug_message("pushing obj: " + string(id));
 	}
 
 	array_sort(wallObjList, function(a, b) {
@@ -20,7 +19,6 @@ if (buildWallList) {
 	for (var i = 0; i < len; i++) {
 		var spr = wallObjList[i].sprite_index
 		array_push(wallList, spr);
-		show_debug_message("pushing sprite: " + string(spr));
 	}
 	
 }

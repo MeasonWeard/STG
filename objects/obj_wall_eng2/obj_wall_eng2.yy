@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_wall_engineering1",
+  "%Name":"obj_wall_eng2",
   "eventList":[],
   "managed":true,
-  "name":"obj_wall_engineering1",
+  "name":"obj_wall_eng2",
   "overriddenProperties":[],
   "parent":{
     "name":"Walls",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wall_engineering1",
-    "path":"sprites/spr_wall_engineering1/spr_wall_engineering1.yy",
+    "name":"spr_wall_eng2",
+    "path":"sprites/spr_wall_eng2/spr_wall_eng2.yy",
   },
   "spriteMaskId":null,
   "visible":true,

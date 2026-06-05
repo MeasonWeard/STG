@@ -1,3 +1,5 @@
+global.runController = self;
+
 mapW = 12;
 mapH = 12;
 

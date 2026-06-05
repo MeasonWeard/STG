@@ -21,7 +21,6 @@ if (drawWalls) {
 			var spr = wallList[wallIndex];
 			var xx = i * wallWidth;
 		
-			show_debug_message("drawing sprite: " + string(spr));
 			draw_sprite(spr, 0, xx, wallHeight);
 			
 			wallIndex ++;
@@ -38,7 +37,6 @@ if (drawWalls) {
 
 if (surface_exists(wallSurface)) {
 	
-	show_debug_message("drawing walls");
 	draw_surface(wallSurface, 0, -wallHeight);
 	
 }

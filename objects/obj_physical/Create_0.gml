@@ -1,4 +1,4 @@
-depth = -y;
+depth = layers.physical -y;
 
 movedThisStep = false;
 canMove = true;
