@@ -4,6 +4,9 @@ camY = camera_get_view_y(cam);
 instructionsX = camX + camW - 64;
 instructionsY = camY + 64;
 
+var mapX = camX + 32;
+var mapY = camY + 32;
+
 //instructions
 if (is_string(instructions) and instructionsTick > 0) {
 
@@ -37,3 +40,6 @@ if (is_string(instructions) and instructionsTick > 0) {
 	scr_misc_resetTextAlignment();
 	
 }
+
+//minimap
+scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, rc.posX, rc.posY);

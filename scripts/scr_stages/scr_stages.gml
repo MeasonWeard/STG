@@ -97,13 +97,61 @@ function scr_stages_goToStage(stageRef) {
 	} else if (is_struct(stageRef) and variable_struct_exists(stageRef, "room")) {
 		data = stageRef;
 	} else {
-		return;
+		return false;
 	}
 
-	if (!is_struct(data)) return;
-	if (!variable_struct_exists(data, "room")) return;
-	if (is_undefined(data.room)) return;
+	if (!is_struct(data)) return false;
+	if (!variable_struct_exists(data, "room")) return false;
+	if (is_undefined(data.room)) return false;
 
 	room_goto(data.room);
+
+	return true;
+	
+}
+
+function scr_stages_moveInDir(dir) {
+
+	var rc = global.runController;
+	var xx = rc.posX;
+	var yy = rc.posY;
+	
+	if (!scr_stages_isCellInDirValid(dir)) return false;
+	
+	if (dir == 0 or dir == "up") yy --;
+	else if (dir == 1 or dir == "right") xx ++;
+	else if (dir == 2 or dir == "down") yy ++;
+	else if (dir == 3 or dir == "left") xx --;
+	else return false;
+	
+	var cell = scr_stages_getCellAt(xx, yy);
+	
+	var success = scr_stages_goToStage(cell);
+	
+	if (success) {
+		rc.posX = xx;
+		rc.posY = yy;
+	}
+	
+	return success;
+	
+}
+
+function scr_stages_goToCell(xx, yy) {
+
+	var rc = global.runController;
+	
+	if (!scr_stages_isCellValid(xx, yy)) return false;
+	
+	var cell = scr_stages_getCellAt(xx, yy);
+	
+	var success = scr_stages_goToStage(cell);
+	
+	if (success) {
+		rc.posX = xx;
+		rc.posY = yy;
+	}
+	
+	return success;
 	
 }

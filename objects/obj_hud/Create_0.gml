@@ -14,3 +14,5 @@ camX = camera_get_view_x(cam);
 camY = camera_get_view_y(cam);
 camH = camera_get_view_height(cam)
 camW = camera_get_view_width(cam);
+
+miniMap = scr_mapGen_createMiniMap(rc.map, true);

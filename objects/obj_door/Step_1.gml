@@ -90,8 +90,8 @@ if (initialiseArea) {
 	
 		areaTop = y - sprH;
 		areaBottom = y;
-		areaLeft = x - halfW;
-		areaRight = areaLeft - areaDist;
+		areaRight = x - halfW;
+		areaLeft = areaRight - areaDist;
 	
 	}
 	
