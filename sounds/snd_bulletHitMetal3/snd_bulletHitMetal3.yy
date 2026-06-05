@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"snd_bulletHitMetal3",
+  "audioGroupId":{
+    "name":"audiogroup_sfx",
+    "path":"audiogroups/audiogroup_sfx",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.5464626,
+  "exportDir":"",
+  "name":"snd_bulletHitMetal3",
+  "parent":{
+    "name":"Bullet Hit Sounds",
+    "path":"folders/Sounds/Bullet Hit Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_bulletHitMetal3.wav",
+  "volume":0.8,
+}

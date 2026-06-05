@@ -18,7 +18,7 @@ damageFlash = 0;
 thornsDamage = 0;
 thornsAttackRate = 1;
 thornsTurnIndex = -1;
-thornsSounds = undefined;//global.data.soundProfiles.burn;
+thornsSounds = global.data.soundProfiles.burn;
 
 activationTurnIndex = -1;
 
@@ -45,7 +45,7 @@ sprites = {
 
 bloodCol = c_red;
 bulletHitSounds = "bulletHitFlesh";
-deathSounds = undefined;//global.data.soundProfiles.fleshExplod;
+deathSounds = global.data.soundProfiles.fleshExplod;
 
 deathFunc = undefined;
 bulletHitFunc = undefined;//scr_effects_bulletHitFlesh;

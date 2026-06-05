@@ -4,8 +4,8 @@ function scr_melee_createWeapon(name) {
 
 		//appearance and sound
 		name: name,
-		swingSounds: undefined,//global.data.soundProfiles.cleaverSwing,
-		hitSounds: undefined,//global.data.soundProfiles.cleaverHit,
+		swingSounds: global.data.soundProfiles.cleaverSwing,
+		hitSounds: global.data.soundProfiles.cleaverHit,
 		attackSprites: [spr_slashUp, spr_slashDown],
 		
 		//combat
