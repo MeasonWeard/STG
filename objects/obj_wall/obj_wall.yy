@@ -10,8 +10,8 @@
   "name":"obj_wall",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Walls",
+    "path":"folders/Objects/Environment/Walls.yy",
   },
   "parentObjectId":null,
   "persistent":false,

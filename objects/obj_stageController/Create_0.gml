@@ -1,7 +1,7 @@
 global.stageController = self;
 global.player = scr_obj_createExclusive(obj_player, 30, 30);
 global.camera = scr_obj_createExclusive(obj_camera, global.player.x, global.player.y);
-global.env = scr_obj_createExclusive(obj_env, 0, 0);
+global.env = scr_obj_createExclusive(obj_envDraw, 0, 0);
 
 global.roomLeft = 2;
 global.roomRight = room_width - 2;

@@ -10,8 +10,8 @@
   "name":"obj_stageController",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Meta",
+    "path":"folders/Objects/Meta.yy",
   },
   "parentObjectId":null,
   "persistent":false,

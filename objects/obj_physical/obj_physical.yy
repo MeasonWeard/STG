@@ -9,8 +9,8 @@
   "name":"obj_physical",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Objects",
+    "path":"folders/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -9,8 +9,8 @@
   "name":"obj_displayController",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Meta",
+    "path":"folders/Objects/Meta.yy",
   },
   "parentObjectId":null,
   "persistent":true,

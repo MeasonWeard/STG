@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_movement",
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -37,7 +37,24 @@ enum projectileTypes {
 	
 }
 
-//ingredients
+//stages
+stages = {
+
+	def: {
+	
+		room: undefined,
+		name: "none",
+		mapCol: c_blue
+	
+	},
+
+	engHall1: {
+		
+		room: stage_engHall1
+		
+	}
+	
+}
 
 
 //LOAD GAME

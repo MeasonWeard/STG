@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_misc",
+  "%Name":"scr_mapGen",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_misc",
+  "name":"scr_mapGen",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

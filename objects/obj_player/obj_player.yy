@@ -10,8 +10,8 @@
   "name":"obj_player",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Chars",
+    "path":"folders/Objects/Chars.yy",
   },
   "parentObjectId":{
     "name":"obj_char",

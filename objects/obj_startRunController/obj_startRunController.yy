@@ -1,20 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_char",
+  "%Name":"obj_startRunController",
   "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_char",
+  "name":"obj_startRunController",
   "overriddenProperties":[],
   "parent":{
-    "name":"Chars",
-    "path":"folders/Objects/Chars.yy",
+    "name":"Meta",
+    "path":"folders/Objects/Meta.yy",
   },
-  "parentObjectId":{
-    "name":"obj_physical",
-    "path":"objects/obj_physical/obj_physical.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

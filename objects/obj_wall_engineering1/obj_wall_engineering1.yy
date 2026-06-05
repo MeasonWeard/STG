@@ -6,8 +6,8 @@
   "name":"obj_wall_engineering1",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Walls",
+    "path":"folders/Objects/Environment/Walls.yy",
   },
   "parentObjectId":{
     "name":"obj_wall",

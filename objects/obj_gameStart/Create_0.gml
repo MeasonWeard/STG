@@ -13,4 +13,4 @@ global.debug = true;
 //UH
 window_set_cursor(cr_none);
 
-room_goto(room_stage);
+room_goto(room_startRun);

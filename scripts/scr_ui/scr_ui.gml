@@ -32,3 +32,44 @@ function scr_ui_convertToScreenSpace(xx, yy) {
 	}
 	
 }
+
+function scr_ui_drawMiniMap(miniMap, cellSize, xx, yy, flashX, flashY) {
+
+	var mapW = array_length(miniMap);
+	if (mapW <= 0) return;
+
+	var mapH = array_length(miniMap[0]);
+
+	var flash = is_real(flashX) and is_real(flashY) and flashX >= 0 and flashX < mapW
+	and flashY >= 0 and flashY < mapH and ((current_time div 500) mod 2 == 0);
+
+	for (var mx = 0; mx < mapW; mx++) {
+
+		for (var my = 0; my < mapH; my++) {
+
+			var col = miniMap[mx][my];
+
+			if (flash and mx == flashX and my == flashY) {
+				col = c_white;
+			}
+
+			var left   = xx + (mx * cellSize);
+			var top    = yy + (my * cellSize);
+			var right  = left + cellSize;
+			var bottom = top + cellSize;
+
+			// Fill
+			draw_set_colour(col);
+			draw_rectangle(left, top, right, bottom, false);
+
+			// Border
+			draw_set_colour(c_white);
+			draw_rectangle(left, top, right, bottom, true);
+
+		}
+
+	}
+
+	draw_set_colour(c_white);
+
+}

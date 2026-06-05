@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_test",
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
