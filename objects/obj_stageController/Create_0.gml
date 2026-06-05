@@ -9,6 +9,44 @@ global.roomLeft = 2;
 global.roomRight = room_width - 2;
 global.roomTop = 2;
 global.roomBottom = room_height - 2;
+global.projectileTop = global.roomTop - 64;
 
 var layerId = layer_get_id("Tiles");
 layer_depth(layerId, layers.ground);
+
+//projectile pool
+projectilePool = [];
+procectilePoolLen = 100;
+for (var i = 0; i < procectilePoolLen; i++) {
+
+	var newProj = instance_create_layer(0, 0, "Instances", obj_projectile);
+	array_push(projectilePool, newProj);
+	
+}
+
+//time slicing
+timeSlicing = {
+
+	thorns: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 4
+	},
+	
+	los: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 12
+	},
+	
+	activation: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 8
+	}
+	
+}
+
+//spatial hashing
+charHash = {};
+itemHash = {};

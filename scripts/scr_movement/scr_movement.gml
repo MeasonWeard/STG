@@ -18,8 +18,6 @@ function scr_movement() {
 	
 	}
 
-
-	
 	if (confineToBounds) {
 		
 		x = clamp(x + moveX, global.roomLeft, global.roomRight);
@@ -33,5 +31,17 @@ function scr_movement() {
 	}
 	
 	if (x != prevX or y != prevY) movedThisStep = true;
+	
+	if (movedThisStep) {
+	
+		colRight = bbox_right - 1;
+		colLeft = bbox_left;
+		colCentre = (colLeft + colRight) * 0.5;
+		
+		colTop = bbox_top + 1;
+		colBottom = bbox_bottom - 1;
+		colMiddle = (colTop + colBottom) * 0.5;
+	
+	}
 
 }

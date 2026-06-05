@@ -1,0 +1,3 @@
+if (!active) exit;
+
+draw_self();

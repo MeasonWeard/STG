@@ -1,0 +1,1 @@
+if (destroyNextFrame) instance_destroy();

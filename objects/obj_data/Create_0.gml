@@ -1,5 +1,14 @@
 global.data = self;
 
+#macro HASH_CELL_SIZE 256
+#macro MIN_FALLOFF 400
+#macro MAX_FALLOFF 1200
+#macro FALLOFF_FACTOR 1
+#macro MIN_FALLOFF_BULLETHIT 100
+#macro MAX_FALLOFF_BULLETHIT 1200
+#macro FALLOFF_FACTOR_BULLETHIT 1.2
+#macro THORNS_IMMUNITY_TIME 0.5
+
 //display
 resolutions = [];
 resolutionIndex = 0;
@@ -15,6 +24,11 @@ defaultSettings = {
 
 	windowed: false,
 	res: [1280, 720],
+	
+	showReloadOnCursor: true,
+	showMeleeOnCursor: true,
+	showSkillsOnCursor: true,
+	showAmmoOnCursor: true
 	
 }
 
@@ -53,6 +67,33 @@ stages = {
 		room: stage_engHall1
 		
 	}
+	
+}
+
+soundProfiles = {
+
+	//bullet hits
+	bulletHitMetal: [],//[snd_bulletHitMetal1, snd_bulletHitMetal2, snd_bulletHitMetal3, snd_bulletHitMetal4],
+	bulletHitFlesh: [],//[snd_bulletHitFlesh],
+	bulletHitRock: [],//[snd_bulletHitRock1, snd_bulletHitRock2, snd_bulletHitRock3],
+	
+	//gunshots
+	blaster: [snd_blaster1, snd_blaster2, snd_blaster3],
+	smg: [],//[snd_smg1, snd_smg2, snd_smg3],
+	shotgun: [],//[snd_shotgun1, snd_shotgun2, snd_shotgun3],
+	pistol: [],//[snd_pistol1, snd_pistol2, snd_pistol3],
+	
+	//melee
+	cleaverSwing: [],//[snd_cleaverSwing1, snd_cleaverSwing2, snd_cleaverSwing3],
+	cleaverHit: [],//[snd_cleaverHit1, snd_cleaverHit2, snd_cleaverHit3],
+	
+	//characters
+	jeffDeath: [],//[snd_jeffDeath1, snd_jeffDeath2, snd_jeffDeath3],
+	
+	//sfx
+	fleshExplod: [],//[snd_fleshExplode1, snd_fleshExplode2, snd_fleshExplode3],
+	burn: [],//[snd_burn1, snd_burn2, snd_burn3],
+	microMissile: []//[snd_microMissile1, snd_microMissile2, snd_microMissile3]
 	
 }
 
