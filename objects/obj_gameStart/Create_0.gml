@@ -8,7 +8,8 @@ global.data = scr_obj_createExclusive(obj_data, x, y);
 global.display = scr_obj_createExclusive(obj_displayController, x, y);
 global.cursor = scr_obj_createExclusive(obj_cursor, x, y);
 
-global.debug = true;
+global.debug = false;
+global.devControls = true;
 
 //UH
 window_set_cursor(cr_none);

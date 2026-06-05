@@ -1,4 +1,4 @@
-if (global.debug) {
+if (global.devControls) {
 
 	if (keyboard_check_pressed(vk_home)) {
    
@@ -21,6 +21,12 @@ if (global.debug) {
 	if (keyboard_check_pressed(vk_escape)) {
    
 		game_end();
+	
+	}
+	
+	if (keyboard_check_pressed(vk_subtract)) {
+   
+		global.debug = !global.debug;
 	
 	}
 

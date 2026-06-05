@@ -73,3 +73,18 @@ function scr_ui_drawMiniMap(miniMap, cellSize, xx, yy, flashX, flashY) {
 	draw_set_colour(c_white);
 
 }
+
+function scr_ui_displayInstructions(text, extraTime) {
+
+	var extraTick = extraTime * 60;
+
+	if (extraTick == 0) extraTick = 2;
+
+	var hud = global.hud;
+
+	if (hud.instructions != text) hud.instructionsFlash = 120;
+
+	hud.instructions = text;
+	hud.instructionsTick = extraTick;
+	
+}

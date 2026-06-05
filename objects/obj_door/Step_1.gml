@@ -49,3 +49,50 @@ if (side == "top" and initialiseDoors) {
 	if (!scr_stages_isCellInDirValid("up")) instance_destroy();
 	
 }
+
+if (initialiseArea) {
+
+	initialiseArea = false;
+	
+	var sprW = sprite_width;
+	var sprH = sprite_height;
+	var halfW = sprW * 0.5;
+	var halfH = sprH * 0.5;
+
+	if (side == "top") {
+	
+		areaTop = y;
+		areaBottom = y + areaDist;
+		areaLeft = x - halfW;
+		areaRight = x + halfW;
+	
+	}
+	
+	if (side == "bottom") {
+	
+		areaTop = y - sprH - areaDist;
+		areaBottom = y - sprH;
+		areaLeft = x - halfW;
+		areaRight = x + halfW;
+	
+	}
+	
+	if (side == "left") {
+	
+		areaTop = y - sprH;
+		areaBottom = y;
+		areaLeft = x + halfW;
+		areaRight = areaLeft + areaDist;
+	
+	}
+	
+	if (side == "right") {
+	
+		areaTop = y - sprH;
+		areaBottom = y;
+		areaLeft = x - halfW;
+		areaRight = areaLeft - areaDist;
+	
+	}
+	
+}

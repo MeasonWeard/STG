@@ -1,4 +1,4 @@
-if (global.debug) {
+if (global.devControls) {
 
 	if (keyboard_check_pressed(vk_home)) {
    
