@@ -96,6 +96,7 @@ function scr_mapGen_createCell(key) {
 
 	var newCell = scr_stages_getStageData(key);
 	
+	newCell.seed = scr_random_generateSeed();
 	newCell.discovered = false;
 	newCell.visited = false;
 	newCell.cleared = false;

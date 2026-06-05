@@ -33,6 +33,7 @@
     {"name":"scr_misc","order":3,"path":"scripts/scr_misc/scr_misc.yy",},
     {"name":"scr_movement","order":4,"path":"scripts/scr_movement/scr_movement.yy",},
     {"name":"scr_obj","order":5,"path":"scripts/scr_obj/scr_obj.yy",},
+    {"name":"scr_random","order":17,"path":"scripts/scr_random/scr_random.yy",},
     {"name":"scr_stages","order":6,"path":"scripts/scr_stages/scr_stages.yy",},
     {"name":"scr_ui","order":7,"path":"scripts/scr_ui/scr_ui.yy",},
     {"name":"spr_controller","order":8,"path":"sprites/spr_controller/spr_controller.yy",},

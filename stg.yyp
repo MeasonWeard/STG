@@ -59,6 +59,7 @@
     {"id":{"name":"scr_misc","path":"scripts/scr_misc/scr_misc.yy",},},
     {"id":{"name":"scr_movement","path":"scripts/scr_movement/scr_movement.yy",},},
     {"id":{"name":"scr_obj","path":"scripts/scr_obj/scr_obj.yy",},},
+    {"id":{"name":"scr_random","path":"scripts/scr_random/scr_random.yy",},},
     {"id":{"name":"scr_stages","path":"scripts/scr_stages/scr_stages.yy",},},
     {"id":{"name":"scr_ui","path":"scripts/scr_ui/scr_ui.yy",},},
     {"id":{"name":"snd_test","path":"sounds/snd_test/snd_test.yy",},},
