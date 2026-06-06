@@ -14,3 +14,6 @@ var gun = scr_guns_createGun("test");
 guns = [gun];
 
 melee = scr_melee_createWeapon("test");
+
+gunCentred = false;
+//gunYoffset = 64;

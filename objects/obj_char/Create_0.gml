@@ -56,6 +56,7 @@ gunDist = 32;
 dir = choose(0, 1, 2, 3);
 
 gunCentred = false;
+customGunOffset = false;
 
 centreX = x + gunXoffset * dir;
 centreY = y - gunYoffset;

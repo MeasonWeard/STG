@@ -7,7 +7,7 @@ if (setup) {
 	hp = maxHp;
 	armour = maxArmour;
 	
-	gunYoffset = 0;//(sprite_get_height(sprites.left) * image_yscale) * 0.66;
+	if (!customGunOffset) gunYoffset = (sprite_get_height(sprites.down) * image_yscale) * 0.5;
 	
 	var gunsLen = array_length(guns);
 	

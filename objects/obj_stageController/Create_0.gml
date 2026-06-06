@@ -49,4 +49,5 @@ timeSlicing = {
 
 //spatial hashing
 charHash = {};
+envHash = {};
 itemHash = {};

@@ -10,8 +10,8 @@
   "name":"obj_meleeAttack",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Projectiles and attacks",
+    "path":"folders/Objects/Projectiles and attacks.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -13,6 +13,7 @@ if (global.debug) {
 	draw_sprite(spr_point, 0, gunX, gunY);
 	draw_sprite(spr_point, 0, aimX, aimY);
 	draw_sprite(spr_point2, 0, x, y);
+	draw_sprite(spr_point2, 0, centreX, centreY);
 	draw_text(x - 32, y + 32, string(hp) + "/" + string(maxHp));
 	
 	var prevCol = draw_get_colour();
