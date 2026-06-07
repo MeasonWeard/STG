@@ -37,6 +37,33 @@ function scr_obj_collision(objA, objB, overlap) {
 	
 }
 
+function scr_obj_movementCollision(objA, objB, overlap) {
+
+	if (!instance_exists(objA)) return false;
+	if (!instance_exists(objB)) return false;
+
+	if (overlap) {
+
+		return (
+			objA.movRight > objB.colLeft and
+			objA.movLeft < objB.colRight and
+			objA.movBottom > objB.colTop and
+			objA.movTop < objB.colBottom
+		);
+
+	} else {
+
+		return (
+			objA.movRight >= objB.colLeft and
+			objA.movLeft <= objB.colRight and
+			objA.movBottom >= objB.colTop and
+			objA.movTop <= objB.colBottom
+		);
+
+	}
+
+}
+
 function scr_obj_circleOverlaps(circleX, circleY, radius, obj) {
 
 	if (!instance_exists(obj)) return false;

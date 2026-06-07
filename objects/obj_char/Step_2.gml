@@ -3,17 +3,37 @@ event_inherited();
 //gun
 if (is_struct(gun)) {
 
-	gun.fireTick --; //max(0, gun.fireTick - 1);
+    var slot = guns[gunIndex];
+    var gunStats = slot.stats;
+
+    gun.fireTick--;
+
+    if (gun.fireTick < 0) gun.fireTick = 0;
+
+    gun.aimOff = max(gunStats.minAimOff, gun.aimOff - gunStats.stability);
+
+    //reload
+    if (gun.reload > 0) {
+		
+        gun.reload--;
+
+        if (gun.reload == 0) {
+            gun.ammo = gunStats.clipSize;
+        }
+		
+    }
+
+	//gun.fireTick --; //max(0, gun.fireTick - 1);
 	
-	if (gun.fireTick < 0) gun.fireTick = 0;
+	//if (gun.fireTick < 0) gun.fireTick = 0;
 	
-	gun.aimOff = max(gun.minAimOff, gun.aimOff - gun.stability);
+	//gun.aimOff = max(gun.minAimOff, gun.aimOff - gun.stability);
 	
-	//reload
-	if (gun.reload > 0) {
-		gun.reload --;
-		if (gun.reload == 0) gun.ammo = gun.clipSize;
-	}
+	////reload
+	//if (gun.reload > 0) {
+	//	gun.reload --;
+	//	if (gun.reload == 0) gun.ammo = gun.clipSize;
+	//}
 	
 }
 

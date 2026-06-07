@@ -1,3 +1,3 @@
 depth = layers.physical -y;
 
-if (canMove) scr_movement();
+if (canMove) scr_movement(blockedByEnv);

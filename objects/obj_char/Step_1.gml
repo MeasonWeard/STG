@@ -13,15 +13,20 @@ if (setup) {
 	
 	for (var i = 0 ; i < gunsLen; i ++) {
 	
-		var thisGun = guns[i];
+		var slot = guns[i];
+		var thisGun = slot.gun;
+		var gunStats = slot.stats;
 	
 		if (is_struct(thisGun)) {
 	
-			thisGun.ammo = thisGun.clipSize;
+			thisGun.ammo = gunStats.clipSize;
 	
 		}
 	
 	}
+	
+	gunIndex = 0;
+	scr_guns_equipGun(self, gunIndex);
 	
 	if (thornsDamage > 0) {
 		thornsTurnIndex = scr_timeSlicing_assignTurnIndex("thorns");

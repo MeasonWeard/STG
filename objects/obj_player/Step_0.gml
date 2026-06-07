@@ -27,7 +27,7 @@ if (shooting) {
 
 if (keyboard_check_pressed(ord("R"))) {
 
-	if (is_struct(gun) and !gun.temporary and gun.reload == 0) scr_guns_reload(gun);
+	if (is_struct(gun) and !gun.temporary and gun.reload == 0) scr_guns_reloadCurrent(self);
 	
 }
 
@@ -41,7 +41,8 @@ if (gunIndex >= gunsLen) gunIndex = 0;
 
 if (gunsLen > 0) {
 	
-	gun = guns[gunIndex];
+	scr_guns_equipGun(self, gunIndex);
+	//gun = guns[gunIndex].gun;
 	
 } else {
 

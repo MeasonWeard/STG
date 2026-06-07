@@ -62,24 +62,29 @@ function scr_projectiles_shoot(char) {
 	//TO DO: it would be good to only set all of these values if projectile create != noone
 
 	var gun = char.gun;
+	var gunStats = char.gunStats;
 
-	var projType = gun.projectileType;
+	
 	var gunX = char.gunX;
 	var gunY = char.gunY;
-	var spd = gun.spd;
-	var sprite = gun.projSprite;
-	var damage = gun.damage;
 	var aimX = char.aimX;
 	var aimY = char.aimY;
-	var range = gun.range;
 	var faction = char.faction;
-	var collisionFunc = char.gun.collisionFunc;
+	
+	var projType = gunStats.projectileType;
+	var spd = gunStats.spd;
+	var sprite = gunStats.projSprite;
+	var damage = gunStats.damage;
+	var range = gunStats.range;
+	var collisionFunc = gunStats.collisionFunc;
+	var maxAimOff = gunStats.maxAimOff;
+	var recoil = gunStats.recoil;
 	
 	var dir = point_direction(gunX, gunY, aimX, aimY);
 	var aimOff = random_range(-gun.aimOff, gun.aimOff);
 	dir += aimOff;
 	
-	gun.aimOff = min(gun.maxAimOff, gun.aimOff + gun.recoil);
+	gun.aimOff = min(maxAimOff, gun.aimOff + recoil);
 
 	var proj = noone;
 
@@ -92,8 +97,8 @@ function scr_projectiles_shoot(char) {
 	
 	if (projType == projectileTypes.blast) {
 	
-		var projNum = gun.blastProjectiles;
-		var spread = gun.blastSpread;
+		var projNum = gunStats.blastProjectiles;
+		var spread = gunStats.blastSpread;
 		var jiggle = spread * 0.5;
 	
 		var step = 0;

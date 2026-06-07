@@ -75,4 +75,6 @@ melee = undefined;
 guns = [];
 gunIndex = 0;
 
+gunStats = undefined;
+
 active = false;
