@@ -118,7 +118,7 @@ function scr_movement(blockedByEnv) {
 		
 		}
 		
-		scr_movement_updateMovementHitBox();
+		//scr_movement_updateMovementHitBox();
 		
 	}
 
