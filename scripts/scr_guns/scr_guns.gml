@@ -18,7 +18,14 @@ function scr_guns_createGun(name) {
 		blastProjectiles: 5,
 		blastSpread: 10,
 		
-		damage: 12,
+		damage: {
+			kin: 12,
+			fire: 0,
+			chem: 0,
+			elec: 0,
+			rad: 0
+		},
+		
 		spd: 22,
 		range: 1600,
 		collisionFunc: undefined,
@@ -155,16 +162,6 @@ function scr_guns_collectGun(char, gun, equip) {
     
 	if (equip) scr_guns_equipGun(char, array_length(char.guns) - 1);
 	
-	//if (!instance_exists(char)) exit;
-	
-	//gun.ammo = gun.clipSize;
-	
-	//array_push(char.guns, gun);
-	
-	//var len = array_length(char.guns);
-	
-	//char.gunIndex = len - 1;
-	
 }
 
 function scr_guns_equipGun(char, index) {
@@ -195,9 +192,50 @@ function scr_guns_calculateGunStats(char, gun) {
 	
 	scr_data_structCopyInto(stats, gun);
 	
-	//manipulate gun stats based on player stats
+	stats.damage.kin = scr_char_calculateStat(stats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+	stats.damage.fire = scr_char_calculateStat(stats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+	stats.damage.chem = scr_char_calculateStat(stats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+	stats.damage.elec = scr_char_calculateStat(stats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+	stats.damage.rad = scr_char_calculateStat(stats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	
+	var range = scr_guns_calculateDamageRange(stats.damage.kin);
+	stats.damage.kinMin = range.minDam;
+	stats.damage.kinMax = range.maxDam;
+	
+	range = scr_guns_calculateDamageRange(stats.damage.fire);
+	stats.damage.fireMin = range.minDam;
+	stats.damage.fireMax = range.maxDam;
+	
+	range = scr_guns_calculateDamageRange(stats.damage.chem);
+	stats.damage.chemMin = range.minDam;
+	stats.damage.chemMax = range.maxDam;
+	
+	range = scr_guns_calculateDamageRange(stats.damage.elec);
+	stats.damage.elecMin = range.minDam;
+	stats.damage.elecMax = range.maxDam;
+	
+	range = scr_guns_calculateDamageRange(stats.damage.rad);
+	stats.damage.radMin = range.minDam;
+	stats.damage.radMax = range.maxDam;
 	
 	return stats;
+	
+}
+
+function scr_guns_calculateDamageRange(dam) {
+
+	if (dam < 1) return {
+		minDam: 0,
+		maxDam: 0
+	};
+
+	var minDam = floor(dam * 0.8);
+	var maxDam = ceil(dam * 1.2);
+	
+	return {
+		minDam: minDam,
+		maxDam: maxDam
+	}
 	
 }
 

@@ -1,6 +1,5 @@
 active = false;
 sc = global.stageController;
-tilemap = layer_tilemap_get_id("tiles_collision");
 
 destroyEffect = spr_bulletExplosion;
 

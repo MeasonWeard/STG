@@ -42,7 +42,7 @@ function scr_gunArsenal_pistol() {
 	gun.maxAimOff = 8;
 	gun.recoil = 1.8;
 	gun.stability = 0.08;
-	gun.damage = 16;
+	gun.damage.kin = 16;
 	gun.shootSounds = global.data.soundProfiles.pistol;
 	
 	return gun;
@@ -56,7 +56,7 @@ function scr_gunArsenal_devastator(){
 	gun.collisionFunc = scr_effects_microMissile;
 	gun.clipSize = 24;
 	gun.fireRate = 16;
-	gun.damage = 4;
+	gun.damage.kin = 4;
 	gun.recoil = 1.2;
 	gun.minAimOff = 3;
 	gun.maxAimOff = 12;
@@ -74,7 +74,7 @@ function scr_gunArsenal_shotty() {
 	
 	gun.auto = true;
 	gun.fireRate = 1.4;
-	gun.damage = 9;
+	gun.damage.kin = 9;
 	gun.clipSize = 5;
 	gun.reloadTime = 2.6;
 	gun.projectileType = projectileTypes.blast;
@@ -106,7 +106,9 @@ function scr_gunArsenal_alienOrb() {
 	gun.maxAimOff = 8;
 	gun.recoil = 1.8;
 	gun.stability = 0.08;
-	gun.damage = 8;
+	
+	gun.damage.kin = 4;
+	
 	gun.shootSounds = global.data.soundProfiles.alienShoot;
 	
 	return gun;
@@ -127,7 +129,10 @@ function scr_gunArsenal_alienOrb2() {
 	gun.maxAimOff = 14;
 	gun.recoil = 2.4;
 	gun.stability = 0.06;
-	gun.damage = 4;
+	
+	gun.damage.kin = 4;
+	gun.damage.chem = 4;
+	
 	gun.shootSounds = global.data.soundProfiles.alienBlast;
 	
 	return gun;

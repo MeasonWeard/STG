@@ -10,8 +10,8 @@ setup = true;
 
 maxHp = 100;
 hp = 100;
-armour = 0;
-maxArmour = 0;
+maxShield = 0;
+shield = 0;
 prevHp = hp;
 damageFlash = 0;
 
@@ -30,6 +30,74 @@ walkSpeed = 4;
 runSpeed = 8;
 
 meleeHitList = [];
+
+stats = {
+
+	//flat health and shields
+	maxHp: 100,
+	maxShield: 0,
+	hpRegen: 0,
+	shieldRegen: 0,
+
+	//health and shields percent increase
+	maxHpPerc: 0,
+	maxShieldPerc: 0,
+	hpRegenPerc: 0,
+	shieldRegenPerc: 0,
+	
+	//flat damage
+	kinDam: 0,
+	fireDam: 0,
+	chemDam: 0,
+	elecDam: 0,
+	radDam: 0,
+
+	//damage percent increase
+	kinDamPerc: 0,
+	fireDamPerc: 0,
+	chemDamPerc: 0,
+	elecDamPerc: 0,
+	radDamPerc: 0,
+	
+	//flat resistances
+	kinRes: 0,
+	fireRes: 0,
+	chemRes: 0,
+	elecRes: 0,
+	radRes: 0,
+	
+	//resistance percent increase
+	kinResPerc: 0,
+	fireResPerc: 0,
+	chemResPerc: 0,
+	elecResPerc: 0,
+	radResPerc: 0
+	
+}
+
+finalStats = {
+
+	//health and shields
+	maxHp: 100,
+	maxShield: 0,
+	hpRegen: 0,
+	shieldRegen: 0,
+
+	//damage
+	kinDam: 0,
+	fireDam: 0,
+	chemDam: 0,
+	elecDam: 0,
+	radDam: 0,
+	
+	//resistances
+	kinRes: 0,
+	fireRes: 0,
+	chemRes: 0,
+	elecRes: 0,
+	radRes: 0,
+	
+}
 
 sprites = {
 

@@ -56,20 +56,71 @@ function scr_char_fleshExplosion(char){
 
 }
 
-function scr_char_damage(char, amount, type, ignoreArmour) {
+function scr_char_damage(char, damage, type, ignoreShield) {
 	
 	if (!instance_exists(char)) return 0;
+	if (!is_struct(damage)) return 0;
 	
-	if (!ignoreArmour and char.armour > 0) {
+	//randomise damage
+	var kin = damage.kin > 0 ? irandom_range(damage.kinMin, damage.kinMax) : 0;
+	var fire = damage.fire > 0 ? irandom_range(damage.fireMin, damage.fireMax) : 0;
+	var chem = damage.chem > 0 ?irandom_range(damage.chemMin, damage.chemMax) : 0;
+	var elec = damage.elec > 0 ?irandom_range(damage.elecMin, damage.elecMax) : 0;
+	var rad = damage.rad > 0 ? irandom_range(damage.radMin, damage.radMax) : 0;
 	
-		char.armour -= 1;
+	//apply resistances
+	var totalRes = 0;
+	var preDam = kin + fire + chem + elec + rad;
+	
+	if (kin > 0 and char.finalStats.kinRes > 0) {
+		var res = irandom_range(char.finalStats.kinResMin, char.finalStats.kinResMax);
+		kin = max(1, kin - res);
+		totalRes += res;
+	}
+	
+	if (fire > 0 and char.finalStats.fireRes > 0) {
+		var res = irandom_range(char.finalStats.fireResMin, char.finalStats.fireResMax);
+		fire = max(1, fire - res);
+		totalRes += res;
+	}
+	
+	if (chem > 0 and char.finalStats.chemRes > 0) {
+		var res = irandom_range(char.finalStats.chemResMin, char.finalStats.chemResMax);
+		chem = max(1, chem - res);
+		totalRes += res;
+	}
+	
+	if (elec > 0 and char.finalStats.elecRes > 0) {
+		var res = irandom_range(char.finalStats.elecResMin, char.finalStats.elecResMax);
+		elec = max(1, elec - res);
+		totalRes += res;
+	}
+	
+	if (rad > 0 and char.finalStats.radRes > 0) {
+		var res = irandom_range(char.finalStats.radResMin, char.finalStats.radResMax);
+		rad = max(1, rad - res);
+		totalRes += res;
+	}
+	
+	//final
+	var totalDam = kin + fire + chem + elec + rad;
+	
+	show_debug_message("dam: " + string(preDam));
+	show_debug_message("res: " + string(totalRes));
+	show_debug_message("final dam: " + string(totalDam));
+	show_debug_message("--------");
+	
+	
+	if (!ignoreShield and char.shield > 0) {
+	
+		char.shield -= 1;
 		return 0;
 	
 	}
 	
-	var lost = min(char.hp, amount);
+	var lost = min(char.hp, totalDam);
 	
-	char.hp = max(char.hp - amount, 0);
+	char.hp = max(char.hp - totalDam, 0);
 	
 	return lost;
 	
@@ -84,5 +135,78 @@ function scr_char_heal(char, amount) {
 	char.hp = min(char.hp + amount, char.maxHp);
 	
 	return min(amount, missing);
+	
+}
+
+function scr_char_calculateFinalStats(stats) {
+	
+	if (!is_struct(stats)) return undefined;
+	
+	var newStats = {
+
+		//health and shields
+		maxHp: scr_char_calculateStat(stats.maxHp, stats.maxHpPerc),
+		maxShield: scr_char_calculateStat(stats.maxShield, stats.maxShieldPerc),
+		hpRegen: scr_char_calculateStat(stats.hpRegen, stats.hpRegenPerc),
+		shieldRegen: scr_char_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
+
+		//damage
+		kinDam: scr_char_calculateStat(stats.kinDam, stats.kinDamPerc),
+		fireDam: scr_char_calculateStat(stats.fireDam, stats.fireDamPerc),
+		chemDam: scr_char_calculateStat(stats.chemDam, stats.chemDamPerc),
+		elecDam: scr_char_calculateStat(stats.elecDam, stats.elecDamPerc),
+		radDam: scr_char_calculateStat(stats.radDam, stats.radDamPerc),
+	
+		//resistances
+		kinRes: scr_char_calculateStat(stats.kinRes, stats.kinResPerc),
+		fireRes: scr_char_calculateStat(stats.fireRes, stats.fireResPerc),
+		chemRes: scr_char_calculateStat(stats.chemRes, stats.chemResPerc),
+		elecRes: scr_char_calculateStat(stats.elecRes, stats.elecResPerc),
+		radRes: scr_char_calculateStat(stats.radRes, stats.radResPerc),
+		
+	}
+	
+	var range = scr_char_calculateResistanceRange(newStats.kinRes);
+	newStats.kinResMin = range.minRes;
+	newStats.kinResMax = range.maxRes;
+	
+	range = scr_char_calculateResistanceRange(newStats.fireRes);
+	newStats.fireResMin = range.minRes;
+	newStats.fireResMax = range.maxRes;
+	
+	range = scr_char_calculateResistanceRange(newStats.chemRes);
+	newStats.chemResMin = range.minRes;
+	newStats.chemResMax = range.maxRes;
+	
+	range = scr_char_calculateResistanceRange(newStats.elecRes);
+	newStats.elecResMin = range.minRes;
+	newStats.elecResMax = range.maxRes;
+	
+	range = scr_char_calculateResistanceRange(newStats.radRes);
+	newStats.radResMin = range.minRes;
+	newStats.radResMax = range.maxRes;
+	
+	return newStats;
+
+}
+
+function scr_char_calculateStat(flat, perc) {
+
+	var dec = perc * 0.01;
+	var add = dec * flat;
+	
+	return flat + add;
+	
+}
+
+function scr_char_calculateResistanceRange(res) {
+
+	var minRes = floor(res / 5);
+	var maxRes = res;
+	
+	return {
+		minRes: minRes,
+		maxRes: maxRes
+	}
 	
 }

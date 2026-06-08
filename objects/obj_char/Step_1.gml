@@ -4,8 +4,12 @@ if (setup) {
 
 	setup = false;
 	
+	finalStats = scr_char_calculateFinalStats(stats);
+	
+	maxHap = finalStats.maxHp;
 	hp = maxHp;
-	armour = maxArmour;
+	maxShield = finalStats.maxShield;
+	shield = maxShield;
 	
 	if (!customGunOffset) gunYoffset = (sprite_get_height(sprites.down) * image_yscale) * 0.5;
 	
