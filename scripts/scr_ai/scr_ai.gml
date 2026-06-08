@@ -117,34 +117,57 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 
 function scr_ai_ghostOverlap(char) {
 	
+	//validate
 	if (!instance_exists(char)) return false;
+	if (!instance_exists(char.ghost)) return false;
 	
 	var col = false;	
-	var sourceGhost = char.ghost;
-
-	with (obj_ghost) {
-		
-		if (id == sourceGhost.id) continue;
-			
-		col = scr_obj_movementCollision(sourceGhost, self, true);
-		if (col) break;
-			
-	}
 	
+	var sourceGhost = char.ghost;
+	var xx = sourceGhost.x;
+	var yy = sourceGhost.y;
+
+	//hash
+	var nearby = scr_hash_getNearby(global.stageController.ghostHash, xx, yy);
+	var len = array_length(nearby);
+	
+	for (var i = 0; i < len; i ++) {
+	
+		var targetGhost = nearby[i];
+		
+		if (targetGhost.id == sourceGhost.id) continue;
+		col = scr_obj_movementCollision(sourceGhost, targetGhost, true);
+		if (col) break;
+	
+	}
+
 	return col;
 	
 }
 
 function scr_ai_moveGhost(inst, xx, yy) {
 
+	//validate
 	if(!instance_exists(inst)) exit;
-
 	if(!instance_exists(inst.ghost)) exit;
-		
-	inst.ghost.x = xx;
-	inst.ghost.y = yy;
 	
-	scr_movement_updateMovementHitBox(inst.ghost);
-	scr_movement_updateCollisionHitBox(inst.ghost);
+	var thisGhost = inst.ghost;
+	
+	//hash remove
+	scr_hash_remove(global.stageController.ghostHash, thisGhost.id, thisGhost.hashCellX, thisGhost.hashCellY);
+	
+	//update position
+	thisGhost.x = xx;
+	thisGhost.y = yy;
+	
+	scr_movement_updateMovementHitBox(thisGhost);
+	scr_movement_updateCollisionHitBox(thisGhost);
+	
+	//has add
+	var cell = scr_hash_getCellAt(xx, yy);
+	thisGhost.hashCellX = cell.xx;
+	thisGhost.hashCellY = cell.yy;
+
+	scr_hash_add(global.stageController.ghostHash, thisGhost.id, thisGhost.hashCellX, thisGhost.hashCellY);
 	
 }

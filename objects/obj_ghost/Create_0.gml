@@ -11,3 +11,11 @@ movLeft = 0;
 movRight = 0;
 movBottom = 0;
 movTop = 0;
+
+
+//hash
+var cell = scr_hash_getCellAt(x, y);
+hashCellX = cell.xx;
+hashCellY = cell.yy;
+
+scr_hash_add(global.stageController.ghostHash, id, hashCellX, hashCellY);
