@@ -25,18 +25,6 @@ if (is_struct(gun)) {
         }
 		
     }
-
-	//gun.fireTick --; //max(0, gun.fireTick - 1);
-	
-	//if (gun.fireTick < 0) gun.fireTick = 0;
-	
-	//gun.aimOff = max(gun.minAimOff, gun.aimOff - gun.stability);
-	
-	////reload
-	//if (gun.reload > 0) {
-	//	gun.reload --;
-	//	if (gun.reload == 0) gun.ammo = gun.clipSize;
-	//}
 	
 }
 

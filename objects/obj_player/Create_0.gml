@@ -1,5 +1,6 @@
 event_inherited();
 
+charName = "player";
 faction = "player";
 
 cursor = global.cursor;
@@ -20,3 +21,8 @@ melee = scr_melee_createWeapon("test");
 
 gunCentred = false;
 //gunYoffset = 64;
+
+stats.fireDam = 30;
+stats.kinDam = 5;
+stats.kinDamPerc = 500;
+stats.fireDamPerc = 50;

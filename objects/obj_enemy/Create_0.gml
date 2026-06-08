@@ -1,5 +1,6 @@
 event_inherited();
 
+charName = "enemy";
 faction = "enemy";
 
 target = global.player;

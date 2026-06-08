@@ -1,6 +1,8 @@
 // Inherit the parent event
 event_inherited();
 
+charName = "none";
+
 setup = true;
 
 sc = global.stageController;

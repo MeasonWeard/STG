@@ -4,6 +4,7 @@ if (setup) {
 
 	setup = false;
 	
+
 	finalStats = scr_char_calculateFinalStats(stats);
 	
 	maxHap = finalStats.maxHp;
@@ -19,14 +20,14 @@ if (setup) {
 	
 		var slot = guns[i];
 		var thisGun = slot.gun;
-		var gunStats = slot.stats;
-	
+
 		if (is_struct(thisGun)) {
 	
-			thisGun.ammo = gunStats.clipSize;
-	
+			slot.stats = scr_guns_calculateGunStats(self, thisGun);
+			thisGun.ammo = slot.stats.clipSize;
+			
 		}
-	
+		
 	}
 	
 	gunIndex = 0;

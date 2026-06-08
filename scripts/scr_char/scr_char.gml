@@ -192,9 +192,19 @@ function scr_char_calculateFinalStats(stats) {
 
 function scr_char_calculateStat(flat, perc) {
 
+	//show_debug_message("flat: " + string(flat));
+	//show_debug_message("perc: " + string(perc));
+
 	var dec = perc * 0.01;
 	var add = dec * flat;
 	
+	//show_debug_message("dec: " + string(dec));
+	//show_debug_message("add: " + string(add));
+	
+	//show_debug_message("total: " + string(flat + add));
+
+	//show_debug_message("----------");
+
 	return flat + add;
 	
 }

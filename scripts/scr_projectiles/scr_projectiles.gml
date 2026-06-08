@@ -64,7 +64,6 @@ function scr_projectiles_shoot(char) {
 	var gun = char.gun;
 	var gunStats = char.gunStats;
 
-	
 	var gunX = char.gunX;
 	var gunY = char.gunY;
 	var aimX = char.aimX;

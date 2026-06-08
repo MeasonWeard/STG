@@ -1,5 +1,25 @@
 event_inherited();
 
+if (global.debug and keyboard_check_pressed(ord("G"))) {
+
+	show_debug_message(gunStats);
+
+	var len = array_length(guns);
+	
+	for (var i = 0; i < len; i ++) {
+	
+		var slot = guns[i];
+		
+		if (is_struct(slot)) {
+		
+			show_debug_message(slot.stats);
+		
+		}
+	
+	}
+	
+}
+
 if (instance_exists(cursor)) {
 	
 	aimX = cursor.x;
@@ -32,22 +52,27 @@ if (keyboard_check_pressed(ord("R"))) {
 }
 
 //select guns
+var prevIndex = gunIndex;
+
 if(mouse_check_button_pressed(mouse_wheel_up())) gunIndex ++;
 if(mouse_check_button_pressed(mouse_wheel_down())) gunIndex --;
 
-var gunsLen = array_length(guns);
-if (gunIndex < 0) gunIndex = gunsLen - 1;
-if (gunIndex >= gunsLen) gunIndex = 0;
+if (gunIndex != prevIndex) {
 
-if (gunsLen > 0) {
-	
-	scr_guns_equipGun(self, gunIndex);
-	//gun = guns[gunIndex].gun;
-	
-} else {
+	var gunsLen = array_length(guns);
+	if (gunIndex < 0) gunIndex = gunsLen - 1;
+	if (gunIndex >= gunsLen) gunIndex = 0;
 
-	gun = undefined;
+	if (gunsLen > 0) {
 	
+		scr_guns_equipGun(self, gunIndex);
+	
+	} else {
+
+		gun = undefined;
+	
+	}
+
 }
 
 //melee 
