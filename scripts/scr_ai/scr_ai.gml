@@ -171,3 +171,52 @@ function scr_ai_moveGhost(inst, xx, yy) {
 	scr_hash_add(global.stageController.ghostHash, thisGhost.id, thisGhost.hashCellX, thisGhost.hashCellY);
 	
 }
+
+function scr_ai_shootAtTarget(char, target, aimOnReload) {
+	
+	if (!instance_exists(char)) exit;
+	if (!instance_exists(target)) exit;
+	if (!is_struct(char.gun)) exit;
+	
+	if (char.shootDelayTick > 0) {
+		
+		char.shootDelayTick--;
+		
+	} else {
+
+		var aim = false;
+		var aimTurn = scr_timeSlicing_isMyTurn("aim", char.aimIndex);
+		
+		if (aimOnReload) {
+			
+			if (char.gun.reload > 0 and aimTurn) aim = true;
+			
+		} else {
+			
+			if (aimTurn) aim = true;
+			
+		}
+		
+		if (firstShot or aim) scr_ai_aimAtTarget(char, target, char.aimRadius, char.aimBias);
+			
+		var shot = scr_guns_shoot(char);
+		
+		if (firstShot and shot) firstShot = false;
+
+	}
+	
+}
+
+function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
+	
+	if (!instance_exists(char)) exit;
+	if (!instance_exists(target)) exit;
+	
+	var pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
+	var xx = pt.xx;
+	var yy = pt.yy;
+
+	char.aimX = xx;
+	char.aimY = yy;
+	
+}

@@ -32,6 +32,7 @@ if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
 if (instance_exists(target)) {
 
 	scr_ai_moveTowardsPoint(ghost.x, ghost.y, walkSpeed);
+	scr_ai_shootAtTarget(self, target, aimOnReload);
 
 } else {
 

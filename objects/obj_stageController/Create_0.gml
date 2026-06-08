@@ -43,7 +43,13 @@ timeSlicing = {
 		nextIndex: 0,
 		turn: 0,
 		steps: 8
-	}
+	},
+	
+	aim: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 8
+	},
 	
 }
 

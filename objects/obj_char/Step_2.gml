@@ -18,7 +18,10 @@ if (is_struct(gun)) {
         gun.reload--;
 
         if (gun.reload == 0) {
+			
             gun.ammo = gunStats.clipSize;
+			shootDelayTick = irandom_range(shootDelayMin, shootDelayMax);
+			
         }
 		
     }

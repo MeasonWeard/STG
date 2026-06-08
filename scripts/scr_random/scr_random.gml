@@ -52,3 +52,33 @@ function scr_randomPointInCircleMinDist(xx, yy, radius, minDist) {
 	};
 	
 }
+
+function scr_randomPointInCircleBiased(xx, yy, radius, bias) {
+
+	var dir = random(360);
+
+	var t = random(1);
+
+	if (bias != 1) {
+		t = power(t, bias);
+	}
+
+	var dist = sqrt(t * radius * radius);
+
+	var px = xx + lengthdir_x(dist, dir);
+	var py = yy + lengthdir_y(dist, dir);
+	
+	return {
+		xx: px,
+		yy: py
+	};
+	
+}
+
+function scr_randomIntermittent(frequency, chance) {
+
+	if (current_time mod frequency != 0) return false;
+
+	return random(100) < chance;
+
+}

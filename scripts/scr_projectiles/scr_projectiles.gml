@@ -89,10 +89,15 @@ function scr_projectiles_shoot(char) {
 	var proj = noone;
 
 	if (projType == projectileTypes.normal) {
+		
 		proj = scr_projectiles_create(gunX, gunY, dir, spd, range, sprite, damage, char, undefined);
-		proj.image_angle = dir;
-		proj.faction = faction;
-		proj.collisionFunc = collisionFunc;
+		
+		if (instance_exists(proj)) {
+			proj.image_angle = dir;
+			proj.faction = faction;
+			proj.collisionFunc = collisionFunc;
+		}
+		
 	}
 	
 	if (projType == projectileTypes.blast) {
@@ -131,7 +136,7 @@ function scr_projectiles_shoot(char) {
 				char,
 				undefined
 			);
-		
+			
 			if (p != noone) {
 				p.image_angle = angle;
 				p.faction = faction;

@@ -13,3 +13,4 @@ firstGhostCheck = true;
 
 aiSetup = true;
 ghostCheckIndex = -1;
+

@@ -67,6 +67,15 @@ gunY = centreY;
 aimX = x;
 aimY = y;
 
+shootDelayMin = 8;
+shootDelayMax = 16;
+shootDelayTick = 0;
+aimRadius = 360;
+aimBias = 1.5; // 1 = equal chance across radius, < 1 baised towards edges, > 1 baised towards centre
+firstShot = true;
+aimIndex = -1;
+aimOnReload = false;
+
 meleeCooldown = 0;
 
 gun = undefined;
@@ -76,5 +85,6 @@ guns = [];
 gunIndex = 0;
 
 gunStats = undefined;
+
 
 active = false;

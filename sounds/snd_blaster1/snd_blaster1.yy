@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_blaster1",
   "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+    "name":"Shot Sounds",
+    "path":"folders/Sounds/Shot Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
