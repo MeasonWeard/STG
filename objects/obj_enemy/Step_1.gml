@@ -10,4 +10,6 @@ if (aiSetup) {
 	
 	aimIndex = scr_timeSlicing_assignTurnIndex("aim");
 	
+	detectionIndex = scr_timeSlicing_assignTurnIndex("detection");
+	
 }

@@ -16,7 +16,7 @@ layer_depth(layerId, layers.ground);
 
 //projectile pool
 projectilePool = [];
-procectilePoolLen = 100;
+procectilePoolLen = 200;
 for (var i = 0; i < procectilePoolLen; i++) {
 
 	var newProj = instance_create_layer(0, 0, "Instances", obj_projectile);
@@ -50,6 +50,12 @@ timeSlicing = {
 		turn: 0,
 		steps: 8
 	},
+	
+	detection: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 16
+	}
 	
 }
 

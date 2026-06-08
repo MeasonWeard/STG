@@ -183,62 +183,6 @@ function scr_guns_equipGun(char, index) {
 
 }
 
-function scr_guns_calculateGunStats(char, gun) {
-
-	if (!instance_exists(char)) return undefined;
-	if (!is_struct(gun)) return undefined;
-
-	var newStats = {};
-	
-	scr_data_structCopyInto(newStats, gun);
-	
-	newStats.damage.kin = scr_char_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
-	newStats.damage.fire = scr_char_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
-	newStats.damage.chem = scr_char_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
-	newStats.damage.elec = scr_char_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
-	newStats.damage.rad = scr_char_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
-	
-	var range = scr_guns_calculateDamageRange(newStats.damage.kin);
-	newStats.damage.kinMin = range.minDam;
-	newStats.damage.kinMax = range.maxDam;
-	
-	range = scr_guns_calculateDamageRange(newStats.damage.fire);
-	newStats.damage.fireMin = range.minDam;
-	newStats.damage.fireMax = range.maxDam;
-	
-	range = scr_guns_calculateDamageRange(newStats.damage.chem);
-	newStats.damage.chemMin = range.minDam;
-	newStats.damage.chemMax = range.maxDam;
-	
-	range = scr_guns_calculateDamageRange(newStats.damage.elec);
-	newStats.damage.elecMin = range.minDam;
-	newStats.damage.elecMax = range.maxDam;
-	
-	range = scr_guns_calculateDamageRange(newStats.damage.rad);
-	newStats.damage.radMin = range.minDam;
-	newStats.damage.radMax = range.maxDam;
-	
-	return newStats;
-	
-}
-
-function scr_guns_calculateDamageRange(dam) {
-
-	if (dam < 1) return {
-		minDam: 0,
-		maxDam: 0
-	};
-
-	var minDam = floor(dam * 0.8);
-	var maxDam = ceil(dam * 1.2);
-	
-	return {
-		minDam: minDam,
-		maxDam: maxDam
-	}
-	
-}
-
 function scr_guns_replaceGun(char, index, gun) {
 
     if (!instance_exists(char)) return undefined;
@@ -259,4 +203,43 @@ function scr_guns_replaceGun(char, index, gun) {
 
     return oldGun;
 
+}
+
+function scr_guns_calculateGunStats(char, gun) {
+
+	if (!instance_exists(char)) return undefined;
+	if (!is_struct(gun)) return undefined;
+
+	var newStats = {};
+	
+	scr_data_structCopyInto(newStats, gun);
+	
+	newStats.damage.kin = scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+	newStats.damage.fire = scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+	newStats.damage.chem = scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+	newStats.damage.elec = scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+	newStats.damage.rad = scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	
+	var range = scr_stats_calculateDamageRange(newStats.damage.kin);
+	newStats.damage.kinMin = range.minDam;
+	newStats.damage.kinMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.fire);
+	newStats.damage.fireMin = range.minDam;
+	newStats.damage.fireMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.chem);
+	newStats.damage.chemMin = range.minDam;
+	newStats.damage.chemMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.elec);
+	newStats.damage.elecMin = range.minDam;
+	newStats.damage.elecMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.rad);
+	newStats.damage.radMin = range.minDam;
+	newStats.damage.radMax = range.maxDam;
+	
+	return newStats;
+	
 }

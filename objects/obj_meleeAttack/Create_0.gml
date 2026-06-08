@@ -1,5 +1,5 @@
 owner = noone;
-damage = 5;
+damage = undefined;
 killThreshold = 0;
 
 depth = layers.effects;

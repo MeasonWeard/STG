@@ -156,5 +156,7 @@ gunIndex = 0;
 
 gunStats = undefined;
 
-
 active = false;
+alert = false;
+detectionDist = 800;
+hurt = false;

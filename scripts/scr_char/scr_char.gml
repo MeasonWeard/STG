@@ -61,6 +61,8 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	if (!instance_exists(char)) return 0;
 	if (!is_struct(damage)) return 0;
 	
+	char.hurt = true;
+	
 	//randomise damage
 	var kin = damage.kin > 0 ? irandom_range(damage.kinMin, damage.kinMax) : 0;
 	var fire = damage.fire > 0 ? irandom_range(damage.fireMin, damage.fireMax) : 0;
@@ -105,12 +107,6 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	//final
 	var totalDam = kin + fire + chem + elec + rad;
 	
-	//show_debug_message("dam: " + string(preDam));
-	//show_debug_message("res: " + string(totalRes));
-	//show_debug_message("final dam: " + string(totalDam));
-	//show_debug_message("--------");
-	
-	
 	if (!ignoreShield and char.shield > 0) {
 	
 		char.shield -= 1;
@@ -145,44 +141,44 @@ function scr_char_calculateFinalStats(stats) {
 	var newStats = {
 
 		//health and shields
-		maxHp: scr_char_calculateStat(stats.maxHp, stats.maxHpPerc),
-		maxShield: scr_char_calculateStat(stats.maxShield, stats.maxShieldPerc),
-		hpRegen: scr_char_calculateStat(stats.hpRegen, stats.hpRegenPerc),
-		shieldRegen: scr_char_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
+		maxHp: scr_stats_calculateStat(stats.maxHp, stats.maxHpPerc),
+		maxShield: scr_stats_calculateStat(stats.maxShield, stats.maxShieldPerc),
+		hpRegen: scr_stats_calculateStat(stats.hpRegen, stats.hpRegenPerc),
+		shieldRegen: scr_stats_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
 
 		//damage
-		kinDam: scr_char_calculateStat(stats.kinDam, stats.kinDamPerc),
-		fireDam: scr_char_calculateStat(stats.fireDam, stats.fireDamPerc),
-		chemDam: scr_char_calculateStat(stats.chemDam, stats.chemDamPerc),
-		elecDam: scr_char_calculateStat(stats.elecDam, stats.elecDamPerc),
-		radDam: scr_char_calculateStat(stats.radDam, stats.radDamPerc),
+		kinDam: scr_stats_calculateStat(stats.kinDam, stats.kinDamPerc),
+		fireDam: scr_stats_calculateStat(stats.fireDam, stats.fireDamPerc),
+		chemDam: scr_stats_calculateStat(stats.chemDam, stats.chemDamPerc),
+		elecDam: scr_stats_calculateStat(stats.elecDam, stats.elecDamPerc),
+		radDam: scr_stats_calculateStat(stats.radDam, stats.radDamPerc),
 	
 		//resistances
-		kinRes: scr_char_calculateStat(stats.kinRes, stats.kinResPerc),
-		fireRes: scr_char_calculateStat(stats.fireRes, stats.fireResPerc),
-		chemRes: scr_char_calculateStat(stats.chemRes, stats.chemResPerc),
-		elecRes: scr_char_calculateStat(stats.elecRes, stats.elecResPerc),
-		radRes: scr_char_calculateStat(stats.radRes, stats.radResPerc),
+		kinRes: scr_stats_calculateStat(stats.kinRes, stats.kinResPerc),
+		fireRes: scr_stats_calculateStat(stats.fireRes, stats.fireResPerc),
+		chemRes: scr_stats_calculateStat(stats.chemRes, stats.chemResPerc),
+		elecRes: scr_stats_calculateStat(stats.elecRes, stats.elecResPerc),
+		radRes: scr_stats_calculateStat(stats.radRes, stats.radResPerc),
 		
 	}
 	
-	var range = scr_char_calculateResistanceRange(newStats.kinRes);
+	var range = scr_stats_calculateResistanceRange(newStats.kinRes);
 	newStats.kinResMin = range.minRes;
 	newStats.kinResMax = range.maxRes;
 	
-	range = scr_char_calculateResistanceRange(newStats.fireRes);
+	range = scr_stats_calculateResistanceRange(newStats.fireRes);
 	newStats.fireResMin = range.minRes;
 	newStats.fireResMax = range.maxRes;
 	
-	range = scr_char_calculateResistanceRange(newStats.chemRes);
+	range = scr_stats_calculateResistanceRange(newStats.chemRes);
 	newStats.chemResMin = range.minRes;
 	newStats.chemResMax = range.maxRes;
 	
-	range = scr_char_calculateResistanceRange(newStats.elecRes);
+	range = scr_stats_calculateResistanceRange(newStats.elecRes);
 	newStats.elecResMin = range.minRes;
 	newStats.elecResMax = range.maxRes;
 	
-	range = scr_char_calculateResistanceRange(newStats.radRes);
+	range = scr_stats_calculateResistanceRange(newStats.radRes);
 	newStats.radResMin = range.minRes;
 	newStats.radResMax = range.maxRes;
 	
@@ -190,33 +186,102 @@ function scr_char_calculateFinalStats(stats) {
 
 }
 
-function scr_char_calculateStat(flat, perc) {
+function scr_char_chooseSpawnPoint(inst, xx, yy, minDist, maxDist) {
 
-	//show_debug_message("flat: " + string(flat));
-	//show_debug_message("perc: " + string(perc));
+	if (!instance_exists(inst)) return undefined;
 
-	var dec = perc * 0.01;
-	var add = dec * flat;
-	
-	//show_debug_message("dec: " + string(dec));
-	//show_debug_message("add: " + string(add));
-	
-	//show_debug_message("total: " + string(flat + add));
+	var oldX = inst.x;
+	var oldY = inst.y;
 
-	//show_debug_message("----------");
+	var tries = 0;
+	var inc = 0;
+	var found = false;
 
-	return flat + add;
+	var px = oldX;
+	var py = oldY;
+
+	while (!found and inc < 24) {
+
+		var newMinDist = minDist + 32 * inc;
+		var newMaxDist = maxDist + 32 * inc;
+
+		var dir = random(360);
+		var minSq = newMinDist * newMinDist;
+		var maxSq = newMaxDist * newMaxDist;
+		var dist = sqrt(random_range(minSq, maxSq));
+
+		px = xx + lengthdir_x(dist, dir);
+		py = yy + lengthdir_y(dist, dir);
+
+		inst.x = px;
+		inst.y = py;
+		
+		var col = false;
+
+		if (px < global.roomLeft or px > global.roomRight ||
+			py < global.roomTop  or py > global.roomBottom) {
+			col = true;
+		}
+
+		if (!col) {
+			
+			with (obj_enemy) {
+			
+				col = place_meeting(x, y, inst);
+				if (col) break;
+				
+			}
+			
+		}
+
+		if (!col) {
+			found = true;
+			break;
+		}
+
+		tries++;
+
+		if (tries >= 16) {
+			tries = 0;
+			inc++;
+		}
+	}
+
+	if (!found) {
+
+		var dir = point_direction(xx, yy, oldX, oldY);
+		var dist = maxDist;
+
+		px = xx + lengthdir_x(dist, dir);
+		py = yy + lengthdir_y(dist, dir);
+
+		px = clamp(px, global.roomLeft, global.roomRight);
+		py = clamp(py, global.roomTop, global.roomBottom);
+
+		inst.x = px;
+		inst.y = py;
+
+		return {
+			xx: px,
+			yy: py,
+		};
+		
+	}
+
+	return {
+		xx: px,
+		yy: py,
+	};
 	
 }
 
-function scr_char_calculateResistanceRange(res) {
+function scr_char_spawnChar(obj, xx, yy) {
 
-	var minRes = floor(res / 5);
-	var maxRes = res;
+	var inst = instance_create_layer(xx, yy, "Instances", obj);
 	
-	return {
-		minRes: minRes,
-		maxRes: maxRes
-	}
+	scr_movement_updateCollisionHitBox(inst);
+	scr_movement_updateMovementHitBox(inst);
+	
+	return inst;
 	
 }

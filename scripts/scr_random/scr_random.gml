@@ -82,3 +82,28 @@ function scr_randomIntermittent(frequency, chance) {
 	return random(100) < chance;
 
 }
+
+function scr_random_weightedPick(arr) {
+
+	var totalWeight = 0;
+	var len = array_length(arr);
+
+	for (var i = 0; i < len; i++) {
+		totalWeight += arr[i][1];
+	}
+
+	var roll = random(totalWeight);
+
+	for (var i = 0; i < len; i++) {
+	
+		roll -= arr[i][1];
+	
+		if (roll <= 0) {
+			return arr[i][0];
+		}
+	
+	}
+
+	return arr[len - 1][0]; // fallback
+	
+}

@@ -22,20 +22,20 @@ if (mode == "aim") {
 		if (playerExists and is_struct(melee)) {
 		
 		
-			if (melee.charges > 0) {
+			if (melee.melee.charges > 0) {
 				
 				var prevCol = draw_get_colour();
 				draw_set_colour(meleeBarCol);
 				draw_set_valign(fa_middle);
-				draw_text(meleeNumX, meleeNumY, string(melee.charges));
+				draw_text(meleeNumX, meleeNumY, string(melee.melee.charges));
 				draw_set_colour(prevCol);
 				scr_misc_resetTextAlignment();
 				
 			} 
 				
-			if (melee.recharge > 0) {
+			if (melee.melee.recharge > 0) {
 				
-				var perc = 1 - (melee.recharge / (melee.rechargeTime * 60));
+				var perc = 1 - (melee.melee.recharge / (melee.stats.rechargeTime * 60));
 				perc *= 100;
 				
 				if (perc >= 15) draw_healthbar(meleeBarLeft, meleeBarTop, meleeBarRight, meleeBarBottom, perc, c_grey, meleeBarCol, meleeBarCol, 0, true, true);

@@ -17,12 +17,15 @@ var gun2 = scr_guns_createGun("test2");
 scr_guns_collectGun(self, gun, false);
 scr_guns_collectGun(self, gun2, false);
 
-melee = scr_melee_createWeapon("test");
+var melee1 = scr_melee_createWeapon("test");
+
+scr_melee_equipMelee(self, melee1);
 
 gunCentred = false;
 //gunYoffset = 64;
 
-stats.fireDam = 30;
-stats.kinDam = 5;
-stats.kinDamPerc = 500;
-stats.fireDamPerc = 50;
+stats.maxHp = 500;
+//stats.fireDam = 30;
+//stats.kinDam = 5;
+//stats.kinDamPerc = 500;
+//stats.fireDamPerc = 50;

@@ -31,14 +31,18 @@ if (is_struct(gun)) {
 //melee weapon
 if (is_struct(melee)) {
 
-	melee.attackTick --;
+	if (is_struct(melee.melee)) {
+
+		melee.melee.attackTick --;
 	
-	if (melee.attackTick < 0) melee.attackTick = 0;
-	if (melee.recharge > 0) melee.recharge --;
+		if (melee.melee.attackTick < 0) melee.melee.attackTick = 0;
+		if (melee.melee.recharge > 0) melee.melee.recharge --;
 	
-	if (melee.recharge <= 0) {
-		melee.recharge = 0;
-		melee.charges = melee.maxCharges;
+		if (melee.melee.recharge <= 0) {
+			melee.melee.recharge = 0;
+			melee.melee.charges = melee.stats.maxCharges;
+		}
+	
 	}
 	
 }

@@ -220,3 +220,33 @@ function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
 	char.aimY = yy;
 	
 }
+
+function scr_ai_alertAllies(char, radius) {
+
+	var xx = char.x;
+	var yy = char.y;
+	
+	var nearby = scr_hash_getNearby(global.stageController.charHash, xx, yy);
+	var len = array_length(nearby);
+	
+	for (var i = 0; i < len; i ++) {
+	
+		var ally = nearby[i];
+		
+		if (!instance_exists(ally)) continue;
+		
+		if (ally.alert) continue;
+		
+		if (ally.faction != char.faction) continue;
+		
+		var dist = point_distance(xx, yy, ally.x, ally.y);
+		
+		if (dist > radius) continue;
+		
+		ally.alert = true;
+		
+		scr_ai_alertAllies(ally, radius);
+	
+	}
+	
+}
