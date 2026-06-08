@@ -32,7 +32,7 @@ if (setup) {
 		thornsTurnIndex = scr_timeSlicing_assignTurnIndex("thorns");
 	}
 	
-	activationTurnIndex = scr_timeSlicing_assignTurnIndex("activation");
+	//activationTurnIndex = scr_timeSlicing_assignTurnIndex("activation");
 	
 	//hash
 	var cell = scr_hash_getCellAt(x, y);

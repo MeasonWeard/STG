@@ -33,3 +33,22 @@ function scr_randomPointInCircle(xx, yy, radius) {
 	}
 	
 }
+
+function scr_randomPointInCircleMinDist(xx, yy, radius, minDist) {
+
+	var dir = random(360);
+
+	var minSq = minDist * minDist;
+	var maxSq = radius * radius;
+
+	var dist = sqrt(random_range(minSq, maxSq));
+
+	var px = xx + lengthdir_x(dist, dir);
+	var py = yy + lengthdir_y(dist, dir);
+	
+	return {
+		xx: px,
+		yy: py
+	};
+	
+}

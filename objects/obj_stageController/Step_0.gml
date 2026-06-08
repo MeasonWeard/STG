@@ -31,3 +31,18 @@ if (global.devControls) {
 	}
 
 }
+
+
+// time slicing index update
+var sliceKeys = variable_struct_get_names(timeSlicing);
+var sliceKeysLen = array_length(sliceKeys);
+
+for (var i = 0; i < sliceKeysLen; i++) {
+
+	var key = sliceKeys[i];
+	var slice = timeSlicing[$ key];
+
+	slice.turn++;
+	if (slice.turn >= slice.steps) slice.turn = 0;
+	
+}

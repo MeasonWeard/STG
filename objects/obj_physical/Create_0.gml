@@ -19,5 +19,5 @@ movRight = 0;
 movBottom = 0;
 movTop = 0;
 
-scr_movement_updateCollisionHitBox();
-scr_movement_updateMovementHitBox();
+scr_movement_updateCollisionHitBox(self);
+scr_movement_updateMovementHitBox(self);

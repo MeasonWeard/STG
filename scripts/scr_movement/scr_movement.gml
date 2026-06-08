@@ -28,7 +28,7 @@ function scr_movement(blockedByEnv) {
 		if (moveX != 0) {
 			
 			x += moveX;
-			scr_movement_updateMovementHitBox();
+			scr_movement_updateMovementHitBox(self);
 		
 			for (var i = 0; i < len; i++) {
 			
@@ -46,11 +46,11 @@ function scr_movement(blockedByEnv) {
 					while (moveX != 0) {
 
 						x += stepX;
-						scr_movement_updateMovementHitBox();
+						scr_movement_updateMovementHitBox(self);
 
 						if (scr_obj_movementCollision(self, env, true)) {
 							x -= stepX;
-							scr_movement_updateMovementHitBox();
+							scr_movement_updateMovementHitBox(self);
 							break;
 						}
 
@@ -75,7 +75,7 @@ function scr_movement(blockedByEnv) {
 		if (moveY != 0) {
 			
 			y += moveY;
-			scr_movement_updateMovementHitBox();
+			scr_movement_updateMovementHitBox(self);
 		
 			for (var i = 0; i < len; i++) {
 			
@@ -93,11 +93,11 @@ function scr_movement(blockedByEnv) {
 					while (moveY != 0) {
 
 						y += stepY;
-						scr_movement_updateMovementHitBox();
+						scr_movement_updateMovementHitBox(self);
 
 						if (scr_obj_movementCollision(self, env, true)) {
 							y -= stepY;
-							scr_movement_updateMovementHitBox();
+							scr_movement_updateMovementHitBox(self);
 							break;
 						}
 
@@ -138,30 +138,30 @@ function scr_movement(blockedByEnv) {
 	
 	if (movedThisStep) {
 	
-		scr_movement_updateCollisionHitBox();
-		scr_movement_updateMovementHitBox();
+		scr_movement_updateCollisionHitBox(self);
+		scr_movement_updateMovementHitBox(self);
 	
 	}
 
 }
 
-function scr_movement_updateMovementHitBox() {
+function scr_movement_updateMovementHitBox(inst) {
 
-	movLeft = bbox_left;
-	movRight = bbox_right;
-	movBottom = bbox_bottom;
-	movTop = bbox_bottom - (bbox_right - bbox_left) * 0.5;
+	inst.movLeft = inst.bbox_left;
+	inst.movRight = inst.bbox_right;
+	inst.movBottom = inst.bbox_bottom;
+	inst.movTop = inst.bbox_bottom - (inst.bbox_right - inst.bbox_left) * 0.5;
 
 }
 
-function scr_movement_updateCollisionHitBox() {
+function scr_movement_updateCollisionHitBox(inst) {
 
-	colRight = bbox_right - 1;
-	colLeft = bbox_left;
-	colCentre = (colLeft + colRight) * 0.5;
+	inst.colRight = inst.bbox_right - 1;
+	inst.colLeft = inst.bbox_left;
+	inst.colCentre = (inst.colLeft + inst.colRight) * 0.5;
 		
-	colTop = bbox_top + 1;
-	colBottom = bbox_bottom - 1;
-	colMiddle = (colTop + colBottom) * 0.5;
+	inst.colTop = inst.bbox_top + 1;
+	inst.colBottom = inst.bbox_bottom - 1;
+	inst.colMiddle = (inst.colTop + inst.colBottom) * 0.5;
 	
 }

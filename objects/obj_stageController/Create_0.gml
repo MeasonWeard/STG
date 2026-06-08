@@ -33,7 +33,7 @@ timeSlicing = {
 		steps: 4
 	},
 	
-	los: {
+	ghostCheck: {
 		nextIndex: 0,
 		turn: 0,
 		steps: 12
