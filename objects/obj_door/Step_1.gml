@@ -20,7 +20,7 @@ if (side == "top" and initialiseDoors) {
 
 	//create bottom door
 	if (scr_stages_isCellInDirValid("down")) {
-		show_debug_message("creating bottom door");
+		//show_debug_message("creating bottom door");
 		var newX = room_width * 0.5;
 		var newY = room_height + sprH;
 		var newDoor = instance_create_layer(newX, newY, "Instances", object_index);
@@ -29,7 +29,7 @@ if (side == "top" and initialiseDoors) {
 
 	//create left door
 	if (scr_stages_isCellInDirValid("left")) {
-		show_debug_message("creating left door");
+		//show_debug_message("creating left door");
 		var newX = 0 - sprW * 0.5;
 		var newY = (room_height * 0.5) + sprH * 0.5;
 		var newDoor = instance_create_layer(newX, newY, "Instances", object_index);
@@ -38,7 +38,7 @@ if (side == "top" and initialiseDoors) {
 
 	//create right door
 	if (scr_stages_isCellInDirValid("right")) {
-		show_debug_message("creating right door");
+		//show_debug_message("creating right door");
 		var newX = room_width + sprW * 0.5;
 		var newY = (room_height * 0.5) + sprH * 0.5;
 		var newDoor = instance_create_layer(newX, newY, "Instances", object_index);

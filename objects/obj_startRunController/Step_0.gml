@@ -26,7 +26,7 @@ if (global.devControls) {
 	
 	if (keyboard_check_pressed(vk_space)) {
    
-		show_debug_message(rc.currentCell);
+		//show_debug_message(rc.currentCell);
    
 		scr_stages_goToStage(rc.currentCell);
 	

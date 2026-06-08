@@ -105,10 +105,10 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	//final
 	var totalDam = kin + fire + chem + elec + rad;
 	
-	show_debug_message("dam: " + string(preDam));
-	show_debug_message("res: " + string(totalRes));
-	show_debug_message("final dam: " + string(totalDam));
-	show_debug_message("--------");
+	//show_debug_message("dam: " + string(preDam));
+	//show_debug_message("res: " + string(totalRes));
+	//show_debug_message("final dam: " + string(totalDam));
+	//show_debug_message("--------");
 	
 	
 	if (!ignoreShield and char.shield > 0) {

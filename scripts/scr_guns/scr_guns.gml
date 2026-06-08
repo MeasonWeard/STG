@@ -192,18 +192,10 @@ function scr_guns_calculateGunStats(char, gun) {
 	
 	scr_data_structCopyInto(newStats, gun);
 	
-	show_debug_message("-----------");
-	show_debug_message(char.charName);
-	
-	show_debug_message("kin");
 	newStats.damage.kin = scr_char_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
-	show_debug_message("fire");
 	newStats.damage.fire = scr_char_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
-	show_debug_message("chem");
 	newStats.damage.chem = scr_char_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
-	show_debug_message("elec");
 	newStats.damage.elec = scr_char_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
-	show_debug_message("rad");
 	newStats.damage.rad = scr_char_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
 	
 	var range = scr_guns_calculateDamageRange(newStats.damage.kin);
