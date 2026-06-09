@@ -52,10 +52,9 @@ if (alert) {
 
 //move toward ghost
 
-	
 	if (instance_exists(target)) {
 
-		scr_ai_moveTowardsPoint(ghost.x, ghost.y, walkSpeed);
+		scr_ai_moveTowardsPointAvoidChars(ghost.x, ghost.y, walkSpeed, avoidDist);
 		scr_ai_shootAtTarget(self, target, aimOnReload);
 
 	} else {

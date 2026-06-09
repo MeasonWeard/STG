@@ -46,6 +46,8 @@ if (setup) {
 
 	scr_hash_add(global.stageController.charHash, id, hashCellX, hashCellY);
 	
+	avoidDist = ((sprite_width + sprite_height) * 0.5) * 1.2;
+	
 }
 
 prevHp = hp;

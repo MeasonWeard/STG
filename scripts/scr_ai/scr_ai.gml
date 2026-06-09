@@ -20,6 +20,70 @@ function scr_ai_moveTowardsPoint(targetX, targetY, moveSpd) {
 
 }
 
+function scr_ai_moveTowardsPointAvoidChars(targetX, targetY, moveSpd, avoidDist) {
+
+	if (!is_real(targetX)) return false;
+	if (!is_real(targetY)) return false;
+
+	var dist = point_distance(x, y, targetX, targetY);
+
+	if (dist <= moveSpd) {
+		xspd = 0;
+		yspd = 0;
+		return true;
+	}
+
+	var dir = point_direction(x, y, targetX, targetY);
+
+	var mx = lengthdir_x(moveSpd, dir);
+	var my = lengthdir_y(moveSpd, dir);
+
+	// separation from nearby allies/enemies
+	var avoidX = 0;
+	var avoidY = 0;
+
+	var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
+	var len = array_length(nearby);
+
+	for (var i = 0; i < len; i++) {
+
+		var otherInst = nearby[i];
+
+		if (!instance_exists(otherInst)) continue;
+		if (otherInst.id == id) continue;
+		if(otherInst.faction != faction) continue;
+
+		var d = point_distance(x, y, otherInst.x, otherInst.y);
+
+		if (d > 0 and d < avoidDist) {
+
+			var away = point_direction(otherInst.x, otherInst.y, x, y);
+			var strength = (avoidDist - d) / avoidDist;
+
+			avoidX += lengthdir_x(moveSpd * strength, away);
+			avoidY += lengthdir_y(moveSpd * strength, away);
+		}
+	}
+
+	mx += avoidX;
+	my += avoidY;
+
+	// normalise so avoidance doesn't make them faster
+	var finalSpd = point_distance(0, 0, mx, my);
+
+	if (finalSpd > moveSpd) {
+		var finalDir = point_direction(0, 0, mx, my);
+		mx = lengthdir_x(moveSpd, finalDir);
+		my = lengthdir_y(moveSpd, finalDir);
+	}
+
+	xspd = mx;
+	yspd = my;
+
+	return false;
+	
+}
+
 function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 
 	if (!instance_exists(target)) return undefined;

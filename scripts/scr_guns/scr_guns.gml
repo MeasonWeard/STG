@@ -13,7 +13,7 @@ function scr_guns_createGun(name) {
 		//attack
 		auto: true,
 		projectileType: projectileTypes.normal,
-		fireRate: 12,
+		fireRate: 8,
 		
 		blastProjectiles: 5,
 		blastSpread: 10,

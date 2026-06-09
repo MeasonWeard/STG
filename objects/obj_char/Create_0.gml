@@ -160,3 +160,4 @@ active = false;
 alert = false;
 detectionDist = 800;
 hurt = false;
+avoidDist = 48;
