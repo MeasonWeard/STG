@@ -98,9 +98,9 @@ function scr_gunArsenal_alienOrb() {
 	
 	gun.projSprite = spr_bullet2;
 	gun.auto = false;
-	gun.clipSize = 4;
-	gun.fireRate = 0.8;
-	gun.reloadTime = 1.6;
+	gun.clipSize = 2;
+	gun.fireRate = 0.6;
+	gun.reloadTime = 1.8;
 	gun.spd = 16;
 	gun.minAimOff = 2.2;
 	gun.maxAimOff = 8;
@@ -122,8 +122,8 @@ function scr_gunArsenal_alienOrb2() {
 	gun.projSprite = spr_bullet3;
 	gun.auto = true;
 	gun.clipSize = 16;
-	gun.fireRate = 14;
-	gun.reloadTime = 2.6;
+	gun.fireRate = 6;
+	gun.reloadTime = 2.8;
 	gun.spd = 12;
 	gun.minAimOff = 2.4;
 	gun.maxAimOff = 14;

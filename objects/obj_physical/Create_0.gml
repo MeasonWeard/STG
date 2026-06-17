@@ -19,5 +19,8 @@ movRight = 0;
 movBottom = 0;
 movTop = 0;
 
+setupHitBoxes = true;
+
 scr_movement_updateCollisionHitBox(self);
 scr_movement_updateMovementHitBox(self);
+	

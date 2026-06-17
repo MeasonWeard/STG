@@ -1,11 +1,20 @@
+//formatting
+
 camX = camera_get_view_x(cam);
 camY = camera_get_view_y(cam);
+camXmid = camX + camW * 0.5;
+camYmid = camY + camH * 0.5;
 
 instructionsX = camX + camW - 64;
 instructionsY = camY + 64;
 
-var mapX = camX + 32;
-var mapY = camY + 32;
+mapX = camX + 32;
+mapY = camY + 32;
+
+healthBarLeft = camXmid - healthBarWidth * 0.5;
+healthBarRight = camXmid + healthBarWidth * 0.5;
+healthBarBottom = camY + camH - 20;
+healthBarTop = healthBarBottom - healthBarHeight;
 
 //instructions
 if (is_string(instructions) and instructionsTick > 0) {
@@ -43,3 +52,6 @@ if (is_string(instructions) and instructionsTick > 0) {
 
 //minimap
 scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, rc.posX, rc.posY);
+
+//health bar
+draw_healthbar(healthBarLeft, healthBarTop, healthBarRight, healthBarBottom, 100, c_black, c_red, c_red, 1, true, true);

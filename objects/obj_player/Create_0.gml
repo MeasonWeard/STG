@@ -20,7 +20,7 @@ scr_melee_equipMelee(self, melee1);
 gunCentred = false;
 //gunYoffset = 64;
 
-stats.maxHp = 500;
+stats.maxHp = 800;
 stats.spd = 6;
 stats.maxDashes = 2;
 //stats.fireDam = 30;

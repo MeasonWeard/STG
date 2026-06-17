@@ -54,7 +54,12 @@ for (var i = 0; i < len; i++) {
 		eff.sprite_index = destroyEffect;
 		
 		var hitTop = (dir > 180 and dir < 360 and y <= char.colTop + spd);
-		if (hitTop) eff.depth = char.depth + 1;
+		
+		if (hitTop) {
+			eff.depth = char.depth + 1;
+		} else {
+			eff.depth = char.depth - 1;
+		}
 		
 		if (is_callable(collisionFunc)) collisionFunc(self);
 		if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
@@ -109,7 +114,12 @@ for (var i = 0; i < len; i++) {
 		eff.sprite_index = destroyEffect;
 		
 		var hitTop = (dir > 180 and dir < 360 and y <= env.colTop + spd);
-		if (hitTop) eff.depth = env.depth + 1;
+		
+		if (hitTop) {
+			eff.depth = env.depth + 1;
+		} else {
+			eff.depth = env.depth - 1;
+		}
 
 		if (is_callable(collisionFunc)) collisionFunc(self);
 		if (is_callable(env.bulletHitFunc)) env.bulletHitFunc(self, env);
