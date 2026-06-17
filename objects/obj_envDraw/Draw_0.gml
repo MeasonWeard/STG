@@ -8,6 +8,8 @@ if (drawWalls) {
 	drawWalls = false;
 	
 	var wallListLen = array_length(wallList);
+	
+	random_set_seed(seed);
 
 	if (wallListLen > 0) {
 
@@ -20,8 +22,11 @@ if (drawWalls) {
 	
 			var spr = wallList[wallIndex];
 			var xx = i * wallWidth;
+			
+			var frames = sprite_get_number(spr);
+			var subImage = irandom_range(0, frames -1);
 		
-			draw_sprite(spr, 0, xx, wallHeight);
+			draw_sprite(spr, subImage, xx, wallHeight);
 			
 			wallIndex ++;
 			

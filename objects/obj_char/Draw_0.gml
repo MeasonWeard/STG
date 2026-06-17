@@ -21,12 +21,8 @@ if (global.debug) {
 	draw_rectangle(colLeft, colTop, colRight, colBottom, true);
 	draw_set_colour(prevCol);
 	
-	//var cell = scr_hash_getCellAt(x, y);
-
-	//var cx = cell.xx;
-	//var cy = cell.yy;
-
 	draw_set_colour(c_yellow);
-	draw_text(x, y, string(hashCellX) + "," + string(hashCellY));
+	draw_text(x, y, string(x) + "," + string(y));
+	//draw_text(x, y, string(hashCellX) + "," + string(hashCellY));
 	
 }

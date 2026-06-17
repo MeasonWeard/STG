@@ -8,7 +8,6 @@ cursor = global.cursor;
 audio_listener_position(x, y, 0);
 audio_listener_orientation(0, 0, 1, 0, -1, 0);
 
-spd = 10;
 
 var gun = scr_gunArsenal_blaster();
 
@@ -22,6 +21,8 @@ gunCentred = false;
 //gunYoffset = 64;
 
 stats.maxHp = 500;
+stats.spd = 6;
+stats.maxDashes = 2;
 //stats.fireDam = 30;
 //stats.kinDam = 5;
 //stats.kinDamPerc = 500;

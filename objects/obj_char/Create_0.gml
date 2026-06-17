@@ -10,28 +10,31 @@ sc = global.stageController;
 faction = undefined;
 setup = true;
 
+//appearance, sound, behaviour
+bloodCol = c_red;
+bulletHitSounds = "bulletHitFlesh";
+deathSounds = global.data.soundProfiles.fleshExplod;
+
+deathFunc = undefined;
+bulletHitFunc = undefined;//scr_effects_bulletHitFlesh;
+
+sprites = {
+
+	left: spr_player,
+	right: spr_player,
+	up: spr_player,
+	down: spr_player,
+	death: spr_death
+	
+}
+
+//stats
 maxHp = 100;
 hp = 100;
 maxShield = 0;
 shield = 0;
 prevHp = hp;
 damageFlash = 0;
-
-thornsDamage = 0;
-thornsAttackRate = 1;
-thornsTurnIndex = -1;
-thornsSounds = global.data.soundProfiles.burn;
-
-activationTurnIndex = -1;
-
-thornsImmunity = 0;
-
-liquidDamageImmunity = 0;
-
-walkSpeed = 4;
-runSpeed = 8;
-
-meleeHitList = [];
 
 stats = {
 
@@ -40,6 +43,11 @@ stats = {
 	maxShield: 0,
 	hpRegen: 0,
 	shieldRegen: 0,
+	
+	//movement
+	spd: 4,
+	dashCoolTime: 3,
+	maxDashes: 1,
 
 	//health and shields percent increase
 	maxHpPerc: 0,
@@ -84,6 +92,11 @@ finalStats = {
 	maxShield: 0,
 	hpRegen: 0,
 	shieldRegen: 0,
+	
+	//movement
+	spd: 4,
+	dashCoolTime: 3,
+	maxDashes: 1,
 
 	//damage
 	kinDam: 0,
@@ -101,23 +114,33 @@ finalStats = {
 	
 }
 
-sprites = {
+//thorns
+thornsDamage = 0;
+thornsAttackRate = 1;
+thornsTurnIndex = -1;
+thornsSounds = global.data.soundProfiles.burn;
 
-	left: spr_player,
-	right: spr_player,
-	up: spr_player,
-	down: spr_player,
-	death: spr_death
-	
-}
+activationTurnIndex = -1;
 
-bloodCol = c_red;
-bulletHitSounds = "bulletHitFlesh";
-deathSounds = global.data.soundProfiles.fleshExplod;
+thornsImmunity = 0;
 
-deathFunc = undefined;
-bulletHitFunc = undefined;//scr_effects_bulletHitFlesh;
+liquidDamageImmunity = 0;
 
+//movement
+spd = 4;
+
+dash = 0;
+dashMax = 36;
+
+dashX = 0;
+dashY = 0;
+dashMult = 2.5;
+dashCool = 0;
+dashes = 0;
+
+dashing = false;
+
+//attack
 gunXoffset = 0;
 gunYoffset = 0;
 
@@ -156,8 +179,14 @@ gunIndex = 0;
 
 gunStats = undefined;
 
+meleeHitList = [];
+
+//ai
 active = false;
 alert = false;
 detectionDist = 800;
 hurt = false;
 avoidDist = 48;
+avoidX = 0;
+avoidY = 0;
+avoidIndex = -1;

@@ -134,58 +134,6 @@ function scr_char_heal(char, amount) {
 	
 }
 
-function scr_char_calculateFinalStats(stats) {
-	
-	if (!is_struct(stats)) return undefined;
-	
-	var newStats = {
-
-		//health and shields
-		maxHp: scr_stats_calculateStat(stats.maxHp, stats.maxHpPerc),
-		maxShield: scr_stats_calculateStat(stats.maxShield, stats.maxShieldPerc),
-		hpRegen: scr_stats_calculateStat(stats.hpRegen, stats.hpRegenPerc),
-		shieldRegen: scr_stats_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
-
-		//damage
-		kinDam: scr_stats_calculateStat(stats.kinDam, stats.kinDamPerc),
-		fireDam: scr_stats_calculateStat(stats.fireDam, stats.fireDamPerc),
-		chemDam: scr_stats_calculateStat(stats.chemDam, stats.chemDamPerc),
-		elecDam: scr_stats_calculateStat(stats.elecDam, stats.elecDamPerc),
-		radDam: scr_stats_calculateStat(stats.radDam, stats.radDamPerc),
-	
-		//resistances
-		kinRes: scr_stats_calculateStat(stats.kinRes, stats.kinResPerc),
-		fireRes: scr_stats_calculateStat(stats.fireRes, stats.fireResPerc),
-		chemRes: scr_stats_calculateStat(stats.chemRes, stats.chemResPerc),
-		elecRes: scr_stats_calculateStat(stats.elecRes, stats.elecResPerc),
-		radRes: scr_stats_calculateStat(stats.radRes, stats.radResPerc),
-		
-	}
-	
-	var range = scr_stats_calculateResistanceRange(newStats.kinRes);
-	newStats.kinResMin = range.minRes;
-	newStats.kinResMax = range.maxRes;
-	
-	range = scr_stats_calculateResistanceRange(newStats.fireRes);
-	newStats.fireResMin = range.minRes;
-	newStats.fireResMax = range.maxRes;
-	
-	range = scr_stats_calculateResistanceRange(newStats.chemRes);
-	newStats.chemResMin = range.minRes;
-	newStats.chemResMax = range.maxRes;
-	
-	range = scr_stats_calculateResistanceRange(newStats.elecRes);
-	newStats.elecResMin = range.minRes;
-	newStats.elecResMax = range.maxRes;
-	
-	range = scr_stats_calculateResistanceRange(newStats.radRes);
-	newStats.radResMin = range.minRes;
-	newStats.radResMax = range.maxRes;
-	
-	return newStats;
-
-}
-
 function scr_char_chooseSpawnPoint(inst, xx, yy, minDist, maxDist) {
 
 	if (!instance_exists(inst)) return undefined;

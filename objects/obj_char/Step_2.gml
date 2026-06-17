@@ -116,6 +116,8 @@ if (thornsDamage > 0) {
 
 }
 
+if (thornsImmunity > 0) thornsImmunity --;
+
 //liquids
 //var liquid = scr_tiles_getLiquidAt(x, y - 8);
 
@@ -144,8 +146,6 @@ if (thornsDamage > 0) {
 //	}
 
 //}
-
-if (thornsImmunity > 0) thornsImmunity --;
 
 //damage and death
 if (hp < prevHp) {

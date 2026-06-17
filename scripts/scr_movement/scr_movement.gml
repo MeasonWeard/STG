@@ -165,3 +165,31 @@ function scr_movement_updateCollisionHitBox(inst) {
 	inst.colMiddle = (inst.colTop + inst.colBottom) * 0.5;
 	
 }
+
+function scr_movement_dash(char) {
+
+    if (!instance_exists(char) or char.dashing or (char.xspd == 0 and char.yspd == 0) or char.dashes <= 0) exit;
+
+    char.dash = char.dashMax;
+
+    char.dashX = sign(char.xspd);
+    char.dashY = sign(char.yspd);
+	
+	if (char.dashes == char.finalStats.maxDashes) char.dashCool = char.finalStats.dashCoolTime * 60;
+	char.dashes = max(0, char.dashes - 1);
+	
+}
+
+function scr_movement_dashDir(char, dir) {
+
+    if (!instance_exists(char) or char.dashing or char.dashes <= 0) exit;
+
+    char.dash = char.dashMax;
+
+    char.dashX = sign(lengthdir_x(1, dir));
+    char.dashY = sign(lengthdir_y(1, dir));
+	
+	if (char.dashes == char.finalStats.maxDashes) char.dashCool = char.finalStats.dashCoolTime * 60;
+	char.dashes = max(0, char.dashes - 1);
+
+}

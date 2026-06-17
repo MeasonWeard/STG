@@ -20,7 +20,7 @@ function scr_ai_moveTowardsPoint(targetX, targetY, moveSpd) {
 
 }
 
-function scr_ai_moveTowardsPointAvoidChars(targetX, targetY, moveSpd, avoidDist) {
+function scr_ai_moveTowardsPointAvoid(targetX, targetY, moveSpd, avoidDist) {
 
 	if (!is_real(targetX)) return false;
 	if (!is_real(targetY)) return false;
@@ -38,37 +38,68 @@ function scr_ai_moveTowardsPointAvoidChars(targetX, targetY, moveSpd, avoidDist)
 	var mx = lengthdir_x(moveSpd, dir);
 	var my = lengthdir_y(moveSpd, dir);
 
-	// separation from nearby allies/enemies
-	var avoidX = 0;
-	var avoidY = 0;
+	if (scr_timeSlicing_isMyTurn("avoid", avoidIndex)) {
 
-	var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
-	var len = array_length(nearby);
+		avoidX = 0;
+		avoidY = 0;
 
-	for (var i = 0; i < len; i++) {
+		//avoid chars
+		var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
+		var len = array_length(nearby);
 
-		var otherInst = nearby[i];
+		for (var i = 0; i < len; i++) {
 
-		if (!instance_exists(otherInst)) continue;
-		if (otherInst.id == id) continue;
-		if(otherInst.faction != faction) continue;
+			var otherInst = nearby[i];
 
-		var d = point_distance(x, y, otherInst.x, otherInst.y);
+			if (!instance_exists(otherInst)) continue;
+			if (otherInst.id == id) continue;
+			if (otherInst.faction != faction) continue;
 
-		if (d > 0 and d < avoidDist) {
+			var d = point_distance(x, y, otherInst.x, otherInst.y);
 
-			var away = point_direction(otherInst.x, otherInst.y, x, y);
-			var strength = (avoidDist - d) / avoidDist;
+			if (d > 0 and d < avoidDist) {
 
-			avoidX += lengthdir_x(moveSpd * strength, away);
-			avoidY += lengthdir_y(moveSpd * strength, away);
+				var away = point_direction(otherInst.x, otherInst.y, x, y);
+				var strength = (avoidDist - d) / avoidDist;
+
+				avoidX += lengthdir_x(strength, away);
+				avoidY += lengthdir_y(strength, away);
+			}
 		}
+		
+		// avoid environment
+		nearby = scr_hash_getNearby(global.stageController.envHash, x, y);
+		len = array_length(nearby);
+
+		for (var i = 0; i < len; i++) {
+
+			var env = nearby[i];
+
+			if (!instance_exists(env)) continue;
+
+			// closest point on the env hitbox
+			var closestX = clamp(x, env.colLeft, env.colRight);
+			var closestY = clamp(y, env.colTop, env.colBottom);
+
+			var d = point_distance(x, y, closestX, closestY);
+
+			if (d < avoidDist) {
+
+				var away = point_direction(closestX, closestY, x, y);
+
+				var strength = (avoidDist - d) / avoidDist;
+
+				avoidX += lengthdir_x(strength, away);
+				avoidY += lengthdir_y(strength, away);
+
+			}
+		}
+		
 	}
 
-	mx += avoidX;
-	my += avoidY;
+	mx += avoidX * moveSpd;
+	my += avoidY * moveSpd;
 
-	// normalise so avoidance doesn't make them faster
 	var finalSpd = point_distance(0, 0, mx, my);
 
 	if (finalSpd > moveSpd) {
@@ -81,7 +112,7 @@ function scr_ai_moveTowardsPointAvoidChars(targetX, targetY, moveSpd, avoidDist)
 	yspd = my;
 
 	return false;
-	
+
 }
 
 function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {

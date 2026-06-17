@@ -55,6 +55,12 @@ timeSlicing = {
 		nextIndex: 0,
 		turn: 0,
 		steps: 16
+	},
+	
+	avoid: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 12
 	}
 	
 }
