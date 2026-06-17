@@ -22,7 +22,7 @@ spd = finalStats.spd;
 //dash
 if (dash > 0) {
 
-    var t = dash / dashMax;
+    var t = dash / dashTime;
 
     var dashSpd = spd * lerp(1, dashMult, t);
 

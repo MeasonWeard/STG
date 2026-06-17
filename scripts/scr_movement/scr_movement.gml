@@ -170,7 +170,7 @@ function scr_movement_dash(char) {
 
     if (!instance_exists(char) or char.dashing or (char.xspd == 0 and char.yspd == 0) or char.dashes <= 0) exit;
 
-    char.dash = char.dashMax;
+    char.dash = char.dashTime;
 
     char.dashX = sign(char.xspd);
     char.dashY = sign(char.yspd);
@@ -184,7 +184,7 @@ function scr_movement_dashDir(char, dir) {
 
     if (!instance_exists(char) or char.dashing or char.dashes <= 0) exit;
 
-    char.dash = char.dashMax;
+    char.dash = char.dashTime;
 
     char.dashX = sign(lengthdir_x(1, dir));
     char.dashY = sign(lengthdir_y(1, dir));
