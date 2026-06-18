@@ -114,6 +114,15 @@ finalStats = {
 	
 }
 
+skills = {
+
+	skill1: undefined,
+	skill2: undefined,
+	skill3: undefined,
+	skill4: undefined
+	
+}
+
 //thorns
 thornsDamage = 0;
 thornsAttackRate = 1;

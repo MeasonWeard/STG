@@ -23,7 +23,5 @@ gunCentred = false;
 stats.maxHp = 800;
 stats.spd = 6;
 stats.maxDashes = 2;
-//stats.fireDam = 30;
-//stats.kinDam = 5;
-//stats.kinDamPerc = 500;
-//stats.fireDamPerc = 50;
+
+skills.skill1 = new skill_test();

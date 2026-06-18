@@ -49,6 +49,12 @@ if (is_struct(melee)) {
 
 meleeCooldown = max(0, meleeCooldown - 1);
 
+//skills
+if (is_struct(skills.skill1)) skills.skill1.tick();
+if (is_struct(skills.skill2)) skills.skill2.tick();
+if (is_struct(skills.skill3)) skills.skill3.tick();
+if (is_struct(skills.skill4)) skills.skill4.tick();
+
 //hash cell
 if (movedThisStep) {
 
