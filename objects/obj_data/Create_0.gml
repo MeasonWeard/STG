@@ -52,6 +52,13 @@ enum projectileTypes {
 	
 }
 
+enum weaponTypes {
+
+	gun = 0,
+	melee = 1
+	
+}
+
 //stages
 stages = {
 

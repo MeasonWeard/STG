@@ -69,5 +69,8 @@ healthBar.maxValue = maxHp;
 healthBar.x = healthBarX;
 healthBar.y = healthBarY;
 
+//dash
+
+
 //var hpPerc = (hp / maxHp) * 100;
 //draw_healthbar(healthBarLeft, healthBarTop, healthBarRight, healthBarBottom, hpPerc, c_black, c_red, c_red, 0, true, true);

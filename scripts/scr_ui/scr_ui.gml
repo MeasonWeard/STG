@@ -88,3 +88,78 @@ function scr_ui_displayInstructions(text, extraTime) {
 	hud.instructionsTick = extraTick;
 	
 }
+
+function scr_ui_skillIcon(xx, yy, align, sprite, name, key, charges, cooldown) {
+
+	var left = xx;
+	var top = yy;
+	
+	if (!sprite_exists(sprite)) sprite = spr_icon_blank;
+	
+	var size = sprite_get_width(sprite);
+
+	switch (align) {
+		case 1: // top right
+			left = xx - size;
+			break;
+
+		case 2: // bottom right
+			left = xx - size;
+			top = yy - size;
+			break;
+
+		case 3: // bottom left
+			top = yy - size;
+			break;
+	}
+
+	var right = left + size;
+	var bottom = top + size;
+
+	cooldown = clamp(cooldown, 0, 1);
+
+	//background
+	draw_set_alpha(1);
+	draw_set_colour(c_black);
+	draw_rectangle(left, top, right, bottom, false);
+
+	//sprite
+	draw_sprite(sprite, 0, left, top);
+
+	//cooldown overlay
+	if (cooldown > 0) {
+		
+		var cdHeight = size * cooldown;
+
+		draw_set_alpha(0.55);
+		draw_set_colour(c_gray);
+		draw_rectangle(left, bottom - cdHeight, right, bottom, false);
+		draw_set_alpha(1);
+		
+	}
+
+	//border
+	draw_set_colour(c_white);
+	draw_rectangle(left, top, right, bottom, true);
+
+	//key, top left
+	if (!is_undefined(key)) {
+		draw_set_halign(fa_left);
+		draw_set_valign(fa_top);
+		draw_set_colour(c_white);
+		draw_text(left + 3, top + 2, string(key));
+	}
+
+	//charges, top right
+	if (!is_undefined(charges)) {
+		draw_set_halign(fa_right);
+		draw_set_valign(fa_top);
+		draw_text(right - 3, top + 2, string(charges));
+	}
+
+	//reset
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+	draw_set_alpha(1);
+	
+}

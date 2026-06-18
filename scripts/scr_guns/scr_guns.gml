@@ -4,6 +4,8 @@ function scr_guns_createGun(name) {
 	//ALTER OTHER GUN VALUES WHEN NEEDED
 	var gun = {
 		
+		weaponType: weaponTypes.gun,
+		
 		//appearance and sound
 		name: name,
 		shootSounds: global.data.soundProfiles.blaster,
