@@ -230,7 +230,9 @@ function scr_ai_ghostOverlap(char) {
 	
 		var targetGhost = nearby[i];
 		
+		if (!instance_exists(targetGhost)) continue;
 		if (targetGhost.id == sourceGhost.id) continue;
+		
 		col = scr_obj_movementCollision(sourceGhost, targetGhost, true);
 		if (col) break;
 	

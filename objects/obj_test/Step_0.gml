@@ -1,9 +1,13 @@
 event_inherited();
 
-var reaim = scr_randomIntermittent(12, 45);
+if (active) {
 
-if (reaim) {
+	var reaim = scr_randomIntermittent(12, 45);
 
-	scr_ai_aimAtTarget(self, target, aimRadius, aimBias);
+	if (reaim) {
+
+		scr_ai_aimAtTarget(self, target, aimRadius, aimBias);
 	
+	}
+
 }
