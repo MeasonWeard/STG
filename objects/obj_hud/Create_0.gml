@@ -33,6 +33,7 @@ maxShield = 0;
 dashes = 0;
 maxDashes = 0;
 dashCool = 0;
+dashCoolTime = 0;
 
 //bars
 healthBar = instance_create_layer(x, y, "Instances", obj_statusBar);

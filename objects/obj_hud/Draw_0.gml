@@ -23,6 +23,7 @@ if (instance_exists(player)) {
 	dashes = player.dashes;
 	maxDashes = player.finalStats.maxDashes;
 	dashCool = player.dashCool;
+	dashCoolTime = player.finalStats.dashCoolTime;
 
 }
 
@@ -70,7 +71,10 @@ healthBar.x = healthBarX;
 healthBar.y = healthBarY;
 
 //dash
-
+var sx = camX + 20;
+var sy = camY + camH - 20;
+var dc = dashCool / (dashCoolTime * 60);
+scr_ui_skillIcon(sx, sy, 3, spr_icon_dash, "Dash", "", dashes, dc);
 
 //var hpPerc = (hp / maxHp) * 100;
 //draw_healthbar(healthBarLeft, healthBarTop, healthBarRight, healthBarBottom, hpPerc, c_black, c_red, c_red, 0, true, true);

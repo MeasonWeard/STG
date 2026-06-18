@@ -141,12 +141,13 @@ function scr_ui_skillIcon(xx, yy, align, sprite, name, key, charges, cooldown) {
 	//border
 	draw_set_colour(c_white);
 	draw_rectangle(left, top, right, bottom, true);
-
+	
 	//key, top left
+	draw_set_colour(c_aqua);
 	if (!is_undefined(key)) {
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
-		draw_set_colour(c_white);
+		
 		draw_text(left + 3, top + 2, string(key));
 	}
 
