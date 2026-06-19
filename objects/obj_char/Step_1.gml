@@ -5,9 +5,7 @@ if (setup) {
 	setup = false;
 	
 	if (!customGunOffset) gunYoffset = (sprite_get_height(sprites.down) * image_yscale) * 0.5;
-	gunIndex = 0;
-	scr_guns_equipGun(self, gunIndex);
-	
+
 	//thorns
 	if (thornsDamage > 0) {
 		thornsTurnIndex = scr_timeSlicing_assignTurnIndex("thorns");
@@ -81,7 +79,14 @@ if (setupStats) {
 		if (is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(self);
 	
 	}
-	
+		
+}
+
+//duhh
+if (firstEquip) {
+	firstEquip = false;
+	gunIndex = 0;
+	scr_guns_equipGun(self, gunIndex);
 }
 
 prevHp = hp;

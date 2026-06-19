@@ -27,9 +27,9 @@ stats.maxDashes = 2;
 stats.hpRegen = 1;
 stats.energyRegen = 5;
 
-stats.elecDamPerc = 100;
-stats.elecDam = 10;
-stats.kinDam = 10;
+stats.elecDamPerc = 35;
+stats.kinDamPerc = 20;
+stats.kinDam = 4;
 
 skills.skill1 = new skill_chainLightning();
 skills.skill2 = new skill_test();

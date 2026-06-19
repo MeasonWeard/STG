@@ -10,6 +10,7 @@ sc = global.stageController;
 
 faction = undefined;
 setup = true;
+firstEquip = true;
 
 //appearance, sound, behaviour
 bloodCol = c_red;
