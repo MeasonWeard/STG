@@ -23,7 +23,9 @@ function skill() constructor {
 	cast = function(source) {
 
 		if (!ready()) return false;
+		
 		if (!is_callable(castFunc)) return false;
+		
 		if (source.energy < energyCost) return false;
 
 		var success = castFunc(source);
@@ -51,6 +53,7 @@ function skill() constructor {
 			source.energy -= energyCost;
 
 			return true;
+			
 		}
 
 		return false;
@@ -90,7 +93,8 @@ function skill() constructor {
 	ready = function() {
 
 		if (maxCharges > 1) {
-			return charges > 0 and castCooldown <= 0;
+			if (maxCharges > 1) return charges > 0 and castCooldown <= 0;
+			else return charges > 0;
 		}
 
 		return cooldown <= 0;
@@ -113,16 +117,16 @@ function skill_test() : skill() constructor {
 
 	name = "Test";
 	maxCharges = 2;
-	charges = 2;
+	charges = 1;
+	energyCost = 0;
 	
 	castFunc = function(source) {
 		
-		if (!instance_exists(source)) return false;
+		with (obj_enemy) {
 		
-		var xx = source.aimX;
-		var yy = source.aimY;
+			hp = 0;
 		
-		instance_create_layer(xx, yy, "Instances", obj_pwooahh);
+		}
 		
 		return true;
 		
@@ -135,8 +139,8 @@ function skill_chainLightning() : skill() constructor {
 	name = "Chain Lightning";
 	maxCharges = 2;
 	charges = 2;
-	energyCost = 25;
-	range = 800;
+	energyCost = 30;
+	range = 900;
 	
 	damage = undefined;
 	
@@ -151,16 +155,18 @@ function skill_chainLightning() : skill() constructor {
 	}
 	
 	castFunc = function(source) {
-		
+
 		if (!instance_exists(source)) return false;
 
-		var chains = 2 + level;
+		var chains = 1 + level;
 		
 		var xx = source.aimX;
 		var yy = source.aimY;
 		
-		var nearest = scr_char_getNearest(xx, yy);
+		//var nearest = scr_hash_getNearby(global.stageController.charHash, xx, yy);
+		var nearest = scr_char_targetNearest(source, xx, yy, 2);
 		
+		if (!instance_exists(nearest)) return false;
 		if (nearest.id == source.id) return false;
 		
 		var dist = point_distance(source.x, source.y, nearest.x, nearest.y);

@@ -1,4 +1,5 @@
 global.stageController = self;
+rc = global.runController;
 
 if (!instance_exists(global.player)) global.player = scr_obj_createExclusive(obj_player, room_width * 0.5, room_height * 0.5);
 global.camera = scr_obj_createExclusive(obj_camera, global.player.x, global.player.y);
@@ -15,6 +16,8 @@ var layerId = layer_get_id("Tiles");
 layer_depth(layerId, layers.ground);
 
 createdArrows = false;
+stageInProgress = true;
+checkIfCleared = true;
 
 //projectile pool
 projectilePool = [];

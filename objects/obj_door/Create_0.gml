@@ -14,3 +14,6 @@ areaRight = 0;
 areaDist = 64;
 
 initialiseArea = true;
+
+open = false;
+image_index = image_number - 1;

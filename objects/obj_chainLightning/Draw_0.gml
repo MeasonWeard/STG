@@ -46,10 +46,17 @@ if (jitterTick <= 0) {
 
 		var target = chainList[i];
 
-		if (!instance_exists(target)) continue;
+		var targetX;
+		var targetY;
 
-		var targetX = target.x;
-		var targetY = target.y;
+		if (instance_exists(target)) {
+			targetX = target.x;
+			targetY = (target.y + target.bbox_top) * 0.5;
+			chainPos[i] = [targetX, targetY];
+		} else {
+			targetX = chainPos[i][0];
+			targetY = chainPos[i][1];
+		}
 
 		var dir = point_direction(sourceX, sourceY, targetX, targetY);
 		var perpDir = dir + 90;

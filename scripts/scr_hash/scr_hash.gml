@@ -116,6 +116,51 @@ function scr_hash_getNearbyRange(hash, xx, yy, range) {
 	return results;
 }
 
+function scr_hash_getInDirection(hash, xx, yy, dir, width) {
+
+	var results = [];
+	var usedKeys = [];
+
+	var step = HASH_CELL_SIZE;
+	var dist = 0;
+
+	while (true) {
+
+		var px = xx + lengthdir_x(dist, dir);
+		var py = yy + lengthdir_y(dist, dir);
+
+		if (px < 0 or px >= room_width or py < 0 or py >= room_height) {
+			break;
+		}
+
+		var cell = scr_hash_getCellAt(px, py);
+
+		for (var cx = cell.xx - width; cx <= cell.xx + width; cx++) {
+			for (var cy = cell.yy - width; cy <= cell.yy + width; cy++) {
+
+				var key = scr_hash_getKey(cx, cy);
+
+				if (array_contains(usedKeys, key)) continue;
+				array_push(usedKeys, key);
+
+				if (variable_struct_exists(hash, key)) {
+
+					var arr = hash[$ key];
+					var len = array_length(arr);
+
+					for (var i = 0; i < len; i++) {
+						array_push(results, arr[i]);
+					}
+				}
+			}
+		}
+
+		dist += step;
+	}
+
+	return results;
+}
+
 function scr_hash_getCellAt(xx, yy) {
 
 	var hashCellX = floor(xx / HASH_CELL_SIZE);

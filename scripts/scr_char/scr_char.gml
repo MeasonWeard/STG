@@ -119,10 +119,10 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	char.hp = max(char.hp - totalDam, 0);
 	
 	//damage numbers
-	if (lost != 0) {
+	if (totalDam != 0) {
 		
-		var col = lost < 0 ? c_lime : c_red;
-		var num = abs(lost);
+		var col = totalDam < 0 ? c_lime : c_red;
+		var num = abs(totalDam);
 	
 		var px = char.x;
 		var py = char.y - char.sprite_height * 0.75;
@@ -288,6 +288,50 @@ function scr_char_getNearest(xx, yy) {
 
 	}
 
+	return found;
+	
+}
+
+function scr_char_targetNearest(source, xx, yy, cellsWidth) {
+
+	if (!instance_exists(source)) return noone;
+
+	var coneHalf = 45
+	var found = noone;
+	var closest = 999999999999;
+
+	var dir = point_direction(source.x, source.y, xx, yy);
+
+	var nearby = scr_hash_getInDirection(
+		global.stageController.charHash,
+		source.x,
+		source.y,
+		dir,
+		cellsWidth  // width around each checked cell
+	);
+
+	var len = array_length(nearby);
+
+	for (var i = 0; i < len; i++) {
+
+		var char = nearby[i];
+
+		if (!instance_exists(char)) continue;
+		if (char.id == source.id) continue;
+
+		var charDir = point_direction(source.x, source.y, char.x, char.y);
+		var diff = abs(angle_difference(dir, charDir));
+
+		if (diff > coneHalf) continue;
+
+		var dist = point_distance(source.x, source.y, char.x, char.y);
+
+		if (dist < closest) {
+			closest = dist;
+			found = char;
+		}
+	}
+	
 	return found;
 	
 }

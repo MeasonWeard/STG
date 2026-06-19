@@ -185,7 +185,6 @@ if (hp <= 0) {
 }
 
 //health and energy regen
-show_debug_message(finalStats);
 
 if (hp > 0) {
 

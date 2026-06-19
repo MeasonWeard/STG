@@ -131,6 +131,7 @@ function scr_stages_moveInDir(dir) {
 	if (success) {
 		rc.posX = xx;
 		rc.posY = yy;
+		rc.currentCell = rc.map[xx][yy];
 	}
 	
 	return success;
@@ -150,6 +151,7 @@ function scr_stages_goToCell(xx, yy) {
 	if (success) {
 		rc.posX = xx;
 		rc.posY = yy;
+		rc.currentCell = rc.map[xx][yy];
 	}
 	
 	return success;

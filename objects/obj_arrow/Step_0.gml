@@ -22,7 +22,7 @@ var top = camY + screenPad;
 var bottom = camY + camH - screenPad;
 
 // direction from player to enemy
-var dir = point_direction(source.x, source.y, target.x, target.y);
+dir = point_direction(source.x, source.y, target.x, target.y);
 image_angle = dir;
 
 // default position: near the enemy, but not on top of it

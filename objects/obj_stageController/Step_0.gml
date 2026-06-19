@@ -59,8 +59,28 @@ if (!createdArrows and enemies < 11) {
 		var arrow = instance_create_layer(0, 0, "Instances", obj_arrow);
 		arrow.target = self;
 		arrow.source = global.player;
-	
+		arrow.col = c_red;
 	
 	}
+	
+}
+
+if (enemies == 0 and stageInProgress) {
+
+	stageInProgress = false;
+
+	with (obj_door) {
+		
+		open = true;
+		
+		var arrow = instance_create_layer(x, y, "Instances", obj_arrow);
+		arrow.target = self;
+		arrow.source = global.player;
+		arrow.text = "EXIT";
+		arrow.col = c_lime;
+		
+	}
+
+	rc.currentCell.cleared = true;
 	
 }

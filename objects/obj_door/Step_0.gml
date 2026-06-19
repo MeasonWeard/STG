@@ -6,7 +6,7 @@ if (instance_exists(player)) {
 	
 }
 
-if (playerinArea) {
+if (playerinArea and open) {
 	
 	scr_ui_displayInstructions("Press E to proceed", 0);
 	

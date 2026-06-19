@@ -1,5 +1,6 @@
 commonList = [];
 
+active = true;
 initialSpawn = true;
 
 minEnemies = 8;

@@ -19,5 +19,9 @@ jitter = 2;
 jitterTick = 0;
 
 lightningPoints = [];
+chainPos = [];
+chainOriginPos = [];
 
 firstZap = true;
+
+range = 600;
