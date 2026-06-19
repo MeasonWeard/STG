@@ -84,6 +84,38 @@ function scr_hash_getNearby(hash, xx, yy) {
 	
 }
 
+function scr_hash_getNearbyRange(hash, xx, yy, range) {
+	
+	var cell = scr_hash_getCellAt(xx, yy);
+	
+	var baseCellX = cell.xx;
+	var baseCellY = cell.yy;
+	
+	var results = [];
+	
+	range = max(0, floor(range));
+	
+	for (var cx = baseCellX - range; cx <= baseCellX + range; cx++) {
+		for (var cy = baseCellY - range; cy <= baseCellY + range; cy++) {
+		
+			var key = scr_hash_getKey(cx, cy);
+		
+			if (variable_struct_exists(hash, key)) {
+			
+				var arr = hash[$ key];
+				var len = array_length(arr);
+			
+				for (var i = 0; i < len; i++) {
+					array_push(results, arr[i]);
+				}
+			
+			}
+		}
+	}
+	
+	return results;
+}
+
 function scr_hash_getCellAt(xx, yy) {
 
 	var hashCellX = floor(xx / HASH_CELL_SIZE);

@@ -1,18 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_effect",
+  "%Name":"obj_doubleZap",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_effect",
+  "name":"obj_doubleZap",
   "overriddenProperties":[],
   "parent":{
     "name":"Effects",
     "path":"folders/Objects/Effects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_effect",
+    "path":"objects/obj_effect/obj_effect.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -30,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_doubleZap",
+    "path":"sprites/spr_doubleZap/spr_doubleZap.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

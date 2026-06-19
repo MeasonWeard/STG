@@ -24,4 +24,5 @@ stats.maxHp = 800;
 stats.spd = 6;
 stats.maxDashes = 2;
 
-skills.skill1 = new skill_test();
+skills.skill1 = new skill_chainLightning();
+skills.skill2 = new skill_test();

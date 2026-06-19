@@ -233,3 +233,48 @@ function scr_char_spawnChar(obj, xx, yy) {
 	return inst;
 	
 }
+
+function scr_char_getNearest(xx, yy) {
+
+	var found = noone;
+	var closest = 999999999999;
+
+	for (var range = 0; range <= 3; range++) {
+
+		var nearby = scr_hash_getNearbyRange(global.stageController.charHash, xx, yy, range);
+
+		var len = array_length(nearby);
+
+		for (var i = 0; i < len; i++) {
+
+			var char = nearby[i];
+
+			if (!instance_exists(char)) continue;
+
+			var dist = point_distance(xx, yy, char.x, char.y);
+
+			if (dist < closest) {
+				closest = dist;
+				found = char;
+			}
+		}
+
+		if (found != noone) return found;
+
+	}
+
+	// last resort
+	with (obj_char) {
+
+		var dist = point_distance(xx, yy, x, y);
+
+		if (dist < closest) {
+			closest = dist;
+			found = id;
+		}
+
+	}
+
+	return found;
+	
+}

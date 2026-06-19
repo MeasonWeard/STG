@@ -88,7 +88,7 @@ var skill2 = skills.skill2;
 var skill3 = skills.skill3;
 var skill4 = skills.skill4;
 
-if (keyboard_check(ord("1")) and is_struct(skill1)) skill1.cast(self, undefined);
-if (keyboard_check(ord("2")) and is_struct(skill2)) skill2.cast(self, undefined);
-if (keyboard_check(ord("3")) and is_struct(skill3)) skill3.cast(self, undefined);
-if (keyboard_check(ord("4")) and is_struct(skill4)) skill4.cast(self, undefined);
+if (keyboard_check(ord("1")) and is_struct(skill1)) skill1.cast(self);
+if (keyboard_check(ord("2")) and is_struct(skill2)) skill2.cast(self);
+if (keyboard_check(ord("3")) and is_struct(skill3)) skill3.cast(self);
+if (keyboard_check(ord("4")) and is_struct(skill4)) skill4.cast(self);

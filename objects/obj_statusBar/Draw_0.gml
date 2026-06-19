@@ -3,8 +3,6 @@ var yy1;
 var xx2;
 var yy2;
 
-show_debug_message("I AM HERE");
-
 if (drawByCoordinates) {
 	
     xx1 = left;

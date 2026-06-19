@@ -3,26 +3,25 @@ function skill() constructor {
 	
 	name = "None";
 	icon = spr_icon_blank;
-
+	level = 1;
+	
 	cooldown = 0;
 	cooldownTime = 2;
+
+	castCooldown = 0;
+	castCooldownTime = 0.5;
 
 	charges = 1;
 	maxCharges = 1;
 	
-	castCooldown = 0;
-	castCooldownTime = 0.5;
-
-	level = 0;
-
 	castFunc = undefined;
 
-	cast = function(source, target) {
+	cast = function(source) {
 
 		if (!ready()) return false;
 		if (!is_callable(castFunc)) return false;
 
-		var success = castFunc(source, target);
+		var success = castFunc(source);
 
 		if (success) {
 
@@ -99,7 +98,7 @@ function skill_test() : skill() constructor {
 	maxCharges = 2;
 	charges = 2;
 	
-	castFunc = function(source, target) {
+	castFunc = function(source) {
 		
 		if (!instance_exists(source)) return false;
 		
@@ -107,6 +106,38 @@ function skill_test() : skill() constructor {
 		var yy = source.aimY;
 		
 		instance_create_layer(xx, yy, "Instances", obj_pwooahh);
+		
+		return true;
+		
+	}
+	
+}
+
+function skill_chainLightning() : skill() constructor {
+
+	name = "Chain Lightning";
+	maxCharges = 2;
+	charges = 2;
+	
+	castFunc = function(source) {
+		
+		if (!instance_exists(source)) return false;
+		
+		var chains = 2 + level;
+		
+		var xx = source.aimX;
+		var yy = source.aimY;
+		
+		var nearest = scr_char_getNearest(xx, yy);
+		
+		if (nearest.id == source.id) return false;
+		
+		var cx = nearest.x;
+		var cy = nearest.y;
+		
+		var cl = instance_create_layer(cx, cy, "Instances", obj_chainLightning);
+		cl.owner = source;
+		cl.chainList = [nearest];
 		
 		return true;
 		

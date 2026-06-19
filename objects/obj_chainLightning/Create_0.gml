@@ -1,0 +1,22 @@
+owner = noone;
+
+chains = 4;
+chainsDone = 0;
+
+life = 200;
+
+interval = 12;
+chainTick = interval;
+
+damage = undefined;
+
+chainList = [];
+
+setup = true;
+
+jitter = 2;
+jitterTick = 0;
+
+lightningPoints = [];
+
+firstZap = true;
