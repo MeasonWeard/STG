@@ -45,7 +45,7 @@ enum layers {
 	
 }
 
-enum projectileTypes {
+enum projectileTypes {  
 
 	normal = 0,
 	blast = 1

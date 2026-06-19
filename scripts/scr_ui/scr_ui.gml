@@ -89,7 +89,7 @@ function scr_ui_displayInstructions(text, extraTime) {
 	
 }
 
-function scr_ui_skillIcon(xx, yy, align, sprite, name, key, charges, cooldown) {
+function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, cooldown) {
 
 	var left = xx;
 	var top = yy;
@@ -163,4 +163,102 @@ function scr_ui_skillIcon(xx, yy, align, sprite, name, key, charges, cooldown) {
 	draw_set_valign(fa_top);
 	draw_set_alpha(1);
 	
+}
+
+function scr_ui_skillIcon(xx, yy, align, key, skill) {
+
+	var sprite = undefined;
+	var charges = undefined;
+	var cooldown = 0;
+	var borderCol = c_white;
+
+	if (!is_undefined(skill)) {
+
+		sprite = skill.icon;
+
+		if (skill.maxCharges > 1) {
+			charges = skill.charges;
+		}
+
+		cooldown = skill.cooldown / (skill.cooldownTime * 60);
+
+		if (skill.ready()) {
+			borderCol = c_aqua;
+		}
+	}
+
+	var left = xx;
+	var top = yy;
+
+	if (!sprite_exists(sprite)) sprite = spr_icon_blank;
+
+	var size = sprite_get_width(sprite);
+
+	switch (align) {
+		case 1:
+			left = xx - size;
+			break;
+
+		case 2:
+			left = xx - size;
+			top = yy - size;
+			break;
+
+		case 3:
+			top = yy - size;
+			break;
+	}
+
+	var right = left + size;
+	var bottom = top + size;
+
+	cooldown = clamp(cooldown, 0, 1);
+
+	// background
+	draw_set_alpha(1);
+	draw_set_colour(c_black);
+	draw_rectangle(left, top, right, bottom, false);
+
+	// sprite
+	if (!is_undefined(skill)) {
+		draw_sprite(sprite, 0, left, top);
+	}
+
+	// cooldown overlay
+	if (cooldown > 0) {
+
+		var cdHeight = size * cooldown;
+
+		draw_set_alpha(0.55);
+		draw_set_colour(c_gray);
+		draw_rectangle(left, bottom - cdHeight, right, bottom, false);
+		draw_set_alpha(1);
+	}
+
+	// border
+	draw_set_colour(borderCol);
+	draw_rectangle(left, top, right, bottom, true);
+
+	// key, top left
+	if (!is_undefined(skill) && !is_undefined(key)) {
+		draw_set_colour(c_aqua);
+		draw_set_halign(fa_left);
+		draw_set_valign(fa_top);
+		draw_text(left + 3, top + 2, string(key));
+	}
+
+	// charges, top right
+	if (!is_undefined(charges)) {
+		draw_set_colour(c_white);
+		draw_set_halign(fa_right);
+		draw_set_valign(fa_top);
+		draw_text(right - 3, top + 2, string(charges));
+	}
+
+	// reset
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_top);
+	draw_set_alpha(1);
+	draw_set_colour(c_white);
+
 }

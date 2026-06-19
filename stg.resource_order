@@ -131,6 +131,7 @@
     {"name":"snd_smg2","order":1,"path":"sounds/snd_smg2/snd_smg2.yy",},
     {"name":"spr_alien","order":3,"path":"sprites/spr_alien/spr_alien.yy",},
     {"name":"spr_bigThing","order":7,"path":"sprites/spr_bigThing/spr_bigThing.yy",},
+    {"name":"spr_blank","order":10,"path":"sprites/spr_blank/spr_blank.yy",},
     {"name":"spr_bullet2","order":5,"path":"sprites/spr_bullet2/spr_bullet2.yy",},
     {"name":"spr_bullet3","order":6,"path":"sprites/spr_bullet3/spr_bullet3.yy",},
     {"name":"spr_bulletExplosion","order":1,"path":"sprites/spr_bulletExplosion/spr_bulletExplosion.yy",},

@@ -1,6 +1,6 @@
 event_inherited();
 
-if (active) {
+if (alert) {
 
 	var reaim = scr_randomIntermittent(12, 45);
 

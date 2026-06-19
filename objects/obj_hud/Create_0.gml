@@ -23,7 +23,15 @@ mapX = camX + 32;
 mapY = camY + 32;
 
 healthBarX = camXmid;
-healthBarY = camY + camH - 20;
+healthBarY = camY + camH - 32;
+
+dashX = 0;
+dashY = 0;
+
+skillsX = 0;
+skillsY = 0;
+skillsPad = 16;
+skillIconW = sprite_get_width(spr_icon_blank);
 
 //info
 hp = 0;
@@ -35,8 +43,15 @@ maxDashes = 0;
 dashCool = 0;
 dashCoolTime = 0;
 
+skill1 = undefined;
+skill2 = undefined;
+skill3 = undefined;
+skill4 = undefined;
+
+skills = [skill1, skill2, skill3, skill4];
+
 //bars
 healthBar = instance_create_layer(x, y, "Instances", obj_statusBar);
-healthBar.width = camW * 0.3;
+healthBar.width = 400;
 healthBar.height = 20;
 healthBar.depth = depth - 1;

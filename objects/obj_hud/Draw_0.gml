@@ -10,8 +10,14 @@ instructionsY = camY + 64;
 mapX = camX + 32;
 mapY = camY + 32;
 
-healthBarX = camXmid;
-healthBarY = camY + camH - 20;
+healthBarX = camX + 220;
+healthBarY = camY + camH - 28;
+
+dashX = camX + camW * 0.33;
+dashY = camY + camH - 20;
+
+skillsX = camX + camW - camW * 0.33;
+skillsY = dashY;
 
 //get info
 if (instance_exists(player)) {
@@ -24,6 +30,14 @@ if (instance_exists(player)) {
 	maxDashes = player.finalStats.maxDashes;
 	dashCool = player.dashCool;
 	dashCoolTime = player.finalStats.dashCoolTime;
+	dashCoolPerc = dashCool / (dashCoolTime * 60);
+	
+	skill1 = player.skills.skill1;
+	skill2 = player.skills.skill2;
+	skill3 = player.skills.skill3;
+	skill4 = player.skills.skill4;
+	
+	skills = [skill1, skill2, skill3, skill4];
 
 }
 
@@ -71,10 +85,21 @@ healthBar.x = healthBarX;
 healthBar.y = healthBarY;
 
 //dash
-var sx = camX + 20;
-var sy = camY + camH - 20;
-var dc = dashCool / (dashCoolTime * 60);
-scr_ui_skillIcon(sx, sy, 3, spr_icon_dash, "Dash", "", dashes, dc);
+scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashCoolPerc);
 
-//var hpPerc = (hp / maxHp) * 100;
-//draw_healthbar(healthBarLeft, healthBarTop, healthBarRight, healthBarBottom, hpPerc, c_black, c_red, c_red, 0, true, true);
+//skills
+var skillsLen = array_length(skills);
+var pos = 0;
+
+for (var i = skillsLen - 1; i >= 0; i--) {
+
+	var thisSkill = skills[i];
+	var key = i + 1;
+
+	var xx = skillsX - pos * (skillsPad + skillIconW);
+
+	scr_ui_skillIcon(xx, skillsY, 2, key, thisSkill);
+
+	pos++;
+	
+}
