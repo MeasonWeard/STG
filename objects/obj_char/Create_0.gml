@@ -19,6 +19,8 @@ deathSounds = global.data.soundProfiles.fleshExplod;
 deathFunc = undefined;
 bulletHitFunc = undefined;//scr_effects_bulletHitFlesh;
 
+regenTick = 60;
+
 sprites = {
 
 	left: spr_player,
@@ -29,13 +31,16 @@ sprites = {
 	
 }
 
+damageFlash = 0;
+
 //stats
 maxHp = 100;
 hp = 100;
 maxShield = 0;
 shield = 0;
 prevHp = hp;
-damageFlash = 0;
+maxEnergy = 200;
+energy = 200;
 
 stats = {
 
@@ -44,6 +49,8 @@ stats = {
 	maxShield: 0,
 	hpRegen: 0,
 	shieldRegen: 0,
+	maxEnergy: 0,
+	energyRegen: 1,
 	
 	//movement
 	spd: 4,
@@ -55,6 +62,8 @@ stats = {
 	maxShieldPerc: 0,
 	hpRegenPerc: 0,
 	shieldRegenPerc: 0,
+	maxEnergyPerc: 0,
+	energyRegenPerc: 0,
 	
 	//flat damage
 	kinDam: 0,

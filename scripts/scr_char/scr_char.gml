@@ -118,6 +118,19 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	
 	char.hp = max(char.hp - totalDam, 0);
 	
+	//damage numbers
+	if (lost != 0) {
+		
+		var col = lost < 0 ? c_lime : c_red;
+		var num = abs(lost);
+	
+		var px = char.x;
+		var py = char.y - char.sprite_height * 0.75;
+	
+		scr_ui_damageNumbers(px, py, num, col);
+		
+	}
+	
 	return lost;
 	
 }

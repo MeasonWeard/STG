@@ -120,6 +120,8 @@ function scr_stats_calculateFinalStats(stats) {
 		maxShield: scr_stats_calculateStat(stats.maxShield, stats.maxShieldPerc),
 		hpRegen: scr_stats_calculateStat(stats.hpRegen, stats.hpRegenPerc),
 		shieldRegen: scr_stats_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
+		maxEnergy: scr_stats_calculateStat(stats.maxEnergy, stats.maxEnergyPerc),
+		energyRegen: scr_stats_calculateStat(stats.energyRegen, stats.energyRegenPerc),
 		
 		//movement
 		spd: stats.spd,

@@ -13,6 +13,9 @@ mapY = camY + 32;
 healthBarX = camX + 220;
 healthBarY = camY + camH - 28;
 
+energyBarX = camX + camW - 220;
+energyBarY = camY + camH - 28;
+
 dashX = camX + camW * 0.33;
 dashY = camY + camH - 20;
 
@@ -26,6 +29,8 @@ if (instance_exists(player)) {
 	maxHp = player.maxHp;
 	shield = player.shield;
 	maxShield = player.maxShield;
+	energy = player.energy;
+	maxEnergy = player.maxEnergy;
 	dashes = player.dashes;
 	maxDashes = player.finalStats.maxDashes;
 	dashCool = player.dashCool;
@@ -78,11 +83,16 @@ if (is_string(instructions) and instructionsTick > 0) {
 //minimap
 scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, rc.posX, rc.posY);
 
-//health bar
+//health and energy
 healthBar.value = hp;
 healthBar.maxValue = maxHp;
 healthBar.x = healthBarX;
 healthBar.y = healthBarY;
+
+energyBar.value = energy;
+energyBar.maxValue = maxEnergy;
+energyBar.x = energyBarX;
+energyBar.y = energyBarY;
 
 //dash
 scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashCoolPerc);

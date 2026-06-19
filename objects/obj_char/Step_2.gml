@@ -184,4 +184,24 @@ if (hp <= 0) {
 	
 }
 
+//health and energy regen
+if (regenTick > 0) {
+	
+	regenTick --;
+	
+} else {
+	
+	regenTick = 60;
+	
+	if (hp > 0) {
+
+		hp += finalStats.hpRegen;
+		energy += finalStats.energyRegen;
+		
+	}
+
+}
+
+//cap health
 if (hp > maxHp) hp = maxHp;
+if (energy > maxEnergy) energy = maxEnergy;

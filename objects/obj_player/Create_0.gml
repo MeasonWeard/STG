@@ -21,6 +21,7 @@ gunCentred = false;
 //gunYoffset = 64;
 
 stats.maxHp = 800;
+stats.maxEnergy = 200;
 stats.spd = 6;
 stats.maxDashes = 2;
 

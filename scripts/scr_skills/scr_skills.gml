@@ -14,6 +14,8 @@ function skill() constructor {
 	charges = 1;
 	maxCharges = 1;
 	
+	energyCost = 0;
+	
 	castFunc = undefined;
 	
 	setupFunc = undefined;
@@ -22,6 +24,7 @@ function skill() constructor {
 
 		if (!ready()) return false;
 		if (!is_callable(castFunc)) return false;
+		if (source.energy < energyCost) return false;
 
 		var success = castFunc(source);
 
@@ -44,6 +47,8 @@ function skill() constructor {
 				castCooldown = castCooldownTime * 60;
 			
 			}
+			
+			source.energy -= energyCost;
 
 			return true;
 		}
@@ -130,6 +135,7 @@ function skill_chainLightning() : skill() constructor {
 	name = "Chain Lightning";
 	maxCharges = 2;
 	charges = 2;
+	energyCost = 25;
 	
 	damage = undefined;
 	

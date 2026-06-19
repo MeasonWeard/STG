@@ -22,8 +22,11 @@ camYmid = camY + camH * 0.5;
 mapX = camX + 32;
 mapY = camY + 32;
 
-healthBarX = camXmid;
-healthBarY = camY + camH - 32;
+healthBarX = 0;
+healthBarY = 0;
+
+energyBarX = 0;
+energyBarY = 0;
 
 dashX = 0;
 dashY = 0;
@@ -38,6 +41,8 @@ hp = 0;
 maxHp = 0;
 shield = 0;
 maxShield = 0;
+energy = 0;
+maxEnergy = 0;
 dashes = 0;
 maxDashes = 0;
 dashCool = 0;
@@ -55,3 +60,10 @@ healthBar = instance_create_layer(x, y, "Instances", obj_statusBar);
 healthBar.width = 400;
 healthBar.height = 20;
 healthBar.depth = depth - 1;
+
+energyBar = instance_create_layer(x, y, "Instances", obj_statusBar);
+energyBar.width = 400;
+energyBar.height = 20;
+energyBar.depth = depth - 1;
+energyBar.fillCol = c_blue;
+energyBar.leftToRight = false;

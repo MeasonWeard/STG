@@ -37,6 +37,8 @@ if (setupStats) {
 	hp = maxHp;
 	maxShield = finalStats.maxShield;
 	shield = maxShield;
+	maxEnergy = finalStats.maxEnergy;
+	energy = maxEnergy;
 	dashes = finalStats.maxDashes;
 	
 	var gunsLen = array_length(guns);

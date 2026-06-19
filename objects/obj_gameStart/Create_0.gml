@@ -16,4 +16,6 @@ global.devControls = true;
 //UH
 window_set_cursor(cr_none);
 
+draw_set_font(fnt_normal);
+
 room_goto(room_startRun);

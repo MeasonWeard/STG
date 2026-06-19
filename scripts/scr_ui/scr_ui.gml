@@ -262,3 +262,22 @@ function scr_ui_skillIcon(xx, yy, align, key, skill) {
 	draw_set_colour(c_white);
 
 }
+
+function scr_ui_damageNumbers(xx, yy, num, col) {
+
+	static range = 64;
+	
+	var dir = random(360);
+	var dist = sqrt(random(1)) * range;
+	
+	var px = xx + lengthdir_x(dist, dir);
+	var py = yy + lengthdir_y(dist, dir);
+	
+	var inst = instance_create_layer(px, py, "Instances", obj_damageNumbers);
+	
+	inst.num = num;
+	inst.col = col;
+	
+	return inst;
+	
+}
