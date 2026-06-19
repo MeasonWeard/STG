@@ -185,23 +185,37 @@ if (hp <= 0) {
 }
 
 //health and energy regen
-if (regenTick > 0) {
-	
-	regenTick --;
-	
-} else {
-	
-	regenTick = 60;
-	
-	if (hp > 0) {
+show_debug_message(finalStats);
 
-		hp += finalStats.hpRegen;
-		energy += finalStats.energyRegen;
+if (hp > 0) {
+
+	var amount;
+
+	if (finalStats.hpRegen > 0) {
 		
+		hpRegenCounter += finalStats.hpRegen / 60;
+	
+
+		amount = floor(hpRegenCounter);
+
+		hp += amount;
+		hpRegenCounter -= amount;
+	
 	}
 
+	if (finalStats.energyRegen > 0) {
+
+		energyRegenCounter += finalStats.energyRegen / 60;
+
+		amount = floor(energyRegenCounter);
+
+		energy += amount;
+		energyRegenCounter -= amount;
+	
+	}
+	
 }
 
-//cap health
+//cap health and energy
 if (hp > maxHp) hp = maxHp;
 if (energy > maxEnergy) energy = maxEnergy;

@@ -20,10 +20,11 @@ scr_melee_equipMelee(self, melee1);
 gunCentred = false;
 //gunYoffset = 64;
 
-stats.maxHp = 800;
-stats.maxEnergy = 200;
+stats.maxHp = 300;
+stats.maxEnergy = 100;
 stats.spd = 6;
 stats.maxDashes = 2;
+stats.hpRegen = 1;
 
 skills.skill1 = new skill_chainLightning();
 skills.skill2 = new skill_test();

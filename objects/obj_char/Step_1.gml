@@ -33,7 +33,7 @@ if (setupStats) {
 	//char stats
 	finalStats = scr_stats_calculateFinalStats(stats);
 	
-	maxHap = finalStats.maxHp;
+	maxHp = finalStats.maxHp;
 	hp = maxHp;
 	maxShield = finalStats.maxShield;
 	shield = maxShield;

@@ -136,6 +136,7 @@ function skill_chainLightning() : skill() constructor {
 	maxCharges = 2;
 	charges = 2;
 	energyCost = 25;
+	range = 800;
 	
 	damage = undefined;
 	
@@ -161,6 +162,9 @@ function skill_chainLightning() : skill() constructor {
 		var nearest = scr_char_getNearest(xx, yy);
 		
 		if (nearest.id == source.id) return false;
+		
+		var dist = point_distance(source.x, source.y, nearest.x, nearest.y);
+		if (dist > range) return false;
 		
 		var cx = nearest.x;
 		var cy = nearest.y;
