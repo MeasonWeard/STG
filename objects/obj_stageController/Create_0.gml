@@ -14,6 +14,8 @@ global.projectileTop = global.roomTop - 64;
 var layerId = layer_get_id("Tiles");
 layer_depth(layerId, layers.ground);
 
+createdArrows = false;
+
 //projectile pool
 projectilePool = [];
 procectilePoolLen = 200;

@@ -46,3 +46,21 @@ for (var i = 0; i < sliceKeysLen; i++) {
 	if (slice.turn >= slice.steps) slice.turn = 0;
 	
 }
+
+//arrows
+var enemies = instance_number(obj_enemy);
+
+if (!createdArrows and enemies < 11) {
+
+	createdArrows = true;
+	
+	with(obj_enemy) {
+	
+		var arrow = instance_create_layer(0, 0, "Instances", obj_arrow);
+		arrow.target = self;
+		arrow.source = global.player;
+	
+	
+	}
+	
+}

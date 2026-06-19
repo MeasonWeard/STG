@@ -3,6 +3,7 @@ function scr_gunArsenal_blaster(){
 	var gun = scr_guns_createGun("Blaster");
 	gun.recoil = 1.2;
 	gun.clipSize = 24;
+	gun.reloadTime = 1.8;
 	
 	return gun;
 

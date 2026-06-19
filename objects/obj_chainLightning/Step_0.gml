@@ -20,7 +20,9 @@ if (firstZap) {
 		
 		scr_audio_playSoundAt(snd_zap, xx, yy);
 		
+		scr_char_damage(firstChar, damage, damageTypes.ability, false);
 		instance_create_layer(chainList[0].x, chainList[0].y, "Instances", obj_doubleZap);
+		
 		
 	}
 	
