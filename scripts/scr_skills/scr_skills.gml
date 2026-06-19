@@ -15,6 +15,8 @@ function skill() constructor {
 	maxCharges = 1;
 	
 	castFunc = undefined;
+	
+	setupFunc = undefined;
 
 	cast = function(source) {
 
@@ -92,6 +94,16 @@ function skill() constructor {
 	
 }
 
+function damageProfile() constructor {
+
+	kin = 0;
+	fire = 0;
+	chem = 0;
+	elec = 0;
+	rad = 0;
+	
+}
+
 function skill_test() : skill() constructor {
 
 	name = "Test";
@@ -119,10 +131,22 @@ function skill_chainLightning() : skill() constructor {
 	maxCharges = 2;
 	charges = 2;
 	
+	damage = undefined;
+	
+	setupFunc = function(char) {
+		
+		damage = new damageProfile();
+		
+		damage.elec = 30 + 15 * level;
+		
+		damage = scr_stats_calculateDamageProfile(char, damage);
+		
+	}
+	
 	castFunc = function(source) {
 		
 		if (!instance_exists(source)) return false;
-		
+
 		var chains = 2 + level;
 		
 		var xx = source.aimX;
@@ -138,6 +162,8 @@ function skill_chainLightning() : skill() constructor {
 		var cl = instance_create_layer(cx, cy, "Instances", obj_chainLightning);
 		cl.owner = source;
 		cl.chainList = [nearest];
+		cl.chains = chains;
+		cl.damage = damage;
 		
 		return true;
 		

@@ -59,6 +59,18 @@ enum weaponTypes {
 	
 }
 
+enum damageTypes {
+
+	projectile = 0,
+	melee = 1,
+	ability = 2,
+	dot = 3,
+	environmental = 4
+	
+}
+
+
+
 //stages
 stages = {
 

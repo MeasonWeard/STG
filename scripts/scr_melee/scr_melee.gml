@@ -116,35 +116,37 @@ function scr_melee_calculateMeleeStats(char, melee) {
 	if (!instance_exists(char)) return undefined;
 	if (!is_struct(melee)) return undefined;
 
-	var newStats = {};
+	var newStats = scr_stats_calculateDamageProfileWeapon(char, melee);
+
+	//var newStats = {};
 	
-	scr_data_structCopyInto(newStats, melee);
+	//scr_data_structCopyInto(newStats, melee);
 	
-	newStats.damage.kin = scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
-	newStats.damage.fire = scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
-	newStats.damage.chem = scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
-	newStats.damage.elec = scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
-	newStats.damage.rad = scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	//newStats.damage.kin = scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+	//newStats.damage.fire = scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+	//newStats.damage.chem = scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+	//newStats.damage.elec = scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+	//newStats.damage.rad = scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
 	
-	var range = scr_stats_calculateDamageRange(newStats.damage.kin);
-	newStats.damage.kinMin = range.minDam;
-	newStats.damage.kinMax = range.maxDam;
+	//var range = scr_stats_calculateDamageRange(newStats.damage.kin);
+	//newStats.damage.kinMin = range.minDam;
+	//newStats.damage.kinMax = range.maxDam;
 	
-	range = scr_stats_calculateDamageRange(newStats.damage.fire);
-	newStats.damage.fireMin = range.minDam;
-	newStats.damage.fireMax = range.maxDam;
+	//range = scr_stats_calculateDamageRange(newStats.damage.fire);
+	//newStats.damage.fireMin = range.minDam;
+	//newStats.damage.fireMax = range.maxDam;
 	
-	range = scr_stats_calculateDamageRange(newStats.damage.chem);
-	newStats.damage.chemMin = range.minDam;
-	newStats.damage.chemMax = range.maxDam;
+	//range = scr_stats_calculateDamageRange(newStats.damage.chem);
+	//newStats.damage.chemMin = range.minDam;
+	//newStats.damage.chemMax = range.maxDam;
 	
-	range = scr_stats_calculateDamageRange(newStats.damage.elec);
-	newStats.damage.elecMin = range.minDam;
-	newStats.damage.elecMax = range.maxDam;
+	//range = scr_stats_calculateDamageRange(newStats.damage.elec);
+	//newStats.damage.elecMin = range.minDam;
+	//newStats.damage.elecMax = range.maxDam;
 	
-	range = scr_stats_calculateDamageRange(newStats.damage.rad);
-	newStats.damage.radMin = range.minDam;
-	newStats.damage.radMax = range.maxDam;
+	//range = scr_stats_calculateDamageRange(newStats.damage.rad);
+	//newStats.damage.radMin = range.minDam;
+	//newStats.damage.radMax = range.maxDam;
 	
 	return newStats;
 	

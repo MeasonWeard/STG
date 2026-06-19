@@ -11,8 +11,17 @@ if (firstZap) {
 
 	firstZap = false;
 
-	if (instance_exists(chainList[0])) {
+	var firstChar = chainList[0];
+
+	if (instance_exists(firstChar)) {
+		
+		var xx = firstChar.x;
+		var yy = firstChar.y;
+		
+		scr_audio_playSoundAt(snd_zap, xx, yy);
+		
 		instance_create_layer(chainList[0].x, chainList[0].y, "Instances", obj_doubleZap);
+		
 	}
 	
 }
@@ -21,13 +30,15 @@ if (chainTick <= 0 and chainsDone < chains) {
 
 	chainTick = interval;
 
-	var source = noone;
+	var source = owner;
 
-	if (array_length(chainList) > 0) {
-		source = chainList[array_length(chainList) - 1];
-	}
-	else {
-		source = owner;
+	for (var i = array_length(chainList) - 1; i >= 0; i--) {
+
+		if (instance_exists(chainList[i])) {
+			source = chainList[i];
+			break;
+		}
+
 	}
 
 	if (instance_exists(source)) {
@@ -71,9 +82,10 @@ if (chainTick <= 0 and chainsDone < chains) {
 			chainsDone++;
 			
 			instance_create_layer(found.x, found.y, "Instances", obj_doubleZap);
-
+			scr_audio_playSoundAt(snd_zap, found.x, found.y);
+			
 			if (!is_undefined(damage)) {
-				//scr_char_damage(found, damage, owner);
+				scr_char_damage(found, damage, damageTypes.ability, false);
 			}
 			
 		}

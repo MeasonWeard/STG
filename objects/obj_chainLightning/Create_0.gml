@@ -1,4 +1,5 @@
 owner = noone;
+depth = layers.effects;
 
 chains = 4;
 chainsDone = 0;

@@ -40,7 +40,7 @@ for (var i = 0; i < len; i++) {
 		
 		}
 		
-		scr_char_damage(char, damage, undefined, false);
+		scr_char_damage(char, damage, damageTypes.projectile, false);
 		var profile = char.bulletHitSounds;
 		var snd = scr_audio_randomSoundFromProfile(profile);
 		if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	

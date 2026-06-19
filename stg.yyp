@@ -170,6 +170,7 @@
     {"id":{"name":"snd_smg3","path":"sounds/snd_smg3/snd_smg3.yy",},},
     {"id":{"name":"snd_stimPac","path":"sounds/snd_stimPac/snd_stimPac.yy",},},
     {"id":{"name":"snd_test","path":"sounds/snd_test/snd_test.yy",},},
+    {"id":{"name":"snd_zap","path":"sounds/snd_zap/snd_zap.yy",},},
     {"id":{"name":"spr_alien","path":"sprites/spr_alien/spr_alien.yy",},},
     {"id":{"name":"spr_bigThing","path":"sprites/spr_bigThing/spr_bigThing.yy",},},
     {"id":{"name":"spr_blank","path":"sprites/spr_blank/spr_blank.yy",},},

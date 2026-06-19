@@ -4,6 +4,7 @@ event_inherited();
 charName = "none";
 
 setup = true;
+setupStats = true;
 
 sc = global.stageController;
 

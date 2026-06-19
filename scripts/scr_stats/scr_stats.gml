@@ -24,6 +24,78 @@ function scr_stats_calculateDamageRange(dam) {
 	
 }
 
+function scr_stats_calculateDamageProfileWeapon(char, profile) {
+
+	var newStats = {};
+	
+	scr_data_structCopyInto(newStats, profile);
+	
+	newStats.damage.kin = scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+	newStats.damage.fire = scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+	newStats.damage.chem = scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+	newStats.damage.elec = scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+	newStats.damage.rad = scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	
+	var range = scr_stats_calculateDamageRange(newStats.damage.kin);
+	newStats.damage.kinMin = range.minDam;
+	newStats.damage.kinMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.fire);
+	newStats.damage.fireMin = range.minDam;
+	newStats.damage.fireMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.chem);
+	newStats.damage.chemMin = range.minDam;
+	newStats.damage.chemMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.elec);
+	newStats.damage.elecMin = range.minDam;
+	newStats.damage.elecMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.damage.rad);
+	newStats.damage.radMin = range.minDam;
+	newStats.damage.radMax = range.maxDam;
+	
+	return newStats;
+	
+}
+
+function scr_stats_calculateDamageProfile(char, profile) {
+
+	var newStats = {};
+	
+	scr_data_structCopyInto(newStats, profile);
+	
+	newStats.kin = scr_stats_calculateStat(newStats.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+	newStats.fire = scr_stats_calculateStat(newStats.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+	newStats.chem = scr_stats_calculateStat(newStats.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+	newStats.elec = scr_stats_calculateStat(newStats.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+	newStats.rad = scr_stats_calculateStat(newStats.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	
+	var range = scr_stats_calculateDamageRange(newStats.kin);
+	newStats.kinMin = range.minDam;
+	newStats.kinMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.fire);
+	newStats.fireMin = range.minDam;
+	newStats.fireMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.chem);
+	newStats.chemMin = range.minDam;
+	newStats.chemMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.elec);
+	newStats.elecMin = range.minDam;
+	newStats.elecMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newStats.rad);
+	newStats.radMin = range.minDam;
+	newStats.radMax = range.maxDam;
+	
+	return newStats;
+	
+}
+
 function scr_stats_calculateResistanceRange(res) {
 
 	var minRes = floor(res / 5);
