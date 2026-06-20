@@ -119,17 +119,7 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	char.hp = max(char.hp - totalDam, 0);
 	
 	//damage numbers
-	if (totalDam != 0) {
-		
-		var col = totalDam < 0 ? c_lime : c_red;
-		var num = abs(totalDam);
-	
-		var px = char.x;
-		var py = char.y - char.sprite_height * 0.75;
-	
-		scr_ui_damageNumbers(px, py, num, col);
-		
-	}
+	scr_ui_damageNumbers(totalDam, char);
 	
 	return lost;
 	
@@ -143,7 +133,28 @@ function scr_char_heal(char, amount) {
 	
 	char.hp = min(char.hp + amount, char.maxHp);
 	
-	return min(amount, missing);
+	var healed = min(amount, missing);
+	
+	scr_ui_damageNumbers(-healed, char);
+	
+	return healed;
+	
+}
+
+function scr_char_rechargeEnergy(char, amount) {
+
+	if (!instance_exists(char)) return 0;
+	
+	var missing = char.maxEnergy - char.energy;
+	
+	char.energy = min(char.energy + amount, char.maxEnergy);
+	
+	var restored = min(amount, missing);
+	
+	var yy = char.y - char.sprite_height * 0.5;
+	scr_ui_risingNumbers(char.x, yy, restored, c_aqua);
+	
+	return restored;
 	
 }
 
@@ -333,5 +344,41 @@ function scr_char_targetNearest(source, xx, yy, cellsWidth) {
 	}
 	
 	return found;
+	
+}
+
+function scr_char_useStimPack(char) {
+	
+	if (!instance_exists(char)) return 0;
+	
+	if (char.stimPacks <= 0) return 0;
+	
+	char.stimPacks--;
+	
+	var amount = ceil(char.maxHp * 0.5);
+	
+	var sp = instance_create_layer(x, y, "Instances", obj_stimPackUse);
+	sp.owner = char;
+	sp.heal = amount;
+	
+	return amount;
+	
+}
+
+function scr_char_useEnergyPack(char) {
+	
+	if (!instance_exists(char)) return 0;
+	
+	if (char.energyPacks <= 0) return 0;
+	
+	char.energyPacks--;
+	
+	var amount = ceil(char.maxEnergy * 0.5);
+	
+	var sp = instance_create_layer(x, y, "Instances", obj_energyPackUse);
+	sp.owner = char;
+	sp.heal = amount;
+	
+	return amount;
 	
 }

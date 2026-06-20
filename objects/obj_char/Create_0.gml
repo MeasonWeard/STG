@@ -44,13 +44,11 @@ prevHp = hp;
 maxEnergy = 200;
 energy = 200;
 
-stimPackMax = 2;
-stimPacks = 2;
-stimPackRegen = 0
+stimPacks = 0;
+energyPacks = 0;
 
-energyPackMax = 1;
-energyPacks = 1;
-energyPackRegen = 0;
+stimPackRecharge = 0;
+energyPackRecharge = 0;
 
 stats = {
 
@@ -61,6 +59,10 @@ stats = {
 	shieldRegen: 0,
 	maxEnergy: 0,
 	energyRegen: 2,
+	maxStimPacks : 0,
+	maxEnergyPacks: 0,
+	stimPackRegen: 2,
+	energyPackRegen: 1,
 	
 	//movement
 	spd: 4,
@@ -74,6 +76,7 @@ stats = {
 	shieldRegenPerc: 0,
 	maxEnergyPerc: 0,
 	energyRegenPerc: 0,
+	
 	
 	//flat damage
 	kinDam: 0,

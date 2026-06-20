@@ -47,6 +47,8 @@ dashes = 0;
 maxDashes = 0;
 dashCool = 0;
 dashCoolTime = 0;
+stimPacks = 0;
+energyPacks = 0;
 
 skill1 = undefined;
 skill2 = undefined;
@@ -65,5 +67,5 @@ energyBar = instance_create_layer(x, y, "Instances", obj_statusBar);
 energyBar.width = 400;
 energyBar.height = 20;
 energyBar.depth = depth - 1;
-energyBar.fillCol = c_blue;
+energyBar.fillCol = c_aqua;
 energyBar.leftToRight = false;

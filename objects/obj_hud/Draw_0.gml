@@ -36,6 +36,8 @@ if (instance_exists(player)) {
 	dashCool = player.dashCool;
 	dashCoolTime = player.finalStats.dashCoolTime;
 	dashCoolPerc = dashCool / (dashCoolTime * 60);
+	stimPacks = player.stimPacks;
+	energyPacks = player.energyPacks;
 	
 	skill1 = player.skills.skill1;
 	skill2 = player.skills.skill2;
@@ -96,6 +98,8 @@ energyBar.y = energyBarY;
 
 //dash
 scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashCoolPerc);
+draw_text(dashX + 60, dashY, stimPacks);
+draw_text(dashX + 80, dashY, energyPacks);
 
 //skills
 var skillsLen = array_length(skills);

@@ -41,6 +41,8 @@ if (setupStats) {
 	maxEnergy = finalStats.maxEnergy;
 	energy = maxEnergy;
 	dashes = finalStats.maxDashes;
+	stimPacks = stats.maxStimPacks;
+	energyPacks = stats.maxEnergyPacks;
 	
 	var weaponsLen = array_length(weapons);
 	
@@ -56,7 +58,11 @@ if (setupStats) {
 			
 		}
 		
-		//if(is_instanceof(thisWeapon, meleeInst))
+		if (is_instanceof(thisWeapon, meleeInst)) {
+		
+			slot.stats = scr_melee_calculateMeleeStats(self, thisWeapon);
+		
+		}
 		
 	}
 	

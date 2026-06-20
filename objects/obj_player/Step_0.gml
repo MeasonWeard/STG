@@ -94,4 +94,6 @@ if ((keyboard_check(ord("2")) or mouse_check_button(mb_side1)) and is_struct(ski
 if (keyboard_check(ord("3")) and is_struct(skill3)) skill3.cast(self);
 if (keyboard_check(ord("4")) and is_struct(skill4)) skill4.cast(self);
 
-if(keyboard_check_pressed(ord("O"))) show_debug_message(weapons);
+//packs
+if (keyboard_check_pressed(ord("Q"))) scr_char_useStimPack(self);
+if (keyboard_check_pressed(ord("E"))) scr_char_useEnergyPack(self);

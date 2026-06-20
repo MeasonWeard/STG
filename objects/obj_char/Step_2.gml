@@ -124,35 +124,6 @@ if (is_struct(thornsDamage)) {
 
 if (thornsImmunity > 0) thornsImmunity --;
 
-//liquids
-//var liquid = scr_tiles_getLiquidAt(x, y - 8);
-
-//if (is_struct(liquid)) {
-
-//	if (liquidDamageImmunity > 0) {
-	
-//		liquidDamageImmunity --;
-	
-//	} else {
-	
-//		if (variable_struct_exists(liquid, "damage")) {
-	
-//			var damage = liquid.damage;
-//			scr_char_damage(self, damage, undefined, true);
-//			//hp -= damage;
-//			liquidDamageImmunity = 30;
-			
-//			var profile = [];
-//			if (variable_struct_exists(liquid, "damageSounds")) profile = liquid.damageSounds;
-			
-//			var snd = scr_audio_randomSoundFromProfile(profile);
-//			if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
-	
-//		}
-//	}
-
-//}
-
 //damage and death
 if (hp < prevHp) {
 
@@ -211,6 +182,29 @@ if (hp > 0) {
 		energy += amount;
 		energyRegenCounter -= amount;
 	
+	}
+	
+}
+
+//packs regen
+if (stats.maxStimPacks > 0 and stats.stimPackRegen > 0 and stimPacks < stats.maxStimPacks) {
+
+	stimPackRecharge += stats.stimPackRegen;
+	
+	if (stimPackRecharge >= 3600) {
+		stimPackRecharge = 0;
+		stimPacks++;
+	}
+	
+}
+
+if (stats.maxEnergyPacks > 0 and stats.energyPackRegen > 0 and energyPacks < stats.maxEnergyPacks) {
+
+	energyPackRecharge += stats.energyPackRegen;
+	
+	if (energyPackRecharge >= 3600) {
+		energyPackRecharge = 0;
+		energyPacks++;
 	}
 	
 }

@@ -265,7 +265,7 @@ function scr_ui_skillIcon(xx, yy, align, key, skill) {
 
 }
 
-function scr_ui_damageNumbers(xx, yy, num, col) {
+function scr_ui_risingNumbers(xx, yy, num, col) {
 
 	static range = 64;
 	
@@ -281,5 +281,21 @@ function scr_ui_damageNumbers(xx, yy, num, col) {
 	inst.col = col;
 	
 	return inst;
+	
+}
+
+function scr_ui_damageNumbers(amount, char) {
+
+	if (amount != 0) {
+		
+		var col = amount < 0 ? c_lime : c_red;
+		var num = abs(amount);
+	
+		var px = char.x;
+		var py = char.y - char.sprite_height * 0.75;
+	
+		scr_ui_risingNumbers(px, py, num, col);
+		
+	}
 	
 }
