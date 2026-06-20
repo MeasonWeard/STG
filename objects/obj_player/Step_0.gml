@@ -103,4 +103,4 @@ if (healed != 0) audio_play_sound(snd_medkit, 0, false);
 
 
 if (keyboard_check_pressed(ord("E"))) recharged = scr_char_useEnergyPack(self);
-if (recharged != 0) audio_play_sound(snd_powerUp, 0, false);
+if (recharged != 0) audio_play_sound(snd_recharge, 0, false);

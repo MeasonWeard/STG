@@ -119,6 +119,7 @@ function skill_test() : skill() constructor {
 	maxCharges = 2;
 	charges = 1;
 	energyCost = 0;
+	castCooldownTime = 0.65;
 	
 	castFunc = function(source) {
 		

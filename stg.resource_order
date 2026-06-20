@@ -140,6 +140,7 @@
     {"name":"snd_pistol3","order":6,"path":"sounds/snd_pistol3/snd_pistol3.yy",},
     {"name":"snd_playerHit","order":2,"path":"sounds/snd_playerHit/snd_playerHit.yy",},
     {"name":"snd_powerUp","order":1,"path":"sounds/snd_powerUp/snd_powerUp.yy",},
+    {"name":"snd_recharge","order":21,"path":"sounds/snd_recharge/snd_recharge.yy",},
     {"name":"snd_shotgun1","order":5,"path":"sounds/snd_shotgun1/snd_shotgun1.yy",},
     {"name":"snd_shotgun2","order":4,"path":"sounds/snd_shotgun2/snd_shotgun2.yy",},
     {"name":"snd_shotgun3","order":3,"path":"sounds/snd_shotgun3/snd_shotgun3.yy",},
