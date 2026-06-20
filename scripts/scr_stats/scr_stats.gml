@@ -24,17 +24,32 @@ function scr_stats_calculateDamageRange(dam) {
 	
 }
 
+function scr_stats_applyDamageBonuses(char, amount, element) {
+
+	var percKey = element + "DamPerc";
+	var damKey = element + "Dam";
+	
+	if (!variable_struct_exists(char.stats, percKey)) return amount;
+	if (!variable_struct_exists(char.finalStats, damKey)) return amount;
+
+	var perc = char.stats[$ percKey];
+	var dam = char.finalStats[$ damKey];
+	
+	return scr_stats_calculateStat(amount, perc) + dam;
+
+}
+
 function scr_stats_calculateDamageProfileWeapon(char, profile) {
 
 	var newStats = {};
 	
 	scr_data_structCopyInto(newStats, profile);
 	
-	newStats.damage.kin = scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
-	newStats.damage.fire = scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
-	newStats.damage.chem = scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
-	newStats.damage.elec = scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
-	newStats.damage.rad = scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	newStats.damage.kin = scr_stats_applyDamageBonuses(char, newStats.damage.kin, "kin"); //scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+	newStats.damage.fire = scr_stats_applyDamageBonuses(char, newStats.damage.fire, "fire");//scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+	newStats.damage.chem = scr_stats_applyDamageBonuses(char, newStats.damage.chem, "chem");// scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+	newStats.damage.elec = scr_stats_applyDamageBonuses(char, newStats.damage.elec, "elec");// scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+	newStats.damage.rad = scr_stats_applyDamageBonuses(char, newStats.damage.rad, "rad");// scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
 	
 	var range = scr_stats_calculateDamageRange(newStats.damage.kin);
 	newStats.damage.kinMin = range.minDam;
@@ -60,17 +75,21 @@ function scr_stats_calculateDamageProfileWeapon(char, profile) {
 	
 }
 
-function scr_stats_calculateDamageProfile(char, profile) {
+function scr_stats_calculateDamageProfile(char, profile, applyBonuses) {
 
 	var newStats = {};
 	
 	scr_data_structCopyInto(newStats, profile);
 	
-	newStats.kin = scr_stats_calculateStat(newStats.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
-	newStats.fire = scr_stats_calculateStat(newStats.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
-	newStats.chem = scr_stats_calculateStat(newStats.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
-	newStats.elec = scr_stats_calculateStat(newStats.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
-	newStats.rad = scr_stats_calculateStat(newStats.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	if (applyBonuses) {
+		
+		newStats.kin = scr_stats_applyDamageBonuses(char, newStats.kin, "kin"); //scr_stats_calculateStat(newStats.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+		newStats.fire = scr_stats_applyDamageBonuses(char, newStats.fire, "fire");//scr_stats_calculateStat(newStats.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+		newStats.chem = scr_stats_applyDamageBonuses(char, newStats.chem, "chem");//scr_stats_calculateStat(newStats.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+		newStats.elec = scr_stats_applyDamageBonuses(char, newStats.elec, "elec");//scr_stats_calculateStat(newStats.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+		newStats.rad = scr_stats_applyDamageBonuses(char, newStats.rad, "rad");//scr_stats_calculateStat(newStats.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+		
+	}
 	
 	var range = scr_stats_calculateDamageRange(newStats.kin);
 	newStats.kinMin = range.minDam;

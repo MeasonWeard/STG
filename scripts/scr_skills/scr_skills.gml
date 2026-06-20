@@ -147,10 +147,12 @@ function skill_chainLightning() : skill() constructor {
 	
 	setupFunc = function(char) {
 		
+		energyCost = 30 + level * 5;
+		
 		damage = new damageProfile();
 		damage.elec = 30 + 15 * level;
-		damage = scr_stats_calculateDamageProfile(char, damage); //IMPORTANT! This will make it do all types of damage
-		energyCost = 30 + level * 5;
+		damage.elec = scr_stats_applyDamageBonuses(char, damage.elec, "elec"); 
+		damage = scr_stats_calculateDamageProfile(char, damage, false);
 		
 	}
 	
