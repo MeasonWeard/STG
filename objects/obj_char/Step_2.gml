@@ -1,16 +1,18 @@
 event_inherited();
 
+//equippedWeapon = weapons[weaponIndex].weapon;
+//equippedWeaponStats = weapons[weaponIndex].stats;
+
 //gun
-if (is_struct(gun)) {
+if (is_instanceof(equippedWeapon, gunInst)) {
 
-    var slot = guns[gunIndex];
-    var gunStats = slot.stats;
-
+	var gun = equippedWeapon;
+	
     gun.fireTick--;
 
     if (gun.fireTick < 0) gun.fireTick = 0;
 
-    gun.aimOff = max(gunStats.minAimOff, gun.aimOff - gunStats.stability);
+    gun.aimOff = max(equippedWeaponStats.minAimOff, gun.aimOff - equippedWeaponStats.stability);
 
     //reload
     if (gun.reload > 0) {
@@ -19,7 +21,7 @@ if (is_struct(gun)) {
 
         if (gun.reload == 0) {
 			
-            gun.ammo = gunStats.clipSize;
+            gun.ammo = equippedWeaponStats.clipSize;
 			shootDelayTick = irandom_range(shootDelayMin, shootDelayMax);
 			
         }
@@ -29,20 +31,18 @@ if (is_struct(gun)) {
 }
 
 //melee weapon
-if (is_struct(melee)) {
+if (is_instanceof(equippedWeapon, meleeInst)) {
 
-	if (is_struct(melee.melee)) {
+	var melee = equippedWeapon;
 
-		melee.melee.attackTick --;
+	melee.attackTick --;
 	
-		if (melee.melee.attackTick < 0) melee.melee.attackTick = 0;
-		if (melee.melee.recharge > 0) melee.melee.recharge --;
+	if (melee.attackTick < 0) melee.attackTick = 0;
+	if (melee.recharge > 0) melee.recharge --;
 	
-		if (melee.melee.recharge <= 0) {
-			melee.melee.recharge = 0;
-			melee.melee.charges = melee.stats.maxCharges;
-		}
-	
+	if (melee.recharge <= 0) {
+		melee.recharge = 0;
+		melee.charges = equippedWeaponStats.maxCharges;
 	}
 	
 }
@@ -91,7 +91,7 @@ for (var i = len; i >= 0; i--) {
 }
 
 //thorns damage
-if (thornsDamage > 0) {
+if (is_struct(thornsDamage)) {
 	
 	if (scr_timeSlicing_isMyTurn("thorns", thornsTurnIndex)) {
 	
@@ -102,6 +102,7 @@ if (thornsDamage > 0) {
 		
 			var char = nearby[i];
 			
+			if (!instance_exists(char)) continue;
 			if (char.id = id) continue;
 			if (char.thornsImmunity > 0) continue;
 			if (scr_char_isFriendly(self, char)) continue;
@@ -110,7 +111,6 @@ if (thornsDamage > 0) {
 			
 			if (col) {
 				scr_char_damage(char, thornsDamage, undefined, true);
-				//char.hp -= thornsDamage;
 				char.thornsImmunity = round(60 * THORNS_IMMUNITY_TIME);
 				var snd = scr_audio_randomSoundFromProfile(thornsSounds);
 				if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);

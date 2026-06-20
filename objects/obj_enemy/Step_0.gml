@@ -54,7 +54,8 @@ if (alert) {
 	if (instance_exists(target)) {
 
 		scr_ai_moveTowardsPointAvoid(ghost.x, ghost.y, spd, avoidDist);
-		scr_ai_shootAtTarget(self, target, aimOnReload);
+		scr_ai_attackTarget(self, target, aimOnReload);
+		//scr_ai_shootAtTarget(self, target, aimOnReload);
 
 	} else {
 

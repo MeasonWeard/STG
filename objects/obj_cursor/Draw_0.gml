@@ -1,41 +1,39 @@
 if (mode == "aim") {
 	
-	//reticle
 	var rad = 8;
 	var playerExists = instance_exists(player);
 	
-	if (playerExists and is_struct(player.gun)) {
-		rad = player.gun.aimOff * 4;
+	//gun
+	if (playerExists and is_instanceof(player.equippedWeapon, gunInst)) {
+		
+		rad = player.equippedWeapon.aimOff * 4;
+		
 	}
 	
-	draw_set_colour(c_red);
-	
-	draw_circle(x, y, 2, false);
-	
-	draw_circle(x, y, rad, true);
-	
 	//melee
-	if (playerExists and showMelee and is_struct(player.melee)) {
+	if (playerExists and showMelee and is_instanceof(player.equippedWeapon, meleeInst)) {
 	
-		var melee = player.melee;
+		rad = 8;
+		
+		var melee = player.equippedWeapon;
+		var stats = player.equippedWeaponStats;
 	
 		if (playerExists and is_struct(melee)) {
 		
-		
-			if (melee.melee.charges > 0) {
+			if (melee.charges > 0) {
 				
 				var prevCol = draw_get_colour();
 				draw_set_colour(meleeBarCol);
 				draw_set_valign(fa_middle);
-				draw_text(meleeNumX, meleeNumY, string(melee.melee.charges));
+				draw_text(meleeNumX, meleeNumY, string(melee.charges));
 				draw_set_colour(prevCol);
 				scr_misc_resetTextAlignment();
 				
 			} 
 				
-			if (melee.melee.recharge > 0) {
+			if (melee.recharge > 0) {
 				
-				var perc = 1 - (melee.melee.recharge / (melee.stats.rechargeTime * 60));
+				var perc = 1 - (melee.recharge / (stats.rechargeTime * 60));
 				perc *= 100;
 				
 				if (perc >= 15) draw_healthbar(meleeBarLeft, meleeBarTop, meleeBarRight, meleeBarBottom, perc, c_grey, meleeBarCol, meleeBarCol, 0, true, true);
@@ -46,13 +44,18 @@ if (mode == "aim") {
 		}
 
 	}
+
+	//reticle
+	draw_set_colour(c_red);
+	draw_circle(x, y, 2, false);
+	draw_circle(x, y, rad, true);
 	
 	//reload
 	if (showReload and playerExists) {
 		
-		var gun = player.gun;
+		var gun = player.equippedWeapon;
 		
-		if (is_struct(gun)) {
+		if (is_instanceof(gun, gunInst)) {
 		
 			if (gun.reload > 0) {
 				
@@ -71,9 +74,11 @@ if (mode == "aim") {
 	//show ammo
 	if (playerExists and showAmmo) {
 	
-		var gun = player.gun;
+		draw_set_font(fnt_normal);
+	
+		var gun = player.equippedWeapon;
 		
-		if (playerExists and is_struct(gun)) {
+		if (playerExists and is_instanceof(gun, gunInst)) {
 			
 			var prevCol = draw_get_colour();
 			draw_set_colour(reloadBarCol);
@@ -95,13 +100,13 @@ if (mode == "aim") {
 	
 		gunNameTick --;
 		
-		if (playerExists and is_struct(player.gun)) {
+		if (playerExists and is_instanceof(player.equippedWeapon, weaponInst)) {
 			
 			//var prevCol = draw_get_colour();
 			draw_set_halign(fa_middle);
 			draw_set_colour(c_white);
 		
-			draw_text(gunNameX, gunNameY, player.gun.name);
+			draw_text(gunNameX, gunNameY, player.equippedWeapon.name);
 		
 		}
 	

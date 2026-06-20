@@ -239,8 +239,10 @@ function scr_ui_skillIcon(xx, yy, align, key, skill) {
 	draw_set_colour(borderCol);
 	draw_rectangle(left, top, right, bottom, true);
 
+	draw_set_font(fnt_normal);
+
 	// key, top left
-	if (!is_undefined(skill) && !is_undefined(key)) {
+	if (!is_undefined(skill) and !is_undefined(key)) {
 		draw_set_colour(c_aqua);
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);

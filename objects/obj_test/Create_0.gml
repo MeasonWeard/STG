@@ -17,8 +17,11 @@ bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
 gun1 = new gun_alienOrb2();
-scr_guns_collectGun(self, gun1, true);
+scr_weapons_collectWeapon(self, gun1, true);
 
 aimOnReload = true;
 aimRadius = 240;
 aimBias = 1.2;
+
+thornsDamage = new damageProfile();
+thornsDamage.chem = 16;

@@ -7,8 +7,11 @@ if (setup) {
 	if (!customGunOffset) gunYoffset = (sprite_get_height(sprites.down) * image_yscale) * 0.5;
 
 	//thorns
-	if (thornsDamage > 0) {
+	if (is_struct(thornsDamage)) {
+		
 		thornsTurnIndex = scr_timeSlicing_assignTurnIndex("thorns");
+		thornsDamage = scr_stats_calculateDamageProfile(self, thornsDamage);
+		
 	}
 	
 	//activationTurnIndex = scr_timeSlicing_assignTurnIndex("activation");
@@ -39,19 +42,21 @@ if (setupStats) {
 	energy = maxEnergy;
 	dashes = finalStats.maxDashes;
 	
-	var gunsLen = array_length(guns);
+	var weaponsLen = array_length(weapons);
 	
-	for (var i = 0 ; i < gunsLen; i ++) {
+	for (var i = 0 ; i < weaponsLen; i ++) {
 	
-		var slot = guns[i];
-		var thisGun = slot.gun;
+		var slot = weapons[i];
+		var thisWeapon = slot.weapon;
 
-		if (is_struct(thisGun)) {
+		if (is_instanceof(thisWeapon, gunInst)) {
 	
-			slot.stats = scr_guns_calculateGunStats(self, thisGun);
-			thisGun.ammo = slot.stats.clipSize;
+			slot.stats = scr_guns_calculateGunStats(self, thisWeapon);
+			thisWeapon.ammo = slot.stats.clipSize;
 			
 		}
+		
+		//if(is_instanceof(thisWeapon, meleeInst))
 		
 	}
 	
@@ -85,8 +90,8 @@ if (setupStats) {
 //duhh
 if (firstEquip) {
 	firstEquip = false;
-	gunIndex = 0;
-	scr_guns_equipGun(self, gunIndex);
+	weaponIndex = 0;
+	scr_weapons_equipWeapon(self, weaponIndex);
 }
 
 prevHp = hp;

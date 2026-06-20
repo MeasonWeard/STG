@@ -14,6 +14,7 @@ if (instance_exists(owner)) {
 	
 			if (!instance_exists(char)) continue;
 			if (char.id == owner.id) continue;
+			if (char.faction == owner.faction) continue;
 		
 			if (
 				bbox_right > char.colLeft and

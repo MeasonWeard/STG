@@ -15,13 +15,13 @@ if (global.settingsDirty) {
 
 if (instance_exists(player)) {
 	
-	if (prevGun != player.gun) {
+	if (prevWeapon != player.equippedWeapon) {
 
 		gunNameTick = 120;
 	
 	}
 
-	prevGun = player.gun;
+	prevWeapon = player.equippedWeapon;
 
 } else {
 

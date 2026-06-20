@@ -273,7 +273,9 @@ function scr_ai_shootAtTarget(char, target, aimOnReload) {
 	
 	if (!instance_exists(char)) exit;
 	if (!instance_exists(target)) exit;
-	if (!is_struct(char.gun)) exit;
+	if (!is_instanceof(char.equippedWeapon, gunInst)) exit;
+	
+	var shot = noone;
 	
 	if (char.shootDelayTick > 0) {
 		
@@ -286,7 +288,7 @@ function scr_ai_shootAtTarget(char, target, aimOnReload) {
 		
 		if (aimOnReload) {
 			
-			if (char.gun.reload > 0 and aimTurn) aim = true;
+			if (char.equippedWeapon.reload > 0 and aimTurn) aim = true;
 			
 		} else {
 			
@@ -296,11 +298,46 @@ function scr_ai_shootAtTarget(char, target, aimOnReload) {
 		
 		if (firstShot or aim) scr_ai_aimAtTarget(char, target, char.aimRadius, char.aimBias);
 			
-		var shot = scr_guns_shoot(char);
+		shot = scr_guns_shoot(char);
 		
 		if (firstShot and shot) firstShot = false;
 
 	}
+	
+	return shot;
+	
+}
+
+function scr_ai_meleeAttackTarget(char, target) {
+
+	if (!instance_exists(char)) exit;
+	if (!instance_exists(target)) exit;
+	if (!is_instanceof(char.equippedWeapon, meleeInst)) exit;
+	
+	var att = noone;
+	
+	if (char.shootDelayTick > 0) {
+		
+		char.shootDelayTick--;
+		
+	} else {
+
+		var dist = point_distance(char.x, char.y, target.x, target.y);
+		aimX = target.x;
+		aimY = target.y;
+			
+		if (dist <= meleeRange) att = scr_melee_attack(char);
+
+	}
+	
+	return att;
+	
+}
+
+function scr_ai_attackTarget(char, target, aimOnReload) {
+
+	if (is_instanceof(char.equippedWeapon, gunInst)) scr_ai_shootAtTarget(char, target, aimOnReload);
+	if (is_instanceof(char.equippedWeapon, meleeInst)) scr_ai_meleeAttackTarget(char, target);
 	
 }
 

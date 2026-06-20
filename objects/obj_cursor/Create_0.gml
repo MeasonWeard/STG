@@ -34,7 +34,7 @@ gunNameX = x;
 gunNameY = y;
 
 gunNameTick = 0;
-prevGun = undefined;
+prevWeapon = undefined;
 
 if (variable_global_exists("player")) {
 

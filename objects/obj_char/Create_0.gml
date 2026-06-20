@@ -44,6 +44,14 @@ prevHp = hp;
 maxEnergy = 200;
 energy = 200;
 
+stimPackMax = 2;
+stimPacks = 2;
+stimPackRegen = 0
+
+energyPackMax = 1;
+energyPacks = 1;
+energyPackRegen = 0;
+
 stats = {
 
 	//flat health and shields
@@ -137,7 +145,7 @@ skills = {
 }
 
 //thorns
-thornsDamage = 0;
+thornsDamage = undefined;
 thornsAttackRate = 1;
 thornsTurnIndex = -1;
 thornsSounds = global.data.soundProfiles.burn;
@@ -193,13 +201,12 @@ aimOnReload = false;
 
 meleeCooldown = 0;
 
-gun = undefined;
-melee = undefined;
+equippedWeapon = undefined;
+equippedWeaponStats = undefined;
+//melee = undefined;
 
-guns = [];
-gunIndex = 0;
-
-gunStats = undefined;
+weapons = [];
+weaponIndex = 0;
 
 meleeHitList = [];
 
@@ -212,3 +219,4 @@ avoidDist = 48;
 avoidX = 0;
 avoidY = 0;
 avoidIndex = -1;
+meleeRange = 240;

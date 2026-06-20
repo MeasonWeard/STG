@@ -1,34 +1,3 @@
-//draw_set_alpha(1);
-//draw_set_colour(c_aqua);
-
-//var len = array_length(chainList);
-
-//if (len > 0) {
-
-//	var sourceX = x;
-//	var sourceY = y;
-
-//	if (instance_exists(owner)) {
-//		sourceX = owner.x;
-//		sourceY = owner.y;
-//	}
-
-//	for (var i = 0; i < len; i++) {
-
-//		var target = chainList[i];
-
-//		if (!instance_exists(target)) continue;
-
-//		draw_line(sourceX, sourceY, target.x, target.y);
-
-//		sourceX = target.x;
-//		sourceY = target.y;
-//	}
-//}
-
-//draw_set_colour(c_white);
-//draw_set_alpha(1);
-
 jitterTick--;
 
 if (jitterTick <= 0) {
@@ -38,7 +7,7 @@ if (jitterTick <= 0) {
 	lightningPoints = [];
 
 	var sourceX = owner.x;
-	var sourceY = owner.y;
+	var sourceY = owner.y - owner.sprite_height * 0.5;
 
 	var len = array_length(chainList);
 

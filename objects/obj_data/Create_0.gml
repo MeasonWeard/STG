@@ -98,7 +98,7 @@ soundProfiles = {
 	bulletHitFlesh: [snd_bulletHitFlesh],
 	bulletHitRock: [snd_bulletHitRock1, snd_bulletHitRock2, snd_bulletHitRock3],
 	
-	//gunshots
+	//weaponshots
 	blaster: [snd_blaster1, snd_blaster2, snd_blaster3],
 	smg: [snd_smg1, snd_smg2, snd_smg3],
 	shotgun: [snd_shotgun1, snd_shotgun2, snd_shotgun3],
@@ -109,6 +109,7 @@ soundProfiles = {
 	//melee
 	cleaverSwing: [snd_cleaverSwing1, snd_cleaverSwing2, snd_cleaverSwing3],
 	cleaverHit: [snd_cleaverHit1, snd_cleaverHit2, snd_cleaverHit3],
+	swish: [snd_swish1, snd_swish2, snd_swish3, snd_swish4],
 	
 	//characters
 	jeffDeath: [snd_jeffDeath1, snd_jeffDeath2, snd_jeffDeath3],

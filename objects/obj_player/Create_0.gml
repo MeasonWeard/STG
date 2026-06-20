@@ -9,12 +9,14 @@ audio_listener_position(x, y, 0);
 audio_listener_orientation(0, 0, 1, 0, -1, 0);
 
 var gun = new gun_blaster();
+var gun2 = new gun_pistol();
 
-scr_guns_collectGun(self, gun, false);
+scr_weapons_collectWeapon(self, gun, false);
+scr_weapons_collectWeapon(self, gun2, false);
 
-var melee1 = scr_melee_createWeapon("test");
+var melee1 = new meleeInst();
 
-scr_melee_equipMelee(self, melee1);
+scr_weapons_collectWeapon(self, melee1, false);
 
 gunCentred = false;
 //gunYoffset = 64;

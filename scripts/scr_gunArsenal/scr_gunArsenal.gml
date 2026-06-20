@@ -1,4 +1,4 @@
-function gun_blaster() : weapon_gun() constructor {
+function gun_blaster() : gunInst() constructor {
 
 	name = "Blaster";
 	recoil = 1.2;
@@ -31,7 +31,7 @@ function gun_blaster() : weapon_gun() constructor {
 	
 }
 
-function gun_pistol(): weapon_gun() constructor {
+function gun_pistol(): gunInst() constructor {
 
 	name = "Pistol";
 	
@@ -49,7 +49,7 @@ function gun_pistol(): weapon_gun() constructor {
 
 }
 
-function gun_devastator() : weapon_gun() constructor{
+function gun_devastator() : gunInst() constructor{
 
 	name = "Devastator";
 	
@@ -66,7 +66,7 @@ function gun_devastator() : weapon_gun() constructor{
 
 }
 
-function gun_shotgun() : weapon_gun() constructor {
+function gun_shotgun() : gunInst() constructor {
 
 	name = "Shotgun";
 	
@@ -88,7 +88,7 @@ function gun_shotgun() : weapon_gun() constructor {
 	
 }
 
-function gun_alienOrb() : weapon_gun() constructor {
+function gun_alienOrb() : gunInst() constructor {
 
 	name = "Alien Orb Launcher #1"
 	
@@ -109,7 +109,7 @@ function gun_alienOrb() : weapon_gun() constructor {
 	
 }
 
-function gun_alienOrb2() : weapon_gun() constructor {
+function gun_alienOrb2() : gunInst() constructor {
 
 	name = "Alien Orb Launcher #2";
 	

@@ -7,6 +7,10 @@ deathFunc = scr_char_fleshExplosion;
 
 gun1 = new gun_alienOrb();
 
-scr_guns_collectGun(self, gun1, true);
+scr_weapons_collectWeapon(self, gun1, true);
 
 stats.maxHp = 60;
+
+thornsDamage = new damageProfile();
+
+thornsDamage.kin = 4;
