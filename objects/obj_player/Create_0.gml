@@ -8,8 +8,7 @@ cursor = global.cursor;
 audio_listener_position(x, y, 0);
 audio_listener_orientation(0, 0, 1, 0, -1, 0);
 
-
-var gun = scr_gunArsenal_blaster();
+var gun = new gun_blaster();
 
 scr_guns_collectGun(self, gun, false);
 

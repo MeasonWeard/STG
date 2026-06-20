@@ -52,12 +52,13 @@ enum projectileTypes {
 	
 }
 
-enum weaponTypes {
+//enum weaponTypes {
 
-	gun = 0,
-	melee = 1
+//	unkown
+//	gun = 0,
+//	melee = 1
 	
-}
+//}
 
 enum damageTypes {
 

@@ -1,59 +1,103 @@
-function scr_guns_createGun(name) {
+function weapon() constructor {
 
-	//DO NOT CHANGE VALUES. THIS IS BEING USED FOR THE BASIC BLASET
-	//ALTER OTHER GUN VALUES WHEN NEEDED
-	var gun = {
-		
-		weaponType: weaponTypes.gun,
-		
-		//appearance and sound
-		name: name,
-		shootSounds: global.data.soundProfiles.blaster,
-		reloadSound: undefined,
-		projSprite: spr_bullet1,
-		
-		//attack
-		auto: true,
-		projectileType: projectileTypes.normal,
-		fireRate: 8,
-		
-		blastProjectiles: 5,
-		blastSpread: 10,
-		
-		damage: {
-			kin: 12,
-			fire: 0,
-			chem: 0,
-			elec: 0,
-			rad: 0
-		},
-		
-		spd: 22,
-		range: 1600,
-		collisionFunc: undefined,
-		
-		//aim
-		minAimOff: 2,
-		maxAimOff: 6,
-		recoil: 0.8,
-		stability: 0.1,
-		
-		//ammo
-		clipSize: 45,
-		ammo: 45,
-		reloadTime: 2.2,
-	
-		//runtime data
-		aimOff: 0,
-		fireTick: 0,
-		reload: 0,
-		temporary: false
-	
-	}
-	
-	return gun;
+	name = "none";
+	damage = new damageProfile();
+	damage.kin = 12;
 	
 }
+
+function weapon_gun() : weapon() constructor {
+
+	//appearance and sound
+	shootSounds = global.data.soundProfiles.blaster;
+	reloadSound = undefined;
+	projSprite = spr_bullet1;
+	
+	//attack
+	auto = true;
+	projectileType = projectileTypes.normal;
+	fireRate = 8;
+	blastProjectiles = 5;
+	blastSpread = 10;
+	spd = 22;
+	range = 1600;
+	collisionFunc = undefined;
+	
+	//aim
+	minAimOff = 2;
+	maxAimOff = 6;
+	recoil = 0.8;
+	stability = 0.1;
+		
+	//ammo
+	clipSize = 45;
+	ammo = 45;
+	reloadTime = 2.2;
+	
+	//runtime data
+	aimOff = 0;
+	fireTick = 0;
+	reload = 0;
+	temporary = false;
+		
+}
+
+//function scr_guns_createGun(name) {
+
+//	//DO NOT CHANGE VALUES. THIS IS BEING USED FOR THE BASIC BLASET
+//	//ALTER OTHER GUN VALUES WHEN NEEDED
+//	var gun = {
+		
+//		//weaponType: weaponTypes.gun,
+		
+//		//appearance and sound
+//		name: name,
+//		shootSounds: global.data.soundProfiles.blaster,
+//		reloadSound: undefined,
+//		projSprite: spr_bullet1,
+		
+//		//attack
+//		auto: true,
+//		projectileType: projectileTypes.normal,
+//		fireRate: 8,
+		
+//		blastProjectiles: 5,
+//		blastSpread: 10,
+		
+//		damage: {
+//			kin: 12,
+//			fire: 0,
+//			chem: 0,
+//			elec: 0,
+//			rad: 0
+//		},
+		
+//		spd: 22,
+//		range: 1600,
+//		collisionFunc: undefined,
+		
+//		//aim
+//		minAimOff: 2,
+//		maxAimOff: 6,
+//		recoil: 0.8,
+//		stability: 0.1,
+		
+//		//ammo
+//		clipSize: 45,
+//		ammo: 45,
+//		reloadTime: 2.2,
+	
+//		//runtime data
+//		aimOff: 0,
+//		fireTick: 0,
+//		reload: 0,
+//		temporary: false
+	
+//	}
+	
+//	return gun;
+	
+//}
 
 function scr_guns_shoot(char) {
 	

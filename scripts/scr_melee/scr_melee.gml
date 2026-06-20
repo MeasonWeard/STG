@@ -2,7 +2,7 @@ function scr_melee_createWeapon(name) {
 
 	var melee = {
 
-		weaponType: weaponTypes.melee,
+		//weaponType: weaponTypes.melee,
 
 		//appearance and sound
 		name: name,
