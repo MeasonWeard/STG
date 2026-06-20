@@ -10,3 +10,15 @@ function scr_misc_resetTextAlignment() {
 	draw_set_valign(fa_top);	
 	
 }
+
+function append_string(str, word, capitalise) {
+
+    str = (is_undefined(str) or str == "") ? word : str + " " + word;
+
+    if (capitalise and string_length(str) > 0) {
+        str[1] = string_upper(str[1]);
+    }
+
+    return str;
+
+}

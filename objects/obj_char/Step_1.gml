@@ -31,6 +31,12 @@ if (setupStats) {
 
 	setupStats = false;
 
+	//apply gear stats
+	if (!is_undefined(gear.device1)) scr_gear_applyStatsToChar(self, gear.device1);
+	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);
+	if (!is_undefined(gear.tie)) scr_gear_applyStatsToChar(self, gear.tie);
+	if (!is_undefined(gear.headgear)) scr_gear_applyStatsToChar(self, gear.headgear);
+
 	//char stats
 	finalStats = scr_stats_calculateFinalStats(stats);
 	

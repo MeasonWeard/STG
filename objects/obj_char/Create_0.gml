@@ -59,12 +59,16 @@ stats = {
 	shieldRegen: 0,
 	maxEnergy: 0,
 	energyRegen: 2,
-	
+
 	//packs
 	maxStimPacks : 0,
 	maxEnergyPacks: 0,
 	stimPackRegen: 1,
 	energyPackRegen: 1,
+	
+	//oa and da
+	oa: 100,
+	da: 100,
 	
 	//movement
 	spd: 4,
@@ -78,7 +82,6 @@ stats = {
 	shieldRegenPerc: 0,
 	maxEnergyPerc: 0,
 	energyRegenPerc: 0,
-	
 	
 	//flat damage
 	kinDam: 0,
@@ -108,7 +111,16 @@ stats = {
 	elecResPerc: 0,
 	radResPerc: 0
 	
-}
+};
+
+gear = {
+
+	device1: undefined,
+	device2: undefined,
+	tie: undefined,
+	headgear: undefined
+	
+};
 
 finalStats = {
 
@@ -138,7 +150,7 @@ finalStats = {
 	elecRes: 0,
 	radRes: 0,
 	
-}
+};
 
 skills = {
 
@@ -147,7 +159,7 @@ skills = {
 	skill3: undefined,
 	skill4: undefined
 	
-}
+};
 
 //thorns
 thornsDamage = undefined;

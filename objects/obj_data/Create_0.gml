@@ -8,6 +8,7 @@ global.data = self;
 #macro MAX_FALLOFF_BULLETHIT 1200
 #macro FALLOFF_FACTOR_BULLETHIT 1.2
 #macro THORNS_IMMUNITY_TIME 0.5
+#macro LOOT_BIAS 3
 
 //display
 resolutions = [];

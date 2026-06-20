@@ -35,5 +35,8 @@ stats.elecDamPerc = 50;
 stats.kinDamPerc = 20;
 stats.kinDam = 4;
 
+gear.device1 = new deviceInst();
+gear.device1.stats.maxHp = 50;
+
 skills.skill1 = new skill_chainLightning();
 skills.skill2 = new skill_test();

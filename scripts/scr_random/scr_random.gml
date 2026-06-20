@@ -107,3 +107,36 @@ function scr_random_weightedPick(arr) {
 	return arr[len - 1][0]; // fallback
 	
 }
+
+function irandom_range_biased(minVal, maxVal, bias, biasTowardsLow) {
+
+    var r = random(1);
+
+    if (biasTowardsLow) {
+        r = power(r, bias);
+    } else {
+        r = 1 - power(1 - r, bias);
+    }
+
+    return round(lerp(minVal, maxVal, r));
+
+}
+
+function random_range_biased(minVal, maxVal, bias, biasTowardsLow, decimalPlaces) {
+
+    var r = random(1);
+
+    if (biasTowardsLow) {
+        r = power(r, bias);
+    } else {
+        r = 1 - power(1 - r, bias);
+    }
+
+    var result = lerp(minVal, maxVal, r);
+
+    var mult = power(10, decimalPlaces);
+    result = round(result * mult) / mult;
+
+    return result;
+
+}
