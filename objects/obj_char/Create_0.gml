@@ -59,9 +59,11 @@ stats = {
 	shieldRegen: 0,
 	maxEnergy: 0,
 	energyRegen: 2,
+	
+	//packs
 	maxStimPacks : 0,
 	maxEnergyPacks: 0,
-	stimPackRegen: 2,
+	stimPackRegen: 1,
 	energyPackRegen: 1,
 	
 	//movement

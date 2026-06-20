@@ -36,6 +36,9 @@ skillsY = 0;
 skillsPad = 16;
 skillIconW = sprite_get_width(spr_icon_blank);
 
+stimPackX = 0;
+energyPackX = 0;
+
 //info
 hp = 0;
 maxHp = 0;
@@ -49,6 +52,8 @@ dashCool = 0;
 dashCoolTime = 0;
 stimPacks = 0;
 energyPacks = 0;
+stimPackCool = 0;
+energyPackCool = 0;
 
 skill1 = undefined;
 skill2 = undefined;

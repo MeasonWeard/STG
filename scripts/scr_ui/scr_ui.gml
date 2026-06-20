@@ -89,7 +89,7 @@ function scr_ui_displayInstructions(text, extraTime) {
 	
 }
 
-function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, cooldown) {
+function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, cooldown, blackout) {
 
 	var left = xx;
 	var top = yy;
@@ -126,6 +126,16 @@ function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, coo
 	//sprite
 	draw_sprite(sprite, 0, left, top);
 
+	//blackout
+	if (blackout and charges <= 0) {
+		
+		draw_set_alpha(0.8);
+		draw_set_colour(c_black);
+		draw_rectangle(left, top, right, bottom, false);
+		draw_set_alpha(1);
+		
+	}
+
 	//cooldown overlay
 	if (cooldown > 0) {
 		
@@ -141,6 +151,8 @@ function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, coo
 	//border
 	draw_set_colour(c_white);
 	draw_rectangle(left, top, right, bottom, true);
+	
+	draw_set_font(fnt_normal);
 	
 	//key, top left
 	draw_set_colour(c_aqua);

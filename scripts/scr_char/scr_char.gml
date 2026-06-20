@@ -352,6 +352,7 @@ function scr_char_useStimPack(char) {
 	if (!instance_exists(char)) return 0;
 	
 	if (char.stimPacks <= 0) return 0;
+	if (char.hp >= char.maxHp) return 0;
 	
 	char.stimPacks--;
 	
@@ -370,6 +371,7 @@ function scr_char_useEnergyPack(char) {
 	if (!instance_exists(char)) return 0;
 	
 	if (char.energyPacks <= 0) return 0;
+	if (char.energy >= char.maxEnergy) return 0;
 	
 	char.energyPacks--;
 	

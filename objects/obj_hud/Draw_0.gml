@@ -22,6 +22,9 @@ dashY = camY + camH - 20;
 skillsX = camX + camW - camW * 0.33;
 skillsY = dashY;
 
+stimPackX = dashX + skillIconW + skillsPad;
+energyPackX = stimPackX + skillIconW + skillsPad;
+
 //get info
 if (instance_exists(player)) {
 	
@@ -36,8 +39,12 @@ if (instance_exists(player)) {
 	dashCool = player.dashCool;
 	dashCoolTime = player.finalStats.dashCoolTime;
 	dashCoolPerc = dashCool / (dashCoolTime * 60);
+	
 	stimPacks = player.stimPacks;
 	energyPacks = player.energyPacks;
+	
+	stimPackCool = player.stimPackRecharge / 3600;
+	energyPackCool = player.energyPackRecharge / 3600;
 	
 	skill1 = player.skills.skill1;
 	skill2 = player.skills.skill2;
@@ -97,9 +104,11 @@ energyBar.x = energyBarX;
 energyBar.y = energyBarY;
 
 //dash
-scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashCoolPerc);
-draw_text(dashX + 60, dashY, stimPacks);
-draw_text(dashX + 80, dashY, energyPacks);
+scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashCoolPerc, false);
+
+//packs
+scr_ui_skillIconFromData(stimPackX, skillsY, 3, spr_icon_stimPack, "StimPac", "Q", stimPacks, stimPackCool, true);
+scr_ui_skillIconFromData(energyPackX, skillsY, 3, spr_icon_energyPack, "Energy Pack", "E", energyPacks, energyPackCool, true);
 
 //skills
 var skillsLen = array_length(skills);

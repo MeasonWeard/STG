@@ -6,8 +6,13 @@ if (jitterTick <= 0) {
 
 	lightningPoints = [];
 
-	var sourceX = owner.x;
-	var sourceY = owner.y - owner.sprite_height * 0.5;
+	var sourceX = x;
+	var sourceY = y;
+
+	if (instance_exists(owner)) {
+		sourceX = owner.x;
+		sourceY = owner.y - owner.sprite_height * 0.5;
+	}
 
 	var len = array_length(chainList);
 
@@ -23,8 +28,12 @@ if (jitterTick <= 0) {
 			targetY = (target.y + target.bbox_top) * 0.5;
 			chainPos[i] = [targetX, targetY];
 		} else {
+			
+			if (array_length(chainPos) <= i) continue;
+
 			targetX = chainPos[i][0];
 			targetY = chainPos[i][1];
+			
 		}
 
 		var dir = point_direction(sourceX, sourceY, targetX, targetY);

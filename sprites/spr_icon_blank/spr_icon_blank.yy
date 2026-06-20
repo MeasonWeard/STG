@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"UI",
-    "path":"folders/Sprites/UI.yy",
+    "name":"Skill Icons",
+    "path":"folders/Sprites/UI/Skill Icons.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -29,7 +29,7 @@ stats.hpRegen = 1;
 stats.energyRegen = 5;
 
 stats.maxStimPacks = 2;
-stats.maxEnergyPacks = 2;
+stats.maxEnergyPacks = 1;
 
 stats.elecDamPerc = 35;
 stats.kinDamPerc = 20;

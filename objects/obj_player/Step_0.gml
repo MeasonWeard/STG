@@ -95,5 +95,12 @@ if (keyboard_check(ord("3")) and is_struct(skill3)) skill3.cast(self);
 if (keyboard_check(ord("4")) and is_struct(skill4)) skill4.cast(self);
 
 //packs
-if (keyboard_check_pressed(ord("Q"))) scr_char_useStimPack(self);
-if (keyboard_check_pressed(ord("E"))) scr_char_useEnergyPack(self);
+var healed = 0;
+var recharged = 0;
+
+if (keyboard_check_pressed(ord("Q"))) healed = scr_char_useStimPack(self);
+if (healed != 0) audio_play_sound(snd_medkit, 0, false);
+
+
+if (keyboard_check_pressed(ord("E"))) recharged = scr_char_useEnergyPack(self);
+if (recharged != 0) audio_play_sound(snd_powerUp, 0, false);
