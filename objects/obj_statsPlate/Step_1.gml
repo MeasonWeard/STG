@@ -4,11 +4,10 @@ if (setup) {
 	
 		var stats = owner.stats;
 		var finalStats = owner.finalStats;
-		txt = scr_stats_format(stats, finalStats);
+		txt = scr_stats_formatCharStats(stats, finalStats);
 	
 	}
 	
 }
-
 
 

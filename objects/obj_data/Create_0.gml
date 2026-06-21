@@ -9,6 +9,10 @@ global.data = self;
 #macro FALLOFF_FACTOR_BULLETHIT 1.2
 #macro THORNS_IMMUNITY_TIME 0.5
 #macro LOOT_BIAS 3
+#macro ITEM_PULL_RANGE 420
+#macro COLLECTION_RANGE 32
+#macro ITEM_PULL_STRENGTH 14
+
 
 //display
 resolutions = [];
@@ -42,7 +46,9 @@ enum layers {
 	lighting = -700,
 	borders = -800,
 	effects = -6000,
-	ui = -90000
+	ui = -9000,
+	ui2 = -10000,
+	cursor = -11000 
 	
 }
 
@@ -52,14 +58,6 @@ enum projectileTypes {
 	blast = 1
 	
 }
-
-//enum weaponTypes {
-
-//	unkown
-//	gun = 0,
-//	melee = 1
-	
-//}
 
 enum damageTypes {
 
@@ -71,7 +69,31 @@ enum damageTypes {
 	
 }
 
+rarities = {
+	
+	crap: {
+		level: 0,
+		col: #dbe3f4
+	},
+	
+	common: {
+		level: 3,
+		col: #dcb200
+	},
+	
+	good: {
+		level: 6,
+		col: #13eca3
+	},
+	
+}
 
+colours = {
+
+	windowBackground: #324E7F,
+	windowText: c_white
+	
+}
 
 //stages
 stages = {

@@ -1,0 +1,1 @@
+scr_hash_remove(global.stageController.itemHash, id, hashCellX, hashCellY);

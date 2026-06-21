@@ -247,81 +247,77 @@ function scr_stats_getName(statKey) {
 
 }
 
-function scr_stats_format(stats, finalStats) {
+function scr_stats_formatCharStats(stats, finalStats) {
 
     var str = "";
 
     // flat health and shields
-    str = scr_stats_formatAdd(str, stats, "maxHp");
-    str = scr_stats_formatAdd(str, stats, "maxShield");
-    str = scr_stats_formatAdd(str, stats, "hpRegen");
-    str = scr_stats_formatAdd(str, stats, "shieldRegen");
-    str = scr_stats_formatAdd(str, stats, "maxEnergy");
-    str = scr_stats_formatAdd(str, stats, "energyRegen");
+    str = scr_stats_formatStat(str, stats, "maxHp");
+    str = scr_stats_formatStat(str, stats, "maxShield");
+    str = scr_stats_formatStat(str, stats, "hpRegen");
+    str = scr_stats_formatStat(str, stats, "shieldRegen");
+    str = scr_stats_formatStat(str, stats, "maxEnergy");
+    str = scr_stats_formatStat(str, stats, "energyRegen");
 
 	str += "\n";
 
     // packs
-    str = scr_stats_formatAdd(str, stats, "maxStimPacks");
-    str = scr_stats_formatAdd(str, stats, "maxEnergyPacks");
-    str = scr_stats_formatAdd(str, stats, "stimPackRegen");
-    str = scr_stats_formatAdd(str, stats, "energyPackRegen");
+    str = scr_stats_formatStat(str, stats, "maxStimPacks");
+    str = scr_stats_formatStat(str, stats, "maxEnergyPacks");
+    str = scr_stats_formatStat(str, stats, "stimPackRegen");
+    str = scr_stats_formatStat(str, stats, "energyPackRegen");
 
 	str += "\n";
 
     // oa and da
-    str = scr_stats_formatAdd(str, stats, "oa");
-    str = scr_stats_formatAdd(str, stats, "da");
+    str = scr_stats_formatStat(str, stats, "oa");
+    str = scr_stats_formatStat(str, stats, "da");
 
 	str += "\n";
 	
     // movement
-    str = scr_stats_formatAdd(str, stats, "spd");
-    str = scr_stats_formatAdd(str, stats, "dashCoolTime");
-    str = scr_stats_formatAdd(str, stats, "maxDashes");
+    str = scr_stats_formatStat(str, stats, "spd");
+    str = scr_stats_formatStat(str, stats, "dashCoolTime");
+    str = scr_stats_formatStat(str, stats, "maxDashes");
 
 	str += "\n";
 
     // flat damage
-    str = scr_stats_formatAdd(str, stats, "kinDam");
-    str = scr_stats_formatAdd(str, stats, "fireDam");
-    str = scr_stats_formatAdd(str, stats, "chemDam");
-    str = scr_stats_formatAdd(str, stats, "elecDam");
-    str = scr_stats_formatAdd(str, stats, "radDam");
+    str = scr_stats_formatStat(str, stats, "kinDam");
+    str = scr_stats_formatStat(str, stats, "fireDam");
+    str = scr_stats_formatStat(str, stats, "chemDam");
+    str = scr_stats_formatStat(str, stats, "elecDam");
+    str = scr_stats_formatStat(str, stats, "radDam");
 	
 	str += "\n";
 	
     // damage percent increase
-    str = scr_stats_formatAdd(str, stats, "kinDamPerc");
-    str = scr_stats_formatAdd(str, stats, "fireDamPerc");
-    str = scr_stats_formatAdd(str, stats, "chemDamPerc");
-    str = scr_stats_formatAdd(str, stats, "elecDamPerc");
-    str = scr_stats_formatAdd(str, stats, "radDamPerc");
+    str = scr_stats_formatStat(str, stats, "kinDamPerc");
+    str = scr_stats_formatStat(str, stats, "fireDamPerc");
+    str = scr_stats_formatStat(str, stats, "chemDamPerc");
+    str = scr_stats_formatStat(str, stats, "elecDamPerc");
+    str = scr_stats_formatStat(str, stats, "radDamPerc");
 	
 	str += "\n";
 	
     // resistances
-    str = scr_stats_formatAdd(str, finalStats, "kinRes");
-    str = scr_stats_formatAdd(str, finalStats, "fireRes");
-    str = scr_stats_formatAdd(str, finalStats, "chemRes");
-    str = scr_stats_formatAdd(str, finalStats, "elecRes");
-    str = scr_stats_formatAdd(str, finalStats, "radRes");
+    str = scr_stats_formatStat(str, finalStats, "kinRes");
+    str = scr_stats_formatStat(str, finalStats, "fireRes");
+    str = scr_stats_formatStat(str, finalStats, "chemRes");
+    str = scr_stats_formatStat(str, finalStats, "elecRes");
+    str = scr_stats_formatStat(str, finalStats, "radRes");
 
     return str;
 
 }
 
-function scr_stats_formatAdd(str, stats, name) {
+function scr_stats_formatStat(str, stats, name) {
 
     if (!variable_struct_exists(stats, name)) return str;
 
     var value = stats[$ name];
 
-    //if (value == 0) return str;
-
     if (str != "") str += "\n";
-
-    //var prefix = value > 0 ? "+" : "";
 
     str += scr_stats_getName(name) + ":   " + string(value);
 

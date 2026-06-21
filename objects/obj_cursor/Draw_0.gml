@@ -1,3 +1,13 @@
+//hover text
+if (hoverTxt != undefined and hoverTxtCount > 0) {
+
+	scr_ui_drawTextBox(x, y, hoverTxt);
+	
+	hoverTxtCount--;
+	
+}
+
+//cursor
 if (mode == "aim") {
 	
 	var rad = 8;
@@ -122,3 +132,4 @@ if (mode == "aim") {
 	draw_self();
 	
 }
+

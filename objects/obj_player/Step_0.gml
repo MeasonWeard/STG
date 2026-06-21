@@ -110,3 +110,33 @@ if (instance_number(obj_statsPlate) == 0 and keyboard_check_pressed(vk_tab)) {
 	var sp = instance_create_layer(x, y, "Instances", obj_statsPlate);
 	sp.owner = self;
 }
+
+//items
+var nearbyItems = scr_hash_getNearbyRange(global.stageController.itemHash, x, y, 2);
+var len = array_length(nearbyItems);
+
+for (var i = 0 ; i < len; i ++) {
+
+	var item = nearbyItems[i];
+	
+	if (!instance_exists(item)) continue;
+	
+	var dist = point_distance(x, y, item.x, item.y);
+	
+	if (dist <= ITEM_PULL_RANGE) {
+		
+        var t = 1 - dist / ITEM_PULL_RANGE;
+
+        item.pullX = x;
+        item.pullY = y;
+        item.pullSpd = ITEM_PULL_STRENGTH * sqr(t);
+		
+	}
+	
+	if (dist <= COLLECTION_RANGE) {
+		
+        if (is_callable(item.collectFunc)) item.collectFunc();
+		
+	}
+	
+}

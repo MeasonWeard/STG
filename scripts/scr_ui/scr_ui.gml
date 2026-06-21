@@ -316,3 +316,80 @@ function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 	}
 	
 }
+
+function scr_ui_drawGearSlot(xx, yy, align, size, gear) {
+
+	var left = xx;
+	var top = yy;
+	
+	var mx = mouse_x;
+	var my = mouse_y;
+
+	switch (align) {
+		case 1:
+			left = xx - size;
+			break;
+
+		case 2:
+			left = xx - size;
+			top = yy - size;
+			break;
+
+		case 3:
+			top = yy - size;
+			break;
+	}
+	
+	var right = left + size;
+	var bottom = top + size;
+	
+	draw_rectangle(left, top, right, bottom, true);
+	
+	if (is_instanceof(gear, gearInst)) {
+		
+		var spr = gear.spr;
+		var midX = left + size * 0.5;
+		var midY = top + size * 0.5;
+		
+		draw_sprite(spr, 0, midX, midY);
+		
+		var mouseInArea = mx > left and mx < right and my > top and my < bottom;
+		
+		if (mouseInArea) {
+			
+			if (!is_string(gear.description)) gear.description = scr_gear_formatDescription(gear);
+			
+			scr_ui_mouseHoverText(gear.description);
+			//scr_ui_drawTextBox(midX, midY, gear.description);
+			
+		}
+		
+	}
+	
+}
+
+function scr_ui_drawTextBox(xx, yy, txt) {
+
+    var pad = 6;
+
+    var w = string_width(txt) + pad * 2;
+    var h = string_height(txt) + pad * 2;
+
+	scr_misc_resetTextAlignment();
+
+    draw_set_color(global.data.colours.windowBackground);
+    draw_rectangle(xx, yy, xx + w, yy + h, false);
+
+    draw_set_color(global.data.colours.windowText);
+    draw_rectangle(xx, yy, xx + w, yy + h, true);
+
+    draw_text(xx + pad, yy + pad, txt);
+
+}
+
+function scr_ui_mouseHoverText(txt) {
+	
+	global.cursor.hoverTxt = txt;
+	global.cursor.hoverTxtCount = 4;
+	
+}

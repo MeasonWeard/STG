@@ -1,6 +1,6 @@
 //setup
 player = noone;
-depth = layers.ui;
+depth = layers.cursor;
 
 //settings
 showMelee = scr_data_getSetting("showMeleeOnCursor", true);
@@ -43,3 +43,6 @@ if (variable_global_exists("player")) {
 }
 
 mode = "aim";
+
+hoverTxt = undefined;
+hoverTxtCount = 0;

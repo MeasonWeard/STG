@@ -1,8 +1,9 @@
 function gearInst() constructor {
 
 	name = "none";
-	sprite = undefined;
+	spr = spr_stimPack;
 	stats = {};
+	description = undefined;
 	
 	//levelUp(level) = function() {
 	
@@ -59,5 +60,35 @@ function scr_gear_applyStatsToChar(char, gear) {
 		char.stats[$ key] += val;
 		
 	}
+	
+}
+
+function scr_gear_formatDescription(gear) {
+
+	if (!is_instanceof(gear, gearInst)) return undefined;
+
+	var stats = gear.stats;
+	
+	var txt = gear.name;
+	txt += "\n";
+	
+	var keys = variable_struct_get_names(stats);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+	
+		var stat = keys[i];
+		var val = stats[$ stat];
+	
+		var newText = scr_stats_getName(stat);
+		newText += ": " + string(val);
+		
+		txt += "\n";
+
+		txt += newText;
+	
+	}
+	
+	return txt;
 	
 }
