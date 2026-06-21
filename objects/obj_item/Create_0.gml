@@ -16,6 +16,7 @@ prevY = y;
 col = c_white;
 
 collectFunc = undefined;
+collectSounds = global.data.soundProfiles.collect;
 
 burstVel = 0;
 burstDir = 0;

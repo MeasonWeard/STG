@@ -136,6 +136,8 @@ for (var i = 0 ; i < len; i ++) {
 	if (dist <= COLLECTION_RANGE) {
 		
         if (is_callable(item.collectFunc)) item.collectFunc();
+		var snd = scr_randomElement(global.data.soundProfiles.collect);
+		audio_play_sound(snd, 0, false);
 		instance_destroy(item);
 		
 	}
