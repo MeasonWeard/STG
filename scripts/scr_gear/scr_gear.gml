@@ -4,22 +4,22 @@ function gearInst() constructor {
 	sprite = undefined;
 	stats = {};
 	
-	levelUp(level) = function() {
+	//levelUp(level) = function() {
 	
-		var keys = variable_struct_get_names(stats);
-		var keysLen = array_length(keys);
+	//	var keys = variable_struct_get_names(stats);
+	//	var keysLen = array_length(keys);
 	
-		for (var i = 0; i < keysLen; i ++) {
+	//	for (var i = 0; i < keysLen; i ++) {
 		
-			var key = keys[i];
-			var val = stats[$ key];
+	//		var key = keys[i];
+	//		var val = stats[$ key];
 		
-			var newVal = ceil(val * (level * 1.2));
-			stats[$ key] = newVal;
+	//		var newVal = ceil(val * (level * 1.2));
+	//		stats[$ key] = newVal;
 		
-		}
+	//	}
 	
-	}
+	//}
 
 }
 

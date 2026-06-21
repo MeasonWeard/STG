@@ -91,6 +91,7 @@
     {"id":{"name":"obj_spawner","path":"objects/obj_spawner/obj_spawner.yy",},},
     {"id":{"name":"obj_stageController","path":"objects/obj_stageController/obj_stageController.yy",},},
     {"id":{"name":"obj_startRunController","path":"objects/obj_startRunController/obj_startRunController.yy",},},
+    {"id":{"name":"obj_statsPlate","path":"objects/obj_statsPlate/obj_statsPlate.yy",},},
     {"id":{"name":"obj_statusBar","path":"objects/obj_statusBar/obj_statusBar.yy",},},
     {"id":{"name":"obj_stimPackUse","path":"objects/obj_stimPackUse/obj_stimPackUse.yy",},},
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},},

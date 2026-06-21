@@ -186,3 +186,145 @@ function scr_stats_calculateFinalStats(stats) {
 	return newStats;
 
 }
+
+function scr_stats_getName(statKey) {
+
+    switch (statKey) {
+
+        case "maxHp": return "Max Health";
+        case "maxShield": return "Max Shield";
+        case "hpRegen": return "Health Regeneration";
+        case "shieldRegen": return "Shield Regeneration";
+        case "maxEnergy": return "Max Energy";
+        case "energyRegen": return "Energy Regeneration";
+
+        case "maxStimPacks": return "Max Stim Packs";
+        case "maxEnergyPacks": return "Max Energy Packs";
+        case "stimPackRegen": return "Stim Pack Regeneration";
+        case "energyPackRegen": return "Energy Pack Regeneration";
+
+        case "oa": return "Offensive Ability";
+        case "da": return "Defensive Ability";
+
+        case "spd": return "Movement Speed";
+        case "dashCoolTime": return "Dash Cooldown";
+        case "maxDashes": return "Max Dashes";
+
+        case "maxHpPerc": return "Max Health %";
+        case "maxShieldPerc": return "Max Shield %";
+        case "hpRegenPerc": return "Health Regeneration %";
+        case "shieldRegenPerc": return "Shield Regeneration %";
+        case "maxEnergyPerc": return "Max Energy %";
+        case "energyRegenPerc": return "Energy Regeneration %";
+
+        case "kinDam": return "Kinetic Damage";
+        case "fireDam": return "Fire Damage";
+        case "chemDam": return "Chemical Damage";
+        case "elecDam": return "Electric Damage";
+        case "radDam": return "Radiation Damage";
+
+        case "kinDamPerc": return "Kinetic Damage %";
+        case "fireDamPerc": return "Fire Damage %";
+        case "chemDamPerc": return "Chemical Damage %";
+        case "elecDamPerc": return "Electric Damage %";
+        case "radDamPerc": return "Radiation Damage %";
+
+        case "kinRes": return "Kinetic Resistance";
+        case "fireRes": return "Fire Resistance";
+        case "chemRes": return "Chemical Resistance";
+        case "elecRes": return "Electric Resistance";
+        case "radRes": return "Radiation Resistance";
+
+        case "kinResPerc": return "Kinetic Resistance %";
+        case "fireResPerc": return "Fire Resistance %";
+        case "chemResPerc": return "Chemical Resistance %";
+        case "elecResPerc": return "Electric Resistance %";
+        case "radResPerc": return "Radiation Resistance %";
+
+        default: return stat;
+
+    }
+
+}
+
+function scr_stats_format(stats, finalStats) {
+
+    var str = "";
+
+    // flat health and shields
+    str = scr_stats_formatAdd(str, stats, "maxHp");
+    str = scr_stats_formatAdd(str, stats, "maxShield");
+    str = scr_stats_formatAdd(str, stats, "hpRegen");
+    str = scr_stats_formatAdd(str, stats, "shieldRegen");
+    str = scr_stats_formatAdd(str, stats, "maxEnergy");
+    str = scr_stats_formatAdd(str, stats, "energyRegen");
+
+	str += "\n";
+
+    // packs
+    str = scr_stats_formatAdd(str, stats, "maxStimPacks");
+    str = scr_stats_formatAdd(str, stats, "maxEnergyPacks");
+    str = scr_stats_formatAdd(str, stats, "stimPackRegen");
+    str = scr_stats_formatAdd(str, stats, "energyPackRegen");
+
+	str += "\n";
+
+    // oa and da
+    str = scr_stats_formatAdd(str, stats, "oa");
+    str = scr_stats_formatAdd(str, stats, "da");
+
+	str += "\n";
+	
+    // movement
+    str = scr_stats_formatAdd(str, stats, "spd");
+    str = scr_stats_formatAdd(str, stats, "dashCoolTime");
+    str = scr_stats_formatAdd(str, stats, "maxDashes");
+
+	str += "\n";
+
+    // flat damage
+    str = scr_stats_formatAdd(str, stats, "kinDam");
+    str = scr_stats_formatAdd(str, stats, "fireDam");
+    str = scr_stats_formatAdd(str, stats, "chemDam");
+    str = scr_stats_formatAdd(str, stats, "elecDam");
+    str = scr_stats_formatAdd(str, stats, "radDam");
+	
+	str += "\n";
+	
+    // damage percent increase
+    str = scr_stats_formatAdd(str, stats, "kinDamPerc");
+    str = scr_stats_formatAdd(str, stats, "fireDamPerc");
+    str = scr_stats_formatAdd(str, stats, "chemDamPerc");
+    str = scr_stats_formatAdd(str, stats, "elecDamPerc");
+    str = scr_stats_formatAdd(str, stats, "radDamPerc");
+	
+	str += "\n";
+	
+    // resistances
+    str = scr_stats_formatAdd(str, finalStats, "kinRes");
+    str = scr_stats_formatAdd(str, finalStats, "fireRes");
+    str = scr_stats_formatAdd(str, finalStats, "chemRes");
+    str = scr_stats_formatAdd(str, finalStats, "elecRes");
+    str = scr_stats_formatAdd(str, finalStats, "radRes");
+
+    return str;
+
+}
+
+function scr_stats_formatAdd(str, stats, name) {
+
+    if (!variable_struct_exists(stats, name)) return str;
+
+    var value = stats[$ name];
+
+    //if (value == 0) return str;
+
+    if (str != "") str += "\n";
+
+    //var prefix = value > 0 ? "+" : "";
+
+    str += scr_stats_getName(name) + ":   " + string(value);
+
+    return str;
+
+}
