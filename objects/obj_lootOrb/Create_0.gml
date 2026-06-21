@@ -6,6 +6,6 @@ raritySetup = true;
 
 collectFunc = function () {
 
-	instance_destroy();
+	//instance_destroy();
 	
 }

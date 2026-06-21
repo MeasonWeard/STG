@@ -16,3 +16,6 @@ prevY = y;
 col = c_white;
 
 collectFunc = undefined;
+
+burstVel = 0;
+burstDir = 0;

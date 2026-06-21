@@ -8,3 +8,12 @@ if (pullSpd > 0) {
     pullSpd = 0;
 	
 }
+
+if (burstVel > 0) {
+	
+    x += lengthdir_x(burstVel, burstDir);
+    y += lengthdir_y(burstVel, burstDir);
+
+    burstVel --;
+	
+}

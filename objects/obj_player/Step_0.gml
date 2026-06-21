@@ -136,6 +136,7 @@ for (var i = 0 ; i < len; i ++) {
 	if (dist <= COLLECTION_RANGE) {
 		
         if (is_callable(item.collectFunc)) item.collectFunc();
+		instance_destroy(item);
 		
 	}
 	
