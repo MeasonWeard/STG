@@ -56,7 +56,7 @@ function scr_char_fleshExplosion(char){
 
 }
 
-function scr_char_damage(char, damage, type, ignoreShield) {
+function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	
 	if (!instance_exists(char)) return 0;
 	if (!is_struct(damage)) return 0;
@@ -106,6 +106,7 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	
 	//final
 	var totalDam = kin + fire + chem + elec + rad;
+	if (hitOutcome != 1) totalDam = max(floor(totalDam * hitOutcome), 1);
 	
 	if (!ignoreShield and char.shield > 0) {
 	
@@ -119,7 +120,7 @@ function scr_char_damage(char, damage, type, ignoreShield) {
 	char.hp = max(char.hp - totalDam, 0);
 	
 	//damage numbers
-	scr_ui_damageNumbers(totalDam, char);
+	scr_ui_damageNumbers(totalDam, char, hitOutcome);
 	
 	return lost;
 	
@@ -370,6 +371,7 @@ function scr_char_useEnergyPack(char) {
 	
 	if (!instance_exists(char)) return 0;
 	
+	if (char.energyPacks <= 0) return 0;
 	if (char.energyPacks <= 0) return 0;
 	if (char.energy >= char.maxEnergy) return 0;
 	

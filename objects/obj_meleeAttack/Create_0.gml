@@ -8,3 +8,5 @@ attackFrames = 4;
 tick = 0;
 
 hitSounds = undefined;
+
+oa = 100;

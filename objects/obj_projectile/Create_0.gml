@@ -17,3 +17,5 @@ rangeLeft = 200;
 charHitReport = false;
 
 collisionFunc = undefined;
+
+oa = 100;

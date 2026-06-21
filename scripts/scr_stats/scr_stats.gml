@@ -328,3 +328,61 @@ function scr_stats_formatAdd(str, stats, name) {
     return str;
 
 }
+
+function scr_stats_hitOutcome(oa, da) {
+
+	var outcome = 1;
+	var diff = abs(oa - da);
+	
+	if (diff < 11) return outcome;
+	
+	//chance for crit
+	if (oa > da) {
+		
+		diff = oa - da;
+		
+		var crits = 0;
+		var rolls = 1 + floor(diff / 100);
+
+		for (var i = 0; i < rolls; i++) {
+
+		    var chance = min(95, diff / (i + 1));
+
+		    var roll = irandom_range(1, 100);
+
+		    if (roll <= chance) {
+		        crits++;
+		    } else {
+		        break;
+		    }
+
+		}
+
+		outcome += crits;
+		
+	} 
+	//chance for glancing hit
+	else if (da > oa) {
+	
+		diff = da - oa;
+	
+		var rolls = 1 + floor(diff / 300);
+
+		repeat (rolls) {
+
+		    var chance = min(290, diff);
+
+		    var roll = irandom_range(1, 300);
+
+		    if (roll <= chance) {
+		        outcome = 0.5;
+		        break;
+		    }
+
+		}
+	
+	}
+	
+	return outcome;
+	
+}

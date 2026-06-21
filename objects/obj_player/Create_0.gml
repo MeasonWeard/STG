@@ -35,6 +35,8 @@ stats.elecDamPerc = 50;
 stats.kinDamPerc = 20;
 stats.kinDam = 4;
 
+stats.oa = 100;
+
 gear.device1 = new deviceInst();
 gear.device1.stats.maxHp = 50;
 

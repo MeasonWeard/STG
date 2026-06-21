@@ -25,7 +25,9 @@ if (instance_exists(owner)) {
 			
 				if (!scr_melee_alreadyHit(char, self)) {
 					
-					scr_char_damage(char, damage, damageTypes.melee, false);
+					var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
+					
+					scr_char_damage(char, damage, damageTypes.melee, false, hitOutcome);
 					
 					if (char.hp <= killThreshold) char.hp = 0;
 				

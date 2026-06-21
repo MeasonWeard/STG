@@ -296,17 +296,22 @@ function scr_ui_risingNumbers(xx, yy, num, col) {
 	
 }
 
-function scr_ui_damageNumbers(amount, char) {
+function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 
 	if (amount != 0) {
 		
 		var col = amount < 0 ? c_lime : c_red;
+		col = hitOutcome > 1 ? c_yellow : col;
+		
 		var num = abs(amount);
 	
 		var px = char.x;
 		var py = char.y - char.sprite_height * 0.75;
 	
-		scr_ui_risingNumbers(px, py, num, col);
+		var inst = scr_ui_risingNumbers(px, py, num, col);
+		
+		if (hitOutcome > 1) inst.size = 2;
+		if (hitOutcome < 1) inst.size = 0;
 		
 	}
 	
