@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Chars",
+    "path":"folders/Sprites/Chars.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

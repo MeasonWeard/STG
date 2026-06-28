@@ -25,3 +25,6 @@ aimBias = 1.2;
 
 thornsDamage = new damageProfile();
 thornsDamage.chem = 16;
+
+minData = 32;
+maxData = 64;

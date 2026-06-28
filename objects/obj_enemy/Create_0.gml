@@ -16,3 +16,6 @@ aiSetup = true;
 ghostCheckIndex = -1;
 
 detectionIndex = -1;
+
+minData = 8;
+maxData = 16;

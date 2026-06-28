@@ -8,8 +8,8 @@
   "name":"obj_res_metals",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Resources",
+    "path":"folders/Objects/Items/Resources.yy",
   },
   "parentObjectId":{
     "name":"obj_item",

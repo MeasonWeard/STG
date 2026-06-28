@@ -125,17 +125,20 @@ for (var i = 0 ; i < len; i ++) {
 	
 	if (!instance_exists(item)) continue;
 	
+	var canCollect = !is_callable(item.collectRequirements) or item.collectRequirements(self); 
+		
 	var dist = point_distance(x, y, item.x, item.y);
 	
-	if (dist <= pullRange) {
+	if (canCollect and dist <= pullRange) {
 		
-        var t = 1 - dist / pullRange;
+	    var t = 1 - dist / pullRange;
 
-        item.pullX = x;
-        item.pullY = y;
+	    item.pullX = x;
+	    item.pullY = y;
 		item.pullSpd = max(1, pullStrength * sqr(t));
 		
 	}
+	
 	
 	if (dist <= COLLECTION_RANGE) {
 		

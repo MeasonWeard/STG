@@ -12,6 +12,7 @@ global.data = self;
 #macro ITEM_PULL_RANGE 480
 #macro COLLECTION_RANGE 32
 #macro ITEM_PULL_STRENGTH 14
+#macro MAX_DATA_DROPS 12
 
 
 //display

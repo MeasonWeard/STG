@@ -142,3 +142,12 @@ function random_range_biased(minVal, maxVal, bias, biasTowardsLow, decimalPlaces
     return result;
 
 }
+
+function scr_random_chance(chance) {
+
+    if (chance <= 0) return false;
+    if (chance >= 100) return true;
+
+    return random(100) < chance;
+
+}
