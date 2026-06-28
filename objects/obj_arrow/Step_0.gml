@@ -33,7 +33,21 @@ var arrowDist = max(0, distToTarget - minDist);
 var px = source.x + lengthdir_x(arrowDist, dir);
 var py = source.y + lengthdir_y(arrowDist, dir);
 
-// clamp to camera rectangle
+// clamp base arrow position to camera rectangle
 x = clamp(px, left, right);
 y = clamp(py, top, bottom);
+
+// pulse inward/outward from the screen edge
+var pulse = sin(current_time / 120) * 16;
+
+// direction from arrow back toward source
+var backDir = point_direction(x, y, source.x, source.y);
+
+// move a little toward/away from source
+x += lengthdir_x(16 + pulse, backDir);
+y += lengthdir_y(16 + pulse, backDir);
+
+//// clamp to camera rectangle
+//x = clamp(px, left, right);
+//y = clamp(py, top, bottom);
 
