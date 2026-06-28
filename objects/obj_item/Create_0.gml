@@ -1,3 +1,7 @@
+key = "item";
+type = "item";
+val = 0;
+
 pickupRange = 300;
 depth = layers.physical - y;
 
@@ -14,6 +18,8 @@ prevX = x;
 prevY = y;
 
 col = c_white;
+
+collectRequirements = undefined;
 
 collectFunc = undefined;
 collectSounds = global.data.soundProfiles.collect;

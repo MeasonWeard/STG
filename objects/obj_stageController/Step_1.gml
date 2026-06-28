@@ -4,11 +4,14 @@ if (checkIfCleared) {
 	
 	if (rc.currentCell.cleared) {
 
+		stageInProgress = false;
+
 		with(obj_enemy) {
 			instance_destroy();
 		}
 	
 		with(obj_door) {
+			
 			open = true;
 			var arrow = instance_create_layer(x, y, "Instances", obj_arrow);
 			arrow.target = self;

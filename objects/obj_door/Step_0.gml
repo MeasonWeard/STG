@@ -40,6 +40,8 @@ if (playerinArea and open) {
 	
 	if (keyboard_check_pressed(ord("E"))) {
 		
+		scr_items_collectAll();
+		
 		var moved = scr_stages_moveInDir(dir);
 		
 		if (moved) {

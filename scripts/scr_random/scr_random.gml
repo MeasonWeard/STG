@@ -8,6 +8,8 @@ function scr_random_generateSeed(){
 
 function scr_randomElement(array) {
 
+	if (!is_array(array)) return undefined;
+
 	var len = array_length(array);
 	
 	if (len == 0) return undefined;

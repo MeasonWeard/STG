@@ -1,5 +1,7 @@
 global.runController = self;
 
+sc = noone;
+
 mapW = 12;
 mapH = 12;
 
@@ -17,3 +19,6 @@ scr_mapGen_randomWalk(map, stages, startX, startY, 15);
 miniMap = scr_mapGen_createMiniMap(map, true);
 
 currentCell = map[posX][posY];
+
+resources = {};
+loot = {};

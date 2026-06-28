@@ -218,3 +218,15 @@ function scr_data_safeStructGet(struct, key, defaultVal) {
 	return variable_struct_get(struct, key);
 	
 }
+
+function scr_data_addResource(key, val) {
+
+	var resources = global.runController.resources;
+	
+	var oldVal = resources[$ key];
+	
+    if (is_undefined(oldVal)) oldVal = 0;
+
+    resources[$ key] = oldVal + val;	
+	
+}

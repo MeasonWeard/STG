@@ -112,7 +112,11 @@ if (instance_number(obj_statsPlate) == 0 and keyboard_check_pressed(vk_tab)) {
 }
 
 //items
-var nearbyItems = scr_hash_getNearbyRange(global.stageController.itemHash, x, y, 2);
+var pullRange = sc.stageInProgress ? ITEM_PULL_RANGE : 5000;
+var pullStrength = sc.stageInProgress ? ITEM_PULL_STRENGTH : ITEM_PULL_STRENGTH * 2;
+var hashRange = sc.stageInProgress ? 2 : 30;
+
+var nearbyItems = scr_hash_getNearbyRange(global.stageController.itemHash, x, y, hashRange);
 var len = array_length(nearbyItems);
 
 for (var i = 0 ; i < len; i ++) {
@@ -123,22 +127,19 @@ for (var i = 0 ; i < len; i ++) {
 	
 	var dist = point_distance(x, y, item.x, item.y);
 	
-	if (dist <= ITEM_PULL_RANGE) {
+	if (dist <= pullRange) {
 		
-        var t = 1 - dist / ITEM_PULL_RANGE;
+        var t = 1 - dist / pullRange;
 
         item.pullX = x;
         item.pullY = y;
-        item.pullSpd = ITEM_PULL_STRENGTH * sqr(t);
+		item.pullSpd = max(1, pullStrength * sqr(t));
 		
 	}
 	
 	if (dist <= COLLECTION_RANGE) {
 		
-        if (is_callable(item.collectFunc)) item.collectFunc();
-		var snd = scr_randomElement(global.data.soundProfiles.collect);
-		audio_play_sound(snd, 0, false);
-		instance_destroy(item);
+		scr_items_collect(self, item);
 		
 	}
 	

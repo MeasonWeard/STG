@@ -1,5 +1,7 @@
 event_inherited();
 
+sc = global.stageController;
+
 if (!dashing) {
 	
 	xspd = (keyboard_check(ord("D")) - keyboard_check(ord("A"))) * spd;
