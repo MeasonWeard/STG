@@ -81,7 +81,7 @@ function scr_mapGen_createMiniMap(map, showAll) {
 			
 			if (!showAll and !cell.discovered) continue;
 			
-			var col = cell.mapCol;
+			var col = cell.cleared ? c_grey : cell.mapCol;
 			miniMap[i][j] = col;
 		
 		}

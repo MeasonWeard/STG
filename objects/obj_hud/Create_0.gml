@@ -8,7 +8,7 @@ instructions = "";
 instructionsTick = 0;
 instructionsFlash = 0;
 
-miniMap = scr_mapGen_createMiniMap(rc.map, true);
+miniMap = scr_mapGen_createMiniMap(rc.map, false);
 
 //formatting
 cam = view_camera[0];

@@ -5,10 +5,10 @@ maxHp = 400;
 
 sprites = {
 
-	left: spr_test,
-	right: spr_test,
-	up: spr_test,
-	down: spr_test,
+	left: spr_celia,
+	right: spr_celia,
+	up: spr_celia,
+	down: spr_celia,
 	death: spr_death
 	
 }

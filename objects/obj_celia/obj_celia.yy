@@ -1,12 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_alien",
+  "%Name":"obj_celia",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_alien",
+  "name":"obj_celia",
   "overriddenProperties":[],
   "parent":{
     "name":"Chars",
@@ -34,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_alien",
-    "path":"sprites/spr_alien/spr_alien.yy",
+    "name":"spr_celia",
+    "path":"sprites/spr_celia/spr_celia.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -198,6 +198,8 @@ if (stats.maxStimPacks > 0 and stats.stimPackRegen > 0 and stimPacks < stats.max
 	
 }
 
+if (stimPacks == stats.maxStimPacks) stimPackRecharge = 0;
+
 if (stats.maxEnergyPacks > 0 and stats.energyPackRegen > 0 and energyPacks < stats.maxEnergyPacks) {
 
 	energyPackRecharge += stats.energyPackRegen;
@@ -208,6 +210,8 @@ if (stats.maxEnergyPacks > 0 and stats.energyPackRegen > 0 and energyPacks < sta
 	}
 	
 }
+
+if (energyPacks == stats.maxEnergyPacks) energyPackRecharge = 0;
 
 //cap health and energy
 if (hp > maxHp) hp = maxHp;

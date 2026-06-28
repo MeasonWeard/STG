@@ -1,20 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_alien",
+  "%Name":"obj_res_bio",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_alien",
+  "name":"obj_res_bio",
   "overriddenProperties":[],
   "parent":{
-    "name":"Chars",
-    "path":"folders/Objects/Chars.yy",
+    "name":"Resources",
+    "path":"folders/Objects/Items/Resources.yy",
   },
   "parentObjectId":{
-    "name":"obj_enemy",
-    "path":"objects/obj_enemy/obj_enemy.yy",
+    "name":"obj_item",
+    "path":"objects/obj_item/obj_item.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -34,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_alien",
-    "path":"sprites/spr_alien/spr_alien.yy",
+    "name":"spr_res_bio",
+    "path":"sprites/spr_res_bio/spr_res_bio.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -19,6 +19,9 @@ scr_mapGen_randomWalk(map, stages, startX, startY, 15);
 miniMap = scr_mapGen_createMiniMap(map, true);
 
 currentCell = map[posX][posY];
+currentCell.discovered = true;
+
+scr_stages_discoverAdjacentCells();
 
 resources = {};
 loot = {};

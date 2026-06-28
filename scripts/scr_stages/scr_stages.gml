@@ -110,6 +110,24 @@ function scr_stages_goToStage(stageRef) {
 	
 }
 
+function scr_stages_discoverAdjacentCells() {
+
+	var cell;
+
+	cell = scr_stages_getCellInDir("left");
+	if (cell != undefined) cell.discovered = true;
+	
+	cell = scr_stages_getCellInDir("up");
+	if (cell != undefined) cell.discovered = true;
+	
+	cell = scr_stages_getCellInDir("right");
+	if (cell != undefined) cell.discovered = true;
+	
+	cell = scr_stages_getCellInDir("down");
+	if (cell != undefined) cell.discovered = true;
+	
+}
+
 function scr_stages_moveInDir(dir) {
 
 	var rc = global.runController;
@@ -132,6 +150,7 @@ function scr_stages_moveInDir(dir) {
 		rc.posX = xx;
 		rc.posY = yy;
 		rc.currentCell = rc.map[xx][yy];
+		scr_stages_discoverAdjacentCells();
 	}
 	
 	return success;
@@ -152,6 +171,7 @@ function scr_stages_goToCell(xx, yy) {
 		rc.posX = xx;
 		rc.posY = yy;
 		rc.currentCell = rc.map[xx][yy];
+		scr_stages_discoverAdjacentCells();
 	}
 	
 	return success;
