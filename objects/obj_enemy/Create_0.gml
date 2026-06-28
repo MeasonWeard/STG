@@ -19,3 +19,6 @@ detectionIndex = -1;
 
 minData = 8;
 maxData = 16;
+
+lootLevel = 0;
+lootChance = 5;

@@ -97,6 +97,7 @@
     {"name":"scr_guns","order":15,"path":"scripts/scr_guns/scr_guns.yy",},
     {"name":"scr_hash","order":10,"path":"scripts/scr_hash/scr_hash.yy",},
     {"name":"scr_items","order":26,"path":"scripts/scr_items/scr_items.yy",},
+    {"name":"scr_loot","order":27,"path":"scripts/scr_loot/scr_loot.yy",},
     {"name":"scr_mapGen","order":8,"path":"scripts/scr_mapGen/scr_mapGen.yy",},
     {"name":"scr_melee","order":17,"path":"scripts/scr_melee/scr_melee.yy",},
     {"name":"scr_meleeArsenal","order":23,"path":"scripts/scr_meleeArsenal/scr_meleeArsenal.yy",},

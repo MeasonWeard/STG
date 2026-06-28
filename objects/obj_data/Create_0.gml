@@ -11,7 +11,7 @@ global.data = self;
 #macro LOOT_BIAS 3
 #macro ITEM_PULL_RANGE 480
 #macro COLLECTION_RANGE 32
-#macro ITEM_PULL_STRENGTH 14
+#macro ITEM_PULL_STRENGTH 16
 #macro MAX_DATA_DROPS 12
 
 
@@ -74,17 +74,17 @@ rarities = {
 	
 	crap: {
 		level: 0,
-		col: #dbe3f4
+		col: c_grey
 	},
 	
 	common: {
 		level: 3,
-		col: #dcb200
+		col: c_blue
 	},
 	
 	good: {
 		level: 6,
-		col: #13eca3
+		col: #00FF00
 	},
 	
 }

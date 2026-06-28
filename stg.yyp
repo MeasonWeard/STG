@@ -133,6 +133,7 @@
     {"id":{"name":"scr_guns","path":"scripts/scr_guns/scr_guns.yy",},},
     {"id":{"name":"scr_hash","path":"scripts/scr_hash/scr_hash.yy",},},
     {"id":{"name":"scr_items","path":"scripts/scr_items/scr_items.yy",},},
+    {"id":{"name":"scr_loot","path":"scripts/scr_loot/scr_loot.yy",},},
     {"id":{"name":"scr_mapGen","path":"scripts/scr_mapGen/scr_mapGen.yy",},},
     {"id":{"name":"scr_melee","path":"scripts/scr_melee/scr_melee.yy",},},
     {"id":{"name":"scr_meleeArsenal","path":"scripts/scr_meleeArsenal/scr_meleeArsenal.yy",},},
