@@ -74,7 +74,7 @@ if (initialiseArea) {
 	if (side == "bottom") {
 	
 		areaTop = y - sprH - areaDist;
-		areaBottom = y;// - sprH;
+		areaBottom = y;
 		areaLeft = x - halfW;
 		areaRight = x + halfW;
 	

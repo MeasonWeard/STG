@@ -8,7 +8,7 @@ if (is_string(text)) {
 	draw_set_halign(fa_middle);
 	draw_set_valign(fa_center);
 	
-	draw_set_colour(c_lime);
+	draw_set_colour(col);
 	draw_set_font(fnt_large);
 	
 	draw_set_alpha(0.8);

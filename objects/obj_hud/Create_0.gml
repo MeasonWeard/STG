@@ -55,6 +55,13 @@ energyPacks = 0;
 stimPackCool = 0;
 energyPackCool = 0;
 
+prevHp = 0;
+prevShield = 0;
+flashAlpha = 0;
+flashCol = c_white;
+fullFlashAlpha = 0;
+fullFlashCol = c_white;
+
 skill1 = undefined;
 skill2 = undefined;
 skill3 = undefined;

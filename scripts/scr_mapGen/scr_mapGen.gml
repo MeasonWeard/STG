@@ -100,6 +100,7 @@ function scr_mapGen_createCell(key) {
 	newCell.discovered = false;
 	newCell.visited = false;
 	newCell.cleared = false;
+	newCell.endCell = false;
 	
 	return newCell;
 	
@@ -159,4 +160,52 @@ function scr_mapGen_randomWalk(map, stages, startX, startY, steps) {
 	}
 
 	return map;
+	
+}
+
+function scr_mapGen_makeFurthestEndCell(map, startX, startY, stages) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+
+	var bestX = startX;
+	var bestY = startY;
+	var bestDist = -1;
+	
+	var stageCount = array_length(stages);
+	var key = stages[irandom(stageCount - 1)];
+
+	for (var i = 0; i < mapW; i++) {
+	
+		for (var j = 0; j < mapH; j++) {
+		
+			var cell = map[i][j];
+			if (is_undefined(cell) or !is_struct(cell)) continue;
+			
+			var dx = i - startX;
+			var dy = j - startY;
+			var dist = dx * dx + dy * dy;
+			
+			if (dist > bestDist) {
+				bestDist = dist;
+				bestX = i;
+				bestY = j;
+			}
+		
+		}
+	
+	}
+
+	if (bestDist >= 0) {
+		var newCell = scr_mapGen_createCell(key);
+		newCell.endCell = true;
+		newCell.mapCol = c_fuchsia;
+		map[bestX][bestY] = newCell;
+	}
+
+	return {
+		xx: bestX,
+		yy: bestY,
+	};
+
 }

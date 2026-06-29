@@ -69,6 +69,15 @@ if (enemies == 0 and stageInProgress) {
 
 	stageInProgress = false;
 
+	if (rc.currentCell.endCell == true) {
+		
+		var midX = (global.roomRight + global.roomLeft) * 0.5;
+		var midY = (global.roomTop + global.roomBottom) * 0.5;
+
+		scr_obj_createPortal(midX, midY);
+		
+	}
+
 	with (obj_door) {
 		
 		open = true;
@@ -80,6 +89,7 @@ if (enemies == 0 and stageInProgress) {
 		arrow.col = c_lime;
 		
 	}
+	
 
 	rc.currentCell.cleared = true;
 	

@@ -55,6 +55,51 @@ if (instance_exists(player)) {
 
 }
 
+//damage flash
+if (!firstStep) {
+	
+	if (shield < prevShield) {
+	
+		flashAlpha = 1;
+		flashCol = c_white;
+	
+	}
+
+	if (hp < prevHp) {
+	
+		flashAlpha = 1;
+		flashCol = #FF0009;
+	
+		if (hp <= ceil(maxHp * 0.33)) {
+			fullFlashAlpha = 1;
+			fullFlashCol = #FF0009;
+			flashAlpha = 3;
+		}
+	
+	} //else if (hp > prevHp and !firstStep) {
+	
+		//flashAlpha = 1;
+		//flashCol = c_lime;
+	
+	//}
+
+	if (flashAlpha > 0) {
+
+		draw_sprite_ext(spr_edgeFlash, 0, camX, camY, 1, 1, 0, flashCol, flashAlpha);
+	
+		flashAlpha -= 0.075;
+	
+	}
+
+	if (fullFlashAlpha > 0) {
+
+		draw_sprite_ext(spr_fullScreenFlash, 0, camX, camY, 1, 1, 0, flashCol, fullFlashAlpha);
+		fullFlashAlpha -= 0.075;
+	
+	}
+
+}
+
 //instructions
 if (is_string(instructions) and instructionsTick > 0) {
 
@@ -126,3 +171,7 @@ for (var i = skillsLen - 1; i >= 0; i--) {
 	pos++;
 	
 }
+
+prevHp = hp;
+prevShield = shield;
+firstStep = false;

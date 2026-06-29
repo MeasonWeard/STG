@@ -109,3 +109,15 @@ function scr_obj_outlineCollisionMask(margin, col) {
 	draw_rectangle(left, top, right, bottom, true);
 	
 }
+
+function scr_obj_createPortal(xx, yy) {
+
+	var portal = scr_obj_createExclusive(obj_portal, xx, yy);
+		
+	var arrow = instance_create_layer(xx, yy, "Instances", obj_arrow);
+	arrow.target = portal;
+	arrow.source = global.player;
+	arrow.text = "END RUN";
+	arrow.col = c_fuchsia;
+	
+}

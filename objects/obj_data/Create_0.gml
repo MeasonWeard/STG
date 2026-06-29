@@ -111,6 +111,12 @@ stages = {
 		
 		room: stage_engHall1
 		
+	},
+	
+	engBoss1: {
+		
+		room: stage_engBoss1
+		
 	}
 	
 }
