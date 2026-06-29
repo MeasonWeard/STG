@@ -58,20 +58,23 @@ if (initialiseArea) {
 	var sprH = sprite_height;
 	var halfW = sprW * 0.5;
 	var halfH = sprH * 0.5;
+	
+	textX = x;
+	textY = y - halfH;
 
 	if (side == "top") {
 	
-		areaTop = y;
+		areaTop = y - sprH;
 		areaBottom = y + areaDist;
 		areaLeft = x - halfW;
 		areaRight = x + halfW;
-	
+		
 	}
 	
 	if (side == "bottom") {
 	
 		areaTop = y - sprH - areaDist;
-		areaBottom = y - sprH;
+		areaBottom = y;// - sprH;
 		areaLeft = x - halfW;
 		areaRight = x + halfW;
 	
@@ -81,18 +84,18 @@ if (initialiseArea) {
 	
 		areaTop = y - sprH;
 		areaBottom = y;
-		areaLeft = x + halfW;
-		areaRight = areaLeft + areaDist;
-	
+		areaLeft = x - halfW;
+		areaRight = x + halfW + areaDist;
+
 	}
 	
 	if (side == "right") {
 	
 		areaTop = y - sprH;
 		areaBottom = y;
-		areaRight = x - halfW;
-		areaLeft = areaRight - areaDist;
-	
+		areaRight = x + halfW;
+		areaLeft = x - halfW - areaDist;
+
 	}
 	
 }
