@@ -18,3 +18,5 @@ image_angle = 0;
 visible = true;
 
 image_alpha = 0.5;
+
+drawDelay = 2;

@@ -14,7 +14,7 @@ function gunInst() : weaponInst() constructor {
 	spd = 22;
 	range = 1600;
 	collisionFunc = undefined;
-	
+
 	//aim
 	minAimOff = 2;
 	maxAimOff = 6;

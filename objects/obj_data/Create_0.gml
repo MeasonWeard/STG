@@ -148,7 +148,7 @@ soundProfiles = {
 	fleshExplod: [snd_fleshExplode1, snd_fleshExplode2, snd_fleshExplode3],
 	burn: [snd_burn1, snd_burn2, snd_burn3],
 	microMissile: [snd_microMissile1, snd_microMissile2, snd_microMissile3],
-	collect: [snd_collect1]
+	collect: [snd_collect1, snd_collect2, snd_collect3]
 	
 }
 

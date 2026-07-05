@@ -177,3 +177,11 @@ function scr_stages_goToCell(xx, yy) {
 	return success;
 	
 }
+
+function scr_stages_endRun() {
+
+	if (instance_exists(global.player)) instance_destroy(global.player);
+	
+	room_goto(room_endRun);
+	
+}

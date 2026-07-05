@@ -95,7 +95,16 @@ if (keyboard_check(ord("3")) and is_struct(skill3)) skill3.cast(self);
 if (keyboard_check(ord("4")) and is_struct(skill4)) skill4.cast(self);
 
 //porta
-if (keyboard_check_pressed(ord("T"))) scr_obj_createPortal(x, y);
+if (keyboard_check_pressed(ord("T"))) {
+	
+	var pt = scr_randomPointInCircleMinDist(x, y, 60, 20);
+	
+	var xx = pt.xx;
+	var yy = pt.yy;
+	
+	scr_obj_createPortal(xx, yy);
+	
+}
 
 //packs
 var healed = 0;

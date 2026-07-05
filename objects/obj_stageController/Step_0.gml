@@ -32,7 +32,6 @@ if (global.devControls) {
 
 }
 
-
 // time slicing index update
 var sliceKeys = variable_struct_get_names(timeSlicing);
 var sliceKeysLen = array_length(sliceKeys);
@@ -71,6 +70,8 @@ if (enemies == 0 and stageInProgress) {
 
 	if (rc.currentCell.endCell == true) {
 		
+		global.runController.gameState = "win";
+		
 		var midX = (global.roomRight + global.roomLeft) * 0.5;
 		var midY = (global.roomTop + global.roomBottom) * 0.5;
 
@@ -90,7 +91,6 @@ if (enemies == 0 and stageInProgress) {
 		
 	}
 	
-
 	rc.currentCell.cleared = true;
 	
 }

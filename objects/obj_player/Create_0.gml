@@ -41,4 +41,4 @@ gear.device1 = new deviceInst();
 gear.device1.stats.energyRegen = 8;
 
 skills.skill1 = new skill_chainLightning();
-skills.skill2 = new skill_test();
+skills.skill4 = new skill_test();
