@@ -33,11 +33,16 @@ function scr_effects_bulletHitFlesh(source, char) {
 	
 }
 
-//function scr_effects_microMissile(source) {
+function scr_effects_explodingProjectile(proj) {
 
-//	var explosion = instance_create_layer(source.x, source.y, "Instances", obj_explosion);
-//	explosion.sounds = global.data.soundProfiles.microMissile;
-//	explosion.minDamage = 6;
-//	explosion.maxDamage = 36;
+	var rad = 75;
 	
-//}
+	if (variable_instance_exists(proj, "explosionRadius")) rad = proj.explosionRadius;
+
+	var explosion = instance_create_layer(proj.x, proj.y, "Instances", obj_explosion);
+	
+	explosion.radius = rad;
+	explosion.sounds = global.data.soundProfiles.microMissile;
+	explosion.damage = proj.damage;
+	
+}

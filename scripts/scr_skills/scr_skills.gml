@@ -140,6 +140,7 @@ function skill_chainLightning() : skill() constructor {
 	name = "Chain Lightning";
 	maxCharges = 2;
 	charges = 2;
+	cooldownTime = 6;
 	energyCost = 30;
 	range = 900;
 	
@@ -194,23 +195,26 @@ function skill_antimatterBlast() : skill() constructor {
 	name = "Antimatter Blast";
 	maxCharges = 1;
 	charges = 1;
-	energyCost = 50;
-	projectiles = 12;
+	energyCost = 75;
+	projectiles = 8;
+	cooldownTime = 10;
+	explosionRadius = 50;
 	
 	damage = undefined;
 	
 	setupFunc = function(char) {
 		
-		energyCost = 50 + level * 5;
+		energyCost = 75 + level * 5;
 		
-		projectiles = 10 + 2 * level;
+		projectiles = 6 + 2 * level;
+		explosionRadius = 50 + level * 5;
 		
 		damage = new damageProfile();
 		
-		damage.kin = 20 + 10 * level;
+		damage.kin = 10 + 2 * level;
 		damage.kin = scr_stats_applyDamageBonuses(char, damage.kin, "kin");
 		
-		damage.rad = 20 + 10 * level;
+		damage.rad = 10 + 2 * level;
 		damage.rad = scr_stats_applyDamageBonuses(char, damage.rad, "rad");
 		
 		damage = scr_stats_calculateDamageProfile(char, damage, false);
@@ -222,8 +226,24 @@ function skill_antimatterBlast() : skill() constructor {
 		var aimX = source.aimX;
 		var aimY = source.aimY;
 		
+		var gunX = source.gunX;
+		var gunY = source.gunY;
 		
+		var dir = point_direction(gunX, gunY, aimX, aimY);
 		
+		var launcher = instance_create_layer(gunX, gunY, "Instances", obj_antimatterBlast);
+		
+		if (instance_exists(launcher)) {
+			
+			launcher.damage = damage;
+			launcher.dir = dir;
+			launcher.owner = source;
+			launcher.projectiles = projectiles;
+			launcher.explosionRadius = explosionRadius;
+			
+			return true;
+			
+		}
 		
 	}
 	

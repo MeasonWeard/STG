@@ -15,7 +15,7 @@ for (var i = 0; i < len; i++) {
 	var char = nearby[i];
 	
 	if (!instance_exists(char)) continue;
-	if (char.id == source.id) continue;
+	if (instance_exists(source) and char.id == source.id) continue;
 	if (char.faction == faction) continue;
 	
 	if (point_in_rectangle(x, y, char.colLeft, char.colTop, char.colRight, char.colBottom)) {
@@ -81,7 +81,7 @@ for (var i = 0; i < len; i++) {
 	var env = nearby[i];
 	
 	if (!instance_exists(env)) continue;
-	if (env.id == source.id) continue;
+	if (instance_exists(source) and env.id == source.id) continue;
 	
 	if (point_in_rectangle(x, y, env.colLeft, env.colTop, env.colRight, env.colBottom)) {
 		

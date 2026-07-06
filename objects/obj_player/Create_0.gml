@@ -22,7 +22,7 @@ gunCentred = false;
 //gunYoffset = 64;
 
 stats.maxHp = 300;
-stats.maxEnergy = 100;
+stats.maxEnergy = 300;
 stats.spd = 6;
 stats.maxDashes = 2;
 stats.hpRegen = 1;
@@ -41,4 +41,7 @@ gear.device1 = new deviceInst();
 gear.device1.stats.energyRegen = 8;
 
 skills.skill1 = new skill_chainLightning();
+skills.skill2 = new skill_antimatterBlast();
 skills.skill4 = new skill_test();
+
+skills.skill2.level = 12;

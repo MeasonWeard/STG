@@ -57,6 +57,13 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 
 }
 
+function scr_projectiles_shootNeutral(xx, yy, dir, spd, range) {
+
+	var proj = scr_projectiles_create(xx, yy, dir, spd, range, spr_bullet1, undefined, noone, undefined);
+	return proj;
+	
+}
+
 function scr_projectiles_shoot(char) {
 
 	//TO DO: it would be good to only set all of these values if projectile create != noone
