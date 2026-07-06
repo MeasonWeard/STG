@@ -147,7 +147,7 @@ for (var i = 0 ; i < len; i ++) {
 
 	    item.pullX = x;
 	    item.pullY = y;
-		item.pullSpd = max(1, pullStrength * sqr(t));
+		item.pullSpd = max(1, (pullStrength * sqr(t)) * 2);
 		
 	}
 	
