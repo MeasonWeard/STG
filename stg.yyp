@@ -124,6 +124,7 @@
     {"id":{"name":"room_gameStart","path":"rooms/room_gameStart/room_gameStart.yy",},},
     {"id":{"name":"room_startRun","path":"rooms/room_startRun/room_startRun.yy",},},
     {"id":{"name":"stage_engBoss1","path":"rooms/stage_engBoss1/stage_engBoss1.yy",},},
+    {"id":{"name":"stage_engComputerRoom","path":"rooms/stage_engComputerRoom/stage_engComputerRoom.yy",},},
     {"id":{"name":"stage_engHall1","path":"rooms/stage_engHall1/stage_engHall1.yy",},},
     {"id":{"name":"scr_ai","path":"scripts/scr_ai/scr_ai.yy",},},
     {"id":{"name":"scr_audio","path":"scripts/scr_audio/scr_audio.yy",},},
@@ -279,10 +280,11 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"room_gameStart","path":"rooms/room_gameStart/room_gameStart.yy",},},
-    {"roomId":{"name":"stage_engHall1","path":"rooms/stage_engHall1/stage_engHall1.yy",},},
+    {"roomId":{"name":"stage_engComputerRoom","path":"rooms/stage_engComputerRoom/stage_engComputerRoom.yy",},},
     {"roomId":{"name":"room_startRun","path":"rooms/room_startRun/room_startRun.yy",},},
     {"roomId":{"name":"stage_engBoss1","path":"rooms/stage_engBoss1/stage_engBoss1.yy",},},
     {"roomId":{"name":"room_endRun","path":"rooms/room_endRun/room_endRun.yy",},},
+    {"roomId":{"name":"stage_engHall1","path":"rooms/stage_engHall1/stage_engHall1.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

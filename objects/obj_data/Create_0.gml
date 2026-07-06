@@ -115,6 +115,12 @@ stages = {
 		
 	},
 	
+	engComputerRoom: {
+		
+		room: stage_engComputerRoom
+		
+	},
+	
 	engBoss1: {
 		
 		room: stage_engBoss1

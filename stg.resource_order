@@ -90,6 +90,7 @@
     {"name":"room_endRun","order":2,"path":"rooms/room_endRun/room_endRun.yy",},
     {"name":"room_startRun","order":1,"path":"rooms/room_startRun/room_startRun.yy",},
     {"name":"stage_engBoss1","order":1,"path":"rooms/stage_engBoss1/stage_engBoss1.yy",},
+    {"name":"stage_engHall1","order":2,"path":"rooms/stage_engHall1/stage_engHall1.yy",},
     {"name":"scr_ai","order":18,"path":"scripts/scr_ai/scr_ai.yy",},
     {"name":"scr_audio","order":11,"path":"scripts/scr_audio/scr_audio.yy",},
     {"name":"scr_char","order":12,"path":"scripts/scr_char/scr_char.yy",},

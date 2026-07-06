@@ -8,7 +8,7 @@ mapW = 12;
 mapH = 12;
 
 map = scr_mapGen_createBlankMap(mapW, mapH);
-stages = ["engHall1"];
+stages = ["engComputerRoom", "engHall1"];
 endStages = ["engBoss1"];
 
 var startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 1);

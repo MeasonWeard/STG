@@ -249,5 +249,4 @@ function skill_antimatterBlast() : skill() constructor {
 		
 	}
 	
-	
 }

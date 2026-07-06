@@ -120,7 +120,9 @@ function scr_mapGen_randomWalk(map, stages, startX, startY, steps) {
 
 	for (var i = 0; i < steps; i++) {
 
-		var key = stages[irandom(stageCount - 1)];
+		var rand = irandom_range(0, stageCount-1);
+
+		var key = stages[rand];
 		var newCell = scr_mapGen_createCell(key);
 		
 		map[xx][yy] = newCell;
