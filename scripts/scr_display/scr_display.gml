@@ -2,7 +2,7 @@ function scr_display_applyIntegerScaling() {
 	var iw = INTERNAL_WIDTH;
 	var ih = INTERNAL_HEIGHT;
 
-	var dw = window_get_width();   // ✅ CRITICAL FIX — use **window** size, not display
+	var dw = window_get_width(); 
 	var dh = window_get_height();
 
 	var scale_x = floor(dw / iw);

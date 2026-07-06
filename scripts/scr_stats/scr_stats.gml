@@ -386,7 +386,8 @@ function scr_stats_hitOutcome(oa, da) {
 
 		outcome += crits;
 		
-	} 
+	}
+	
 	//chance for glancing hit
 	else if (da > oa) {
 	

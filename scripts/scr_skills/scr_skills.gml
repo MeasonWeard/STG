@@ -138,11 +138,13 @@ function skill_test() : skill() constructor {
 function skill_chainLightning() : skill() constructor {
 
 	name = "Chain Lightning";
+	icon = spr_icon_chainLightning;
 	maxCharges = 2;
 	charges = 2;
 	cooldownTime = 6;
 	energyCost = 30;
 	range = 900;
+	chains = 1;
 	
 	damage = undefined;
 	
@@ -150,8 +152,10 @@ function skill_chainLightning() : skill() constructor {
 		
 		energyCost = 30 + level * 5;
 		
+		chains = 1 + floor(level / 2);
+		
 		damage = new damageProfile();
-		damage.elec = 30 + 15 * level;
+		damage.elec = 25 + 10 * level;
 		damage.elec = scr_stats_applyDamageBonuses(char, damage.elec, "elec"); 
 		damage = scr_stats_calculateDamageProfile(char, damage, false);
 		
@@ -161,12 +165,9 @@ function skill_chainLightning() : skill() constructor {
 
 		if (!instance_exists(source)) return false;
 
-		var chains = 1 + level;
-		
 		var xx = source.aimX;
 		var yy = source.aimY;
 		
-		//var nearest = scr_hash_getNearby(global.stageController.charHash, xx, yy);
 		var nearest = scr_char_targetNearest(source, xx, yy, 2);
 		
 		if (!instance_exists(nearest)) return false;
@@ -193,11 +194,12 @@ function skill_chainLightning() : skill() constructor {
 function skill_antimatterBlast() : skill() constructor {
 	
 	name = "Antimatter Blast";
+	icon = spr_icon_antimatter;
 	maxCharges = 1;
 	charges = 1;
 	energyCost = 75;
 	projectiles = 8;
-	cooldownTime = 10;
+	cooldownTime = 11;
 	explosionRadius = 50;
 	
 	damage = undefined;

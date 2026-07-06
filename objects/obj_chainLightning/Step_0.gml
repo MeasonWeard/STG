@@ -84,6 +84,7 @@ if (chainTick <= 0 and chainsDone < chains) {
 			closest = dist;
 			found = char;
 		}
+		
 	}
 
 	if (found != noone) {
@@ -103,6 +104,9 @@ if (chainTick <= 0 and chainsDone < chains) {
 		if (!is_undefined(damage)) {
 			scr_char_damage(found, damage, damageTypes.ability, false);
 		}
+		
+		damage = scr_stats_multiplyDamageProfile(damage, 0.75);
+		
 	}
 }
 
@@ -122,131 +126,3 @@ for (var i = 0; i < len; i++) {
 		chainOriginPos[i] = [target.x, target.y];
 	}
 }
-
-//life--;
-
-//if (life <= 0) {
-//	instance_destroy();
-//	exit;
-//}
-
-//chainTick--;
-
-//if (firstZap) {
-
-//	firstZap = false;
-
-//	var firstChar = chainList[0];
-
-
-//	if (instance_exists(firstChar)) {
-		
-//		var xx = firstChar.x;
-//		var yy = (firstChar.y + firstChar.bbox_top) * 0.5;
-		
-//		array_push(chainPos, [xx, yy]);
-		
-//		scr_audio_playSoundAt(snd_zap, xx, yy);
-		
-//		scr_char_damage(firstChar, damage, damageTypes.ability, false);
-//		instance_create_layer(chainList[0].x, chainList[0].y, "Instances", obj_doubleZap);
-		
-		
-//	}
-	
-//}
-
-//if (chainTick <= 0 and chainsDone < chains) {
-
-//	chainTick = interval;
-
-//	var sourceX = owner.x;
-//	var sourceY = owner.y;
-
-//	var chainLen = array_length(chainList);
-
-//	if (chainLen > 0) {
-
-//		var lastIndex = chainLen - 1;
-
-//		if (instance_exists(chainList[lastIndex])) {
-//			sourceX = chainList[lastIndex].x;
-//			sourceY = chainList[lastIndex].y;
-//		}
-//		else if (array_length(chainPos) > lastIndex) {
-//			sourceX = chainPos[lastIndex][0];
-//			sourceY = chainPos[lastIndex][1];
-//		}
-
-//	}
-
-//	var nearby = scr_hash_getNearbyRange(global.stageController.charHash, sourceX, sourceY, 2);
-
-//	var len = array_length(nearby);
-
-//	var found = noone;
-//	var closest = 999999999999;
-
-//	for (var i = 0; i < len; i++) {
-
-//		var char = nearby[i];
-
-//		if (!instance_exists(char)) continue;
-//		if (char == owner) continue;
-//		if (char.faction == owner.faction) continue;
-			
-//		var dist = point_distance(sourceX, sourceY, char.x, char.y);
-//		if (dist > range) continue;
-
-//		var alreadyChained = false;
-
-//		for (var j = 0; j < array_length(chainList); j++) {
-//			if (chainList[j] == char) {
-//				alreadyChained = true;
-//				break;
-//			}
-//		}
-
-//		if (alreadyChained) continue;
-
-//		if (dist < closest) {
-//			closest = dist;
-//			found = char;
-//		}
-			
-//	}
-
-//	if (found != noone) {
-
-//		var zapX = found.x;
-//		var zapY = (found.y + found.bbox_top) * 0.5;
-
-//		array_push(chainList, found);
-//		array_push(chainPos, [zapX, zapY]);
-//		chainsDone++;
-		
-//		instance_create_layer(zapX, zapY, "Instances", obj_doubleZap);
-//		scr_audio_playSoundAt(snd_zap, zapX, zapY);
-			
-//		if (!is_undefined(damage)) {
-//			scr_char_damage(found, damage, damageTypes.ability, false);
-//		}
-
-//	}
-	
-//}
-
-//var len = array_length(chainList);
-//for (var i = 0; i < len; i++) {
-
-//	var target = chainList[i];
-
-//	if (instance_exists(target)) {
-		
-//		var zapX = target.x;
-//		var zapY = (target.y + target.bbox_top) * 0.5;
-		
-//		chainPos[i] = [zapX, zapY];
-//	}
-	
-//}
