@@ -1,10 +1,11 @@
 function meleeInst() : weaponInst() constructor {
-
-	name = "HUH";
+	
 	//appearance
+	name = "Cleaver";
 	swingSounds = global.data.soundProfiles.cleaverSwing;
 	hitSounds = global.data.soundProfiles.cleaverHit;
 	attackSprites = [spr_slashUp, spr_slashDown];
+	spr = spr_melee;
 		
 	//combat
 	attackRate = 2.8;

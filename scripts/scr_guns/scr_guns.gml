@@ -4,6 +4,7 @@ function gunInst() : weaponInst() constructor {
 	shootSounds = global.data.soundProfiles.blaster;
 	reloadSound = undefined;
 	projSprite = spr_bullet1;
+	spr = spr_gun;
 	
 	//attack
 	auto = true;

@@ -27,18 +27,21 @@ function gearInst() constructor {
 function deviceInst() : gearInst() constructor {
 
 	name = "Device";
+	spr = spr_device;
 	
 }
 
 function tieInst() : gearInst() constructor {
 	
 	name = "Tie";
+	spr = spr_tie;
 	
 }
 
 function headgearInst() : gearInst() constructor {
 
 	name = "Headgear";
+	spr = spr_headgear;
 	
 }
 
