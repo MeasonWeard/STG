@@ -110,6 +110,38 @@ function scr_file_createBlankSave() {
 		
 		settings: scr_data_defaultSettings(),
 		
+		playerData: {
+		
+			name: undefined,
+			avatar: undefined,
+			
+			class1: undefined,
+			class2: undefined,
+			
+			xp: 0,
+			level: 0,
+			
+			gear: {
+
+				device1: undefined,
+				device2: undefined,
+				tie: undefined,
+				headgear: undefined
+	
+			},
+				
+		},
+		
+		inventory: {
+			devices: [],
+			ties: [],
+			headgear: [],
+			guns: [],
+			melee: []
+		},
+		
+		resources: {},
+		
 	};
 	
 	return newSave;

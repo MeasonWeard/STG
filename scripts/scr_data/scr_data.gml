@@ -223,10 +223,80 @@ function scr_data_addResource(key, val) {
 
 	var resources = global.runController.resources;
 	
-	var oldVal = resources[$ key];
-	
-    if (is_undefined(oldVal)) oldVal = 0;
+	if (!variable_struct_exists(resources, key)) {
+		
+		var info = scr_data_getResourceInfo(key);
 
-    resources[$ key] = oldVal + val;	
+		resources[$ key] = {
+			val : val,
+			icon : info.icon,
+			name : info.name
+		};
+
+		exit;
+		
+	}
+	
+	var entry = resources[$ key];
+	entry.val += val;
+	
+}
+
+function scr_data_getResourceInfo(key) {
+
+	static resources = global.data.resources;
+	
+	var data;
+	var newData = {};
+
+	if(variable_struct_exists(resources, key)) {
+		
+		data = variable_struct_get(resources, key);
+		
+	} else {
+	
+		data = resources.def;
+	
+	}
+	
+	scr_data_structCopyInto(newData, data);
+
+	return newData;
+	
+}
+
+//does not mutate the array in place, just returns the reordered one
+function scr_data_arrayOrdered(array, order) {
+
+	var orderLen = array_length(order);
+	var arrayLen = array_length(array);
+	var oldArray = []; 
+	array_copy(oldArray, 0, array, 0, arrayLen);
+	
+	var newArray = [];
+	
+	//put 'em in order
+	for (var i = 0; i < orderLen; i++) {
+	
+		var key = order[i];
+		
+		for (var j = arrayLen - 1; j >= 0; j--) {
+		
+			if (oldArray[j] == key) {
+			
+				array_push(newArray, key);
+				array_delete(oldArray, j, 1);
+				arrayLen --;
+			
+			}
+		
+		}
+	
+	}
+	
+	//just concat the rest
+	newArray = array_concat(newArray, oldArray);
+	
+	return newArray;
 	
 }

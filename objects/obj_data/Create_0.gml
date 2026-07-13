@@ -98,6 +98,51 @@ colours = {
 	
 }
 
+resourceOrder = ["data","metals","polymers","fissiles"];
+
+resources = {
+
+	def: {
+		name: "not found",
+		icon: spr_missing
+	},
+
+	//main
+
+	data: {
+		name: "Data",
+		icon: spr_res_data
+	},
+	
+	metals: {
+		name: "Metals",
+		icon: spr_res_metals
+	},
+	
+	polymers: {
+		name: "Polymers",
+		icon: spr_res_polymers
+	},
+	
+	fissiles: {
+		name: "Fissile Materials",
+		icon: spr_res_fissiles
+	},
+	
+	//common
+
+	bio: {
+		name: "Bio Waste",
+		icon: spr_res_bio
+	},
+	
+	alienOrgan: {
+		name: "Alien Organ",
+		icon: spr_res_alienOrgan
+	}
+	
+}
+
 //stages
 stages = {
 

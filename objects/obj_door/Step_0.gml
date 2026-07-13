@@ -8,9 +8,9 @@ if (instance_exists(player) and open) {
 
 if (playerinArea) {
 	
-	scr_ui_displayInstructions("Press E to proceed", 0);
+	scr_ui_displayInstructions("Press F to proceed", 0);
 	
-	if (keyboard_check_pressed(ord("E"))) {
+	if (keyboard_check_pressed(ord("F"))) {
 		
 		var dir = undefined;
 		var moveX = 0;

@@ -3,6 +3,8 @@ var yy1;
 var xx2;
 var yy2;
 
+var prevCol = draw_get_colour();
+
 if (drawByCoordinates) {
 	
     xx1 = left;
@@ -79,4 +81,4 @@ for (var i = 0; i < borderSize; i++) {
 }
 
 draw_set_alpha(1);
-draw_set_color(c_white);
+draw_set_color(prevCol);

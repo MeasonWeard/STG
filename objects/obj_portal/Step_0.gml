@@ -23,8 +23,8 @@ if (instance_exists(player)) {
 
 if (playerInArea) {
 	
-	scr_ui_displayInstructions("Press E to end run", 0);
+	scr_ui_displayInstructions("Press F to end run", 0);
 	
-	if (keyboard_check_pressed(ord("E"))) room_goto(room_endRun);
+	if (keyboard_check_pressed(ord("F"))) scr_stages_endRun();
 	
 }
