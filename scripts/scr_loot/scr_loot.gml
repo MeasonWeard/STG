@@ -19,7 +19,26 @@ function scr_loot_rollLevel(lootLevel) {
 
 }
 
-function scr_loot_dropLoot(chance, level) {
+function scr_loot_rollRarity(maxRarity, improveChance) {
+
+    if (maxRarity <= 1) return 1;
+
+    var rarity = 1;
+
+	var chance = improveChance;
+	
+	while(rarity < maxRarity and scr_random_chance(chance)) {
+	
+		rarity ++;
+		chance *= 0.5;
+	
+	}
+
+    return rarity;
+
+}
+
+function scr_loot_dropLoot(chance, maxRarity, improveChance) {
 	
 	var drops = 0;
 
@@ -39,43 +58,60 @@ function scr_loot_dropLoot(chance, level) {
 
 	repeat(drops) {
 
-		var lootLevel = scr_loot_rollLevel(level);
+		var rarity = scr_loot_rollRarity(maxRarity, improveChance);
 		var loot = scr_items_spawn(obj_lootOrb, x, y, 1, true);
-		loot.level = lootLevel;
+		loot.rarity = rarity;
 		
 	}
 
 }
 
-function scr_loot_getRarityInfo(level) {
+function scr_loot_getRarityInfo(rarity) {
 
 	static rarities = global.data.rarities;
 	static keys = variable_struct_get_names(rarities);
 	static keysLen = array_length(keys);
 	
-	var info = undefined;
-	var highest = -1;
-	
 	for (var i = 0; i < keysLen; i++) {
 	
 		var key = keys[i];
-		var rarity = rarities[$ key];
-		
-		if (level >= rarity.level and rarity.level > highest) {
+		var info = rarities[$ key];
+
+		if (rarity == info.num) {
 			
-			highest = rarity.level;
-			info = rarity;
-			if (level == rarity.level) break;
-		
+			var newInfo = {};
+			scr_data_structCopyInto(newInfo, info);
+			
+			newInfo.key = key;
+			
+			return newInfo;
+			
 		}
-	
+			
 	}
 	
-	return info;
+	return undefined;
 	
 }
 
-function scr_loot_generateGenericLoot(level) {
+function scr_loot_addStat(loot, stat, val) {
+
+	if (!is_struct(loot)) exit;
+	if (!variable_struct_exists(loot, "stats")) exit;
+	
+	var stats = loot.stats;
+	
+	var oldVal = 0;
+	
+	if (!is_undefined(stats[$ stat])) oldVal = stats[$ stat];
+	
+	var newVal = oldVal + val;
+	
+	stats[$ stat] = newVal;
+	
+}
+
+function scr_loot_generateGenericLoot(level, rarity) {
 
 	var loot = noone;
 	var type = choose("gun","melee","device","tie","headgear");
@@ -95,9 +131,9 @@ function scr_loot_generateGenericLoot(level) {
 	if (type == "device") {
 		
 		var devType = choose("laserPointer", "watch", "powerBank");
-		if (devType == "lasterPointer") loot = scr_devices_laserPointer(level);
-		if (devType == "watch") loot = scr_devices_watch(level);
-		if (devType == "powerBank") loot = scr_devices_powerBank(level);
+		if (devType == "lasterPointer") loot = scr_devices_laserPointer(level, rarity);
+		if (devType == "watch") loot = scr_devices_watch(level, rarity);
+		if (devType == "powerBank") loot = scr_devices_powerBank(level, rarity);
 		
 	}
 	

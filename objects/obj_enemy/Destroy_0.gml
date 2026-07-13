@@ -10,4 +10,4 @@ scr_items_drop(obj_stimPack, x, y, 2, undefined, true);
 scr_items_drop(obj_energyPack, x, y, 2, undefined, true);
 
 //loot
-scr_loot_dropLoot(lootChance, lootLevel);
+scr_loot_dropLoot(lootChance, lootMaxRarity, lootImproveChance);

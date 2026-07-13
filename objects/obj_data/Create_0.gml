@@ -75,37 +75,37 @@ enum damageTypes {
 rarities = {
 	
 	alpha: {
-		level: 0,
+		num: 1,
 		col: c_dkgray,
 		name: "Alpha"
 	},
 	
 	beta: {
-		level: 3,
+		num: 2,
 		col: c_blue,
 		name: "Beta"
 	},
 	
 	gamma: {
-		level: 6,
+		num: 3,
 		col: #00FF00,
 		name: "Gamma"
 	},
 	
 	delta: {
-		level: 9,
+		num: 4,
 		col: #FF5200,
 		name: "Delta"
 	},
 	
 	sigma: {
-		level: 12,
+		num: 5,
 		col: #ED008C,
 		name: "Sigma"
 	},
 	
 	omega: {
-		level: 15,
+		num: 6,
 		col: c_white,
 		name: "Omega"
 	},

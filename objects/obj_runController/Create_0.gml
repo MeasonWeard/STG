@@ -3,6 +3,7 @@ global.runController = self;
 sc = noone;
 
 gameState = "running";
+runLevel = 1;
 
 mapW = 12;
 mapH = 12;

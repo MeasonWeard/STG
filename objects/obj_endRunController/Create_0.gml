@@ -24,7 +24,7 @@ titleY = yMid - 260;
 iconGap = 98;
 rowGap = 160;
 
-//format resources
+//FORMAT RESOURCES
 resTick = 15;
 resRevealed = 0;
 
@@ -67,7 +67,7 @@ for (var i = 0; i < resKeysLen; i++) {
 
 }
 
-//xp
+//XP
 xpDisplay = gameData.playerData.xp;
 level = gameData.playerData.level;
 
@@ -83,3 +83,7 @@ xpBar.visible = false;
 xpBar.width = 800;
 xpBar.height = 25;
 xpBar.fillCol = #77e3da;
+
+//GENERATE LOOT
+var lootOrbs 
+loot = [];
