@@ -413,3 +413,69 @@ function scr_stats_hitOutcome(oa, da) {
 	return outcome;
 	
 }
+
+function scr_stats_formatDamage(damage) {
+	
+	var txt = "";
+	
+	if (damage.kin > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Kinetic: " + string(damage.kin);
+	}
+	
+	if (damage.fire > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Fire: " + string(damage.fire);
+	}
+	
+	if (damage.chem > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Chemical: " + string(damage.chem);
+	}
+	
+	if (damage.elec > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Electric: " + string(damage.elec);
+	}
+	
+	if (damage.rad > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Radiation: " + string(damage.rad);
+	}
+	
+	return txt;
+	
+}
+
+function scr_stats_formatDamageRange(damage) {
+	
+	var txt = "";
+	
+	if (damage.kinMax > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Kinetic: " + string(damage.kinMin) + " - " + string(damage.kinMax);
+	}
+	
+	if (damage.fireMax > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Fire: " + string(damage.fireMin) + " - " + string(damage.fireMax);
+	}
+	
+	if (damage.chemMax > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Chemical: " + string(damage.chemMin) + " - " + string(damage.chemMax);
+	}
+	
+	if (damage.elecMax > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Electric: " + string(damage.elecMin) + " - " + string(damage.elecMax);
+	}
+	
+	if (damage.radMax > 0) {
+		if (txt != "") txt += "\n";
+		txt += "Radiation: " + string(damage.radMin) + " - " + string(damage.radMax);
+	}
+	
+	return txt;
+	
+}

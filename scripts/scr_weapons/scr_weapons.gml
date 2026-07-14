@@ -6,6 +6,8 @@ function weaponInst(level, rarity) constructor {
 	lvl = level;
 	rar = rarity;
 	
+	bonusStats = {};
+	
 }
 
 function scr_weapons_collectWeapon(char, weapon, equip) {

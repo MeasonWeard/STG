@@ -132,5 +132,38 @@ function scr_guns_calculateGunStats(char, gun) {
 }
 
 function scr_guns_formatDescription(gun) {
-	return "";
+
+	if (!is_instanceof(gun, gunInst)) return undefined;
+
+	var stats = gun.bonusStats;
+	var damage = gun.damage;
+	
+	var txt = gun.name + "     " + "lvl " + string(gun.lvl);
+	var damageTxt = scr_stats_formatDamage(damage);
+	
+	txt += "\n\nDamage\n----------------\n";
+	
+	txt += damageTxt;
+
+	var keys = variable_struct_get_names(stats);
+	var keysLen = array_length(keys);
+	
+	if (keysLen > 0) txt += "\n\nBonus Stats\n--These don't do anything yet--\n";
+	
+	for (var i = 0; i < keysLen; i ++) {
+	
+		var stat = keys[i];
+		var val = stats[$ stat];
+	
+		var newText = scr_stats_getName(stat);
+		newText += ": " + string(val);
+		
+		txt += "\n";
+
+		txt += newText;
+	
+	}
+	
+	return txt;
+	
 }

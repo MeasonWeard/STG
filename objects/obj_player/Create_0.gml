@@ -11,6 +11,9 @@ audio_listener_orientation(0, 0, 1, 0, -1, 0);
 var gun = new gun_blaster(1, 1);
 var gun2 = new gun_shotgun (1, 1);
 
+gun.damage.fire = 6;
+gun.bonusStats.fireRate = 1;
+
 scr_weapons_collectWeapon(self, gun, false);
 scr_weapons_collectWeapon(self, gun2, false);
 
