@@ -14,7 +14,7 @@ function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 	blastProjectiles = 5;
 	blastSpread = 10;
 	spd = 22;
-	range = 1600;
+	range = 1200;
 	collisionFunc = undefined;
 
 	//aim
@@ -141,10 +141,30 @@ function scr_guns_formatDescription(gun) {
 	var txt = gun.name + "     " + "lvl " + string(gun.lvl);
 	var damageTxt = scr_stats_formatDamage(damage);
 	
+	var clipSize = gun.clipSize;
+	var fireRate = string_trimDecimals(gun.fireRate, 2);
+	var reloadTime = string_trimDecimals(gun.reloadTime, 2);
+	var range = gun.range;
+	
+	txt += "\n\nAmmo: " + string(clipSize);
+	txt += "\nFire Rate: " + string(fireRate) + " p/s";
+	txt += "\nReload time: " + string(reloadTime) + " seconds";
+	txt += "\nRange: " + string(range);
+	
+	if (gun.projectileType == projectileTypes.blast) {
+		
+		var projectiles = gun.blastProjectiles;
+		var	spread = gun.blastSpread;	
+		
+		txt += "\nProjectiles: " + string(projectiles);
+		txt += "\nSpread: " + string(spread) + " degrees";
+		
+	}
+	
 	txt += "\n\nDamage\n----------------\n";
 	
 	txt += damageTxt;
-
+	
 	var keys = variable_struct_get_names(stats);
 	var keysLen = array_length(keys);
 	

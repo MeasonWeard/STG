@@ -128,3 +128,20 @@ function string_capitalise(str, capitalise) {
 
 	return str;
 }
+
+function string_trimDecimals(value, places) {
+
+	var mult = power(10, places);
+	var str = string_format(round(value * mult) / mult, 0, places);
+
+	while (string_char_at(str, string_length(str)) == "0") {
+		str = string_delete(str, string_length(str), 1);
+	}
+
+	if (string_char_at(str, string_length(str)) == ".") {
+		str = string_delete(str, string_length(str), 1);
+	}
+
+	return str;
+
+}

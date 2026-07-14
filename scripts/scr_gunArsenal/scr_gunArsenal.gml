@@ -15,7 +15,7 @@ function gun_blaster(level, rarity) : gunInst(level, rarity) constructor {
 		
 	//damage: 12,
 	//spd: 22,
-	//range: 1600,
+	//range: 1200,
 	//collisionFunc: undefined,
 		
 	////aim
@@ -36,6 +36,7 @@ function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 	name = "Pistol";
 	
 	auto = false;
+	range = 1000;
 	clipSize = 12;
 	fireRate = 8;
 	reloadTime = 1.6;
@@ -79,7 +80,7 @@ function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 	blastProjectiles = 7;
 	blastSpread = 8;
 	shootSounds = global.data.soundProfiles.shotgun;
-	range = 1200;
+	range = 800;
 	//projSprite = spr_bullet3;
 	minAimOff = 3;
 	maxAimOff = 9;
