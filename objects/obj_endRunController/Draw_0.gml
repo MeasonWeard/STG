@@ -118,62 +118,74 @@ if (tab == "loot") {
 	draw_set_halign(fa_middle);
 	draw_set_font(fnt_large);
 	
-	draw_text(titleX, titleY, "Loot");
+	var totalLoot = alpha + beta + gamma + delta + sigma + omega;
 	
-	draw_sprite_ext(spr_lootOrb, 0, lootOrbX, ly1, 1, 1, 0, data.rarities.alpha.col, 1);
-	draw_sprite_ext(spr_lootOrb, 1, lootOrbX, ly2, 1, 1, 0, data.rarities.beta.col, 1);
-	draw_sprite_ext(spr_lootOrb, 2, lootOrbX, ly3, 1, 1, 0, data.rarities.gamma.col, 1);
-	draw_sprite_ext(spr_lootOrb, 3, lootOrbX, ly4, 1, 1, 0, data.rarities.delta.col, 1);
-	draw_sprite_ext(spr_lootOrb, 4, lootOrbX, ly5, 1, 1, 0, data.rarities.sigma.col, 1);
-	draw_sprite_ext(spr_lootOrb, 5, lootOrbX, ly6, 1, 1, 0, data.rarities.omega.col, 1);
-	
-	draw_text(lootOrbTextX, ly1 - 16, alpha);
-	draw_text(lootOrbTextX, ly2 - 16, beta);
-	draw_text(lootOrbTextX, ly3 - 16, gamma);
-	draw_text(lootOrbTextX, ly4 - 16, delta);
-	draw_text(lootOrbTextX, ly5 - 16, sigma);
-	draw_text(lootOrbTextX, ly6 - 16, omega);
-	
-	if (alpha > 0) {
-	
-		alphaReveal.active = true;
-		alphaScrap.active = true;
+	if (totalLoot < 1) {
 		
-	}
-	
-	if (beta > 0) {
-	
-		betaReveal.active = true;
-		betaScrap.active = true;
+		tab = "continue";
 		
-	}
+	} else {
+
+		draw_set_halign(fa_middle);
+		draw_set_font(fnt_large);
+		draw_text(titleX, titleY, "Loot");
 	
-	if (gamma > 0) {
+		draw_sprite_ext(spr_lootOrb, 0, lootOrbX, ly1, 1, 1, 0, data.rarities.alpha.col, 1);
+		draw_sprite_ext(spr_lootOrb, 1, lootOrbX, ly2, 1, 1, 0, data.rarities.beta.col, 1);
+		draw_sprite_ext(spr_lootOrb, 2, lootOrbX, ly3, 1, 1, 0, data.rarities.gamma.col, 1);
+		draw_sprite_ext(spr_lootOrb, 3, lootOrbX, ly4, 1, 1, 0, data.rarities.delta.col, 1);
+		draw_sprite_ext(spr_lootOrb, 4, lootOrbX, ly5, 1, 1, 0, data.rarities.sigma.col, 1);
+		draw_sprite_ext(spr_lootOrb, 5, lootOrbX, ly6, 1, 1, 0, data.rarities.omega.col, 1);
 	
-		gammaReveal.active = true;
-		gammaScrap.active = true;
+		draw_text(lootOrbTextX, ly1 - 16, alpha);
+		draw_text(lootOrbTextX, ly2 - 16, beta);
+		draw_text(lootOrbTextX, ly3 - 16, gamma);
+		draw_text(lootOrbTextX, ly4 - 16, delta);
+		draw_text(lootOrbTextX, ly5 - 16, sigma);
+		draw_text(lootOrbTextX, ly6 - 16, omega);
+	
+		if (alpha > 0) {
+	
+			alphaReveal.active = true;
+			alphaScrap.active = true;
 		
-	}
+		}
 	
-	if (delta > 0) {
+		if (beta > 0) {
 	
-		deltaReveal.active = true;
-		deltaScrap.active = true;
+			betaReveal.active = true;
+			betaScrap.active = true;
 		
-	}
+		}
 	
-	if (sigma > 0) {
+		if (gamma > 0) {
 	
-		sigmaReveal.active = true;
-		sigmaScrap.active = true;
+			gammaReveal.active = true;
+			gammaScrap.active = true;
 		
-	}
+		}
 	
-	if (omega > 0) {
+		if (delta > 0) {
 	
-		omegaReveal.active = true;
-		omegaScrap.active = true;
+			deltaReveal.active = true;
+			deltaScrap.active = true;
 		
+		}
+	
+		if (sigma > 0) {
+	
+			sigmaReveal.active = true;
+			sigmaScrap.active = true;
+		
+		}
+	
+		if (omega > 0) {
+	
+			omegaReveal.active = true;
+			omegaScrap.active = true;
+		
+		}
+	
 	}
 	
 }
@@ -184,6 +196,9 @@ if (tab == "reveal") {
 	var amount = variable_instance_get(self, revealKey);
 	var rarityNum = scr_loot_getRarityNum(revealKey);
 	var maxLevel = rc.runLevel;
+	
+	takeButton.active = true;
+	scrapAllButton.active = true;
 	
 	while (amount > 0) {
 		
@@ -196,9 +211,18 @@ if (tab == "reveal") {
 	variable_instance_set(self, revealKey, 0);
 	
 	//draw
-	var columns = 8;
-	var rows = 4;
-	var itemsPerPage = columns * rows;
+	var cap = string_capitalise(revealKey, 1);
+	
+	draw_set_halign(fa_middle);
+	draw_set_font(fnt_large);
+	draw_set_colour(c_lime);
+	draw_text(titleX, titleY - 60, cap + " Loot");
+	
+	draw_set_font(fnt_normal);
+	draw_set_halign(fa_left);
+	draw_text(scrapAllButton.x + 100, scrapAllButton.y - 8, "Right click individual items to scrap one at a time.");
+	
+	var itemsPerPage = lootColumns * lootRows;
 
 	var startIndex = lootPage * itemsPerPage;
 	var endIndex = min(startIndex + itemsPerPage, array_length(revealedLoot));
@@ -207,8 +231,8 @@ if (tab == "reveal") {
 
 		var pageIndex = i - startIndex;
 
-		var col = pageIndex mod columns;
-		var row = pageIndex div columns;
+		var col = pageIndex mod lootColumns;
+		var row = pageIndex div lootColumns;
 
 		var slotX = lootLeft + col * (lootSlotSize + lootSlotGap);
 		var slotY = lootTop + row * (lootSlotSize + lootSlotGap);
@@ -216,12 +240,13 @@ if (tab == "reveal") {
 		var args = [i];
 
 		scr_ui_drawItemSlot(
+			revealedLoot[i],
 			slotX,
 			slotY,
 			0,
 			lootSlotSize,
 			fnt_large,
-			revealedLoot[i],
+			true,
 			undefined,
 			undefined,
 			scrapRevealed,

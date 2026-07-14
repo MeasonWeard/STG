@@ -57,7 +57,7 @@ function scr_gear_formatDescription(gear) {
 
 	var stats = gear.stats;
 	
-	var txt = gear.name;
+	var txt = gear.name + "     " + "lvl " + string(gear.lvl);
 	txt += "\n";
 	
 	var keys = variable_struct_get_names(stats);

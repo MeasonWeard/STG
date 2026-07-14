@@ -317,13 +317,15 @@ function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 	
 }
 
-function scr_ui_drawItemSlot(xx, yy, align, size, font, item, leftFunc = undefined, leftArgs = [], rightFunc = undefined, rightArgs = []) {
+function scr_ui_drawItemSlot(item, xx, yy, align, size, font, drawBackground, leftFunc = undefined, leftArgs = [], rightFunc = undefined, rightArgs = []) {
 
 	var left = xx;
 	var top = yy;
 	
 	var mx = mouse_x;
 	var my = mouse_y;
+	
+	var borderCol = c_white;
 	
 	var prevCol = draw_get_colour();
 
@@ -345,14 +347,32 @@ function scr_ui_drawItemSlot(xx, yy, align, size, font, item, leftFunc = undefin
 	var right = left + size;
 	var bottom = top + size;
 	
-	draw_set_colour(c_white);
-	draw_rectangle(left, top, right, bottom, true);
 	
 	if (is_struct(item)) {
+		
+		var rarity = item.rar;
+		var rarityInfo = scr_loot_getRarityInfo(rarity);
+		borderCol = rarityInfo.col;
 		
 		var spr = item.spr;
 		var midX = left + size * 0.5;
 		var midY = top + size * 0.5;
+		
+		if (drawBackground) {
+		
+			var h = color_get_hue(borderCol);
+			var s = color_get_saturation(borderCol);
+			var v = color_get_value(borderCol);
+
+			v *= 0.1;
+			v = clamp(v, 0, 255);
+
+			var bgCol =  make_color_hsv(h, s, v);
+		
+			draw_set_colour(bgCol);
+			draw_rectangle(left, top, right, bottom, false);
+	
+		}
 		
 		draw_sprite(spr, 0, midX, midY);
 		
@@ -375,22 +395,24 @@ function scr_ui_drawItemSlot(xx, yy, align, size, font, item, leftFunc = undefin
 		
 	}
 	
+	draw_set_colour(borderCol);
+	draw_rectangle(left, top, right, bottom, true);
+	
 	draw_set_colour(prevCol);
 	
 }
 
 function scr_ui_drawTextBox(xx, yy, txt, font) {
 
+	var prevFont = draw_get_font();
+	draw_set_font(font);
+
     var pad = 6;
 
     var w = string_width(txt) + pad * 2;
     var h = string_height(txt) + pad * 2;
 
-	var prevFont = draw_get_font();
-	draw_set_font(font);
-	
 	scr_misc_resetTextAlignment();
-	
 	
     draw_set_color(global.data.colours.windowBackground);
     draw_rectangle(xx, yy, xx + w, yy + h, false);

@@ -41,11 +41,17 @@ ly4 = lootOrbY + lootOrbGap * 3;
 ly5 = lootOrbY + lootOrbGap * 4;
 ly6 = lootOrbY + lootOrbGap * 5;
 
-lootLeft = 200;
 lootTop = titleY + 100;
 lootSlotSize = 128;
 lootSlotGap = 16;
 lootPage = 0;
+lootColumns = 8;
+lootRows = 4;
+
+var rowLength = lootSlotSize * lootColumns + lootSlotGap * (lootColumns - 1);
+var spareSpace = room_width - rowLength;
+
+lootLeft = spareSpace * 0.5;
 
 //FORMAT RESOURCES
 resTick = 15;
@@ -110,11 +116,11 @@ xpBar.fillCol = #77e3da;
 //LOOT
 scrap = function(lootKey) {
 	
-	audio_play_sound(snd_recycle, 0, false);
-	
 	var ec = global.endRunController;
 	
 	variable_instance_set(ec.id, lootKey, 0);
+	
+	audio_play_sound(snd_recycle, 0, false);
 	
 }
 
@@ -133,6 +139,34 @@ scrapRevealed = function(index) {
 	
 	ec.revealedLoot[index] = undefined;
 	
+	audio_play_sound(snd_recycle, 0, false);
+	
+}
+
+scrapAll = function() {
+
+	var ec = global.endRunController;
+	
+	//do something in a for loop
+	
+	revealedLoot = [];
+	
+	ec.tab = "loot";
+	
+	audio_play_sound(snd_recycle, 0, false);
+		
+}
+
+takeAll = function() {
+
+	var ec = global.endRunController;
+	
+	//do something in a for loop
+	
+	revealedLoot = [];
+	
+	ec.tab = "loot";
+		
 }
 
 loot = rc.loot;
@@ -147,7 +181,12 @@ sigma = variable_struct_exists(loot, "sigma") ? loot[$ "sigma"] : 0;
 omega = variable_struct_exists(loot, "omega") ? loot[$ "omega"] : 0;
 
 //test data
+alpha = 30;
 beta = 30;
+gamma = 30;
+delta = 30;
+sigma = 30;
+omega = 30;
 //
 
 lootButtons = [];
@@ -218,16 +257,25 @@ omegaScrap = instance_create_layer(lxb2, ly6, "Instances", obj_buttonRectangle);
 
 omegaReveal.txt = "Reveal";
 omegaReveal.leftFunc = reveal;
-omegaReveal.args = ["omega"];
+omegaReveal.leftArgs = ["omega"];
 
 omegaScrap.txt = "Scrap";
 omegaScrap.leftFunc = scrap;
 omegaScrap.leftArgs = ["omega"];
 
-//deactivate
+//reveal screen buttons
+takeButton = instance_create_layer(xMid - 100, titleY + 30, "Instances", obj_buttonRectangle);
+takeButton.txt = "Take All";
+takeButton.leftFunc = takeAll;
+
+scrapAllButton = instance_create_layer(xMid + 100, titleY + 30, "Instances", obj_buttonRectangle);
+scrapAllButton.txt = "Scrap All";
+scrapAllButton.leftFunc = scrapAll;
+
+//deactivate all
 
 array_push(lootButtons, alphaReveal, alphaScrap, betaReveal, betaScrap, gammaReveal, gammaScrap,
-deltaReveal, deltaScrap, sigmaReveal, sigmaScrap, omegaReveal, omegaScrap);
+deltaReveal, deltaScrap, sigmaReveal, sigmaScrap, omegaReveal, omegaScrap, takeButton, scrapAllButton);
 
 var lootButtonsLen = array_length(lootButtons);
 for (var i = 0; i < lootButtonsLen; i ++) {

@@ -76,7 +76,7 @@ rarities = {
 	
 	alpha: {
 		num: 1,
-		col: c_dkgray,
+		col: c_white,
 		name: "Alpha"
 	},
 	
@@ -106,7 +106,7 @@ rarities = {
 	
 	omega: {
 		num: 6,
-		col: c_white,
+		col: #FF0009,
 		name: "Omega"
 	},
 	

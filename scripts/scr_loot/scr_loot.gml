@@ -143,10 +143,12 @@ function scr_loot_addStat(loot, stat, val) {
 	
 }
 
-function scr_loot_generateGenericLoot(level, rarity) {
+function scr_loot_generateGenericLoot(maxLevel, rarity) {
 
 	var loot = noone;
 	var type = choose("gun","melee","device","tie","headgear");
+	
+	var level = scr_loot_rollLevel(maxLevel);
 	
 	if (type == "gun") {
 		
