@@ -1,1 +1,1 @@
-level = 6;
+rarity = 3;

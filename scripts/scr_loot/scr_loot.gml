@@ -38,11 +38,11 @@ function scr_loot_rollRarity(maxRarity, improveChance) {
 
 }
 
-function scr_loot_dropLoot(chance, maxRarity, improveChance) {
+function scr_loot_dropLoot(chance, maxRarity, improveChance, maxAmount) {
 	
 	var drops = 0;
 
-	while (chance >= 1) {
+	while (chance >= 1 and drops < maxAmount) {
 
 	    if (chance >= 100) {
 	        drops++;

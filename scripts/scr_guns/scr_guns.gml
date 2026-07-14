@@ -5,6 +5,7 @@ function gunInst() : weaponInst() constructor {
 	reloadSound = undefined;
 	projSprite = spr_bullet1;
 	spr = spr_gun;
+	description = undefined;
 	
 	//attack
 	auto = true;
@@ -128,4 +129,8 @@ function scr_guns_calculateGunStats(char, gun) {
 
 	return newStats;
 	
+}
+
+function scr_guns_formatDescription(gun) {
+	return "";
 }

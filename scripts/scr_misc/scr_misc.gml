@@ -13,12 +13,11 @@ function scr_misc_resetTextAlignment() {
 
 function append_string(str, word, capitalise) {
 
-    str = (is_undefined(str) or str == "") ? word : str + " " + word;
+	str = (is_undefined(str) or str == "") ? word : str + " " + word;
 
-    if (capitalise and string_length(str) > 0) {
-        str[1] = string_upper(str[1]);
-    }
-
+	if (capitalise and string_length(str) > 0) str = string_upper(string_char_at(str, 1)) 
+	+ string_delete(str, 1, 1);
+    
     return str;
-
+	
 }

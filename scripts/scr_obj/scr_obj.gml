@@ -64,6 +64,23 @@ function scr_obj_movementCollision(objA, objB, overlap) {
 
 }
 
+function scr_obj_mouseHover() {
+	
+	var cursor = global.cursor;
+	
+	mouseHover = false;
+	
+	if (!instance_exists(cursor)) exit;
+	
+	if (cursor.x < bbox_left) exit;
+	if (cursor.x > bbox_right) exit;
+	if (cursor.y < bbox_top) exit;
+	if (cursor.y > bbox_bottom) exit;
+	
+	mouseHover = true;
+	
+}
+
 function scr_obj_circleOverlaps(circleX, circleY, radius, obj) {
 
 	if (!instance_exists(obj)) return false;

@@ -271,7 +271,7 @@ function scr_stats_getName(statKey) {
         case "elecResPerc": return "Electric Resistance %";
         case "radResPerc": return "Radiation Resistance %";
 
-        default: return stat;
+        default: return "...";
 
     }
 

@@ -37,8 +37,8 @@ stats.kinDam = 4;
 
 stats.oa = 100;
 
-gear.device1 = new deviceInst();
-gear.device1.stats.energyRegen = 8;
+gear.device1 = scr_devices_powerBank(6, 1);
+//gear.device1.stats.energyRegen = 8;
 
 skills.skill1 = new skill_chainLightning();
 skills.skill2 = new skill_antimatterBlast();

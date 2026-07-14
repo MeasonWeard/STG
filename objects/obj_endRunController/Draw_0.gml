@@ -1,5 +1,13 @@
 xpBar.visible = false;
 
+var lootButtonsLen = array_length(lootButtons);
+for (var i = 0; i < lootButtonsLen; i ++) {
+
+	var button = lootButtons[i];
+	button.active = false;
+	
+}
+
 if (tab == "resources") {
 
 	if (resRevealed < resKeysLen) {
@@ -111,5 +119,61 @@ if (tab == "loot") {
 	draw_set_font(fnt_large);
 	
 	draw_text(titleX, titleY, "Loot");
+	
+	draw_sprite_ext(spr_lootOrb, 0, lootOrbX, ly1, 1, 1, 0, data.rarities.alpha.col, 1);
+	draw_sprite_ext(spr_lootOrb, 1, lootOrbX, ly2, 1, 1, 0, data.rarities.beta.col, 1);
+	draw_sprite_ext(spr_lootOrb, 2, lootOrbX, ly3, 1, 1, 0, data.rarities.gamma.col, 1);
+	draw_sprite_ext(spr_lootOrb, 3, lootOrbX, ly4, 1, 1, 0, data.rarities.delta.col, 1);
+	draw_sprite_ext(spr_lootOrb, 4, lootOrbX, ly5, 1, 1, 0, data.rarities.sigma.col, 1);
+	draw_sprite_ext(spr_lootOrb, 5, lootOrbX, ly6, 1, 1, 0, data.rarities.omega.col, 1);
+	
+	draw_text(lootOrbTextX, ly1 - 16, alpha);
+	draw_text(lootOrbTextX, ly2 - 16, beta);
+	draw_text(lootOrbTextX, ly3 - 16, gamma);
+	draw_text(lootOrbTextX, ly4 - 16, delta);
+	draw_text(lootOrbTextX, ly5 - 16, sigma);
+	draw_text(lootOrbTextX, ly6 - 16, omega);
+	
+	if (alpha > 0) {
+	
+		alphaReveal.active = true;
+		alphaScrap.active = true;
+		
+	}
+	
+	if (beta > 0) {
+	
+		betaReveal.active = true;
+		betaScrap.active = true;
+		
+	}
+	
+	if (gamma > 0) {
+	
+		gammaReveal.active = true;
+		gammaScrap.active = true;
+		
+	}
+	
+	if (delta > 0) {
+	
+		deltaReveal.active = true;
+		deltaScrap.active = true;
+		
+	}
+	
+	if (sigma > 0) {
+	
+		sigmaReveal.active = true;
+		sigmaScrap.active = true;
+		
+	}
+	
+	if (omega > 0) {
+	
+		omegaReveal.active = true;
+		omegaScrap.active = true;
+		
+	}
 	
 }

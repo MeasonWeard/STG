@@ -27,9 +27,9 @@ function scr_devices_laserPointer(level, rarity) {
 	
 	var name;
 	
-	append_string(name, type1, true);
-	append_string(name, type2, true);
-	append_string(name, "laser pointer", true);
+	name = append_string(name, type1, true);
+	name = append_string(name, type2, true);
+	name = append_string(name, "laser pointer", true);
 	
 	device.name = name;
 	
@@ -93,9 +93,9 @@ function scr_devices_watch(level, rarity) {
 	
 	var name;
 	
-	append_string(name, type, true);
-	append_string(name, regenType, true);
-	append_string(name, "watch", true);
+	name = append_string(name, type, true);
+	name = append_string(name, regenType, true);
+	name = append_string(name, "watch", true);
 	
 	device.name = name;
 	
@@ -136,16 +136,18 @@ function scr_devices_powerBank(level, rarity) {
 		low = 0.05 * level;
 		high = 0.2 * level;
 		stats.energyPackRegen = random_range_biased(low, high, LOOT_BIAS, true, 2);
-		
+
 	}
 	
-	stats.regen = regen;
+	stats.energyRegen = regen;
 	
-	var name;
+	var name = "";
 	
-	append_string(name, type, true);
-	append_string(name, "power bank", true);
+	name = append_string(name, type, true);
+	name = append_string(name, "Power Bank", true);
 	
 	device.name = name;
+	
+	return device;
 	
 }

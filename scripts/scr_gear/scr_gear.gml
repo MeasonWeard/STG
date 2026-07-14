@@ -5,23 +5,6 @@ function gearInst() constructor {
 	stats = {};
 	description = undefined;
 	
-	//levelUp(level) = function() {
-	
-	//	var keys = variable_struct_get_names(stats);
-	//	var keysLen = array_length(keys);
-	
-	//	for (var i = 0; i < keysLen; i ++) {
-		
-	//		var key = keys[i];
-	//		var val = stats[$ key];
-		
-	//		var newVal = ceil(val * (level * 1.2));
-	//		stats[$ key] = newVal;
-		
-	//	}
-	
-	//}
-
 }
 
 function deviceInst() : gearInst() constructor {

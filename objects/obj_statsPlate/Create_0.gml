@@ -28,9 +28,14 @@ gearSlotGap = gearSlotSize + 16;
 gearX = gearLeft + 32;
 gearY = gearTop + 32;
 
+weaponX = gearLeft + 256;
+weaponY = gearY;
+
 device1 = undefined;
 device2 = undefined;
 tie = undefined;
 headgear = undefined;
+
+weapon = undefined;
 
 closeDelay = 12;

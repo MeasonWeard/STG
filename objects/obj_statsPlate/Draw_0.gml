@@ -15,6 +15,9 @@ gearBottom = statsBottom;
 gearX = gearLeft + 32;
 gearY = gearTop + 32;
 
+weaponX = gearLeft + 256;
+weaponY = gearY;
+
 
 //get info
 if (instance_exists(player)) {
@@ -23,6 +26,7 @@ if (instance_exists(player)) {
 	device2 = player.gear.device2;
 	tie = player.gear.tie;
 	headgear = player.gear.headgear;
+	weapon = player.equippedWeapon;
 
 }
 
@@ -44,7 +48,8 @@ draw_rectangle(gearLeft, gearTop, gearRight, gearBottom, true);
 draw_set_colour(data.colours.windowText);
 draw_text(camX + 40, camY + 40, txt);
 
-scr_ui_drawGearSlot(gearX, gearY, 0, gearSlotSize, device1);
-scr_ui_drawGearSlot(gearX + gearSlotGap, gearY, 0, gearSlotSize, device2);
-scr_ui_drawGearSlot(gearX, gearY + gearSlotGap, 0, gearSlotSize, tie);
-scr_ui_drawGearSlot(gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, headgear);
+scr_ui_drawItemSlot(gearX, gearY, 0, gearSlotSize, device1);
+scr_ui_drawItemSlot(gearX + gearSlotGap, gearY, 0, gearSlotSize, device2);
+scr_ui_drawItemSlot(gearX, gearY + gearSlotGap, 0, gearSlotSize, tie);
+scr_ui_drawItemSlot(gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, headgear);
+scr_ui_drawItemSlot(weaponX, weaponY, 0, gearSlotSize, weapon);

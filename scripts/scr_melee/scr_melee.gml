@@ -6,6 +6,7 @@ function meleeInst() : weaponInst() constructor {
 	hitSounds = global.data.soundProfiles.cleaverHit;
 	attackSprites = [spr_slashUp, spr_slashDown];
 	spr = spr_melee;
+	description = undefined;
 		
 	//combat
 	attackRate = 2.8;
@@ -109,4 +110,8 @@ function scr_melee_calculateMeleeStats(char, melee) {
 
 	return newStats;
 	
+}
+
+function scr_melee_formatDescription(melee) {
+	return "";
 }

@@ -21,5 +21,6 @@ minData = 8;
 maxData = 16;
 
 lootMaxRarity = 3;
-lootImproveChance = 20;
-lootChance = 5;
+lootImproveChance = 10;
+lootChance = 2;
+lootAmount = 1;

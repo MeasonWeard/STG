@@ -317,7 +317,7 @@ function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 	
 }
 
-function scr_ui_drawGearSlot(xx, yy, align, size, gear) {
+function scr_ui_drawItemSlot(xx, yy, align, size, item) {
 
 	var left = xx;
 	var top = yy;
@@ -345,9 +345,9 @@ function scr_ui_drawGearSlot(xx, yy, align, size, gear) {
 	
 	draw_rectangle(left, top, right, bottom, true);
 	
-	if (is_instanceof(gear, gearInst)) {
+	if (is_struct(item)) {
 		
-		var spr = gear.spr;
+		var spr = item.spr;
 		var midX = left + size * 0.5;
 		var midY = top + size * 0.5;
 		
@@ -357,10 +357,13 @@ function scr_ui_drawGearSlot(xx, yy, align, size, gear) {
 		
 		if (mouseInArea) {
 			
-			if (!is_string(gear.description)) gear.description = scr_gear_formatDescription(gear);
+			var func = scr_gear_formatDescription;
+			if (is_instanceof(item, gunInst)) func = scr_guns_formatDescription;
+			if (is_instanceof(item, meleeInst)) func = scr_melee_formatDescription;
 			
-			scr_ui_mouseHoverText(gear.description);
-			//scr_ui_drawTextBox(midX, midY, gear.description);
+			if (!is_string(item.description)) item.description = func(item);
+			
+			scr_ui_mouseHoverText(item.description);
 			
 		}
 		
@@ -393,3 +396,4 @@ function scr_ui_mouseHoverText(txt) {
 	global.cursor.hoverTxtCount = 4;
 	
 }
+
