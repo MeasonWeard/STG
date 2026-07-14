@@ -216,6 +216,7 @@
     {"id":{"name":"snd_playerHit","path":"sounds/snd_playerHit/snd_playerHit.yy",},},
     {"id":{"name":"snd_powerUp","path":"sounds/snd_powerUp/snd_powerUp.yy",},},
     {"id":{"name":"snd_recharge","path":"sounds/snd_recharge/snd_recharge.yy",},},
+    {"id":{"name":"snd_recycle","path":"sounds/snd_recycle/snd_recycle.yy",},},
     {"id":{"name":"snd_shotgun1","path":"sounds/snd_shotgun1/snd_shotgun1.yy",},},
     {"id":{"name":"snd_shotgun2","path":"sounds/snd_shotgun2/snd_shotgun2.yy",},},
     {"id":{"name":"snd_shotgun3","path":"sounds/snd_shotgun3/snd_shotgun3.yy",},},

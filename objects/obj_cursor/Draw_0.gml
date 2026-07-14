@@ -1,7 +1,8 @@
 //hover text
 if (hoverTxt != undefined and hoverTxtCount > 0) {
 
-	scr_ui_drawTextBox(x, y, hoverTxt);
+	
+	scr_ui_drawTextBox(x, y, hoverTxt, hoverFont);
 	
 	hoverTxtCount--;
 	

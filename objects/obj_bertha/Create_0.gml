@@ -5,7 +5,7 @@ bloodCol = c_red;
 bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
-var slash = new melee_berthaSlash();
+var slash = new melee_berthaSlash(1, 1);
 
 scr_weapons_collectWeapon(self, slash, true);
 

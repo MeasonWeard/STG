@@ -46,3 +46,4 @@ mode = "aim";
 
 hoverTxt = undefined;
 hoverTxtCount = 0;
+hoverFont = fnt_normal;

@@ -1,4 +1,4 @@
-function gunInst() : weaponInst() constructor {
+function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 
 	//appearance and sound
 	shootSounds = global.data.soundProfiles.blaster;

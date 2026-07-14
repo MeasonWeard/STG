@@ -317,13 +317,15 @@ function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 	
 }
 
-function scr_ui_drawItemSlot(xx, yy, align, size, item) {
+function scr_ui_drawItemSlot(xx, yy, align, size, font, item, leftFunc = undefined, leftArgs = [], rightFunc = undefined, rightArgs = []) {
 
 	var left = xx;
 	var top = yy;
 	
 	var mx = mouse_x;
 	var my = mouse_y;
+	
+	var prevCol = draw_get_colour();
 
 	switch (align) {
 		case 1:
@@ -343,6 +345,7 @@ function scr_ui_drawItemSlot(xx, yy, align, size, item) {
 	var right = left + size;
 	var bottom = top + size;
 	
+	draw_set_colour(c_white);
 	draw_rectangle(left, top, right, bottom, true);
 	
 	if (is_struct(item)) {
@@ -363,23 +366,32 @@ function scr_ui_drawItemSlot(xx, yy, align, size, item) {
 			
 			if (!is_string(item.description)) item.description = func(item);
 			
-			scr_ui_mouseHoverText(item.description);
+			scr_ui_mouseHoverText(item.description, font);
+			
+			if (is_callable(leftFunc) and mouse_check_button_pressed(mb_left)) method_call(leftFunc, leftArgs);
+			if (is_callable(rightFunc) and mouse_check_button_pressed(mb_right)) method_call(rightFunc, rightArgs);
 			
 		}
 		
 	}
 	
+	draw_set_colour(prevCol);
+	
 }
 
-function scr_ui_drawTextBox(xx, yy, txt) {
+function scr_ui_drawTextBox(xx, yy, txt, font) {
 
     var pad = 6;
 
     var w = string_width(txt) + pad * 2;
     var h = string_height(txt) + pad * 2;
 
+	var prevFont = draw_get_font();
+	draw_set_font(font);
+	
 	scr_misc_resetTextAlignment();
-
+	
+	
     draw_set_color(global.data.colours.windowBackground);
     draw_rectangle(xx, yy, xx + w, yy + h, false);
 
@@ -387,11 +399,14 @@ function scr_ui_drawTextBox(xx, yy, txt) {
     draw_rectangle(xx, yy, xx + w, yy + h, true);
 
     draw_text(xx + pad, yy + pad, txt);
+	
+	draw_set_font(prevFont);
 
 }
 
-function scr_ui_mouseHoverText(txt) {
+function scr_ui_mouseHoverText(txt, font) {
 	
+	global.cursor.hoverFont = font;
 	global.cursor.hoverTxt = txt;
 	global.cursor.hoverTxtCount = 4;
 	

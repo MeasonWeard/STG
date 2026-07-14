@@ -1,4 +1,4 @@
-function gun_blaster() : gunInst() constructor {
+function gun_blaster(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Blaster";
 	recoil = 1.2;
@@ -31,7 +31,7 @@ function gun_blaster() : gunInst() constructor {
 	
 }
 
-function gun_pistol(): gunInst() constructor {
+function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 
 	name = "Pistol";
 	
@@ -49,7 +49,7 @@ function gun_pistol(): gunInst() constructor {
 
 }
 
-function gun_devastator() : gunInst() constructor{
+function gun_devastator(level, rarity) : gunInst(level, rarity) constructor{
 
 	name = "Devastator";
 	
@@ -66,7 +66,7 @@ function gun_devastator() : gunInst() constructor{
 
 }
 
-function gun_shotgun() : gunInst() constructor {
+function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Shotgun";
 	
@@ -77,10 +77,10 @@ function gun_shotgun() : gunInst() constructor {
 	reloadTime = 2.6;
 	projectileType = projectileTypes.blast;
 	blastProjectiles = 7;
-	blastSpread = 5;
+	blastSpread = 8;
 	shootSounds = global.data.soundProfiles.shotgun;
 	range = 1200;
-	projSprite = spr_bullet3;
+	//projSprite = spr_bullet3;
 	minAimOff = 3;
 	maxAimOff = 9;
 	recoil = 3;
@@ -88,7 +88,7 @@ function gun_shotgun() : gunInst() constructor {
 	
 }
 
-function gun_alienOrb() : gunInst() constructor {
+function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Alien Orb Launcher #1"
 	
@@ -109,7 +109,7 @@ function gun_alienOrb() : gunInst() constructor {
 	
 }
 
-function gun_alienOrb2() : gunInst() constructor {
+function gun_alienOrb2(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Alien Orb Launcher #2";
 	

@@ -1,19 +1,21 @@
 function scr_devices_laserPointer(level, rarity) {
 
-	var device = new deviceInst();
+	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
 
 	var type1 = choose("precise", "bright");
 	var type2 = choose("hot", "ionizing", "malfunctioning", "", "", "")
 	
-	//type1	
-	var low = 15 + level * 2;
-	var high = 25 + level * 3;
+	//type1
+	var low = 8 + level * 2;
+	var high = 18 + level * 3;
 	
 	var statChange = irandom_range_biased(low, high, LOOT_BIAS, true);
-		
-	if (type1 == "precise") stats.oa += statChange;
-	if (type2 == "bright") stats.da += statChange;
+	
+	stats.oa = irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+	if (type1 == "precise") scr_loot_addStat(device, "oa", statChange);
+	if (type2 == "bright") stats.da = statChange;
 	
 	//type2
 	low = level + level * 3;
@@ -21,15 +23,15 @@ function scr_devices_laserPointer(level, rarity) {
 		
 	var dam = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
-	if (type2 == "hot") stats.fireDam += dam;
-	if (type2 == "ionizing") stats.radDam += dam;
-	if (type2 == "malfunctioning") stats.elecDam += dam;
+	if (type2 == "hot") stats.fireDam = dam;
+	if (type2 == "ionizing") stats.radDam = dam;
+	if (type2 == "malfunctioning") stats.elecDam = dam;
 	
-	var name;
+	var name = "";
 	
-	name = append_string(name, type1, true);
-	name = append_string(name, type2, true);
-	name = append_string(name, "laser pointer", true);
+	name = append_string(name, type1, 2);
+	name = append_string(name, type2, 2);
+	name = append_string(name, "laser pointer", 2);
 	
 	device.name = name;
 	
@@ -39,13 +41,13 @@ function scr_devices_laserPointer(level, rarity) {
 
 function scr_devices_watch(level, rarity) {
 
-	var device = new deviceInst();
+	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
 
 	//to do: some don't have regen type
 
 	var type = choose("digital", "analog");
-	var regenType = choose(undefined, undefined, "oximetric", "electroscopic");
+	var regenType = choose("", "", "oximetric", "electroscopic");
 	
 	if (type == "digital") {
 	
@@ -91,11 +93,11 @@ function scr_devices_watch(level, rarity) {
 	
 	}
 	
-	var name;
+	var name = "";
 	
-	name = append_string(name, type, true);
-	name = append_string(name, regenType, true);
-	name = append_string(name, "watch", true);
+	name = append_string(name, type, 2);
+	name = append_string(name, regenType, 2);
+	name = append_string(name, "watch", 2);
 	
 	device.name = name;
 	
@@ -105,7 +107,7 @@ function scr_devices_watch(level, rarity) {
 
 function scr_devices_powerBank(level, rarity) {
 
-	var device = new deviceInst();
+	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
 	
 	var type = choose("high capacity", "fast", "dual-cell");
@@ -116,8 +118,8 @@ function scr_devices_powerBank(level, rarity) {
 	
 	if (type = "high capacity") {
 	
-		low = 5 * level;
-		high = 10 + 10 * level;
+		low = 10 * level;
+		high = 15 + 15 * level;
 		
 		stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
@@ -125,8 +127,8 @@ function scr_devices_powerBank(level, rarity) {
 	
 	if (type == "fast") {
 	
-		low = 0.05 * level;
-		high = 0.2 * level;
+		low = 0.1 * level;
+		high = 0.4 * level;
 		regen += random_range_biased(low, high, LOOT_BIAS, true, 2);
 	
 	}
@@ -143,8 +145,8 @@ function scr_devices_powerBank(level, rarity) {
 	
 	var name = "";
 	
-	name = append_string(name, type, true);
-	name = append_string(name, "Power Bank", true);
+	name = append_string(name, type, 2);
+	name = append_string(name, "power bank", 2);
 	
 	device.name = name;
 	

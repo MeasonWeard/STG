@@ -81,6 +81,30 @@ function scr_obj_mouseHover() {
 	
 }
 
+function scr_obj_clicked(button, hold) {
+
+	if (!mouseHover) return false;
+
+	var mb = mb_any;
+	var clicked = false;
+	
+	if (button == 0) mb = mb_left;
+	if (button == 1) mb = mb_right;
+
+	if (hold) {
+	
+		if (mouse_check_button(mb)) clicked = true;
+	
+	} else {
+		
+		if (mouse_check_button_pressed(mb)) clicked = true;
+	
+	}
+	
+	return clicked;
+	
+}
+
 function scr_obj_circleOverlaps(circleX, circleY, radius, obj) {
 
 	if (!instance_exists(obj)) return false;

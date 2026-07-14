@@ -1,8 +1,10 @@
-function weaponInst() constructor {
+function weaponInst(level, rarity) constructor {
 
 	name = "none";
 	damage = new damageProfile();
 	damage.kin = 12;
+	lvl = level;
+	rar = rarity;
 	
 }
 

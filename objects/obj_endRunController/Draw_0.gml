@@ -177,3 +177,57 @@ if (tab == "loot") {
 	}
 	
 }
+
+if (tab == "reveal") {
+
+	//generate loot
+	var amount = variable_instance_get(self, revealKey);
+	var rarityNum = scr_loot_getRarityNum(revealKey);
+	var maxLevel = rc.runLevel;
+	
+	while (amount > 0) {
+		
+		var newLoot = scr_loot_generateGenericLoot(maxLevel, rarityNum);
+		array_push(revealedLoot, newLoot);
+		amount--;
+		
+	}
+	
+	variable_instance_set(self, revealKey, 0);
+	
+	//draw
+	var columns = 8;
+	var rows = 4;
+	var itemsPerPage = columns * rows;
+
+	var startIndex = lootPage * itemsPerPage;
+	var endIndex = min(startIndex + itemsPerPage, array_length(revealedLoot));
+
+	for (var i = startIndex; i < endIndex; i++) {
+
+		var pageIndex = i - startIndex;
+
+		var col = pageIndex mod columns;
+		var row = pageIndex div columns;
+
+		var slotX = lootLeft + col * (lootSlotSize + lootSlotGap);
+		var slotY = lootTop + row * (lootSlotSize + lootSlotGap);
+
+		var args = [i];
+
+		scr_ui_drawItemSlot(
+			slotX,
+			slotY,
+			0,
+			lootSlotSize,
+			fnt_large,
+			revealedLoot[i],
+			undefined,
+			undefined,
+			scrapRevealed,
+			args
+		);
+	}
+
+	
+}

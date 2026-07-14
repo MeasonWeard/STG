@@ -1,9 +1,9 @@
-if (tabIndex >= array_length(tabs)) {
+if (tabIndex >= array_length(tabs) or tab == "continue") {
 	
 	game_end();
 	
 } else {
 
-	tab = tabs[tabIndex];
+	if (tab != "reveal") tab = tabs[tabIndex];
 
 }

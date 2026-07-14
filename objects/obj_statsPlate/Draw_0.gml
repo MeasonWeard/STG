@@ -48,8 +48,8 @@ draw_rectangle(gearLeft, gearTop, gearRight, gearBottom, true);
 draw_set_colour(data.colours.windowText);
 draw_text(camX + 40, camY + 40, txt);
 
-scr_ui_drawItemSlot(gearX, gearY, 0, gearSlotSize, device1);
-scr_ui_drawItemSlot(gearX + gearSlotGap, gearY, 0, gearSlotSize, device2);
-scr_ui_drawItemSlot(gearX, gearY + gearSlotGap, 0, gearSlotSize, tie);
-scr_ui_drawItemSlot(gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, headgear);
-scr_ui_drawItemSlot(weaponX, weaponY, 0, gearSlotSize, weapon);
+scr_ui_drawItemSlot(gearX, gearY, 0, gearSlotSize, fnt_normal, device1);
+scr_ui_drawItemSlot(gearX + gearSlotGap, gearY, 0, gearSlotSize, fnt_normal, device2);
+scr_ui_drawItemSlot(gearX, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, tie);
+scr_ui_drawItemSlot(gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, headgear);
+scr_ui_drawItemSlot(weaponX, weaponY, 0, gearSlotSize, fnt_normal, weapon);

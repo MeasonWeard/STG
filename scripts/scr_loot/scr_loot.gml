@@ -1,13 +1,22 @@
-function scr_loot_rollLevel(lootLevel) {
+function scr_loot_rollLevel(maxLevel) {
 
-    if (lootLevel <= 0) return 0;
+    if (maxLevel <= 0) return 0;
 
-    var level = 0;
-    var denom = lootLevel + 3;
+    var minLevel = max(1, floor(maxLevel * 0.5));
+    var level = minLevel;
 
-    while (level < lootLevel) {
+    var firstChance = 75;
+    var finalChance = 10;
 
-        var chance = (lootLevel - level) / denom * 100;
+    var increases = maxLevel - minLevel;
+
+    while (level < maxLevel) {
+
+        var step = level - minLevel;
+
+        var progress = (increases <= 1) ? 1 : step / (increases - 1);
+
+        var chance = lerp(firstChance, finalChance, progress);
 
         if (!scr_random_chance(chance)) break;
 
@@ -94,6 +103,29 @@ function scr_loot_getRarityInfo(rarity) {
 	
 }
 
+function scr_loot_getRarityNum(rarityKey) {
+
+	static rarities = global.data.rarities;
+	static keys = variable_struct_get_names(rarities);
+	static keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i++) {
+	
+		var key = keys[i];
+		var info = rarities[$ key];
+		
+		if (rarityKey == key) {
+			
+			return info.num;
+			
+		}
+			
+	}
+	
+	return 0;
+	
+}
+
 function scr_loot_addStat(loot, stat, val) {
 
 	if (!is_struct(loot)) exit;
@@ -118,20 +150,20 @@ function scr_loot_generateGenericLoot(level, rarity) {
 	
 	if (type == "gun") {
 		
-		loot = new gunInst();
+		loot = new gunInst(level, rarity);
 		
 	}
 	
 	if (type == "melee") {
 		
-		loot = new meleeInst();
+		loot = new meleeInst(level, rarity);
 		
 	}
 	
 	if (type == "device") {
 		
 		var devType = choose("laserPointer", "watch", "powerBank");
-		if (devType == "lasterPointer") loot = scr_devices_laserPointer(level, rarity);
+		if (devType == "laserPointer") loot = scr_devices_laserPointer(level, rarity);
 		if (devType == "watch") loot = scr_devices_watch(level, rarity);
 		if (devType == "powerBank") loot = scr_devices_powerBank(level, rarity);
 		
@@ -139,13 +171,13 @@ function scr_loot_generateGenericLoot(level, rarity) {
 	
 	if (type == "tie") {
 		
-		loot = new tieInst();
+		loot = new tieInst(level, rarity);
 		
 	}
 	
 	if (type == "headgear") {
 		
-		loot = new headgearInst();
+		loot = new headgearInst(level, rarity);
 		
 	}
 	

@@ -1,4 +1,4 @@
-function meleeInst() : weaponInst() constructor {
+function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 	
 	//appearance
 	name = "Cleaver";

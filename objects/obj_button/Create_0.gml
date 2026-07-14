@@ -14,6 +14,9 @@ mouseHover = false;
 leftFunc = undefined;
 rightFunc = undefined;
 
+leftArgs = [];
+rightArgs = [];
+
 leftKey = undefined;
 rightKey = undefined;
 

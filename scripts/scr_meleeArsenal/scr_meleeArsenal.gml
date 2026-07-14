@@ -1,4 +1,4 @@
-function melee_berthaSlash() : meleeInst() constructor {
+function melee_berthaSlash(level, rarity) : meleeInst(level, rarity) constructor {
 
 	maxCharges = 3;
 	damage.kin = 12;

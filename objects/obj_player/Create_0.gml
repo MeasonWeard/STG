@@ -8,13 +8,13 @@ cursor = global.cursor;
 audio_listener_position(x, y, 0);
 audio_listener_orientation(0, 0, 1, 0, -1, 0);
 
-var gun = new gun_blaster();
-var gun2 = new gun_pistol();
+var gun = new gun_blaster(1, 1);
+var gun2 = new gun_shotgun (1, 1);
 
 scr_weapons_collectWeapon(self, gun, false);
 scr_weapons_collectWeapon(self, gun2, false);
 
-var melee1 = new meleeInst();
+var melee1 = new meleeInst(1, 1);
 
 scr_weapons_collectWeapon(self, melee1, false);
 
@@ -38,7 +38,6 @@ stats.kinDam = 4;
 stats.oa = 100;
 
 gear.device1 = scr_devices_powerBank(6, 1);
-//gear.device1.stats.energyRegen = 8;
 
 skills.skill1 = new skill_chainLightning();
 skills.skill2 = new skill_antimatterBlast();
