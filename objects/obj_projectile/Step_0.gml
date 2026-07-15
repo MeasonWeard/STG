@@ -43,13 +43,13 @@ for (var i = 0; i < len; i++) {
 		var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
 		
 		scr_char_damage(char, damage, damageTypes.projectile, false, hitOutcome);
+		
 		var profile = char.bulletHitSounds;
 		var snd = scr_audio_randomSoundFromProfile(profile);
 		if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
 		if (charHitReport) audio_play_sound(snd_hitMarker, 0, false);
 		if (instance_exists(global.player) and char == global.player) audio_play_sound(snd_playerHit, 0, false);
 
-		
 		active = false;
 	
 		var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
@@ -68,6 +68,69 @@ for (var i = 0; i < len; i++) {
 	
 		exit;
 		
+	}
+	
+}
+
+if (damageDestructibles) {
+
+	nearby = scr_hash_getNearby(global.stageController.destHash, x, y);
+	len = array_length(nearby);
+	
+	for (var i = 0; i < len; i++) {
+	
+		var dest = nearby[i];
+	
+		if (!instance_exists(dest)) continue;
+	
+		if (point_in_rectangle(x, y, dest.colLeft, dest.colTop, dest.colRight, dest.colBottom)) {
+		
+			var safeX = x;
+			var safeY = y;
+			var hitX = nextX;
+			var hitY = nextY;
+	
+			repeat (4) {
+		
+				var midX = (safeX + hitX) * 0.5;
+				var midY = (safeY + hitY) * 0.5;
+		
+				if (point_in_rectangle(midX, midY, dest.colLeft, dest.colTop, dest.colRight, dest.colBottom)) {
+					hitX = midX;
+					hitY = midY;
+				} else {
+					safeX = midX;
+					safeY = midY;
+				}
+		
+			}
+	
+			scr_env_damage(dest, damage, undefined, false);
+			
+			var profile = dest.bulletHitSounds;
+			var snd = scr_audio_randomSoundFromProfile(profile);
+			if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
+
+			active = false;
+	
+			var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
+			eff.sprite_index = destroyEffect;
+		
+			var hitTop = (dir > 180 and dir < 360 and y <= dest.colTop + spd);
+		
+			if (hitTop) {
+				eff.depth = dest.depth + 1;
+			} else {
+				eff.depth = dest.depth - 1;
+			}
+
+			if (is_callable(collisionFunc)) collisionFunc(self);
+			if (is_callable(dest.bulletHitFunc)) dest.bulletHitFunc(self, dest);
+	
+			exit;
+		
+		}
+	
 	}
 	
 }
@@ -105,7 +168,6 @@ for (var i = 0; i < len; i++) {
 		
 		}
 	
-		//scr_char_damage(char, damage, undefined, false);
 		var profile = env.bulletHitSounds;
 		var snd = scr_audio_randomSoundFromProfile(profile);
 		if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	

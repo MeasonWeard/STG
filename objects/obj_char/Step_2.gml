@@ -77,7 +77,7 @@ if (movedThisStep) {
 }
 
 //depopulate melee hit immunity
-var len = array_length(meleeHitList) - 1
+var len = array_length(meleeHitList) - 1;
 
 for (var i = len; i >= 0; i--) {
 

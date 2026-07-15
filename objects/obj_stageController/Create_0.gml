@@ -74,4 +74,5 @@ timeSlicing = {
 charHash = {};
 ghostHash = {};
 envHash = {};
+destHash = {};
 itemHash = {};

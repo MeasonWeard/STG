@@ -17,7 +17,7 @@ scale = 1;
 
 owner = noone;
 
-equippedWeapon = new gunInst();
+equippedWeapon = new gunInst(1, 1);
 
 dir = 0;
 spd = 18;

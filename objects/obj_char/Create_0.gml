@@ -220,7 +220,8 @@ meleeCooldown = 0;
 
 equippedWeapon = undefined;
 equippedWeaponStats = undefined;
-//melee = undefined;
+
+damageDestructibles = false;
 
 weapons = [];
 weaponIndex = 0;

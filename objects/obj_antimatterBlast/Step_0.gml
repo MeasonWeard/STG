@@ -25,7 +25,10 @@ if (delay > 0) {
 			proj.damage = damage;
 			proj.explosionRadius = explosionRadius;
 			
-			if (instance_exists(owner)) proj.faction = owner.faction;
+			if (instance_exists(owner)) {
+				proj.faction = owner.faction;
+				proj.damageDestructibles = owner.damageDestructibles;
+			}
 			
 			scr_audio_playSoundAt(snd_antimatterShoot, x, y);
 			

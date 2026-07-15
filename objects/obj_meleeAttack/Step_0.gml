@@ -5,6 +5,7 @@ if (instance_exists(owner)) {
 	
 	if (tick < attackFrames) {
 	
+		//chars
 		var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
 		var len = array_length(nearby);
 
@@ -44,6 +45,46 @@ if (instance_exists(owner)) {
 
 			}
 	
+		}
+		
+		//destructibles
+		if (damageDestructibles) {
+		
+			nearby = scr_hash_getNearby(global.stageController.destHash, x, y);
+			len = array_length(nearby);
+
+			for (var i = 0; i < len; i++) {
+
+				var dest = nearby[i];
+	
+				if (!instance_exists(dest)) continue;
+
+				if (
+					bbox_right > dest.colLeft and
+					bbox_left < dest.colRight and
+					bbox_bottom > dest.colTop and
+					bbox_top < dest.colBottom
+				) {
+			
+					if (!scr_melee_alreadyHit(dest, self)) {
+					
+						scr_env_damage(dest, damage, damageTypes.melee, false);
+					
+						if (dest.hp <= killThreshold) dest.hp = 0;
+				
+						var snd = scr_audio_randomSoundFromProfile(hitSounds);
+						if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
+					
+						array_push(dest.meleeHitList, self);
+					
+						if (is_callable(dest.bulletHitFunc)) dest.bulletHitFunc(self, dest);
+
+					}
+
+				}
+	
+			}
+		
 		}
 	
 	}

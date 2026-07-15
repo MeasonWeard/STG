@@ -1,19 +1,22 @@
 {
   "$GMObject":"",
-  "%Name":"obj_res_metals",
+  "%Name":"obj_destructible",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":1,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_res_metals",
+  "name":"obj_destructible",
   "overriddenProperties":[],
   "parent":{
-    "name":"Resources",
-    "path":"folders/Objects/Items/Resources.yy",
+    "name":"Destructibles",
+    "path":"folders/Objects/Destructibles.yy",
   },
   "parentObjectId":{
-    "name":"obj_resource",
-    "path":"objects/obj_resource/obj_resource.yy",
+    "name":"obj_physical",
+    "path":"objects/obj_physical/obj_physical.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -32,10 +35,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_res_metals",
-    "path":"sprites/spr_res_metals/spr_res_metals.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

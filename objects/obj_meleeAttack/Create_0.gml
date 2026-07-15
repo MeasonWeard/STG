@@ -10,3 +10,5 @@ tick = 0;
 hitSounds = undefined;
 
 oa = 100;
+
+damageDestructibles = false;

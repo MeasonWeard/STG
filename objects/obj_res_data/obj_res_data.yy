@@ -13,8 +13,8 @@
     "path":"folders/Objects/Items/Resources.yy",
   },
   "parentObjectId":{
-    "name":"obj_item",
-    "path":"objects/obj_item/obj_item.yy",
+    "name":"obj_resource",
+    "path":"objects/obj_resource/obj_resource.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

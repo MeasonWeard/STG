@@ -71,8 +71,8 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	var rad = damage.rad > 0 ? irandom_range(damage.radMin, damage.radMax) : 0;
 	
 	//apply resistances
-	var totalRes = 0;
-	var preDam = kin + fire + chem + elec + rad;
+	//var totalRes = 0;
+	//var preDam = kin + fire + chem + elec + rad;
 	
 	if (kin > 0 and char.finalStats.kinRes > 0) {
 		var res = irandom_range(char.finalStats.kinResMin, char.finalStats.kinResMax);

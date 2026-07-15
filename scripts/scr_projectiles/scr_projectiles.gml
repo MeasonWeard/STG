@@ -79,6 +79,7 @@ function scr_projectiles_shoot(char) {
 	var aimY = char.aimY;
 	var faction = char.faction;
 	var oa = char.stats.oa;
+	var damageDestructibles = char.damageDestructibles;
 	
 	var projType = weaponStats.projectileType;
 	var spd = weaponStats.spd;
@@ -106,6 +107,7 @@ function scr_projectiles_shoot(char) {
 			proj.faction = faction;
 			proj.collisionFunc = collisionFunc;
 			proj.oa = oa;
+			proj.damageDestructibles = damageDestructibles;
 		}
 		
 	}
@@ -152,6 +154,7 @@ function scr_projectiles_shoot(char) {
 				p.faction = faction;
 				p.collisionFunc = collisionFunc;
 				p.oa = oa;
+				p.damageDestructibles = damageDestructibles;
 			}
 			
 			proj = p;

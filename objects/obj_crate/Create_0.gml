@@ -1,0 +1,11 @@
+event_inherited();
+
+hp = 100;
+
+scr_env_addDrop(self, obj_res_metals, 75, 6);
+scr_env_addDrop(self, obj_res_polymers, 75, 6);
+scr_env_addDrop(self, obj_res_metals, 45, 12);
+scr_env_addDrop(self, obj_res_polymers, 25, 12);
+scr_env_addDrop(self, obj_stimPack, 5, 1);
+scr_env_addDrop(self, obj_stimPack, 5, 1);
+scr_env_addDrop(self, obj_lootOrb, 10, 2);

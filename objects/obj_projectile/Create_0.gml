@@ -18,4 +18,6 @@ charHitReport = false;
 
 collisionFunc = undefined;
 
+damageDestructibles = false;
+
 oa = 100;

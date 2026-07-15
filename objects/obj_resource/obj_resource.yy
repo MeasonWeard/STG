@@ -1,19 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_res_metals",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_resource",
+  "eventList":[],
   "managed":true,
-  "name":"obj_res_metals",
+  "name":"obj_resource",
   "overriddenProperties":[],
   "parent":{
     "name":"Resources",
     "path":"folders/Objects/Items/Resources.yy",
   },
   "parentObjectId":{
-    "name":"obj_resource",
-    "path":"objects/obj_resource/obj_resource.yy",
+    "name":"obj_item",
+    "path":"objects/obj_item/obj_item.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -32,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_res_metals",
-    "path":"sprites/spr_res_metals/spr_res_metals.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

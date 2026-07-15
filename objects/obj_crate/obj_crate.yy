@@ -1,19 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_res_metals",
+  "%Name":"obj_crate",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_res_metals",
+  "name":"obj_crate",
   "overriddenProperties":[],
   "parent":{
-    "name":"Resources",
-    "path":"folders/Objects/Items/Resources.yy",
+    "name":"Destructibles",
+    "path":"folders/Objects/Destructibles.yy",
   },
   "parentObjectId":{
-    "name":"obj_resource",
-    "path":"objects/obj_resource/obj_resource.yy",
+    "name":"obj_destructible",
+    "path":"objects/obj_destructible/obj_destructible.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_res_metals",
-    "path":"sprites/spr_res_metals/spr_res_metals.yy",
+    "name":"spr_crateMedium",
+    "path":"sprites/spr_crateMedium/spr_crateMedium.yy",
   },
   "spriteMaskId":null,
   "visible":true,

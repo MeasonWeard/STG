@@ -54,6 +54,7 @@ function scr_melee_attack(char) {
 	att.killThreshold = stats.killThreshold;
 	att.hitSounds = melee.hitSounds;
 	att.oa = char.stats.oa;
+	att.damageDestructibles = char.damageDestructibles;
 	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;
