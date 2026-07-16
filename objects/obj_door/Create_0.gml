@@ -27,5 +27,7 @@ areaDist = 64;
 //hub stuff
 openDist = 400;
 displayTagDist = 1450;
-stageName = "";
 displayTag = false;
+
+zoneName = "Industrial";
+zoneConstructor = zone_industrial;

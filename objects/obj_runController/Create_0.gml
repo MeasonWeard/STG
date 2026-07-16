@@ -3,30 +3,25 @@ global.runController = self;
 sc = noone;
 
 gameState = "running";
-runLevel = 4;
+runLevel = 1;
+extraLevel = 0;
 
-mapW = 12;
-mapH = 12;
+generateMap = true;
+zoneConstructor = zone_industrial;
 
-map = scr_mapGen_createBlankMap(mapW, mapH);
-stages = ["engComputerRoom", "engHall1"];
-endStages = ["engBoss1"];
+zoneInst = undefined;
+map = undefined;
+startPos = undefined;
 
-var startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 1);
-startX = startPos.xx;
-startY = startPos.yy;
-posX = startX;
-posY = startY;
+startX = 0;
+startY = 0;
 
-scr_mapGen_randomWalk(map, stages, startX, startY, 15);
-scr_mapGen_makeFurthestEndCell(map, startX, startY, endStages);
+posX = 0;
+posY = 0;
 
-miniMap = scr_mapGen_createMiniMap(map, true);
+miniMap = undefined;
 
-currentCell = map[posX][posY];
-currentCell.discovered = true;
-
-scr_stages_discoverAdjacentCells();
+currentCell = undefined;
 
 resources = {};
 loot = {};

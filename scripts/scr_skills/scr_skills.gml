@@ -16,11 +16,11 @@ function skill() constructor {
 	
 	energyCost = 0;
 	
-	castFunc = undefined;
+	static castFunc = undefined;
 	
-	setupFunc = undefined;
+	static setupFunc = undefined;
 
-	cast = function(source) {
+	static cast = function(source) {
 
 		if (!ready()) return false;
 		
@@ -60,7 +60,7 @@ function skill() constructor {
 
 	}
 
-	tick = function() {
+	static tick = function() {
 
 		if (maxCharges > 1) {
 
@@ -90,7 +90,7 @@ function skill() constructor {
 
 	}
 
-	ready = function() {
+	static ready = function() {
 
 		if (maxCharges > 1) {
 			if (maxCharges > 1) return charges > 0 and castCooldown <= 0;
@@ -121,7 +121,7 @@ function skill_test() : skill() constructor {
 	energyCost = 0;
 	castCooldownTime = 0.65;
 	
-	castFunc = function(source) {
+	static castFunc = function(source) {
 		
 		with (obj_enemy) {
 		
@@ -148,7 +148,7 @@ function skill_chainLightning() : skill() constructor {
 	
 	damage = undefined;
 	
-	setupFunc = function(char) {
+	static setupFunc = function(char) {
 		
 		energyCost = 30 + level * 5;
 		
@@ -161,7 +161,7 @@ function skill_chainLightning() : skill() constructor {
 		
 	}
 	
-	castFunc = function(source) {
+	static castFunc = function(source) {
 
 		if (!instance_exists(source)) return false;
 
@@ -204,7 +204,7 @@ function skill_antimatterBlast() : skill() constructor {
 	
 	damage = undefined;
 	
-	setupFunc = function(char) {
+	static setupFunc = function(char) {
 		
 		energyCost = 75 + level * 5;
 		
@@ -223,7 +223,7 @@ function skill_antimatterBlast() : skill() constructor {
 		
 	}
 	
-	castFunc = function(source) {
+	static castFunc = function(source) {
 		
 		var aimX = source.aimX;
 		var aimY = source.aimY;

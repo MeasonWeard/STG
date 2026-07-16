@@ -70,9 +70,7 @@ if (playerinArea) {
 		
 		} else {
 		
-			//hub behaviour
-		
-		
+			scr_zones_startZone(zoneConstructor, 0);
 		
 		}
 		

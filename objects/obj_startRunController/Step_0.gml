@@ -26,17 +26,8 @@ if (global.devControls) {
 	
 	if (keyboard_check_pressed(vk_space)) {
    
-		//show_debug_message(rc.currentCell);
-   
 		scr_stages_goToStage(rc.currentCell);
 	
 	}
 	
-	if (keyboard_check_pressed(ord("H"))) {
-   
-		instance_destroy(global.runController);
-		room_goto(stage_hub1);
-	
-	}
-
 }

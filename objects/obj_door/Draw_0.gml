@@ -10,7 +10,7 @@ if (global.debug) {
 if(open) {
 
 	var col = playerinArea ? c_lime : #B2FFB2;
-	var txt = sc.hub? stageName : "EXIT";
+	var txt = sc.hub? zoneName : "EXIT";
 
 	
 	draw_set_colour(col);
@@ -39,6 +39,6 @@ if (displayTag) {
 		yy = y - sprite_height + 12;
 	}
 	
-	scr_ui_displayTag(xx, yy, 100, stageName, c_lime, fnt_normal, angle);
+	scr_ui_displayTag(xx, yy, 100, zoneName, c_lime, fnt_normal, angle);
 	
 }

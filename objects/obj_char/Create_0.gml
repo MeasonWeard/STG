@@ -7,6 +7,7 @@ setup = true;
 setupStats = true;
 
 sc = global.stageController;
+rc = scr_data_getRunController();
 
 faction = undefined;
 setup = true;

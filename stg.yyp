@@ -167,6 +167,7 @@
     {"id":{"name":"scr_timeSlicing","path":"scripts/scr_timeSlicing/scr_timeSlicing.yy",},},
     {"id":{"name":"scr_ui","path":"scripts/scr_ui/scr_ui.yy",},},
     {"id":{"name":"scr_weapons","path":"scripts/scr_weapons/scr_weapons.yy",},},
+    {"id":{"name":"scr_zones","path":"scripts/scr_zones/scr_zones.yy",},},
     {"id":{"name":"snd_alienBlast1","path":"sounds/snd_alienBlast1/snd_alienBlast1.yy",},},
     {"id":{"name":"snd_alienBlast2","path":"sounds/snd_alienBlast2/snd_alienBlast2.yy",},},
     {"id":{"name":"snd_alienBlast3","path":"sounds/snd_alienBlast3/snd_alienBlast3.yy",},},

@@ -13,9 +13,12 @@ global.player = noone;
 global.debug = false;
 global.devControls = true;
 
+global.stageController = noone;
+global.runController = noone;
+
 //UH
 window_set_cursor(cr_none);
 
 draw_set_font(fnt_normal);
 
-room_goto(room_startRun);
+room_goto(stage_hub1);

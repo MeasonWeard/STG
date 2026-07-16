@@ -130,6 +130,7 @@
     {"name":"scr_timeSlicing","order":14,"path":"scripts/scr_timeSlicing/scr_timeSlicing.yy",},
     {"name":"scr_ui","order":7,"path":"scripts/scr_ui/scr_ui.yy",},
     {"name":"scr_weapons","order":22,"path":"scripts/scr_weapons/scr_weapons.yy",},
+    {"name":"scr_zones","order":30,"path":"scripts/scr_zones/scr_zones.yy",},
     {"name":"snd_alienBlast1","order":12,"path":"sounds/snd_alienBlast1/snd_alienBlast1.yy",},
     {"name":"snd_alienBlast2","order":13,"path":"sounds/snd_alienBlast2/snd_alienBlast2.yy",},
     {"name":"snd_alienBlast3","order":14,"path":"sounds/snd_alienBlast3/snd_alienBlast3.yy",},
