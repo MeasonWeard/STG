@@ -1,0 +1,2 @@
+type = "gear";
+slotKey = "headgear";

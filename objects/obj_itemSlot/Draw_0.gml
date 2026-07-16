@@ -1,0 +1,1 @@
+scr_ui_drawItemSlot(item, x, y, 0, slotSize, fnt_normal, true, undefined, undefined, unequip, [slotKey]);

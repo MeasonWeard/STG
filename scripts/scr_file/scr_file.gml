@@ -95,7 +95,6 @@ function scr_file_saveGame(saveFile, saveData) {
 	
 }
 /// @function scr_file_createBlankSave(name)
-/// @param {real} slot  The slot number
 /// @returns A valid save struct
 function scr_file_createBlankSave() {
 
@@ -129,6 +128,11 @@ function scr_file_createBlankSave() {
 				headgear: undefined
 	
 			},
+			
+			weapons: {
+				weapon1: undefined,
+				weapon2: undefined
+			}
 				
 		},
 		
