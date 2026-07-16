@@ -138,7 +138,7 @@ if (is_string(instructions) and instructionsTick > 0) {
 }
 
 //minimap
-scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, posX, posY);
+if (!sc.hub) scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, posX, posY);
 
 //health and energy
 healthBar.value = hp;

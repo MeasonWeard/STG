@@ -436,3 +436,52 @@ function scr_ui_mouseHoverText(txt, font) {
 	
 }
 
+function scr_ui_displayTag(xx, yy, lineDist, txt, col = c_lime, font = fnt_normal, lineDir = 35) {
+
+	var prevCol    = draw_get_colour();
+	var prevFont   = draw_get_font();
+	var prevHAlign = draw_get_halign();
+	var prevVAlign = draw_get_valign();
+
+	var dirX = lengthdir_x(1, lineDir);
+	var dirY = lengthdir_y(1, lineDir);
+
+	var endX = xx + dirX * lineDist;
+	var endY = yy + dirY * lineDist;
+
+	var textGap = 4;
+	var textX = endX + dirX * textGap;
+	var textY = endY + dirY * textGap;
+
+	// Horizontal alignment
+	if (dirX > 0.01) {
+		draw_set_halign(fa_left);
+	} else if (dirX < -0.01) {
+		draw_set_halign(fa_right);
+	} else {
+		draw_set_halign(fa_center);
+	}
+
+	// Vertical alignment
+	if (dirY > 0.01) {
+		draw_set_valign(fa_top);
+	} else if (dirY < -0.01) {
+		draw_set_valign(fa_bottom);
+	} else {
+		draw_set_valign(fa_middle);
+	}
+
+	draw_set_colour(col);
+	draw_set_font(font);
+
+	draw_line(xx, yy, endX, endY);
+	draw_text(textX, textY, txt);
+
+	draw_set_colour(prevCol);
+	draw_set_font(prevFont);
+	draw_set_halign(prevHAlign);
+	draw_set_valign(prevVAlign);
+	
+	scr_misc_resetTextAlignment();
+	
+}

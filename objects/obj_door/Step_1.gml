@@ -1,6 +1,9 @@
-if (side == "top" and initialiseDoors) {
+if (!sc.hub and side == "top" and initialiseDoors) {
 
 	initialiseDoors = false;
+
+	var sprH = sprite_height;
+	var sprW = sprite_width;
 
 	//eliminate other doors first, in case I accidentally place more than one initial door
 	with (obj_door) {
@@ -15,8 +18,6 @@ if (side == "top" and initialiseDoors) {
 	x = room_width * 0.5;
 
 	//other doors
-	var sprH = sprite_height;
-	var sprW = sprite_width;
 
 	//create bottom door
 	if (scr_stages_isCellInDirValid("down")) {
@@ -50,6 +51,7 @@ if (side == "top" and initialiseDoors) {
 	
 }
 
+//initialise area
 if (initialiseArea) {
 
 	initialiseArea = false;
@@ -61,7 +63,32 @@ if (initialiseArea) {
 	
 	textX = x;
 	textY = y - halfH;
+	
+	//get side
+	var leftDist   = abs(x);
+	var rightDist  = abs(x - room_width);
+	var topDist    = abs(y);
+	var bottomDist = abs(y - room_height);
 
+	var closest = topDist;
+	side = "top";
+
+	if (bottomDist < closest ) {
+		closest  = bottomDist;
+		side = "bottom";
+	}
+
+	if (leftDist < closest ) {
+		closest  = leftDist;
+		side = "left";
+	}
+
+	if (rightDist < closest ) {
+		closest  = rightDist;
+		side = "right";
+	}
+
+	//set area
 	if (side == "top") {
 	
 		areaTop = y - sprH;
@@ -98,4 +125,7 @@ if (initialiseArea) {
 
 	}
 	
+	yMid = (areaBottom + areaTop) * 0.5;
+	xMid = (areaLeft + areaRight) * 0.5;
+		
 }
