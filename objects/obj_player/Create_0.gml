@@ -45,6 +45,7 @@ gear.device2 = scr_devices_watch(6, 5);
 gear.tie = new tieInst(1, 1);
 gear.headgear = new headgearInst(1, 1);
 
+
 skills.skill1 = new skill_chainLightning();
 skills.skill2 = new skill_antimatterBlast();
 skills.skill4 = new skill_test();
