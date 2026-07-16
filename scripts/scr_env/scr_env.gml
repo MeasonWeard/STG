@@ -65,3 +65,49 @@ function scr_env_addDrop(dest, obj, chance, maxVal) {
 	return success;
 	
 }
+
+function scr_env_interactable(env, showDist, useDist, func, tag) {
+	
+	var player = global.player;
+	
+	if (!instance_exists(env)) exit;
+	if (!instance_exists(player)) exit;
+	
+	var xx = player.x;
+	var yy = player.y;
+	
+	var pad = 12;
+	
+	var left = env.colLeft;
+	var right = env.colRight;
+	var top = env.colTop;
+	var bottom = env.colBottom;
+	
+	var closestX = clamp(xx, left, right);
+	var closestY = clamp(yy, top, bottom);
+	
+	var dist = point_distance(xx, yy, closestX, closestY);
+	
+	var showInteraction = dist <= showDist;
+	var canInteract = dist <= useDist;
+	
+	if (showInteraction) {
+	
+		var col = canInteract ? c_lime : #B2FFB2;
+		var xMid = (left + right) * 0.5;
+
+		draw_rectangle_colour(left - pad, top - pad, right + pad, bottom + pad, col, col, col, col, true);
+
+		var txt = canInteract ? tag + ("   (F)") : tag;
+
+		if (is_string(tag)) scr_ui_displayTag(xMid, top - 24, 100, txt, col);
+
+	}
+	
+	if (canInteract) {
+	
+		if (keyboard_check_pressed(ord("F")) and is_callable(func)) func();
+	
+	}
+	
+}

@@ -2,6 +2,7 @@ global.stageController = self;
 rc = scr_data_getRunController();
 
 hub = false;
+setupHub = true;
 
 if (!instance_exists(global.player)) global.player = scr_obj_createExclusive(obj_player, room_width * 0.5, room_height * 0.5);
 global.camera = scr_obj_createExclusive(obj_camera, global.player.x, global.player.y);
@@ -16,6 +17,8 @@ global.projectileTop = global.roomTop - 64;
 
 var layerId = layer_get_id("Tiles");
 layer_depth(layerId, layers.ground);
+
+player = global.player;
 
 createdArrows = false;
 stageInProgress = true;

@@ -28,3 +28,16 @@ if (checkIfCleared and !hub) {
 	}
 	
 }
+
+if (hub and setupHub) {
+
+	setupHub = false;
+	
+	if (instance_exists(player)) {
+	
+		player.x = global.hubPosX;
+		player.y = global.hubPosY;
+		
+	}
+	
+}

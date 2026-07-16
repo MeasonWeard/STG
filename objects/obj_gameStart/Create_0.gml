@@ -16,6 +16,9 @@ global.devControls = true;
 global.stageController = noone;
 global.runController = noone;
 
+global.hubPosX = 500;
+global.hubPosY = 500;
+
 //UH
 window_set_cursor(cr_none);
 
