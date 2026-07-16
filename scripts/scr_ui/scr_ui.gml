@@ -35,6 +35,8 @@ function scr_ui_convertToScreenSpace(xx, yy) {
 
 function scr_ui_drawMiniMap(miniMap, cellSize, xx, yy, flashX, flashY) {
 
+	if (!is_array(miniMap)) exit;
+
 	var mapW = array_length(miniMap);
 	if (mapW <= 0) return;
 

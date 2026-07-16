@@ -1,4 +1,4 @@
-if (checkIfCleared) {
+if (checkIfCleared and !hub) {
 
 	checkIfCleared = false;
 	

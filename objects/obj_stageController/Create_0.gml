@@ -1,5 +1,7 @@
 global.stageController = self;
-rc = global.runController;
+rc = scr_data_getRunController();
+
+hub = false;
 
 if (!instance_exists(global.player)) global.player = scr_obj_createExclusive(obj_player, room_width * 0.5, room_height * 0.5);
 global.camera = scr_obj_createExclusive(obj_camera, global.player.x, global.player.y);

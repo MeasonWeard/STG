@@ -1,6 +1,10 @@
 global.hud = self;
 player = global.player;
-rc = global.runController;
+sc = global.stageController;
+rc = scr_data_getRunController();
+
+hub = sc.hub;
+
 depth = layers.ui;
 firstStep = true;
 
@@ -8,7 +12,7 @@ instructions = "";
 instructionsTick = 0;
 instructionsFlash = 0;
 
-miniMap = scr_mapGen_createMiniMap(rc.map, false);
+miniMap = instance_exists(rc) ? scr_mapGen_createMiniMap(rc.map, false) : undefined;
 
 //formatting
 cam = view_camera[0];
@@ -40,6 +44,9 @@ stimPackX = 0;
 energyPackX = 0;
 
 //info
+posX = 0;
+posY = 0;
+
 hp = 0;
 maxHp = 0;
 shield = 0;

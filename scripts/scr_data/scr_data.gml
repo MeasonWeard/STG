@@ -300,3 +300,11 @@ function scr_data_arrayOrdered(array, order) {
 	return newArray;
 	
 }
+
+function scr_data_getRunController() {
+
+	var rc = variable_global_exists("runController") ? global.runController : noone;
+	
+	return rc;
+	
+}

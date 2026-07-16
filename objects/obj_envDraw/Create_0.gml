@@ -1,4 +1,6 @@
-seed = global.runController.currentCell.seed;
+rc = scr_data_getRunController();
+
+seed = instance_exists(rc) ? rc.currentCell.seed : 0;
 
 wallWidth = 256;
 wallHeight = 128;

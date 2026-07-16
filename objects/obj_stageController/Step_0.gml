@@ -46,51 +46,55 @@ for (var i = 0; i < sliceKeysLen; i++) {
 	
 }
 
-//arrows
-var enemies = instance_number(obj_enemy);
-
-if (!createdArrows and enemies < 11) {
-
-	createdArrows = true;
+if (!hub) {
 	
-	with(obj_enemy) {
+	//arrows
+	var enemies = instance_number(obj_enemy);
+
+	if (!createdArrows and enemies < 11) {
+
+		createdArrows = true;
 	
-		var arrow = instance_create_layer(0, 0, "Instances", obj_arrow);
-		arrow.target = self;
-		arrow.source = global.player;
-		arrow.col = c_red;
+		with(obj_enemy) {
+	
+			var arrow = instance_create_layer(0, 0, "Instances", obj_arrow);
+			arrow.target = self;
+			arrow.source = global.player;
+			arrow.col = c_red;
+	
+		}
 	
 	}
+
+	if (enemies == 0 and stageInProgress) {
+
+		stageInProgress = false;
+
+		if (rc.currentCell.endCell == true) {
+		
+			global.runController.gameState = "win";
+		
+			var midX = (global.roomRight + global.roomLeft) * 0.5;
+			var midY = (global.roomTop + global.roomBottom) * 0.5;
+
+			scr_obj_createPortal(midX, midY);
+		
+		}
+
+		with (obj_door) {
+		
+			open = true;
+		
+			var arrow = instance_create_layer(x, y, "Instances", obj_arrow);
+			arrow.target = self;
+			arrow.source = global.player;
+			arrow.text = "EXIT";
+			arrow.col = c_lime;
+		
+		}
 	
-}
-
-if (enemies == 0 and stageInProgress) {
-
-	stageInProgress = false;
-
-	if (rc.currentCell.endCell == true) {
-		
-		global.runController.gameState = "win";
-		
-		var midX = (global.roomRight + global.roomLeft) * 0.5;
-		var midY = (global.roomTop + global.roomBottom) * 0.5;
-
-		scr_obj_createPortal(midX, midY);
-		
+		rc.currentCell.cleared = true;
+	
 	}
 
-	with (obj_door) {
-		
-		open = true;
-		
-		var arrow = instance_create_layer(x, y, "Instances", obj_arrow);
-		arrow.target = self;
-		arrow.source = global.player;
-		arrow.text = "EXIT";
-		arrow.col = c_lime;
-		
-	}
-	
-	rc.currentCell.cleared = true;
-	
 }

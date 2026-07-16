@@ -25,6 +25,9 @@ skillsY = dashY;
 stimPackX = dashX + skillIconW + skillsPad;
 energyPackX = stimPackX + skillIconW + skillsPad;
 
+posX = instance_exists(rc) ? rc.posX : 0;
+posY = instance_exists(rc) ? rc.posY : 0;
+
 //get info
 if (instance_exists(player)) {
 	
@@ -135,7 +138,7 @@ if (is_string(instructions) and instructionsTick > 0) {
 }
 
 //minimap
-scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, rc.posX, rc.posY);
+scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, posX, posY);
 
 //health and energy
 healthBar.value = hp;
