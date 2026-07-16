@@ -28,3 +28,10 @@ if (playerInArea) {
 	if (keyboard_check_pressed(ord("F"))) scr_stages_endRun();
 	
 }
+
+if (playSound) {
+
+	playSound = false;
+	scr_audio_playSoundAt(snd_portalOpen, x, y);
+	
+}

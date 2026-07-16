@@ -1,6 +1,16 @@
 if (tabIndex >= array_length(tabs) or tab == "continue") {
 	
-	finish();
+	tab = "continue";
+	
+	if (returnToHubTick > 0) {
+		
+		returnToHubTick --;	
+		
+	} else {
+		
+		finish();
+		
+	}
 	
 } else {
 

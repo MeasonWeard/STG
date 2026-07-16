@@ -219,13 +219,27 @@ if (tab == "reveal") {
 	draw_text(titleX, titleY - 60, cap + " Loot");
 	
 	draw_set_font(fnt_normal);
-	draw_set_halign(fa_left);
-	draw_text(scrapAllButton.x + 100, scrapAllButton.y - 8, "Right click individual items to scrap one at a time.");
+	draw_set_halign(fa_middle);
+	draw_text(titleX, titleY + 60, "Right click individual items to scrap one at a time.");
 	
+	var lootCount = array_length(revealedLoot);
 	var itemsPerPage = lootColumns * lootRows;
 
+	var pageCount = ceil(lootCount / itemsPerPage);
+	var maxPage = max(pageCount - 1, 0);
+
+	lootPage = clamp(lootPage, 0, maxPage);
+
 	var startIndex = lootPage * itemsPerPage;
-	var endIndex = min(startIndex + itemsPerPage, array_length(revealedLoot));
+	var endIndex = min(startIndex + itemsPerPage, lootCount);
+
+	prevPageButton.active = lootPage > 0;
+	nextPageButton.active = lootPage < maxPage;
+	
+	if(maxPage > 0) {
+		draw_set_halign(fa_middle);
+		draw_text(pageTextX, titleY + 60, "Page " + string(lootPage + 1) + "/" + string(maxPage + 1));
+	}
 
 	for (var i = startIndex; i < endIndex; i++) {
 
@@ -255,4 +269,26 @@ if (tab == "reveal") {
 	}
 
 	
+}
+
+if (tab == "continue") {
+
+
+	draw_set_font(fnt_huge);
+	
+	var dots = 1 + ((current_time div 300) mod 3);
+
+	var dotTxt = "";
+
+	repeat (dots) {
+	    dotTxt += ".";
+	}
+	
+	var txt = "Saving game   \n\nReturning to hub.";
+	
+	draw_set_halign(fa_middle);
+	draw_text(titleX, room_height * 0.5 - 120, txt);
+	draw_set_halign(fa_left);
+	draw_text(titleX + 84, room_height * 0.5 - 120, dotTxt);
+
 }

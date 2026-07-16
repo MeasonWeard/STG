@@ -20,6 +20,9 @@ layer_depth(layerId, layers.ground);
 
 player = global.player;
 
+portalX = room_width * 0.5;
+portalY = room_height * 0.5;
+
 createdArrows = false;
 stageInProgress = true;
 checkIfCleared = true;

@@ -10,6 +10,7 @@ tabIndex = 0;
 tab = tabs[tabIndex];
 
 keyPressDelay = 12;
+returnToHubTick = 180;
 
 //formatting
 scr_misc_resetTextAlignment();
@@ -153,6 +154,8 @@ scrapAll = function() {
 	
 	ec.tab = "loot";
 	
+	lootPage = 0;
+	
 	audio_play_sound(snd_recycle, 0, false);
 		
 }
@@ -161,9 +164,21 @@ takeAll = function() {
 
 	var ec = global.endRunController;
 	
-	//do something in a for loop
+	var revealedLen = array_length(revealedLoot);
+	
+	for (var i = 0; i < revealedLen; i++) {
+		
+		var entry = revealedLoot[i];
+		
+		if (!is_instanceof(entry, weaponInst) and !is_instanceof(entry, gearInst)) continue;
+		
+		array_push(takenLoot, entry);
+		
+	}
 	
 	revealedLoot = [];
+	
+	lootPage = 0;
 	
 	ec.tab = "loot";
 		
@@ -176,6 +191,22 @@ finish = function () {
 	scr_file_saveGame(global.saveFile, global.gameData);
 	
 	room_goto(stage_hub1);
+	
+	global.hubPosX = -1;
+	global.hubPosY = -1;
+	
+}
+
+prevPage = function() {
+
+	lootPage --;
+	if (lootPage < 0) lootPage = 0;
+
+}
+
+nextPage = function() {
+	
+	lootPage++;
 	
 }
 
@@ -192,12 +223,12 @@ sigma = variable_struct_exists(loot, "sigma") ? loot[$ "sigma"] : 0;
 omega = variable_struct_exists(loot, "omega") ? loot[$ "omega"] : 0;
 
 //test data
-alpha = 30;
-beta = 30;
-gamma = 30;
-delta = 30;
-sigma = 30;
-omega = 30;
+//alpha = 99;
+//beta = 99;
+//gamma = 30;
+//delta = 30;
+//sigma = 30;
+//omega = 30;
 //
 
 lootButtons = [];
@@ -283,10 +314,22 @@ scrapAllButton = instance_create_layer(xMid + 100, titleY + 30, "Instances", obj
 scrapAllButton.txt = "Scrap All";
 scrapAllButton.leftFunc = scrapAll;
 
+//page buttons
+prevPageButton = instance_create_layer(xMid + 350, titleY + 30, "Instances", obj_buttonSquare);
+prevPageButton.txt = "<";
+prevPageButton.leftFunc = prevPage;
+
+nextPageButton = instance_create_layer(xMid + 400, titleY + 30, "Instances", obj_buttonSquare);
+nextPageButton.txt = ">";
+nextPageButton.leftFunc = nextPage;
+
+pageTextX = (prevPageButton.x + nextPageButton.x) * 0.5;
+
 //deactivate all
 
 array_push(lootButtons, alphaReveal, alphaScrap, betaReveal, betaScrap, gammaReveal, gammaScrap,
-deltaReveal, deltaScrap, sigmaReveal, sigmaScrap, omegaReveal, omegaScrap, takeButton, scrapAllButton);
+deltaReveal, deltaScrap, sigmaReveal, sigmaScrap, omegaReveal, omegaScrap, takeButton, scrapAllButton,
+prevPageButton, nextPageButton);
 
 var lootButtonsLen = array_length(lootButtons);
 for (var i = 0; i < lootButtonsLen; i ++) {

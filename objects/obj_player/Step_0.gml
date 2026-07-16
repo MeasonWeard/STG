@@ -94,8 +94,8 @@ if ((keyboard_check(ord("2")) or mouse_check_button(mb_side1)) and is_struct(ski
 if (keyboard_check(ord("3")) and is_struct(skill3)) skill3.cast(self);
 if (keyboard_check(ord("4")) and is_struct(skill4)) skill4.cast(self);
 
-//porta
-if (keyboard_check_pressed(ord("T"))) {
+//portal
+if (!sc.hub and keyboard_check_pressed(ord("T"))) {
 	
 	var pt = scr_randomPointInCircleMinDist(x, y, 60, 20);
 	

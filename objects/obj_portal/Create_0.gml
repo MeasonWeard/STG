@@ -13,3 +13,5 @@ areaRight = 0;
 areaTop = 0;
 areaBottom = 0;
 
+playSound = true;
+

@@ -33,10 +33,31 @@ if (hub and setupHub) {
 
 	setupHub = false;
 	
+	with (obj_portalPad) {
+	
+		other.portalX = x;
+		other.portalY = y + 12;
+	
+	}
+	
 	if (instance_exists(player)) {
 	
-		player.x = global.hubPosX;
-		player.y = global.hubPosY;
+		if (global.hubPosX < 0 or global.hubPosY < 0) {
+			
+			with (obj_portalPad) {
+				powerDown = true;	
+			}
+			
+			instance_create_layer(portalX, portalY - 12, "Instances", obj_closingPortal);
+			player.x = portalX;
+			player.y = portalY;
+			
+		} else {
+			
+			player.x = global.hubPosX;
+			player.y = global.hubPosY;
+			
+		}
 		
 	}
 	

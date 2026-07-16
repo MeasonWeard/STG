@@ -29,5 +29,5 @@ openDist = 400;
 displayTagDist = 1450;
 displayTag = false;
 
-zoneName = "Industrial";
+zoneName = "Engineering";
 zoneConstructor = zone_industrial;

@@ -70,8 +70,6 @@ if (instance_exists(owner)) {
 					
 						scr_env_damage(dest, damage, damageTypes.melee, false);
 					
-						if (dest.hp <= killThreshold) dest.hp = 0;
-				
 						var snd = scr_audio_randomSoundFromProfile(hitSounds);
 						if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
 					
