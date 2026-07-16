@@ -172,6 +172,7 @@ takeAll = function() {
 loot = rc.loot;
 revealKey = undefined;
 revealedLoot = [];
+takenLoot = [];
 
 alpha = variable_struct_exists(loot, "alpha") ? loot[$ "alpha"] : 0;
 beta = variable_struct_exists(loot, "beta") ? loot[$ "beta"] : 0;

@@ -186,3 +186,43 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	return loot;
 	
 }
+
+function scr_loot_saveToStash(loot) {
+
+	if (!is_array(loot)) return false;
+
+	if (!variable_global_exists("gameData")) return false;
+	
+	if (!variable_struct_exists(global.gameData, "inventory")) {
+		
+		global.gameData.inventory = {
+			devices: [],
+			ties: [],
+			headgear: [],
+			guns: [],
+			melee: []
+		}
+		
+	}
+	
+	var inventory = global.gameData.inventory;
+	
+	var len = array_length(loot);
+	
+	for (var i = 0; i < len; i++) {
+	
+		var item = loot[i];
+		
+		if (!is_struct(item)) continue;
+		
+		if (is_instanceof(item, gunInst)) array_push(inventory.guns, item);
+		if (is_instanceof(item, meleeInst)) array_push(inventory.melee, item);
+		if (is_instanceof(item, deviceInst)) array_push(inventory.devices, item);
+		if (is_instanceof(item, tieInst)) array_push(inventory.ties, item);
+		if (is_instanceof(item, headgearInst)) array_push(inventory.headgear, item);
+		
+	}
+	
+	return true;
+	
+}
