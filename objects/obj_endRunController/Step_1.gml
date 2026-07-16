@@ -1,6 +1,6 @@
 if (tabIndex >= array_length(tabs) or tab == "continue") {
 	
-	game_end();
+	finish();
 	
 } else {
 

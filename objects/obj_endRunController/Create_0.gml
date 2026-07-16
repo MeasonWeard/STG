@@ -169,6 +169,16 @@ takeAll = function() {
 		
 }
 
+finish = function () {
+
+	scr_loot_saveToStash(takenLoot);
+	
+	scr_file_saveGame(global.saveFile, global.gameData);
+	
+	room_goto(stage_hub1);
+	
+}
+
 loot = rc.loot;
 revealKey = undefined;
 revealedLoot = [];
