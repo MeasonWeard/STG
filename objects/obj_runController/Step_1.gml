@@ -10,6 +10,8 @@ if (variable_global_exists("stageController")) {
 
 if (generateMap) {
 
+	randomise();
+
 	generateMap = false;
 
 	zoneInst = new zoneConstructor();

@@ -1,4 +1,5 @@
 rc = global.runController;
+sc = global.stageController;
 
 commonList = [];
 
