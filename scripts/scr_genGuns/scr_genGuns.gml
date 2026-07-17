@@ -24,5 +24,7 @@ function scr_genGuns_blaster(level, rarity) {
 		scr_loot_addStat(gun, key, bonusDam);
 		
 	}
+	
+	return gun;
 
 }
