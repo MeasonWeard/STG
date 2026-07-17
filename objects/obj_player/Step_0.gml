@@ -27,8 +27,11 @@ if (instance_exists(cursor)) {
 
 }
 
+//ATTACKING
+if (attackDelay > 0) attackDelay --;
+
 //gun
-if (is_instanceof(equippedWeapon, gunInst)) {
+if (is_instanceof(equippedWeapon, gunInst) and !attackDelay > 0) {
 
 	var shooting = equippedWeapon.auto? mouse_check_button(mb_left) : mouse_check_button_pressed(mb_left);
 
@@ -48,7 +51,7 @@ if (keyboard_check_pressed(ord("R"))) {
 }
 
 //melee 
-if (is_instanceof(equippedWeapon, meleeInst)) {
+if (is_instanceof(equippedWeapon, meleeInst) and !attackDelay > 0) {
 	
 	if(mouse_check_button(mb_left)) {
 	

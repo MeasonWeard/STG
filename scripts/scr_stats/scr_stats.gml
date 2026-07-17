@@ -365,7 +365,7 @@ function scr_stats_hitOutcome(oa, da) {
 	//chance for crit
 	if (oa > da) {
 		
-		diff = oa - da;
+		diff = (oa - da) * 0.5;
 		
 		var crits = 0;
 		var rolls = 1 + floor(diff / 100);

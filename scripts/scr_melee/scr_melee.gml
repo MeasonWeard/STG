@@ -116,5 +116,48 @@ function scr_melee_calculateMeleeStats(char, melee) {
 }
 
 function scr_melee_formatDescription(melee) {
-	return "";
+
+	if (!is_instanceof(melee, meleeInst)) return undefined;
+
+	var stats = melee.bonusStats;
+	var damage = melee.damage;
+	
+	var txt = melee.name + "     " + "lvl " + string(melee.lvl);
+	var damageTxt = scr_stats_formatDamage(damage);
+	
+	var attackRate = string_trimDecimals(melee.attackRate, 2);
+	var charges = melee.maxCharges;
+	var rechargeTime = string_trimDecimals(melee.rechargeTime, 2);
+	var killThreshold = melee.killThreshold;
+
+	txt += "\n\nAttack Rate: " + string(attackRate) + " p/s";
+	txt += "\nCharges: " + string(charges);
+	txt += "\nRecharge Time: " + string(rechargeTime) + " seconds";
+	txt += "\nKill Threshold: " + string(killThreshold);
+
+	txt += "\n\nDamage\n----------------\n";
+	
+	txt += damageTxt;
+	
+	var keys = variable_struct_get_names(stats);
+	var keysLen = array_length(keys);
+	
+	if (keysLen > 0) txt += "\n\nBonus Stats\n--These don't do anything yet--\n";
+	
+	for (var i = 0; i < keysLen; i ++) {
+	
+		var stat = keys[i];
+		var val = stats[$ stat];
+	
+		var newText = scr_stats_getName(stat);
+		newText += ": " + string(val);
+		
+		txt += "\n";
+
+		txt += newText;
+	
+	}
+	
+	return txt;
+	
 }
