@@ -1,2 +1,2 @@
-type = "weapon";
+type = itemTypes.weapon;
 slotKey = "weapon2";

@@ -130,7 +130,7 @@ function scr_file_createBlankSave() {
 			},
 			
 			weapons: {
-				weapon1: undefined,
+				weapon1: new gun_blaster(1, 1),
 				weapon2: undefined
 			}
 				

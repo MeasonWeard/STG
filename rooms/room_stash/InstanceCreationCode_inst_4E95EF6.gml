@@ -1,2 +1,2 @@
-type = "gear";
+type = itemTypes.gear;
 slotKey = "headgear";

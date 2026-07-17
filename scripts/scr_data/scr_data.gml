@@ -301,6 +301,45 @@ function scr_data_arrayOrdered(array, order) {
 	
 }
 
+function scr_data_cleanStructArrays(data) {
+
+	var cleaned = {};
+
+	if (!is_struct(data)) return cleaned;
+
+	var keys = variable_struct_get_names(data);
+	var keysLen = array_length(keys);
+
+	for (var i = 0; i < keysLen; i++) {
+
+		var key = keys[i];
+		var arr = data[$ key];
+
+		if (!is_array(arr)) {
+			cleaned[$ key] = arr;
+			continue;
+		}
+
+		var newArray = [];
+
+		for (var j = 0; j < array_length(arr); j++) {
+
+			var entry = arr[j];
+
+			if (!is_struct(entry)) continue;
+
+			array_push(newArray, entry);
+
+		}
+
+		cleaned[$ key] = newArray;
+
+	}
+
+	return cleaned;
+
+}
+
 function scr_data_getRunController() {
 
 	var rc = variable_global_exists("runController") ? global.runController : noone;

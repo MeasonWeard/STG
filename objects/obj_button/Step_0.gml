@@ -4,8 +4,8 @@ if (!active) exit;
 
 scr_obj_mouseHover();
 
-var leftClick = is_callable(leftFunc) and (scr_obj_clicked(0, hold)); //or scr_input_check(leftKey, hold));
-var rightClick = is_callable(rightFunc) and (scr_obj_clicked(1, hold)); //or scr_input_check(rightKey, hold));
+var leftClick = is_callable(leftFunc) and ((scr_obj_clicked(0, hold)) or scr_input_check(leftKey, hold));
+var rightClick = is_callable(rightFunc) and ((scr_obj_clicked(1, hold)) or scr_input_check(rightKey, hold));
 
 clicked = leftClick or rightClick;
 

@@ -162,6 +162,7 @@
     {"id":{"name":"scr_gunArsenal","path":"scripts/scr_gunArsenal/scr_gunArsenal.yy",},},
     {"id":{"name":"scr_guns","path":"scripts/scr_guns/scr_guns.yy",},},
     {"id":{"name":"scr_hash","path":"scripts/scr_hash/scr_hash.yy",},},
+    {"id":{"name":"scr_input","path":"scripts/scr_input/scr_input.yy",},},
     {"id":{"name":"scr_items","path":"scripts/scr_items/scr_items.yy",},},
     {"id":{"name":"scr_loot","path":"scripts/scr_loot/scr_loot.yy",},},
     {"id":{"name":"scr_mapGen","path":"scripts/scr_mapGen/scr_mapGen.yy",},},

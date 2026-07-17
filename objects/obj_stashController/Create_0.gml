@@ -30,3 +30,5 @@ if (is_struct(global.gameData)) {
 	inventory = scr_data_loadInventory();
 
 }
+
+//functions

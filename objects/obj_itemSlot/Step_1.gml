@@ -1,13 +1,14 @@
 if (instance_exists(stashController)) {
 
-	if (type == "gear") {
+	if (type == itemTypes.gear) {
 
-		var item = stashController.gear[$ slotKey];
-	
-	} else if (type == "weapon") {
+		item = stashController.equippedGear[$ slotKey];
 
-		var item = stashController.weapons[$ slotKey];
 	
+	} else if (type == itemTypes.weapon) {
+
+		item = stashController.equippedWeapons[$ slotKey];
+
 	}
 
 }

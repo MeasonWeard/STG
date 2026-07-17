@@ -27,6 +27,8 @@ for (var i = startIndex; i < endIndex; i++) {
 
 	var slotX = startX + col * (slotSize + slotGap);
 	var slotY = startY + row * (slotSize + slotGap);
+	
+	var args = [tab, i];
 
 	scr_ui_drawItemSlot(
 		displayedItems[i],
@@ -35,7 +37,11 @@ for (var i = startIndex; i < endIndex; i++) {
 		0,
 		slotSize,
 		fnt_large,
-		true
+		true,
+		equipLeft,
+		args,
+		equipRight,
+		args
 	);
 
 }
