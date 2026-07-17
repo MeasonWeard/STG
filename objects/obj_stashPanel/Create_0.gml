@@ -141,3 +141,22 @@ equipRight = function(key, index) {
 	}
 	
 }
+
+scrap = function(key, index) {
+	
+	var arr = inventory[$ key];
+	
+	if (is_undefined(arr)) exit;
+	
+	var len = array_length(arr);
+	if (index >= len) exit;
+	
+	var item = arr[index];
+	
+	if (is_undefined(item)) exit;
+	
+	arr[index] = undefined;
+	
+	audio_play_sound(snd_recycle, 0, false);
+	
+}

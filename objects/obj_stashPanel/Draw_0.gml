@@ -29,6 +29,14 @@ for (var i = startIndex; i < endIndex; i++) {
 	var slotY = startY + row * (slotSize + slotGap);
 	
 	var args = [tab, i];
+	
+	var leftFunc = equipLeft;
+	var rightFunc = equipRight;
+	
+	if (mode == "scrap") {
+		leftFunc = scrap;
+		rightFunc = scrap;
+	}
 
 	scr_ui_drawItemSlot(
 		displayedItems[i],
@@ -38,9 +46,9 @@ for (var i = startIndex; i < endIndex; i++) {
 		slotSize,
 		fnt_large,
 		true,
-		equipLeft,
+		leftFunc,
 		args,
-		equipRight,
+		rightFunc,
 		args
 	);
 
