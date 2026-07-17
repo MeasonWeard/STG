@@ -26,8 +26,8 @@ function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 	stability = 0.1;
 		
 	//ammo
-	clipSize = 45;
-	ammo = 45;
+	clipSize = 24;
+	ammo = 24;
 	reloadTime = 2.2;
 	
 	//runtime data
