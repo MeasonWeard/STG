@@ -1,2 +1,2 @@
 type = "gear";
-slotKey = "headgear";
+slotKey = "tie";

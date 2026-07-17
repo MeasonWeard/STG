@@ -1,5 +1,7 @@
 function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 	
+	type = itemTypes.melee;
+	
 	//appearance
 	name = "Cleaver";
 	swingSounds = global.data.soundProfiles.cleaverSwing;

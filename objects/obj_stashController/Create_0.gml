@@ -1,3 +1,8 @@
+global.stashController = self;
+
+if (instance_exists(global.player)) instance_destroy(global.player);
+
+//data
 equippedGear = {
 
 	device1: undefined,
@@ -15,12 +20,13 @@ equippedWeapons = {
 }
 
 playerData = undefined;
+inventory = {};
 
-if (instance_exists(global.gameData)) {
+if (is_struct(global.gameData)) {
 
-	playerData = scr_data_safeStructGet(global.gameData, "playerData", scr_file_createBlankSave());
+	equippedGear = scr_data_loadEquippedGear();
+	equippedWeapons = scr_data_loadEquippedWeapons();
 	
-	equippedGear = playerData.gear;
-	equippedWeapons = playerData.weapons;
-	
+	inventory = scr_data_loadInventory();
+
 }

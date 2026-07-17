@@ -1,5 +1,7 @@
 function gearInst(level, rarity) constructor {
 
+	type = itemTypes.gear;
+
 	name = "none";
 	spr = spr_stimPack;
 	stats = {};
@@ -11,22 +13,25 @@ function gearInst(level, rarity) constructor {
 
 function deviceInst(level, rarity) : gearInst(level, rarity) constructor {
 
+	type = itemTypes.device;
 	name = "Device";
 	spr = spr_device;
 
 }
 
-function tieInst(level, rarity) : gearInst(level, rarity) constructor {
+function headgearInst(level, rarity) : gearInst(level, rarity) constructor {
 	
-	name = "Tie";
-	spr = spr_tie;
+	type = itemTypes.headgear;
+	name = "Headgear";
+	spr = spr_headgear;
 	
 }
 
-function headgearInst(level, rarity) : gearInst(level, rarity) constructor {
-
-	name = "Headgear";
-	spr = spr_headgear;
+function tieInst(level, rarity) : gearInst(level, rarity) constructor {
+	
+	type = itemTypes.tie;
+	name = "Tie";
+	spr = spr_tie;
 	
 }
 

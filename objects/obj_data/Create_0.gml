@@ -73,6 +73,18 @@ enum damageTypes {
 	
 }
 
+enum itemTypes {
+	
+	weapon = 0,
+	gun = 2,
+	melee = 3,
+	gear = 4,
+	device = 5,
+	headgear = 6,
+	tie = 7
+	
+}
+
 rarities = {
 	
 	alpha: {

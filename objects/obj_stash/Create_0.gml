@@ -2,6 +2,6 @@ event_inherited();
 
 useFunc = function() {
 	
-	scr_testSound();
+	room_goto(room_stash);
 	
 }

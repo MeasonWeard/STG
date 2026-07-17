@@ -50,6 +50,6 @@ draw_text(camX + 40, camY + 40, txt);
 
 scr_ui_drawItemSlot(device1, gearX, gearY, 0, gearSlotSize, fnt_normal, true);
 scr_ui_drawItemSlot(device2, gearX + gearSlotGap, gearY, 0, gearSlotSize, fnt_normal, true);
-scr_ui_drawItemSlot(tie, gearX, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
-scr_ui_drawItemSlot(headgear, gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
+scr_ui_drawItemSlot(headgear, gearX, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
+scr_ui_drawItemSlot(tie, gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
 scr_ui_drawItemSlot(weapon, weaponX, weaponY, 0, gearSlotSize, fnt_normal, true);

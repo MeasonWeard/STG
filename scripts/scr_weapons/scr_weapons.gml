@@ -1,5 +1,7 @@
 function weaponInst(level, rarity) constructor {
 
+	type = itemTypes.weapon;
+
 	name = "none";
 	damage = new damageProfile();
 	damage.kin = 12;

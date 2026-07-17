@@ -309,3 +309,156 @@ function scr_data_getRunController() {
 	
 }
 
+function scr_data_loadItemData(data) {
+
+	if (!is_struct(data)) return undefined;
+	if (!variable_struct_exists(data, "type")) return undefined;
+
+	var item;
+	
+	var lvl = data.lvl;
+	var rar = data.rar;
+	
+	switch (data.type) {
+		
+		case itemTypes.weapon:
+			item = new weaponInst(lvl, rar);
+			break;
+			
+		case itemTypes.gear:
+			item = new gearInst(lvl, rar);
+			break;
+
+		case itemTypes.gun:
+			item = new gunInst(lvl, rar);
+			break;
+
+		case itemTypes.melee:
+			item = new meleeInst(lvl, rar);
+			break;
+
+		case itemTypes.device:
+			item = new deviceInst(lvl, rar);
+			break;
+
+		case itemTypes.tie:
+			item = new tieInst(lvl, rar);
+			break;
+
+		case itemTypes.headgear:
+			item = new headgearInst(lvl, rar);
+			break;
+
+		default:
+			return undefined;
+	}
+
+	scr_data_structCopyInto(item, data);
+
+	return item;
+}
+
+function scr_data_loadItemDataArray(savedArray) {
+
+	var loadedArray = [];
+
+	if (!is_array(savedArray)) return loadedArray;
+
+	for (var i = 0; i < array_length(savedArray); i++) {
+
+		var item = scr_data_loadItemData(savedArray[i]);
+
+		if (!is_undefined(item)) {
+			array_push(loadedArray, item);
+		}
+	}
+
+	return loadedArray;
+	
+}
+
+function scr_data_loadInventory() {
+
+	var gameData = global.gameData;
+	
+	var invData = gameData.inventory;
+	
+	var guns = scr_data_loadItemDataArray(invData.guns);
+	var melee = scr_data_loadItemDataArray(invData.melee);
+	var devices = scr_data_loadItemDataArray(invData.devices);
+	var headgear = scr_data_loadItemDataArray(invData.headgear);
+	var ties = scr_data_loadItemDataArray(invData.ties);
+	
+	return {
+		guns: guns,
+		melee: melee,
+		devices: devices,
+		headgear: headgear,
+		ties: ties
+	}
+	
+}
+
+function scr_data_loadEquippedGear() {
+
+	var gameData = global.gameData;
+	
+	var gearData = gameData.playerData.gear;
+	
+	var gear = {};
+	
+	var keys = variable_struct_get_names(gearData);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+	
+		var key = keys[i];
+		var item = gearData[$ key];
+		
+		var newItem = scr_data_loadItemData(item);
+		
+		gear[$ key] = newItem;
+	
+	}
+	
+	return gear;
+	
+}
+
+function scr_data_loadEquippedWeapons() {
+
+	var gameData = global.gameData;
+	
+	var weaponData = gameData.playerData.weapons;
+	
+	var weapons = {};
+	
+	var keys = variable_struct_get_names(weaponData);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+	
+		var key = keys[i];
+		var item = weaponData[$ key];
+		
+		var newItem = scr_data_loadItemData(item);
+		
+		weapons[$ key] = newItem;
+	
+	}
+	
+	return weapons;
+	
+}
+
+function scr_data_loadEquipped() {
+
+	var gear = scr_data_loadEquippedGear();
+	var weapons = scr_data_loadEquippedWeapons();
+	
+	return {
+		gear: gear,
+		weapons: weapons
+	}
+	
+}

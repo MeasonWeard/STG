@@ -1,5 +1,7 @@
 function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 
+	type = itemTypes.gun;
+
 	//appearance and sound
 	shootSounds = global.data.soundProfiles.blaster;
 	reloadSound = undefined;
