@@ -1,4 +1,4 @@
-function scr_devices_laserPointer(level, rarity) {
+function scr_genDevices_laserPointer(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
@@ -39,7 +39,7 @@ function scr_devices_laserPointer(level, rarity) {
 	
 }
 
-function scr_devices_watch(level, rarity) {
+function scr_genDevices_watch(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
@@ -105,7 +105,7 @@ function scr_devices_watch(level, rarity) {
 	
 }
 
-function scr_devices_powerBank(level, rarity) {
+function scr_genDevices_powerBank(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;

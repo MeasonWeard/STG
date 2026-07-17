@@ -162,6 +162,7 @@
     {"id":{"name":"scr_env","path":"scripts/scr_env/scr_env.yy",},},
     {"id":{"name":"scr_file","path":"scripts/scr_file/scr_file.yy",},},
     {"id":{"name":"scr_gear","path":"scripts/scr_gear/scr_gear.yy",},},
+    {"id":{"name":"scr_genGuns","path":"scripts/scr_genGuns/scr_genGuns.yy",},},
     {"id":{"name":"scr_gunArsenal","path":"scripts/scr_gunArsenal/scr_gunArsenal.yy",},},
     {"id":{"name":"scr_guns","path":"scripts/scr_guns/scr_guns.yy",},},
     {"id":{"name":"scr_hash","path":"scripts/scr_hash/scr_hash.yy",},},

@@ -33,8 +33,8 @@ scr_weapons_collectWeapon(self, weapons.weapon2, false);
 
 //scr_weapons_collectWeapon(self, melee1, false);
 
-//gear.device1 = scr_devices_powerBank(6, 5);
-//gear.device2 = scr_devices_watch(6, 5);
+//gear.device1 = scr_genDevices_powerBank(6, 5);
+//gear.device2 = scr_genDevices_watch(6, 5);
 //gear.tie = new tieInst(1, 1);
 //gear.headgear = new headgearInst(1, 1);
 

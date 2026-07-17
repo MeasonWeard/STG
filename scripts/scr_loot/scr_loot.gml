@@ -165,9 +165,9 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	if (type == "device") {
 		
 		var devType = choose("laserPointer", "watch", "powerBank");
-		if (devType == "laserPointer") loot = scr_devices_laserPointer(level, rarity);
-		if (devType == "watch") loot = scr_devices_watch(level, rarity);
-		if (devType == "powerBank") loot = scr_devices_powerBank(level, rarity);
+		if (devType == "laserPointer") loot = scr_genDevices_laserPointer(level, rarity);
+		if (devType == "watch") loot = scr_genDevices_watch(level, rarity);
+		if (devType == "powerBank") loot = scr_genDevices_powerBank(level, rarity);
 		
 	}
 	
