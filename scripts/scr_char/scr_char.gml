@@ -304,7 +304,7 @@ function scr_char_getNearest(xx, yy) {
 	
 }
 
-function scr_char_targetNearest(source, xx, yy, cellsWidth) {
+function scr_char_targetNearest(source, xx, yy, cellsWidth, needsLos = false) {
 
 	if (!instance_exists(source)) return noone;
 
@@ -330,6 +330,10 @@ function scr_char_targetNearest(source, xx, yy, cellsWidth) {
 
 		if (!instance_exists(char)) continue;
 		if (char.id == source.id) continue;
+
+		if (needsLos) {
+			if (!scr_physics_hasLineOfSight(source.x, source.y, char.x, char.y)) continue;	
+		}
 
 		var charDir = point_direction(source.x, source.y, char.x, char.y);
 		var diff = abs(angle_difference(dir, charDir));

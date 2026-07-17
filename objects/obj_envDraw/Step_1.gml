@@ -4,7 +4,7 @@ if (buildWallList) {
 
 	var wallObjList = [];
 
-	with (obj_wall) {
+	with (obj_bgWall) {
 		array_push(wallObjList, id);
 	}
 

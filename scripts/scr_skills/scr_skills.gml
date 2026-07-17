@@ -168,7 +168,7 @@ function skill_chainLightning() : skill() constructor {
 		var xx = source.aimX;
 		var yy = source.aimY;
 		
-		var nearest = scr_char_targetNearest(source, xx, yy, 2);
+		var nearest = scr_char_targetNearest(source, xx, yy, 2, true);
 		
 		if (!instance_exists(nearest)) return false;
 		if (nearest.id == source.id) return false;

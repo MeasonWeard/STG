@@ -9,19 +9,19 @@ function scr_genGuns_blaster(level, rarity) {
 		
 		if (level > 1) {
 		
-			bonusDam += irandom_range(level - 1, level);
+			bonusDam += irandom_range(level - 1, ceil(level * 1.5));
 		
 		}
 		
-		var damType = "kinDam";
+		var damType = "kin";
 		
 		if (level > 2) {
 		
-			damType = choose("kinDam","fireDam","chemDam","elecDam","radDam");
+			damType = choose("kin","kin","fire","chem","elec","rad");
 		
 		}
 		
-		scr_loot_addStat(gun, key, bonusDam);
+		scr_loot_addDamage(gun, damType, bonusDam);
 		
 	}
 	

@@ -1,13 +1,17 @@
 if (instance_exists(ghost)) instance_destroy(ghost);
 
-//drop data
-scr_items_dropData(x, y, minData, maxData);
+if (dropOnDestroy) {
 
-//drop stimpack
-scr_items_drop(obj_stimPack, x, y, 2, undefined, true);
+	//drop data
+	scr_items_dropData(x, y, minData, maxData);
 
-//drop energypack
-scr_items_drop(obj_energyPack, x, y, 2, undefined, true);
+	//drop stimpack
+	scr_items_drop(obj_stimPack, x, y, 2, undefined, true);
 
-//loot
-scr_loot_dropLoot(lootChance, lootMaxRarity, lootImproveChance, lootAmount);
+	//drop energypack
+	scr_items_drop(obj_energyPack, x, y, 2, undefined, true);
+
+	//loot
+	scr_loot_dropLoot(lootChance, lootMaxRarity, lootImproveChance, lootAmount);
+
+}

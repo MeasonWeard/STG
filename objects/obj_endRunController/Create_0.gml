@@ -121,7 +121,7 @@ scrap = function(lootKey) {
 	
 	variable_instance_set(ec.id, lootKey, 0);
 	
-	audio_play_sound(snd_recycle, 0, false);
+	audio_play_sound(snd_scrap, 0, false);
 	
 }
 
@@ -140,7 +140,7 @@ scrapRevealed = function(index) {
 	
 	ec.revealedLoot[index] = undefined;
 	
-	audio_play_sound(snd_recycle, 0, false);
+	audio_play_sound(snd_scrap, 0, false);
 	
 }
 
@@ -156,7 +156,7 @@ scrapAll = function() {
 	
 	lootPage = 0;
 	
-	audio_play_sound(snd_recycle, 0, false);
+	audio_play_sound(snd_scrap, 0, false);
 		
 }
 

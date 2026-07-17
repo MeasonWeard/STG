@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_bigThing",
-    "path":"sprites/spr_bigThing/spr_bigThing.yy",
+    "name":"spr_wall_Computer1H",
+    "path":"sprites/spr_wall_Computer1H/spr_wall_Computer1H.yy",
   },
   "spriteMaskId":null,
   "visible":true,

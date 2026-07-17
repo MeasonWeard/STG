@@ -143,6 +143,41 @@ function scr_loot_addStat(loot, stat, val) {
 	
 }
 
+function scr_loot_addBonusStat(loot, stat, val) {
+
+	if (!is_struct(loot)) exit;
+	if (!variable_struct_exists(loot, "bonusStats")) exit;
+	
+	var stats = loot.bonusStats;
+	
+	var oldVal = 0;
+	
+	if (!is_undefined(stats[$ stat])) oldVal = stats[$ stat];
+	
+	var newVal = oldVal + val;
+	
+	stats[$ stat] = newVal;
+	
+}
+
+function scr_loot_addDamage(weapon, damType, val) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var damage = weapon.damage;
+	
+	if (!variable_struct_exists(damage, damType)) exit;
+	
+	var oldVal = 0;
+	
+	if (!is_undefined(damage[$ damType])) oldVal = damage[$ damType];
+	
+	var newVal = oldVal + val;
+	
+	damage[$ damType] = newVal;
+	
+}
+
 function scr_loot_generateGenericLoot(maxLevel, rarity) {
 
 	var loot = noone;
@@ -152,7 +187,7 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "gun") {
 		
-		loot = new gunInst(level, rarity);
+		loot = scr_genGuns_blaster(level, rarity);
 		
 	}
 	

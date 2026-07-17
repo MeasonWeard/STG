@@ -157,6 +157,6 @@ scrap = function(key, index) {
 	
 	arr[index] = undefined;
 	
-	audio_play_sound(snd_recycle, 0, false);
+	audio_play_sound(snd_scrap, 0, false);
 	
 }

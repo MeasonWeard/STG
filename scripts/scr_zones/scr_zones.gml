@@ -13,7 +13,7 @@ function scr_zones_startZone(zoneConstructor, extraLevel) {
 
 function zone() constructor {
 
-	zoneLevel = 1;
+	zoneLevel = 4;
 
 	mapW = 12;
 	mapH = 12;
@@ -45,7 +45,7 @@ function zone_industrial() : zone() constructor {
 		map = scr_mapGen_createBlankMap(mapW, mapH);
 		startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 1);
 		
-		var stages = ["engComputerRoom", "engHall1"];
+		var stages = ["engComputerRoom", "engHall1", "engHall2"];
 		var endStages = ["engBoss1"];
 
 		var startX = startPos.xx;

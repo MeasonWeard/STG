@@ -7,6 +7,12 @@ if (checkIfCleared and !hub) {
 		stageInProgress = false;
 
 		with(obj_enemy) {
+			dropOnDestroy = false;
+			instance_destroy();
+		}
+		
+		with(obj_destructible) {
+			dropOnDestroy = false;
 			instance_destroy();
 		}
 	

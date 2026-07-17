@@ -1,5 +1,7 @@
 event_inherited();
 
+rc = global.runController;
+
 setup = true;
 
 hp = 50;
@@ -23,3 +25,7 @@ resStackSize = 4;
 resMinFactor = 0.25;
 
 meleeHitList = [];
+
+dropOnDestroy = true;
+
+spawnChance = 100;

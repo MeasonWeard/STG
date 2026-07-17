@@ -92,7 +92,11 @@ if (!hub) {
 			arrow.col = c_lime;
 		
 		}
-	
+		
+		with (obj_destructible) {
+			instance_destroy();	
+		}
+		
 		rc.currentCell.cleared = true;
 	
 	}

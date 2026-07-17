@@ -7,3 +7,5 @@ hashCellY = undefined;
 
 bulletHitSounds = global.data.soundProfiles.bulletHitMetal;
 bulletHitFunc = undefined;
+
+blockLos = false;

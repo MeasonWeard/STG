@@ -162,3 +162,15 @@ function scr_obj_createPortal(xx, yy) {
 	arrow.col = c_fuchsia;
 	
 }
+
+function scr_obj_generateSeed(obj) {
+
+	var rc = global.runController;
+	var seed = instance_exists(rc) ? rc.currentCell.seed : 0;
+	
+	seed += x * 127;
+	seed += y * 211;
+	
+	return seed;
+	
+}

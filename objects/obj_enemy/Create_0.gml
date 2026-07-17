@@ -24,3 +24,5 @@ lootMaxRarity = 3;
 lootImproveChance = 10;
 lootChance = 2;
 lootAmount = 1;
+
+dropOnDestroy = true;

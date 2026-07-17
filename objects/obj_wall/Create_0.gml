@@ -1,1 +1,5 @@
-tick = 4;
+event_inherited();
+
+blockLos = true;
+
+confineToBounds = false;
