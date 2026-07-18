@@ -1,3 +1,72 @@
+function scr_stats_blankCharStats() {
+
+	var stats = {
+
+		//flat health and shields
+		maxHp: 100,
+		maxShield: 0,
+		hpRegen: 0,
+		shieldRegen: 0,
+		maxEnergy: 0,
+		energyRegen: 2,
+
+		//packs
+		maxStimPacks : 0,
+		maxEnergyPacks: 0,
+		stimPackRegen: 1,
+		energyPackRegen: 1,
+	
+		//oa and da
+		oa: 100,
+		da: 100,
+	
+		//movement
+		spd: 4,
+		dashCoolTime: 3,
+		maxDashes: 1,
+
+		//health and shields percent increase
+		maxHpPerc: 0,
+		maxShieldPerc: 0,
+		hpRegenPerc: 0,
+		shieldRegenPerc: 0,
+		maxEnergyPerc: 0,
+		energyRegenPerc: 0,
+	
+		//flat damage
+		kinDam: 0,
+		fireDam: 0,
+		chemDam: 0,
+		elecDam: 0,
+		radDam: 0,
+
+		//damage percent increase
+		kinDamPerc: 0,
+		fireDamPerc: 0,
+		chemDamPerc: 0,
+		elecDamPerc: 0,
+		radDamPerc: 0,
+	
+		//flat resistances
+		kinRes: 0,
+		fireRes: 0,
+		chemRes: 0,
+		elecRes: 0,
+		radRes: 0,
+	
+		//resistance percent increase
+		kinResPerc: 0,
+		fireResPerc: 0,
+		chemResPerc: 0,
+		elecResPerc: 0,
+		radResPerc: 0
+	
+	};
+	
+	return stats;
+	
+}
+
 function scr_stats_calculateStat(flat, perc) {
 
 	var dec = perc * 0.01;
@@ -360,7 +429,7 @@ function scr_stats_hitOutcome(oa, da) {
 	var outcome = 1;
 	var diff = abs(oa - da);
 	
-	if (diff < 11) return outcome;
+	if (diff < 10) return outcome;
 	
 	//chance for crit
 	if (oa > da) {
@@ -478,4 +547,31 @@ function scr_stats_formatDamageRange(damage) {
 	
 	return txt;
 	
+}
+
+/// @function scr_stats_alterStat(struct, key, amount)
+/// @desc Alters an existing field in a stats struct. Does not create new fields.
+///
+/// @param {struct} struct   The stats struct to modify.
+/// @param {string} key      The name of the field to alter.
+/// @param {real|bool} amount The amount to add to a numeric field, or the value to assign to a boolean field.
+function scr_stats_alterStat(struct, key, amount) {
+
+	if (!is_struct(struct)) exit;
+	if (!variable_struct_exists(struct, key)) exit;
+
+	var value = struct[$ key];
+
+	if (is_bool(value)) {
+
+		if (is_bool(amount)) {
+			struct[$ key] = amount;
+		}
+
+	} else if (is_numeric(value) && is_numeric(amount)) {
+
+		struct[$ key] = value + amount;
+
+	}
+
 }

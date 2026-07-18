@@ -17,6 +17,7 @@ gunCentred = false;
 gear = scr_data_loadEquippedGear();
 
 var weapons = scr_data_loadEquippedWeapons();
+weapons.weapon2 = new gun_pulseRifle(1, 1);
 scr_weapons_collectWeapon(self, weapons.weapon1, true);
 scr_weapons_collectWeapon(self, weapons.weapon2, false);
 
@@ -42,21 +43,15 @@ scr_weapons_collectWeapon(self, weapons.weapon2, false);
 //gunYoffset = 64;
 
 //STATS
-stats.maxHp = 300;
-stats.maxEnergy = 300;
-stats.spd = 6;
-stats.maxDashes = 2;
-stats.hpRegen = 1;
-stats.energyRegen = 5;
+baseStats.maxHp = 300;
+baseStats.maxEnergy = 300;
+baseStats.spd = 6;
+baseStats.maxDashes = 2;
+baseStats.hpRegen = 1;
+baseStats.energyRegen = 5;
 
-stats.maxStimPacks = 2;
-stats.maxEnergyPacks = 1;
-
-stats.elecDamPerc = 50;
-stats.kinDamPerc = 20;
-stats.kinDam = 4;
-
-stats.oa = 100;
+baseStats.maxStimPacks = 2;
+baseStats.maxEnergyPacks = 1;
 
 //SKILLS
 skills.skill1 = new skill_chainLightning();

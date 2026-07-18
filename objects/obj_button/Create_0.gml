@@ -24,6 +24,7 @@ clickSound = undefined;//snd_click1;
 playClickSound = true;
 
 constantFunc = undefined;
+hoverFunc = undefined;
 
 hold = false;
 

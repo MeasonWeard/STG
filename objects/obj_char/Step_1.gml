@@ -1,5 +1,20 @@
 event_inherited();
 
+//equip main weapon
+if (firstEquip) {
+	firstEquip = false;
+	weaponIndex = 0;
+	scr_weapons_equipWeapon(self, weaponIndex);
+	prevWeapon = equippedWeapon;
+}
+
+if (equippedWeapon != prevWeapon) {
+	setupStats = true;	
+}
+
+prevWeapon = equippedWeapon;
+
+//set up basics
 if (setup) {
 
 	setup = false;
@@ -27,15 +42,20 @@ if (setup) {
 	
 }
 
+//set up stats and skills
 if (setupStats) {
 
 	setupStats = false;
+	
+	scr_data_copyInto(stats, baseStats);
 
 	//apply gear stats
 	if (!is_undefined(gear.device1)) scr_gear_applyStatsToChar(self, gear.device1);
 	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);
 	if (!is_undefined(gear.tie)) scr_gear_applyStatsToChar(self, gear.tie);
 	if (!is_undefined(gear.headgear)) scr_gear_applyStatsToChar(self, gear.headgear);
+
+	if (!is_undefined(equippedWeapon)) scr_weapons_applyWeaponBonusesToChar(equippedWeapon, self);
 
 	//char stats
 	finalStats = scr_stats_calculateFinalStats(stats);
@@ -97,13 +117,6 @@ if (setupStats) {
 	
 	}
 		
-}
-
-//duhh
-if (firstEquip) {
-	firstEquip = false;
-	weaponIndex = 0;
-	scr_weapons_equipWeapon(self, weaponIndex);
 }
 
 prevHp = hp;

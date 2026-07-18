@@ -9,7 +9,7 @@ gun1 = new gun_alienOrb(1, 1);
 
 scr_weapons_collectWeapon(self, gun1, true);
 
-stats.maxHp = 60;
+baseStats.maxHp = 60;
 
 thornsDamage = new damageProfile();
 

@@ -1,1 +1,0 @@
-if (instance_exists(global.player)) instance_destroy(global.player);

@@ -128,6 +128,19 @@ function scr_guns_calculateGunStats(char, gun) {
 	if (!is_instanceof(gun, gunInst)) return undefined;
 
 	var newStats = scr_stats_calculateDamageProfileWeapon(char, gun);
+	
+	var bonusStats  = gun.bonusStats;
+	var keys = variable_struct_get_names(bonusStats);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+		
+		var key = keys[i];
+		var amount = bonusStats[$ key];
+		
+		scr_stats_alterStat(newStats, key, amount);
+		
+	}
 
 	return newStats;
 	

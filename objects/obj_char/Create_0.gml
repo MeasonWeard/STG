@@ -5,6 +5,7 @@ charName = "none";
 
 setup = true;
 setupStats = true;
+//setupSkills = true;
 
 sc = global.stageController;
 rc = scr_data_getRunController();
@@ -51,68 +52,9 @@ energyPacks = 0;
 stimPackRecharge = 0;
 energyPackRecharge = 0;
 
-stats = {
+baseStats = scr_stats_blankCharStats();
 
-	//flat health and shields
-	maxHp: 100,
-	maxShield: 0,
-	hpRegen: 0,
-	shieldRegen: 0,
-	maxEnergy: 0,
-	energyRegen: 2,
-
-	//packs
-	maxStimPacks : 0,
-	maxEnergyPacks: 0,
-	stimPackRegen: 1,
-	energyPackRegen: 1,
-	
-	//oa and da
-	oa: 100,
-	da: 100,
-	
-	//movement
-	spd: 4,
-	dashCoolTime: 3,
-	maxDashes: 1,
-
-	//health and shields percent increase
-	maxHpPerc: 0,
-	maxShieldPerc: 0,
-	hpRegenPerc: 0,
-	shieldRegenPerc: 0,
-	maxEnergyPerc: 0,
-	energyRegenPerc: 0,
-	
-	//flat damage
-	kinDam: 0,
-	fireDam: 0,
-	chemDam: 0,
-	elecDam: 0,
-	radDam: 0,
-
-	//damage percent increase
-	kinDamPerc: 0,
-	fireDamPerc: 0,
-	chemDamPerc: 0,
-	elecDamPerc: 0,
-	radDamPerc: 0,
-	
-	//flat resistances
-	kinRes: 0,
-	fireRes: 0,
-	chemRes: 0,
-	elecRes: 0,
-	radRes: 0,
-	
-	//resistance percent increase
-	kinResPerc: 0,
-	fireResPerc: 0,
-	chemResPerc: 0,
-	elecResPerc: 0,
-	radResPerc: 0
-	
-};
+stats = {};
 
 gear = {
 
@@ -221,6 +163,7 @@ meleeCooldown = 0;
 
 equippedWeapon = undefined;
 equippedWeaponStats = undefined;
+prevWeapon = undefined;
 
 damageDestructibles = false;
 

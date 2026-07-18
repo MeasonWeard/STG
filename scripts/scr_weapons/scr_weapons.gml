@@ -105,3 +105,25 @@ function scr_weapons_replaceWeapon(char, index, gun) {
     return oldWeapon;
 
 }
+
+function scr_weapons_applyWeaponBonusesToChar(weapon, char) {
+	
+	if (!instance_exists(char)) exit;
+	if (!is_instanceof(weapon, weaponInst)) exit;
+	
+	var bonusStats = weapon.bonusStats;
+	var charStats = char.stats;
+	
+	var keys = variable_struct_get_names(bonusStats);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+		
+		var key = keys[i];
+		var amount = bonusStats[$ key];
+		
+		scr_stats_alterStat(charStats, key, amount);
+		
+	}
+	
+}

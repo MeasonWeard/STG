@@ -5,29 +5,34 @@ function gun_blaster(level, rarity) : gunInst(level, rarity) constructor {
 	clipSize = 24;
 	reloadTime = 1.8;
 	
-	//shootSounds: global.data.soundProfiles.blaster,
-	//reloadSound: undefined,
-	//projSprite: spr_bullet1,
-		
+	//shootSounds = global.data.soundProfiles.blaster;
+	//reloadSound = undefined;
+	//projSprite = spr_bullet1;
+	//spr = spr_gun;
+	//description = undefined;
+	
 	////attack
-	//auto: true,
-	//fireRate: 12,
-		
-	//damage: 12,
-	//spd: 22,
-	//range: 1200,
-	//collisionFunc: undefined,
-		
+	//auto = true;
+	//projectileType = projectileTypes.normal;
+	//fireRate = 8;
+	//blastProjectiles = 5;
+	//blastSpread = 10;
+	//spd = 22;
+	//range = 1200;
+	//collisionFunc = undefined;
+
 	////aim
-	//minAimOff: 2,
-	//maxAimOff: 6,
-	//recoil: 0.8,
-	//stability: 0.1,
+	//minAimOff = 2;
+	//maxAimOff = 6;
+	//recoil = 0.8;
+	//stability = 0.1;
 		
 	////ammo
-	//clipSize: 45,
-	//ammo: 45,
-	//reloadTime: 2.2,
+	//clipSize = 24;
+	//ammo = 24;
+	//reloadTime = 2.2;
+
+	//damage.kin = 12
 	
 }
 
@@ -38,32 +43,57 @@ function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 	auto = false;
 	range = 1000;
 	clipSize = 12;
-	fireRate = 8;
+	fireRate = 6.2;
 	reloadTime = 1.6;
 	spd = 22;
 	minAimOff = 2.2;
-	maxAimOff = 8;
+	maxAimOff = 7;
 	recoil = 1.8;
 	stability = 0.08;
-	damage.kin = 16;
+	damage.kin = 22;
 	shootSounds = global.data.soundProfiles.pistol;
 
 }
 
-function gun_devastator(level, rarity) : gunInst(level, rarity) constructor{
+function gun_smg(level, rarity): gunInst(level, rarity) constructor {
 
-	name = "Devastator";
+	name = "SMG";
 	
-	collisionFunc = scr_effects_microMissile;
-	clipSize = 24;
-	fireRate = 16;
-	damage.kin = 4;
-	recoil = 1.2;
-	minAimOff = 3;
-	maxAimOff = 12;
-	spd = 30;
-	reloadTime = 3.8;
-	projSprite = spr_microMissile;
+	auto = true;
+	range = 1000;
+	clipSize = 32;
+	fireRate = 12;
+	reloadTime = 2;
+	spd = 22;
+	minAimOff = 2.4;
+	maxAimOff = 8;
+	recoil = 1.4;
+	stability = 0.12;
+	damage.kin = 8;
+	shootSounds = global.data.soundProfiles.smg;
+
+}
+
+function gun_pulseRifle(level, rarity): gunInst(level, rarity) constructor {
+
+	name = "Pulse Rifle";
+	
+	auto = true;
+	range = 1400;
+	clipSize = 8;
+	fireRate = 2.8;
+	reloadTime = 3;
+	spd = 26;
+	minAimOff = 1.6;
+	maxAimOff = 10;
+	recoil = 4;
+	stability = 0.12;
+	damage.kin = 26;
+	shootSounds = global.data.soundProfiles.pulse;
+	
+	bonusStats = {
+		oa: 15	
+	}
 
 }
 

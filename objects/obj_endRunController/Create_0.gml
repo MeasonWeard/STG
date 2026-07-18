@@ -185,8 +185,19 @@ takeAll = function() {
 }
 
 finish = function () {
-
+	
+	var playerData = global.gameData.playerData;
+	
+	//loot
 	scr_loot_saveToStash(takenLoot);
+	
+	//xp
+	var xp = playerData.xp + dataCollected;
+	var level = playerData.level;
+	var result = scr_progression_calculateLevel(level, xp);
+	
+	playerData.level = result.newLevel;
+	playerData.xp = result.newXp;
 	
 	scr_file_saveGame(global.saveFile, global.gameData);
 	

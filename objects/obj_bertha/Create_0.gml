@@ -9,8 +9,6 @@ var slash = new melee_berthaSlash(1, 1);
 
 scr_weapons_collectWeapon(self, slash, true);
 
-stats.maxHp = 80;
-
 thornsDamage = new damageProfile();
 thornsDamage.kin = 8;
 
@@ -28,4 +26,5 @@ targetMinDist = 30;
 targetMaxDist = 60;
 targetReaquireDist = 90;
 
-stats.spd += 0.5;
+baseStats.maxHp = 80;
+baseStats.spd += 0.5;

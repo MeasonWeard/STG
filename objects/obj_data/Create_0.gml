@@ -85,6 +85,15 @@ enum itemTypes {
 	
 }
 
+enum classes {
+	
+	physics = 0,
+	chemistry = 1,
+	biology = 2,
+	engineering = 3
+	
+}
+
 rarities = {
 	
 	alpha: {
@@ -226,6 +235,7 @@ soundProfiles = {
 	smg: [snd_smg1, snd_smg2, snd_smg3],
 	shotgun: [snd_shotgun1, snd_shotgun2, snd_shotgun3],
 	pistol: [snd_pistol1, snd_pistol2, snd_pistol3],
+	pulse: [snd_pulse1],
 	alienBlast: [snd_alienBlast1, snd_alienBlast2, snd_alienBlast3],
 	alienShoot: [snd_alienShoot1, snd_alienShoot2, snd_alienShoot3],
 	

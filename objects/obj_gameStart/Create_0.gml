@@ -24,4 +24,10 @@ window_set_cursor(cr_none);
 
 draw_set_font(fnt_normal);
 
-room_goto(stage_hub1);
+//
+
+if (global.gameData.playerData.class1 == undefined) {
+	room_goto(room_classSelect);
+} else {
+	room_goto(stage_hub1);
+}

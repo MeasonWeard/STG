@@ -47,6 +47,7 @@ if (clickFlash > 0) {
 
 //text
 draw_set_colour(col);
+draw_set_font(font);
 draw_set_halign(fa_middle);
 draw_set_valign(fa_center);
 
