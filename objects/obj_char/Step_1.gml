@@ -48,6 +48,17 @@ if (setupStats) {
 	stats = {};
 	scr_data_copyInto(stats, baseStats);
 	
+	//apply class stats
+	if (instance_exists(global.player) and self.id == global.player.id) {
+		
+		//major
+		scr_class_applyMajorStats(global.gameData.playerData.class1, stats);
+		//minor
+		scr_class_applyMinorStats(global.gameData.playerData.class1, stats);
+		scr_class_applyMinorStats(global.gameData.playerData.class2, stats);
+		
+	}
+	
 	//apply gear stats
 	if (!is_undefined(gear.device1)) scr_gear_applyStatsToChar(self, gear.device1);
 	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);

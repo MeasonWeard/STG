@@ -70,3 +70,51 @@ function class_engineering(): classInst() constructor {
 	}
 	
 }
+
+function scr_class_applyMajorStats(class, stats) {
+
+	if (!is_struct(stats)) exit;
+	if (!is_struct(class)) exit;
+	
+	if (!variable_struct_exists(class, "majorBonuses")) exit;
+	
+	var bonuses = class[$ "majorBonuses"];
+	
+	var keys = variable_struct_get_names(bonuses);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+	
+		var key = keys[i];
+		var val = bonuses[$ key];
+		
+		scr_stats_alterStat(stats, key, val);
+	
+	}
+	
+}
+
+function scr_class_applyMinorStats(class, stats) {
+
+	if (!is_struct(stats)) exit;
+	if (!is_struct(class)) exit;
+	
+	if (!variable_struct_exists(class, "minorBonuses")) exit;
+	
+	var bonuses = class[$ "minorBonuses"];
+	
+	var keys = variable_struct_get_names(bonuses);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+	
+		var key = keys[i];
+		var val = bonuses[$ key];
+		
+		scr_stats_alterStat(stats, key, val);
+	
+	}
+	
+	return stats;
+	
+}
