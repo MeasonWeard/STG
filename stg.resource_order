@@ -257,6 +257,7 @@
     {"name":"spr_icon_chainLightning","order":4,"path":"sprites/spr_icon_chainLightning/spr_icon_chainLightning.yy",},
     {"name":"spr_icon_dash","order":1,"path":"sprites/spr_icon_dash/spr_icon_dash.yy",},
     {"name":"spr_icon_energyPack","order":3,"path":"sprites/spr_icon_energyPack/spr_icon_energyPack.yy",},
+    {"name":"spr_icon_rubberBoots","order":6,"path":"sprites/spr_icon_rubberBoots/spr_icon_rubberBoots.yy",},
     {"name":"spr_icon_stimPack","order":2,"path":"sprites/spr_icon_stimPack/spr_icon_stimPack.yy",},
     {"name":"spr_item_slot","order":7,"path":"sprites/spr_item_slot/spr_item_slot.yy",},
     {"name":"spr_label","order":10,"path":"sprites/spr_label/spr_label.yy",},

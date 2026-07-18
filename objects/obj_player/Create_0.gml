@@ -17,9 +17,6 @@ gunCentred = false;
 gear = scr_data_loadEquippedGear();
 
 var weapons = scr_data_loadEquippedWeapons();
-weapons.weapon1 = new gun_shotgun(1, 1);
-weapons.weapon2 = new gun_autoShotgun(1, 1);
-weapons.weapon2.bonusStats.elecDamPerc = 200;
 scr_weapons_collectWeapon(self, weapons.weapon1, true);
 scr_weapons_collectWeapon(self, weapons.weapon2, false);
 

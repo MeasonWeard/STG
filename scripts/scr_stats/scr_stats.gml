@@ -67,6 +67,16 @@ function scr_stats_blankCharStats() {
 	
 }
 
+function damageProfile() constructor {
+
+	kin = 0;
+	fire = 0;
+	chem = 0;
+	elec = 0;
+	rad = 0;
+	
+}
+
 function scr_stats_calculateStat(flat, perc) {
 
 	var dec = perc * 0.01;

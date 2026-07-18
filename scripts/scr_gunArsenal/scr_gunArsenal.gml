@@ -42,15 +42,16 @@ function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 	
 	auto = false;
 	range = 1000;
-	clipSize = 12;
+	damage.kin = 16;
 	fireRate = 6.2;
-	reloadTime = 1.6;
+	clipSize = 12;
+	reloadTime = 1.4;
 	spd = 22;
 	minAimOff = 2.2;
 	maxAimOff = 7;
 	recoil = 1.8;
 	stability = 0.08;
-	damage.kin = 22;
+
 	shootSounds = global.data.soundProfiles.pistol;
 
 }
@@ -63,7 +64,7 @@ function gun_smg(level, rarity): gunInst(level, rarity) constructor {
 	range = 1000;
 	clipSize = 32;
 	fireRate = 12;
-	reloadTime = 2;
+	reloadTime = 1.6;
 	spd = 22;
 	minAimOff = 2.4;
 	maxAimOff = 8;
@@ -80,15 +81,15 @@ function gun_pulseRifle(level, rarity): gunInst(level, rarity) constructor {
 	
 	auto = true;
 	range = 1400;
+	damage.kin = 32;
 	clipSize = 8;
 	fireRate = 2.8;
-	reloadTime = 3;
+	reloadTime = 2.2;
 	spd = 26;
 	minAimOff = 1.6;
-	maxAimOff = 10;
+	maxAimOff = 8;
 	recoil = 4;
-	stability = 0.12;
-	damage.kin = 26;
+	stability = 0.14;
 	shootSounds = global.data.soundProfiles.pulse;
 	
 	bonusStats = {
@@ -107,7 +108,7 @@ function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 	clipSize = 4;
 	reloadTime = 2.6;
 	projectileType = projectileTypes.blast;
-	blastProjectiles = 10;
+	blastProjectiles = 8;
 	blastSpread = 8;
 	shootSounds = global.data.soundProfiles.shotgun;
 	range = 800;
@@ -125,11 +126,11 @@ function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 	
 	auto = true;
 	fireRate = 1.6;
-	damage.kin = 8;
+	damage.kin = 9;
 	clipSize = 8;
-	reloadTime = 2.6;
+	reloadTime = 2.5;
 	projectileType = projectileTypes.blast;
-	blastProjectiles = 8;
+	blastProjectiles = 6;
 	blastSpread = 7;
 	shootSounds = global.data.soundProfiles.shotgun;
 	range = 800;

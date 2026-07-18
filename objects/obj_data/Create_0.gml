@@ -255,14 +255,44 @@ soundProfiles = {
 	
 }
 
+skillConstructors = {
+    rubberBoots: skill_rubberBoots,
+    chainLightning: skill_chainLightning,
+    antimatterBlast: skill_antimatterBlast
+};
+
 
 //LOAD GAME
 global.saveFile = scr_file_getLatestSave();
 global.gameData = scr_file_loadGame(global.saveFile);
 
+//create new save
 if (global.gameData == undefined) {
 
 	global.gameData = scr_file_createBlankSave();
 	scr_file_saveGame("save0", global.gameData);
 	
-}
+}// else {
+
+//	//convert data
+//	if (variable_struct_exists(global.gameData, "playerData")) {
+	
+//		var playerData = global.gameData.playerData;
+		
+//		//class 1
+//		if (variable_struct_exists(playerData, "class1")) {
+//			scr_testSound();
+//			if (is_struct(playerData.class1))  playerData.class1.unlockedSkills = scr_skills_loadArray(playerData.class1.unlockedSkills);
+
+//		}
+		
+//		//class2
+//		if (variable_struct_exists(playerData, "class2")) {
+		
+//			if (is_struct(playerData.class2))  playerData.class2.unlockedSkills = scr_skills_loadArray(playerData.class2.unlockedSkills);
+
+//		}
+	
+//	}
+	
+//}

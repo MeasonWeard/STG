@@ -5,6 +5,8 @@ function skill() constructor {
 	icon = spr_icon_blank;
 	level = 1;
 	
+	key = undefined;
+	
 	active = true;
 	passives = undefined;
 	
@@ -106,19 +108,52 @@ function skill() constructor {
 	
 }
 
-function damageProfile() constructor {
+function scr_skills_load(savedSkill) {
 
-	kin = 0;
-	fire = 0;
-	chem = 0;
-	elec = 0;
-	rad = 0;
+    var const = variable_struct_get(
+        global.data.skillConstructors,
+        savedSkill.key
+    );
+	
+	if (is_undefined(const)) return undefined;
+	
+	if (is_instanceof(savedSkill, const)) return savedSkill;
+
+    var loadedSkill = new const();
+	
+	variable_struct_remove(savedSkill, "setupFunc");
+	variable_struct_remove(savedSkill, "castFunc");
+	variable_struct_remove(savedSkill, "cast");
+	variable_struct_remove(savedSkill, "tick");
+	variable_struct_remove(savedSkill, "ready");
+
+    scr_data_structCopyInto(loadedSkill, savedSkill);
+
+    return loadedSkill;
 	
 }
+
+function scr_skills_loadArray(savedSkills) {
+
+    var len = array_length(savedSkills);
+    var loadedSkills = array_create(len);
+
+    for (var i = 0; i < len; i++) {
+
+        loadedSkills[i] = scr_skills_load(savedSkills[i]);
+
+    }
+
+    return loadedSkills;
+
+}
+
+
 
 function skill_test() : skill() constructor {
 
 	name = "Test";
+	key = "test";
 	maxCharges = 2;
 	charges = 1;
 	energyCost = 0;
@@ -141,6 +176,7 @@ function skill_test() : skill() constructor {
 function skill_chainLightning() : skill() constructor {
 
 	name = "Chain Lightning";
+	key = "chainLightning";
 	icon = spr_icon_chainLightning;
 	maxCharges = 2;
 	charges = 2;
@@ -197,6 +233,7 @@ function skill_chainLightning() : skill() constructor {
 function skill_antimatterBlast() : skill() constructor {
 	
 	name = "Antimatter Blast";
+	key = "antimatterBlast";
 	icon = spr_icon_antimatter;
 	maxCharges = 1;
 	charges = 1;
@@ -250,6 +287,31 @@ function skill_antimatterBlast() : skill() constructor {
 			
 		}
 		
+	}
+	
+}
+
+function skill_rubberBoots() : skill() constructor {
+
+	name = "Rubber Boots";
+	key = "rubberBoots";
+	active = false;
+	icon = spr_icon_rubberBoots;
+	
+	passives = {
+	
+		elecRes: 10
+	
+	};
+	
+	static setupFunc = function(source) {
+	
+		passives = {
+	
+			elecRes: 5 * level
+	
+		};
+	
 	}
 	
 }

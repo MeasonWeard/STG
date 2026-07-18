@@ -5,6 +5,8 @@ if (setup) {
 	var skillTemplate = undefined;
 	if (is_callable(const)) skillTemplate = new const();
 	
+	skillTemplate.level = 0;
+	
 	var found = false;
 	
 	if (is_struct(selectedClass) and is_struct(skillTemplate)) {
@@ -32,5 +34,9 @@ if (setup) {
 	}
 	
 	if (!found) thisSkill = skillTemplate;
+	
+	if (!is_instanceof(thisSkill, skill)) thisSkill = scr_skills_load(thisSkill);
+
+	sprite_index = thisSkill.icon;
 
 }
