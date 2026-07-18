@@ -5,6 +5,9 @@ function skill() constructor {
 	icon = spr_icon_blank;
 	level = 1;
 	
+	active = true;
+	passives = undefined;
+	
 	cooldown = 0;
 	cooldownTime = 2;
 

@@ -156,23 +156,41 @@ function scr_guns_formatDescription(gun) {
 	var txt = gun.name + "     " + "lvl " + string(gun.lvl);
 	var damageTxt = scr_stats_formatDamage(damage);
 	
+	var projType = gun.projectileType;
 	var clipSize = gun.clipSize;
 	var fireRate = string_trimDecimals(gun.fireRate, 2);
 	var reloadTime = string_trimDecimals(gun.reloadTime, 2);
 	var range = gun.range;
+	var minAim = gun.minAimOff;
+	var maxAim = gun.maxAimOff;
+	var stability = gun.stability;
+	var recoil = gun.recoil;
 	
-	txt += "\n\nAmmo: " + string(clipSize);
+	txt += "\n\nBasics\n----------------\n"
+	txt += "Ammo: " + string(clipSize);
 	txt += "\nFire Rate: " + string(fireRate) + " p/s";
 	txt += "\nReload time: " + string(reloadTime) + " seconds";
 	txt += "\nRange: " + string(range);
 	
-	if (gun.projectileType == projectileTypes.blast) {
+	if (projType = projectileTypes.normal) {
+		
+		var spread = minAim + maxAim * 0.05;
+		var accuracy = string_trimDecimals(100 / spread, 1);
+		var control = string_trimDecimals(stability * 10, 1);
+		
+		txt += "\n\nAccuracy: " + string(accuracy);
+		txt += "\nRecoil: " + string(recoil);
+		txt += "\nControl: " + string(control);
+		
+	}
+	
+	if (projType == projectileTypes.blast) {
 		
 		var projectiles = gun.blastProjectiles;
-		var	spread = gun.blastSpread;	
+		var	blastSpread = gun.blastSpread;	
 		
-		txt += "\nProjectiles: " + string(projectiles);
-		txt += "\nSpread: " + string(spread) + " degrees";
+		txt += "\n\nProjectiles: " + string(projectiles);
+		txt += "\nSpread: " + string(blastSpread) + " degrees";
 		
 	}
 	
@@ -180,10 +198,11 @@ function scr_guns_formatDescription(gun) {
 	
 	txt += damageTxt;
 	
+
 	var keys = variable_struct_get_names(stats);
 	var keysLen = array_length(keys);
 	
-	if (keysLen > 0) txt += "\n\nBonus Stats\n--These don't do anything yet--\n";
+	if (keysLen > 0) txt += "\n\nBonus\n----------------";
 	
 	for (var i = 0; i < keysLen; i ++) {
 	

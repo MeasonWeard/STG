@@ -1,6 +1,8 @@
 // Inherit the parent event
 event_inherited();
 
+name = "celia";
+
 baseStats.maxHp = 400;
 
 sprites = {

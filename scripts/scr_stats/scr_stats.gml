@@ -11,7 +11,7 @@ function scr_stats_blankCharStats() {
 		energyRegen: 2,
 
 		//packs
-		maxStimPacks : 0,
+		maxStimPacks: 0,
 		maxEnergyPacks: 0,
 		stimPackRegen: 1,
 		energyPackRegen: 1,

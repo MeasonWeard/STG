@@ -12,8 +12,6 @@ if (equippedWeapon != prevWeapon) {
 	setupStats = true;	
 }
 
-prevWeapon = equippedWeapon;
-
 //set up basics
 if (setup) {
 
@@ -44,11 +42,12 @@ if (setup) {
 
 //set up stats and skills
 if (setupStats) {
-
+	
 	setupStats = false;
 	
+	stats = {};
 	scr_data_copyInto(stats, baseStats);
-
+	
 	//apply gear stats
 	if (!is_undefined(gear.device1)) scr_gear_applyStatsToChar(self, gear.device1);
 	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);
@@ -120,3 +119,4 @@ if (setupStats) {
 }
 
 prevHp = hp;
+prevWeapon = equippedWeapon;

@@ -1,7 +1,9 @@
 // Inherit the parent event
 event_inherited();
 
-charName = "none";
+step = 0;
+
+name = "none";
 
 setup = true;
 setupStats = true;
@@ -54,7 +56,7 @@ energyPackRecharge = 0;
 
 baseStats = scr_stats_blankCharStats();
 
-stats = {};
+stats = scr_stats_blankCharStats();
 
 gear = {
 

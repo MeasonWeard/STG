@@ -1,24 +1,24 @@
 event_inherited();
 
-if (global.debug and keyboard_check_pressed(ord("G"))) {
+//if (global.debug and keyboard_check_pressed(ord("G"))) {
 
-	show_debug_message(weaponStats);
+//	show_debug_message(weaponStats);
 
-	var len = array_length(weapons);
+//	var len = array_length(weapons);
 	
-	for (var i = 0; i < len; i ++) {
+//	for (var i = 0; i < len; i ++) {
 	
-		var slot = weapons[i];
+//		var slot = weapons[i];
 		
-		if (is_struct(slot)) {
+//		if (is_struct(slot)) {
 		
-			show_debug_message(slot.stats);
+//			show_debug_message(slot.stats);
 		
-		}
+//		}
 	
-	}
+//	}
 	
-}
+//}
 
 if (instance_exists(cursor)) {
 	

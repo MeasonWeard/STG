@@ -1,5 +1,7 @@
 event_inherited();
 
+name = "bertha";
+
 bloodCol = c_red;
 
 bulletHitFunc = scr_effects_bulletHitFlesh;

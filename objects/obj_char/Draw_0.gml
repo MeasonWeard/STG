@@ -26,3 +26,5 @@ if (global.debug) {
 	//draw_text(x, y, string(hashCellX) + "," + string(hashCellY));
 	
 }
+
+step++;

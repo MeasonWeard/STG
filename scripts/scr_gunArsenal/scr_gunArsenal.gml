@@ -101,14 +101,36 @@ function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Shotgun";
 	
-	auto = true;
-	fireRate = 1.4;
-	damage.kin = 9;
-	clipSize = 5;
+	auto = false;
+	fireRate = 1.2;
+	damage.kin = 10;
+	clipSize = 4;
 	reloadTime = 2.6;
 	projectileType = projectileTypes.blast;
-	blastProjectiles = 7;
+	blastProjectiles = 10;
 	blastSpread = 8;
+	shootSounds = global.data.soundProfiles.shotgun;
+	range = 800;
+	//projSprite = spr_bullet3;
+	minAimOff = 3;
+	maxAimOff = 9;
+	recoil = 3;
+	stability = 0.05;
+	
+}
+
+function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Auto Shotgun";
+	
+	auto = true;
+	fireRate = 1.6;
+	damage.kin = 8;
+	clipSize = 8;
+	reloadTime = 2.6;
+	projectileType = projectileTypes.blast;
+	blastProjectiles = 8;
+	blastSpread = 7;
 	shootSounds = global.data.soundProfiles.shotgun;
 	range = 800;
 	//projSprite = spr_bullet3;
