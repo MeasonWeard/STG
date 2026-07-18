@@ -132,6 +132,13 @@ function scr_file_createBlankSave() {
 			weapons: {
 				weapon1: new gun_blaster(1, 1),
 				weapon2: undefined
+			},
+			
+			skills: {
+				skill1 : undefined,
+				skill2: undefined,
+				skill3: undefined,
+				skill4: undefined
 			}
 				
 		},

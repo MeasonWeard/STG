@@ -141,6 +141,7 @@
     {"id":{"name":"obj_res_polymers","path":"objects/obj_res_polymers/obj_res_polymers.yy",},},
     {"id":{"name":"obj_resource","path":"objects/obj_resource/obj_resource.yy",},},
     {"id":{"name":"obj_runController","path":"objects/obj_runController/obj_runController.yy",},},
+    {"id":{"name":"obj_skillIcon","path":"objects/obj_skillIcon/obj_skillIcon.yy",},},
     {"id":{"name":"obj_skillNode","path":"objects/obj_skillNode/obj_skillNode.yy",},},
     {"id":{"name":"obj_skillScreenController","path":"objects/obj_skillScreenController/obj_skillScreenController.yy",},},
     {"id":{"name":"obj_skillsMainMenuController","path":"objects/obj_skillsMainMenuController/obj_skillsMainMenuController.yy",},},

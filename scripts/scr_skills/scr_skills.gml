@@ -148,6 +148,36 @@ function scr_skills_loadArray(savedSkills) {
 
 }
 
+function scr_skills_findActiveSkill(key, playerData) {
+	
+	if (key == undefined) return undefined;
+	
+    var pClasses = [playerData.class1, playerData.class2];
+
+    for (var i = 0; i < array_length(pClasses); i++) {
+
+        var classData = pClasses[i];
+
+        if (!is_struct(classData)) continue;
+        if (!is_array(classData.unlockedSkills)) continue;
+
+        var skills = classData.unlockedSkills;
+
+        for (var j = 0; j < array_length(skills); j++) {
+
+            var skill = skills[j];
+
+            if (!is_struct(skill)) continue;
+            if (!skill.active) continue;
+            if (skill.key == key) return skill;
+
+        }
+
+    }
+
+    return undefined;
+	
+}
 
 
 function skill_test() : skill() constructor {

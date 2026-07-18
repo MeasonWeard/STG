@@ -70,7 +70,7 @@ if (setupStats) {
 		if (is_struct(class1)) class1.unlockedSkills = scr_skills_loadArray(class1.unlockedSkills);
 		if (is_struct(class2)) class2.unlockedSkills = scr_skills_loadArray(class2.unlockedSkills);
 		
-		//class1
+		//class1, setup skills and apply passives
 		if (is_struct(class1)) {
 			
 			var unlockedSkills = playerData.class1.unlockedSkills;
@@ -102,7 +102,7 @@ if (setupStats) {
 			}
 		}
 		
-		//class2
+		//class2, setup skills and apply passives
 		if (is_struct(class2)) {
 			
 			var unlockedSkills = playerData.class2.unlockedSkills;
@@ -134,6 +134,23 @@ if (setupStats) {
 			}
 		}
 		
+		//load active skills
+		var activeSkills = playerData.skills;
+		
+		var skill1 = activeSkills.skill1;
+		var skill2 = activeSkills.skill2;
+		var skill3 = activeSkills.skill3;
+		var skill4 = activeSkills.skill4;
+		
+		var skill1Key = is_struct(skill1) ? skill1.key : undefined;
+		var skill2Key = is_struct(skill2) ? skill2.key : undefined;
+		var skill3Key = is_struct(skill3) ? skill3.key : undefined;
+		var skill4Key = is_struct(skill4) ? skill4.key : undefined;
+		
+		skills.skill1 = scr_skills_findActiveSkill(skill1Key, playerData);
+		skills.skill2 = scr_skills_findActiveSkill(skill2Key, playerData);
+		skills.skill3 = scr_skills_findActiveSkill(skill3Key, playerData);
+		skills.skill4 = scr_skills_findActiveSkill(skill4Key, playerData);
 		
 	}
 	
@@ -145,30 +162,30 @@ if (setupStats) {
 
 	if (!is_undefined(equippedWeapon)) scr_weapons_applyWeaponBonusesToChar(equippedWeapon, self);
 
-	//skills
-	if (is_struct(skills.skill1)) {
+	//load active skills
+	//if (is_struct(skills.skill1)) {
 		
-		if (is_callable(skills.skill1.setupFunc)) skills.skill1.setupFunc(self);
+	//	if (is_callable(skills.skill1.setupFunc)) skills.skill1.setupFunc(self);
 	
-	}
+	//}
 	
-	if (is_struct(skills.skill2)) {
+	//if (is_struct(skills.skill2)) {
 		
-		if (is_callable(skills.skill2.setupFunc)) skills.skill2.setupFunc(self);
+	//	if (is_callable(skills.skill2.setupFunc)) skills.skill2.setupFunc(self);
 	
-	}
+	//}
 	
-	if (is_struct(skills.skill3)) {
+	//if (is_struct(skills.skill3)) {
 		
-		if (is_callable(skills.skill3.setupFunc)) skills.skill3.setupFunc(self);
+	//	if (is_callable(skills.skill3.setupFunc)) skills.skill3.setupFunc(self);
 	
-	}
+	//}
 	
-	if (is_struct(skills.skill4)) {
+	//if (is_struct(skills.skill4)) {
 		
-		if (is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(self);
+	//	if (is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(self);
 	
-	}
+	//}
 	
 	//char stats
 	finalStats = scr_stats_calculateFinalStats(stats);

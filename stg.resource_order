@@ -100,6 +100,7 @@
     {"name":"obj_res_polymers","order":3,"path":"objects/obj_res_polymers/obj_res_polymers.yy",},
     {"name":"obj_resource","order":6,"path":"objects/obj_resource/obj_resource.yy",},
     {"name":"obj_runController","order":6,"path":"objects/obj_runController/obj_runController.yy",},
+    {"name":"obj_skillIcon","order":13,"path":"objects/obj_skillIcon/obj_skillIcon.yy",},
     {"name":"obj_skillNode","order":12,"path":"objects/obj_skillNode/obj_skillNode.yy",},
     {"name":"obj_skillScreenController","order":13,"path":"objects/obj_skillScreenController/obj_skillScreenController.yy",},
     {"name":"obj_skillsMainMenuController","order":11,"path":"objects/obj_skillsMainMenuController/obj_skillsMainMenuController.yy",},

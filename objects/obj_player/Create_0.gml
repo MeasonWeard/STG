@@ -53,9 +53,9 @@ baseStats.maxStimPacks = 2;
 baseStats.maxEnergyPacks = 1;
 
 //SKILLS
-skills.skill1 = new skill_chainLightning();
-skills.skill2 = new skill_antimatterBlast();
-skills.skill4 = new skill_test();
+//skills.skill1 = new skill_chainLightning();
+//skills.skill2 = new skill_antimatterBlast();
+//skills.skill4 = new skill_test();
 
-skills.skill1.level = 3;
-skills.skill2.level = 3;
+//skills.skill1.level = 3;
+//skills.skill2.level = 3;

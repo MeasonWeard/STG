@@ -91,7 +91,7 @@ function scr_ui_displayInstructions(text, extraTime) {
 	
 }
 
-function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, cooldown, blackout) {
+function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, cooldown, blackout, showText = true) {
 
 	var left = xx;
 	var top = yy;
@@ -158,7 +158,7 @@ function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, coo
 	
 	//key, top left
 	draw_set_colour(c_aqua);
-	if (!is_undefined(key)) {
+	if (showText and !is_undefined(key)) {
 		draw_set_halign(fa_left);
 		draw_set_valign(fa_top);
 		
@@ -166,7 +166,7 @@ function scr_ui_skillIconFromData(xx, yy, align, sprite, name, key, charges, coo
 	}
 
 	//charges, top right
-	if (!is_undefined(charges)) {
+	if (showText and !is_undefined(charges)) {
 		draw_set_halign(fa_right);
 		draw_set_valign(fa_top);
 		draw_text(right - 3, top + 2, string(charges));
