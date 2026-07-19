@@ -11,8 +11,8 @@
   "name":"obj_explosion",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Effects",
+    "path":"folders/Sprites/Effects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

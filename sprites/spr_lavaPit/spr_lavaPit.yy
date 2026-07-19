@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Things",
+    "path":"folders/Sprites/Environment/Things.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
