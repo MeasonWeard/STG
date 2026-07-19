@@ -209,6 +209,12 @@ stages = {
 		
 	},
 	
+	engHall3: {
+		
+		room: stage_engHall3
+		
+	},
+	
 	engComputerRoom: {
 		
 		room: stage_engComputerRoom

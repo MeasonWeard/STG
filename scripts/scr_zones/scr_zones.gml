@@ -45,7 +45,8 @@ function zone_industrial() : zone() constructor {
 		map = scr_mapGen_createBlankMap(mapW, mapH);
 		startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 1);
 		
-		var stages = ["engComputerRoom", "engHall1", "engHall2"];
+		var stages = ["engHall3"];
+		//var stages = ["engComputerRoom", "engHall1", "engHall2"];
 		var endStages = ["engBoss1"];
 
 		var startX = startPos.xx;
