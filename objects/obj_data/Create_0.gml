@@ -239,6 +239,7 @@ soundProfiles = {
 
 	//bullet hits
 	bulletHitMetal: [snd_bulletHitMetal1, snd_bulletHitMetal2, snd_bulletHitMetal3, snd_bulletHitMetal4],
+	bulletHitMetalHigh: [snd_bulletHitMetalHigh1, snd_bulletHitMetalHigh2, snd_bulletHitMetalHigh3, snd_bulletHitMetalHigh4],
 	bulletHitFlesh: [snd_bulletHitFlesh],
 	bulletHitRock: [snd_bulletHitRock1, snd_bulletHitRock2, snd_bulletHitRock3],
 	
@@ -270,10 +271,14 @@ soundProfiles = {
 
 enemyGroups = {
 
-	testSmall: [[obj_alien, 100],[obj_bertha, 45]],
-	testBig: [[obj_alien, 100],[obj_bertha, 30],[obj_celia, 10]],
+	mutantsSmall: [[obj_bertha, 100]],
+	mutantsBig: [[obj_bertha, 100],[obj_celia,25]],
 	
-	engSmall: [[obj_spiderDrone, 100]]
+	aliensSmall: [[obj_alien, 100]],
+	aliendsBig: [[obj_alien, 100]],
+	
+	spidersSmall: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
+	spidersBig: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]]
 	
 }
 
@@ -295,27 +300,4 @@ if (global.gameData == undefined) {
 	global.gameData = scr_file_createBlankSave();
 	scr_file_saveGame("save0", global.gameData);
 	
-}// else {
-
-//	//convert data
-//	if (variable_struct_exists(global.gameData, "playerData")) {
-	
-//		var playerData = global.gameData.playerData;
-		
-//		//class 1
-//		if (variable_struct_exists(playerData, "class1")) {
-//			scr_testSound();
-//			if (is_struct(playerData.class1))  playerData.class1.unlockedSkills = scr_skills_loadArray(playerData.class1.unlockedSkills);
-
-//		}
-		
-//		//class2
-//		if (variable_struct_exists(playerData, "class2")) {
-		
-//			if (is_struct(playerData.class2))  playerData.class2.unlockedSkills = scr_skills_loadArray(playerData.class2.unlockedSkills);
-
-//		}
-	
-//	}
-	
-//}
+}

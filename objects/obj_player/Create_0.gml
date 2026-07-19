@@ -4,6 +4,7 @@ cursor = global.cursor;
 name = "player";
 faction = "player";
 damageDestructibles = true;
+sprites.death = spr_playerDeath;
 
 attackDelay = 12;
 

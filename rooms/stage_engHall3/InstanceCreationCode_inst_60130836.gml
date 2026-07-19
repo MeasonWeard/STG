@@ -1,5 +1,6 @@
-array_push(commonList, [obj_alien, 100]);
-array_push(commonList, [obj_celia, 45]);
+array_push(groups, global.data.enemyGroups.spidersSmall);
+array_push(groups, global.data.enemyGroups.spidersSmall);
+array_push(groups, global.data.enemyGroups.mutantsSmall);
 
 minEnemies = 4;
 maxEnemies = 6;

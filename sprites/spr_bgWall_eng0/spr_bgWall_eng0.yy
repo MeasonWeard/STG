@@ -23,7 +23,7 @@
   ],
   "name":"spr_bgWall_eng0",
   "nineSlice":null,
-  "origin":6,
+  "origin":7,
   "parent":{
     "name":"Background Walls",
     "path":"folders/Sprites/Environment/Background Walls.yy",
@@ -75,7 +75,7 @@
     ],
     "visibleRange":null,
     "volume":1.0,
-    "xorigin":0,
+    "xorigin":128,
     "yorigin":128,
   },
   "swatchColours":null,

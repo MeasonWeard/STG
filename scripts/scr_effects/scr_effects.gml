@@ -33,6 +33,26 @@ function scr_effects_bulletHitFlesh(source, char) {
 	
 }
 
+function scr_effects_explosion(xx, yy, strength) {
+	
+	var rad = 20 * strength;
+	var dam = 10 * strength;
+	
+	var damage = new damageProfile();
+	damage.kin = dam;
+	
+	//scr_stats_calculateDamageProfileWeapon()
+
+	var explosion = instance_create_layer(xx, yy, "Instances", obj_explosion);
+	
+	explosion.radius = rad;
+	explosion.sounds = [snd_explosion];
+	explosion.damage = damage;
+	
+	return explosion;
+	
+}
+
 function scr_effects_explodingProjectile(proj) {
 
 	var rad = 75;

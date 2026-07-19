@@ -21,7 +21,7 @@ if (drawWalls) {
 		for (var i = 0; i < wallsAmount; i ++) {
 	
 			var spr = wallList[wallIndex];
-			var xx = i * wallWidth;
+			var xx = i * wallWidth + wallWidth * 0.5;
 			
 			var frames = sprite_get_number(spr);
 			var subImage = irandom_range(0, frames -1);

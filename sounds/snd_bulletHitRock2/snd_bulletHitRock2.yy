@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.66839004,
+  "duration":0.58349204,
   "exportDir":"",
   "name":"snd_bulletHitRock2",
   "parent":{

@@ -118,6 +118,36 @@ function scr_stats_applyDamageBonuses(char, amount, element) {
 
 }
 
+function scr_stats_calculateDamageProfileRanges(profile) {
+	
+	var newProfile = {};
+	
+	scr_data_structCopyInto(newProfile, profile);
+	
+	var range = scr_stats_calculateDamageRange(newProfile.kin);
+	newProfile.kinMin = range.minDam;
+	newProfile.kinMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newProfile.fire);
+	newProfile.fireMin = range.minDam;
+	newProfile.fireMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newProfile.chem);
+	newProfile.chemMin = range.minDam;
+	newProfile.chemMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newProfile.elec);
+	newProfile.elecMin = range.minDam;
+	newProfile.elecMax = range.maxDam;
+	
+	range = scr_stats_calculateDamageRange(newProfile.rad);
+	newProfile.radMin = range.minDam;
+	newProfile.radMax = range.maxDam;
+	
+	return newProfile;
+	
+}
+
 function scr_stats_calculateDamageProfileWeapon(char, profile) {
 
 	var newStats = {};
@@ -154,7 +184,7 @@ function scr_stats_calculateDamageProfileWeapon(char, profile) {
 	
 }
 
-function scr_stats_calculateDamageProfile(char, profile, applyBonuses) {
+function scr_stats_calculateCharDamageProfile(char, profile, applyBonuses) {
 
 	var newStats = {};
 	

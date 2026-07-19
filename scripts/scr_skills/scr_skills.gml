@@ -279,7 +279,7 @@ function skill_chainLightning() : skill() constructor {
 		damage = new damageProfile();
 		damage.elec = 25 + 10 * level;
 		damage.elec = scr_stats_applyDamageBonuses(char, damage.elec, "elec"); 
-		damage = scr_stats_calculateDamageProfile(char, damage, false);
+		damage = scr_stats_calculateCharDamageProfile(char, damage, false);
 		
 	}
 	
@@ -342,7 +342,7 @@ function skill_antimatterBlast() : skill() constructor {
 		damage.rad = 10 + 2 * level;
 		damage.rad = scr_stats_applyDamageBonuses(char, damage.rad, "rad");
 		
-		damage = scr_stats_calculateDamageProfile(char, damage, false);
+		damage = scr_stats_calculateCharDamageProfile(char, damage, false);
 		
 	}
 	

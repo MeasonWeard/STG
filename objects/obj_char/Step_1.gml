@@ -23,7 +23,7 @@ if (setup) {
 	if (is_struct(thornsDamage)) {
 		
 		thornsTurnIndex = scr_timeSlicing_assignTurnIndex("thorns");
-		thornsDamage = scr_stats_calculateDamageProfile(self, thornsDamage, false);
+		thornsDamage = scr_stats_calculateCharDamageProfile(self, thornsDamage, false);
 		
 	}
 	

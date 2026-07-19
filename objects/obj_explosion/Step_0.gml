@@ -25,7 +25,10 @@ if (firstStep) {
 			var falloff = 1 - (dist / radius);
 			var mult = max(0.05, falloff); 
 			
+			if (!variable_struct_exists(damage, "kinMin")) damage = scr_stats_calculateDamageProfileRanges(damage);
+			
 			damage = scr_stats_multiplyDamageProfile(damage, mult);
+			
 			
 			scr_char_damage(char, damage, undefined, true);
 		

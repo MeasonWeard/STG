@@ -346,12 +346,37 @@ function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
 	if (!instance_exists(char)) exit;
 	if (!instance_exists(target)) exit;
 	
-	var pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
-	var xx = pt.xx;
-	var yy = pt.yy;
+	var tx = target.x - char.x;
+	var ty = target.colMiddle - char.y;
 
-	char.aimX = xx;
-	char.aimY = yy;
+	var tries = 0;
+	var pt;
+	var dot = -1;
+
+	while (dot <= 0 and tries < 12) {
+		
+		pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
+
+		var px = pt.xx - char.x;
+		var py = pt.yy - char.y;
+
+		dot = tx * px + ty * py;
+
+		tries++;
+		
+	}
+
+	show_debug_message("tries: " + string(tries));
+
+	char.aimX = pt.xx;
+	char.aimY = pt.yy;
+	
+	//var pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
+	//var xx = pt.xx;
+	//var yy = pt.yy;
+
+	//char.aimX = xx;
+	//char.aimY = yy;
 	
 }
 

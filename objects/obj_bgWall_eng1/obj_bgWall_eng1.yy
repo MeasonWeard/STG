@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_bgWall_eng1",
-    "path":"sprites/spr_bgWall_eng1/spr_bgWall_eng1.yy",
+    "name":"spr_wall_eng1H",
+    "path":"sprites/spr_wall_eng1H/spr_wall_eng1H.yy",
   },
   "spriteMaskId":null,
   "visible":true,
