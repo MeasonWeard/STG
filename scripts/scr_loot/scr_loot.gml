@@ -187,7 +187,9 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "gun") {
 		
-		loot = scr_genGuns_blaster(level, rarity);
+		var func = choose(scr_genGuns_blaster, scr_genGuns_pistol, scr_genGuns_smg, scr_genGuns_pulseRifle,
+		scr_genGuns_shotgun, scr_genGuns_autoShotgun);
+		loot = func(level, rarity);
 		
 	}
 	

@@ -40,6 +40,8 @@ function zone_industrial() : zone() constructor {
 	mapW = 12;
 	mapH = 12;
 	
+	zoneLevel = 3;
+	
 	static generateMap = function() {
 	
 		map = scr_mapGen_createBlankMap(mapW, mapH);

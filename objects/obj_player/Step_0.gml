@@ -1,25 +1,5 @@
 event_inherited();
 
-//if (global.debug and keyboard_check_pressed(ord("G"))) {
-
-//	show_debug_message(weaponStats);
-
-//	var len = array_length(weapons);
-	
-//	for (var i = 0; i < len; i ++) {
-	
-//		var slot = weapons[i];
-		
-//		if (is_struct(slot)) {
-		
-//			show_debug_message(slot.stats);
-		
-//		}
-	
-//	}
-	
-//}
-
 if (instance_exists(cursor)) {
 	
 	aimX = cursor.x;
@@ -38,7 +18,10 @@ if (is_instanceof(equippedWeapon, gunInst) and !attackDelay > 0) {
 	if (shooting) {
 
 		var proj = scr_guns_shoot(self);
-		if (instance_exists(proj)) proj.charHitReport = true;
+		if (instance_exists(proj)) {
+			proj.charHitReport = true;
+			shootingTick = shootingCooldown;
+		}
 
 	}
 

@@ -123,7 +123,7 @@ liquidDamageImmunity = 0;
 spd = 4;
 
 dash = 0;
-dashTime = 36;
+dashTime = 32;
 
 dashX = 0;
 dashY = 0;

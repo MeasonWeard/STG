@@ -7,12 +7,15 @@ function scr_genDevices_laserPointer(level, rarity) {
 	var type2 = choose("hot", "ionizing", "malfunctioning", "", "", "")
 	
 	//type1
-	var low = 8 + level * 2;
-	var high = 18 + level * 3;
+	var low = 2 + level * 2;
+	var high = 4 + level * 3;
+
+	stats.oa = irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+	low = 2 + level;
+	high = 4 + level * 2;
 	
 	var statChange = irandom_range_biased(low, high, LOOT_BIAS, true);
-	
-	stats.oa = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
 	if (type1 == "precise") scr_loot_addStat(device, "oa", statChange);
 	if (type2 == "bright") stats.da = statChange;

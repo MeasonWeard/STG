@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_devices",
+  "%Name":"scr_genDevices",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_devices",
+  "name":"scr_genDevices",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",
