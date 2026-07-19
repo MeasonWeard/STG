@@ -236,6 +236,7 @@ function skill_test() : skill() constructor {
 
 	name = "Test";
 	key = "test";
+	icon = spr_icon_rubberBoots;
 	maxCharges = 2;
 	charges = 1;
 	energyCost = 0;

@@ -9,3 +9,6 @@ bulletHitSounds = global.data.soundProfiles.bulletHitMetal;
 bulletHitFunc = undefined;
 
 blockLos = false;
+
+onGround = false;
+projCollision = true;

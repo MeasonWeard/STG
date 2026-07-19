@@ -2,12 +2,13 @@ event_inherited();
 
 collectRequirements = function(char) {
 	
-	return char.stimPacks < char.stats.maxStimPacks;
+	return char.hp < char.maxHp;
 
 }
 
 collectFunc = function(char, item) {
 
-	char.stimPacks ++;
+	var amount = ceil(char.maxHp * 0.1);
+	scr_char_heal(char, amount);
 	
 }

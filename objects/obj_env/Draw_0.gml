@@ -8,5 +8,6 @@ if (global.debug) {
 	draw_rectangle(colLeft, colTop, colRight, colBottom, true);
 	draw_set_colour(c_green);
 	draw_rectangle(movLeft, movTop, movRight, movBottom, true);
+	draw_text(x, y + 20, string(hashCellX) + "," + string(hashCellY));
 	
 }

@@ -2,12 +2,13 @@ event_inherited();
 
 collectRequirements = function(char) {
 	
-	return char.energyPacks < char.stats.maxEnergyPacks;
+	return char.energy < char.maxEnergy;
 
 }
 
 collectFunc = function(char, item) {
 
-	char.energyPacks ++;
+	var amount = ceil(char.maxEnergy * 0.1);
+	scr_char_rechargeEnergy(char, amount);
 	
 }

@@ -22,8 +22,8 @@ if (global.debug) {
 	draw_set_colour(prevCol);
 	
 	draw_set_colour(c_yellow);
-	draw_text(x, y, string(x) + "," + string(y));
-	//draw_text(x, y, string(hashCellX) + "," + string(hashCellY));
+	//draw_text(x, y, string(x) + "," + string(y));
+	draw_text(x, y, string(hashCellX) + "," + string(hashCellY));
 	
 }
 

@@ -215,6 +215,12 @@ stages = {
 		
 	},
 	
+	engHall4: {
+		
+		room: stage_engHall4
+		
+	},
+	
 	engComputerRoom: {
 		
 		room: stage_engComputerRoom
@@ -262,6 +268,7 @@ soundProfiles = {
 }
 
 skillConstructors = {
+	test: skill_test,
     rubberBoots: skill_rubberBoots,
     chainLightning: skill_chainLightning,
     antimatterBlast: skill_antimatterBlast

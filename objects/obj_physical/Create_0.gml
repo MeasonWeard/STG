@@ -5,6 +5,11 @@ canMove = true;
 confineToBounds = true;
 blockedByEnv = true;
 
+hashByMaskCentre = false;
+
+hashCellX = undefined;
+hashCellY = undefined;
+
 xspd = 0;
 yspd = 0;
 

@@ -162,31 +162,6 @@ if (setupStats) {
 
 	if (!is_undefined(equippedWeapon)) scr_weapons_applyWeaponBonusesToChar(equippedWeapon, self);
 
-	//load active skills
-	//if (is_struct(skills.skill1)) {
-		
-	//	if (is_callable(skills.skill1.setupFunc)) skills.skill1.setupFunc(self);
-	
-	//}
-	
-	//if (is_struct(skills.skill2)) {
-		
-	//	if (is_callable(skills.skill2.setupFunc)) skills.skill2.setupFunc(self);
-	
-	//}
-	
-	//if (is_struct(skills.skill3)) {
-		
-	//	if (is_callable(skills.skill3.setupFunc)) skills.skill3.setupFunc(self);
-	
-	//}
-	
-	//if (is_struct(skills.skill4)) {
-		
-	//	if (is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(self);
-	
-	//}
-	
 	//char stats
 	finalStats = scr_stats_calculateFinalStats(stats);
 	

@@ -4,7 +4,50 @@ rc = scr_data_getRunController();
 hub = false;
 setupHub = true;
 
-if (!instance_exists(global.player)) global.player = scr_obj_createExclusive(obj_player, room_width * 0.5, room_height * 0.5);
+var playerX = room_width * 0.5;
+var playerY =  room_height * 0.5;
+
+if (instance_exists(rc) and rc.firstStage) {
+	
+	rc.firstStage = false;
+
+	var w = rc.zoneInst.mapW;
+	var h = rc.zoneInst.mapH;
+
+	var leftDist   = rc.posX;
+	var rightDist  = w - rc.posX;
+	var topDist    = rc.posY;
+	var bottomDist = h - rc.posY;
+
+	var nearestEdge = min(leftDist, rightDist, topDist, bottomDist);
+
+	// Left
+	if (nearestEdge == leftDist) {
+		playerX = 10;
+		playerY = room_height * 0.5;
+	}
+
+	// Right
+	else if (nearestEdge == rightDist) {
+		playerX = room_width - 10;
+		playerY = room_height * 0.5;
+	}
+
+	// Top
+	else if (nearestEdge == topDist) {
+		playerX = room_width * 0.5;
+		playerY = 10;
+	}
+
+	// Bottom
+	else {
+		playerX = room_width * 0.5;
+		playerY = room_height - 10;
+	}
+	
+}
+
+if (!instance_exists(global.player)) global.player = scr_obj_createExclusive(obj_player, playerX, playerY);
 global.camera = scr_obj_createExclusive(obj_camera, global.player.x, global.player.y);
 global.env = scr_obj_createExclusive(obj_envDraw, 0, 0);
 global.hud = scr_obj_createExclusive(obj_hud, 0, 0);

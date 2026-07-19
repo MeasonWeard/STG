@@ -145,6 +145,7 @@ for (var i = 0; i < len; i++) {
 	
 	if (!instance_exists(env)) continue;
 	if (instance_exists(source) and env.id == source.id) continue;
+	if (env.onGround) continue;
 	
 	if (point_in_rectangle(x, y, env.colLeft, env.colTop, env.colRight, env.colBottom)) {
 		

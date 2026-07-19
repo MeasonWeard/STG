@@ -23,5 +23,7 @@ miniMap = undefined;
 
 currentCell = undefined;
 
+firstStage = true;
+
 resources = {};
 loot = {};
