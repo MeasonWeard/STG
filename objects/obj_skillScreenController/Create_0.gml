@@ -1,4 +1,9 @@
 global.skillScreenController = self;
+playerData = global.gameData.playerData;
+
+var spent = scr_skills_countSpentSkillPoints()
+totalPoints = scr_skills_getTotalSkillPoints();
+points = max(0, totalPoints - spent);
 
 back = function() {
 

@@ -179,6 +179,58 @@ function scr_skills_findActiveSkill(key, playerData) {
 	
 }
 
+function scr_skills_getTotalSkillPoints() {
+
+	var points = global.gameData.playerData.level;
+	return points;
+	
+}
+
+function scr_skills_countSpentSkillPoints() {
+	
+	var playerData = global.gameData.playerData;
+	var points = 0;
+	
+	var class1 = playerData.class1;
+	var class2 = playerData.class2;
+	
+	if (is_struct(class1)) {
+	
+		var unlockedSkills = class1.unlockedSkills;
+		var len = array_length(unlockedSkills);
+		
+		for (var i = 0; i < len; i++) {
+		
+			var sk = unlockedSkills[i];
+			if (!is_struct(sk)) continue;
+			
+			var level = sk.level;
+			points += max(0, level);
+		
+		}
+	
+	}
+	
+	if (is_struct(class2)) {
+	
+		var unlockedSkills = class2.unlockedSkills;
+		var len = array_length(unlockedSkills);
+		
+		for (var i = 0; i < len; i++) {
+		
+			var sk = unlockedSkills[i];
+			if (!is_struct(sk)) continue;
+			
+			var level = sk.level;
+			points += max(0, level);
+		
+		}
+	
+	}
+	
+	return points;
+	
+}
 
 function skill_test() : skill() constructor {
 

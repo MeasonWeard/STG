@@ -145,3 +145,25 @@ function string_trimDecimals(value, places) {
 	return str;
 
 }
+
+function scr_showDevInfo() {
+
+	var txt = ""
+
+	if(global.devControls) txt += "Dev controls on\n";
+	if(global.debug) txt += "Debugging on";
+
+	if (txt != "") {
+
+		depth = layers.ui;
+		var cam = view_camera[0];
+		var camX = camera_get_view_x(cam);
+		var camY = camera_get_view_y(cam);
+
+		draw_set_colour(c_blue);
+		draw_set_font(fnt_normal);
+		draw_text(camX + 12, camY + 12, txt);
+
+	}
+	
+}

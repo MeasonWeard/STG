@@ -1,5 +1,7 @@
 scr_obj_mouseHover();
 
+if (global.devControls) if (keyboard_check_pressed(vk_subtract)) global.debug = !global.debug;
+
 if (mouseHover) {
 
 	var txt = "";
@@ -7,13 +9,80 @@ if (mouseHover) {
 	txt += "   lvl " + string(thisSkill.level);
 	scr_ui_mouseHoverText(string(txt), fnt_normal);
 	
-
-	if (mouse_check_button_pressed(mb_left)) {
-		thisSkill.level ++;
-	}
+	if (global.debug) {
+		
+		///FREE POINTS!
+		if (mouse_check_button_pressed(mb_left)) {
+			thisSkill.level ++;
+		}
 	
-	if (mouse_check_button_pressed(mb_right)) {
-		thisSkill.level --;
+		if (mouse_check_button_pressed(mb_right)) {
+			thisSkill.level --;
+		}
+	
+	} else {
+		
+		//the proper way
+		if (mouse_check_button_pressed(mb_left)) {
+			
+			if (c.points > 0) {
+				thisSkill.level ++;
+				c.points --;
+				
+				if (thisSkill.active) {
+
+				    var slots = ["skill1", "skill2", "skill3", "skill4"];
+				    var alreadyAssigned = false;
+
+				    // First check whether this skill is already assigned
+				    for (var i = 0; i < array_length(slots); i++) {
+
+				        var slot = variable_struct_get(playerData.skills, slots[i]);
+
+				        if (is_struct(slot) and slot.key == thisSkill.key) {
+				            alreadyAssigned = true;
+				            break;
+				        }
+
+				    }
+
+				    // Only look for an empty slot if it was not found
+				    if (!alreadyAssigned) {
+
+				        var skillStruct = {
+				            key: thisSkill.key,
+				            icon: thisSkill.icon
+				        };
+
+				        for (var i = 0; i < array_length(slots); i++) {
+
+				            var slotKey = slots[i];
+				            var slot = variable_struct_get(playerData.skills, slotKey);
+
+				            if (is_undefined(slot)) {
+				                variable_struct_set(playerData.skills, slotKey, skillStruct);
+				                break;
+				            }
+
+				        }
+
+				    }
+
+				}
+				
+			}
+			
+		}
+	
+		if (mouse_check_button_pressed(mb_right)) {
+			
+			if (thisSkill.level > 0) {
+				thisSkill.level --;
+				c.points = min(c.totalPoints, c.points + 1);
+			}
+			
+		}
+		
 	}
 	
 	//clear invalid active skills
@@ -32,7 +101,7 @@ if (mouseHover) {
 		}
 		
 		if (is_struct(skills.skill3)) {
-			if (skills.skill3key == thisSkill.key) skills.skill3 = undefined;	
+			if (skills.skill3.key == thisSkill.key) skills.skill3 = undefined;	
 		}
 		
 		if (is_struct(skills.skill4)) {
