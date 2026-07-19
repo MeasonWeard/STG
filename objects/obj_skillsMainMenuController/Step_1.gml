@@ -23,14 +23,16 @@ if (setup) {
 		
 			label2.txt = "Available at level 10";
 		
-		} else if (class1 == undefined) {
+		} else if (class2 == undefined) {
 		
 			label2.txt = "Select Specialization";
 			class2Button.txt = "Select";
+			class2Button.active = true;
 		
 		} else {
 		
 			class2Button.txt = class2.name;
+			class2Button.active = true;
 		
 		}
 	

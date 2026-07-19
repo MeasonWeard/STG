@@ -25,6 +25,8 @@ back = function() {
 	global.selectedClass.unlockedSkills = unlockedSkills;
 	scr_file_saveGame(global.saveFile, global.gameData);
 
-	room_goto(stage_hub1);
+	if (global.gameData.playerData.class2 == undefined) room_goto(stage_hub1);
+	else room_goto(room_skillsMainMenu);
+	
 	
 }
