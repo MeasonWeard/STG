@@ -8,6 +8,7 @@ function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 	projSprite = spr_bullet1;
 	spr = spr_gun;
 	description = undefined;
+	rot = 0;
 	
 	//attack
 	auto = true;

@@ -142,22 +142,26 @@ function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 	
 }
 
+//ENEMY GUNS
+
 function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Alien Orb Launcher #1"
 	
-	projSprite = spr_bullet2;
+	projSprite = spr_bullet_alienSpit;
 	auto = false;
 	clipSize = 2;
-	fireRate = 0.6;
+	fireRate = 0.8;
 	reloadTime = 1.8;
 	spd = 16;
 	minAimOff = 2.2;
 	maxAimOff = 8;
 	recoil = 1.8;
 	stability = 0.08;
+	rot = 3;
 	
-	damage.kin = 4;
+	damage.kin = 2;
+	damage.chem = 3;
 	
 	shootSounds = global.data.soundProfiles.alienShoot;
 	
@@ -168,9 +172,11 @@ function gun_alienOrb2(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Alien Orb Launcher #2";
 	
 	projSprite = spr_bullet3;
+	projectileType = projectileTypes.blast;
+	blastProjectiles = 6;
 	auto = true;
-	clipSize = 16;
-	fireRate = 6;
+	clipSize = 4;
+	fireRate = 1;
 	reloadTime = 2.8;
 	spd = 12;
 	minAimOff = 2.4;
@@ -178,9 +184,32 @@ function gun_alienOrb2(level, rarity) : gunInst(level, rarity) constructor {
 	recoil = 2.4;
 	stability = 0.06;
 	
-	damage.kin = 4;
-	damage.chem = 4;
+	damage.kin = 3;
+	damage.chem = 5;
 	
 	shootSounds = global.data.soundProfiles.alienBlast;
+	
+}
+
+function gun_spiderGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Spider Gun #1"
+	
+	projSprite = spr_spiderBullet;
+	auto = true;
+	fireRate = 4;
+	clipSize = 2;
+	reloadTime = 1.8;
+	spd = 16;
+	minAimOff = 2.2;
+	maxAimOff = 8;
+	recoil = 1.8;
+	stability = 0.08;
+	rot = 12;
+	
+	shootSounds = global.data.soundProfiles.spiderShoot;
+	
+	damage.kin = 2;
+	damage.rad = 2;
 	
 }

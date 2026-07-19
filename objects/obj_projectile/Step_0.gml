@@ -6,6 +6,12 @@ yspd = lengthdir_y(spd, dir);
 var nextX = x + xspd;
 var nextY = y + yspd;
 
+if (rot == 0) {
+	image_angle = dir;
+} else {
+	image_angle += rot;
+}
+
 //char collison
 var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
 var len = array_length(nearby);
@@ -197,8 +203,6 @@ for (var i = 0; i < len; i++) {
 
 x = nextX;
 y = nextY;
-
-image_angle = dir;
 
 rangeLeft -= spd;
 

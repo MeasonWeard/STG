@@ -1,6 +1,8 @@
 event_inherited();
 
-if (is_array(decorationSprites)) {
+if (setupDecoration and is_array(decorationSprites)) {
+
+	setupDecoration = false;
 
 	var seed = scr_obj_generateSeed(self);
 	random_set_seed(seed);

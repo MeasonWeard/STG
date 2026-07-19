@@ -23,6 +23,7 @@ deathSounds = global.data.soundProfiles.fleshExplod;
 
 deathFunc = undefined;
 bulletHitFunc = undefined;//scr_effects_bulletHitFlesh;
+gibDisappears = true;
 
 hpRegenCounter = 0;
 energyRegenCounter = 0;

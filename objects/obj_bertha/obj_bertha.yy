@@ -9,8 +9,8 @@
   "name":"obj_bertha",
   "overriddenProperties":[],
   "parent":{
-    "name":"Chars",
-    "path":"folders/Objects/Chars.yy",
+    "name":"Enemies",
+    "path":"folders/Objects/Chars/Enemies.yy",
   },
   "parentObjectId":{
     "name":"obj_enemy",

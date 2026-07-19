@@ -7,6 +7,7 @@ depth = layers.projectiles;
 
 dir = 0;
 spd = 12;
+rot = 0;
 damage = 10;
 source = noone;
 faction = "none";

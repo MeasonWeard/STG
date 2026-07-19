@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.30331066,
+  "duration":0.6327438,
   "exportDir":"",
   "name":"snd_alienShoot3",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_alienShoot3.wav",
-  "volume":1.0,
+  "volume":0.8,
 }

@@ -249,6 +249,7 @@ soundProfiles = {
 	pistol: [snd_pistol1, snd_pistol2, snd_pistol3],
 	pulse: [snd_pulse1],
 	alienBlast: [snd_alienBlast1, snd_alienBlast2, snd_alienBlast3],
+	spiderShoot: [snd_spiderShoot1, snd_spiderShoot2, snd_spiderShoot3],
 	alienShoot: [snd_alienShoot1, snd_alienShoot2, snd_alienShoot3],
 	
 	//melee
@@ -264,6 +265,15 @@ soundProfiles = {
 	burn: [snd_burn1, snd_burn2, snd_burn3],
 	microMissile: [snd_microMissile1, snd_microMissile2, snd_microMissile3],
 	collect: [snd_collect1, snd_collect2, snd_collect3]
+	
+}
+
+enemyGroups = {
+
+	testSmall: [[obj_alien, 100],[obj_bertha, 45]],
+	testBig: [[obj_alien, 100],[obj_bertha, 30],[obj_celia, 10]],
+	
+	engSmall: [[obj_spiderDrone, 100]]
 	
 }
 

@@ -13,5 +13,13 @@ if (setup) {
 		}
 	
 	}
+	
+	if (array_length(commonList) == 0) {
+	
+		var group = scr_randomElement(groups);
+		
+		commonList = group;
+	
+	}
 
 }

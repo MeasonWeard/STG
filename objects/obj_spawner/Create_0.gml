@@ -1,6 +1,8 @@
 rc = global.runController;
 sc = global.stageController;
 
+groups = [];
+
 commonList = [];
 
 setup = true;
