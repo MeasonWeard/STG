@@ -4,19 +4,20 @@ charName = "enemy";
 faction = "enemy";
 
 target = global.player;
-targetMinDist = 180;
-targetMaxDist = 360;
-targetReaquireDist = 450;
 
 ghost = instance_create_layer(x, y, "Instances", obj_ghost);
 ghost.owner = self;
 firstGhostCheck = true;
 
+//ai
 aiSetup = true;
-ghostCheckIndex = -1;
-
 detectionIndex = -1;
+ghostCheckIndex = -1;
+targetMinDist = 180;
+targetMaxDist = 360;
+targetReaquireDist = 450;
 
+//drops
 minData = 8;
 maxData = 16;
 

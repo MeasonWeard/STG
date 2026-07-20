@@ -222,3 +222,15 @@ function scr_guns_formatDescription(gun) {
 	return txt;
 	
 }
+
+function scr_guns_calculateBonusDamage(startingDam, level) {
+
+	var low = max(1, floor(startingDam * (0.05 * level)));
+	var high = max(1, ceil(startingDam * (0.15 * level)));
+	
+	return {
+		low: low,
+		high: high
+	}
+	
+}

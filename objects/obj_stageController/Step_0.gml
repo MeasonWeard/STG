@@ -51,7 +51,7 @@ if (!hub) {
 	//arrows
 	var enemies = instance_number(obj_enemy);
 
-	if (!createdArrows and enemies < 11) {
+	if (!createdArrows and enemies < 16) {
 
 		createdArrows = true;
 	

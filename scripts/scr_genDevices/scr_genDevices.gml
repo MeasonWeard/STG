@@ -21,8 +21,8 @@ function scr_genDevices_laserPointer(level, rarity) {
 	if (type2 == "bright") stats.da = statChange;
 	
 	//type2
-	low = level + level * 3;
-	high = level * 2 + level * 4;
+	low = round(level + level * 1.5);
+	high = round(level + 1 + level * 2.5);
 		
 	var dam = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
