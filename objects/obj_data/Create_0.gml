@@ -16,7 +16,6 @@ global.data = self;
 #macro ITEM_PULL_STRENGTH 16
 #macro MAX_DATA_DROPS 12
 
-
 //display
 resolutions = [];
 resolutionIndex = 0;
@@ -196,6 +195,24 @@ stages = {
 		mapCol: c_blue
 	
 	},
+	
+	wasteHall1: {
+		
+		room: stage_wasteHall1
+		
+	},
+	
+	wasteLava1: {
+		
+		room: stage_wasteLava1
+		
+	},
+	
+	wasteAcid1: {
+		
+		room: stage_wasteAcid1
+		
+	},
 
 	engHall1: {
 		
@@ -206,18 +223,6 @@ stages = {
 	engHall2: {
 		
 		room: stage_engHall2
-		
-	},
-	
-	engHall3: {
-		
-		room: stage_engHall3
-		
-	},
-	
-	engHall4: {
-		
-		room: stage_engHall4
 		
 	},
 	

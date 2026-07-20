@@ -122,14 +122,10 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 	var tries = 0;
 	var inc = 0;
 	var found = false;
+	var fallback = false;
 	
-	var offX = 0;
-	var offY = 0;
 	var px = x;
 	var py = y;
-	
-	var oldX = ghost.x;
-	var oldY = ghost.y;
 	
 	while (!found and inc < 24) {
 	
@@ -141,21 +137,28 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 		var maxSq = newMaxDist * newMaxDist;
 		var dist = sqrt(random_range(minSq, maxSq));
 		
-		offX = lengthdir_x(dist, dir);
-		offY = lengthdir_y(dist, dir);
+		px = target.x + lengthdir_x(dist, dir);
+		py = target.y + lengthdir_y(dist, dir);
 		
-		px = target.x + offX;
-		py = target.y + offY;
-		
-		scr_ai_moveGhost(self, px, py);
-
-		var col = scr_ai_ghostOverlap(self);
-		
-		if (px < global.roomLeft or px > global.roomRight or py < global.roomTop or py > global.roomBottom) {
-			col = true;
+		// Reject out-of-bounds points before doing the overlap check.
+		if (
+			px < global.roomLeft
+			or px > global.roomRight
+			or py < global.roomTop
+			or py > global.roomBottom
+		) {
+			
+			tries++;
+			
+			if (tries >= 16) {
+				tries = 0;
+				inc++;
+			}
+			
+			continue;
 		}
 		
-		if (!col) {
+		if (!scr_ai_ghostOverlapAt(self, px, py)) {
 			found = true;
 			break;
 		}
@@ -163,49 +166,32 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 		tries++;
 		
 		if (tries >= 16) {
-
 			tries = 0;
 			inc++;
 		}
-		
 	}
 	
 	if (!found) {
 		
-		scr_testSound();
+		fallback = true;
 		
 		var dir = point_direction(target.x, target.y, x, y);
-		var dist = maxDist;
 
-		px = target.x + lengthdir_x(dist, dir);
-		py = target.y + lengthdir_y(dist, dir);
+		px = target.x + lengthdir_x(maxDist, dir);
+		py = target.y + lengthdir_y(maxDist, dir);
 
 		px = clamp(px, global.roomLeft, global.roomRight);
 		py = clamp(py, global.roomTop, global.roomBottom);
-
-		if (moveGhost) {
-			scr_ai_moveGhost(self, px, py);
-		} else {
-			scr_ai_moveGhost(self, oldX, oldY);
-		}
-
-		return {
-			xx: px,
-			yy: py,
-			fallback: true
-		};
-		
 	}
 	
 	if (moveGhost) {
 		scr_ai_moveGhost(self, px, py);
-	} else {
-		scr_ai_moveGhost(self, oldX, oldY);
 	}
 	
 	return {
 		xx: px,
 		yy: py,
+		fallback: fallback
 	};
 
 }
@@ -223,6 +209,7 @@ function scr_ai_ghostOverlap(char) {
 	var yy = sourceGhost.y;
 
 	//hash
+	//TO DO: get nearby range = 2?
 	var nearby = scr_hash_getNearby(global.stageController.ghostHash, xx, yy);
 	var len = array_length(nearby);
 	
@@ -240,6 +227,43 @@ function scr_ai_ghostOverlap(char) {
 
 	return col;
 	
+}
+
+function scr_ai_ghostOverlapAt(char, xx, yy) {
+	
+	var g = char.ghost;
+	
+	var offsetX = xx - g.x;
+	var offsetY = yy - g.y;
+	
+	var left   = g.colLeft   + offsetX;
+	var right  = g.colRight  + offsetX;
+	var top    = g.colTop    + offsetY;
+	var bottom = g.colBottom + offsetY;
+	
+	//TO DO: get nearby range = 2?
+	var nearby = scr_hash_getNearby(global.stageController.ghostHash, xx, yy);
+	var len = array_length(nearby);
+	
+	for (var i = 0; i < len; i++) {
+		
+		var otherGhost = nearby[i];
+		
+		if (!instance_exists(otherGhost) or otherGhost.id == g.id) {
+			continue;
+		}
+		
+		if (
+			right > otherGhost.colLeft
+			and left < otherGhost.colRight
+			and bottom > otherGhost.colTop
+			and top < otherGhost.colBottom
+		) {
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 function scr_ai_moveGhost(inst, xx, yy) {
@@ -365,8 +389,6 @@ function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
 		tries++;
 		
 	}
-
-	show_debug_message("tries: " + string(tries));
 
 	char.aimX = pt.xx;
 	char.aimY = pt.yy;

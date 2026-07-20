@@ -7,7 +7,7 @@ runLevel = 1;
 extraLevel = 0;
 
 generateMap = true;
-zoneConstructor = zone_industrial;
+zoneConstructor = undefined;
 
 zoneInst = undefined;
 map = undefined;

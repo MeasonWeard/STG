@@ -68,8 +68,6 @@ function scr_melee_attack(char) {
 	att.stopOnHit = melee.stopOnHit;
 	att.range = melee.range;
 	
-	show_debug_message(att.hitDelay);
-	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;
 	if (melee.attackSpriteIndex > array_length(melee.attackSprites) - 1) melee.attackSpriteIndex = 0;

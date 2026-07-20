@@ -17,6 +17,7 @@ if (!alert) {
 		if (seen or hurt) {
 			
 			alert = true;
+			show_debug_message("ALERTING /// " + sc.time + " ... " + string(current_time));
 			scr_ai_alertAllies(self, detectionDist * 0.5);
 			
 		}
@@ -29,9 +30,10 @@ if (alert) {
 	
 	//first destination pick
 	if (firstGhostCheck) {
-
+		
+		show_debug_message("alerted /// " + sc.time + " ... " + string(current_time));
 		firstGhostCheck = false;
-	
+		
 		var pt = scr_ai_choosePointAroundTarget(target, targetMinDist, targetMaxDist, true);
 
 	}

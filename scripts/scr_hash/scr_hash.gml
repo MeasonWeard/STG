@@ -60,7 +60,6 @@ function scr_hash_getNearby(hash, xx, yy) {
 	
 	var results = [];
 	
-	//TO DO: include cells diagonal to base cell?
 	for (var cx = baseCellX - 1; cx <= baseCellX + 1; cx++) {
 		for (var cy = baseCellY - 1; cy <= baseCellY + 1; cy++) {
 		

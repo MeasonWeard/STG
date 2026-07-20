@@ -35,7 +35,7 @@ function zone() constructor {
 
 }
 
-function zone_industrial() : zone() constructor {
+function zone_waste() : zone() constructor {
 
 	mapW = 12;
 	mapH = 12;
@@ -47,7 +47,7 @@ function zone_industrial() : zone() constructor {
 		map = scr_mapGen_createBlankMap(mapW, mapH);
 		startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 1);
 		
-		var stages = ["engHall3","engHall4"];
+		var stages = ["wasteAcid1"];//["wasteHall1","wasteLava1","wasteAcid1"];
 		//var stages = ["engComputerRoom", "engHall1", "engHall2"];
 		var endStages = ["engBoss1"];
 

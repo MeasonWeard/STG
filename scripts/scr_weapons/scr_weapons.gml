@@ -28,7 +28,7 @@ function scr_weapons_collectWeapon(char, weapon, equip) {
 	    };
 		
 	} else if (is_instanceof(weapon, meleeInst)) {
-		show_debug_message("collecting:");
+
 		slot = {
 			weapon: weapon,
 			stats: scr_melee_calculateMeleeStats(char, weapon)

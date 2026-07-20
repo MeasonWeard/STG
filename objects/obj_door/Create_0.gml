@@ -29,5 +29,5 @@ openDist = 400;
 displayTagDist = 1450;
 displayTag = false;
 
-zoneName = "Engineering";
-zoneConstructor = zone_industrial;
+zoneName = "Waste\nDisposal";
+zoneConstructor = zone_waste;

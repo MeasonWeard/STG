@@ -94,7 +94,7 @@ timeSlicing = {
 	ghostCheck: {
 		nextIndex: 0,
 		turn: 0,
-		steps: 12
+		steps: 16
 	},
 	
 	activation: {
@@ -129,3 +129,6 @@ ghostHash = {};
 envHash = {};
 destHash = {};
 itemHash = {};
+
+//time
+time = date_datetime_string(date_current_datetime());
