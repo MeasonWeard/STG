@@ -39,28 +39,24 @@ function scr_movement(blockedByEnv) {
 			
 				if (scr_obj_movementCollision(self, env, true)) {
 					
-					x = prevX;
-					
 					var remainingX = moveX;
-					var stepX = sign(moveX);
-					
-					while (moveX != 0) {
+					var stepX = sign(remainingX);
+					var testX = prevX;
 
-						x += stepX;
-						scr_movement_updateMovementHitBox(self);
+					while (abs(remainingX) > 0.01) {
 
-						if (scr_obj_movementCollision(self, env, true)) {
-							x -= stepX;
-							scr_movement_updateMovementHitBox(self);
+						var amount = min(1, abs(remainingX)) * stepX;
+						var nextX = testX + amount;
+
+						if (scr_obj_movementCollisionAt(self, env, nextX, prevY, true)) {
 							break;
 						}
 
-						moveX -= stepX;
-
+						testX = nextX;
+						remainingX -= amount;
 					}
 
-					moveX = x - prevX;
-					x = prevX;
+					moveX = testX - prevX;
 
 					break;
 					
@@ -87,30 +83,27 @@ function scr_movement(blockedByEnv) {
 			
 				if (scr_obj_movementCollision(self, env, true)) {
 					
-					y = prevY;
+					var remainingY = moveY;
+					var stepY = sign(remainingY);
+					var testY = prevY;
 
-					var stepY = sign(moveY);
-					
-					while (moveY != 0) {
+					while (abs(remainingY) > 0.01) {
 
-						y += stepY;
-						scr_movement_updateMovementHitBox(self);
+						var amount = min(1, abs(remainingY)) * stepY;
+						var nextY = testY + amount;
 
-						if (scr_obj_movementCollision(self, env, true)) {
-							y -= stepY;
-							scr_movement_updateMovementHitBox(self);
+						if (scr_obj_movementCollisionAt(self, env, prevX, nextY, true)) {
 							break;
 						}
 
-						moveY -= stepY;
-
+						testY = nextY;
+						remainingY -= amount;
 					}
 
-					moveY = y - prevY;
-					y = prevY;
+					moveY = testY - prevY;
 
 					break;
-					
+
 				}
 			
 			}
@@ -118,8 +111,6 @@ function scr_movement(blockedByEnv) {
 			y = prevY;
 		
 		}
-		
-		//scr_movement_updateMovementHitBox();
 		
 	}
 

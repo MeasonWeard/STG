@@ -1,4 +1,3 @@
-global.debugSteps ++;
 
 if (checkIfCleared and !hub) {
 

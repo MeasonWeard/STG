@@ -9,8 +9,6 @@ var playerY =  room_height * 0.5;
 
 deathCountdown = 90;
 
-global.debugSteps = 0;
-
 if (instance_exists(rc) and rc.firstStage) {
 	
 	rc.firstStage = false;

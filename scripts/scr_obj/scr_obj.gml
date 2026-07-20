@@ -64,6 +64,41 @@ function scr_obj_movementCollision(objA, objB, overlap) {
 
 }
 
+function scr_obj_movementCollisionAt(objA, objB, xx, yy, overlap) {
+
+	if (!instance_exists(objA)) return false;
+	if (!instance_exists(objB)) return false;
+
+	var offsetX = xx - objA.x;
+	var offsetY = yy - objA.y;
+
+	var movLeft   = objA.movLeft   + offsetX;
+	var movRight  = objA.movRight  + offsetX;
+	var movTop    = objA.movTop    + offsetY;
+	var movBottom = objA.movBottom + offsetY;
+
+	if (overlap) {
+
+		return (
+			movRight > objB.colLeft
+			and movLeft < objB.colRight
+			and movBottom > objB.colTop
+			and movTop < objB.colBottom
+		);
+
+	} else {
+
+		return (
+			movRight >= objB.colLeft
+			and movLeft <= objB.colRight
+			and movBottom >= objB.colTop
+			and movTop <= objB.colBottom
+		);
+
+	}
+
+}
+
 function scr_obj_mouseHover() {
 	
 	var cursor = global.cursor;
