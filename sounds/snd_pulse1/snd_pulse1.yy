@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.40387756,
+  "duration":0.41333333,
   "exportDir":"",
   "name":"snd_pulse1",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_pulse1.wav",
-  "volume":0.8,
+  "volume":1.0,
 }

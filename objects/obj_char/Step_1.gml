@@ -166,14 +166,22 @@ if (setupStats) {
 	finalStats = scr_stats_calculateFinalStats(stats);
 	
 	maxHp = finalStats.maxHp;
-	hp = maxHp;
 	maxShield = finalStats.maxShield;
-	shield = maxShield;
 	maxEnergy = finalStats.maxEnergy;
-	energy = maxEnergy;
-	dashes = finalStats.maxDashes;
-	stimPacks = stats.maxStimPacks;
-	energyPacks = stats.maxEnergyPacks;
+
+	if (setupBasics) {
+	
+		setupBasics = false;
+	
+		hp = maxHp;
+		shield = maxShield;
+		energy = maxEnergy;
+	
+		dashes = finalStats.maxDashes;
+		stimPacks = stats.maxStimPacks;
+		energyPacks = stats.maxEnergyPacks;
+	
+	}
 	
 	//calculate weapon stats
 	var weaponsLen = array_length(weapons);

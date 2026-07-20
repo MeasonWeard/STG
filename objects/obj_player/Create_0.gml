@@ -21,8 +21,6 @@ meleeRangeOffset = 16;
 gear = scr_data_loadEquippedGear();
 
 var weapons = scr_data_loadEquippedWeapons();
-weapons.weapon1 = new melee_cleaver(1, 1);
-weapons.weapon2 = new melee_hammer(1, 1);
 
 scr_weapons_collectWeapon(self, weapons.weapon1, true);
 scr_weapons_collectWeapon(self, weapons.weapon2, false);

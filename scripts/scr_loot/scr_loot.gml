@@ -195,8 +195,9 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "melee") {
 		
-		loot = new meleeInst(level, rarity);
-		
+		var func = choose(scr_genMelee_cleaver, scr_genMelee_hammer, scr_genMelee_prod);
+		loot = func(level, rarity);
+
 	}
 	
 	if (type == "device") {

@@ -4,6 +4,7 @@ function gun_blaster(level, rarity) : gunInst(level, rarity) constructor {
 	recoil = 1.2;
 	clipSize = 24;
 	reloadTime = 1.8;
+	spr = spr_blaster;
 	
 	//shootSounds = global.data.soundProfiles.blaster;
 	//reloadSound = undefined;
@@ -39,6 +40,7 @@ function gun_blaster(level, rarity) : gunInst(level, rarity) constructor {
 function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 
 	name = "Pistol";
+	spr = spr_pistol;
 	
 	auto = false;
 	range = 1000;
@@ -59,6 +61,7 @@ function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 function gun_smg(level, rarity): gunInst(level, rarity) constructor {
 
 	name = "SMG";
+	spr = spr_smg;
 	
 	auto = true;
 	range = 1000;
@@ -78,6 +81,7 @@ function gun_smg(level, rarity): gunInst(level, rarity) constructor {
 function gun_pulseRifle(level, rarity): gunInst(level, rarity) constructor {
 
 	name = "Pulse Rifle";
+	spr = spr_pulseRifle;
 	
 	auto = true;
 	range = 1400;
@@ -101,6 +105,7 @@ function gun_pulseRifle(level, rarity): gunInst(level, rarity) constructor {
 function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Shotgun";
+	spr = spr_shotgun;
 	
 	auto = false;
 	fireRate = 1.2;
@@ -123,6 +128,7 @@ function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Auto Shotgun";
+	spr = spr_autoShotgun;
 	
 	auto = true;
 	fireRate = 1.6;

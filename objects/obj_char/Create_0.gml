@@ -7,7 +7,7 @@ name = "none";
 
 setup = true;
 setupStats = true;
-//setupSkills = true;
+setupBasics = true;
 
 sc = global.stageController;
 rc = scr_data_getRunController();

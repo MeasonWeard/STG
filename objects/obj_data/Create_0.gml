@@ -248,7 +248,7 @@ soundProfiles = {
 	smg: [snd_smg1, snd_smg2, snd_smg3],
 	shotgun: [snd_shotgun1, snd_shotgun2, snd_shotgun3],
 	pistol: [snd_pistol1, snd_pistol2, snd_pistol3],
-	pulse: [snd_pulse1],
+	pulse: [snd_pulse1, snd_pulse2, snd_pulse3],
 	alienBlast: [snd_alienBlast1, snd_alienBlast2, snd_alienBlast3],
 	spiderShoot: [snd_spiderShoot1, snd_spiderShoot2, snd_spiderShoot3],
 	alienShoot: [snd_alienShoot1, snd_alienShoot2, snd_alienShoot3],
@@ -257,6 +257,7 @@ soundProfiles = {
 	cleaverSwing: [snd_cleaverSwing1, snd_cleaverSwing2, snd_cleaverSwing3],
 	cleaverHit: [snd_cleaverHit1, snd_cleaverHit2, snd_cleaverHit3],
 	hammerHit: [snd_hammerHit1, snd_hammerHit2, snd_hammerHit3],
+	prod: [snd_prod1, snd_prod2, snd_prod3],
 	swish: [snd_swish1, snd_swish2, snd_swish3, snd_swish4],
 	
 	//characters

@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.43827665,
+  "duration":1.1987301,
   "exportDir":"",
   "name":"snd_swish2",
   "parent":{

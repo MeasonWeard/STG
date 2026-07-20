@@ -31,8 +31,8 @@
   "nineSlice":null,
   "origin":3,
   "parent":{
-    "name":"Effects",
-    "path":"folders/Sprites/Effects.yy",
+    "name":"Melee Attacks",
+    "path":"folders/Sprites/Effects/Melee Attacks.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

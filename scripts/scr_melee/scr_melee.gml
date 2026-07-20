@@ -7,7 +7,7 @@ function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 	swingSounds = global.data.soundProfiles.cleaverSwing;
 	hitSounds = global.data.soundProfiles.cleaverHit;
 	attackSprites = [spr_slashUp, spr_slashDown];
-	spr = spr_melee;
+	spr = spr_cleaver;
 	description = undefined;
 		
 	//combat
