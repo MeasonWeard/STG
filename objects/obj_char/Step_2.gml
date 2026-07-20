@@ -30,7 +30,7 @@ if (is_instanceof(equippedWeapon, gunInst)) {
 	
 }
 
-//melee weapon
+//melee weapons
 if (is_instanceof(equippedWeapon, meleeInst)) {
 
 	var melee = equippedWeapon;
@@ -46,6 +46,32 @@ if (is_instanceof(equippedWeapon, meleeInst)) {
 	}
 	
 }
+
+//recharge melee weapons even when in pocket
+//var weaponsLen = array_length(weapons);
+
+//for (var i = 0; i < weaponsLen; i ++) {
+	
+//	var slot = weapons[i];
+//	var melee = slot.weapon;
+	
+//	if (is_instanceof(melee, meleeInst)) {
+
+//		show_debug_message("MELEE");
+
+//		melee.attackTick --;
+	
+//		if (melee.attackTick < 0) melee.attackTick = 0;
+//		if (melee.recharge > 0) melee.recharge --;
+	
+//		if (melee.recharge <= 0) {
+//			melee.recharge = 0;
+//			melee.charges = melee.maxCharges;
+//		}
+	
+//	}
+
+//}
 
 meleeCooldown = max(0, meleeCooldown - 1);
 

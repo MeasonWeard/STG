@@ -20,10 +20,10 @@ meleeRangeOffset = 16;
 
 gear = scr_data_loadEquippedGear();
 
-var weapons = scr_data_loadEquippedWeapons();
+var weaponsData = scr_data_loadEquippedWeapons();
 
-scr_weapons_collectWeapon(self, weapons.weapon1, true);
-scr_weapons_collectWeapon(self, weapons.weapon2, false);
+scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
+scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 
 //var gun = new gun_blaster(1, 1);
 //var gun2 = new gun_shotgun (1, 1);
