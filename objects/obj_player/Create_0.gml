@@ -16,6 +16,8 @@ audio_listener_orientation(0, 0, 1, 0, -1, 0);
 gunCentred = false;
 meleeRangeOffset = 16;
 
+moveToSide = undefined;
+
 //EQUIPMENT
 
 gear = scr_data_loadEquippedGear();

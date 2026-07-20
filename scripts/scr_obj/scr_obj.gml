@@ -209,3 +209,29 @@ function scr_obj_generateSeed(obj) {
 	return seed;
 	
 }
+
+function scr_obj_cullByDirection(dir, inverse = false) {
+
+	var valid = false;
+	
+	valid = scr_stages_isCellInDirValid(dir);
+	
+	if (inverse) valid = !valid;
+	
+	//also cull side player starts on if it's the starting room
+	if (scr_stages_inStartingCell()) {
+		
+		var edge = scr_stages_getStartingEdge();
+		
+		if (dir == 0) dir = "up";
+		if (dir == 1) dir = "right";
+		if (dir == 2) dir = "down";
+		if (dir == 3) dir = "left";
+		
+		if (edge == dir) valid = true;
+		
+	}
+	
+	if (valid) instance_destroy();
+	
+}

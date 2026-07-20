@@ -83,8 +83,8 @@
   ],
   "name":"stage_engHall1",
   "parent":{
-    "name":"Stages",
-    "path":"folders/Rooms/Stages.yy",
+    "name":"Engineering",
+    "path":"folders/Rooms/Stages/Engineering.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

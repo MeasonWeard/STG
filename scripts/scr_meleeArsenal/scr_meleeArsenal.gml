@@ -38,7 +38,7 @@ function melee_hammer(level, rarity) : meleeInst(level, rarity) constructor {
 	attackRate = 1.2;
 	maxCharges = 3;
 	rechargeTime = 2.1;
-	killThreshold = 15;
+	killThreshold = 20;
 	
 	damage.kin = 50;
 	

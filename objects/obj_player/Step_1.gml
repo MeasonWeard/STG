@@ -2,6 +2,26 @@ event_inherited();
 
 sc = global.stageController;
 
+if (is_string(moveToSide) and !sc.hub and sc.checkPlayerMoveToSide) {
+
+	var centreX = room_width * 0.5;
+	var centreY = room_height * 0.5;
+	
+	var in = 5;
+	
+	x = centreX;
+	y = centreY;
+	
+	if (moveToSide == "top") y = in;
+	if (moveToSide == "bottom") y = room_height - in;
+	if (moveToSide == "left") x = in;
+	if (moveToSide == "right") x = room_width - in;
+		
+	moveToSide = undefined;
+	sc.checkPlayerMoveToSide = false;
+	
+}
+
 if (!dashing) {
 	
 	var finalSpd = finalStats.spd;

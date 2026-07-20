@@ -198,19 +198,28 @@ stages = {
 	
 	wasteHall1: {
 		
-		room: stage_wasteHall1
+		room: stage_wasteHall1,
 		
 	},
 	
-	wasteLava1: {
+	wasteArena1: {
 		
-		room: stage_wasteLava1
+		room: stage_wasteArena1,
+		mapCol: c_orange
 		
 	},
 	
-	wasteAcid1: {
+	wasteArenaLava1: {
 		
-		room: stage_wasteAcid1
+		room: stage_wasteArenaLava1,
+		mapCol: c_orange
+		
+	},
+	
+	wasteArenaAcid1: {
+		
+		room: stage_wasteArenaAcid1,
+		mapCol: c_orange
 		
 	},
 

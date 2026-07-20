@@ -39,24 +39,28 @@ if (playerinArea) {
 				dir = 0;
 				moveX = x;
 				moveY = global.roomBottom;
+				player.moveToSide = "bottom";
 			}
 	
 			if (side == "right") {
 				dir = 1;
 				moveX = global.roomLeft;
 				moveY = room_height * 0.5;
+				player.moveToSide = "left";
 			}
 	
 			if (side == "bottom") {
 				dir = 2;
 				moveX = x;
 				moveY = global.roomTop;
+				player.moveToSide = "top";
 			}
 	
 			if (side == "left") {
 				dir = 3;
 				moveX = global.roomRight;
 				moveY = room_height * 0.5;
+				player.moveToSide = "right";
 			}
 		
 			scr_items_collectAll();

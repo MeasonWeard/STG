@@ -1,4 +1,4 @@
-function scr_mapGen_randomStartingLocation(mapW, mapH, pad) {
+function scr_mapGen_randomStartingLocation(mapW, mapH, pad, avoidCorners) {
 
 	var maxX = mapW - 1;
 	var maxY = mapH - 1;
@@ -36,7 +36,7 @@ function scr_mapGen_randomStartingLocation(mapW, mapH, pad) {
 		yy = irandom_range(safePadY, maxY - safePadY);
 		
 	}
-
+		
 	return {
 		side: side,
 		xx: xx,
@@ -106,65 +106,6 @@ function scr_mapGen_createCell(key) {
 	
 }
 
-function scr_mapGen_randomWalk(map, stages, startX, startY, steps) {
-
-	var mapW = array_length(map);
-	var mapH = array_length(map[0]);
-
-	var stageCount = array_length(stages);
-	if (stageCount <= 0) return map;
-	if (steps <= 0) return map;
-
-	var xx = startX;
-	var yy = startY;
-
-	for (var i = 0; i < steps; i++) {
-
-		var rand = irandom_range(0, stageCount-1);
-
-		var key = stages[rand];
-		var newCell = scr_mapGen_createCell(key);
-		
-		map[xx][yy] = newCell;
-
-		var moved = false;
-		var attempts = 0;
-
-		while (!moved and attempts < 25) {
-
-			attempts++;
-
-			var dir = irandom(3);
-
-			var nx = xx;
-			var ny = yy;
-
-			if (dir == 0) ny--;
-			if (dir == 1) ny++;
-			if (dir == 2) nx--;
-			if (dir == 3) nx++;
-
-			if (nx < 0 or nx >= mapW) continue;
-			if (ny < 0 or ny >= mapH) continue;
-
-			if (!is_undefined(map[nx][ny])) continue;
-
-			xx = nx;
-			yy = ny;
-			moved = true;
-			
-		}
-
-		if (!moved) {
-			show_debug_message("random walk got stuck after " + string(i + 1) + " cells");
-			break;
-		}
-	}
-
-	return map;
-	
-}
-
 function scr_mapGen_makeFurthestEndCell(map, startX, startY, stages) {
 
 	var mapW = array_length(map);
@@ -210,4 +151,324 @@ function scr_mapGen_makeFurthestEndCell(map, startX, startY, stages) {
 		yy: bestY,
 	};
 
+}
+
+function scr_mapGen_randomWalk(map, stages, startX, startY, steps) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+	
+	var cellCount = 0;
+	
+	var stageCount = array_length(stages);
+	
+	if (stageCount <= 0) return {
+		map: map,
+		cellCount: cellCount
+	};
+	
+	if (steps <= 0) return {
+		map: map,
+		cellCount: cellCount
+	};
+	
+	var xx = startX;
+	var yy = startY;
+	
+	for (var i = 0; i < steps; i++) {
+
+		if (is_undefined(map[xx][yy])) {
+	
+			var rand = irandom_range(0, stageCount - 1);
+			var key = stages[rand];
+	
+			map[xx][yy] = scr_mapGen_createCell(key);
+			cellCount++;
+	
+		}
+
+		if (i >= steps - 1) break;
+
+		var moved = false;
+		var attempts = 0;
+
+		while (!moved and attempts < 25) {
+
+			attempts++;
+
+			var dir = irandom(3);
+
+			var nx = xx;
+			var ny = yy;
+
+			if (dir == 0) ny--;
+			if (dir == 1) ny++;
+			if (dir == 2) nx--;
+			if (dir == 3) nx++;
+
+			if (nx < 0 or nx >= mapW) continue;
+			if (ny < 0 or ny >= mapH) continue;
+
+			if (!is_undefined(map[nx][ny])) continue;
+
+			xx = nx;
+			yy = ny;
+			moved = true;
+			
+		}
+
+		if (!moved) {
+			show_debug_message("random walk got stuck after " + cellCount + " cells");
+			break;
+		}
+		
+	}
+
+	return {
+		map: map,
+		cellCount: cellCount
+	}
+	
+}
+
+function scr_mapGen_generateHallways(
+	map,
+	stages,
+	startX,
+	startY,
+	mainLength,
+	sideHallAmount,
+	sideHallMinLength,
+	sideHallMaxLength
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+	
+	var cellCount = 0;
+	
+	var stageCount = array_length(stages);
+	
+	if (stageCount <= 0) return {
+		map: map,
+		cellCount: cellCount
+	};
+	
+	// ---------------------------------------------------------
+	// Pick direction away from the starting edge
+	// ---------------------------------------------------------
+
+	var distLeft   = startX;
+	var distRight  = mapW - 1 - startX;
+	var distTop    = startY;
+	var distBottom = mapH - 1 - startY;
+
+	var nearestDist = min(
+		distLeft,
+		distRight,
+		distTop,
+		distBottom
+	);
+
+	var dx = 0;
+	var dy = 0;
+
+	if (distLeft == nearestDist) {
+		dx = 1;
+	}
+	else if (distRight == nearestDist) {
+		dx = -1;
+	}
+	else if (distTop == nearestDist) {
+		dy = 1;
+	}
+	else {
+		dy = -1;
+	}
+
+	var hallCells = [];
+
+	// ---------------------------------------------------------
+	// Generate main hallway
+	// ---------------------------------------------------------
+
+	var xx = startX;
+	var yy = startY;
+
+	for (var i = 0; i < mainLength; i++) {
+
+		if (xx < 0 or xx >= mapW) break;
+		if (yy < 0 or yy >= mapH) break;
+
+		if (!is_undefined(map[xx][yy])) break;
+
+		var key = stages[irandom(stageCount - 1)];
+		map[xx][yy] = scr_mapGen_createCell(key);
+
+		array_push(hallCells, {
+			xx: xx,
+			yy: yy
+		});
+		
+		cellCount ++;
+
+		xx += dx;
+		yy += dy;
+
+	}
+
+	var hallCount = array_length(hallCells);
+	
+	if (hallCount <= 0)  return {
+		map: map,
+		cellCount: cellCount
+	};
+
+	// Perpendicular directions relative to the main hall
+	var sideDX1 = dy;
+	var sideDY1 = -dx;
+
+	var sideDX2 = -dy;
+	var sideDY2 = dx;
+
+	// ---------------------------------------------------------
+	// Generate side halls
+	// ---------------------------------------------------------
+
+	for (var h = 0; h < sideHallAmount; h++) {
+
+		var index = irandom(hallCount - 1);
+		var cell = hallCells[index];
+
+		var sideLength = irandom_range(
+			sideHallMinLength,
+			sideHallMaxLength
+		);
+
+		var useFirstSide = choose(true, false);
+
+		var sideDX = useFirstSide ? sideDX1 : sideDX2;
+		var sideDY = useFirstSide ? sideDY1 : sideDY2;
+
+		var sx = cell.xx + sideDX;
+		var sy = cell.yy + sideDY;
+
+		for (var j = 0; j < sideLength; j++) {
+
+			if (sx < 0 or sx >= mapW) break;
+			if (sy < 0 or sy >= mapH) break;
+
+			if (!is_undefined(map[sx][sy])) break;
+
+			var key = stages[irandom(stageCount - 1)];
+			map[sx][sy] = scr_mapGen_createCell(key);
+			
+			cellCount ++;
+
+			sx += sideDX;
+			sy += sideDY;
+
+		}
+
+	}
+
+	return {
+		map: map,
+		cellCount: cellCount
+	}
+	
+}
+
+function scr_mapGen_addSideRooms(
+	map,
+	stages,
+	amount
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+	
+	var maxTries = 42;
+	
+	var cellCount = 0;
+	var stageCount = array_length(stages);
+	
+	if (stageCount <= 0 or amount <= 0) {
+		return {
+			map: map,
+			cellCount: cellCount
+		};
+	}
+	
+	for (var i = 0; i < amount; i++) {
+		
+		var placed = false;
+		var tries = 0;
+		
+		while (!placed and tries < maxTries) {
+			
+			tries++;
+			
+			var xx = irandom(mapW - 1);
+			var yy = irandom(mapH - 1);
+			
+			// Candidate cell must be empty
+			if (!is_undefined(map[xx][yy])) continue;
+			
+			var neighbourCount = 0;
+			
+			// Left
+			if (xx > 0) {
+				if (!is_undefined(map[xx - 1][yy])) {
+					neighbourCount++;
+				}
+			}
+			
+			// Right
+			if (xx < mapW - 1) {
+				if (!is_undefined(map[xx + 1][yy])) {
+					neighbourCount++;
+				}
+			}
+			
+			// Above
+			if (yy > 0) {
+				if (!is_undefined(map[xx][yy - 1])) {
+					neighbourCount++;
+				}
+			}
+			
+			// Below
+			if (yy < mapH - 1) {
+				if (!is_undefined(map[xx][yy + 1])) {
+					neighbourCount++;
+				}
+			}
+			
+			// Must connect to exactly one existing cell
+			if (neighbourCount != 1) continue;
+			
+			var key = stages[irandom(stageCount - 1)];
+			map[xx][yy] = scr_mapGen_createCell(key);
+			
+			cellCount++;
+			placed = true;
+			
+		}
+		
+		if (!placed) {
+			show_debug_message(
+				"side room generation failed after "
+				+ string(maxTries)
+				+ " tries"
+			);
+		}
+		
+	}
+	
+	return {
+		map: map,
+		cellCount: cellCount
+	};
+	
 }

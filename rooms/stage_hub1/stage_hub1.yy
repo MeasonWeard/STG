@@ -48,8 +48,8 @@
   ],
   "name":"stage_hub1",
   "parent":{
-    "name":"Stages",
-    "path":"folders/Rooms/Stages.yy",
+    "name":"Hubs",
+    "path":"folders/Rooms/Stages/Hubs.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

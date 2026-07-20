@@ -8,6 +8,7 @@ var playerX = room_width * 0.5;
 var playerY =  room_height * 0.5;
 
 deathCountdown = 90;
+checkPlayerMoveToSide = true;
 
 if (instance_exists(rc) and rc.firstStage) {
 	

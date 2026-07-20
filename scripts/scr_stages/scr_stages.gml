@@ -3,15 +3,47 @@ function scr_stages_getStageData(key) {
 	static stages = global.data.stages;
 
 	var sData = {};
+	var newData = undefined;
 	
 	scr_data_structCopyInto(sData, stages.def);
 	
-	if (variable_struct_exists(stages, key)) {
+	if (is_string(key)) {
 	
-		var newData = variable_struct_get(stages, key);
+		if (variable_struct_exists(stages, key)) {
+	
+			newData = variable_struct_get(stages, key);
+		
+		}
+	
+	}
+	
+	var keyIsRoom = asset_get_type(key) == asset_room;
+	
+	if (keyIsRoom) {
+
+		var keys = variable_struct_get_names(stages);
+		var keysLen = array_length(keys);
+		
+		for (var i = 0; i < keysLen; i++) {
+			
+			var stageKey = keys[i];
+			var stg = stages[$ stageKey];
+			var rm = stg.room;
+			
+			if (rm == key) newData = stg;
+			
+		}
+
+	}
+	
+	if (is_struct(newData)) {
 		
 		scr_data_structCopyInto(sData, newData);
-	
+		
+	} else if (keyIsRoom) {
+		
+		sData.room = key;
+		
 	}
 	
 	return sData;
@@ -183,5 +215,53 @@ function scr_stages_endRun() {
 	if (instance_exists(global.player)) instance_destroy(global.player);
 	
 	room_goto(room_endRun);
+	
+}
+
+function scr_stages_getStartingEdge() {
+
+	if (!instance_exists(global.runController)) return undefined;
+
+	var rc = global.runController;
+
+	var w = rc.zoneInst.mapW;
+	var h = rc.zoneInst.mapH;
+
+	var leftDist   = rc.startX;
+	var rightDist  = (w - 1) - rc.startX;
+	var upDist     = rc.startY;
+	var downDist   = (h - 1) - rc.startY;
+
+	var minDist = leftDist;
+	var edge = "left";
+
+	if (rightDist < minDist) {
+		minDist = rightDist;
+		edge = "right";
+	}
+
+	if (upDist < minDist) {
+		minDist = upDist;
+		edge = "up";
+	}
+
+	if (downDist < minDist) {
+		edge = "down";
+	}
+
+	return edge;
+
+}
+
+function scr_stages_inStartingCell() {
+
+	if (!instance_exists(global.runController)) return false;
+		
+	var startX = global.runController.startX;
+	var startY = global.runController.startX;
+	var posX = global.runController.posX;
+	var posY = global.runController.posX;
+		
+	return (posX == startX and posY == startY);
 	
 }

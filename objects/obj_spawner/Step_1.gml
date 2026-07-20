@@ -2,7 +2,7 @@ if (setup) {
 
 	setup = false;
 
-	if (rc.posX == rc.startX and rc.posY == rc.startY) {
+	if (scr_stages_inStartingCell()) {
 
 		if (instance_exists(global.player)) {
 	
