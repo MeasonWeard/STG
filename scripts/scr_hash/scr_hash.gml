@@ -50,9 +50,7 @@ function scr_hash_remove(hash, inst, cellX, cellY) {
 }
 
 function scr_hash_getNearby(hash, xx, yy) {
-	
-	//cellSize = HASH_CELL_SIZE;
-	
+
 	var cell = scr_hash_getCellAt(xx, yy);
 	
 	var baseCellX = cell.xx;
@@ -78,7 +76,7 @@ function scr_hash_getNearby(hash, xx, yy) {
 		
 		}
 	}
-	
+		
 	return results;
 	
 }
@@ -113,6 +111,7 @@ function scr_hash_getNearbyRange(hash, xx, yy, range) {
 	}
 	
 	return results;
+	
 }
 
 function scr_hash_getInDirection(hash, xx, yy, dir, width) {

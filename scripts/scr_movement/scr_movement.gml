@@ -40,9 +40,10 @@ function scr_movement(blockedByEnv) {
 				if (scr_obj_movementCollision(self, env, true)) {
 					
 					x = prevX;
-
+					
+					var remainingX = moveX;
 					var stepX = sign(moveX);
-
+					
 					while (moveX != 0) {
 
 						x += stepX;
@@ -89,7 +90,7 @@ function scr_movement(blockedByEnv) {
 					y = prevY;
 
 					var stepY = sign(moveY);
-
+					
 					while (moveY != 0) {
 
 						y += stepY;

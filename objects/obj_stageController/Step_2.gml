@@ -1,3 +1,5 @@
+show_debug_message(global.debugSteps);
+
 if (hub and instance_exists(global.player)) {
 	
 	global.hubPosX = global.player.x;

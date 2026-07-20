@@ -1,3 +1,5 @@
+global.debugSteps ++;
+
 if (checkIfCleared and !hub) {
 
 	checkIfCleared = false;

@@ -124,10 +124,18 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 	var found = false;
 	var fallback = false;
 	
+	var targetX = target.x;
+	var targetY = target.y;
+	
+	var roomLeft = global.roomLeft;
+	var roomRight = global.roomRight;
+	var roomTop = global.roomTop;
+	var roomBottom = global.roomBottom;
+	
 	var px = x;
 	var py = y;
 	
-	while (!found and inc < 24) {
+	while (!found and inc < 18) {
 	
 		var newMinDist = minDist + 32 * inc;
 		var newMaxDist = maxDist + 32 * inc;
@@ -137,15 +145,15 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 		var maxSq = newMaxDist * newMaxDist;
 		var dist = sqrt(random_range(minSq, maxSq));
 		
-		px = target.x + lengthdir_x(dist, dir);
-		py = target.y + lengthdir_y(dist, dir);
+		px = targetX + lengthdir_x(dist, dir);
+		py = targetY + lengthdir_y(dist, dir);
 		
 		// Reject out-of-bounds points before doing the overlap check.
 		if (
-			px < global.roomLeft
-			or px > global.roomRight
-			or py < global.roomTop
-			or py > global.roomBottom
+			px < roomLeft
+			or px > roomRight
+			or py < roomTop
+			or py > roomBottom
 		) {
 			
 			tries++;
@@ -165,10 +173,11 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 		
 		tries++;
 		
-		if (tries >= 16) {
+		if (tries >= 12) {
 			tries = 0;
 			inc++;
 		}
+		
 	}
 	
 	if (!found) {
@@ -177,8 +186,8 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 		
 		var dir = point_direction(target.x, target.y, x, y);
 
-		px = target.x + lengthdir_x(maxDist, dir);
-		py = target.y + lengthdir_y(maxDist, dir);
+		px = targetX + lengthdir_x(maxDist, dir);
+		py = targetY + lengthdir_y(maxDist, dir);
 
 		px = clamp(px, global.roomLeft, global.roomRight);
 		py = clamp(py, global.roomTop, global.roomBottom);
@@ -187,6 +196,10 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 	if (moveGhost) {
 		scr_ai_moveGhost(self, px, py);
 	}
+	
+	//global.aiPointCalls++;
+	//global.aiPointAttempts += inc * 16 + tries + 1;
+	//global.aiPointMaxInc = max(global.aiPointMaxInc, inc);
 	
 	return {
 		xx: px,
@@ -403,6 +416,9 @@ function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
 }
 
 function scr_ai_alertAllies(char, radius) {
+
+	//show_debug_message("alerting: " + string(global.debugFrame));
+	//global.aiAlertCalls ++;
 
 	var xx = char.x;
 	var yy = char.y;
