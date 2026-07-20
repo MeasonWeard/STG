@@ -256,6 +256,7 @@ soundProfiles = {
 	//melee
 	cleaverSwing: [snd_cleaverSwing1, snd_cleaverSwing2, snd_cleaverSwing3],
 	cleaverHit: [snd_cleaverHit1, snd_cleaverHit2, snd_cleaverHit3],
+	hammerHit: [snd_hammerHit1, snd_hammerHit2, snd_hammerHit3],
 	swish: [snd_swish1, snd_swish2, snd_swish3, snd_swish4],
 	
 	//characters

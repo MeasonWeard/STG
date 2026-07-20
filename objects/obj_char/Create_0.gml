@@ -153,6 +153,8 @@ gunY = centreY;
 aimX = x;
 aimY = y;
 
+meleeRangeOffset = 0;
+
 shootDelayMin = 8;
 shootDelayMax = 16;
 shootDelayTick = 0;

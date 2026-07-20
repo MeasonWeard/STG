@@ -14,6 +14,9 @@ function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 	attackRate = 2.8;
 	maxCharges = 6;
 	rechargeTime = 1.75;
+	hitDelay = 0;
+	stopOnHit = false;
+	range = 0;
 		
 	damage.kin = 35;
 		
@@ -36,17 +39,21 @@ function scr_melee_attack(char) {
 	var melee = char.equippedWeapon;
 	var stats = char.equippedWeaponStats;
 	
+	if (melee.attackTick > 0) return noone;
+	if (melee.charges < 1) return noone;
+	
 	var meleeX = char.gunX;
 	var meleeY = char.gunY;
 	var aimX = char.aimX;
 	var aimY = char.aimY;
-	
+	var offset = char.meleeRangeOffset + melee.range;
+
 	var dir = point_direction(meleeX, meleeY, aimX, aimY);
 	
-	if (melee.attackTick > 0) return noone;
-	if (melee.charges < 1) return noone;
-
-	var att = instance_create_layer(char.gunX, char.gunY, "Instances", obj_meleeAttack);
+	var attackX = meleeX + lengthdir_x(offset, dir);
+	var attackY = meleeY + lengthdir_y(offset, dir);
+	
+	var att = instance_create_layer(attackX, attackY, "Instances", obj_meleeAttack);
 	
 	var snd = scr_audio_randomSoundFromProfile(melee.swingSounds);
 	if (snd != undefined) if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
@@ -57,6 +64,11 @@ function scr_melee_attack(char) {
 	att.hitSounds = melee.hitSounds;
 	att.oa = char.stats.oa;
 	att.damageDestructibles = char.damageDestructibles;
+	att.hitDelay = melee.hitDelay;
+	att.stopOnHit = melee.stopOnHit;
+	att.range = melee.range;
+	
+	show_debug_message(att.hitDelay);
 	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;

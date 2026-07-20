@@ -1,3 +1,47 @@
+function melee_cleaver(level, rarity) : meleeInst(level, rarity) constructor {
+
+	damage.kin = 25;
+
+	//appearance
+	//name = "Cleaver";
+	//swingSounds = global.data.soundProfiles.cleaverSwing;
+	//hitSounds = global.data.soundProfiles.cleaverHit;
+	//attackSprites = [spr_slashUp, spr_slashDown];
+	//spr = spr_melee;
+	//description = undefined;
+		
+	////combat
+	//attackRate = 2.8;
+	//maxCharges = 6;
+	//rechargeTime = 1.75;
+		
+	//damage.kin = 35;
+		
+	//killThreshold = 10;
+
+}
+
+function melee_hammer(level, rarity) : meleeInst(level, rarity) constructor {
+	
+	name = "Hammer";
+	attackSprites = [spr_slam];
+	swingSounds = global.data.soundProfiles.swish;
+	hitSounds = global.data.soundProfiles.hammerHit;
+	
+	range = 64;
+	hitDelay = 12;
+	stopOnHit = true;
+	
+	attackRate = 1.2;
+	maxCharges = 3;
+	rechargeTime = 2;
+	killThreshold = 15;
+	
+	damage.kin = 50;
+	
+}
+
+//enemy weapons
 function melee_berthaSlash(level, rarity) : meleeInst(level, rarity) constructor {
 
 	maxCharges = 3;

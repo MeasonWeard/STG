@@ -7,7 +7,7 @@ collectRequirements = function(char) {
 }
 
 collectFunc = function(char, item) {
-
+	scr_testSound();
 	var amount = ceil(char.maxHp * 0.1);
 	scr_char_heal(char, amount);
 	

@@ -14,12 +14,16 @@ audio_listener_position(x, y, 0);
 audio_listener_orientation(0, 0, 1, 0, -1, 0);
 
 gunCentred = false;
+meleeRangeOffset = 16;
 
 //EQUIPMENT
 
 gear = scr_data_loadEquippedGear();
 
 var weapons = scr_data_loadEquippedWeapons();
+weapons.weapon1 = new melee_cleaver(1, 1);
+weapons.weapon2 = new melee_hammer(1, 1);
+
 scr_weapons_collectWeapon(self, weapons.weapon1, true);
 scr_weapons_collectWeapon(self, weapons.weapon2, false);
 
@@ -31,8 +35,6 @@ scr_weapons_collectWeapon(self, weapons.weapon2, false);
 
 //scr_weapons_collectWeapon(self, gun, false);
 //scr_weapons_collectWeapon(self, gun2, false);
-
-//var melee1 = new meleeInst(1, 1);
 
 //scr_weapons_collectWeapon(self, melee1, false);
 
