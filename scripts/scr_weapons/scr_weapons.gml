@@ -28,7 +28,7 @@ function scr_weapons_collectWeapon(char, weapon, equip) {
 	    };
 		
 	} else if (is_instanceof(weapon, meleeInst)) {
-		
+		show_debug_message("collecting:");
 		slot = {
 			weapon: weapon,
 			stats: scr_melee_calculateMeleeStats(char, weapon)
@@ -124,6 +124,18 @@ function scr_weapons_applyWeaponBonusesToChar(weapon, char) {
 		
 		scr_stats_alterStat(charStats, key, amount);
 		
+	}
+	
+}
+
+function scr_weapons_calculateBonusDamage(startingDam, level) {
+
+	var low = max(1, floor(startingDam * (0.05 * level)));
+	var high = max(1, ceil(startingDam * (0.15 * level)));
+	
+	return {
+		low: low,
+		high: high
 	}
 	
 }

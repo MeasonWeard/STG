@@ -122,6 +122,21 @@ function scr_melee_calculateMeleeStats(char, melee) {
 	if (!is_struct(melee)) return undefined;
 
 	var newStats = scr_stats_calculateDamageProfileWeapon(char, melee);
+	
+	var bonusStats  = melee.bonusStats;
+	var keys = variable_struct_get_names(bonusStats);
+	var keysLen = array_length(keys);
+	
+	for (var i = 0; i < keysLen; i ++) {
+		
+		var key = keys[i];
+		var amount = bonusStats[$ key];
+		
+		scr_stats_alterStat(newStats, key, amount);
+		
+	}
+	
+	
 
 	return newStats;
 	

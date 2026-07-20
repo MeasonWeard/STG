@@ -1,13 +1,6 @@
 event_inherited();
 
 //equip main weapon
-if (firstEquip) {
-	firstEquip = false;
-	weaponIndex = 0;
-	scr_weapons_equipWeapon(self, weaponIndex);
-	prevWeapon = equippedWeapon;
-}
-
 if (equippedWeapon != prevWeapon) {
 	setupStats = true;	
 }
@@ -192,20 +185,24 @@ if (setupStats) {
 		var thisWeapon = slot.weapon;
 
 		if (is_instanceof(thisWeapon, gunInst)) {
-	
 			slot.stats = scr_guns_calculateGunStats(self, thisWeapon);
 			thisWeapon.ammo = slot.stats.clipSize;
 			
 		}
 		
 		if (is_instanceof(thisWeapon, meleeInst)) {
-		
 			slot.stats = scr_melee_calculateMeleeStats(self, thisWeapon);
-		
 		}
 		
 	}
 		
+}
+
+if (firstEquip) {
+	firstEquip = false;
+	weaponIndex = 0;
+	scr_weapons_equipWeapon(self, weaponIndex);
+	prevWeapon = equippedWeapon;
 }
 
 prevHp = hp;

@@ -2,7 +2,7 @@ function scr_genMelee_cleaver(level, rarity) {
 
 	var melee = new melee_cleaver(level, rarity);
 
-	var damRange = scr_guns_calculateBonusDamage(melee.damage.kin, level);
+	var damRange = scr_weapons_calculateBonusDamage(melee.damage.kin, level);
 	var bonusDam = irandom_range(damRange.low, damRange.high);
 
 	if (level == 1) bonusDam = choose(0, bonusDam);
@@ -35,7 +35,7 @@ function scr_genMelee_hammer(level, rarity) {
 
 	var melee = new melee_hammer(level, rarity);
 
-	var damRange = scr_guns_calculateBonusDamage(melee.damage.kin, level);
+	var damRange = scr_weapons_calculateBonusDamage(melee.damage.kin, level);
 	var bonusDam = irandom_range(damRange.low, damRange.high);
 
 	if (level == 1) bonusDam = choose(0, bonusDam);
@@ -66,7 +66,7 @@ function scr_genMelee_prod(level, rarity) {
 
 	var melee = new melee_prod(level, rarity);
 
-	var damRange = scr_guns_calculateBonusDamage(melee.damage.elec, level);
+	var damRange = scr_weapons_calculateBonusDamage(melee.damage.elec, level);
 	var bonusDam = irandom_range(damRange.low, damRange.high);
 
 	if (level == 1) bonusDam = choose(0, bonusDam);
