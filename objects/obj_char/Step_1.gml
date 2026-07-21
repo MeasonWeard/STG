@@ -5,7 +5,7 @@ if (equippedWeapon != prevWeapon) {
 	setupStats = true;	
 }
 
-//set up basics
+//set up
 if (setup) {
 
 	setup = false;
@@ -161,8 +161,17 @@ if (setupStats) {
 	maxHp = finalStats.maxHp;
 	maxShield = finalStats.maxShield;
 	maxEnergy = finalStats.maxEnergy;
+	
+	//make sure active skills have correct damage and shit
+	if (is_instanceof(skills.skill1, skill) and is_callable(skills.skill1.setupFunc)) skills.skill1.setupFunc(self);
+	if (is_instanceof(skills.skill2, skill) and is_callable(skills.skill2.setupFunc)) skills.skill2.setupFunc(self);
+	if (is_instanceof(skills.skill3, skill) and is_callable(skills.skill3.setupFunc)) skills.skill3.setupFunc(self);
+	if (is_instanceof(skills.skill4, skill) and is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(self);
 
 	if (setupBasics) {
+	
+		show_debug_message(baseStats.maxHp);
+		show_debug_message(finalStats.maxHp);
 	
 		setupBasics = false;
 	

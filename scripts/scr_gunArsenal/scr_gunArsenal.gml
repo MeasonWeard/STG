@@ -227,7 +227,7 @@ function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
 	projSprite = spr_bullet3;
 	projectileType = projectileTypes.blast;
 	blastProjectiles = 12;
-	blastSpread = 10;
+	blastSpread = 12;
 	auto = true;
 	clipSize = 1;
 	fireRate = 0.8;
@@ -238,8 +238,8 @@ function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
 	recoil = 2.4;
 	stability = 0.06;
 	
-	damage.kin = 3;
-	damage.chem = 8;
+	damage.kin = 2;
+	damage.chem = 6;
 	
 	shootSounds = global.data.soundProfiles.alienBlast;
 	

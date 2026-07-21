@@ -4,6 +4,7 @@ function skill() constructor {
 	name = "None";
 	icon = spr_icon_blank;
 	level = 1;
+	maxLevel = 12;
 	
 	key = undefined;
 	
@@ -379,15 +380,24 @@ function skill_fungalTurret() : skill() constructor {
 	name = "Fungal Turret";
 	key = "fungalTurret";
 	icon = spr_icon_fungalTurret;
-	maxCharges = 2;
+	maxLevel = 9;
+	maxCharges = 1;
 	charges = 1;
-	energyCost = 30;
-	cooldownTime = 5;
-	maxSpawns = 2;
+	energyCost = 35;
+	cooldownTime = 4;
+	castCooldownTime = 0.2;
+	maxSpawns = 1;
+	life = 6;
+	maxHp = 200;
 
 	static setupFunc = function(char) {
 		
 		energyCost = 25 + level * 5;
+		life = 6 + (level - 1) * 0.5;
+		maxSpawns = 1 + level div 3;
+		maxCharges = maxSpawns;
+		maxHp = 200 + (level - 1) * 25;
+		castCooldownTime = 0.25;
 	
 	}
 	
@@ -409,7 +419,9 @@ function skill_fungalTurret() : skill() constructor {
 		
 		var existing = 0;
 		
-		var inst = scr_char_spawnPet(obj_fungalTurret, source, xx, yy, maxSpawns);
+		var inst = scr_char_spawnPet(obj_fungalTurret, source, life, xx, yy, maxSpawns);
+		inst.level = level;
+		inst.baseStats.maxHp = maxHp;
 
 		if (instance_exists(inst)) return true;
 

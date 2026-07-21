@@ -231,24 +231,29 @@ function scr_stats_multiplyDamageProfile(profile, mult) {
 	if (!is_struct(profile)) return newDamage;
 
 	newDamage.kin    = round(profile.kin    * mult);
-	newDamage.kinMin = round(profile.kinMin * mult);
-	newDamage.kinMax = round(profile.kinMax * mult);
-
 	newDamage.fire    = round(profile.fire    * mult);
-	newDamage.fireMin = round(profile.fireMin * mult);
-	newDamage.fireMax = round(profile.fireMax * mult);
-
 	newDamage.chem    = round(profile.chem    * mult);
-	newDamage.chemMin = round(profile.chemMin * mult);
-	newDamage.chemMax = round(profile.chemMax * mult);
-
 	newDamage.elec    = round(profile.elec    * mult);
-	newDamage.elecMin = round(profile.elecMin * mult);
-	newDamage.elecMax = round(profile.elecMax * mult);
-
 	newDamage.rad    = round(profile.rad    * mult);
-	newDamage.radMin = round(profile.radMin * mult);
-	newDamage.radMax = round(profile.radMax * mult);
+
+	if (variable_struct_exists(profile, "kinMin")) {
+		
+		newDamage.kinMin = round(profile.kinMin * mult);
+		newDamage.kinMax = round(profile.kinMax * mult);
+	
+		newDamage.fireMin = round(profile.fireMin * mult);
+		newDamage.fireMax = round(profile.fireMax * mult);
+	
+		newDamage.chemMin = round(profile.chemMin * mult);
+		newDamage.chemMax = round(profile.chemMax * mult);
+	
+		newDamage.elecMin = round(profile.elecMin * mult);
+		newDamage.elecMax = round(profile.elecMax * mult);
+	
+		newDamage.radMin = round(profile.radMin * mult);
+		newDamage.radMax = round(profile.radMax * mult);
+		
+	}
 
 	return newDamage;
 

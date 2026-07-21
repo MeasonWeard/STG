@@ -1,5 +1,7 @@
 event_inherited();
 
+if (spawning) exit;
+	
 if (scr_timeSlicing_isMyTurn("findTarget", findTargetIndex)) {
 	
 	if (instance_exists(target)) {

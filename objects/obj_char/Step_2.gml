@@ -19,7 +19,9 @@ if (is_instanceof(equippedWeapon, gunInst)) {
 		
         gun.reload--;
 
-        if (gun.reload == 0) {
+        if (gun.reload <= 0) {
+			
+			gun.reload = 0;
 			
             gun.ammo = equippedWeaponStats.clipSize;
 			shootDelayTick = irandom_range(shootDelayMin, shootDelayMax);
@@ -267,3 +269,14 @@ if (energyPacks == stats.maxEnergyPacks) energyPackRecharge = 0;
 //cap health and energy
 if (hp > maxHp) hp = maxHp;
 if (energy > maxEnergy) energy = maxEnergy;
+
+//pet
+if (pet and is_real(life) and !spawning) {
+
+	life -= FRAME_TIME;
+	
+	if (life <= 0) {
+		hp = 0;	
+	}
+	
+}

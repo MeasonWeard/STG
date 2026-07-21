@@ -18,6 +18,8 @@ meleeRangeOffset = 16;
 
 moveToSide = undefined;
 
+setMaxCharges = true;
+
 //EQUIPMENT
 
 gear = scr_data_loadEquippedGear();

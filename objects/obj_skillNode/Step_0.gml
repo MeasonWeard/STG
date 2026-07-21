@@ -24,48 +24,61 @@ if (mouseHover) {
 		if (mouse_check_button_pressed(mb_left)) {
 			
 			if (c.points > 0) {
-				thisSkill.level ++;
-				c.points --;
 				
-				if (thisSkill.active) {
+				var success = true;
+				
+				thisSkill.level ++;
+				
+				if (thisSkill.level > thisSkill.maxLevel) {
+					thisSkill.level = thisSkill.maxLevel;
+					success = false;
+				}
+				
+				if (success) {
+					
+					c.points --;
+				
+					if (thisSkill.active) {
 
-				    var slots = ["skill1", "skill2", "skill3", "skill4"];
-				    var alreadyAssigned = false;
+					    var slots = ["skill1", "skill2", "skill3", "skill4"];
+					    var alreadyAssigned = false;
 
-				    // First check whether this skill is already assigned
-				    for (var i = 0; i < array_length(slots); i++) {
+					    // First check whether this skill is already assigned
+					    for (var i = 0; i < array_length(slots); i++) {
 
-				        var slot = variable_struct_get(playerData.skills, slots[i]);
+					        var slot = variable_struct_get(playerData.skills, slots[i]);
 
-				        if (is_struct(slot) and slot.key == thisSkill.key) {
-				            alreadyAssigned = true;
-				            break;
-				        }
+					        if (is_struct(slot) and slot.key == thisSkill.key) {
+					            alreadyAssigned = true;
+					            break;
+					        }
 
-				    }
+					    }
 
-				    // Only look for an empty slot if it was not found
-				    if (!alreadyAssigned) {
+					    // Only look for an empty slot if it was not found
+					    if (!alreadyAssigned) {
 
-				        var skillStruct = {
-				            key: thisSkill.key,
-				            icon: thisSkill.icon
-				        };
+					        var skillStruct = {
+					            key: thisSkill.key,
+					            icon: thisSkill.icon
+					        };
 
-				        for (var i = 0; i < array_length(slots); i++) {
+					        for (var i = 0; i < array_length(slots); i++) {
 
-				            var slotKey = slots[i];
-				            var slot = variable_struct_get(playerData.skills, slotKey);
+					            var slotKey = slots[i];
+					            var slot = variable_struct_get(playerData.skills, slotKey);
 
-				            if (is_undefined(slot)) {
-				                variable_struct_set(playerData.skills, slotKey, skillStruct);
-				                break;
-				            }
+					            if (is_undefined(slot)) {
+					                variable_struct_set(playerData.skills, slotKey, skillStruct);
+					                break;
+					            }
 
-				        }
+					        }
 
-				    }
+					    }
 
+					}
+				
 				}
 				
 			}

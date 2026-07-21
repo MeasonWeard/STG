@@ -22,6 +22,28 @@ if (is_string(moveToSide) and !sc.hub and sc.checkPlayerMoveToSide) {
 	
 }
 
+if (setMaxCharges) {
+
+	setMaxCharges = false;
+	if (is_instanceof(skills.skill1, skill)) {
+		skills.skill1.charges = skills.skill1.maxCharges;
+		skills.skill1.cooldown = 0;
+	}
+	if (is_instanceof(skills.skill2, skill)) {
+		skills.skill2.charges = skills.skill2.maxCharges;
+		skills.skill2.cooldown = 0;
+	}
+	if (is_instanceof(skills.skill3, skill)) {
+		skills.skill3.charges = skills.skill3.maxCharges;
+		skills.skill3.cooldown = 0;
+	}
+	if (is_instanceof(skills.skill4, skill)) {
+		skills.skill4.charges = skills.skill4.maxCharges;
+		skills.skill4.cooldown = 0;
+	}
+	
+}
+
 if (!dashing) {
 	
 	var finalSpd = finalStats.spd;

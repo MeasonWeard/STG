@@ -383,28 +383,82 @@ function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
 	if (!instance_exists(char)) exit;
 	if (!instance_exists(target)) exit;
 	
-	var tx = target.x - char.x;
-	var ty = target.colMiddle - char.y;
-
+	var targetX = target.x;
+	var targetY = target.colMiddle;
+	
+	var tx = targetX - char.x;
+	var ty = targetY - char.y;
+	
+	var targetLen = point_distance(0, 0, tx, ty);
+	
+	// Fallback: aim directly at target
+	var aimX = targetX;
+	var aimY = targetY;
+	
 	var tries = 0;
-	var pt;
-	var dot = -1;
-
-	while (dot <= 0 and tries < 12) {
+	var valid = false;
+	
+	while (!valid and tries < 10) {
 		
-		pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
-
+		var pt = scr_randomPointInCircleBiased(
+			targetX,
+			targetY,
+			aimRadius,
+			aimBias
+		);
+		
 		var px = pt.xx - char.x;
 		var py = pt.yy - char.y;
-
-		dot = tx * px + ty * py;
-
-		tries++;
 		
+		var pointLen = point_distance(0, 0, px, py);
+		
+		if (targetLen > 0 and pointLen > 0) {
+			
+			var dot = tx * px + ty * py;
+			var alignment = dot / (targetLen * pointLen);
+			
+			// Must be within roughly 30 degrees of the target
+			if (alignment >= 0.866) {
+				aimX = pt.xx;
+				aimY = pt.yy;
+				valid = true;
+			}
+		}
+		
+		tries++;
 	}
+	
+	char.aimX = aimX;
+	char.aimY = aimY;
+	
+	//SECOND ATTEMPT:
+	
+	//var tx = target.x - char.x;
+	//var ty = target.colMiddle - char.y;
 
-	char.aimX = pt.xx;
-	char.aimY = pt.yy;
+	//var tries = 0;
+	//var pt;
+	//var dot = -1;
+
+	//while (dot <= 0 and tries < 12) {
+		
+	//	pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
+
+	//	var px = pt.xx - char.x;
+	//	var py = pt.yy - char.y;
+
+	//	dot = tx * px + ty * py;
+
+	//	tries++;
+		
+	//}
+	
+	//if (tries >= 12 and dot <= 0) scr_testSound();
+
+	//char.aimX = pt.xx;
+	//char.aimY = pt.yy;
+	
+	///FIRST ATTEMPT:
 	
 	//var pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
 	//var xx = pt.xx;

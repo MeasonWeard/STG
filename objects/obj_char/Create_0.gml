@@ -3,6 +3,8 @@ event_inherited();
 
 step = 0;
 
+
+
 name = "none";
 owner = noone;
 spawnTime = current_time;
@@ -33,6 +35,9 @@ energyRegenCounter = 0;
 shieldRegenCounter = 0;
 hurtCooldown = 240;
 hurtTick = 0;
+
+pet = false;
+life = undefined;
 
 sprites = {
 
@@ -162,15 +167,6 @@ aimY = y;
 
 meleeRangeOffset = 0;
 
-shootDelayMin = 8;
-shootDelayMax = 16;
-shootDelayTick = 0;
-aimRadius = 360;
-aimBias = 1.5; // 1 = equal chance across radius, < 1 baised towards edges, > 1 baised towards centre
-firstShot = true;
-aimIndex = -1;
-aimOnReload = false;
-
 meleeCooldown = 0;
 
 equippedWeapon = undefined;
@@ -194,3 +190,12 @@ avoidX = 0;
 avoidY = 0;
 avoidIndex = -1;
 meleeRange = 240;
+
+shootDelayMin = 8;
+shootDelayMax = 16;
+shootDelayTick = 0;
+aimRadius = 360;
+aimBias = 1.5; // 1 = equal chance across radius, < 1 baised towards edges, > 1 baised towards centre
+firstShot = true;
+aimIndex = -1;
+aimOnReload = false;

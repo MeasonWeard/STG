@@ -461,7 +461,7 @@ function scr_char_useEnergyPack(char) {
 	
 }
 
-function scr_char_spawnPet(obj, source, xx, yy, maxSpawns, faction = undefined, cloneGear = true) {
+function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undefined, cloneGear = true) {
 	
 	if (!asset_get_type(obj) == asset_object) return noone;
 	
@@ -583,8 +583,14 @@ function scr_char_spawnPet(obj, source, xx, yy, maxSpawns, faction = undefined, 
 	
 	}
 	
+	inst.pet = true;
+	inst.life = life;
 	inst.faction = faction;
 	inst.spawning = true;
+	
+	inst.setup = true;
+	inst.setupStats = true;
+	inst.setupBasics = true;
 	
 	return inst;
 	
