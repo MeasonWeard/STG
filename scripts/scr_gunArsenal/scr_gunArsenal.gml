@@ -238,9 +238,9 @@ function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
 	recoil = 2.4;
 	stability = 0.06;
 	
-	damage.kin = 2;
+	damage.kin = 3;
 	damage.chem = 6;
 	
-	shootSounds = global.data.soundProfiles.alienBlast;
+	shootSounds = global.data.soundProfiles.fungusBlast;
 	
 }

@@ -123,17 +123,63 @@ if (mouseHover) {
 	
 	//assign to keys
 	if (is_struct(thisSkill) and thisSkill.active) {
-	
+
 		var skillStruct = {
-			key : thisSkill.key,
-			icon: thisSkill.icon
+			key  : thisSkill.key,
+			icon : thisSkill.icon
+		};
+
+		if (keyboard_check_pressed(ord("1"))) {
+
+			if (is_struct(playerData.skills.skill1) and playerData.skills.skill1.key == skillStruct.key) {
+				playerData.skills.skill1 = undefined;
+			} else {
+				if (is_struct(playerData.skills.skill2) and playerData.skills.skill2.key == skillStruct.key) playerData.skills.skill2 = undefined;
+				if (is_struct(playerData.skills.skill3) and playerData.skills.skill3.key == skillStruct.key) playerData.skills.skill3 = undefined;
+				if (is_struct(playerData.skills.skill4) and playerData.skills.skill4.key == skillStruct.key) playerData.skills.skill4 = undefined;
+
+				playerData.skills.skill1 = skillStruct;
+			}
 		}
-	
-		if (keyboard_check_pressed(ord("1"))) playerData.skills.skill1 = skillStruct;
-		if (keyboard_check_pressed(ord("2"))) playerData.skills.skill2 = skillStruct;
-		if (keyboard_check_pressed(ord("3"))) playerData.skills.skill3 = skillStruct;
-		if (keyboard_check_pressed(ord("4"))) playerData.skills.skill4 = skillStruct;
-		
+
+		if (keyboard_check_pressed(ord("2"))) {
+
+			if (is_struct(playerData.skills.skill2) and playerData.skills.skill2.key == skillStruct.key) {
+				playerData.skills.skill2 = undefined;
+			} else {
+				if (is_struct(playerData.skills.skill1) and playerData.skills.skill1.key == skillStruct.key) playerData.skills.skill1 = undefined;
+				if (is_struct(playerData.skills.skill3) and playerData.skills.skill3.key == skillStruct.key) playerData.skills.skill3 = undefined;
+				if (is_struct(playerData.skills.skill4) and playerData.skills.skill4.key == skillStruct.key) playerData.skills.skill4 = undefined;
+
+				playerData.skills.skill2 = skillStruct;
+			}
+		}
+
+		if (keyboard_check_pressed(ord("3"))) {
+
+			if (is_struct(playerData.skills.skill3) and playerData.skills.skill3.key == skillStruct.key) {
+				playerData.skills.skill3 = undefined;
+			} else {
+				if (is_struct(playerData.skills.skill1) and playerData.skills.skill1.key == skillStruct.key) playerData.skills.skill1 = undefined;
+				if (is_struct(playerData.skills.skill2) and playerData.skills.skill2.key == skillStruct.key) playerData.skills.skill2 = undefined;
+				if (is_struct(playerData.skills.skill4) and playerData.skills.skill4.key == skillStruct.key) playerData.skills.skill4 = undefined;
+
+				playerData.skills.skill3 = skillStruct;
+			}
+		}
+
+		if (keyboard_check_pressed(ord("4"))) {
+
+			if (is_struct(playerData.skills.skill4) and playerData.skills.skill4.key == skillStruct.key) {
+				playerData.skills.skill4 = undefined;
+			} else {
+				if (is_struct(playerData.skills.skill1) and playerData.skills.skill1.key == skillStruct.key) playerData.skills.skill1 = undefined;
+				if (is_struct(playerData.skills.skill2) and playerData.skills.skill2.key == skillStruct.key) playerData.skills.skill2 = undefined;
+				if (is_struct(playerData.skills.skill3) and playerData.skills.skill3.key == skillStruct.key) playerData.skills.skill3 = undefined;
+
+				playerData.skills.skill4 = skillStruct;
+			}
+		}
 	}
 	
 }

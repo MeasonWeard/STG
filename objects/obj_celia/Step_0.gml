@@ -6,7 +6,7 @@ if (alert) {
 
 	if (reaim) {
 
-		scr_ai_aimAtTarget(self, target, aimRadius, aimBias);
+		scr_ai_aimAtTarget(self, target, aimAngle, aimBias);
 	
 	}
 

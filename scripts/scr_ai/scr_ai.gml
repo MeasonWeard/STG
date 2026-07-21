@@ -333,7 +333,7 @@ function scr_ai_shootAtTarget(char, target, aimOnReload) {
 			
 		}
 		
-		if (firstShot or aim) scr_ai_aimAtTarget(char, target, char.aimRadius, char.aimBias);
+		if (firstShot or aim) scr_ai_aimAtTarget(char, target, char.aimAngle, char.aimBias);
 			
 		shot = scr_guns_shoot(char);
 		
@@ -386,50 +386,82 @@ function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
 	var targetX = target.x;
 	var targetY = target.colMiddle;
 	
-	var tx = targetX - char.x;
-	var ty = targetY - char.y;
+	var targetDir = point_direction(
+		char.x,
+		char.y,
+		targetX,
+		targetY
+	);
 	
-	var targetLen = point_distance(0, 0, tx, ty);
+	var targetDist = point_distance(
+		char.x,
+		char.y,
+		targetX,
+		targetY
+	);
 	
-	// Fallback: aim directly at target
-	var aimX = targetX;
-	var aimY = targetY;
+	// Random angular error between -aimAngle and +aimAngle
+	var angleOffset = random_range(-aimAngle, aimAngle);
 	
-	var tries = 0;
-	var valid = false;
-	
-	while (!valid and tries < 10) {
-		
-		var pt = scr_randomPointInCircleBiased(
-			targetX,
-			targetY,
-			aimRadius,
-			aimBias
-		);
-		
-		var px = pt.xx - char.x;
-		var py = pt.yy - char.y;
-		
-		var pointLen = point_distance(0, 0, px, py);
-		
-		if (targetLen > 0 and pointLen > 0) {
-			
-			var dot = tx * px + ty * py;
-			var alignment = dot / (targetLen * pointLen);
-			
-			// Must be within roughly 30 degrees of the target
-			if (alignment >= 0.866) {
-				aimX = pt.xx;
-				aimY = pt.yy;
-				valid = true;
-			}
-		}
-		
-		tries++;
+	// Bias toward the centre.
+	// Higher aimBias means more accurate shots.
+	if (aimBias > 0) {
+		angleOffset *= power(random(1), aimBias);
 	}
 	
-	char.aimX = aimX;
-	char.aimY = aimY;
+	var aimDir = targetDir + angleOffset;
+	
+	char.aimX = char.x + lengthdir_x(targetDist, aimDir);
+	char.aimY = char.y + lengthdir_y(targetDist, aimDir);
+	
+	//THIRD ATTEMPT:
+	//var targetX = target.x;
+	//var targetY = target.colMiddle;
+	
+	//var tx = targetX - char.x;
+	//var ty = targetY - char.y;
+	
+	//var targetLen = point_distance(0, 0, tx, ty);
+	
+	//// Fallback: aim directly at target
+	//var aimX = targetX;
+	//var aimY = targetY;
+	
+	//var tries = 0;
+	//var valid = false;
+	
+	//while (!valid and tries < 10) {
+		
+	//	var pt = scr_randomPointInCircleBiased(
+	//		targetX,
+	//		targetY,
+	//		aimRadius,
+	//		aimBias
+	//	);
+		
+	//	var px = pt.xx - char.x;
+	//	var py = pt.yy - char.y;
+		
+	//	var pointLen = point_distance(0, 0, px, py);
+		
+	//	if (targetLen > 0 and pointLen > 0) {
+			
+	//		var dot = tx * px + ty * py;
+	//		var alignment = dot / (targetLen * pointLen);
+			
+	//		// Must be within roughly 30 degrees of the target
+	//		if (alignment >= 0.866) {
+	//			aimX = pt.xx;
+	//			aimY = pt.yy;
+	//			valid = true;
+	//		}
+	//	}
+		
+	//	tries++;
+	//}
+	
+	//char.aimX = aimX;
+	//char.aimY = aimY;
 	
 	//SECOND ATTEMPT:
 	

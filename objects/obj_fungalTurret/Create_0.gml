@@ -10,6 +10,7 @@ bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
 level = 1;
+gunDamMult = 1;
 
 target = noone;
 
@@ -33,5 +34,5 @@ findTargetIndex = scr_timeSlicing_assignTurnIndex("findTarget");
 aimIndex = scr_timeSlicing_assignTurnIndex("aim");
 reTargetDist = 800;
 
-aimBias = 2;
-aimRadius = 200;
+aimBias = 1.85;
+//aimAngle = 30;

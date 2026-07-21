@@ -23,7 +23,7 @@ gun1 = new gun_alienOrb2(1, 1);
 scr_weapons_collectWeapon(self, gun1, true);
 
 aimOnReload = true;
-aimRadius = 240;
+aimAngle = 50;
 aimBias = 1.2;
 
 thornsDamage = new damageProfile();

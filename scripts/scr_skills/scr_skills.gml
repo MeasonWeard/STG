@@ -423,6 +423,7 @@ function skill_fungalTurret() : skill() constructor {
 	maxSpawns = 1;
 	life = 6;
 	maxHp = 200;
+	gunDamMult = 1;
 
 	static setupFunc = function(char) {
 		
@@ -432,6 +433,7 @@ function skill_fungalTurret() : skill() constructor {
 		maxCharges = maxSpawns;
 		maxHp = 200 + (level - 1) * 25;
 		castCooldownTime = 0.25;
+		gunDamMult = 1 + (level - 1) * 0.2;
 	
 	}
 	
@@ -456,6 +458,9 @@ function skill_fungalTurret() : skill() constructor {
 		var inst = scr_char_spawnPet(obj_fungalTurret, source, life, xx, yy, maxSpawns);
 		inst.level = level;
 		inst.baseStats.maxHp = maxHp;
+		inst.gunDamMult = gunDamMult;
+
+		scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
 
 		if (instance_exists(inst)) return true;
 

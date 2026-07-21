@@ -197,8 +197,8 @@ meleeRange = 240;
 shootDelayMin = 8;
 shootDelayMax = 16;
 shootDelayTick = 0;
-aimRadius = 360;
-aimBias = 1.5; // 1 = equal chance across radius, < 1 baised towards edges, > 1 baised towards centre
+aimAngle = 30;
+aimBias = 1.5; // 1 = equal chance across angle range, < 1 baised towards edges, > 1 baised towards centre
 firstShot = true;
 aimIndex = -1;
 aimOnReload = false;

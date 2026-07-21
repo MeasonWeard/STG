@@ -7,9 +7,8 @@ if (fungalSetup) {
 
 	if (level > 1) {
 
-		var factor = level * 0.6;
 		var gun1 = new gun_fungalGun (1, 1);
-		gun1.damage = scr_stats_multiplyDamageProfile(gun1.damage, factor);
+		gun1.damage = scr_stats_multiplyDamageProfile(gun1.damage, gunDamMult);
 		
 		gun1.reloadTime -= (level - 1) * 0.036;
 	

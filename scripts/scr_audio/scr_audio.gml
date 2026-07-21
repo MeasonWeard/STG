@@ -157,6 +157,6 @@ function scr_audio_stopMusic() {
 
 function scr_audio_playSoundAt(snd, xx, yy) {
 
-	audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
+	audio_play_sound_at(snd, xx, yy, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
 	
 }

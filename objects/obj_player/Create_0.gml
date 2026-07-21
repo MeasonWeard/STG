@@ -48,8 +48,8 @@ scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 //gunYoffset = 64;
 
 //STATS
-baseStats.maxHp = 300;
-baseStats.maxEnergy = 300;
+baseStats.maxHp = 200;
+baseStats.maxEnergy = 200;
 baseStats.spd = 6;
 baseStats.maxDashes = 2;
 baseStats.hpRegen = 1;
@@ -58,8 +58,8 @@ baseStats.energyRegen = 5;
 baseStats.maxStimPacks = 2;
 baseStats.maxEnergyPacks = 1;
 
-baseStats.maxShield = 4;
-baseStats.shieldRegen = 0.5;
+baseStats.maxShield = 1;
+baseStats.shieldRegen = 0.25;
 
 //SKILLS
 skills.skill1 = new skill_chainLightning();

@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_alienShoot3",
+  "%Name":"snd_fungusBlast1",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -12,7 +12,7 @@
   "conversionMode":0,
   "duration":0.54210883,
   "exportDir":"",
-  "name":"snd_alienShoot3",
+  "name":"snd_fungusBlast1",
   "parent":{
     "name":"Shot Sounds",
     "path":"folders/Sounds/Shot Sounds.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_alienShoot3.wav",
-  "volume":0.8,
+  "soundFile":"snd_fungusBlast1.wav",
+  "volume":1.0,
 }

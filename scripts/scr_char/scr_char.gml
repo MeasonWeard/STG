@@ -542,13 +542,6 @@ function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undef
 		//if (faction == undefined) faction = source.faction;
 		faction = faction ?? source.faction;
 		
-		//if (cloneGear) {
-		
-		//	var newGear = variable_clone(source.gear);
-		//	inst.gear = newGear;
-		
-		//}
-		
 	}
 	
 	//destroy oldest if max spawn limit is reached
@@ -591,6 +584,9 @@ function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undef
 	inst.setup = true;
 	inst.setupStats = true;
 	inst.setupBasics = true;
+	
+	scr_movement_updateCollisionHitBox(inst);
+	scr_movement_updateMovementHitBox(inst);
 	
 	return inst;
 	
