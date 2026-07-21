@@ -383,7 +383,7 @@ function skill_fungalTurret() : skill() constructor {
 	maxLevel = 9;
 	maxCharges = 1;
 	charges = 1;
-	energyCost = 35;
+	energyCost = 20;
 	cooldownTime = 4;
 	castCooldownTime = 0.2;
 	maxSpawns = 1;
@@ -392,7 +392,7 @@ function skill_fungalTurret() : skill() constructor {
 
 	static setupFunc = function(char) {
 		
-		energyCost = 25 + level * 5;
+		energyCost = 20 + (level - 1) * 2;
 		life = 6 + (level - 1) * 0.5;
 		maxSpawns = 1 + level div 3;
 		maxCharges = maxSpawns;

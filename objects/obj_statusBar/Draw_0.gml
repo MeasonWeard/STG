@@ -80,5 +80,18 @@ for (var i = 0; i < borderSize; i++) {
 	
 }
 
+//text
+if (is_string(txt) and txt != "") {
+
+	draw_set_halign(fa_middle);
+	draw_set_valign(fa_middle);
+	draw_set_colour(txtCol);
+	
+	draw_text(x, y, txt);
+	
+	scr_misc_resetTextAlignment();
+	
+}
+
 draw_set_alpha(1);
 draw_set_color(prevCol);

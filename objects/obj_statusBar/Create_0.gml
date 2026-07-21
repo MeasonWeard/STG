@@ -3,6 +3,9 @@ depth = layers.ui;
 value = 50;
 maxValue = 100;
 
+txt = "";
+txtCol = c_black;
+
 width = 100;
 height = 16;
 left = x;

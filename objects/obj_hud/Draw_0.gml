@@ -150,11 +150,13 @@ healthBar.value = hp;
 healthBar.maxValue = maxHp;
 healthBar.x = healthBarX;
 healthBar.y = healthBarY;
+healthBar.txt = string(hp) + " / " + string(maxHp);
 
 energyBar.value = energy;
 energyBar.maxValue = maxEnergy;
 energyBar.x = energyBarX;
 energyBar.y = energyBarY;
+energyBar.txt = string(energy) + " / " + string(maxEnergy);
 
 if (maxShield > 0) {
 

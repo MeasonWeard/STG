@@ -15,8 +15,5 @@ if (scr_timeSlicing_isMyTurn("findTarget", findTargetIndex)) {
 	
 }
 
-if (instance_exists(target)) {
-
-	scr_ai_shootAtTarget(self, target, true);
+scr_ai_shootAtTarget(self, target, true);
 	
-}

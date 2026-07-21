@@ -32,4 +32,4 @@ aimIndex = scr_timeSlicing_assignTurnIndex("aim");
 reTargetDist = 800;
 
 aimBias = 2;
-aimRadius = 150;
+aimRadius = 200;
