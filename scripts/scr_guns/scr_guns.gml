@@ -78,7 +78,7 @@ function scr_guns_shoot(char) {
 			
 			} else {
 			
-				gun.reload = weaponStats.reloadTime * 60;
+				gun.reload = max(0.01, weaponStats.reloadTime * 60);
 			
 			}
 			

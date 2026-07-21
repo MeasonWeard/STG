@@ -7,7 +7,7 @@ if (fungalSetup) {
 
 	if (level > 1) {
 
-		var factor = level * 0.7;
+		var factor = level * 0.6;
 		var gun1 = new gun_fungalGun (1, 1);
 		gun1.damage = scr_stats_multiplyDamageProfile(gun1.damage, factor);
 		

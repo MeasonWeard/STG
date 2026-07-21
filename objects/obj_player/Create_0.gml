@@ -45,7 +45,6 @@ scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 //gear.tie = new tieInst(1, 1);
 //gear.headgear = new headgearInst(1, 1);
 
-
 //gunYoffset = 64;
 
 //STATS

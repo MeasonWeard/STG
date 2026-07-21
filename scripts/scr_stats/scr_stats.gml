@@ -620,3 +620,51 @@ function scr_stats_alterStat(struct, key, amount) {
 	}
 
 }
+
+function scr_stats_copyDamageBonuses(source, dest) {
+	
+	if (!is_struct(source) or !is_struct(dest)) exit;
+	
+	dest.kinDam = source.kinDam;
+	dest.fireDam = source.fireDam;
+	dest.chemDam = source.chemDam;
+	dest.elecDam = source.elecDam;
+	dest.radDam = source.radDam;
+	
+}
+
+function scr_stats_copyDamageMultipliers(source, dest) {
+	
+	if (!is_struct(source) or !is_struct(dest)) exit;
+	
+	dest.kinDamPerc = source.kinDamPerc;
+	dest.fireDamPerc = source.fireDamPerc;
+	dest.chemDamPerc = source.chemDamPerc;
+	dest.elecDamPerc = source.elecDamPerc;
+	dest.radDamPerc = source.radDamPerc;
+	
+}
+
+function scr_stats_copyResistanceBonuses(source, dest) {
+	
+	if (!is_struct(source) or !is_struct(dest)) exit;
+	
+	dest.kinRes = source.kinRes;
+	dest.fireRes = source.fireRes;
+	dest.chemRes = source.chemRes;
+	dest.elecRes = source.elecRes;
+	dest.radRes = source.radRes;
+	
+}
+
+function scr_stats_copyResistanceMultipliers(source, dest) {
+	
+	if (!is_struct(source) or !is_struct(dest)) exit;
+	
+	dest.kinResPerc = source.kinResPerc;
+	dest.fireResPerc = source.fireResPerc;
+	dest.chemResPerc = source.chemResPerc;
+	dest.elecResPerc = source.elecResPerc;
+	dest.radResPerc = source.radResPerc;
+	
+}

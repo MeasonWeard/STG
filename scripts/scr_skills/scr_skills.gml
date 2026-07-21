@@ -149,7 +149,7 @@ function scr_skills_loadArray(savedSkills) {
 
 }
 
-function scr_skills_findActiveSkill(key, playerData) {
+function scr_skills_findPlayerSkill(key, playerData, mustBeActive = false) {
 	
 	if (key == undefined) return undefined;
 	
@@ -166,11 +166,11 @@ function scr_skills_findActiveSkill(key, playerData) {
 
         for (var j = 0; j < array_length(skills); j++) {
 
-            var skill = skills[j];
+            var thisSkill = skills[j];
 
-            if (!is_struct(skill)) continue;
-            if (!skill.active) continue;
-            if (skill.key == key) return skill;
+            if (!is_struct(thisSkill)) continue;
+            if (mustBeActive and !thisSkill.active) continue;
+            if (thisSkill.key == key) return thisSkill;
 
         }
 
@@ -179,6 +179,40 @@ function scr_skills_findActiveSkill(key, playerData) {
     return undefined;
 	
 }
+
+function scr_skills_findCharSkill(key, char, mustBeActive = false) {
+	
+	if (key == undefined) return undefined;
+	if (!instance_exists(char)) return undefined;
+	if (!variable_instance_exists(char, "class1") or !variable_instance_exists(char, "class2")) return undefined;
+	
+    var cClasses = [char.class1, char.class2];
+
+    for (var i = 0; i < array_length(cClasses); i++) {
+
+        var classData = cClasses[i];
+
+        if (!is_struct(classData)) continue;
+        if (!is_array(classData.unlockedSkills)) continue;
+
+        var skills = classData.unlockedSkills;
+
+        for (var j = 0; j < array_length(skills); j++) {
+
+            var thisSkill = skills[j];
+
+            if (!is_struct(thisSkill)) continue;
+            if (mustBeActive and !thisSkill.active) continue;
+            if (thisSkill.key == key) return thisSkill;
+
+        }
+
+    }
+
+    return undefined;
+	
+}
+
 
 function scr_skills_getTotalSkillPoints() {
 

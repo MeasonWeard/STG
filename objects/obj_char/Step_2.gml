@@ -22,6 +22,7 @@ if (is_instanceof(equippedWeapon, gunInst)) {
         if (gun.reload <= 0) {
 			
 			gun.reload = 0;
+			gun.fireTick = 0;
 			
             gun.ammo = equippedWeaponStats.clipSize;
 			shootDelayTick = irandom_range(shootDelayMin, shootDelayMax);

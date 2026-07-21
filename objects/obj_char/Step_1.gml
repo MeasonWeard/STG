@@ -140,11 +140,20 @@ if (setupStats) {
 		var skill3Key = is_struct(skill3) ? skill3.key : undefined;
 		var skill4Key = is_struct(skill4) ? skill4.key : undefined;
 		
-		skills.skill1 = scr_skills_findActiveSkill(skill1Key, playerData);
-		skills.skill2 = scr_skills_findActiveSkill(skill2Key, playerData);
-		skills.skill3 = scr_skills_findActiveSkill(skill3Key, playerData);
-		skills.skill4 = scr_skills_findActiveSkill(skill4Key, playerData);
+		skills.skill1 = scr_skills_findPlayerSkill(skill1Key, playerData, true);
+		skills.skill2 = scr_skills_findPlayerSkill(skill2Key, playerData, true);
+		skills.skill3 = scr_skills_findPlayerSkill(skill3Key, playerData, true);
+		skills.skill4 = scr_skills_findPlayerSkill(skill4Key, playerData, true);
 		
+	}
+	
+	if (pet and instance_exists(owner)) {
+	
+		if (getOwnerDamBonuses) scr_stats_copyDamageBonuses(owner.stats, stats);
+		if (getOwnerDamMults) scr_stats_copyDamageMultipliers(owner.stats, stats);
+		if (getOwnerResBonuses) scr_stats_copyResistanceBonuses(owner.stats, stats);
+		if (getOwnerResMults) scr_stats_copyResistanceMultipliers(owner.stats, stats);
+	
 	}
 	
 	//apply gear stats

@@ -3,8 +3,6 @@ event_inherited();
 
 step = 0;
 
-
-
 name = "none";
 owner = noone;
 spawnTime = current_time;
@@ -38,6 +36,11 @@ hurtTick = 0;
 
 pet = false;
 life = undefined;
+
+getOwnerDamBonuses = false;
+getOwnerDamMults = true;
+getOwnerResBonuses = true;
+getOwnerResMults = true;
 
 sprites = {
 

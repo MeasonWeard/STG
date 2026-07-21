@@ -542,12 +542,12 @@ function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undef
 		//if (faction == undefined) faction = source.faction;
 		faction = faction ?? source.faction;
 		
-		if (cloneGear) {
+		//if (cloneGear) {
 		
-			var newGear = variable_clone(source.gear);
-			inst.gear = newGear;
+		//	var newGear = variable_clone(source.gear);
+		//	inst.gear = newGear;
 		
-		}
+		//}
 		
 	}
 	

@@ -9,6 +9,8 @@ bloodCol = #A1FF99;
 bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
+level = 1;
+
 target = noone;
 
 gunYoffset = -sprite_height + 16;
