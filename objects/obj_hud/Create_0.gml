@@ -40,6 +40,9 @@ skillsY = 0;
 skillsPad = 16;
 skillIconW = sprite_get_width(spr_icon_blank);
 
+shieldX = 0;
+shieldY = 0;
+
 stimPackX = 0;
 energyPackX = 0;
 
@@ -61,6 +64,8 @@ stimPacks = 0;
 energyPacks = 0;
 stimPackCool = 0;
 energyPackCool = 0;
+
+shieldRecharge = false;
 
 prevHp = 0;
 prevShield = 0;

@@ -30,13 +30,20 @@ if (instance_exists(owner)) {
 					if (!scr_melee_alreadyHit(char, self)) {
 					
 						var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
-					
+						
+						if (char.shield > 0) {
+							var snd = scr_audio_randomSoundFromProfile(shieldSounds);
+							if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
+						}
+						
 						scr_char_damage(char, damage, damageTypes.melee, false, hitOutcome);
 					
 						if (char.hp <= killThreshold) char.hp = 0;
 				
 						var snd = scr_audio_randomSoundFromProfile(hitSounds);
 						if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
+					
+
 					
 						array_push(char.meleeHitList, self);
 					
@@ -75,7 +82,7 @@ if (instance_exists(owner)) {
 					
 							var snd = scr_audio_randomSoundFromProfile(hitSounds);
 							if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
-					
+
 							array_push(dest.meleeHitList, self);
 					
 							if (is_callable(dest.bulletHitFunc)) dest.bulletHitFunc(self, dest);

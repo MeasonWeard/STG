@@ -27,6 +27,9 @@ gibDisappears = true;
 
 hpRegenCounter = 0;
 energyRegenCounter = 0;
+shieldRegenCounter = 0;
+hurtCooldown = 240;
+hurtTick = 0;
 
 sprites = {
 

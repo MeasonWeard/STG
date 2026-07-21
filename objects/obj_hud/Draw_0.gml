@@ -25,6 +25,9 @@ skillsY = dashY;
 stimPackX = dashX + skillIconW + skillsPad;
 energyPackX = stimPackX + skillIconW + skillsPad;
 
+shieldX = healthBarX - healthBar.width * 0.5 + 16;
+shieldY = healthBarY - 32;
+
 posX = instance_exists(rc) ? rc.posX : 0;
 posY = instance_exists(rc) ? rc.posY : 0;
 
@@ -42,6 +45,8 @@ if (instance_exists(player)) {
 	dashCool = player.dashCool;
 	dashCoolTime = player.finalStats.dashCoolTime;
 	dashCoolPerc = dashCool / (dashCoolTime * 60);
+	
+	shieldRecharge = player.shieldRegenCounter > 0 ? true : false;
 	
 	stimPacks = player.stimPacks;
 	energyPacks = player.energyPacks;
@@ -64,7 +69,7 @@ if (!firstStep) {
 	if (shield < prevShield) {
 	
 		flashAlpha = 1;
-		flashCol = c_white;
+		flashCol = c_purple;
 	
 	}
 
@@ -140,7 +145,7 @@ if (is_string(instructions) and instructionsTick > 0) {
 //minimap
 if (!sc.hub) scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, posX, posY);
 
-//health and energy
+//health, energy and shield
 healthBar.value = hp;
 healthBar.maxValue = maxHp;
 healthBar.x = healthBarX;
@@ -150,6 +155,25 @@ energyBar.value = energy;
 energyBar.maxValue = maxEnergy;
 energyBar.x = energyBarX;
 energyBar.y = energyBarY;
+
+if (maxShield > 0) {
+
+	var subImage = shield > 0 ? 0 : 1;
+	
+	draw_set_font(fnt_normal);
+	draw_set_colour(c_purple);
+	draw_set_halign(fa_left);
+	draw_sprite(spr_shieldIcon, subImage, shieldX, shieldY);
+	draw_text(shieldX + 24, shieldY - 8, string(shield) + "/" + string(maxShield));
+	
+	if(shieldRecharge) {
+	
+		var drawRecharge = (current_time mod 800) < 400;
+		if (drawRecharge) draw_sprite(spr_shieldRechargeIcon, 0, shieldX, shieldY);
+	
+	}
+
+}
 
 //dash
 scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashCoolPerc, false);

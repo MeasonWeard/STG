@@ -409,21 +409,41 @@ function scr_ui_drawTextBox(xx, yy, txt, font) {
 	var prevFont = draw_get_font();
 	draw_set_font(font);
 
-    var pad = 6;
+	var pad = 6;
 
-    var w = string_width(txt) + pad * 2;
-    var h = string_height(txt) + pad * 2;
+	var w = string_width(txt) + pad * 2;
+	var h = string_height(txt) + pad * 2;
+
+	var screenW = display_get_gui_width();
+	var screenH = display_get_gui_height();
+
+	var drawX = xx;
+	var drawY = yy;
+
+	// Flip horizontally if it would leave the screen
+	if (drawX + w > screenW) {
+		drawX = xx - w;
+	}
+
+	// Flip vertically if it would leave the screen
+	if (drawY + h > screenH) {
+		drawY = yy - h;
+	}
+
+	// Final clamp in case the box is larger than the available space
+	drawX = clamp(drawX, 0, max(0, screenW - w));
+	drawY = clamp(drawY, 0, max(0, screenH - h));
 
 	scr_misc_resetTextAlignment();
-	
-    draw_set_color(global.data.colours.windowBackground);
-    draw_rectangle(xx, yy, xx + w, yy + h, false);
 
-    draw_set_color(global.data.colours.windowText);
-    draw_rectangle(xx, yy, xx + w, yy + h, true);
+	draw_set_color(global.data.colours.windowBackground);
+	draw_rectangle(drawX, drawY, drawX + w, drawY + h, false);
 
-    draw_text(xx + pad, yy + pad, txt);
-	
+	draw_set_color(global.data.colours.windowText);
+	draw_rectangle(drawX, drawY, drawX + w, drawY + h, true);
+
+	draw_text(drawX + pad, drawY + pad, txt);
+
 	draw_set_font(prevFont);
 
 }

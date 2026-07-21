@@ -256,6 +256,7 @@ soundProfiles = {
 	bulletHitMetalHigh: [snd_bulletHitMetalHigh1, snd_bulletHitMetalHigh2, snd_bulletHitMetalHigh3, snd_bulletHitMetalHigh4],
 	bulletHitFlesh: [snd_bulletHitFlesh],
 	bulletHitRock: [snd_bulletHitRock1, snd_bulletHitRock2, snd_bulletHitRock3],
+	bulletHitShield: [snd_shieldDamage1, snd_shieldDamage2, snd_shieldDamage3],
 	
 	//weaponshots
 	blaster: [snd_blaster1, snd_blaster2, snd_blaster3],

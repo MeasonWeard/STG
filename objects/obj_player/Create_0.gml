@@ -57,6 +57,9 @@ baseStats.energyRegen = 5;
 baseStats.maxStimPacks = 2;
 baseStats.maxEnergyPacks = 1;
 
+baseStats.maxShield = 4;
+baseStats.shieldRegen = 0.5;
+
 //SKILLS
 skills.skill1 = new skill_chainLightning();
 skills.skill2 = new skill_antimatterBlast();

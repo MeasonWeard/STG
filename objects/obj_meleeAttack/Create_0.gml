@@ -10,6 +10,8 @@ tick = 0;
 
 hitSounds = undefined;
 
+shieldSounds = global.data.soundProfiles.bulletHitShield;
+
 oa = 100;
 
 damageDestructibles = false;

@@ -3,6 +3,8 @@ sc = global.stageController;
 
 destroyEffect = spr_bulletExplosion;
 
+shieldHitSounds = global.data.soundProfiles.bulletHitShield;
+
 depth = layers.projectiles;
 
 dir = 0;

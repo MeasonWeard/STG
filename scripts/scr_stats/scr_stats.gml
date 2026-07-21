@@ -6,7 +6,7 @@ function scr_stats_blankCharStats() {
 		maxHp: 100,
 		maxShield: 0,
 		hpRegen: 0,
-		shieldRegen: 0,
+		shieldRegen: 0.25,
 		maxEnergy: 0,
 		energyRegen: 2,
 

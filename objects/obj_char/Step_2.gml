@@ -182,7 +182,7 @@ if (hp <= 0) {
 	
 }
 
-//health and energy regen
+//health, energy and shield regen
 
 if (hp > 0) {
 
@@ -211,6 +211,30 @@ if (hp > 0) {
 	
 	}
 	
+	if (finalStats.maxShield > 0 and finalStats.shieldRegen > 0 and shield < maxShield and hurtTick < 1) {
+	
+		shieldRegenCounter += finalStats.shieldRegen / 60;
+		
+		var regens = floor(shieldRegenCounter);
+		
+		if (regens > 0) {
+		
+			var remainder = max(0, shieldRegenCounter - regens);
+			shield = min(maxShield, shield + regens);
+			
+			shieldRegenCounter = shield >= maxShield ? 0 : remainder;
+		
+		}
+		
+	}
+	
+	if (hurtTick > 0) {
+		
+		shieldRegenCounter = 0;		
+		hurtTick --;
+		
+	}
+
 }
 
 //packs regen

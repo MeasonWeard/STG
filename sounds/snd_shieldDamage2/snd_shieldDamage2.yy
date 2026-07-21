@@ -1,9 +1,9 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_stimPac",
+  "%Name":"snd_shieldDamage2",
   "audioGroupId":{
-    "name":"audiogroup_sfx",
-    "path":"audiogroups/audiogroup_sfx",
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
   "bitDepth":1,
   "channelFormat":0,
@@ -12,7 +12,7 @@
   "conversionMode":0,
   "duration":1.3699774,
   "exportDir":"",
-  "name":"snd_stimPac",
+  "name":"snd_shieldDamage2",
   "parent":{
     "name":"SFX",
     "path":"folders/Sounds/SFX.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_stimPac.wav",
+  "soundFile":"snd_shieldDamage2.wav",
   "volume":1.0,
 }
