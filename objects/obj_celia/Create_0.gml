@@ -11,7 +11,8 @@ sprites = {
 	right: spr_celia,
 	up: spr_celia,
 	down: spr_celia,
-	death: spr_death
+	death: spr_death,
+	spawn: spr_celia
 	
 }
 

@@ -148,7 +148,7 @@ function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 	
 }
 
-//ENEMY GUNS
+//ENEMY AND PET GUNS
 
 function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
 
@@ -217,5 +217,30 @@ function gun_spiderGun(level, rarity) : gunInst(level, rarity) constructor {
 	
 	damage.kin = 2;
 	damage.rad = 2;
+	
+}
+
+function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Fungal Gun";
+	
+	projSprite = spr_bullet3;
+	projectileType = projectileTypes.blast;
+	blastProjectiles = 12;
+	blastSpread = 10;
+	auto = true;
+	clipSize = 1;
+	fireRate = 0.8;
+	reloadTime = 0.8;
+	spd = 10;
+	minAimOff = 2.4;
+	maxAimOff = 14;
+	recoil = 2.4;
+	stability = 0.06;
+	
+	damage.kin = 3;
+	damage.chem = 8;
+	
+	shootSounds = global.data.soundProfiles.alienBlast;
 	
 }

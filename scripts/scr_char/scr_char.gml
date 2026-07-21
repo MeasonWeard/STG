@@ -257,7 +257,7 @@ function scr_char_spawnChar(obj, xx, yy) {
 	
 }
 
-function scr_char_getNearest(xx, yy) {
+function scr_char_getNearest(xx, yy, needsLos = false) {
 
 	var found = noone;
 	var closest = 999999999999;
@@ -273,6 +273,10 @@ function scr_char_getNearest(xx, yy) {
 			var char = nearby[i];
 
 			if (!instance_exists(char)) continue;
+			
+			if (needsLos) {
+				if (!scr_physics_hasLineOfSight(xx, yy, char.x, char.y)) continue;	
+			}
 
 			var dist = point_distance(xx, yy, char.x, char.y);
 
@@ -280,6 +284,7 @@ function scr_char_getNearest(xx, yy) {
 				closest = dist;
 				found = char;
 			}
+			
 		}
 
 		if (found != noone) return found;
@@ -302,7 +307,72 @@ function scr_char_getNearest(xx, yy) {
 	
 }
 
-function scr_char_targetNearest(source, xx, yy, cellsWidth, needsLos = false) {
+function scr_char_getNearestToSource(source, needsLos = false, opposingFaction = true,) {
+
+	if (!instance_exists(source)) return noone;
+
+	var xx = source.x;
+	var yy = source.y;
+
+	var found = noone;
+	var closest = 999999999999;
+
+	for (var range = 0; range <= 3; range++) {
+
+		var nearby = scr_hash_getNearbyRange(global.stageController.charHash, xx, yy, range);
+
+		var len = array_length(nearby);
+
+		for (var i = 0; i < len; i++) {
+
+			var char = nearby[i];
+
+			if (!instance_exists(char)) continue;
+			
+			if (opposingFaction and char.faction == source.faction) continue;
+			
+			if (needsLos) {
+				if (!scr_physics_hasLineOfSight(xx, yy, char.x, char.y)) continue;	
+			}
+
+			var dist = point_distance(xx, yy, char.x, char.y);
+
+			if (dist < closest) {
+				closest = dist;
+				found = char;
+			}
+			
+		}
+
+		if (found != noone) return found;
+
+	}
+
+	// last resort
+	with (obj_char) {
+
+		var dist = point_distance(xx, yy, x, y);
+
+		if (dist < closest) {
+			closest = dist;
+			found = self;
+		}
+
+	}
+	
+	if (found.id == source.id) return noone;
+	
+	if (opposingFaction and found.faction == source.faction) return noone;
+			
+	if (needsLos) {
+		if (!scr_physics_hasLineOfSight(xx, yy, found.x, found.y)) return noone;	
+	}
+
+	return found;
+	
+}
+
+function scr_char_targetNearest(source, xx, yy, cellsWidth, needsLos = false, opposingFaction = true) {
 
 	if (!instance_exists(source)) return noone;
 
@@ -328,6 +398,8 @@ function scr_char_targetNearest(source, xx, yy, cellsWidth, needsLos = false) {
 
 		if (!instance_exists(char)) continue;
 		if (char.id == source.id) continue;
+		
+		if (opposingFaction and char.faction == source.faction) continue;
 
 		if (needsLos) {
 			if (!scr_physics_hasLineOfSight(source.x, source.y, char.x, char.y)) continue;	
@@ -386,5 +458,134 @@ function scr_char_useEnergyPack(char) {
 	sp.heal = amount;
 	
 	return amount;
+	
+}
+
+function scr_char_spawnPet(obj, source, xx, yy, maxSpawns, faction = undefined, cloneGear = true) {
+	
+	if (!asset_get_type(obj) == asset_object) return noone;
+	
+	var inst = instance_create_layer(xx, yy, "Instances", obj);
+	
+	//avoid spawning at envs
+	var found = false;
+	var inc = 0;
+
+	while (!found and inc < 8) {
+
+		var minDist = inc * 32 + 8;
+		var maxDist = minDist + 40;
+
+		for (var tries = 0; tries < 12; tries++) {
+
+			var pt = scr_randomPointInCircleMinDist(
+				xx,
+				yy,
+				maxDist,
+				minDist
+			);
+
+			var blocked = false;
+
+			var nearby = scr_hash_getNearby(
+				global.stageController.envHash,
+				pt.xx,
+				pt.yy
+			);
+
+			var nearbyLen = array_length(nearby);
+
+			for (var i = 0; i < nearbyLen; i++) {
+
+				var env = nearby[i];
+
+				if (!instance_exists(env)) continue;
+
+				if (scr_obj_movementCollisionAt(
+					inst,
+					env,
+					true,
+					pt.xx,
+					pt.yy
+				)) {
+					blocked = true;
+					break;
+				}
+
+			}
+
+			if (!blocked) {
+
+				inst.x = pt.xx;
+				inst.y = pt.yy;
+
+				found = true;
+				break;
+
+			}
+
+		}
+
+		inc++;
+
+	}
+
+	if (!found) {
+		instance_destroy(inst);
+		return noone;
+	}
+	
+	//set up
+	if (instance_exists(source)) {
+		
+		inst.owner = source;
+		//if (faction == undefined) faction = source.faction;
+		faction = faction ?? source.faction;
+		
+		if (cloneGear) {
+		
+			var newGear = variable_clone(source.gear);
+			inst.gear = newGear;
+		
+		}
+		
+	}
+	
+	//destroy oldest if max spawn limit is reached
+	if (is_real(maxSpawns)) {
+	
+		var count = 0;
+		var oldestSpawnTime = 999999999999999;
+		var oldest = noone;
+	
+		with(obj) {
+		
+			if (self.faction == faction) {
+			
+				count++;
+				
+				if (spawnTime < oldestSpawnTime) {
+				
+					oldestSpawnTime = spawnTime;
+					oldest = self;
+				
+				}
+			
+			}
+		
+		}
+		
+		if (count >= maxSpawns and instance_exists(oldest)) {
+
+			oldest.hp = 0;
+		
+		}
+	
+	}
+	
+	inst.faction = faction;
+	inst.spawning = true;
+	
+	return inst;
 	
 }

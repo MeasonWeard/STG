@@ -5,7 +5,16 @@ name = "Spider Drone";
 
 bulletHitSounds = global.data.soundProfiles.bulletHitMetalHigh;
 
-//deathFunc = scr_char_fleshExplosion;
+sprites = {
+
+	up: spr_spiderDrone,
+	down: spr_spiderDrone,
+	left: spr_spiderDrone,
+	right: spr_spiderDrone,
+	death: spr_spiderDrone,
+	spawn: spr_spiderDrone
+	
+}
 
 sprites.death = spr_spiderDroneDeath;
 deathSounds = [snd_droneDeath1, snd_droneDeath2];

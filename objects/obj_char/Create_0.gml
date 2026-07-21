@@ -4,6 +4,9 @@ event_inherited();
 step = 0;
 
 name = "none";
+owner = noone;
+spawnTime = current_time;
+spawning = false;
 
 setup = true;
 setupStats = true;
@@ -37,6 +40,7 @@ sprites = {
 	right: spr_player,
 	up: spr_player,
 	down: spr_player,
+	spawn: spr_player,
 	death: spr_death
 	
 }

@@ -20,7 +20,8 @@ sprites = {
 	right: spr_bertha,
 	up: spr_bertha,
 	down: spr_bertha,
-	death: spr_bertha
+	death: spr_bertha,
+	spawn: spr_bertha
 	
 }
 

@@ -1,9 +1,23 @@
 event_inherited();
 
+draw_self();
+
 if (movedThisStep) image_speed = 1;
 else image_speed = 0;
 
-draw_self();
+//sprites
+if (spawning) {
+	
+	sprite_index = sprites.spawn;
+	image_speed = 1;
+	
+	if (image_index == image_number - 1) {
+		sprite_index = sprites.down;
+		image_speed = 0;
+		spawning = false;
+	}
+	
+}
 
 if (damageFlash > 0) {
 

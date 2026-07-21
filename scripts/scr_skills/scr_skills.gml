@@ -374,6 +374,49 @@ function skill_antimatterBlast() : skill() constructor {
 	
 }
 
+function skill_fungalTurret() : skill() constructor {
+	
+	name = "Fungal Turret";
+	key = "fungalTurret";
+	icon = spr_icon_fungalTurret;
+	maxCharges = 2;
+	charges = 1;
+	energyCost = 30;
+	cooldownTime = 5;
+	maxSpawns = 2;
+
+	static setupFunc = function(char) {
+		
+		energyCost = 25 + level * 5;
+	
+	}
+	
+	static castFunc = function(source) {
+		
+		var aimX = source.aimX;
+		var aimY = source.aimY;
+		
+		var gunX = source.gunX;
+		var gunY = source.gunY;
+		
+		var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+		var aimDist = point_distance(gunX, gunY, aimX, aimY);
+		var dist = min(200, aimDist);
+		
+		var xx = gunX + lengthdir_x(dist, dir);
+		var yy = gunY + lengthdir_y(dist, dir);
+		
+		var existing = 0;
+		
+		var inst = scr_char_spawnPet(obj_fungalTurret, source, xx, yy, maxSpawns);
+
+		if (instance_exists(inst)) return true;
+
+	}
+	
+}
+
 function skill_rubberBoots() : skill() constructor {
 
 	name = "Rubber Boots";

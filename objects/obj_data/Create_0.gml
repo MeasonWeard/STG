@@ -303,7 +303,8 @@ skillConstructors = {
 	test: skill_test,
     rubberBoots: skill_rubberBoots,
     chainLightning: skill_chainLightning,
-    antimatterBlast: skill_antimatterBlast
+    antimatterBlast: skill_antimatterBlast,
+	fungalTurret: skill_fungalTurret
 };
 
 

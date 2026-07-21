@@ -447,3 +447,14 @@ function scr_ai_alertAllies(char, radius) {
 	}
 	
 }
+
+//function scr_ai_setupVariables(inst) {
+
+//	inst.aiSetup = true;
+//	inst.detectionIndex = -1;
+//	inst.ghostCheckIndex = -1;
+//	inst.targetMinDist = 180;
+//	inst.targetMaxDist = 360;
+//	inst.targetReaquireDist = 450;
+	
+//}
