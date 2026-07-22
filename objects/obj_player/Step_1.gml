@@ -1,3 +1,5 @@
+if (!active) exit;
+
 event_inherited();
 
 sc = global.stageController;

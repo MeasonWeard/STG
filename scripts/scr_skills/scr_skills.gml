@@ -5,10 +5,11 @@ function skill() constructor {
 	key = undefined;
 	icon = spr_icon_blank;
 	level = 1;
+	description = "";
+	statsDescription = "";
 	
 	maxLevel = 12;
 	
-	active = true;
 	passives = undefined;
 	
 	cooldown = 0;
@@ -25,6 +26,8 @@ function skill() constructor {
 	static castFunc = undefined;
 	
 	static setupFunc = undefined;
+	
+	static formatStatsDescription = undefined;
 
 	static cast = function(source) {
 
@@ -107,6 +110,16 @@ function skill() constructor {
 
 	}
 	
+
+	
+}
+
+function scr_skills_isActive(skillInst) {
+
+	if (!is_instanceof(skillInst, skill)) return false;
+	
+	return is_callable(skillInst.castFunc);
+	
 }
 
 function scr_skills_load(savedSkill) {
@@ -174,7 +187,7 @@ function scr_skills_findPlayerSkill(key, mustBeActive = false) {
             var thisSkill = skills[j];
 
             if (!is_struct(thisSkill)) continue;
-            if (mustBeActive and !thisSkill.active) continue;
+            if (mustBeActive and !scr_skills_isActive(thisSkill)) continue;
             if (thisSkill.key == key) return thisSkill;
 
         }
@@ -215,7 +228,7 @@ function scr_skills_findCharSkill(key, char, mustBeActive = false) {
 			
 			show_debug_message(thisSkill.key);
 
-            if (mustBeActive and !thisSkill.active) continue;
+            if (mustBeActive and !scr_skills_isActive(thisSkill)) continue;
             if (thisSkill.key == key) return thisSkill;
 
         }
@@ -280,6 +293,57 @@ function scr_skills_countSpentSkillPoints() {
 	
 }
 
+function scr_skills_formatDescription(skillInst) {
+	
+	if (!is_instanceof(skillInst, skill)) return "";
+	
+	var passive = !is_callable(skillInst.castFunc);
+	
+	var txt = skillInst.name;
+	
+	if (passive) txt += "   (Passive)";
+	
+	txt += "    Level " + string(skillInst.level) + " / " + string(skillInst.maxLevel);
+	
+	if (skillInst.energyCost > 0) txt += "\n\nEnergy cost: " + string(skillInst.energyCost);
+	
+	if (!passive) {
+		txt += "\nRecharge time: " + string(skillInst.cooldownTime) + " second";
+		if (skillInst.cooldownTime > 1) txt += "s";
+	}
+	
+	txt += "\n\n" + skillInst.description;
+	
+	if (skillInst.statsDescription != "") txt += "\n\n" + skillInst.statsDescription;
+	
+	var passives = skillInst.passives;
+	var passivesTxt = "";
+	
+	if (is_struct(passives)) {
+	
+		var keys = variable_struct_get_names(passives);
+		var keysLen = array_length(keys);
+		
+		for (var i = 0; i < keysLen; i ++) {
+			
+			var key = keys[i];
+			var val = passives[$ key];
+			
+			var statTxt = scr_stats_getName(key);
+			
+			passivesTxt += "\n";
+			passivesTxt += statTxt + ": " + string(val);
+			
+		}
+	
+	}
+	
+	if (passivesTxt != "") txt += "\n" + passivesTxt;
+	
+	return txt;
+	
+}
+
 //ACTIVES
 
 function skill_test() : skill() constructor {
@@ -319,6 +383,16 @@ function skill_chainLightning() : skill() constructor {
 	chains = 1;
 	
 	damage = undefined;
+	
+	description = "Electricity bounces from target to target\ndealing decreased damage with every jump.";
+	
+	static formatStatsDescription = function() {
+		
+		statsDescription = "Charges: " + string(maxCharges);
+		statsDescription += "\nTargets: " + string(chains);
+		statsDescription += "\n\nDamage: " + string(damage.elec) + " electric";
+		
+	}
 	
 	static setupFunc = function(source) {
 		
@@ -377,6 +451,17 @@ function skill_antimatterBlast() : skill() constructor {
 	
 	damage = undefined;
 	
+	description = "Unleash a barrage of magnetically suspended antimatter capsules."
+	description += "\nOn impact that capsules shatter, causing the antimatter to annihilate\nin a devastating explosion.";
+	
+	static formatStatsDescription = function() {
+	
+		statsDescription = "Projectiles: " + string(projectiles);
+		statsDescription += "\nExplosion radius: " + string(explosionRadius);
+		statsDescription += "\n\nDamage: " + string(damage.kin) +" kinetic, " + string(damage.rad) + " radiation";
+	
+	}
+	
 	static setupFunc = function(source) {
 		
 		energyCost = 75 + level * 5;
@@ -428,7 +513,7 @@ function skill_blob() : skill() constructor {
 	
 	name = "Blob";
 	key = "blob";
-	icon = spr_icon_fungalTurret;
+	icon = spr_icon_blob;
 	
 	maxLevel = 9;
 	maxCharges = 2;
@@ -439,13 +524,28 @@ function skill_blob() : skill() constructor {
 	life = 5;
 	maxHp = 50;
 	shields = 0;
+	
+	description = "Spawn blobular organisms that fight by your side.\nThough it appears to be a single creature, it is actually\na coordinated mass of microscopic lifeforms."
+
+	static formatStatsDescription = function() {
+		
+		var kinDam = 5 + (level - 1);
+		var chemDam = 5 + (level - 1);
+		
+		statsDescription = "Charges: " + string(maxCharges);
+		statsDescription += "\nMax spawns: " + string(maxSpawns);
+		statsDescription += "\nLife: " + string(life) + " seconds";
+		statsDescription += "\nHP: " + string(maxHp);
+		statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
+		
+	}
 
 	static setupFunc = function(source) {
 		
 		life = 6 + (level - 1) * 0.5;
 		maxSpawns = 2 + (level - 1);
 		maxCharges = maxSpawns;
-		maxHp = 50 + (level - 1) * 5;
+		maxHp = 40 + (level - 1) * 5;
 		
 		var ga = scr_skills_findCharSkill("guardianArray", source, false);
 		
@@ -504,6 +604,22 @@ function skill_fungalTurret() : skill() constructor {
 	maxHp = 100;
 	gunDamMult = 1;
 	shields = 0;
+	
+	description = "Spawn giant mushrooms that spew acid at your enemies";
+	
+	static formatStatsDescription = function() {
+	
+		var kinDam = 3 * gunDamMult;
+		var chemDam = 6 * gunDamMult;
+		
+		statsDescription = "Charges: " + string(maxCharges);
+		statsDescription += "\nMax spawns: " + string(maxSpawns);
+		statsDescription += "\nLife: " + string(life) + " seconds";
+		statsDescription += "\nHP: " + string(maxHp);
+		statsDescription += "\n\nProjectiles: 12";
+		statsDescription += "\nDamage: " + string(kinDam) + " kinetic, " + string(chemDam) + " chemical";
+		
+	}
 
 	static setupFunc = function(source) {
 		
@@ -557,26 +673,40 @@ function skill_fungalTurret() : skill() constructor {
 
 function skill_turret() : skill() constructor {
 	
-	name = "Turret";
+	name = "Auto-Turret";
 	key = "turret";
 	icon = spr_icon_turret;
-	maxLevel = 12;
+	maxLevel = 10;
 	maxCharges = 1;
 	charges = 1;
 	energyCost = 50;
-	cooldownTime = 20;
+	cooldownTime = 22;
 	castCooldownTime = 0.2;
 	maxSpawns = 1;
 	clips = 2;
 	maxHp = 150;
 	gunDamMult = 1;
 	shields = 0;
+	
+	description = "Construct an automated stationary gun that fires until its ammo runs out.\n"
+	description += "Flat damage bonuses that apply to your weapons also apply to the\nturret's bullets.";
+	
+	static formatStatsDescription = function() {
+	
+		var ammo = clips * (18 + (level - 1));
+		var dam = 8 * gunDamMult;
+	
+		statsDescription = "HP: " + string(maxHp);
+		statsDescription += "\nAmmo: " + string(ammo);
+		statsDescription += "\nDamage: " + string(dam) + " kinetic";
+	
+	}
 
 	static setupFunc = function(source) {
 		
 		energyCost = 50 + (level - 1) * 5;
 		maxHp = 200 + (level - 1) * 25;
-		gunDamMult = 1 + (level - 1) * 0.2;
+		gunDamMult = 1 + (level - 1) * 0.25;
 		shields = 0;
 		
 		var extraClips = level div 2;
@@ -627,8 +757,37 @@ function skill_rubberBoots() : skill() constructor {
 
 	name = "Rubber Boots";
 	key = "rubberBoots";
-	active = false;
 	icon = spr_icon_rubberBoots;
+	maxLevel = 6;
+	
+	description = "Increases your electric resistance.";
+	
+	passives = {
+	
+		elecRes: 10
+	
+	};
+	
+	static setupFunc = function(source) {
+	
+		passives = {
+	
+			elecRes: 5 * level
+	
+		};
+	
+	}
+	
+}
+
+function skill_PPE() : skill() constructor {
+
+	name = "PPE";
+	key = "PPE";
+	icon = spr_icon_rubberBoots;
+	maxLevel = 6;
+	
+	description = "Increases your electric resistance.";
 	
 	passives = {
 	
@@ -652,10 +811,17 @@ function skill_guardianArray() : skill() constructor {
 
 	name = "Guardian Array";
 	key = "guardianArray";
-	active = false;
 	icon = spr_icon_blank;
 	petShields = 1;
 	maxLevel = 3;
+	
+	description = "Your summons get a shield.";
+	
+	static formatStatsDescription = function() {
+	
+		statsDescription = "Summon shield points: " + string(petShields);
+	
+	}
 	
 	static setupFunc = function(source) {
 	

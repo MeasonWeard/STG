@@ -66,8 +66,8 @@ function scr_genDevices_watch(level, rarity) {
 	
 	if (type == "analog") {
 	
-		var low = 0.05 * level + 0.05;
-		var list = [low, low + 0.05, low + 0.06, low + 0.07, low + 0.08, low + 0.09, low + 0.1];
+		var low = 0.02 * level + 0.04;
+		var list = [low, low + 0.02, low + 0.03, low + 0.04, low + 0.05, low + 0.06, low + 0.7];
 		var len = array_length(list);
 		var index = irandom_range_biased(0, len - 1, LOOT_BIAS, true);
 		var num = list[index];

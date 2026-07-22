@@ -62,7 +62,7 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	if (!is_struct(damage)) return 0;
 	
 	char.hurt = true;
-	char.hurtTick = char.hurtCooldown;
+	char.hurtTick = char.shieldRegenDelay;
 	
 	//randomise damage
 	var kin = damage.kin > 0 ? irandom_range(damage.kinMin, damage.kinMax) : 0;

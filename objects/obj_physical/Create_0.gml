@@ -1,5 +1,7 @@
 depth = layers.physical -y;
 
+active = true;
+
 movedThisStep = false;
 canMove = true;
 confineToBounds = true;

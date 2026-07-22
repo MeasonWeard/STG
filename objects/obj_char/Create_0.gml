@@ -33,7 +33,7 @@ gibDisappears = true;
 hpRegenCounter = 0;
 energyRegenCounter = 0;
 shieldRegenCounter = 0;
-hurtCooldown = 240;
+shieldRegenDelay = 240;
 hurtTick = 0;
 
 pet = false;
@@ -186,3 +186,4 @@ meleeHitList = [];
 
 //ai
 hurt = false;
+alert = false;

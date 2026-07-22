@@ -9,6 +9,7 @@ function scr_stats_blankCharStats() {
 		shieldRegen: 0.25,
 		maxEnergy: 0,
 		energyRegen: 2,
+		shieldRegenDelay: 3,
 
 		//packs
 		maxStimPacks: 0,
@@ -339,6 +340,7 @@ function scr_stats_getName(statKey) {
         case "maxShield": return "Max Shield";
         case "hpRegen": return "Health Regeneration";
         case "shieldRegen": return "Shield Regeneration";
+		case "shieldRegenDelay": return "Shield Regeneration Delay";
         case "maxEnergy": return "Max Energy";
         case "energyRegen": return "Energy Regeneration";
 
@@ -361,11 +363,11 @@ function scr_stats_getName(statKey) {
         case "maxEnergyPerc": return "Max Energy %";
         case "energyRegenPerc": return "Energy Regeneration %";
 
-        case "kinDam": return "Kinetic Damage";
-        case "fireDam": return "Fire Damage";
-        case "chemDam": return "Chemical Damage";
-        case "elecDam": return "Electric Damage";
-        case "radDam": return "Radiation Damage";
+        case "kinDam": return "Flat Kinetic Damage";
+        case "fireDam": return "Flat Fire Damage";
+        case "chemDam": return "Flat Chemical Damage";
+        case "elecDam": return "Flat Electric Damage";
+        case "radDam": return "Flat Radiation Damage";
 
         case "kinDamPerc": return "Kinetic Damage %";
         case "fireDamPerc": return "Fire Damage %";
@@ -398,18 +400,19 @@ function scr_stats_formatCharStats(stats, finalStats) {
     // flat health and shields
     str = scr_stats_formatStat(str, stats, "maxHp");
     str = scr_stats_formatStat(str, stats, "maxShield");
-    str = scr_stats_formatStat(str, stats, "hpRegen");
-    str = scr_stats_formatStat(str, stats, "shieldRegen");
+    str = scr_stats_formatStat(str, stats, "hpRegen", " p/s");
+    str = scr_stats_formatStat(str, stats, "shieldRegen", " p/s");
+	str = scr_stats_formatStat(str, stats, "shieldRegenDelay", " seconds");
     str = scr_stats_formatStat(str, stats, "maxEnergy");
-    str = scr_stats_formatStat(str, stats, "energyRegen");
+    str = scr_stats_formatStat(str, stats, "energyRegen", " p/s");
 
 	str += "\n";
 
     // packs
     str = scr_stats_formatStat(str, stats, "maxStimPacks");
     str = scr_stats_formatStat(str, stats, "maxEnergyPacks");
-    str = scr_stats_formatStat(str, stats, "stimPackRegen");
-    str = scr_stats_formatStat(str, stats, "energyPackRegen");
+    str = scr_stats_formatStat(str, stats, "stimPackRegen", " p/s");
+    str = scr_stats_formatStat(str, stats, "energyPackRegen", " p/s");
 
 	str += "\n";
 
@@ -421,7 +424,7 @@ function scr_stats_formatCharStats(stats, finalStats) {
 	
     // movement
     str = scr_stats_formatStat(str, stats, "spd");
-    str = scr_stats_formatStat(str, stats, "dashCoolTime");
+    str = scr_stats_formatStat(str, stats, "dashCoolTime", " seconds");
     str = scr_stats_formatStat(str, stats, "maxDashes");
 
 	str += "\n";
@@ -436,11 +439,11 @@ function scr_stats_formatCharStats(stats, finalStats) {
 	str += "\n";
 	
     // damage percent increase
-    str = scr_stats_formatStat(str, stats, "kinDamPerc");
-    str = scr_stats_formatStat(str, stats, "fireDamPerc");
-    str = scr_stats_formatStat(str, stats, "chemDamPerc");
-    str = scr_stats_formatStat(str, stats, "elecDamPerc");
-    str = scr_stats_formatStat(str, stats, "radDamPerc");
+    str = scr_stats_formatStat(str, stats, "kinDamPerc", "%");
+    str = scr_stats_formatStat(str, stats, "fireDamPerc", "%");
+    str = scr_stats_formatStat(str, stats, "chemDamPerc", "%");
+    str = scr_stats_formatStat(str, stats, "elecDamPerc", "%");
+    str = scr_stats_formatStat(str, stats, "radDamPerc", "%");
 	
 	str += "\n";
 	
@@ -455,7 +458,7 @@ function scr_stats_formatCharStats(stats, finalStats) {
 
 }
 
-function scr_stats_formatStat(str, stats, name) {
+function scr_stats_formatStat(str, stats, name, appendString = undefined) {
 
     if (!variable_struct_exists(stats, name)) return str;
 
@@ -463,7 +466,9 @@ function scr_stats_formatStat(str, stats, name) {
 
     if (str != "") str += "\n";
 
-    str += scr_stats_getName(name) + ":   " + string(value);
+    str += scr_stats_getName(name) + ":     " + string(value);
+	
+	if (is_string(appendString)) str += appendString;
 
     return str;
 

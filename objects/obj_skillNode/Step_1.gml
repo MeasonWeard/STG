@@ -36,7 +36,19 @@ if (setup) {
 	if (!found) thisSkill = skillTemplate;
 	
 	if (!is_instanceof(thisSkill, skill)) thisSkill = scr_skills_load(thisSkill);
-
+	
+	var oldLevel = thisSkill.level;
+	thisSkill.level = max(1, thisSkill.level);
+	
+	if(is_callable(thisSkill.setupFunc)) thisSkill.setupFunc(global.player);
+	if(is_callable(thisSkill.formatStatsDescription)) thisSkill.formatStatsDescription();
+	
+	description = scr_skills_formatDescription(thisSkill);
+	
+	thisSkill.level = oldLevel;
+	
+	prevLevel = thisSkill.level;
+	
 	sprite_index = thisSkill.icon;
 
 }

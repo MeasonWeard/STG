@@ -1,11 +1,10 @@
 scr_obj_mouseHover();
 
+if (!is_struct(thisSkill)) exit;
+
 if (mouseHover) {
 
-	var txt = "";
-	if (is_struct(thisSkill)) txt = thisSkill.name;
-	txt += "   lvl " + string(thisSkill.level);
-	scr_ui_mouseHoverText(string(txt), fnt_normal);
+	scr_ui_mouseHoverText(string(description), fnt_normal);
 	
 	if (global.debug) {
 		
@@ -38,7 +37,7 @@ if (mouseHover) {
 					
 					c.points --;
 				
-					if (thisSkill.active) {
+					if (scr_skills_isActive(thisSkill)) {
 
 					    var slots = ["skill1", "skill2", "skill3", "skill4"];
 					    var alreadyAssigned = false;
@@ -122,7 +121,7 @@ if (mouseHover) {
 	}
 	
 	//assign to keys
-	if (is_struct(thisSkill) and thisSkill.active) {
+	if (is_struct(thisSkill) and scr_skills_isActive(thisSkill)) {
 
 		var skillStruct = {
 			key  : thisSkill.key,
@@ -181,5 +180,18 @@ if (mouseHover) {
 			}
 		}
 	}
+	
+}
+
+if (thisSkill.level != prevLevel) {
+
+	var oldLevel = thisSkill.level;
+	thisSkill.level = max(1, thisSkill.level);
+
+	if(is_callable(thisSkill.setupFunc)) thisSkill.setupFunc(global.player);
+	if(is_callable(thisSkill.formatStatsDescription)) thisSkill.formatStatsDescription();
+	description = scr_skills_formatDescription(thisSkill);
+	
+	thisSkill.level = oldLevel;
 	
 }

@@ -7,4 +7,8 @@ setup = true;
 
 thisSkill = undefined;
 
+prevLevel = -1;
+
 mouseHover = false;
+
+description = "";

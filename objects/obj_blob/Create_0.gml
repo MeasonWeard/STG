@@ -23,7 +23,7 @@ sprites = {
 	up: spr_blob,
 	down: spr_blob,
 	death: spr_blob,
-	spawn: spr_blob
+	spawn: spr_blobSpawn
 	
 }
 

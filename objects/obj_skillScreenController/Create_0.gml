@@ -25,8 +25,12 @@ back = function() {
 	global.selectedClass.unlockedSkills = unlockedSkills;
 	scr_file_saveGame(global.saveFile, global.gameData);
 
-	if (global.gameData.playerData.class2 == undefined) room_goto(stage_hub1);
-	else room_goto(room_skillsMainMenu);
+	if (global.gameData.playerData.class2 == undefined) {
+		if (instance_exists(global.player)) instance_destroy(global.player);
+		room_goto(stage_hub1);
+	} else {
+		room_goto(room_skillsMainMenu);
+	}
 	
 	
 }

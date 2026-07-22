@@ -1,3 +1,11 @@
+playerExists = instance_exists(player) and player.active;
+
+if (playerExists and is_instanceof(player.equippedWeapon, weaponInst)) {
+	mode = "aim";	
+} else {
+	mode = "point";	
+}
+
 //hover text
 if (hoverTxt != undefined and hoverTxtCount > 0) {
 
@@ -11,24 +19,23 @@ if (hoverTxt != undefined and hoverTxtCount > 0) {
 if (mode == "aim") {
 	
 	var rad = 8;
-	var playerExists = instance_exists(player);
-	
+
 	//gun
-	if (playerExists and is_instanceof(player.equippedWeapon, gunInst)) {
+	if (is_instanceof(player.equippedWeapon, gunInst)) {
 		
 		rad = player.equippedWeapon.aimOff * 4;
 		
 	}
 	
 	//melee
-	if (playerExists and showMelee and is_instanceof(player.equippedWeapon, meleeInst)) {
+	if (showMelee and is_instanceof(player.equippedWeapon, meleeInst)) {
 	
 		rad = 8;
 		
 		var melee = player.equippedWeapon;
 		var stats = player.equippedWeaponStats;
 	
-		if (playerExists and is_struct(melee)) {
+		if (is_struct(melee)) {
 		
 			if (melee.charges > 0) {
 				
@@ -61,7 +68,7 @@ if (mode == "aim") {
 	draw_circle(x, y, rad, true);
 	
 	//reload
-	if (showReload and playerExists) {
+	if (showReload) {
 		
 		var gun = player.equippedWeapon;
 		
@@ -82,7 +89,7 @@ if (mode == "aim") {
 	}
 	
 	//show ammo
-	if (playerExists and showAmmo) {
+	if (showAmmo) {
 	
 		draw_set_font(fnt_normal);
 	
@@ -121,11 +128,6 @@ if (mode == "aim") {
 		}
 	
 	}
-	
-	
-	//debug
-	if (global.debug) draw_text(x + 50, y - 50, rad);
-	
 	
 } else {
 

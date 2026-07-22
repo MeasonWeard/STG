@@ -433,9 +433,9 @@ function scr_ai_alertAllies(char, radius) {
 		
 		if (!instance_exists(ally)) continue;
 		
-		if (ally.alert) continue;
-		
 		if (ally.faction != char.faction) continue;
+		
+		if (ally.alert) continue;
 		
 		var dist = point_distance(xx, yy, ally.x, ally.y);
 		

@@ -1,5 +1,6 @@
 //setup
 player = noone;
+playerExists = false;
 depth = layers.cursor;
 
 //settings

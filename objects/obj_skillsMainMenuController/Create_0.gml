@@ -1,4 +1,4 @@
-if (instance_exists(global.player)) instance_destroy(global.player);
+if (instance_exists(global.player)) global.player.active = false;
 
 global.skillsMainMenuController = self;
 
