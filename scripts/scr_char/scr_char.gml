@@ -584,6 +584,7 @@ function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undef
 	inst.setup = true;
 	inst.setupStats = true;
 	inst.setupBasics = true;
+	inst.alertAllies = false;
 	
 	scr_movement_updateCollisionHitBox(inst);
 	scr_movement_updateMovementHitBox(inst);

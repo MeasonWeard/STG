@@ -273,8 +273,8 @@ function gun_blobGun(level, rarity) : gunInst(level, rarity) constructor {
 	range = 200;
 	auto = false;
 	clipSize = 1;
-	fireRate = 1;
-	reloadTime = 1;
+	fireRate = 1.2;
+	reloadTime = 1.2;
 	spd = 16;
 	minAimOff = 2.2;
 	maxAimOff = 8;
@@ -282,8 +282,8 @@ function gun_blobGun(level, rarity) : gunInst(level, rarity) constructor {
 	stability = 0.08;
 	rot = 3;
 	
-	damage.kin = 2;
-	damage.chem = 3;
+	damage.kin = 5;
+	damage.chem = 5;
 	
 	shootSounds = global.data.soundProfiles.alienShoot;
 	
