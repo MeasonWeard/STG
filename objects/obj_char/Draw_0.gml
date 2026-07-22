@@ -5,6 +5,23 @@ draw_self();
 if (movedThisStep) image_speed = 1;
 else image_speed = 0;
 
+//shield
+if (shield > 0) {
+
+	
+	var shieldScale = 1.06;
+
+	var sprHeight = sprite_height;
+
+	var yOffset = sprHeight * abs(image_yscale) * (shieldScale - 1) * 0.5;
+	
+	var shieldCol = #ED008C;
+	var shieldAlpha = 0.3;
+
+	draw_sprite_ext(sprite_index, image_index, x, y + yOffset, image_xscale * shieldScale, image_yscale * shieldScale, image_angle, shieldCol, shieldAlpha);
+	
+}
+
 //sprites
 if (spawning) {
 	

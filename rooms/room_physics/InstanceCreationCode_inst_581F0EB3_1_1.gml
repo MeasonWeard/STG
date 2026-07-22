@@ -1,1 +1,1 @@
-const = skill_rubberBoots;
+const = skill_guardianArray;

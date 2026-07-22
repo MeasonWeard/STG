@@ -1,4 +1,6 @@
-if (scaleGUI) {
+if (global.guiScaling and scaleGUI) {
+
+	scr_testSound();
 
 	scaleGUI = false;
 

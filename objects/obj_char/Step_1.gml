@@ -143,10 +143,10 @@ if (setupStats) {
 		var skill3Key = is_struct(skill3) ? skill3.key : undefined;
 		var skill4Key = is_struct(skill4) ? skill4.key : undefined;
 		
-		skills.skill1 = scr_skills_findPlayerSkill(skill1Key, playerData, true);
-		skills.skill2 = scr_skills_findPlayerSkill(skill2Key, playerData, true);
-		skills.skill3 = scr_skills_findPlayerSkill(skill3Key, playerData, true);
-		skills.skill4 = scr_skills_findPlayerSkill(skill4Key, playerData, true);
+		skills.skill1 = scr_skills_findPlayerSkill(skill1Key, true);
+		skills.skill2 = scr_skills_findPlayerSkill(skill2Key, true);
+		skills.skill3 = scr_skills_findPlayerSkill(skill3Key, true);
+		skills.skill4 = scr_skills_findPlayerSkill(skill4Key, true);
 		
 	}
 	
@@ -181,9 +181,6 @@ if (setupStats) {
 	if (is_instanceof(skills.skill4, skill) and is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(self);
 
 	if (setupBasics) {
-	
-		show_debug_message(baseStats.maxHp);
-		show_debug_message(finalStats.maxHp);
 	
 		setupBasics = false;
 	

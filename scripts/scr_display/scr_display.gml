@@ -1,16 +1,24 @@
 function scr_display_applyIntegerScaling() {
+	
 	var iw = INTERNAL_WIDTH;
 	var ih = INTERNAL_HEIGHT;
 
-	var dw = window_get_width(); 
+	var dw = window_get_width();
 	var dh = window_get_height();
 
-	var scale_x = floor(dw / iw);
-	var scale_y = floor(dh / ih);
-	var scale = min(scale_x, scale_y);
+	var fitScale = min(dw / iw, dh / ih);
 
-	var vp_w = iw * scale;
-	var vp_h = ih * scale;
+	var scale;
+
+	if (fitScale >= 1) {
+		scale = floor(fitScale);
+	} else {
+		scale = fitScale;
+	}
+
+	var vp_w = round(iw * scale);
+	var vp_h = round(ih * scale);
+
 	var vp_x = (dw - vp_w) div 2;
 	var vp_y = (dh - vp_h) div 2;
 
@@ -24,7 +32,7 @@ function scr_display_applyIntegerScaling() {
 	global.gui_scale = scale;
 	global.gui_offset_x = vp_x;
 	global.gui_offset_y = vp_y;
-	
+
 	global.surfaceRebuildRequested = true;
 
 }
@@ -44,6 +52,7 @@ function scr_display_setCameraView(w, h) {
 
 function scr_display_switchFullscreen() {
 
+	
 	var fs = window_get_fullscreen();
 	fs = !fs;
 	
@@ -59,7 +68,8 @@ function scr_display_switchFullscreen() {
 	view_set_yport(0, 0);
 
 	camera_set_view_size(view_camera[0], INTERNAL_WIDTH, INTERNAL_HEIGHT);
-
+	
+	global.displayController.refreshScaling = true;
 	global.displayController.scaleGUI = true;
 	
 }
@@ -90,7 +100,8 @@ function scr_display_cycleResolution() {
 }
 
 function scr_display_refreshWindowSize() {
-
+	
+	global.displayController.refreshScaling = true;
 	window_set_size(global.window_w, global.window_h);
 	
 }

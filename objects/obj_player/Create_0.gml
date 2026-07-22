@@ -10,6 +10,8 @@ attackDelay = 12;
 shootingCooldown = 12;
 shootingTick = 0;
 
+charData = global.gameData.playerData;
+
 audio_listener_position(x, y, 0);
 audio_listener_orientation(0, 0, 1, 0, -1, 0);
 

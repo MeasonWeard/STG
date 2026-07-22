@@ -149,9 +149,11 @@ function scr_skills_loadArray(savedSkills) {
 
 }
 
-function scr_skills_findPlayerSkill(key, playerData, mustBeActive = false) {
+function scr_skills_findPlayerSkill(key, mustBeActive = false) {
 	
 	if (key == undefined) return undefined;
+	
+	var playerData = global.gameData.playerData;
 	
     var pClasses = [playerData.class1, playerData.class2];
 
@@ -184,9 +186,14 @@ function scr_skills_findCharSkill(key, char, mustBeActive = false) {
 	
 	if (key == undefined) return undefined;
 	if (!instance_exists(char)) return undefined;
-	if (!variable_instance_exists(char, "class1") or !variable_instance_exists(char, "class2")) return undefined;
+	if (!is_struct(char.charData)) return undefined; 
 	
-    var cClasses = [char.class1, char.class2];
+	var charData = char.charData;
+	
+	if (!variable_struct_exists(charData, "class1") or !variable_instance_exists(charData, "class2")) return undefined;
+	
+
+    var cClasses = [charData.class1, charData.class2];
 
     for (var i = 0; i < array_length(cClasses); i++) {
 
@@ -198,10 +205,13 @@ function scr_skills_findCharSkill(key, char, mustBeActive = false) {
         var skills = classData.unlockedSkills;
 
         for (var j = 0; j < array_length(skills); j++) {
-
+			
             var thisSkill = skills[j];
-
+			
             if (!is_struct(thisSkill)) continue;
+			
+			show_debug_message(thisSkill.key);
+
             if (mustBeActive and !thisSkill.active) continue;
             if (thisSkill.key == key) return thisSkill;
 
@@ -267,6 +277,8 @@ function scr_skills_countSpentSkillPoints() {
 	
 }
 
+//ACTIVES
+
 function skill_test() : skill() constructor {
 
 	name = "Test";
@@ -305,7 +317,7 @@ function skill_chainLightning() : skill() constructor {
 	
 	damage = undefined;
 	
-	static setupFunc = function(char) {
+	static setupFunc = function(source) {
 		
 		energyCost = 30 + level * 5;
 		
@@ -313,8 +325,8 @@ function skill_chainLightning() : skill() constructor {
 		
 		damage = new damageProfile();
 		damage.elec = 25 + 10 * level;
-		damage.elec = scr_stats_applyDamageBonuses(char, damage.elec, "elec"); 
-		damage = scr_stats_calculateCharDamageProfile(char, damage, false);
+		damage.elec = scr_stats_applyDamageBonuses(source, damage.elec, "elec"); 
+		damage = scr_stats_calculateCharDamageProfile(source, damage, false);
 		
 	}
 	
@@ -362,7 +374,7 @@ function skill_antimatterBlast() : skill() constructor {
 	
 	damage = undefined;
 	
-	static setupFunc = function(char) {
+	static setupFunc = function(source) {
 		
 		energyCost = 75 + level * 5;
 		
@@ -372,12 +384,12 @@ function skill_antimatterBlast() : skill() constructor {
 		damage = new damageProfile();
 		
 		damage.kin = 10 + 2 * level;
-		damage.kin = scr_stats_applyDamageBonuses(char, damage.kin, "kin");
+		damage.kin = scr_stats_applyDamageBonuses(source, damage.kin, "kin");
 		
 		damage.rad = 10 + 2 * level;
-		damage.rad = scr_stats_applyDamageBonuses(char, damage.rad, "rad");
+		damage.rad = scr_stats_applyDamageBonuses(source, damage.rad, "rad");
 		
-		damage = scr_stats_calculateCharDamageProfile(char, damage, false);
+		damage = scr_stats_calculateCharDamageProfile(source, damage, false);
 		
 	}
 	
@@ -414,25 +426,33 @@ function skill_fungalTurret() : skill() constructor {
 	name = "Fungal Turret";
 	key = "fungalTurret";
 	icon = spr_icon_fungalTurret;
+	
 	maxLevel = 9;
 	maxCharges = 1;
 	charges = 1;
 	energyCost = 20;
-	cooldownTime = 0.25;
-	castCooldownTime = 0.2;
+	cooldownTime = 4;
+	castCooldownTime = 0.25;
 	maxSpawns = 1;
 	life = 6;
-	maxHp = 200;
+	maxHp = 100;
 	gunDamMult = 1;
+	shields = 0;
 
-	static setupFunc = function(char) {
+	static setupFunc = function(source) {
 		
 		energyCost = 20 + (level - 1) * 2;
 		life = 6 + (level - 1) * 0.5;
 		maxSpawns = 1 + level div 3;
 		maxCharges = maxSpawns;
-		maxHp = 150 + (level - 1) * 25;
+		maxHp = 100 + (level - 1) * 20;
 		gunDamMult = 1 + (level - 1) * 0.2;
+		
+		var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+		if (is_struct(ga)) {
+			shields = ga.petShields;
+		}
 	
 	}
 	
@@ -459,6 +479,7 @@ function skill_fungalTurret() : skill() constructor {
 		inst.level = level;
 		inst.baseStats.maxHp = maxHp;
 		inst.gunDamMult = gunDamMult;
+		inst.baseStats.maxShield = shields;
 
 		scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
 
@@ -481,17 +502,25 @@ function skill_turret() : skill() constructor {
 	castCooldownTime = 0.2;
 	maxSpawns = 1;
 	clips = 2;
-	maxHp = 200;
+	maxHp = 150;
 	gunDamMult = 1;
+	shields = 0;
 
-	static setupFunc = function(char) {
+	static setupFunc = function(source) {
 		
 		energyCost = 50 + (level - 1) * 5;
 		maxHp = 200 + (level - 1) * 25;
 		gunDamMult = 1 + (level - 1) * 0.2;
+		shields = 0;
 		
 		var extraClips = level div 2;
 		clips = 2 + extraClips;
+	
+		var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+		if (is_struct(ga)) {
+			shields = ga.petShields;
+		}
 	
 	}
 	
@@ -518,12 +547,15 @@ function skill_turret() : skill() constructor {
 		inst.level = level;
 		inst.baseStats.maxHp = maxHp;
 		inst.gunDamMult = gunDamMult;
+		inst.baseStats.maxShield = shields;
 
 		if (instance_exists(inst)) return true;
 
 	}
 	
 }
+
+//PASSIVES
 
 function skill_rubberBoots() : skill() constructor {
 
@@ -545,6 +577,23 @@ function skill_rubberBoots() : skill() constructor {
 			elecRes: 5 * level
 	
 		};
+	
+	}
+	
+}
+
+function skill_guardianArray() : skill() constructor {
+
+	name = "Guardian Array";
+	key = "guardianArray";
+	active = false;
+	icon = spr_icon_blank;
+	petShields = 1;
+	maxLevel = 3;
+	
+	static setupFunc = function(source) {
+	
+		petShields = level;
 	
 	}
 	

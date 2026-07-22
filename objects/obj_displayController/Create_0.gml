@@ -7,7 +7,8 @@ application_surface_enable(true);
 gpu_set_texfilter(true);
 
 // user setting:
-global.guiScaling = false;   // or true
+global.guiScaling = false;
+global.integerScaling = true;
 
 // user-selected window size:
 var res = global.gameData.settings.res;
@@ -26,4 +27,5 @@ window_set_fullscreen(!windowed);
 window_set_size(global.window_w, global.window_h);
 window_center();
 
+refreshScaling = false;
 scaleGUI = true;
