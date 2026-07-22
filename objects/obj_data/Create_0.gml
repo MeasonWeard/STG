@@ -309,7 +309,8 @@ skillConstructors = {
 	fungalTurret: skill_fungalTurret,
 	turret: skill_turret,
 	guardianArray: skill_guardianArray,
-	blob: skill_blob
+	blob: skill_blob,
+	PPE: skill_PPE
 };
 
 

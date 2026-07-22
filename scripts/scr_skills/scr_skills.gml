@@ -297,7 +297,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 	if (!is_instanceof(skillInst, skill)) return "";
 	
-	var passive = !is_callable(skillInst.castFunc);
+	var passive = !scr_skills_isActive(skillInst);
 	
 	var txt = skillInst.name;
 	
@@ -758,13 +758,13 @@ function skill_rubberBoots() : skill() constructor {
 	name = "Rubber Boots";
 	key = "rubberBoots";
 	icon = spr_icon_rubberBoots;
-	maxLevel = 6;
+	maxLevel = 4;
 	
 	description = "Increases your electric resistance.";
 	
 	passives = {
 	
-		elecRes: 10
+		elecRes: 8
 	
 	};
 	
@@ -772,7 +772,7 @@ function skill_rubberBoots() : skill() constructor {
 	
 		passives = {
 	
-			elecRes: 5 * level
+			elecRes: 8 * level
 	
 		};
 	
@@ -787,11 +787,12 @@ function skill_PPE() : skill() constructor {
 	icon = spr_icon_rubberBoots;
 	maxLevel = 6;
 	
-	description = "Increases your electric resistance.";
+	description = "Increases your chemical and fire resistances.";
 	
 	passives = {
 	
-		elecRes: 10
+		chemRes: 4,
+		fireRes: 4
 	
 	};
 	
@@ -799,7 +800,8 @@ function skill_PPE() : skill() constructor {
 	
 		passives = {
 	
-			elecRes: 5 * level
+			chemRes: 4 * level,
+			fireRes: 4 * level
 	
 		};
 	
