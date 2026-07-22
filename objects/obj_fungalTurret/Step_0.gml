@@ -16,4 +16,3 @@ if (scr_timeSlicing_isMyTurn("findTarget", findTargetIndex)) {
 }
 
 scr_ai_shootAtTarget(self, target, true);
-	

@@ -29,8 +29,8 @@ if (instance_exists(target)) {
 	
 }
 	
-if (aimX < x) image_xscale = 1;
-if (aimX > x) image_xscale = -1;
+if (aimX < x) image_xscale = -1;
+if (aimX > x) image_xscale = 1;
 
 if (equippedWeapon.reload > 0 and !newClip) {
 

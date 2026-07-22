@@ -25,7 +25,10 @@ if (is_instanceof(equippedWeapon, gunInst)) {
 			gun.fireTick = 0;
 			
             gun.ammo = equippedWeaponStats.clipSize;
-			shootDelayTick = irandom_range(shootDelayMin, shootDelayMax);
+			
+			if (variable_instance_exists(self, "shootDelayMin") and variable_instance_exists(self, "shootDelayMax")) {
+				shootDelayTick = irandom_range(shootDelayMin, shootDelayMax);
+			}
 			
         }
 		

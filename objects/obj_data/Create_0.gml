@@ -308,7 +308,8 @@ skillConstructors = {
     antimatterBlast: skill_antimatterBlast,
 	fungalTurret: skill_fungalTurret,
 	turret: skill_turret,
-	guardianArray: skill_guardianArray
+	guardianArray: skill_guardianArray,
+	blob: skill_blob
 };
 
 

@@ -7,15 +7,8 @@ target = global.player;
 
 ghost = instance_create_layer(x, y, "Instances", obj_ghost);
 ghost.owner = self;
-firstGhostCheck = true;
 
-//ai
-aiSetup = true;
-detectionIndex = -1;
-ghostCheckIndex = -1;
-targetMinDist = 180;
-targetMaxDist = 360;
-targetReaquireDist = 450;
+dropOnDestroy = true;
 
 //drops
 minData = 8;
@@ -26,4 +19,5 @@ lootImproveChance = 10;
 lootChance = 2;
 lootAmount = 1;
 
-dropOnDestroy = true;
+//ai
+scr_ai_setup();

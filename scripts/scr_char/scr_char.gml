@@ -33,7 +33,7 @@ function scr_char_fleshExplosion(char){
 	var rightY = yy;
 	
 	var col = char.bloodCol;
-	var force = 12;
+	var force = variable_instance_exists(char, "fleshExplodeForce") ? char.fleshExplodeForce: 12;
 	var particles = 10;
 	var rad = 6;
 	var splits = 2;

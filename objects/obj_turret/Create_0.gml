@@ -38,5 +38,6 @@ findTargetIndex = scr_timeSlicing_assignTurnIndex("findTarget");
 aimIndex = scr_timeSlicing_assignTurnIndex("aim");
 reTargetDist = 800;
 
+scr_ai_setup();
+
 aimBias = 1.85;
-//aimAngle = 30;

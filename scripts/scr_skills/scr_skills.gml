@@ -424,6 +424,69 @@ function skill_antimatterBlast() : skill() constructor {
 	
 }
 
+function skill_blob() : skill() constructor {
+	
+	name = "Blob";
+	key = "blob";
+	icon = spr_icon_fungalTurret;
+	
+	maxLevel = 9;
+	maxCharges = 2;
+	energyCost = 20;
+	cooldownTime = 1;
+	castCooldownTime = 0.25;
+	maxSpawns = 2;
+	life = 5;
+	maxHp = 50;
+	shields = 0;
+
+	static setupFunc = function(source) {
+		
+		life = 6 + (level - 1) * 0.5;
+		maxSpawns = 2 + (level - 1);
+		maxCharges = maxSpawns;
+		maxHp = 50 + (level - 1) * 5;
+		
+		var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+		if (is_struct(ga)) {
+			shields = ga.petShields;
+		}
+	
+	}
+	
+	static castFunc = function(source) {
+		
+		var aimX = source.aimX;
+		var aimY = source.aimY;
+		
+		var gunX = source.gunX;
+		var gunY = source.gunY;
+		
+		var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+		var aimDist = point_distance(gunX, gunY, aimX, aimY);
+		var dist = min(200, aimDist);
+		
+		var xx = gunX + lengthdir_x(dist, dir);
+		var yy = gunY + lengthdir_y(dist, dir);
+		
+		var existing = 0;
+		
+		var inst = scr_char_spawnPet(obj_blob, source, life, xx, yy, maxSpawns);
+		inst.life = life;
+		inst.level = level;
+		inst.baseStats.maxHp = maxHp;
+		inst.baseStats.maxShield = shields;
+
+		scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+
+		if (instance_exists(inst)) return true;
+
+	}
+	
+}
+
 function skill_fungalTurret() : skill() constructor {
 	
 	name = "Fungal Turret";

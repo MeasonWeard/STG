@@ -414,91 +414,6 @@ function scr_ai_aimAtTarget(char, target, aimRadius, aimBias) {
 	char.aimX = char.x + lengthdir_x(targetDist, aimDir);
 	char.aimY = char.y + lengthdir_y(targetDist, aimDir);
 	
-	//THIRD ATTEMPT:
-	//var targetX = target.x;
-	//var targetY = target.colMiddle;
-	
-	//var tx = targetX - char.x;
-	//var ty = targetY - char.y;
-	
-	//var targetLen = point_distance(0, 0, tx, ty);
-	
-	//// Fallback: aim directly at target
-	//var aimX = targetX;
-	//var aimY = targetY;
-	
-	//var tries = 0;
-	//var valid = false;
-	
-	//while (!valid and tries < 10) {
-		
-	//	var pt = scr_randomPointInCircleBiased(
-	//		targetX,
-	//		targetY,
-	//		aimRadius,
-	//		aimBias
-	//	);
-		
-	//	var px = pt.xx - char.x;
-	//	var py = pt.yy - char.y;
-		
-	//	var pointLen = point_distance(0, 0, px, py);
-		
-	//	if (targetLen > 0 and pointLen > 0) {
-			
-	//		var dot = tx * px + ty * py;
-	//		var alignment = dot / (targetLen * pointLen);
-			
-	//		// Must be within roughly 30 degrees of the target
-	//		if (alignment >= 0.866) {
-	//			aimX = pt.xx;
-	//			aimY = pt.yy;
-	//			valid = true;
-	//		}
-	//	}
-		
-	//	tries++;
-	//}
-	
-	//char.aimX = aimX;
-	//char.aimY = aimY;
-	
-	//SECOND ATTEMPT:
-	
-	//var tx = target.x - char.x;
-	//var ty = target.colMiddle - char.y;
-
-	//var tries = 0;
-	//var pt;
-	//var dot = -1;
-
-	//while (dot <= 0 and tries < 12) {
-		
-	//	pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
-
-	//	var px = pt.xx - char.x;
-	//	var py = pt.yy - char.y;
-
-	//	dot = tx * px + ty * py;
-
-	//	tries++;
-		
-	//}
-	
-	//if (tries >= 12 and dot <= 0) scr_testSound();
-
-	//char.aimX = pt.xx;
-	//char.aimY = pt.yy;
-	
-	///FIRST ATTEMPT:
-	
-	//var pt = scr_randomPointInCircleBiased(target.x, target.colMiddle, aimRadius, aimBias);
-	//var xx = pt.xx;
-	//var yy = pt.yy;
-
-	//char.aimX = xx;
-	//char.aimY = yy;
-	
 }
 
 function scr_ai_alertAllies(char, radius) {
@@ -534,13 +449,173 @@ function scr_ai_alertAllies(char, radius) {
 	
 }
 
-//function scr_ai_setupVariables(inst) {
+function scr_ai_standardAIBehaviour() {
 
-//	inst.aiSetup = true;
-//	inst.detectionIndex = -1;
-//	inst.ghostCheckIndex = -1;
-//	inst.targetMinDist = 180;
-//	inst.targetMaxDist = 360;
-//	inst.targetReaquireDist = 450;
+	//first destination pick
+	if (firstGhostCheck) {
+		
+		firstGhostCheck = false;
+		
+		var pt = scr_ai_choosePointAroundTarget(target, targetMinDist, targetMaxDist, true);
+
+	}
+
+	//periodically check if destination is still okay
+	if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
+
+		var col = scr_ai_ghostOverlap(self);
+		var tooFar = false;
 	
-//}
+		if (instance_exists(target)) {
+			tooFar = point_distance(ghost.x, ghost.y, target.x, target.y) > targetReaquireDist;
+		}
+	
+		if (col or tooFar) {
+		
+			var pt = scr_ai_choosePointAroundTarget(target, targetMinDist, targetMaxDist, true);
+				
+		}
+
+	}
+
+	//move toward ghost
+	if (instance_exists(target)) {
+
+		scr_ai_moveTowardsPointAvoid(ghost.x, ghost.y, spd, avoidDist);
+		scr_ai_attackTarget(self, target, aimOnReload);
+		//scr_ai_shootAtTarget(self, target, aimOnReload);
+
+	} else {
+
+		xspd = 0;
+		yspd = 0;
+
+	}
+	
+}
+
+function scr_ai_standardPetBehaviour() {
+
+	if (scr_timeSlicing_isMyTurn("findTarget", findTargetIndex)) {
+	
+		if (instance_exists(target)) {
+	
+			var dist = point_distance(x, y, target.x, target.y);
+			if (dist > reTargetDist) target = noone;
+	
+		}
+	
+		if (!instance_exists(target)) target = scr_char_getNearestToSource(self, true);
+	
+	}
+
+	scr_ai_shootAtTarget(self, target, true);
+	
+	//
+	if (instance_exists(target)) {
+		scr_ai_standardAIBehaviour();
+	} else {
+		scr_ai_moveTowardsOwner();
+	}
+
+	if (aimX < x) image_xscale = -1;
+	if (aimX > x) image_xscale = 1;
+	
+}
+
+function scr_ai_moveTowardsOwner() {
+
+	if (!instance_exists(owner)) exit;
+
+	//first destination pick
+	if (firstGhostCheck) {
+		
+		firstGhostCheck = false;
+		
+		var pt = scr_ai_choosePointAroundTarget(owner, targetMinDist, targetMaxDist, true);
+
+	}
+
+	//periodically check if destination is still okay
+	if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
+
+		var col = scr_ai_ghostOverlap(self);
+		var tooFar = false;
+	
+		if (instance_exists(owner)) {
+			tooFar = point_distance(ghost.x, ghost.y, owner.x, owner.y) > targetReaquireDist;
+		}
+	
+		if (col or tooFar) {
+		
+			var pt = scr_ai_choosePointAroundTarget(owner, targetMinDist, targetMaxDist, true);
+				
+		}
+
+	}
+
+	//move toward ghost
+	if (instance_exists(owner)) {
+
+		aimX = owner.x;
+		aimY = owner.y;
+		scr_ai_moveTowardsPointAvoid(ghost.x, ghost.y, spd, avoidDist);
+
+	} else {
+
+		xspd = 0;
+		yspd = 0;
+
+	}
+	
+}
+
+function scr_ai_setup() {
+
+	// General AI
+	if (!variable_instance_exists(self, "alert")) alert = false;
+	if (!variable_instance_exists(self, "firstGhostCheck")) firstGhostCheck = true;
+
+	// Time-slicing indices
+	if (!variable_instance_exists(self, "detectionIndex")) detectionIndex = -1;
+	if (!variable_instance_exists(self, "ghostCheckIndex")) ghostCheckIndex = -1;
+	if (!variable_instance_exists(self, "avoidIndex")) avoidIndex = -1;
+	if (!variable_instance_exists(self, "aimIndex")) aimIndex = -1;
+
+	// Targeting distances
+	if (!variable_instance_exists(self, "targetMinDist")) targetMinDist = 180;
+	if (!variable_instance_exists(self, "targetMaxDist")) targetMaxDist = 360;
+	if (!variable_instance_exists(self, "targetReaquireDist")) targetReaquireDist = 450;
+
+	// Detection
+	if (!variable_instance_exists(self, "detectionDist")) detectionDist = 800;
+
+	// Avoidance
+	if (!variable_instance_exists(self, "avoidDist")) avoidDist = 48;
+	if (!variable_instance_exists(self, "avoidX")) avoidX = 0;
+	if (!variable_instance_exists(self, "avoidY")) avoidY = 0;
+
+	// Melee
+	if (!variable_instance_exists(self, "meleeRange")) meleeRange = 240;
+
+	// Shooting
+	if (!variable_instance_exists(self, "shootDelayMin")) shootDelayMin = 8;
+	if (!variable_instance_exists(self, "shootDelayMax")) shootDelayMax = 16;
+	if (!variable_instance_exists(self, "shootDelayTick")) shootDelayTick = 0;
+
+	// Aiming
+	if (!variable_instance_exists(self, "aimAngle")) aimAngle = 30;
+	if (!variable_instance_exists(self, "aimBias")) aimBias = 1.5;
+	if (!variable_instance_exists(self, "firstShot")) firstShot = true;
+	if (!variable_instance_exists(self, "aimOnReload")) aimOnReload = false;
+	
+	// Assign time-slicing indices
+	ghostCheckIndex = scr_timeSlicing_assignTurnIndex("ghostCheck");
+	aimIndex = scr_timeSlicing_assignTurnIndex("aim");
+	detectionIndex = scr_timeSlicing_assignTurnIndex("detection");
+	avoidIndex = scr_timeSlicing_assignTurnIndex("avoid");
+
+	// Randomise initial shooting delay
+	shootDelayTick = irandom_range(shootDelayMin * 2, shootDelayMax * 2);
+	
+}

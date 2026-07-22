@@ -185,21 +185,4 @@ weaponIndex = 0;
 meleeHitList = [];
 
 //ai
-active = false;
-alert = false;
-detectionDist = 800;
 hurt = false;
-avoidDist = 48;
-avoidX = 0;
-avoidY = 0;
-avoidIndex = -1;
-meleeRange = 240;
-
-shootDelayMin = 8;
-shootDelayMax = 16;
-shootDelayTick = 0;
-aimAngle = 30;
-aimBias = 1.5; // 1 = equal chance across angle range, < 1 baised towards edges, > 1 baised towards centre
-firstShot = true;
-aimIndex = -1;
-aimOnReload = false;

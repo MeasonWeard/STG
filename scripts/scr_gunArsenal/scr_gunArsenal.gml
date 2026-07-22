@@ -264,3 +264,27 @@ function gun_turretGun(level, rarity) : gunInst(level, rarity) constructor {
 	shootSounds = global.data.soundProfiles.smg;
 	
 }
+
+function gun_blobGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Blob gun"
+	
+	projSprite = spr_bullet_blobSpit;
+	range = 200;
+	auto = false;
+	clipSize = 1;
+	fireRate = 1;
+	reloadTime = 1;
+	spd = 16;
+	minAimOff = 2.2;
+	maxAimOff = 8;
+	recoil = 1.8;
+	stability = 0.08;
+	rot = 3;
+	
+	damage.kin = 2;
+	damage.chem = 3;
+	
+	shootSounds = global.data.soundProfiles.alienShoot;
+	
+}
