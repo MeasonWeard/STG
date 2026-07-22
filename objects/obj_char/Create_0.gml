@@ -149,6 +149,8 @@ dashes = 0;
 dashing = false;
 
 //attack
+customGunOffset = false;
+gunCentred = false;
 gunXoffset = 0;
 gunYoffset = 0;
 
@@ -156,11 +158,8 @@ gunDist = 32;
 
 dir = choose(0, 1, 2, 3);
 
-gunCentred = false;
-customGunOffset = false;
-
-centreX = x + gunXoffset * dir;
-centreY = y - gunYoffset;
+centreX = x;
+centreY = y;
 
 gunX = centreX;
 gunY = centreY;

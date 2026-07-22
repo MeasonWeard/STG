@@ -1,8 +1,9 @@
 event_inherited();
 
 //ATTACK
+
 centreX = x + gunXoffset;
-centreY = y - gunYoffset;
+centreY = y + gunYoffset;
 
 if (gunCentred) {
 	centreX = x;

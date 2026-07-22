@@ -14,6 +14,7 @@ gunDamMult = 1;
 
 target = noone;
 
+customGunOffset = true;
 gunYoffset = -sprite_height + 16;
 
 sprites = {

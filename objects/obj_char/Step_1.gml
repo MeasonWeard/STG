@@ -10,7 +10,10 @@ if (setup) {
 
 	setup = false;
 	
-	if (!customGunOffset) gunYoffset = (sprite_get_height(sprites.down) * image_yscale) * 0.5;
+	if (!customGunOffset) {
+		gunYoffset = -((sprite_get_height(sprites.down) * image_yscale) * 0.5);
+		gunXoffset = 0;
+	}
 
 	//thorns
 	if (is_struct(thornsDamage)) {

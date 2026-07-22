@@ -29,23 +29,9 @@ var weaponsData = scr_data_loadEquippedWeapons();
 scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 
-//var gun = new gun_blaster(1, 1);
-//var gun2 = new gun_shotgun (1, 1);
-
-//gun.damage.fire = 6;
-//gun.bonusStats.fireRate = 1;
-
-//scr_weapons_collectWeapon(self, gun, false);
-//scr_weapons_collectWeapon(self, gun2, false);
-
-//scr_weapons_collectWeapon(self, melee1, false);
-
-//gear.device1 = scr_genDevices_powerBank(6, 5);
-//gear.device2 = scr_genDevices_watch(6, 5);
-//gear.tie = new tieInst(1, 1);
-//gear.headgear = new headgearInst(1, 1);
-
-//gunYoffset = 64;
+//var hg = new headgearInst(1, 1);
+//hg.stats.fireDam = 100;
+//gear.headgear = hg;
 
 //STATS
 baseStats.maxHp = 200;

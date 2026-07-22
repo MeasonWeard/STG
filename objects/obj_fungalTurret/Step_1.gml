@@ -3,6 +3,8 @@ event_inherited();
 
 if (fungalSetup) {
 
+	scr_audio_playSoundAt(snd_alienShoot2, x, y);
+
 	fungalSetup = false;
 
 	if (level > 1) {

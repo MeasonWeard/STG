@@ -418,7 +418,7 @@ function skill_fungalTurret() : skill() constructor {
 	maxCharges = 1;
 	charges = 1;
 	energyCost = 20;
-	cooldownTime = 4;
+	cooldownTime = 0.25;
 	castCooldownTime = 0.2;
 	maxSpawns = 1;
 	life = 6;
@@ -431,8 +431,7 @@ function skill_fungalTurret() : skill() constructor {
 		life = 6 + (level - 1) * 0.5;
 		maxSpawns = 1 + level div 3;
 		maxCharges = maxSpawns;
-		maxHp = 200 + (level - 1) * 25;
-		castCooldownTime = 0.25;
+		maxHp = 150 + (level - 1) * 25;
 		gunDamMult = 1 + (level - 1) * 0.2;
 	
 	}
@@ -456,11 +455,69 @@ function skill_fungalTurret() : skill() constructor {
 		var existing = 0;
 		
 		var inst = scr_char_spawnPet(obj_fungalTurret, source, life, xx, yy, maxSpawns);
+		inst.life = life;
 		inst.level = level;
 		inst.baseStats.maxHp = maxHp;
 		inst.gunDamMult = gunDamMult;
 
 		scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+
+		if (instance_exists(inst)) return true;
+
+	}
+	
+}
+
+function skill_turret() : skill() constructor {
+	
+	name = "Turret";
+	key = "turret";
+	icon = spr_icon_turret;
+	maxLevel = 12;
+	maxCharges = 1;
+	charges = 1;
+	energyCost = 50;
+	cooldownTime = 20;
+	castCooldownTime = 0.2;
+	maxSpawns = 1;
+	clips = 2;
+	maxHp = 200;
+	gunDamMult = 1;
+
+	static setupFunc = function(char) {
+		
+		energyCost = 50 + (level - 1) * 5;
+		maxHp = 200 + (level - 1) * 25;
+		gunDamMult = 1 + (level - 1) * 0.2;
+		
+		var extraClips = level div 2;
+		clips = 2 + extraClips;
+	
+	}
+	
+	static castFunc = function(source) {
+		
+		var aimX = source.aimX;
+		var aimY = source.aimY;
+		
+		var gunX = source.gunX;
+		var gunY = source.gunY;
+		
+		var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+		var aimDist = point_distance(gunX, gunY, aimX, aimY);
+		var dist = min(200, aimDist);
+		
+		var xx = gunX + lengthdir_x(dist, dir);
+		var yy = gunY + lengthdir_y(dist, dir);
+		
+		var existing = 0;
+		
+		var inst = scr_char_spawnPet(obj_turret, source, undefined, xx, yy, maxSpawns);
+		inst.clips = clips;
+		inst.level = level;
+		inst.baseStats.maxHp = maxHp;
+		inst.gunDamMult = gunDamMult;
 
 		if (instance_exists(inst)) return true;
 

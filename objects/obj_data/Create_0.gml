@@ -306,7 +306,8 @@ skillConstructors = {
     rubberBoots: skill_rubberBoots,
     chainLightning: skill_chainLightning,
     antimatterBlast: skill_antimatterBlast,
-	fungalTurret: skill_fungalTurret
+	fungalTurret: skill_fungalTurret,
+	turret: skill_turret
 };
 
 

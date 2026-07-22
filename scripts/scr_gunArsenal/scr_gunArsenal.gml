@@ -244,3 +244,23 @@ function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
 	shootSounds = global.data.soundProfiles.fungusBlast;
 	
 }
+
+function gun_turretGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Turret Gun";
+	spr = spr_smg;
+	
+	auto = true;
+	range = 1000;
+	clipSize = 18;
+	fireRate = 10;
+	reloadTime = 1.4;
+	spd = 22;
+	minAimOff = 2.4;
+	maxAimOff = 8;
+	recoil = 1.4;
+	stability = 0.12;
+	damage.kin = 8;
+	shootSounds = global.data.soundProfiles.smg;
+	
+}
