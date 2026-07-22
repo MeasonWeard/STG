@@ -45,22 +45,20 @@ if (setupStats) {
 	scr_data_copyInto(stats, baseStats);
 	
 	//apply class stats and passive skill stats
-	if (instance_exists(global.player) and self.id == global.player.id) {
-		
-		var playerData = global.gameData.playerData;
+	if (is_struct(charData)) {
 		
 		//major
-		scr_class_applyMajorStats(playerData.class1, stats);
+		scr_class_applyMajorStats(charData.class1, stats);
 		//minor
-		scr_class_applyMinorStats(playerData.class1, stats);
-		scr_class_applyMinorStats(playerData.class2, stats);
+		scr_class_applyMinorStats(charData.class1, stats);
+		scr_class_applyMinorStats(charData.class2, stats);
 		
 		//apply passive skills stats
 		var class1Passives = [];
 		var class2Passives = [];
 		
-		var class1 = playerData.class1;
-		var class2 = playerData.class2;
+		var class1 = charData.class1;
+		var class2 = charData.class2;
 		
 		//convert skill save data into skill instances
 		if (is_struct(class1)) class1.unlockedSkills = scr_skills_loadArray(class1.unlockedSkills);
@@ -69,7 +67,7 @@ if (setupStats) {
 		//class1, setup skills and apply passives
 		if (is_struct(class1)) {
 			
-			var unlockedSkills = playerData.class1.unlockedSkills;
+			var unlockedSkills = charData.class1.unlockedSkills;
 			var len = array_length(unlockedSkills);
 		
 			for (var i = 0; i < len; i ++) {
@@ -101,7 +99,7 @@ if (setupStats) {
 		//class2, setup skills and apply passives
 		if (is_struct(class2)) {
 			
-			var unlockedSkills = playerData.class2.unlockedSkills;
+			var unlockedSkills = charData.class2.unlockedSkills;
 			var len = array_length(unlockedSkills);
 		
 			for (var i = 0; i < len; i ++) {
@@ -131,7 +129,7 @@ if (setupStats) {
 		}
 		
 		//load active skills
-		var activeSkills = playerData.skills;
+		var activeSkills = charData.skills;
 		
 		var skill1 = activeSkills.skill1;
 		var skill2 = activeSkills.skill2;
@@ -143,10 +141,10 @@ if (setupStats) {
 		var skill3Key = is_struct(skill3) ? skill3.key : undefined;
 		var skill4Key = is_struct(skill4) ? skill4.key : undefined;
 		
-		skills.skill1 = scr_skills_findPlayerSkill(skill1Key, true);
-		skills.skill2 = scr_skills_findPlayerSkill(skill2Key, true);
-		skills.skill3 = scr_skills_findPlayerSkill(skill3Key, true);
-		skills.skill4 = scr_skills_findPlayerSkill(skill4Key, true);
+		skills.skill1 = scr_skills_findCharSkill(skill1Key, self, true);
+		skills.skill2 = scr_skills_findCharSkill(skill2Key, self, true);
+		skills.skill3 = scr_skills_findCharSkill(skill3Key, self, true);
+		skills.skill4 = scr_skills_findCharSkill(skill4Key, self, true);
 		
 	}
 	

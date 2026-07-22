@@ -2,11 +2,11 @@
 function skill() constructor {
 	
 	name = "None";
+	key = undefined;
 	icon = spr_icon_blank;
 	level = 1;
-	maxLevel = 12;
 	
-	key = undefined;
+	maxLevel = 12;
 	
 	active = true;
 	passives = undefined;
@@ -127,8 +127,11 @@ function scr_skills_load(savedSkill) {
 	variable_struct_remove(savedSkill, "cast");
 	variable_struct_remove(savedSkill, "tick");
 	variable_struct_remove(savedSkill, "ready");
+	
+	//for now we only need the skill level
+	loadedSkill.level = savedSkill.level;
 
-    scr_data_structCopyInto(loadedSkill, savedSkill);
+    //scr_data_structCopyInto(loadedSkill, savedSkill);
 
     return loadedSkill;
 	
