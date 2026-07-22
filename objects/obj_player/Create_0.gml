@@ -22,6 +22,17 @@ moveToSide = undefined;
 
 setMaxCharges = true;
 
+sprites = {
+
+	left: spr_player_1,
+	right: spr_player_1,
+	up: spr_player_1,
+	down: spr_player_1,
+	spawn: spr_player_1,
+	death: spr_player_death
+	
+}
+
 //EQUIPMENT
 
 gear = scr_data_loadEquippedGear();
