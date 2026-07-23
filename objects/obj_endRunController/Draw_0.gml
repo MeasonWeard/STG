@@ -118,7 +118,7 @@ if (tab == "loot") {
 	draw_set_halign(fa_middle);
 	draw_set_font(fnt_large);
 	
-	var totalLoot = alpha + beta + gamma + delta + sigma + omega;
+	var totalLoot = alpha + beta + gamma + delta + sigma + omega + unique;
 	
 	if (totalLoot < 1) {
 		
@@ -136,6 +136,7 @@ if (tab == "loot") {
 		draw_sprite_ext(spr_lootOrb, 3, lootOrbX, ly4, 1, 1, 0, data.rarities.delta.col, 1);
 		draw_sprite_ext(spr_lootOrb, 4, lootOrbX, ly5, 1, 1, 0, data.rarities.sigma.col, 1);
 		draw_sprite_ext(spr_lootOrb, 5, lootOrbX, ly6, 1, 1, 0, data.rarities.omega.col, 1);
+		draw_sprite_ext(spr_lootOrb, 5, lootOrbX, ly7, 1, 1, 0, data.rarities.unique.col, 1);
 	
 		draw_text(lootOrbTextX, ly1 - 16, alpha);
 		draw_text(lootOrbTextX, ly2 - 16, beta);
@@ -143,6 +144,7 @@ if (tab == "loot") {
 		draw_text(lootOrbTextX, ly4 - 16, delta);
 		draw_text(lootOrbTextX, ly5 - 16, sigma);
 		draw_text(lootOrbTextX, ly6 - 16, omega);
+		draw_text(lootOrbTextX, ly7 - 16, unique);
 	
 		if (alpha > 0) {
 	
@@ -185,6 +187,13 @@ if (tab == "loot") {
 			omegaScrap.active = true;
 		
 		}
+		
+		if (unique > 0) {
+	
+			uniqueReveal.active = true;
+			uniqueScrap.active = true;
+		
+		}
 	
 	}
 	
@@ -193,21 +202,46 @@ if (tab == "loot") {
 if (tab == "reveal") {
 
 	//generate loot
-	var amount = variable_instance_get(self, revealKey);
-	var rarityNum = scr_loot_getRarityNum(revealKey);
 	var maxLevel = rc.runLevel;
 	
 	takeButton.active = true;
 	scrapAllButton.active = true;
 	
-	while (amount > 0) {
+	if (revealKey == "unique") {
+	
+		var len = array_length(uniqueLoot);
+		for (var i = 0; i < len; i++) {
 		
-		var newLoot = scr_loot_generateGenericLoot(maxLevel, rarityNum);
-		array_push(revealedLoot, newLoot);
-		amount--;
+			var lootFunc = uniqueLoot[i];
+			if (!is_callable(lootFunc)) continue;
 		
+			var lvl = scr_loot_rollLevel(maxLevel);
+			var lootItem = lootFunc(lvl);
+			
+			if (!is_struct(lootItem)) continue;
+			
+			array_push(revealedLoot, lootItem);
+		
+		}
+		
+		uniqueLoot = [];
+	
+	} else {
+	
+		var amount = variable_instance_get(self, revealKey);
+		var rarityNum = scr_loot_getRarityNum(revealKey);
+		
+		while (amount > 0) {
+		
+			var newLoot = scr_loot_generateGenericLoot(maxLevel, rarityNum);
+			array_push(revealedLoot, newLoot);
+			amount--;
+		
+		}
+	
 	}
 	
+	//var setTo = lootKey == "unique" ? [] : 0;
 	variable_instance_set(self, revealKey, 0);
 	
 	//draw

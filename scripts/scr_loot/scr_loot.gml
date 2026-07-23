@@ -75,6 +75,22 @@ function scr_loot_dropLoot(chance, maxRarity, improveChance, maxAmount) {
 
 }
 
+function scr_loot_dropUnique(chance, func) {
+	
+	if (!scr_random_chance(chance)) return noone;
+	
+	if (!is_callable(func)) return noone;
+	
+	var loot = scr_items_spawn(obj_lootOrb, x, y, 1, true);
+	
+	loot.rarity = -1;
+	
+	loot.uniqueFunc = func;
+	
+	return loot;
+	
+}
+
 function scr_loot_getRarityInfo(rarity) {
 
 	static rarities = global.data.rarities;

@@ -27,3 +27,4 @@ firstStage = true;
 
 resources = {};
 loot = {};
+uniqueLoot = [];

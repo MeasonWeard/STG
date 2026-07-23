@@ -143,6 +143,12 @@ rarities = {
 		name: "Omega"
 	},
 	
+	unique: {
+		num: -1,
+		col: c_yellow,
+		name: "Unique"
+	}
+	
 }
 
 colours = {
