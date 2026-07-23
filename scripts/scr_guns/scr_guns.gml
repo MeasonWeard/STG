@@ -142,6 +142,11 @@ function scr_guns_calculateGunStats(char, gun) {
 		scr_stats_alterStat(newStats, key, amount);
 		
 	}
+	
+	if (char.stats.gunDamPerc > 0) {
+		var dec = 1 + char.stats.gunDamPerc * 0.01;
+		newStats.damage = scr_stats_multiplyDamageProfile(newStats.damage, dec);
+	}
 
 	return newStats;
 	

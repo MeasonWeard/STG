@@ -220,9 +220,11 @@ function scr_data_safeStructGet(struct, key, defaultVal) {
 }
 
 function scr_data_addResource(key, val) {
-
-	var resources = global.runController.resources;
 	
+	if (!instance_exists(global.runController)) exit;
+	
+	var resources = global.runController.resources;
+
 	if (!variable_struct_exists(resources, key)) {
 		
 		var info = scr_data_getResourceInfo(key);

@@ -309,7 +309,7 @@ soundProfiles = {
 	swish: [snd_swish1, snd_swish2, snd_swish3, snd_swish4],
 	
 	//characters
-	jeffDeath: [snd_jeffDeath1, snd_jeffDeath2, snd_jeffDeath3],
+	plantDeath: [snd_plantDeath1, snd_plantDeath2, snd_plantDeath3],
 	
 	//sfx
 	fleshExplod: [snd_fleshExplode1, snd_fleshExplode2, snd_fleshExplode3],
@@ -328,7 +328,9 @@ enemyGroups = {
 	aliendsBig: [[obj_alien, 100]],
 	
 	spidersSmall: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
-	spidersBig: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]]
+	spidersBig: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
+	
+	plantsSmall: [[obj_plant, 100]]
 	
 }
 
@@ -343,7 +345,10 @@ skillConstructors = {
 	blob: skill_blob,
 	PPE: skill_PPE,
 	joltzmanShield: skill_joltzmanShield,
-	shieldBattery: skill_shieldBattery
+	shieldBattery: skill_shieldBattery,
+	kevlar: skill_kevlar,
+	tinkerer: skill_tinkerer,
+	muscleGrowth: skill_muscleGrowth
 };
 
 

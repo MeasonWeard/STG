@@ -12,7 +12,7 @@ var slash = new melee_berthaSlash(1, 1);
 scr_weapons_collectWeapon(self, slash, true);
 
 thornsDamage = new damageProfile();
-thornsDamage.kin = 8;
+thornsDamage.kin = 4;
 
 sprites = {
 

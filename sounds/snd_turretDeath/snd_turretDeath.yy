@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_turretDeath",
   "parent":{
-    "name":"SFX",
-    "path":"folders/Sounds/SFX.yy",
+    "name":"Char sounds",
+    "path":"folders/Sounds/Char sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

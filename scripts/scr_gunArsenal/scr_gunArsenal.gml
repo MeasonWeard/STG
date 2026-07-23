@@ -288,3 +288,26 @@ function gun_blobGun(level, rarity) : gunInst(level, rarity) constructor {
 	shootSounds = global.data.soundProfiles.alienShoot;
 	
 }
+
+function gun_plantGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Pollen Gun"
+	
+	projSprite = spr_bullet_plantSpit;
+	auto = false;
+	clipSize = 2;
+	fireRate = 0.8;
+	reloadTime = 1.8;
+	spd = 16;
+	minAimOff = 2.2;
+	maxAimOff = 8;
+	recoil = 1.8;
+	stability = 0.08;
+	rot = 3;
+	
+	damage.kin = 3;
+	damage.chem = 2;
+	
+	shootSounds = global.data.soundProfiles.alienShoot;
+	
+}

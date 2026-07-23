@@ -47,6 +47,10 @@ function scr_stats_blankCharStats() {
 		chemDamPerc: 0,
 		elecDamPerc: 0,
 		radDamPerc: 0,
+		
+		//
+		gunDamPerc: 0,
+		meleeDamPerc: 0,
 	
 		//flat resistances
 		kinRes: 0,
@@ -374,6 +378,9 @@ function scr_stats_getName(statKey) {
         case "chemDamPerc": return "Chemical Damage %";
         case "elecDamPerc": return "Electric Damage %";
         case "radDamPerc": return "Radiation Damage %";
+		
+		case "gunDamPerc": return "Gun Damage %";
+        case "meleeDamPerc": return "Melee Damage %";
 
         case "kinRes": return "Kinetic Resistance";
         case "fireRes": return "Fire Resistance";
@@ -448,6 +455,12 @@ function scr_stats_formatCharStats(stats, finalStats) {
     str = scr_stats_formatStat(str, stats, "chemDamPerc", "%");
     str = scr_stats_formatStat(str, stats, "elecDamPerc", "%");
     str = scr_stats_formatStat(str, stats, "radDamPerc", "%");
+	
+	str += "\n";
+	
+	//
+	str = scr_stats_formatStat(str, stats, "gunDamPerc", "%");
+    str = scr_stats_formatStat(str, stats, "meleeDamPerc", "%");
 	
 	str += "\n";
 	

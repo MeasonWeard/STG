@@ -134,7 +134,10 @@ function scr_melee_calculateMeleeStats(char, melee) {
 		
 	}
 	
-	
+	if (char.stats.meleeDamPerc > 0) {
+		var dec = 1 + char.stats.meleeDamPerc * 0.01;
+		newStats.damage = scr_stats_multiplyDamageProfile(newStats.damage, dec);
+	}
 
 	return newStats;
 	

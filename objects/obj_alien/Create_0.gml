@@ -14,7 +14,7 @@ baseStats.maxHp = 60;
 
 thornsDamage = new damageProfile();
 
-thornsDamage.kin = 4;
+thornsDamage.kin = 2;
 
 sprites = {
 

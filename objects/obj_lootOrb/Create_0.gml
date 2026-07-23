@@ -10,6 +10,8 @@ uniqueFunc = undefined;
 
 collectFunc = function () {
 
+	if (!instance_exists(global.runController)) exit;
+	
 	var loot = global.runController.loot;
 	
 	if (is_callable(uniqueFunc)) {

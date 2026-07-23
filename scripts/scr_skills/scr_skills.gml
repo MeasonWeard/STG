@@ -764,7 +764,7 @@ function skill_rubberBoots() : skill() constructor {
 	
 	passives = {
 	
-		elecRes: 8
+		elecRes: 4
 	
 	};
 	
@@ -772,7 +772,7 @@ function skill_rubberBoots() : skill() constructor {
 	
 		passives = {
 	
-			elecRes: 8 * level
+			elecRes: 4 * level
 	
 		};
 	
@@ -791,8 +791,8 @@ function skill_PPE() : skill() constructor {
 	
 	passives = {
 	
-		chemRes: 4,
-		fireRes: 4
+		chemRes: 3,
+		fireRes: 3
 	
 	};
 	
@@ -800,14 +800,96 @@ function skill_PPE() : skill() constructor {
 	
 		passives = {
 	
-			chemRes: 4 * level,
-			fireRes: 4 * level
+			chemRes: 3 * level,
+			fireRes: 3 * level
 	
 		};
 	
 	}
 	
 }
+
+function skill_kevlar() : skill() constructor {
+
+	name = "Kevlar";
+	key = "kevlar";
+	icon = spr_icon_rubberBoots;
+	maxLevel = 4;
+	
+	description = "Increases your kinetic resistance.";
+	
+	passives = {
+	
+		kinRes: 4 * level
+	
+	};
+	
+	static setupFunc = function(source) {
+	
+		passives = {
+	
+			kinRes: 4 * level
+	
+		};
+	
+	}
+	
+}
+
+function skill_tinkerer() : skill() constructor {
+
+	name = "Tinkerer";
+	key = "tinkerer";
+	icon = spr_icon_rubberBoots;
+	maxLevel = 4;
+	
+	description = "Modify your guns so that they deal more damage.";
+	
+	passives = {
+	
+		gunDamPerc: 5
+	
+	};
+	
+	static setupFunc = function(source) {
+	
+		passives = {
+	
+			gunDamPerc: 5 * level
+	
+		};
+	
+	}
+	
+}
+
+function skill_muscleGrowth() : skill() constructor {
+
+	name = "Myostatin inhibitor";
+	key = "muscleGrowth";
+	icon = spr_icon_rubberBoots;
+	maxLevel = 4;
+	
+	description = "Block the body's natural limit on muscle growth, greatly increasing your melee damage.";
+	
+	passives = {
+	
+		meleeDamPerc: 5
+	
+	};
+	
+	static setupFunc = function(source) {
+	
+		passives = {
+	
+			meleeDamPerc: 5 * level
+	
+		};
+	
+	}
+	
+}
+
 
 function skill_guardianArray() : skill() constructor {
 
