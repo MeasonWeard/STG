@@ -160,24 +160,18 @@ for (var i = 0; i < len; i++) {
 	if (env.onGround) continue;
 	
 	//skip if behind
-	var farX = (moveX >= 0) ? env.colRight  : env.colLeft;
-	var farY = (moveY >= 0) ? env.colBottom : env.colTop;
+	var centreX = (env.colLeft + env.colRight) * 0.5;
+	var centreY = (env.colTop + env.colBottom) * 0.5;
 
-	var toFarX = farX - x;
-	var toFarY = farY - y;
+	var toObjX = centreX - x;
+	var toObjY = centreY - y;
 
-	var dot = moveX * toFarX + moveY * toFarY;
+	var dot = moveX * toObjX + moveY * toObjY;
 
-	// The entire collision rectangle is behind the projectile
 	if (dot < 0) continue;
 
 	//detect collision
 	if (point_in_rectangle(x, y, env.colLeft, env.colTop, env.colRight, env.colBottom)) {
-		
-		var safeX = x;
-		var safeY = y;
-		var hitX = nextX;
-		var hitY = nextY;
 		
 		//skip if higher
 		if (height > env.height) {
@@ -185,7 +179,12 @@ for (var i = 0; i < len; i++) {
 			depth = env.depth - 1;
 			continue;
 		}
-	
+		
+		var safeX = x;
+		var safeY = y;
+		var hitX = nextX;
+		var hitY = nextY;
+		
 		repeat (4) {
 		
 			var midX = (safeX + hitX) * 0.5;
