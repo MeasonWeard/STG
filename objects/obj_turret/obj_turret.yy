@@ -36,8 +36,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_turret",
-    "path":"sprites/spr_turret/spr_turret.yy",
+    "name":"spr_turretDeath",
+    "path":"sprites/spr_turretDeath/spr_turretDeath.yy",
   },
   "spriteMaskId":null,
   "visible":true,

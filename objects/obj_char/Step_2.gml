@@ -167,6 +167,16 @@ if (hp < prevHp) {
 	
 }
 
+if (shield < prevShield) {
+
+	shieldFlash = 3;
+	
+} else {
+
+	shieldFlash = max(0, shieldFlash - 1);
+	
+}
+
 if (hp <= 0) {
 
 	if(is_callable(deathFunc)) {
@@ -175,7 +185,7 @@ if (hp <= 0) {
 		
 	} else {
 		
-		var gib = instance_create_layer(x, y-10, "Instances", obj_gib);
+		var gib = instance_create_layer(x, y, "Instances", obj_gib);
 		gib.sprite_index = sprites.death;
 		gib.disappear = gibDisappears;
 		

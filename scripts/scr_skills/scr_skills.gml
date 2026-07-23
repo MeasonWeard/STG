@@ -688,7 +688,7 @@ function skill_turret() : skill() constructor {
 	gunDamMult = 1;
 	shields = 0;
 	
-	description = "Construct an automated stationary gun that fires until its ammo runs out.\n"
+	description = "Deploy an automated stationary gun that fires until its ammo runs out.\n"
 	description += "Flat damage bonuses that apply to your weapons also apply to the\nturret's bullets.";
 	
 	static formatStatsDescription = function() {

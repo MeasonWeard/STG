@@ -1,25 +1,7 @@
 event_inherited();
 
-draw_self();
-
 if (movedThisStep) image_speed = 1;
 else image_speed = 0;
-
-//shield
-if (shield > 0) {
-
-	var pulse = sin(current_time * 0.005);
-	var shieldScale = 1.08 + pulse * 0.04;
-	var sprHeight = sprite_height;
-
-	var yOffset = sprHeight * abs(image_yscale) * (shieldScale - 1) * 0.5;
-	
-	var shieldCol = #ED008C;
-	var shieldAlpha = 0.4 + pulse * 0.05;
-
-	draw_sprite_ext(sprite_index, image_index, x, y + yOffset, image_xscale * shieldScale, image_yscale * shieldScale, image_angle, shieldCol, shieldAlpha);
-	
-}
 
 //sprites
 if (spawning) {
@@ -32,6 +14,24 @@ if (spawning) {
 		image_speed = 0;
 		spawning = false;
 	}
+	
+}
+
+draw_self();
+
+//shield
+if (shield > 0) {
+
+	var pulse = sin(current_time * 0.005);
+	var shieldScale = 1.08 + pulse * 0.04;
+	var sprHeight = sprite_height;
+
+	var yOffset = sprHeight * abs(image_yscale) * (shieldScale - 1) * 0.5;
+	
+	var shieldCol = shieldFlash > 0 ? #EDA5E7 : #ED008C;
+	var shieldAlpha = shieldFlash > 0 ? 0.7 : 0.4 + pulse * 0.05;
+
+	draw_sprite_ext(sprite_index, image_index, x, y + yOffset, image_xscale * shieldScale, image_yscale * shieldScale, image_angle, shieldCol, shieldAlpha);
 	
 }
 

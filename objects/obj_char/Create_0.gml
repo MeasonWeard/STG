@@ -56,6 +56,7 @@ sprites = {
 }
 
 damageFlash = 0;
+shieldFlash = 0;
 
 //stats
 maxHp = 100;
@@ -63,6 +64,7 @@ hp = 100;
 maxShield = 0;
 shield = 0;
 prevHp = hp;
+prevShield = shield;
 maxEnergy = 200;
 energy = 200;
 

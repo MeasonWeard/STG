@@ -20,12 +20,12 @@ gunYoffset = -sprite_height + 8;
 
 sprites = {
 
-	left: spr_turret,
-	right: spr_turret,
-	up: spr_turret,
-	down: spr_turret,
+	left: spr_turretLeft,
+	right: spr_turretRight,
+	up: spr_turretUp,
+	down: spr_turretDown,
 	death: spr_turretDeath,
-	spawn: spr_turretSpawn
+	spawn: spr_turretDeploy
 	
 }
 

@@ -222,5 +222,6 @@ if (firstEquip) {
 	prevWeapon = equippedWeapon;
 }
 
+prevShield = shield;
 prevHp = hp;
 prevWeapon = equippedWeapon;
