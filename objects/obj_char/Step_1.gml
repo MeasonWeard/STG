@@ -11,7 +11,7 @@ if (setup) {
 	setup = false;
 	
 	if (!customGunOffset) {
-		gunYoffset = -((sprite_get_height(sprites.down) * image_yscale) * 0.5);
+		gunYoffset = -((sprite_get_height(sprites.down) * image_yscale) * 0.6);
 		gunXoffset = 0;
 	}
 

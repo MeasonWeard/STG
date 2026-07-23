@@ -6,6 +6,7 @@ destroyEffect = spr_bulletExplosion;
 shieldHitSounds = global.data.soundProfiles.bulletHitShield;
 
 depth = layers.projectiles;
+height = 0;
 
 dir = 0;
 spd = 12;

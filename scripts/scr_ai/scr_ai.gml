@@ -574,9 +574,6 @@ function scr_ai_standardPetBehaviour() {
 	} else {
 		scr_ai_moveTowardsOwner();
 	}
-
-	if (aimX < x) image_xscale = -1;
-	if (aimX > x) image_xscale = 1;
 	
 }
 
@@ -630,49 +627,6 @@ function scr_ai_moveTowardsOwner() {
 		avoidDist
 	);
 
-	//if (!instance_exists(owner)) exit;
-
-	////first destination pick
-	//if (firstGhostCheck) {
-		
-	//	firstGhostCheck = false;
-		
-	//	var pt = scr_ai_choosePointAroundTarget(owner, targetMinDist, targetMaxDist, true);
-
-	//}
-
-	////periodically check if destination is still okay
-	//if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
-
-	//	var col = scr_ai_ghostOverlap(self);
-	//	var tooFar = false;
-	
-	//	if (instance_exists(owner)) {
-	//		tooFar = point_distance(ghost.x, ghost.y, owner.x, owner.y) > targetReaquireDist;
-	//	}
-	
-	//	if (col or tooFar) {
-		
-	//		var pt = scr_ai_choosePointAroundTarget(owner, targetMinDist, targetMaxDist, true);
-				
-	//	}
-
-	//}
-
-	////move toward ghost
-	//if (instance_exists(owner)) {
-
-	//	aimX = owner.x;
-	//	aimY = owner.y;
-	//	scr_ai_moveTowardsPointAvoid(ghost.x, ghost.y, spd, avoidDist);
-
-	//} else {
-
-	//	xspd = 0;
-	//	yspd = 0;
-
-	//}
-	
 }
 
 function scr_ai_setup() {

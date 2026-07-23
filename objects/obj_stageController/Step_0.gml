@@ -29,6 +29,14 @@ if (global.devControls) {
 		global.debug = !global.debug;
 	
 	}
+	
+	if (keyboard_check_pressed(vk_delete)) {
+   
+		with (obj_enemy) {
+			hp = 0;
+		}
+	
+	}
 
 }
 

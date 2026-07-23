@@ -472,3 +472,64 @@ function scr_mapGen_addSideRooms(
 	};
 	
 }
+
+function scr_mapGen_replaceRooms(
+	map,
+	stages,
+	amount
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+
+	var maxTries = 42;
+
+	var roomCount = 0;
+	var stageCount = array_length(stages);
+
+	if (stageCount <= 0 or amount <= 0) {
+		return {
+			map: map,
+			roomCount: roomCount
+		};
+	}
+
+	for (var i = 0; i < amount; i++) {
+
+		var replaced = false;
+		var tries = 0;
+
+		while (!replaced and tries < maxTries) {
+
+			tries++;
+
+			var xx = irandom(mapW - 1);
+			var yy = irandom(mapH - 1);
+
+			// Must already contain a room
+			if (is_undefined(map[xx][yy])) continue;
+
+			var key = stages[irandom(stageCount - 1)];
+			map[xx][yy] = scr_mapGen_createCell(key);
+
+			roomCount++;
+			replaced = true;
+
+		}
+
+		if (!replaced) {
+			show_debug_message(
+				"room replacement failed after "
+				+ string(maxTries)
+				+ " tries"
+			);
+		}
+
+	}
+
+	return {
+		map: map,
+		roomCount: roomCount
+	};
+
+}

@@ -57,7 +57,7 @@ function zone_waste() : zone() constructor {
 		
 			//var stages = ["wasteArena1","wasteArenaLava1","wasteArenaAcid1"];
 			var halls = [stage_wasteHall1, stage_wasteHall2];//[stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
-			var sideRooms = [stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
+			var sideRooms = [stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaAcid2, stage_wasteArenaLava1];
 			var endStages = ["engBoss1"];
 
 			var startX = startPos.xx;
@@ -66,10 +66,13 @@ function zone_waste() : zone() constructor {
 			var mainLength = irandom_range(8, 12);
 			var sideHallAmount = irandom_range(3, 6);
 			var sideRoomsAmount = irandom_range(6, 8);
+			var replaceRoomsAmount = irandom_range(6, 8);
 			
 			var result = scr_mapGen_generateHallways(map, halls, startX, startY, mainLength, sideHallAmount, 2, 5);
 			var cellCount = result.cellCount;
 			
+			result = scr_mapGen_replaceRooms(map, sideRooms, replaceRoomsAmount);
+
 			result = scr_mapGen_addSideRooms(map, sideRooms, sideRoomsAmount);
 			cellCount += result.cellCount;
 

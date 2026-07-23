@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_toxicCrate",
+  "%Name":"obj_barrel",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_toxicCrate",
+  "name":"obj_barrel",
   "overriddenProperties":[],
   "parent":{
     "name":"Things",
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_toxicCrate",
-    "path":"sprites/spr_toxicCrate/spr_toxicCrate.yy",
+    "name":"spr_barrel",
+    "path":"sprites/spr_barrel/spr_barrel.yy",
   },
   "spriteMaskId":null,
   "visible":true,

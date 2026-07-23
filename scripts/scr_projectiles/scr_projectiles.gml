@@ -33,6 +33,9 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 	proj.damage = damage;
 	proj.source = source;
 	proj.rangeLeft = range;
+	
+	proj.height = irandom_range(1, 100);
+	proj.ignoreEnvTick = 1;
 
 	//values to always reset
 

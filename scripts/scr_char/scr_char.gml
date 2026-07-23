@@ -592,3 +592,60 @@ function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undef
 	return inst;
 	
 }
+
+function scr_char_animateLRMirror(alwaysAnimate) {
+
+	sprite_index = sprites.right;
+
+	if (aimX < x) image_xscale = -1;
+	if (aimX > x) image_xscale = 1;
+	
+	if (movedThisStep or alwaysAnimate) {
+		image_speed = 1	
+	} else {
+		image_speed = 0;
+		image_index = 0;
+	}
+	
+}
+
+
+function scr_char_animateLR(alwaysAnimate) {
+
+	if (aimX < x) sprite_index = sprites.left;
+	if (aimX > x) sprite_index = sprites.right;
+	
+	if (movedThisStep or alwaysAnimate) {
+		image_speed = 1	
+	} else {
+		image_speed = 0;
+		image_index = 0;
+	}
+	
+}
+
+function scr_char_animateUPDL(alwaysAnimate) {
+
+	var dir = point_direction(gunX, gunY, aimX, aimY);
+
+	if (dir >= 45 and dir < 135) {
+		sprite_index = sprites.up;
+	}
+	else if (dir >= 135 and dir < 225) {
+		sprite_index = sprites.left;
+	}
+	else if (dir >= 225 and dir < 315) {
+		sprite_index = sprites.down;
+	}
+	else {
+		sprite_index = sprites.right;
+	}
+	
+	if (movedThisStep or alwaysAnimate) {
+		image_speed = 1	
+	} else {
+		image_speed = 0;
+		image_index = 0;
+	}
+	
+}

@@ -223,6 +223,13 @@ stages = {
 		mapCol: c_orange
 		
 	},
+	
+	wasteArenaAcid2: {
+		
+		room: stage_wasteArenaAcid2,
+		mapCol: c_orange
+		
+	},
 
 	engHall1: {
 		

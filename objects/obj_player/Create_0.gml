@@ -57,7 +57,7 @@ baseStats.energyRegen = 5;
 baseStats.maxStimPacks = 2;
 baseStats.maxEnergyPacks = 1;
 
-baseStats.maxShield = 12;
+baseStats.maxShield = 0;
 baseStats.shieldRegen = 0.25;
 
 //SKILLS

@@ -12,3 +12,5 @@ blockLos = false;
 
 onGround = false;
 projCollision = true;
+
+height = 200;

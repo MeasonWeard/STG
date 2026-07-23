@@ -6,11 +6,16 @@ yspd = lengthdir_y(spd, dir);
 var nextX = x + xspd;
 var nextY = y + yspd;
 
+var moveX = lengthdir_x(1, dir);
+var moveY = lengthdir_y(1, dir);
+
 if (rot == 0) {
 	image_angle = dir;
 } else {
 	image_angle += rot;
 }
+
+var keepDepth = false;
 
 //char collison
 var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
@@ -154,12 +159,32 @@ for (var i = 0; i < len; i++) {
 	if (instance_exists(source) and env.id == source.id) continue;
 	if (env.onGround) continue;
 	
+	//skip if behind
+	var farX = (moveX >= 0) ? env.colRight  : env.colLeft;
+	var farY = (moveY >= 0) ? env.colBottom : env.colTop;
+
+	var toFarX = farX - x;
+	var toFarY = farY - y;
+
+	var dot = moveX * toFarX + moveY * toFarY;
+
+	// The entire collision rectangle is behind the projectile
+	if (dot < 0) continue;
+
+	//detect collision
 	if (point_in_rectangle(x, y, env.colLeft, env.colTop, env.colRight, env.colBottom)) {
 		
 		var safeX = x;
 		var safeY = y;
 		var hitX = nextX;
 		var hitY = nextY;
+		
+		//skip if higher
+		if (height > env.height) {
+			keepDepth = true;
+			depth = env.depth - 1;
+			continue;
+		}
 	
 		repeat (4) {
 		
@@ -202,6 +227,9 @@ for (var i = 0; i < len; i++) {
 	
 }
 
+
+
+//move
 x = nextX;
 y = nextY;
 
@@ -226,4 +254,4 @@ if (x <= global.roomLeft or x >= global.roomRight or y <= global.projectileTop o
 		
 }
 
-depth = layers.physical -y - 32;
+if (!keepDepth) depth = -y - 32;
