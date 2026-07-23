@@ -47,7 +47,7 @@ function scr_genTies_physics(level, rarity) {
 		if (key == "shieldRegenDelay") {
 			
 			low = level * -0.015;
-			high = low + .1;
+			high = low - .1;
 			integer = false;
 			
 		}
