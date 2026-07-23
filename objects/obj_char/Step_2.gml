@@ -227,7 +227,7 @@ if (hp > 0) {
 	
 	}
 	
-	if (finalStats.maxShield > 0 and finalStats.shieldRegen > 0 and shield < maxShield and hurtTick < 1) {
+	if (finalStats.maxShield > 0 and finalStats.shieldRegen > 0 and shield < maxShield and hurtTick <= 0) {
 	
 		shieldRegenCounter += finalStats.shieldRegen / 60;
 		

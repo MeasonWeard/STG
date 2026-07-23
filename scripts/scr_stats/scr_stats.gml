@@ -6,7 +6,7 @@ function scr_stats_blankCharStats() {
 		maxHp: 100,
 		maxShield: 0,
 		hpRegen: 0,
-		shieldRegen: 0.25,
+		shieldRegen: 0.2,
 		maxEnergy: 0,
 		energyRegen: 2,
 		shieldRegenDelay: 3,
@@ -399,10 +399,14 @@ function scr_stats_formatCharStats(stats, finalStats) {
 
     // flat health and shields
     str = scr_stats_formatStat(str, stats, "maxHp");
+	str = scr_stats_formatStat(str, stats, "hpRegen", " p/s");
+	str += "\n";
+	
     str = scr_stats_formatStat(str, stats, "maxShield");
-    str = scr_stats_formatStat(str, stats, "hpRegen", " p/s");
     str = scr_stats_formatStat(str, stats, "shieldRegen", " p/s");
 	str = scr_stats_formatStat(str, stats, "shieldRegenDelay", " seconds");
+	str += "\n";
+	
     str = scr_stats_formatStat(str, stats, "maxEnergy");
     str = scr_stats_formatStat(str, stats, "energyRegen", " p/s");
 

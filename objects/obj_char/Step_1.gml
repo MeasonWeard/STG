@@ -171,7 +171,7 @@ if (setupStats) {
 	maxHp = finalStats.maxHp;
 	maxShield = finalStats.maxShield;
 	maxEnergy = finalStats.maxEnergy;
-	shieldRegenDelay = stats.shieldRegenDelay;
+	shieldRegenDelay = max(0.1, stats.shieldRegenDelay);
 	
 	//make sure active skills have correct damage and shit
 	if (is_instanceof(skills.skill1, skill) and is_callable(skills.skill1.setupFunc)) skills.skill1.setupFunc(self);

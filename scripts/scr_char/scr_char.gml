@@ -62,13 +62,13 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	if (!is_struct(damage)) return 0;
 	
 	char.hurt = true;
-	char.hurtTick = char.shieldRegenDelay;
+	char.hurtTick = char.shieldRegenDelay * 60;
 	
 	//randomise damage
 	var kin = damage.kin > 0 ? irandom_range(damage.kinMin, damage.kinMax) : 0;
 	var fire = damage.fire > 0 ? irandom_range(damage.fireMin, damage.fireMax) : 0;
-	var chem = damage.chem > 0 ?irandom_range(damage.chemMin, damage.chemMax) : 0;
-	var elec = damage.elec > 0 ?irandom_range(damage.elecMin, damage.elecMax) : 0;
+	var chem = damage.chem > 0 ? irandom_range(damage.chemMin, damage.chemMax) : 0;
+	var elec = damage.elec > 0 ? irandom_range(damage.elecMin, damage.elecMax) : 0;
 	var rad = damage.rad > 0 ? irandom_range(damage.radMin, damage.radMax) : 0;
 	
 	//apply resistances

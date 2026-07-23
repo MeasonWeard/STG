@@ -335,7 +335,9 @@ skillConstructors = {
 	turret: skill_turret,
 	guardianArray: skill_guardianArray,
 	blob: skill_blob,
-	PPE: skill_PPE
+	PPE: skill_PPE,
+	joltzmanShield: skill_joltzmanShield,
+	shieldBattery: skill_shieldBattery
 };
 
 

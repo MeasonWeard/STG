@@ -832,3 +832,55 @@ function skill_guardianArray() : skill() constructor {
 	}
 	
 }
+
+function skill_joltzmanShield() : skill() constructor {
+
+	name = "Joltzman Shield";
+	key = "joltzmanShield";
+	icon = spr_icon_blank;
+	maxLevel = 3;
+
+	description = "Grants you shield points.";
+	
+	static setupFunc = function(source) {
+	
+		passives = {
+	
+			maxShield: level
+	
+		};
+	
+	}
+	
+}
+
+function skill_shieldBattery() : skill() constructor {
+
+	name = "Shield Battery";
+	key = "shieldBattery";
+	icon = spr_icon_blank;
+	maxLevel = 5;
+
+	description = "The first point grants you +1 shield point.";
+	description += "\nEach point decreases shield regen delay\nand increases shield regen rate.";
+	
+	//passives = {
+	
+	//	maxShield: 1,
+	//	shieldRegenDelay: -0.1
+	
+	//};
+
+	static setupFunc = function(source) {
+	
+		passives = {
+			
+			maxShield: 1,
+			shieldRegenDelay: -0.1 * level,
+			shieldRegen: 0.05 * level
+
+		};
+	
+	}
+	
+}
