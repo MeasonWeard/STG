@@ -234,12 +234,12 @@ sigma = variable_struct_exists(loot, "sigma") ? loot[$ "sigma"] : 0;
 omega = variable_struct_exists(loot, "omega") ? loot[$ "omega"] : 0;
 
 //test data
-//alpha = 200;
-//beta = 200;
-//gamma = 30;
-//delta = 30;
-//sigma = 30;
-//omega = 30;
+alpha = 100;
+beta = 100;
+gamma = 100;
+delta = 100;
+sigma = 100;
+omega = 100;
 //
 
 lootButtons = [];

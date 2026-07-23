@@ -21,6 +21,23 @@ function scr_randomElement(array) {
 	
 }
 
+function scr_randomElementRemove(array) {
+
+	if (!is_array(array)) return undefined;
+
+	var len = array_length(array);
+	
+	if (len == 0) return undefined;
+	
+	var rand = irandom_range(0, len - 1);
+	var el = array[rand];
+	
+	array_delete(array, rand, 1);
+	
+	return el;
+	
+}
+
 function scr_randomPointInCircle(xx, yy, radius) {
 
 	var dir = random(360);

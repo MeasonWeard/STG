@@ -212,7 +212,9 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "tie") {
 		
-		loot = new tieInst(level, rarity);
+		var func = choose(scr_genTies_physics, scr_genTies_physics); // make sure you don't repeat genTies_physics
+		
+		loot = func(level, rarity);
 		
 	}
 	
