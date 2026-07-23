@@ -75,31 +75,26 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	if (kin > 0 and char.finalStats.kinRes > 0) {
 		var res = irandom_range(char.finalStats.kinResMin, char.finalStats.kinResMax);
 		kin = max(1, kin - res);
-		totalRes += res;
 	}
 	
 	if (fire > 0 and char.finalStats.fireRes > 0) {
 		var res = irandom_range(char.finalStats.fireResMin, char.finalStats.fireResMax);
 		fire = max(1, fire - res);
-		totalRes += res;
 	}
 	
 	if (chem > 0 and char.finalStats.chemRes > 0) {
 		var res = irandom_range(char.finalStats.chemResMin, char.finalStats.chemResMax);
 		chem = max(1, chem - res);
-		totalRes += res;
 	}
 	
 	if (elec > 0 and char.finalStats.elecRes > 0) {
 		var res = irandom_range(char.finalStats.elecResMin, char.finalStats.elecResMax);
 		elec = max(1, elec - res);
-		totalRes += res;
 	}
 	
 	if (rad > 0 and char.finalStats.radRes > 0) {
 		var res = irandom_range(char.finalStats.radResMin, char.finalStats.radResMax);
 		rad = max(1, rad - res);
-		totalRes += res;
 	}
 	
 	//final

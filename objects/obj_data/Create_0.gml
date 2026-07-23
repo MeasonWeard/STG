@@ -11,6 +11,8 @@ global.data = self;
 #macro FALLOFF_FACTOR_BULLETHIT 1.2
 #macro THORNS_IMMUNITY_TIME 0.5
 #macro LOOT_BIAS 3
+#macro LOOT_BIAS_MILD 2
+#macro LOOT_BIAS_HEAVY 4
 #macro ITEM_PULL_RANGE 480
 #macro COLLECTION_RANGE 32
 #macro ITEM_PULL_STRENGTH 16
@@ -82,6 +84,15 @@ enum itemTypes {
 	device = 5,
 	headgear = 6,
 	tie = 7
+	
+}
+
+enum stageTypes {
+
+	hall = 0,
+	arena = 1,
+	boss = 2,
+	special = 3
 	
 }
 
@@ -193,7 +204,8 @@ stages = {
 	
 		room: undefined,
 		name: "none",
-		mapCol: c_blue
+		mapCol: c_blue,
+		type: stageTypes.hall
 	
 	},
 	
@@ -206,28 +218,32 @@ stages = {
 	wasteArena1: {
 		
 		room: stage_wasteArena1,
-		mapCol: c_orange
+		mapCol: c_orange,
+		type: stageTypes.arena
 		
 	},
 	
 	wasteArenaLava1: {
 		
 		room: stage_wasteArenaLava1,
-		mapCol: c_orange
+		mapCol: c_orange,
+		type: stageTypes.arena
 		
 	},
 	
 	wasteArenaAcid1: {
 		
 		room: stage_wasteArenaAcid1,
-		mapCol: c_orange
+		mapCol: c_orange,
+		type: stageTypes.arena
 		
 	},
 	
 	wasteArenaAcid2: {
 		
 		room: stage_wasteArenaAcid2,
-		mapCol: c_orange
+		mapCol: c_orange,
+		type: stageTypes.arena
 		
 	},
 
@@ -245,13 +261,15 @@ stages = {
 	
 	engComputerRoom: {
 		
-		room: stage_engComputerRoom
+		room: stage_engComputerRoom,
+		type: stageTypes.arena
 		
 	},
 	
 	engBoss1: {
 		
-		room: stage_engBoss1
+		room: stage_engBoss1,
+		type: stageTypes.boss
 		
 	}
 	

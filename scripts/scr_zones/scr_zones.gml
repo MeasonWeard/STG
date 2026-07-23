@@ -40,7 +40,7 @@ function zone_waste() : zone() constructor {
 	mapW = 12;
 	mapH = 12;
 	
-	zoneLevel = 3;
+	zoneLevel = 4;
 	
 	static generateMap = function() {
 	
@@ -71,10 +71,10 @@ function zone_waste() : zone() constructor {
 			var result = scr_mapGen_generateHallways(map, halls, startX, startY, mainLength, sideHallAmount, 2, 5);
 			var cellCount = result.cellCount;
 			
-			result = scr_mapGen_replaceRooms(map, sideRooms, replaceRoomsAmount);
-
 			result = scr_mapGen_addSideRooms(map, sideRooms, sideRoomsAmount);
 			cellCount += result.cellCount;
+			
+			result = scr_mapGen_replaceRooms(map, sideRooms, replaceRoomsAmount, stageTypes.hall);
 
 			success = cellCount > 20;
 			if (!success) continue;

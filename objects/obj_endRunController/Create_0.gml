@@ -234,7 +234,7 @@ sigma = variable_struct_exists(loot, "sigma") ? loot[$ "sigma"] : 0;
 omega = variable_struct_exists(loot, "omega") ? loot[$ "omega"] : 0;
 
 //test data
-//alpha = 99;
+//alpha = 200;
 //beta = 200;
 //gamma = 30;
 //delta = 30;

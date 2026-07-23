@@ -242,17 +242,18 @@ function scr_mapGen_generateHallways(
 	sideHallMaxLength
 ) {
 
-	var mapW = array_length(map);
+		var mapW = array_length(map);
 	var mapH = array_length(map[0]);
 	
 	var cellCount = 0;
-	
 	var stageCount = array_length(stages);
 	
-	if (stageCount <= 0) return {
-		map: map,
-		cellCount: cellCount
-	};
+	if (stageCount <= 0) {
+		return {
+			map: map,
+			cellCount: cellCount
+		};
+	}
 	
 	// ---------------------------------------------------------
 	// Pick direction away from the starting edge
@@ -310,7 +311,7 @@ function scr_mapGen_generateHallways(
 			yy: yy
 		});
 		
-		cellCount ++;
+		cellCount++;
 
 		xx += dx;
 		yy += dy;
@@ -319,10 +320,12 @@ function scr_mapGen_generateHallways(
 
 	var hallCount = array_length(hallCells);
 	
-	if (hallCount <= 0)  return {
-		map: map,
-		cellCount: cellCount
-	};
+	if (hallCount <= 0) {
+		return {
+			map: map,
+			cellCount: cellCount
+		};
+	}
 
 	// Perpendicular directions relative to the main hall
 	var sideDX1 = dy;
@@ -331,43 +334,94 @@ function scr_mapGen_generateHallways(
 	var sideDX2 = -dy;
 	var sideDY2 = dx;
 
+	// Main-hall indices already used for side halls
+	var usedSideIndices = [];
+	var maxTries = 42;
+
 	// ---------------------------------------------------------
 	// Generate side halls
 	// ---------------------------------------------------------
 
 	for (var h = 0; h < sideHallAmount; h++) {
 
-		var index = irandom(hallCount - 1);
-		var cell = hallCells[index];
+		var placed = false;
+		var tries = 0;
 
-		var sideLength = irandom_range(
-			sideHallMinLength,
-			sideHallMaxLength
-		);
+		while (!placed and tries < maxTries) {
 
-		var useFirstSide = choose(true, false);
+			tries++;
 
-		var sideDX = useFirstSide ? sideDX1 : sideDX2;
-		var sideDY = useFirstSide ? sideDY1 : sideDY2;
+			var index = irandom(hallCount - 1);
 
-		var sx = cell.xx + sideDX;
-		var sy = cell.yy + sideDY;
+			// Require at least one main-hall cell between side halls
+			var tooClose = false;
 
-		for (var j = 0; j < sideLength; j++) {
+			for (var u = 0; u < array_length(usedSideIndices); u++) {
 
-			if (sx < 0 or sx >= mapW) break;
-			if (sy < 0 or sy >= mapH) break;
+				if (abs(index - usedSideIndices[u]) <= 1) {
+					tooClose = true;
+					break;
+				}
 
-			if (!is_undefined(map[sx][sy])) break;
+			}
 
-			var key = stages[irandom(stageCount - 1)];
-			map[sx][sy] = scr_mapGen_createCell(key);
-			
-			cellCount ++;
+			if (tooClose) continue;
 
-			sx += sideDX;
-			sy += sideDY;
+			var cell = hallCells[index];
 
+			var sideLength = irandom_range(
+				sideHallMinLength,
+				sideHallMaxLength
+			);
+
+			var useFirstSide = choose(true, false);
+
+			var sideDX = useFirstSide ? sideDX1 : sideDX2;
+			var sideDY = useFirstSide ? sideDY1 : sideDY2;
+
+			var sx = cell.xx + sideDX;
+			var sy = cell.yy + sideDY;
+
+			// First side-hall cell must be valid
+			if (sx < 0 or sx >= mapW) continue;
+			if (sy < 0 or sy >= mapH) continue;
+			if (!is_undefined(map[sx][sy])) continue;
+
+			var placedCells = 0;
+
+			for (var j = 0; j < sideLength; j++) {
+
+				if (sx < 0 or sx >= mapW) break;
+				if (sy < 0 or sy >= mapH) break;
+
+				if (!is_undefined(map[sx][sy])) break;
+
+				var key = stages[irandom(stageCount - 1)];
+				map[sx][sy] = scr_mapGen_createCell(key);
+				
+				cellCount++;
+				placedCells++;
+
+				sx += sideDX;
+				sy += sideDY;
+
+			}
+
+			if (placedCells > 0) {
+
+				array_push(usedSideIndices, index);
+				placed = true;
+
+			}
+
+		}
+
+		if (!placed) {
+			show_debug_message(
+				"side hallway generation failed after "
+				+ string(maxTries)
+				+ " tries"
+			);
 		}
 
 	}
@@ -375,7 +429,7 @@ function scr_mapGen_generateHallways(
 	return {
 		map: map,
 		cellCount: cellCount
-	}
+	};
 	
 }
 
@@ -476,7 +530,8 @@ function scr_mapGen_addSideRooms(
 function scr_mapGen_replaceRooms(
 	map,
 	stages,
-	amount
+	amount,
+	type = undefined
 ) {
 
 	var mapW = array_length(map);
@@ -508,6 +563,10 @@ function scr_mapGen_replaceRooms(
 
 			// Must already contain a room
 			if (is_undefined(map[xx][yy])) continue;
+			
+			if (type != undefined) {
+				if (map[xx][yy].type != type) continue;	
+			}
 
 			var key = stages[irandom(stageCount - 1)];
 			map[xx][yy] = scr_mapGen_createCell(key);

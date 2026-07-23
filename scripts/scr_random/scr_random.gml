@@ -110,7 +110,7 @@ function scr_random_weightedPick(arr) {
 	
 }
 
-function irandom_range_biased(minVal, maxVal, bias, biasTowardsLow) {
+function irandom_range_biased(minVal, maxVal, bias, biasTowardsLow = true) {
 
     var r = random(1);
 

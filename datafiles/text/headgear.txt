@@ -1,0 +1,12 @@
+hard hat - ken res
+welding mask - fire res
+safety goggles - chem res
+arc flash hood - elec res
+lead hood - rad res
+
+respirator - chem and rad res
+safety goggles - chem and fire res
+blast helmet - kin and fire res
+insulated hood - elec and fire res
+radiation visor - elec and rad res
+dielectric helmet - kin and elec res

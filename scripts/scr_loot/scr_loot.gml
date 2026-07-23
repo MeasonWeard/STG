@@ -6,7 +6,7 @@ function scr_loot_rollLevel(maxLevel) {
     var level = minLevel;
 
     var firstChance = 75;
-    var finalChance = 10;
+    var finalChance = 25;
 
     var increases = maxLevel - minLevel;
 
@@ -184,6 +184,7 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	var type = choose("gun","melee","device","tie","headgear");
 	
 	var level = scr_loot_rollLevel(maxLevel);
+	show_debug_message(maxLevel);
 	
 	if (type == "gun") {
 		
@@ -217,7 +218,11 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "headgear") {
 		
-		loot = new headgearInst(level, rarity);
+		var func = choose(scr_genHeadgear_hardHat, scr_genHeadgear_weldingMask, scr_genHeadgear_safetyMask,
+		scr_genHeadgear_arcFlashHood, scr_genHeadgear_leadHood, scr_genHeadgear_respirator, scr_genHeadgear_safetyGoggles,
+		scr_genHeadgear_blastHelmet, scr_genHeadgear_insulatedHood, scr_genHeadgear_radiationVisor, scr_genHeadgear_dielectricHelmet);
+		
+		loot = func(level, rarity);
 		
 	}
 	
