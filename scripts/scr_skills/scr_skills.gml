@@ -429,6 +429,65 @@ function scr_skills_formatDescription(skillInst) {
 
 	#region chemistry
 
+	function skill_flamethrower() : skill() constructor {
+	
+		name = "Flamethrower";
+		key = "flamethrower";
+		icon = spr_icon_blank;
+		maxLevel = 9;
+		maxCharges = 1;
+		charges = 1;
+		energyCost = 100;
+		jetCount = 4;
+		cooldownTime = 16;
+		life = 8;
+		damTime = 0.5;
+	
+		damage = undefined;
+	
+		description = "Spinning fire!";
+	
+		static formatStatsDescription = function() {
+	
+			statsDescription = "Jets: " + string(jetCount);
+			statsDescription += "\n\nDuration: " + string(life) +" seconds";
+			statsDescription += "\n\nDamage: " + string(damage.fire / damTime) +" fire p/s";
+			
+		}
+	
+		static setupFunc = function(source) {
+		
+			//energyCost = 50 + level * 5;
+		
+			jetCount = 4 + level div 4;
+			life = 7.5 + 0.5 * level;
+		
+			damage = new damageProfile();
+		
+			damage.fire = 10 + 2 * level;
+			damage.fire = scr_stats_applyDamageBonuses(source, damage.fire, "fire");
+
+			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			
+		}
+	
+		static castFunc = function(source) {
+		
+			var ff = instance_create_layer(source.x, source.y, "Instances", obj_flamethrower);
+	
+			ff.owner = source;
+			ff.damage = damage;
+			ff.jetCount = jetCount;
+			ff.faction = source.faction;
+			ff.life = life;
+			ff.damTime = damTime;
+			
+			return true;
+			
+		}
+	
+	}
+
 	function skill_acidFlasks() : skill() constructor {
 	
 		name = "Acid Flasks";
@@ -491,7 +550,6 @@ function scr_skills_formatDescription(skillInst) {
 				launcher.owner = source;
 				launcher.damage = damage;
 				launcher.dir = dir;
-				launcher.owner = source;
 				launcher.totalProjectiles = projectiles;
 				launcher.radius = radius;
 				launcher.faction = source.faction;

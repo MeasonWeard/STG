@@ -351,7 +351,8 @@ skillConstructors = {
 	tinkerer: skill_tinkerer,
 	muscleGrowth: skill_muscleGrowth,
 	acidFlasks: skill_acidFlasks,
-	acidicBullets: skill_acidicBullets
+	acidicBullets: skill_acidicBullets,
+	flamethrower: skill_flamethrower
 };
 
 

@@ -1,21 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_acidPool",
+  "%Name":"obj_flamethrower",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":1,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_acidPool",
+  "name":"obj_flamethrower",
   "overriddenProperties":[],
   "parent":{
     "name":"Projectiles and attacks",
     "path":"folders/Objects/Projectiles and attacks.yy",
   },
-  "parentObjectId":{
-    "name":"obj_hazard",
-    "path":"objects/obj_hazard/obj_hazard.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -33,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_acidPoolForming",
-    "path":"sprites/spr_acidPoolForming/spr_acidPoolForming.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
