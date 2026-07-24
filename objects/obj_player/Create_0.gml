@@ -5,6 +5,7 @@ name = "player";
 faction = "player";
 damageDestructibles = true;
 sprites.death = spr_playerDeath;
+tags = ["bio"];
 
 attackDelay = 12;
 shootingCooldown = 12;

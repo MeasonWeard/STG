@@ -1,5 +1,7 @@
 event_inherited();
 
+tags = ["bio"];
+
 level = 1;
 life = 10;
 

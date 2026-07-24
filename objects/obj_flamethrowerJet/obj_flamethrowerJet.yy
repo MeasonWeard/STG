@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_flamethrowerJet",
-    "path":"sprites/spr_flamethrowerJet/spr_flamethrowerJet.yy",
+    "name":"spr_flamethrowerJet_1",
+    "path":"sprites/spr_flamethrowerJet_1/spr_flamethrowerJet_1.yy",
   },
   "spriteMaskId":null,
   "visible":true,

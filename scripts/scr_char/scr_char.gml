@@ -654,3 +654,28 @@ function scr_char_addBulletFunc(char, func) {
 
 	
 }
+
+function scr_char_hasTag(char, tag) {
+
+	if(!instance_exists(char)) return false;
+	
+	var len = array_length(char.tags);
+	
+	if (len < 1) return false;
+	
+	var found = false;
+	
+	for (var i = 0; i < len; i++) {
+		
+		var thisTag = char.tags[i];
+		
+		if (thisTag == tag) {
+			found = true;
+			break;
+		}
+		
+	}
+	
+	return found;
+	
+}

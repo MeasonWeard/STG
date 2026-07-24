@@ -1,6 +1,7 @@
-function scr_zones_startZone(zoneConstructor, extraLevel) {
+function scr_zones_startZone(zoneConstructor, extraLevel, destroyPlayer = true) {
 
 	if (instance_exists(global.player)) instance_destroy(global.player);
+	
 	global.runController = scr_obj_createExclusive(obj_runController, 0, 0);
 	var rc = global.runController;
 	

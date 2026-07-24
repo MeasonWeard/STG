@@ -155,8 +155,9 @@ function scr_audio_stopMusic() {
 	
 }
 
-function scr_audio_playSoundAt(snd, xx, yy) {
+function scr_audio_playSoundAt(snd, xx, yy, loops = false) {
 
-	audio_play_sound_at(snd, xx, yy, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
+	var s = audio_play_sound_at(snd, xx, yy, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, loops, 0);	
+	return s;
 	
 }

@@ -1,4 +1,4 @@
-if (instance_exists(ghost)) instance_destroy(ghost);
+event_inherited();
 
 if (dropOnDestroy) {
 

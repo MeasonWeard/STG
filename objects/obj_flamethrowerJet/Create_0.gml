@@ -11,3 +11,5 @@ damTime = 0.5;
 charHash = global.stageController.charHash;
 
 damageSounds = [snd_burn];
+
+image_xscale = 1.2;

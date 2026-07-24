@@ -8,6 +8,8 @@ owner = noone;
 spawnTime = current_time;
 spawning = false;
 
+tags = [];
+
 charData = undefined;
 
 setup = true;

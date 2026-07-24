@@ -337,23 +337,30 @@ enemyGroups = {
 }
 
 skillConstructors = {
-    rubberBoots: skill_rubberBoots,
-    chainLightning: skill_chainLightning,
-    antimatterBlast: skill_antimatterBlast,
-	fungalTurret: skill_fungalTurret,
-	turret: skill_turret,
-	guardianArray: skill_guardianArray,
-	blob: skill_blob,
-	PPE: skill_PPE,
-	joltzmanShield: skill_joltzmanShield,
-	shieldBattery: skill_shieldBattery,
-	kevlar: skill_kevlar,
-	tinkerer: skill_tinkerer,
-	muscleGrowth: skill_muscleGrowth,
-	acidFlasks: skill_acidFlasks,
-	acidicBullets: skill_acidicBullets,
-	flamethrower: skill_flamethrower,
-	homeostasis: skill_homeostasis
+	
+	antimatterBlast: skill_antimatterBlast, //phys
+	joltzmanShield: skill_joltzmanShield, //phys
+	
+	PPE: skill_PPE, //chem
+	acidFlasks: skill_acidFlasks, //chem	
+	flamethrower: skill_flamethrower, //chem
+	medicalSynthesis: skill_medicalSynthesis, //chem
+	acidicBullets: skill_acidicBullets, //chem
+	
+	fungalTurret: skill_fungalTurret, //bio
+	blob: skill_blob, //bio
+	muscleGrowth: skill_muscleGrowth, //bio
+	homeostasis: skill_homeostasis, //bio
+	medicalExosomes: skill_medicalExosomes, // bio
+	
+	rubberBoots: skill_rubberBoots, //eng
+	chainLightning: skill_chainLightning, // eng
+	turret: skill_turret, //eng
+	guardianArray: skill_guardianArray, //eng
+	shieldBattery: skill_shieldBattery, //eng
+	kevlar: skill_kevlar, //eng
+	tinkerer: skill_tinkerer //eng
+	
 };
 
 

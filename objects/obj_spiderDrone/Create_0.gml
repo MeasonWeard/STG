@@ -2,7 +2,7 @@
 event_inherited();
 
 name = "Spider Drone";
-
+tags = ["mech"];
 bulletHitSounds = global.data.soundProfiles.bulletHitMetalHigh;
 
 sprites = {

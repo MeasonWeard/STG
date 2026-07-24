@@ -1,7 +1,7 @@
 event_inherited();
 
 name = "alien";
-
+tags = ["bio","plant"];
 bloodCol = #C3D9B6;
 
 bulletHitFunc = scr_effects_bulletHitFlesh;

@@ -79,7 +79,7 @@ var skill4 = skills.skill4;
 
 if ((keyboard_check(ord("1")) or mouse_check_button(mb_right)) and is_struct(skill1)) skill1.cast(self);
 if ((keyboard_check(ord("2")) or mouse_check_button(mb_side1)) and is_struct(skill2)) skill2.cast(self);
-if (keyboard_check(ord("3")) and is_struct(skill3)) skill3.cast(self);
+if ((keyboard_check(ord("3")) or mouse_check_button(mb_side2)) and is_struct(skill3)) skill3.cast(self);
 if (keyboard_check(ord("4")) and is_struct(skill4)) skill4.cast(self);
 
 //portal

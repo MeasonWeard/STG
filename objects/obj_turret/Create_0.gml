@@ -5,6 +5,8 @@ life = undefined;
 clips = 2;
 newClip = false;
 
+tags = ["mech"];
+
 turretSetup = true;
 
 bulletHitSounds = global.data.soundProfiles.bulletHitMetalHigh;

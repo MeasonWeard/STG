@@ -2,7 +2,7 @@
 event_inherited();
 
 name = "celia";
-
+tags = ["bio"];
 baseStats.maxHp = 400;
 
 sprites = {

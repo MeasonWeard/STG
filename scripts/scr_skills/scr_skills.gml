@@ -24,6 +24,8 @@ function skill() constructor {
 	maxCharges = 1;
 	
 	energyCost = 0;
+	
+	txtCol = c_white;
 
 	static castFunc = undefined;
 	
@@ -728,6 +730,58 @@ function scr_skills_formatDescription(skillInst) {
 		}
 	
 	}
+	
+	function skill_medicalExosomes() : skill() constructor {
+	
+		name = "Medical Exosomes";
+		key = "medicalExosomes";
+		icon = spr_icon_exosomes;
+		txtCol = c_black;
+	
+		maxLevel = 9;
+		maxCharges = 1;
+		energyCost = 60;
+		
+		cooldownTime = 24;
+		castCooldownTime = 0.25;
+		
+		heal = 4;
+		ticks = 10;
+		range = 100;
+
+		description = "Release engineered vesicles that restore health over time\nfor you and nearby biological allies."
+
+		static formatStatsDescription = function() {
+		
+			var totalHeal = heal * ticks;
+			statsDescription = "Heals: " + string(totalHeal) + "HP over 10 seconds";
+			statsDescription += "\nRange: " + string(range);
+		}
+
+		static setupFunc = function(source) {
+		
+			energyCost = 55 + level * 5;
+			heal = 4 + 2 * (level - 1);
+			range = 250 + (level - 1) * 25;
+			
+		}
+	
+		static castFunc = function(source) {
+		
+			var inst = instance_create_layer(source.x, source.y, "Instances", obj_exosomes);
+			inst.owner = source;
+			inst.heal = heal;
+			inst.ticks = ticks;
+			inst.range = range;
+			inst.faction = source.faction;
+			
+			scr_audio_playSoundAt(snd_powerUp, source.x, source.y);
+
+			if (instance_exists(inst)) return true;
+
+		}
+	
+	}
 
 	#endregion
 
@@ -892,8 +946,10 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Joltzman Shield";
 		key = "joltzmanShield";
-		icon = spr_icon_blank;
+		icon = spr_icon_joltzmanShield;
+		txtCol = c_black;
 		maxLevel = 3;
+		
 
 		description = "Grants you shield points.";
 	
@@ -917,7 +973,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "PPE";
 		key = "PPE";
-		icon = spr_icon_rubberBoots;
+		icon = spr_icon_PPE;
 		maxLevel = 6;
 	
 		description = "Increases your chemical and fire resistances.";
@@ -942,11 +998,34 @@ function scr_skills_formatDescription(skillInst) {
 	
 	}
 	
+	function skill_medicalSynthesis() : skill() constructor {
+
+		name = "Pharmaceutical Synthesis";
+		key = "medicalSynthesis";
+		icon = spr_icon_medicalSynthesis;
+		txtCol = c_black;
+		maxLevel = 4;
+	
+		description = "The first point increases your maximum stim packs by 1.\nEach point increases stimPac regeneration.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				maxStimPacks: 1,
+				stimPackRegen: level * 0.1
+	
+			};
+	
+		}
+	
+	}
+	
 	function skill_acidicBullets() : skill() constructor {
 
 		name = "Acidic Bullets";
 		key = "acidicBullets";
-		icon = spr_icon_acidFlasks;
+		icon = spr_icon_acidicBullets;
 		maxLevel = 6;
 		
 		chance = 3;
@@ -998,6 +1077,8 @@ function scr_skills_formatDescription(skillInst) {
 		}
 	
 	}
+	
+	
 
 	#endregion
 
@@ -1037,14 +1118,14 @@ function scr_skills_formatDescription(skillInst) {
 		icon = spr_icon_blob;
 		maxLevel = 10;
 	
-		description = "Increase maximum health and health regeneration\nby improving biological stability.";
+		description = "Implanted bioengineered cells improve your maximum health\nand health regeneration";
 	
 		static setupFunc = function(source) {
 	
 			passives = {
 	
 				maxHp : 10 * level,
-				hpRegen: 0.2 * level
+				hpRegen: 0.25 * level
 	
 			};
 	
@@ -1062,6 +1143,7 @@ function scr_skills_formatDescription(skillInst) {
 		key = "rubberBoots";
 		icon = spr_icon_rubberBoots;
 		maxLevel = 4;
+		txtCol = c_black;
 	
 		description = "Increases your electric resistance.";
 	
