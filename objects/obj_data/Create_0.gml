@@ -352,7 +352,8 @@ skillConstructors = {
 	muscleGrowth: skill_muscleGrowth,
 	acidFlasks: skill_acidFlasks,
 	acidicBullets: skill_acidicBullets,
-	flamethrower: skill_flamethrower
+	flamethrower: skill_flamethrower,
+	homeostasis: skill_homeostasis
 };
 
 

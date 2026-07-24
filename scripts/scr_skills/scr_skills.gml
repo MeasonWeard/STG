@@ -433,7 +433,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		name = "Flamethrower";
 		key = "flamethrower";
-		icon = spr_icon_blank;
+		icon = spr_icon_flamethrower;
 		maxLevel = 9;
 		maxCharges = 1;
 		charges = 1;
@@ -459,7 +459,7 @@ function scr_skills_formatDescription(skillInst) {
 		
 			//energyCost = 50 + level * 5;
 		
-			jetCount = 4 + level div 4;
+			jetCount = 4 + (level - 1) div 4;
 			life = 7.5 + 0.5 * level;
 		
 			damage = new damageProfile();
@@ -1023,6 +1023,28 @@ function scr_skills_formatDescription(skillInst) {
 			passives = {
 	
 				meleeDamPerc: 5 * level
+	
+			};
+	
+		}
+	
+	}
+	
+	function skill_homeostasis() : skill() constructor {
+
+		name = "Enhanced Homeostasis";
+		key = "homeostasis";
+		icon = spr_icon_blob;
+		maxLevel = 10;
+	
+		description = "Increase maximum health and health regeneration\nby improving biological stability.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				maxHp : 10 * level,
+				hpRegen: 0.2 * level
 	
 			};
 	
