@@ -20,7 +20,7 @@ rangeLeft = 200;
 
 charHitReport = false;
 
-collisionFunc = undefined;
+collisionFuncs = [];
 
 damageDestructibles = false;
 

@@ -18,7 +18,7 @@ function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 	blastSpread = 10;
 	spd = 22;
 	range = 1200;
-	collisionFunc = undefined;
+	collisionFuncs = undefined;
 
 	//aim
 	minAimOff = 2;

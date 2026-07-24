@@ -1,1 +1,0 @@
-const = skill_test;

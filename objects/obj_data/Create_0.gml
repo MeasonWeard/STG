@@ -48,6 +48,7 @@ enum layers {
 	decorations = 800,
 	ground = 900,
 	groundDecorations = 800,
+	hazards = 700,
 	projectiles = -400,
 	lighting = -700,
 	borders = -800,
@@ -315,7 +316,8 @@ soundProfiles = {
 	fleshExplod: [snd_fleshExplode1, snd_fleshExplode2, snd_fleshExplode3],
 	burn: [snd_burn1, snd_burn2, snd_burn3],
 	microMissile: [snd_microMissile1, snd_microMissile2, snd_microMissile3],
-	collect: [snd_collect1, snd_collect2, snd_collect3]
+	collect: [snd_collect1, snd_collect2, snd_collect3],
+	bottleBreak : [snd_bottleBreak1, snd_bottleBreak2, snd_bottleBreak3, snd_bottleBreak4]
 	
 }
 
@@ -335,7 +337,6 @@ enemyGroups = {
 }
 
 skillConstructors = {
-	test: skill_test,
     rubberBoots: skill_rubberBoots,
     chainLightning: skill_chainLightning,
     antimatterBlast: skill_antimatterBlast,
@@ -348,7 +349,9 @@ skillConstructors = {
 	shieldBattery: skill_shieldBattery,
 	kevlar: skill_kevlar,
 	tinkerer: skill_tinkerer,
-	muscleGrowth: skill_muscleGrowth
+	muscleGrowth: skill_muscleGrowth,
+	acidFlasks: skill_acidFlasks,
+	acidicBullets: skill_acidicBullets
 };
 
 

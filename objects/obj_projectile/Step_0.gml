@@ -1,5 +1,7 @@
 if (!active) exit;
 
+var funcsLen = array_length(collisionFuncs);
+
 xspd = lengthdir_x(spd, dir);
 yspd = lengthdir_y(spd, dir);
 
@@ -75,7 +77,11 @@ for (var i = 0; i < len; i++) {
 			eff.depth = char.depth - 1;
 		}
 		
-		if (is_callable(collisionFunc)) collisionFunc(self);
+		for (var j = 0; j < funcsLen; j ++) {
+			var func = collisionFuncs[j];
+			if (is_callable(func)) func(self);
+		}
+		
 		if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
 	
 		exit;
@@ -136,7 +142,11 @@ if (damageDestructibles) {
 				eff.depth = dest.depth - 1;
 			}
 
-			if (is_callable(collisionFunc)) collisionFunc(self);
+			for (var j = 0; j < funcsLen; j ++) {
+				var func = collisionFuncs[j];
+				if (is_callable(func)) func(self);
+			}
+			
 			if (is_callable(dest.bulletHitFunc)) dest.bulletHitFunc(self, dest);
 	
 			exit;
@@ -217,7 +227,11 @@ for (var i = 0; i < len; i++) {
 			eff.depth = env.depth - 1;
 		}
 
-		if (is_callable(collisionFunc)) collisionFunc(self);
+		for (var j = 0; j < funcsLen; j ++) {
+			var func = collisionFuncs[j];
+			if (is_callable(func)) func(self);
+		}
+	
 		if (is_callable(env.bulletHitFunc)) env.bulletHitFunc(self, env);
 	
 		exit;
@@ -225,8 +239,6 @@ for (var i = 0; i < len; i++) {
 	}
 	
 }
-
-
 
 //move
 x = nextX;
@@ -243,7 +255,11 @@ if (x <= global.roomLeft or x >= global.roomRight or y <= global.projectileTop o
 	
 	var eff = instance_create_layer(x, y, "Instances", obj_bulletEffect);
 	eff.sprite_index = destroyEffect;
-	if (is_callable(collisionFunc)) collisionFunc(self);
+	
+	for (var i = 0; i < funcsLen; i ++) {
+		var func = collisionFuncs[i];
+		if (is_callable(func)) func(self);
+	}
 	
 	var profile = global.data.soundProfiles.bulletHitMetal;
 	var snd = scr_audio_randomSoundFromProfile(profile);

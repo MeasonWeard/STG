@@ -644,3 +644,13 @@ function scr_char_animateUPDL(alwaysAnimate) {
 	}
 	
 }
+
+function scr_char_addBulletFunc(char, func) {
+
+	if(!instance_exists(char)) exit;
+	if(!is_callable(func)) exit;
+	
+	array_push(char.bulletFuncs, func);
+
+	
+}

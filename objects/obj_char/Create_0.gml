@@ -186,6 +186,8 @@ weaponIndex = 0;
 
 meleeHitList = [];
 
+bulletFuncs = [];
+
 //ai
 hurt = false;
 alert = false;

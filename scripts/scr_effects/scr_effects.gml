@@ -66,3 +66,29 @@ function scr_effects_explodingProjectile(proj) {
 	explosion.damage = proj.damage;
 	
 }
+
+function scr_effects_acidicBullet(proj) {
+
+	if (proj.damage.chem <= 0) exit;
+	
+	if (!instance_exists(proj.source)) exit;
+	
+	var sk = scr_skills_findCharSkill("acidicBullets", proj.source);
+	
+	if (is_undefined(sk)) exit;
+	
+	var chance = sk.chance;
+	var damage = sk.damage;
+	var radius = sk.radius;
+	var life = sk.life;
+	
+	if (!scr_random_chance(chance)) exit;
+	
+	var pool = instance_create_layer(proj.x, proj.y, "Instances", obj_acidPool);
+	
+	pool.damage = damage;
+	pool.radius = radius;
+	pool.life = life;
+	pool.faction = proj.source.faction;
+	
+}

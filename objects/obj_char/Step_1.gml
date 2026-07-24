@@ -44,6 +44,8 @@ if (setupStats) {
 	stats = {};
 	scr_data_copyInto(stats, baseStats);
 	
+	bulletFuncs = [];
+	
 	//apply class stats and passive skill stats
 	if (is_struct(charData)) {
 		
@@ -64,7 +66,7 @@ if (setupStats) {
 		if (is_struct(class1)) class1.unlockedSkills = scr_skills_loadArray(class1.unlockedSkills);
 		if (is_struct(class2)) class2.unlockedSkills = scr_skills_loadArray(class2.unlockedSkills);
 		
-		//class1, setup skills and apply passives
+		//class1, setup skills, apply passives and extra effects
 		if (is_struct(class1)) {
 			
 			var unlockedSkills = charData.class1.unlockedSkills;
@@ -78,25 +80,34 @@ if (setupStats) {
 			
 				if (is_callable(sk.setupFunc)) sk.setupFunc(self);
 				
-				if (!is_struct(sk.passives)) continue;
-				
-				var keys = variable_struct_get_names(sk.passives);
-				var keysLen = array_length(keys);
-				
-				for (var j = 0; j < keysLen; j ++) {
-				
-					var key = keys[j];
-					var val = sk.passives[$ key];
+				//passives
+				if (is_struct(sk.passives)) {
 					
-					if (!variable_struct_exists(stats, key)) continue;
+					var keys = variable_struct_get_names(sk.passives);
+					var keysLen = array_length(keys);
+				
+					for (var j = 0; j < keysLen; j ++) {
+				
+						var key = keys[j];
+						var val = sk.passives[$ key];
+					
+						if (!variable_struct_exists(stats, key)) continue;
 		
-					stats[$ key] += val;
+						stats[$ key] += val;
+				
+					}
 				
 				}
+				
+				//extra effects
+				if (is_callable(sk.extraEffects)) {
+					sk.extraEffects(self);
+				}
+
 			}
 		}
 		
-		//class2, setup skills and apply passives
+		//class1, setup skills, apply passives and extra effects
 		if (is_struct(class2)) {
 			
 			var unlockedSkills = charData.class2.unlockedSkills;
@@ -110,21 +121,30 @@ if (setupStats) {
 				
 				if (is_callable(sk.setupFunc)) sk.setupFunc(self);
 				
-				if (!is_struct(sk.passives)) continue;
-				
-				var keys = variable_struct_get_names(sk.passives);
-				var keysLen = array_length(keys);
-				
-				for (var j = 0; j < keysLen; j ++) {
-				
-					var key = keys[j];
-					var val = sk.passives[$ key];
+				//passives
+				if (is_struct(sk.passives)) {
 					
-					if (!variable_struct_exists(stats, key)) continue;
+					var keys = variable_struct_get_names(sk.passives);
+					var keysLen = array_length(keys);
+				
+					for (var j = 0; j < keysLen; j ++) {
+				
+						var key = keys[j];
+						var val = sk.passives[$ key];
+					
+						if (!variable_struct_exists(stats, key)) continue;
 		
-					stats[$ key] += val;
+						stats[$ key] += val;
+				
+					}
 				
 				}
+				
+				//extra effects
+				if (is_callable(sk.extraEffects)) {
+					sk.extraEffects(self);
+				}
+				
 			}
 		}
 		

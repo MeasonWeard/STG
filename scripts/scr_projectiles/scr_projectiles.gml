@@ -89,11 +89,15 @@ function scr_projectiles_shoot(char) {
 	var sprite = weaponStats.projSprite;
 	var damage = weaponStats.damage;
 	var range = weaponStats.range;
-	var collisionFunc = weaponStats.collisionFunc;
 	var maxAimOff = weaponStats.maxAimOff;
 	var recoil = weaponStats.recoil;
 	var rot = weaponStats.rot;
 	
+	var collisionFuncs = [];
+	
+	if (is_array(weaponStats.collisionFuncs)) collisionFuncs = array_concat(collisionFuncs, weaponStats.collisionFuncs);
+	if (is_array(char.bulletFuncs)) collisionFuncs = array_concat(collisionFuncs,char.bulletFuncs);
+		
 	var dir = point_direction(gunX, gunY, aimX, aimY);
 	var aimOff = random_range(-gun.aimOff, gun.aimOff);
 	dir += aimOff;
@@ -110,7 +114,7 @@ function scr_projectiles_shoot(char) {
 			
 			proj.image_angle = dir;
 			proj.faction = faction;
-			proj.collisionFunc = collisionFunc;
+			proj.collisionFuncs = collisionFuncs;
 			proj.oa = oa;
 			proj.damageDestructibles = damageDestructibles;
 			proj.rot = choose(rot, -rot);
@@ -166,7 +170,7 @@ function scr_projectiles_shoot(char) {
 				
 				p.image_angle = angle;
 				p.faction = faction;
-				p.collisionFunc = collisionFunc;
+				p.collisionFuncs = collisionFuncs;
 				p.oa = oa;
 				p.damageDestructibles = damageDestructibles;
 				p.rot = choose(rot, -rot);

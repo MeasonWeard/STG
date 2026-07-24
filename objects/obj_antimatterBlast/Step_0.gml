@@ -21,7 +21,7 @@ if (delay > 0) {
 		if (instance_exists(proj)) {
 	
 			proj.sprite_index = spr_antimatterBullet;
-			proj.collisionFunc = scr_effects_explodingProjectile;
+			proj.collisionFuncs = [scr_effects_explodingProjectile];
 			proj.damage = damage;
 			proj.explosionRadius = explosionRadius;
 			
@@ -36,7 +36,6 @@ if (delay > 0) {
 		
 		}
 
-		
 	}
 	
 }

@@ -1,3 +1,5 @@
+#region FUNCTIONS
+
 //base class
 function skill() constructor {
 	
@@ -22,12 +24,14 @@ function skill() constructor {
 	maxCharges = 1;
 	
 	energyCost = 0;
-	
+
 	static castFunc = undefined;
 	
 	static setupFunc = undefined;
 	
 	static formatStatsDescription = undefined;
+	
+	static extraEffects = undefined;
 
 	static cast = function(source) {
 
@@ -343,488 +347,670 @@ function scr_skills_formatDescription(skillInst) {
 	return txt;
 	
 }
+#endregion
 
-//ACTIVES
+#region ACTIVES
 
-function skill_test() : skill() constructor {
+	#region physics
 
-	name = "Test";
-	key = "test";
-	icon = spr_icon_rubberBoots;
-	maxCharges = 2;
-	charges = 1;
-	energyCost = 0;
-	castCooldownTime = 0.65;
+	function skill_antimatterBlast() : skill() constructor {
 	
-	static castFunc = function(source) {
+		name = "Antimatter Blast";
+		key = "antimatterBlast";
+		icon = spr_icon_antimatter;
+		maxCharges = 1;
+		charges = 1;
+		energyCost = 75;
+		projectiles = 8;
+		cooldownTime = 11;
+		explosionRadius = 50;
+	
+		damage = undefined;
+	
+		description = "Unleash a barrage of magnetically suspended antimatter capsules."
+		description += "\nOn impact that capsules shatter, causing the antimatter to annihilate\nin a devastating explosion.";
+	
+		static formatStatsDescription = function() {
+	
+			statsDescription = "Projectiles: " + string(projectiles);
+			statsDescription += "\nExplosion radius: " + string(explosionRadius);
+			statsDescription += "\n\nDamage: " + string(damage.kin) +" kinetic, " + string(damage.rad) + " radiation";
+	
+		}
+	
+		static setupFunc = function(source) {
 		
-		with (obj_enemy) {
+			energyCost = 75 + level * 5;
 		
-			hp = 0;
+			projectiles = 6 + 2 * level;
+			explosionRadius = 50 + level * 5;
+		
+			damage = new damageProfile();
+		
+			damage.kin = 10 + 2 * level;
+			damage.kin = scr_stats_applyDamageBonuses(source, damage.kin, "kin");
+		
+			damage.rad = 10 + 2 * level;
+			damage.rad = scr_stats_applyDamageBonuses(source, damage.rad, "rad");
+		
+			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
 		
 		}
-		
-		return true;
-		
-	}
 	
-}
-
-function skill_chainLightning() : skill() constructor {
-
-	name = "Chain Lightning";
-	key = "chainLightning";
-	icon = spr_icon_chainLightning;
-	maxCharges = 2;
-	charges = 2;
-	cooldownTime = 6;
-	energyCost = 30;
-	range = 900;
-	chains = 1;
-	
-	damage = undefined;
-	
-	description = "Electricity bounces from target to target\ndealing decreased damage with every jump.";
-	
-	static formatStatsDescription = function() {
+		static castFunc = function(source) {
 		
-		statsDescription = "Charges: " + string(maxCharges);
-		statsDescription += "\nTargets: " + string(chains);
-		statsDescription += "\n\nDamage: " + string(damage.elec) + " electric";
+			var aimX = source.aimX;
+			var aimY = source.aimY;
 		
-	}
-	
-	static setupFunc = function(source) {
+			var gunX = source.gunX;
+			var gunY = source.gunY;
 		
-		energyCost = 30 + level * 5;
+			var dir = point_direction(gunX, gunY, aimX, aimY);
 		
-		chains = 1 + floor(level / 2);
+			var launcher = instance_create_layer(gunX, gunY, "Instances", obj_antimatterBlast);
 		
-		damage = new damageProfile();
-		damage.elec = 25 + 10 * level;
-		damage.elec = scr_stats_applyDamageBonuses(source, damage.elec, "elec"); 
-		damage = scr_stats_calculateCharDamageProfile(source, damage, false);
-		
-	}
-	
-	static castFunc = function(source) {
-
-		if (!instance_exists(source)) return false;
-
-		var xx = source.aimX;
-		var yy = source.aimY;
-		
-		var nearest = scr_char_targetNearest(source, xx, yy, 2, true);
-		
-		if (!instance_exists(nearest)) return false;
-		if (nearest.id == source.id) return false;
-		
-		var dist = point_distance(source.x, source.y, nearest.x, nearest.y);
-		if (dist > range) return false;
-		
-		var cx = nearest.x;
-		var cy = nearest.y;
-		
-		var cl = instance_create_layer(cx, cy, "Instances", obj_chainLightning);
-		cl.owner = source;
-		cl.chainList = [nearest];
-		cl.chains = chains;
-		cl.damage = damage;
-		
-		return true;
-		
-	}
-	
-}
-
-function skill_antimatterBlast() : skill() constructor {
-	
-	name = "Antimatter Blast";
-	key = "antimatterBlast";
-	icon = spr_icon_antimatter;
-	maxCharges = 1;
-	charges = 1;
-	energyCost = 75;
-	projectiles = 8;
-	cooldownTime = 11;
-	explosionRadius = 50;
-	
-	damage = undefined;
-	
-	description = "Unleash a barrage of magnetically suspended antimatter capsules."
-	description += "\nOn impact that capsules shatter, causing the antimatter to annihilate\nin a devastating explosion.";
-	
-	static formatStatsDescription = function() {
-	
-		statsDescription = "Projectiles: " + string(projectiles);
-		statsDescription += "\nExplosion radius: " + string(explosionRadius);
-		statsDescription += "\n\nDamage: " + string(damage.kin) +" kinetic, " + string(damage.rad) + " radiation";
-	
-	}
-	
-	static setupFunc = function(source) {
-		
-		energyCost = 75 + level * 5;
-		
-		projectiles = 6 + 2 * level;
-		explosionRadius = 50 + level * 5;
-		
-		damage = new damageProfile();
-		
-		damage.kin = 10 + 2 * level;
-		damage.kin = scr_stats_applyDamageBonuses(source, damage.kin, "kin");
-		
-		damage.rad = 10 + 2 * level;
-		damage.rad = scr_stats_applyDamageBonuses(source, damage.rad, "rad");
-		
-		damage = scr_stats_calculateCharDamageProfile(source, damage, false);
-		
-	}
-	
-	static castFunc = function(source) {
-		
-		var aimX = source.aimX;
-		var aimY = source.aimY;
-		
-		var gunX = source.gunX;
-		var gunY = source.gunY;
-		
-		var dir = point_direction(gunX, gunY, aimX, aimY);
-		
-		var launcher = instance_create_layer(gunX, gunY, "Instances", obj_antimatterBlast);
-		
-		if (instance_exists(launcher)) {
+			if (instance_exists(launcher)) {
 			
-			launcher.damage = damage;
-			launcher.dir = dir;
-			launcher.owner = source;
-			launcher.projectiles = projectiles;
-			launcher.explosionRadius = explosionRadius;
+				launcher.damage = damage;
+				launcher.dir = dir;
+				launcher.owner = source;
+				launcher.projectiles = projectiles;
+				launcher.explosionRadius = explosionRadius;
 			
-			return true;
+				return true;
+			
+			}
+		
+		}
+	
+	}
+
+	#endregion
+
+	#region chemistry
+
+	function skill_acidFlasks() : skill() constructor {
+	
+		name = "Acid Flasks";
+		key = "acidFlasks";
+		icon = spr_icon_acidFlasks;
+		maxLevel = 12;
+		maxCharges = 1;
+		charges = 1;
+		energyCost = 55;
+		projectiles = 6;
+		cooldownTime = 10;
+		radius = 50;
+		life = 4;
+	
+		damage = undefined;
+	
+		description = "Throw glass acid flasks that shatter on impact, creating pools of acid\n";
+		description += "that deal chemical damage to enemies standing in them.";
+	
+		static formatStatsDescription = function() {
+	
+			statsDescription = "Projectiles: " + string(projectiles);
+			statsDescription += "\nPool radius: " + string(radius);
+			statsDescription += "\n\nPool duration: " + string(life) +" seconds";
+			statsDescription += "\n\nDamage: " + string(damage.chem) +" chemical p/s";
 			
 		}
-		
-	}
 	
-}
+		static setupFunc = function(source) {
+		
+			energyCost = 50 + level * 5;
+		
+			projectiles = 5 + level div 2;
+			radius = 38 + level * 2;
+			life = 4.5 + level * 0.5;
+		
+			damage = new damageProfile();
+		
+			damage.chem = 6 + 2 * level;
+			damage.chem = scr_stats_applyDamageBonuses(source, damage.chem, "chem");
 
-function skill_blob() : skill() constructor {
+			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+		
+		}
 	
-	name = "Blob";
-	key = "blob";
-	icon = spr_icon_blob;
-	
-	maxLevel = 9;
-	maxCharges = 2;
-	energyCost = 20;
-	cooldownTime = 1;
-	castCooldownTime = 0.25;
-	maxSpawns = 2;
-	life = 5;
-	maxHp = 50;
-	shields = 0;
-	
-	description = "Spawn blobular organisms that fight by your side.\nThough it appears to be a single creature, it is actually\na coordinated mass of microscopic lifeforms."
-
-	static formatStatsDescription = function() {
+		static castFunc = function(source) {
 		
-		var kinDam = 5 + (level - 1);
-		var chemDam = 5 + (level - 1);
+			var aimX = source.aimX;
+			var aimY = source.aimY;
 		
-		statsDescription = "Charges: " + string(maxCharges);
-		statsDescription += "\nMax spawns: " + string(maxSpawns);
-		statsDescription += "\nLife: " + string(life) + " seconds";
-		statsDescription += "\nHP: " + string(maxHp);
-		statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
+			var gunX = source.gunX;
+			var gunY = source.gunY;
 		
-	}
-
-	static setupFunc = function(source) {
+			var dir = point_direction(gunX, gunY, aimX, aimY);
 		
-		life = 6 + (level - 1) * 0.5;
-		maxSpawns = 2 + (level - 1);
-		maxCharges = maxSpawns;
-		maxHp = 40 + (level - 1) * 5;
+			var launcher = instance_create_layer(gunX, gunY, "Instances", obj_acidFlaskLauncher);
 		
-		var ga = scr_skills_findCharSkill("guardianArray", source, false);
+			if (instance_exists(launcher)) {
+			
+				launcher.owner = source;
+				launcher.damage = damage;
+				launcher.dir = dir;
+				launcher.owner = source;
+				launcher.totalProjectiles = projectiles;
+				launcher.radius = radius;
+				launcher.faction = source.faction;
+				launcher.poolLife = life;
+			
+				return true;
+			
+			}
 		
-		if (is_struct(ga)) {
-			shields = ga.petShields;
 		}
 	
 	}
-	
-	static castFunc = function(source) {
-		
-		var aimX = source.aimX;
-		var aimY = source.aimY;
-		
-		var gunX = source.gunX;
-		var gunY = source.gunY;
-		
-		var dir = point_direction(gunX, gunY, aimX, aimY);
-		
-		var aimDist = point_distance(gunX, gunY, aimX, aimY);
-		var dist = min(200, aimDist);
-		
-		var xx = gunX + lengthdir_x(dist, dir);
-		var yy = gunY + lengthdir_y(dist, dir);
-		
-		var existing = 0;
-		
-		var inst = scr_char_spawnPet(obj_blob, source, life, xx, yy, maxSpawns);
-		inst.life = life;
-		inst.level = level;
-		inst.baseStats.maxHp = maxHp;
-		inst.baseStats.maxShield = shields;
 
-		scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+	#endregion
 
-		if (instance_exists(inst)) return true;
+	#region biology
 
-	}
+	function skill_blob() : skill() constructor {
 	
-}
-
-function skill_fungalTurret() : skill() constructor {
+		name = "Blob";
+		key = "blob";
+		icon = spr_icon_blob;
 	
-	name = "Fungal Turret";
-	key = "fungalTurret";
-	icon = spr_icon_fungalTurret;
-	
-	maxLevel = 9;
-	maxCharges = 1;
-	charges = 1;
-	energyCost = 20;
-	cooldownTime = 4;
-	castCooldownTime = 0.25;
-	maxSpawns = 1;
-	life = 6;
-	maxHp = 100;
-	gunDamMult = 1;
-	shields = 0;
-	
-	description = "Spawn giant mushrooms that spew acid at your enemies";
-	
-	static formatStatsDescription = function() {
-	
-		var kinDam = 3 * gunDamMult;
-		var chemDam = 6 * gunDamMult;
-		
-		statsDescription = "Charges: " + string(maxCharges);
-		statsDescription += "\nMax spawns: " + string(maxSpawns);
-		statsDescription += "\nLife: " + string(life) + " seconds";
-		statsDescription += "\nHP: " + string(maxHp);
-		statsDescription += "\n\nProjectiles: 12";
-		statsDescription += "\nDamage: " + string(kinDam) + " kinetic, " + string(chemDam) + " chemical";
-		
-	}
-
-	static setupFunc = function(source) {
-		
-		energyCost = 20 + (level - 1) * 2;
-		life = 6 + (level - 1) * 0.5;
-		maxSpawns = 1 + level div 3;
-		maxCharges = maxSpawns;
-		maxHp = 100 + (level - 1) * 20;
-		gunDamMult = 1 + (level - 1) * 0.2;
-		
-		var ga = scr_skills_findCharSkill("guardianArray", source, false);
-		
-		if (is_struct(ga)) {
-			shields = ga.petShields;
-		}
-	
-	}
-	
-	static castFunc = function(source) {
-		
-		var aimX = source.aimX;
-		var aimY = source.aimY;
-		
-		var gunX = source.gunX;
-		var gunY = source.gunY;
-		
-		var dir = point_direction(gunX, gunY, aimX, aimY);
-		
-		var aimDist = point_distance(gunX, gunY, aimX, aimY);
-		var dist = min(200, aimDist);
-		
-		var xx = gunX + lengthdir_x(dist, dir);
-		var yy = gunY + lengthdir_y(dist, dir);
-		
-		var existing = 0;
-		
-		var inst = scr_char_spawnPet(obj_fungalTurret, source, life, xx, yy, maxSpawns);
-		inst.life = life;
-		inst.level = level;
-		inst.baseStats.maxHp = maxHp;
-		inst.gunDamMult = gunDamMult;
-		inst.baseStats.maxShield = shields;
-
-		scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
-
-		if (instance_exists(inst)) return true;
-
-	}
-	
-}
-
-function skill_turret() : skill() constructor {
-	
-	name = "Auto-Turret";
-	key = "turret";
-	icon = spr_icon_turret;
-	maxLevel = 10;
-	maxCharges = 1;
-	charges = 1;
-	energyCost = 50;
-	cooldownTime = 22;
-	castCooldownTime = 0.2;
-	maxSpawns = 1;
-	clips = 2;
-	maxHp = 150;
-	gunDamMult = 1;
-	shields = 0;
-	
-	description = "Deploy an automated stationary gun that fires until its ammo runs out.\n"
-	description += "Flat damage bonuses that apply to your weapons also apply to the\nturret's bullets.";
-	
-	static formatStatsDescription = function() {
-	
-		var ammo = clips * (18 + (level - 1));
-		var dam = 8 * gunDamMult;
-	
-		statsDescription = "HP: " + string(maxHp);
-		statsDescription += "\nAmmo: " + string(ammo);
-		statsDescription += "\nDamage: " + string(dam) + " kinetic";
-	
-	}
-
-	static setupFunc = function(source) {
-		
-		energyCost = 50 + (level - 1) * 5;
-		maxHp = 200 + (level - 1) * 25;
-		gunDamMult = 1 + (level - 1) * 0.25;
+		maxLevel = 9;
+		maxCharges = 2;
+		energyCost = 20;
+		cooldownTime = 1;
+		castCooldownTime = 0.25;
+		maxSpawns = 2;
+		life = 5;
+		maxHp = 50;
 		shields = 0;
-		
-		var extraClips = level div 2;
-		clips = 2 + extraClips;
 	
-		var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		description = "Spawn blobular organisms that fight by your side.\nThough it appears to be a single creature, it is actually\na coordinated mass of microscopic lifeforms."
+
+		static formatStatsDescription = function() {
 		
-		if (is_struct(ga)) {
-			shields = ga.petShields;
+			var kinDam = 5 + (level - 1);
+			var chemDam = 5 + (level - 1);
+		
+			statsDescription = "Charges: " + string(maxCharges);
+			statsDescription += "\nMax spawns: " + string(maxSpawns);
+			statsDescription += "\nLife: " + string(life) + " seconds";
+			statsDescription += "\nHP: " + string(maxHp);
+			statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
+		
+		}
+
+		static setupFunc = function(source) {
+		
+			life = 6 + (level - 1) * 0.5;
+			maxSpawns = 2 + (level - 1);
+			maxCharges = maxSpawns;
+			maxHp = 40 + (level - 1) * 5;
+		
+			var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+			if (is_struct(ga)) {
+				shields = ga.petShields;
+			}
+	
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(200, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+		
+			var existing = 0;
+		
+			var inst = scr_char_spawnPet(obj_blob, source, life, xx, yy, maxSpawns);
+			inst.life = life;
+			inst.level = level;
+			inst.baseStats.maxHp = maxHp;
+			inst.baseStats.maxShield = shields;
+
+			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+
+			if (instance_exists(inst)) return true;
+
 		}
 	
 	}
 	
-	static castFunc = function(source) {
+	function skill_fungalTurret() : skill() constructor {
+	
+		name = "Fungal Turret";
+		key = "fungalTurret";
+		icon = spr_icon_fungalTurret;
+	
+		maxLevel = 9;
+		maxCharges = 1;
+		charges = 1;
+		energyCost = 20;
+		cooldownTime = 4;
+		castCooldownTime = 0.25;
+		maxSpawns = 1;
+		life = 6;
+		maxHp = 100;
+		gunDamMult = 1;
+		shields = 0;
+	
+		description = "Spawn giant mushrooms that spew acid at your enemies";
+	
+		static formatStatsDescription = function() {
+	
+			var kinDam = 3 * gunDamMult;
+			var chemDam = 6 * gunDamMult;
 		
-		var aimX = source.aimX;
-		var aimY = source.aimY;
+			statsDescription = "Charges: " + string(maxCharges);
+			statsDescription += "\nMax spawns: " + string(maxSpawns);
+			statsDescription += "\nLife: " + string(life) + " seconds";
+			statsDescription += "\nHP: " + string(maxHp);
+			statsDescription += "\n\nProjectiles: 12";
+			statsDescription += "\nDamage: " + string(kinDam) + " kinetic, " + string(chemDam) + " chemical";
 		
-		var gunX = source.gunX;
-		var gunY = source.gunY;
-		
-		var dir = point_direction(gunX, gunY, aimX, aimY);
-		
-		var aimDist = point_distance(gunX, gunY, aimX, aimY);
-		var dist = min(200, aimDist);
-		
-		var xx = gunX + lengthdir_x(dist, dir);
-		var yy = gunY + lengthdir_y(dist, dir);
-		
-		var existing = 0;
-		
-		var inst = scr_char_spawnPet(obj_turret, source, undefined, xx, yy, maxSpawns);
-		inst.clips = clips;
-		inst.level = level;
-		inst.baseStats.maxHp = maxHp;
-		inst.gunDamMult = gunDamMult;
-		inst.baseStats.maxShield = shields;
+		}
 
-		if (instance_exists(inst)) return true;
+		static setupFunc = function(source) {
+		
+			energyCost = 20 + (level - 1) * 2;
+			life = 6 + (level - 1) * 0.5;
+			maxSpawns = 1 + level div 3;
+			maxCharges = maxSpawns;
+			maxHp = 100 + (level - 1) * 20;
+			gunDamMult = 1 + (level - 1) * 0.2;
+		
+			var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+			if (is_struct(ga)) {
+				shields = ga.petShields;
+			}
+	
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(200, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+		
+			var existing = 0;
+		
+			var inst = scr_char_spawnPet(obj_fungalTurret, source, life, xx, yy, maxSpawns);
+			inst.life = life;
+			inst.level = level;
+			inst.baseStats.maxHp = maxHp;
+			inst.gunDamMult = gunDamMult;
+			inst.baseStats.maxShield = shields;
 
+			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+
+			if (instance_exists(inst)) return true;
+
+		}
+	
+	}
+
+	#endregion
+
+	#region engineering
+
+	function skill_chainLightning() : skill() constructor {
+
+		name = "Chain Lightning";
+		key = "chainLightning";
+		icon = spr_icon_chainLightning;
+		maxCharges = 2;
+		charges = 2;
+		cooldownTime = 6;
+		energyCost = 30;
+		range = 900;
+		chains = 1;
+	
+		damage = undefined;
+	
+		description = "Electricity bounces from target to target\ndealing decreased damage with every jump.";
+	
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Charges: " + string(maxCharges);
+			statsDescription += "\nTargets: " + string(chains);
+			statsDescription += "\n\nDamage: " + string(damage.elec) + " electric";
+		
+		}
+	
+		static setupFunc = function(source) {
+		
+			energyCost = 30 + level * 5;
+		
+			chains = 1 + floor(level / 2);
+		
+			damage = new damageProfile();
+			damage.elec = 25 + 10 * level;
+			damage.elec = scr_stats_applyDamageBonuses(source, damage.elec, "elec"); 
+			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+		
+		}
+	
+		static castFunc = function(source) {
+
+			if (!instance_exists(source)) return false;
+
+			var xx = source.aimX;
+			var yy = source.aimY;
+		
+			var nearest = scr_char_targetNearest(source, xx, yy, 2, true);
+		
+			if (!instance_exists(nearest)) return false;
+			if (nearest.id == source.id) return false;
+		
+			var dist = point_distance(source.x, source.y, nearest.x, nearest.y);
+			if (dist > range) return false;
+		
+			var cx = nearest.x;
+			var cy = nearest.y;
+		
+			var cl = instance_create_layer(cx, cy, "Instances", obj_chainLightning);
+			cl.owner = source;
+			cl.chainList = [nearest];
+			cl.chains = chains;
+			cl.damage = damage;
+		
+			return true;
+		
+		}
+	
+	}
+
+	function skill_turret() : skill() constructor {
+	
+		name = "Auto-Turret";
+		key = "turret";
+		icon = spr_icon_turret;
+		maxLevel = 10;
+		maxCharges = 1;
+		charges = 1;
+		energyCost = 50;
+		cooldownTime = 22;
+		castCooldownTime = 0.2;
+		maxSpawns = 1;
+		clips = 2;
+		maxHp = 150;
+		gunDamMult = 1;
+		shields = 0;
+	
+		description = "Deploy an automated stationary gun that fires until its ammo runs out.\n"
+		description += "Flat damage bonuses that apply to your weapons also apply to the\nturret's bullets.";
+	
+		static formatStatsDescription = function() {
+	
+			var ammo = clips * (18 + (level - 1));
+			var dam = 8 * gunDamMult;
+	
+			statsDescription = "HP: " + string(maxHp);
+			statsDescription += "\nAmmo: " + string(ammo);
+			statsDescription += "\nDamage: " + string(dam) + " kinetic";
+	
+		}
+
+		static setupFunc = function(source) {
+		
+			energyCost = 50 + (level - 1) * 5;
+			maxHp = 200 + (level - 1) * 25;
+			gunDamMult = 1 + (level - 1) * 0.25;
+			shields = 0;
+		
+			var extraClips = level div 2;
+			clips = 2 + extraClips;
+	
+			var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+			if (is_struct(ga)) {
+				shields = ga.petShields;
+			}
+	
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(200, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+		
+			var existing = 0;
+		
+			var inst = scr_char_spawnPet(obj_turret, source, undefined, xx, yy, maxSpawns);
+			inst.clips = clips;
+			inst.level = level;
+			inst.baseStats.maxHp = maxHp;
+			inst.gunDamMult = gunDamMult;
+			inst.baseStats.maxShield = shields;
+
+			if (instance_exists(inst)) return true;
+
+		}
+	
+	}
+
+	#endregion
+
+#endregion
+
+#region PASSIVES
+
+	#region physics
+
+	function skill_joltzmanShield() : skill() constructor {
+
+		name = "Joltzman Shield";
+		key = "joltzmanShield";
+		icon = spr_icon_blank;
+		maxLevel = 3;
+
+		description = "Grants you shield points.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				maxShield: level
+	
+			};
+	
+		}
+	
 	}
 	
-}
+	#endregion
 
-//PASSIVES
+	#region chemistry
 
-function skill_rubberBoots() : skill() constructor {
+	function skill_PPE() : skill() constructor {
 
-	name = "Rubber Boots";
-	key = "rubberBoots";
-	icon = spr_icon_rubberBoots;
-	maxLevel = 4;
+		name = "PPE";
+		key = "PPE";
+		icon = spr_icon_rubberBoots;
+		maxLevel = 6;
 	
-	description = "Increases your electric resistance.";
-	
-	passives = {
-	
-		elecRes: 4
-	
-	};
-	
-	static setupFunc = function(source) {
+		description = "Increases your chemical and fire resistances.";
 	
 		passives = {
 	
-			elecRes: 4 * level
+			chemRes: 3,
+			fireRes: 3
 	
 		};
 	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				chemRes: 3 * level,
+				fireRes: 3 * level
+	
+			};
+	
+		}
+	
 	}
 	
-}
+	function skill_acidicBullets() : skill() constructor {
 
-function skill_PPE() : skill() constructor {
+		name = "Acidic Bullets";
+		key = "acidicBullets";
+		icon = spr_icon_acidFlasks;
+		maxLevel = 6;
+		
+		chance = 3;
+		damage = undefined;
+		radius = 40;
+		life = 5;
+		chemDam = 1;
+	
+		description = "Your projectiles deal extra chemical damage and\n";
+		description += "have a chance of creating acid pools where they collide.";
+		
+		static formatStatsDescription = function() {
 
-	name = "PPE";
-	key = "PPE";
-	icon = spr_icon_rubberBoots;
-	maxLevel = 6;
+			statsDescription = "Acid pool chance: " + string(chance) + "%";
+			statsDescription += "\nPool radius: " + string(radius);
+			statsDescription += "\n\nPool duration: " + string(life) +" seconds";
+			statsDescription += "\nDamage: " + string(damage.chem) + " chemical p/s";
+		
+		}
+		
+		static extraEffects = function(source) {
+			
+			var func = scr_effects_acidicBullet;
+			
+			scr_char_addBulletFunc(source, func);
+			
+		}
+		
+		static setupFunc = function(source) {
 	
-	description = "Increases your chemical and fire resistances.";
+			chance = level * 2;
 	
-	passives = {
+			radius = 38 + level * 2;
+			life = 4.5 + level * 0.5;
+		
+			damage = new damageProfile();
+		
+			damage.chem = 6 + 2 * level;
+			damage.chem = scr_stats_applyDamageBonuses(source, damage.chem, "chem");
+
+			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			
+			passives = {
+		
+				chemDam: level
+		
+			}
 	
-		chemRes: 3,
-		fireRes: 3
+		}
 	
-	};
+	}
+
+	#endregion
+
+	#region biology
+
+	function skill_muscleGrowth() : skill() constructor {
+
+		name = "Myostatin inhibitor";
+		key = "muscleGrowth";
+		icon = spr_icon_rubberBoots;
+		maxLevel = 4;
 	
-	static setupFunc = function(source) {
+		description = "Block the body's natural limit on muscle growth, greatly increasing your melee damage.";
 	
 		passives = {
 	
-			chemRes: 3 * level,
-			fireRes: 3 * level
+			meleeDamPerc: 5
 	
 		};
 	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				meleeDamPerc: 5 * level
+	
+			};
+	
+		}
+	
 	}
-	
-}
 
-function skill_kevlar() : skill() constructor {
+	#endregion
 
-	name = "Kevlar";
-	key = "kevlar";
-	icon = spr_icon_rubberBoots;
-	maxLevel = 4;
+	#region engineering
+
+	function skill_rubberBoots() : skill() constructor {
+
+		name = "Rubber Boots";
+		key = "rubberBoots";
+		icon = spr_icon_rubberBoots;
+		maxLevel = 4;
 	
-	description = "Increases your kinetic resistance.";
+		description = "Increases your electric resistance.";
 	
-	passives = {
+		passives = {
 	
-		kinRes: 4 * level
+			elecRes: 4
 	
-	};
+		};
 	
-	static setupFunc = function(source) {
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				elecRes: 4 * level
+	
+			};
+	
+		}
+	
+	}
+
+	function skill_kevlar() : skill() constructor {
+
+		name = "Kevlar";
+		key = "kevlar";
+		icon = spr_icon_rubberBoots;
+		maxLevel = 4;
+	
+		description = "Increases your kinetic resistance.";
 	
 		passives = {
 	
@@ -832,137 +1018,100 @@ function skill_kevlar() : skill() constructor {
 	
 		};
 	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				kinRes: 4 * level
+	
+			};
+	
+		}
+	
 	}
-	
-}
 
-function skill_tinkerer() : skill() constructor {
+	function skill_tinkerer() : skill() constructor {
 
-	name = "Tinkerer";
-	key = "tinkerer";
-	icon = spr_icon_rubberBoots;
-	maxLevel = 4;
+		name = "Tinkerer";
+		key = "tinkerer";
+		icon = spr_icon_rubberBoots;
+		maxLevel = 4;
 	
-	description = "Modify your guns so that they deal more damage.";
-	
-	passives = {
-	
-		gunDamPerc: 5
-	
-	};
-	
-	static setupFunc = function(source) {
+		description = "Modify your guns so that they deal more damage.";
 	
 		passives = {
 	
-			gunDamPerc: 5 * level
+			gunDamPerc: 5
 	
 		};
 	
-	}
+		static setupFunc = function(source) {
 	
-}
-
-function skill_muscleGrowth() : skill() constructor {
-
-	name = "Myostatin inhibitor";
-	key = "muscleGrowth";
-	icon = spr_icon_rubberBoots;
-	maxLevel = 4;
+			passives = {
 	
-	description = "Block the body's natural limit on muscle growth, greatly increasing your melee damage.";
+				gunDamPerc: 5 * level
 	
-	passives = {
+			};
 	
-		meleeDamPerc: 5
-	
-	};
-	
-	static setupFunc = function(source) {
-	
-		passives = {
-	
-			meleeDamPerc: 5 * level
-	
-		};
+		}
 	
 	}
-	
-}
 
+	function skill_guardianArray() : skill() constructor {
 
-function skill_guardianArray() : skill() constructor {
-
-	name = "Guardian Array";
-	key = "guardianArray";
-	icon = spr_icon_blank;
-	petShields = 1;
-	maxLevel = 3;
+		name = "Guardian Array";
+		key = "guardianArray";
+		icon = spr_icon_blank;
+		petShields = 1;
+		maxLevel = 3;
 	
-	description = "Your summons get a shield.";
+		description = "Your summons get a shield.";
 	
-	static formatStatsDescription = function() {
+		static formatStatsDescription = function() {
 	
-		statsDescription = "Summon shield points: " + string(petShields);
+			statsDescription = "Summon shield points: " + string(petShields);
+	
+		}
+	
+		static setupFunc = function(source) {
+	
+			petShields = level;
+	
+		}
 	
 	}
 	
-	static setupFunc = function(source) {
-	
-		petShields = level;
-	
-	}
-	
-}
+	function skill_shieldBattery() : skill() constructor {
 
-function skill_joltzmanShield() : skill() constructor {
+		name = "Shield Battery";
+		key = "shieldBattery";
+		icon = spr_icon_blank;
+		maxLevel = 5;
 
-	name = "Joltzman Shield";
-	key = "joltzmanShield";
-	icon = spr_icon_blank;
-	maxLevel = 3;
+		description = "The first point grants you +1 shield point.";
+		description += "\nEach point decreases shield regen delay\nand increases shield regen rate.";
+	
+		//passives = {
+	
+		//	maxShield: 1,
+		//	shieldRegenDelay: -0.1
+	
+		//};
 
-	description = "Grants you shield points.";
+		static setupFunc = function(source) {
 	
-	static setupFunc = function(source) {
-	
-		passives = {
-	
-			maxShield: level
-	
-		};
-	
-	}
-	
-}
-
-function skill_shieldBattery() : skill() constructor {
-
-	name = "Shield Battery";
-	key = "shieldBattery";
-	icon = spr_icon_blank;
-	maxLevel = 5;
-
-	description = "The first point grants you +1 shield point.";
-	description += "\nEach point decreases shield regen delay\nand increases shield regen rate.";
-	
-	//passives = {
-	
-	//	maxShield: 1,
-	//	shieldRegenDelay: -0.1
-	
-	//};
-
-	static setupFunc = function(source) {
-	
-		passives = {
+			passives = {
 			
-			maxShield: 1,
-			shieldRegenDelay: -0.1 * level,
-			shieldRegen: 0.05 * level
+				maxShield: 1,
+				shieldRegenDelay: -0.1 * level,
+				shieldRegen: 0.05 * level
 
-		};
+			};
+	
+		}
 	
 	}
 	
-}
+	#endregion
+
+#endregion

@@ -188,6 +188,8 @@ if (hp <= 0) {
 		var gib = instance_create_layer(x, y, "Instances", obj_gib);
 		gib.sprite_index = sprites.death;
 		gib.disappear = gibDisappears;
+		gib.image_xscale = image_xscale;
+		gib.image_yscale = image_yscale;
 		
 	}
 	
