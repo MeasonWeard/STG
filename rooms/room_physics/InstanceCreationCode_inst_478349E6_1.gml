@@ -1,1 +1,1 @@
-const = skill_shieldBattery;
+const = skill_joltzmanShield;

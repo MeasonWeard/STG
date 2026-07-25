@@ -381,6 +381,7 @@
     {"name":"spr_icon_medicalSynthesis","order":15,"path":"sprites/spr_icon_medicalSynthesis/spr_icon_medicalSynthesis.yy",},
     {"name":"spr_icon_myostatinInhibitor","order":17,"path":"sprites/spr_icon_myostatinInhibitor/spr_icon_myostatinInhibitor.yy",},
     {"name":"spr_icon_PPE","order":14,"path":"sprites/spr_icon_PPE/spr_icon_PPE.yy",},
+    {"name":"spr_icon_radioactiveBullets","order":25,"path":"sprites/spr_icon_radioactiveBullets/spr_icon_radioactiveBullets.yy",},
     {"name":"spr_icon_radiotrophy","order":23,"path":"sprites/spr_icon_radiotrophy/spr_icon_radiotrophy.yy",},
     {"name":"spr_icon_rubberBoots","order":6,"path":"sprites/spr_icon_rubberBoots/spr_icon_rubberBoots.yy",},
     {"name":"spr_icon_shieldBattery","order":22,"path":"sprites/spr_icon_shieldBattery/spr_icon_shieldBattery.yy",},

@@ -1035,7 +1035,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		name = "Radioactive Bullets";
 		key = "radioactiveBullets";
-		icon = spr_icon_blank;
+		icon = spr_icon_radioactiveBullets;
 		maxLevel = 6;
 		
 		chance = 3;
@@ -1224,6 +1224,32 @@ function scr_skills_formatDescription(skillInst) {
 			passives = {
 	
 				meleeDamPerc: 5 * level
+	
+			};
+	
+		}
+	
+	}
+	
+	function skill_chitin() : skill() constructor {
+
+		name = "Chitin";
+		key = "chitin";
+		icon = spr_icon_myostatinInhibitor;
+		maxLevel = 8;
+	
+		description = "You grow a chitinous exoskeleton, increasing your maximum health and all resistances.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				maxHp: 5 * level,
+				kinRes: level,
+				fireRes: level,
+				chemRes: level,
+				elecRes: level,
+				radRes: level
 	
 			};
 	

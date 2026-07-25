@@ -41,7 +41,7 @@ gear = scr_data_loadEquippedGear();
 var weaponsData = scr_data_loadEquippedWeapons();
 
 //weaponsData.weapon1 = new gun_pulseRifle(1,1);
-weaponsData.weapon2 = scr_genMelee_hammer(4, 2);
+//weaponsData.weapon2 = scr_genMelee_hammer(4, 2);
 scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 

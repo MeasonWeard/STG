@@ -450,6 +450,7 @@
     {"id":{"name":"spr_icon_medicalSynthesis","path":"sprites/spr_icon_medicalSynthesis/spr_icon_medicalSynthesis.yy",},},
     {"id":{"name":"spr_icon_myostatinInhibitor","path":"sprites/spr_icon_myostatinInhibitor/spr_icon_myostatinInhibitor.yy",},},
     {"id":{"name":"spr_icon_PPE","path":"sprites/spr_icon_PPE/spr_icon_PPE.yy",},},
+    {"id":{"name":"spr_icon_radioactiveBullets","path":"sprites/spr_icon_radioactiveBullets/spr_icon_radioactiveBullets.yy",},},
     {"id":{"name":"spr_icon_radiotrophy","path":"sprites/spr_icon_radiotrophy/spr_icon_radiotrophy.yy",},},
     {"id":{"name":"spr_icon_rubberBoots","path":"sprites/spr_icon_rubberBoots/spr_icon_rubberBoots.yy",},},
     {"id":{"name":"spr_icon_shieldBattery","path":"sprites/spr_icon_shieldBattery/spr_icon_shieldBattery.yy",},},

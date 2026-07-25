@@ -340,26 +340,31 @@ enemyGroups = {
 skillConstructors = {
 	
 	antimatterBlast: skill_antimatterBlast, //phys
-	joltzmanShield: skill_joltzmanShield, //phys,
 	teleport: skill_teleport, // phys
+	
+	joltzmanShield: skill_joltzmanShield, //phys,
 	radioactiveBullets: skill_radioactiveBullets, //phys
 	
-	PPE: skill_PPE, //chem
 	acidFlasks: skill_acidFlasks, //chem	
 	flamethrower: skill_flamethrower, //chem
+	
+	PPE: skill_PPE, //chem
 	medicalSynthesis: skill_medicalSynthesis, //chem
 	acidicBullets: skill_acidicBullets, //chem
 	
 	fungalTurret: skill_fungalTurret, //bio
 	blob: skill_blob, //bio
+	medicalExosomes: skill_medicalExosomes, // bio
+	
 	muscleGrowth: skill_muscleGrowth, //bio
 	homeostasis: skill_homeostasis, //bio
-	medicalExosomes: skill_medicalExosomes, // bio
 	radiotrophy: skill_radiotrophy, //bio
+	chitin: skill_chitin, //bio
 	
-	rubberBoots: skill_rubberBoots, //eng
 	chainLightning: skill_chainLightning, // eng
 	turret: skill_turret, //eng
+	
+	rubberBoots: skill_rubberBoots, //eng
 	guardianArray: skill_guardianArray, //eng
 	shieldBattery: skill_shieldBattery, //eng
 	kevlar: skill_kevlar, //eng
