@@ -368,6 +368,7 @@
     {"name":"spr_icon_antimatter","order":5,"path":"sprites/spr_icon_antimatter/spr_icon_antimatter.yy",},
     {"name":"spr_icon_blob","order":9,"path":"sprites/spr_icon_blob/spr_icon_blob.yy",},
     {"name":"spr_icon_chainLightning","order":4,"path":"sprites/spr_icon_chainLightning/spr_icon_chainLightning.yy",},
+    {"name":"spr_icon_chitin","order":26,"path":"sprites/spr_icon_chitin/spr_icon_chitin.yy",},
     {"name":"spr_icon_dash","order":1,"path":"sprites/spr_icon_dash/spr_icon_dash.yy",},
     {"name":"spr_icon_energyPack","order":3,"path":"sprites/spr_icon_energyPack/spr_icon_energyPack.yy",},
     {"name":"spr_icon_enhancedHomeostasis","order":18,"path":"sprites/spr_icon_enhancedHomeostasis/spr_icon_enhancedHomeostasis.yy",},

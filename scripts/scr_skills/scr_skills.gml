@@ -1235,7 +1235,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Chitin";
 		key = "chitin";
-		icon = spr_icon_myostatinInhibitor;
+		icon = spr_icon_chitin;
 		maxLevel = 8;
 	
 		description = "You grow a chitinous exoskeleton, increasing your maximum health and all resistances.";
