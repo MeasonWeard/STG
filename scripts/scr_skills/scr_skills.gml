@@ -426,6 +426,56 @@ function scr_skills_formatDescription(skillInst) {
 		}
 	
 	}
+	
+	function skill_wormhole() : skill() constructor {
+	
+		name = "Einstein-Rosen Bridge";
+		key = "wormhole";
+		icon = spr_icon_antimatter;
+		maxCharges = 1;
+		energyCost = 35;
+		cooldownTime = 10;
+		maxLevel = 6;
+		range = 920;
+
+		description = "Instantly teleport to where you aim."
+	
+		static setupFunc = function(source) {
+		
+			cooldownTime = 10 - (level - 1);
+		
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(range, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+			
+			var pt = scr_char_findValidPlace(source, xx, yy);
+			
+			if (pt == undefined) return false;
+			
+			scr_audio_playSoundAt(snd_teleport, pt.px, pt.py);
+			
+			source.x = pt.px;
+			source.y = pt.py;
+			
+			return true;
+			
+		}
+	
+	}
 
 	#endregion
 
@@ -634,6 +684,9 @@ function scr_skills_formatDescription(skillInst) {
 			var existing = 0;
 		
 			var inst = scr_char_spawnPet(obj_blob, source, life, xx, yy, maxSpawns);
+			
+			if (!instance_exists(inst)) return false;
+			
 			inst.life = life;
 			inst.level = level;
 			inst.baseStats.maxHp = maxHp;
@@ -717,6 +770,9 @@ function scr_skills_formatDescription(skillInst) {
 			var existing = 0;
 		
 			var inst = scr_char_spawnPet(obj_fungalTurret, source, life, xx, yy, maxSpawns);
+			
+			if (!instance_exists(inst)) return false;
+			
 			inst.life = life;
 			inst.level = level;
 			inst.baseStats.maxHp = maxHp;

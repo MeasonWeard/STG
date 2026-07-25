@@ -339,7 +339,8 @@ enemyGroups = {
 skillConstructors = {
 	
 	antimatterBlast: skill_antimatterBlast, //phys
-	joltzmanShield: skill_joltzmanShield, //phys
+	joltzmanShield: skill_joltzmanShield, //phys,
+	wormhole: skill_wormhole, // phys
 	
 	PPE: skill_PPE, //chem
 	acidFlasks: skill_acidFlasks, //chem	

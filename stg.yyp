@@ -367,6 +367,7 @@
     {"id":{"name":"snd_swish2","path":"sounds/snd_swish2/snd_swish2.yy",},},
     {"id":{"name":"snd_swish3","path":"sounds/snd_swish3/snd_swish3.yy",},},
     {"id":{"name":"snd_swish4","path":"sounds/snd_swish4/snd_swish4.yy",},},
+    {"id":{"name":"snd_teleport","path":"sounds/snd_teleport/snd_teleport.yy",},},
     {"id":{"name":"snd_test","path":"sounds/snd_test/snd_test.yy",},},
     {"id":{"name":"snd_turretDeath","path":"sounds/snd_turretDeath/snd_turretDeath.yy",},},
     {"id":{"name":"snd_turretDeploy","path":"sounds/snd_turretDeploy/snd_turretDeploy.yy",},},

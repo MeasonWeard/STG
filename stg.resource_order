@@ -309,6 +309,7 @@
     {"name":"snd_swish2","order":7,"path":"sounds/snd_swish2/snd_swish2.yy",},
     {"name":"snd_swish3","order":8,"path":"sounds/snd_swish3/snd_swish3.yy",},
     {"name":"snd_swish4","order":9,"path":"sounds/snd_swish4/snd_swish4.yy",},
+    {"name":"snd_teleport","order":29,"path":"sounds/snd_teleport/snd_teleport.yy",},
     {"name":"snd_turretDeath","order":5,"path":"sounds/snd_turretDeath/snd_turretDeath.yy",},
     {"name":"snd_turretDeploy","order":34,"path":"sounds/snd_turretDeploy/snd_turretDeploy.yy",},
     {"name":"snd_zap","order":20,"path":"sounds/snd_zap/snd_zap.yy",},
