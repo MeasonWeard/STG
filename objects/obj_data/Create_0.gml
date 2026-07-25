@@ -352,6 +352,7 @@ skillConstructors = {
 	muscleGrowth: skill_muscleGrowth, //bio
 	homeostasis: skill_homeostasis, //bio
 	medicalExosomes: skill_medicalExosomes, // bio
+	radiotrophy: skill_radiotrophy, //bio
 	
 	rubberBoots: skill_rubberBoots, //eng
 	chainLightning: skill_chainLightning, // eng

@@ -61,9 +61,6 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	if (!instance_exists(char)) return 0;
 	if (!is_struct(damage)) return 0;
 	
-	char.hurt = true;
-	char.hurtTick = char.shieldRegenDelay * 60;
-	
 	//randomise damage
 	var kin = damage.kin > 0 ? irandom_range(damage.kinMin, damage.kinMax) : 0;
 	var fire = damage.fire > 0 ? irandom_range(damage.fireMin, damage.fireMax) : 0;
@@ -99,6 +96,9 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	
 	//final
 	var totalDam = kin + fire + chem + elec + rad;
+	
+	if (totalDam < 1) return 0;
+
 	if (hitOutcome != 1) totalDam = max(floor(totalDam * hitOutcome), 1);
 	
 	if (!ignoreShield and char.shield > 0) {
@@ -111,8 +111,17 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	var lost = min(char.hp, totalDam);
 	
 	char.hp = max(char.hp - totalDam, 0);
+		
+	char.hurt = true;
+	char.hurtTick = char.shieldRegenDelay * 60;
 	
-	char.mostRecentDamage = variable_clone(damage);
+	char.mostRecentDamage = {
+		kin: kin,
+		fire: fire,
+		chem: chem,
+		elec: elec,
+		rad: rad
+	}
 	
 	//damage numbers
 	scr_ui_damageNumbers(totalDam, char, hitOutcome);
@@ -126,6 +135,8 @@ function scr_char_heal(char, amount) {
 	if (!instance_exists(char)) return 0;
 	
 	var missing = char.maxHp - char.hp;
+	
+	if (missing < 1) return 0;
 	
 	char.hp = min(char.hp + amount, char.maxHp);
 	
@@ -142,6 +153,8 @@ function scr_char_rechargeEnergy(char, amount) {
 	if (!instance_exists(char)) return 0;
 	
 	var missing = char.maxEnergy - char.energy;
+	
+	if (missing < 1) return 0;
 	
 	char.energy = min(char.energy + amount, char.maxEnergy);
 	

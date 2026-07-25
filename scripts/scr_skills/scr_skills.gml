@@ -1006,7 +1006,7 @@ function scr_skills_formatDescription(skillInst) {
 		txtCol = c_black;
 		maxLevel = 4;
 	
-		description = "The first point increases your maximum stim packs by 1.\nEach point increases stim pack regeneration.";
+		description = "The first point increases your maximum stim packs by 1.\nEach point increases stim pack regeneration rate.";
 	
 		static setupFunc = function(source) {
 	
@@ -1137,22 +1137,54 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Radiotrophic Cells";
 		key = "radiotrophy";
-		icon = spr_icon_enhancedHomeostasis;
-		maxLevel = 10;
+		icon = spr_icon_radiotrophy;
+		maxLevel = 6;
+		recharge = 4;
 	
 		description = "Your cells absorb ionizing radiation and convert it into energy.";
-	
+		description += "\nYou gain radiation resistance, and when you take radiation damage";
+		description += "\nyou recharge energy points.";
+		
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Recharge maximum: " + string(recharge);
+		
+		}
+		
 		static setupFunc = function(source) {
 	
+			recharge = level;
 			
+			passives = {
+			
+				radRes: 2 + level
+			
+			}
 	
 		}
 		
 		static extraEffects = function(source) {
 		
-			var func = function() {
+			var func = function(char) {
 				
-				
+				if (char.hp < char.prevHp) {
+					
+					if (!is_struct(char.mostRecentDamage)) exit;
+					
+					var radDam = char.mostRecentDamage.rad;
+					
+					if (radDam < 1) exit;
+					
+					var sk = scr_skills_findCharSkill("radiotrophy", char);
+					
+					if (!is_struct(sk)) exit;
+					
+					var rechargeAmount = min(sk.recharge, radDam);
+					
+					scr_char_rechargeEnergy(char, rechargeAmount);
+					
+				}
 				
 			}
 			
