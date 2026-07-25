@@ -189,6 +189,8 @@ weaponIndex = 0;
 meleeHitList = [];
 
 bulletFuncs = [];
+constantFuncs = [];
+mostRecentDamage = undefined;
 
 //ai
 hurt = false;

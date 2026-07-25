@@ -296,3 +296,23 @@ if (pet and is_real(life) and !spawning) {
 	}
 	
 }
+
+//constant funcs
+var constLen = array_length(constantFuncs);
+
+if (constLen > 0) {
+
+	for(var i = 0; i < constLen; i++) {
+	
+		var func = constantFuncs[i];
+		
+		if (!is_callable(func)) continue;
+		
+		func(self);
+	
+	}
+	
+}
+
+prevShield = shield;
+prevHp = hp;

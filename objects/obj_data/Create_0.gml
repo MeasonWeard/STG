@@ -359,7 +359,7 @@ skillConstructors = {
 	guardianArray: skill_guardianArray, //eng
 	shieldBattery: skill_shieldBattery, //eng
 	kevlar: skill_kevlar, //eng
-	tinkerer: skill_tinkerer //eng
+	gunsmith: skill_gunsmith //eng
 	
 };
 

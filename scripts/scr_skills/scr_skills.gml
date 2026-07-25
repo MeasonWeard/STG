@@ -1006,7 +1006,7 @@ function scr_skills_formatDescription(skillInst) {
 		txtCol = c_black;
 		maxLevel = 4;
 	
-		description = "The first point increases your maximum stim packs by 1.\nEach point increases stimPac regeneration.";
+		description = "The first point increases your maximum stim packs by 1.\nEach point increases stim pack regeneration.";
 	
 		static setupFunc = function(source) {
 	
@@ -1088,7 +1088,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Myostatin inhibitor";
 		key = "muscleGrowth";
-		icon = spr_icon_rubberBoots;
+		icon = spr_icon_myostatinInhibitor;
 		maxLevel = 4;
 	
 		description = "Block the body's natural limit on muscle growth, greatly increasing your melee damage.";
@@ -1115,7 +1115,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Enhanced Homeostasis";
 		key = "homeostasis";
-		icon = spr_icon_blob;
+		icon = spr_icon_enhancedHomeostasis;
 		maxLevel = 10;
 	
 		description = "Implanted bioengineered cells improve your maximum health\nand health regeneration";
@@ -1129,6 +1129,35 @@ function scr_skills_formatDescription(skillInst) {
 	
 			};
 	
+		}
+	
+	}
+	
+	function skill_radiotrophy() : skill() constructor {
+
+		name = "Radiotrophic Cells";
+		key = "radiotrophy";
+		icon = spr_icon_enhancedHomeostasis;
+		maxLevel = 10;
+	
+		description = "Your cells absorb ionizing radiation and convert it into energy.";
+	
+		static setupFunc = function(source) {
+	
+			
+	
+		}
+		
+		static extraEffects = function(source) {
+		
+			var func = function() {
+				
+				
+				
+			}
+			
+			scr_char_addConstantFunc(source, func);
+		
 		}
 	
 	}
@@ -1169,7 +1198,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Kevlar";
 		key = "kevlar";
-		icon = spr_icon_rubberBoots;
+		icon = spr_icon_kevlar;
 		maxLevel = 4;
 	
 		description = "Increases your kinetic resistance.";
@@ -1192,11 +1221,11 @@ function scr_skills_formatDescription(skillInst) {
 	
 	}
 
-	function skill_tinkerer() : skill() constructor {
+	function skill_gunsmith() : skill() constructor {
 
-		name = "Tinkerer";
-		key = "tinkerer";
-		icon = spr_icon_rubberBoots;
+		name = "Gunsmith";
+		key = "gunsmith";
+		icon = spr_icon_gunsmith;
 		maxLevel = 4;
 	
 		description = "Modify your guns so that they deal more damage.";
@@ -1223,7 +1252,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Guardian Array";
 		key = "guardianArray";
-		icon = spr_icon_blank;
+		icon = spr_icon_guardianArray;
 		petShields = 1;
 		maxLevel = 3;
 	
@@ -1247,19 +1276,12 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Shield Battery";
 		key = "shieldBattery";
-		icon = spr_icon_blank;
+		icon = spr_icon_shieldBattery;
 		maxLevel = 5;
 
 		description = "The first point grants you +1 shield point.";
 		description += "\nEach point decreases shield regen delay\nand increases shield regen rate.";
 	
-		//passives = {
-	
-		//	maxShield: 1,
-		//	shieldRegenDelay: -0.1
-	
-		//};
-
 		static setupFunc = function(source) {
 	
 			passives = {

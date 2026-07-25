@@ -40,6 +40,8 @@ gear = scr_data_loadEquippedGear();
 
 var weaponsData = scr_data_loadEquippedWeapons();
 
+//weaponsData.weapon1 = new gun_pulseRifle(1,1);
+
 scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 

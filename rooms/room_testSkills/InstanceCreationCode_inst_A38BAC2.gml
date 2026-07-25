@@ -1,1 +1,1 @@
-const = skill_tinkerer;
+const = skill_gunsmith;

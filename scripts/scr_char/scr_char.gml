@@ -112,6 +112,8 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	
 	char.hp = max(char.hp - totalDam, 0);
 	
+	char.mostRecentDamage = variable_clone(damage);
+	
 	//damage numbers
 	scr_ui_damageNumbers(totalDam, char, hitOutcome);
 	
@@ -652,6 +654,15 @@ function scr_char_addBulletFunc(char, func) {
 	
 	array_push(char.bulletFuncs, func);
 
+	
+}
+
+function scr_char_addConstantFunc(char, func) {
+
+	if(!instance_exists(char)) exit;
+	if(!is_callable(func)) exit;
+	
+	array_push(char.constantFuncs, func);
 	
 }
 
