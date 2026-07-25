@@ -317,7 +317,8 @@ soundProfiles = {
 	burn: [snd_burn1, snd_burn2, snd_burn3],
 	microMissile: [snd_microMissile1, snd_microMissile2, snd_microMissile3],
 	collect: [snd_collect1, snd_collect2, snd_collect3],
-	bottleBreak : [snd_bottleBreak1, snd_bottleBreak2, snd_bottleBreak3, snd_bottleBreak4]
+	bottleBreak: [snd_bottleBreak1, snd_bottleBreak2, snd_bottleBreak3, snd_bottleBreak4],
+	emp: [snd_emp1, snd_emp2, snd_emp3]
 	
 }
 
@@ -340,7 +341,8 @@ skillConstructors = {
 	
 	antimatterBlast: skill_antimatterBlast, //phys
 	joltzmanShield: skill_joltzmanShield, //phys,
-	wormhole: skill_wormhole, // phys
+	teleport: skill_teleport, // phys
+	radioactiveBullets: skill_radioactiveBullets, //phys
 	
 	PPE: skill_PPE, //chem
 	acidFlasks: skill_acidFlasks, //chem	

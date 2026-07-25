@@ -18,3 +18,7 @@ damageDestructibles = false;
 
 stopOnHit = false;
 range = 0;
+
+damageInRadius = false;
+setRadius = true;
+radius = 0;

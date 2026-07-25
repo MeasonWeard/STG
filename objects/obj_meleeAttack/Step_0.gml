@@ -20,12 +20,25 @@ if (instance_exists(owner)) {
 				if (char.id == owner.id) continue;
 				if (char.faction == owner.faction) continue;
 		
-				if (
-					bbox_right > char.colLeft and
-					bbox_left < char.colRight and
-					bbox_bottom > char.colTop and
-					bbox_top < char.colBottom
-				) {
+				var col = false;
+				
+				if (damageInRadius) {
+				
+					var nearestX = clamp(x, char.colLeft, char.colRight);
+					var nearestY = clamp(y, char.colTop, char.colBottom);
+
+					var dist = point_distance(x, y, nearestX, nearestY);
+
+					if (dist <= radius) col = true;
+				
+				} else {
+				
+					col = bbox_right > char.colLeft and bbox_left < char.colRight
+					and bbox_bottom > char.colTop and bbox_top < char.colBottom;
+				
+				}
+		
+				if (col) {
 			
 					if (!scr_melee_alreadyHit(char, self)) {
 					
@@ -49,8 +62,6 @@ if (instance_exists(owner)) {
 					
 						if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
 						
-
-					
 					}
 
 				}

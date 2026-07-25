@@ -86,6 +86,7 @@ healthBar = instance_create_layer(x, y, "Instances", obj_statusBar);
 healthBar.width = 400;
 healthBar.height = 20;
 healthBar.depth = depth - 1;
+healthBar.txtCol = c_yellow;
 
 energyBar = instance_create_layer(x, y, "Instances", obj_statusBar);
 energyBar.width = 400;
@@ -93,3 +94,4 @@ energyBar.height = 20;
 energyBar.depth = depth - 1;
 energyBar.fillCol = c_aqua;
 energyBar.leftToRight = false;
+energyBar.txtCol = c_white;

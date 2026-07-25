@@ -1,1 +1,1 @@
-const = skill_wormhole;
+const = skill_teleport;

@@ -18,3 +18,5 @@ alphaDecay = 0;
 firstStep = true;
 
 damage = undefined;
+
+faction = undefined;

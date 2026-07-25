@@ -64,6 +64,7 @@ function scr_effects_explodingProjectile(proj) {
 	explosion.radius = rad;
 	explosion.sounds = global.data.soundProfiles.microMissile;
 	explosion.damage = proj.damage;
+	explosion.faction = proj.faction;
 	
 }
 
@@ -90,5 +91,29 @@ function scr_effects_acidicBullet(proj) {
 	pool.radius = radius;
 	pool.life = life;
 	pool.faction = proj.source.faction;
+	
+}
+
+function scr_effects_radioactiveBullet(proj) {
+	
+	if (proj.damage.rad <= 0) exit;
+	
+	if (!instance_exists(proj.source)) exit;
+	
+	var sk = scr_skills_findCharSkill("radioactiveBullets", proj.source);
+	
+	if (is_undefined(sk)) exit;
+	
+	var chance = sk.chance;
+	var damage = sk.damage;
+	var radius = sk.radius;
+	
+	if (!scr_random_chance(chance)) exit;
+	
+	var flash = instance_create_layer(proj.x, proj.y, "Instances", obj_radiationFlash);
+	
+	flash.damage = damage;
+	flash.radius = radius;
+	flash.faction = proj.source.faction;
 	
 }

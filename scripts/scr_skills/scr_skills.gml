@@ -427,16 +427,17 @@ function scr_skills_formatDescription(skillInst) {
 	
 	}
 	
-	function skill_wormhole() : skill() constructor {
+	function skill_teleport() : skill() constructor {
 	
-		name = "Einstein-Rosen Bridge";
-		key = "wormhole";
-		icon = spr_icon_antimatter;
+		name = "Flash Teleport";
+		key = "teleport";
+		icon = spr_icon_wormhole;
 		maxCharges = 1;
 		energyCost = 35;
 		cooldownTime = 10;
 		maxLevel = 6;
-		range = 920;
+		range = 940;
+		txtCol = c_black;
 
 		description = "Instantly teleport to where you aim."
 	
@@ -468,8 +469,17 @@ function scr_skills_formatDescription(skillInst) {
 			
 			scr_audio_playSoundAt(snd_teleport, pt.px, pt.py);
 			
+			var m = instance_create_layer(source.x, source.y, "Instances", obj_teleportMirage);
+			m.sprite_index = source.sprite_index;
+			m.image_index = source.image_index;
+			
 			source.x = pt.px;
 			source.y = pt.py;
+			
+			var m2 = instance_create_layer(source.x, source.y + 8, "Instances", obj_teleportMirage);
+			m2.sprite_index = source.sprite_index;
+			m2.image_index = source.image_index;
+			m2.alpha -= 0.1;
 			
 			return true;
 			
@@ -1016,6 +1026,60 @@ function scr_skills_formatDescription(skillInst) {
 				maxShield: level
 	
 			};
+	
+		}
+	
+	}
+	
+	function skill_radioactiveBullets() :skill() constructor {
+	
+		name = "Radioactive Bullets";
+		key = "radioactiveBullets";
+		icon = spr_icon_blank;
+		maxLevel = 6;
+		
+		chance = 3;
+		damage = undefined;
+		radius = 50;
+		radDam = 1;
+	
+		description = "Your projectiles deal extra radiation damage and\n";
+		description += "have a chance to detonate, dealing additonal area\nradiation damage.";
+		
+		static formatStatsDescription = function() {
+
+			statsDescription = "Detonation chance: " + string(chance) + "%";
+			statsDescription += "\nDamage radius: " + string(radius);
+			statsDescription += "\nArea damage: " + string(damage.rad) + " radiation";
+		
+		}
+		
+		static extraEffects = function(source) {
+			
+			//var func = scr_effects_acidicBullet;
+			var func = scr_effects_radioactiveBullet;
+			scr_char_addBulletFunc(source, func);
+			
+		}
+		
+		static setupFunc = function(source) {
+	
+			chance = level * 2;
+	
+			radius = 75 + (level - 1) * 5;
+
+			damage = new damageProfile();
+		
+			damage.rad = 22 + (level - 1) * 4;
+			damage.rad = scr_stats_applyDamageBonuses(source, damage.rad, "rad");
+
+			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			
+			passives = {
+		
+				radDam: level
+		
+			}
 	
 		}
 	

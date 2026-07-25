@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_stimPac",
+  "%Name":"snd_emp3",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.8459864,
+  "duration":1.1261678,
   "exportDir":"",
-  "name":"snd_stimPac",
+  "name":"snd_emp3",
   "parent":{
     "name":"SFX",
     "path":"folders/Sounds/SFX.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_stimPac.wav",
+  "soundFile":"snd_emp3.wav",
   "volume":1.0,
 }

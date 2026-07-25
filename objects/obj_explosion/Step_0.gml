@@ -17,6 +17,8 @@ if (firstStep) {
 		for (var i = 0; i < nearbyLen; i++) {
 	
 			var char = nearby[i];
+			
+			if (char.faction == faction) continue;
 			//no need to check if the instance exists. circleDistSq checks that and returns -1 if it doesn't
 			var distSq = scr_obj_circleDistSq(x, y, radius, char);
 			if (distSq < 0) continue;

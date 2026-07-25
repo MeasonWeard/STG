@@ -21,6 +21,7 @@ function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 	damage.kin = 35;
 		
 	killThreshold = 10;
+	damageInRadius = false;
 
 	//runtime data
 	charges = 4;
@@ -67,6 +68,7 @@ function scr_melee_attack(char) {
 	att.hitDelay = melee.hitDelay;
 	att.stopOnHit = melee.stopOnHit;
 	att.range = melee.range;
+	att.damageInRadius = melee.damageInRadius;
 	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;
