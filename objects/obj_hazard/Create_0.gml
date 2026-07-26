@@ -20,5 +20,5 @@ damage = undefined;
 
 onGround = false;
 
-prevXscale = 1;
-prevYscale = 1;
+prevXscale = -1;
+prevYscale = -1;

@@ -147,3 +147,6 @@ for (var i = 0 ; i < len; i ++) {
 	}
 	
 }
+
+//alternate use
+if (keyboard_check(ord("C"))) alternateUse = true;

@@ -316,3 +316,4 @@ if (constLen > 0) {
 
 prevShield = shield;
 prevHp = hp;
+alternateUse = false;

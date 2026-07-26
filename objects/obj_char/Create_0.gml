@@ -23,6 +23,8 @@ faction = undefined;
 setup = true;
 firstEquip = true;
 
+alternateUse = false;
+
 //appearance, sound, behaviour
 bloodCol = c_red;
 bulletHitSounds = "bulletHitFlesh";

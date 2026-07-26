@@ -643,8 +643,8 @@ function scr_skills_formatDescription(skillInst) {
 	
 			statsDescription = "Projectiles: " + string(projectiles);
 			statsDescription += "\nPool Radius: " + string(radius);
-			statsDescription += "\n\nPool Duration: " + string(life) +" seconds";
-			statsDescription += "\n\nDamage: " + string(damage.chem) +" chemical p/s";
+			statsDescription += "\nPool Duration: " + string(life) + " seconds";
+			statsDescription += "\n\nDamage: " + string(damage.chem) + " chemical p/s";
 			
 		}
 	
@@ -693,6 +693,68 @@ function scr_skills_formatDescription(skillInst) {
 		
 		}
 	
+	}
+
+	function skill_thermiteCharge() : skill() constructor {
+		
+		name = "Thermit Charge";
+		key = "thermiteCharge";
+		icon = spr_icon_flamethrower;
+		maxLevel = 12;
+		maxCharges = 4;
+		energyCost = 40;
+		cooldownTime = 4;
+		castCooldownTime = 0.5;
+		flameLife = 4;
+
+		damage = undefined;
+		flameDamage = undefined;
+	
+		description = "Deploy thermite charges that detonate and set the ground on fire.";
+		description = "Charges detonate after a 5 second countdown. Press C to detonate charges early.";
+		
+		static formatStatsDescription = function() {
+	
+			statsDescription = "Maximum Charges: " + string(maxCharges);
+			statsDescription += "\nExplosion Damage: " + string(damage.kin) + " kinetic, " + string(damage.fire) + " fire";
+			statsDescription += "\nBurned Ground Damage: " + string(flameDamage.fire * 2) + " fire p/s";
+			statsDescription += "\nBurned Ground Duration: 4 seconds"
+		}
+	
+		static setupFunc = function(source) {
+		
+			maxCharges = 2 + level div 3;
+			
+			damage = new damageProfile();
+			flameDamage = new damageProfile();
+			
+			damage.kin = 20 + (level - 1) * 5;
+			damage.fire = 20 + (level - 1) * 5;
+			
+			flameDamage.fire = 8 + (level - 1) * 4;
+			
+			damage.fire = scr_stats_applyDamageBonuses(source, damage.fire, "fire");
+			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			
+			flameDamage.fire = scr_stats_applyDamageBonuses(source, flameDamage.fire, "fire");
+			flameDamage = scr_stats_calculateCharDamageProfile(source, flameDamage, false);
+			
+		}
+	
+		static castFunc = function(source) {
+		
+			var tc = instance_create_layer(source.x, source.y, "Instances", obj_thermiteCharge);
+	
+			tc.owner = source;
+			tc.damage = damage;
+			tc.flameDamage = flameDamage;
+			tc.faction = source.faction;
+			tc.life = flameLife;
+			
+			return true;
+			
+		}
+		
 	}
 
 	#endregion
