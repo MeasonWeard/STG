@@ -746,8 +746,8 @@ function scr_skills_formatDescription(skillInst) {
 
 		static setupFunc = function(source) {
 		
-			energyCost = 20 + (level - 1) * 2;
-			life = 6 + (level - 1) * 0.5;
+			energyCost = 30 + (level - 1) * 2;
+			life = 6 + (level - 1) * 0.75;
 			maxSpawns = 1 + level div 3;
 			maxCharges = maxSpawns;
 			maxHp = 100 + (level - 1) * 20;
@@ -1250,6 +1250,30 @@ function scr_skills_formatDescription(skillInst) {
 				chemRes: level,
 				elecRes: level,
 				radRes: level
+	
+			};
+	
+		}
+	
+	}
+	
+	function skill_adrenalGlands() : skill() constructor {
+
+		name = "Enlarged Adrenal Glands";
+		key = "adrenalGlands";
+		icon = spr_icon_adrenalGlands;
+		maxLevel = 8;
+	
+		description = "Your adrenal glands produce more adrenaline and cortisole.";
+		description += "\nThe first point gives you +1 dash charge. Each point";
+		description += "\nreduces dash cooldown time.";
+		
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				maxDashes: 1,
+				dashRegen: 0.02 * level
 	
 			};
 	

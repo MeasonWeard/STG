@@ -42,10 +42,8 @@ if (instance_exists(player)) {
 	maxEnergy = player.maxEnergy;
 	dashes = player.dashes;
 	maxDashes = player.finalStats.maxDashes;
-	dashCool = player.dashCool;
-	dashCoolTime = player.finalStats.dashCoolTime;
-	dashCoolPerc = dashCool / (dashCoolTime * 60);
-	
+	dashRecharge = player.dashRecharge;
+
 	shieldRecharge = player.shieldRegenCounter > 0 ? true : false;
 	
 	stimPacks = player.stimPacks;
@@ -178,7 +176,7 @@ if (maxShield > 0) {
 }
 
 //dash
-scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashCoolPerc, false);
+scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashRecharge, false);
 
 //packs
 scr_ui_skillIconFromData(stimPackX, skillsY, 3, spr_icon_stimPack, "StimPac", "Q", stimPacks, stimPackCool, true);

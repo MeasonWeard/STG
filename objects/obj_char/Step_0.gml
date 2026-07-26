@@ -40,13 +40,35 @@ if (dash > 0) {
 	
 }
 
-if (dashCool > 0) {
+if (dashes < finalStats.maxDashes) {
+	
+	dashRecharge += finalStats.dashRegen / 60;
 
-	dashCool --;
+	if (dashRecharge >= 1) {
+
+		dashRecharge--;
+
+		dashes = min(finalStats.maxDashes, dashes + 1);
+
+		if (dashes == finalStats.maxDashes) {
+			dashRecharge = 0;
+		}
+
+	}
 	
 } else {
 
-	dashes = min(finalStats.maxDashes, dashes + 1);
-	if (dashes < finalStats.maxDashes) dashCool = finalStats.dashCoolTime * 60;
+	dashRecharge = 0;
 	
 }
+
+//if (dashCool > 0) {
+
+//	dashCool --;
+	
+//} else {
+
+//	dashes = min(finalStats.maxDashes, dashes + 1);
+//	if (dashes < finalStats.maxDashes) dashCool = finalStats.dashCoolTime * 60;
+	
+//}

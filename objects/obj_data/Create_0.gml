@@ -360,6 +360,7 @@ skillConstructors = {
 	homeostasis: skill_homeostasis, //bio
 	radiotrophy: skill_radiotrophy, //bio
 	chitin: skill_chitin, //bio
+	adrenalGlands: skill_adrenalGlands, //bio
 	
 	chainLightning: skill_chainLightning, // eng
 	turret: skill_turret, //eng

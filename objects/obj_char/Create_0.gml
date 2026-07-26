@@ -75,6 +75,7 @@ energyPacks = 0;
 
 stimPackRecharge = 0;
 energyPackRecharge = 0;
+dashRecharge = 0;
 
 baseStats = scr_stats_blankCharStats();
 
@@ -100,7 +101,7 @@ finalStats = {
 	
 	//movement
 	spd: 4,
-	dashCoolTime: 3,
+	dashRegen: 0.3,
 	maxDashes: 1,
 
 	//damage

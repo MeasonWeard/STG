@@ -365,6 +365,7 @@
     {"name":"spr_headgear","order":4,"path":"sprites/spr_headgear/spr_headgear.yy",},
     {"name":"spr_icon_acidFlasks","order":10,"path":"sprites/spr_icon_acidFlasks/spr_icon_acidFlasks.yy",},
     {"name":"spr_icon_acidicBullets","order":16,"path":"sprites/spr_icon_acidicBullets/spr_icon_acidicBullets.yy",},
+    {"name":"spr_icon_adrenalGlands","order":27,"path":"sprites/spr_icon_adrenalGlands/spr_icon_adrenalGlands.yy",},
     {"name":"spr_icon_antimatter","order":5,"path":"sprites/spr_icon_antimatter/spr_icon_antimatter.yy",},
     {"name":"spr_icon_blob","order":9,"path":"sprites/spr_icon_blob/spr_icon_blob.yy",},
     {"name":"spr_icon_chainLightning","order":4,"path":"sprites/spr_icon_chainLightning/spr_icon_chainLightning.yy",},

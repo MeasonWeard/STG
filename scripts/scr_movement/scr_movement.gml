@@ -167,7 +167,7 @@ function scr_movement_dash(char) {
     char.dashX = sign(char.xspd);
     char.dashY = sign(char.yspd);
 	
-	if (char.dashes == char.finalStats.maxDashes) char.dashCool = char.finalStats.dashCoolTime * 60;
+	//if (char.dashes == char.finalStats.maxDashes) char.dashCool = char.finalStats.dashCoolTime * 60;
 	char.dashes = max(0, char.dashes - 1);
 	
 }

@@ -23,7 +23,7 @@ function scr_stats_blankCharStats() {
 	
 		//movement
 		spd: 4,
-		dashCoolTime: 3,
+		dashRegen: 0.25,
 		maxDashes: 1,
 
 		//health and shields percent increase
@@ -293,7 +293,7 @@ function scr_stats_calculateFinalStats(stats) {
 		
 		//movement
 		spd: stats.spd,
-		dashCoolTime: stats.dashCoolTime,
+		dashRegen: stats.dashRegen,
 		maxDashes: stats.maxDashes,
 
 		//damage
@@ -357,7 +357,7 @@ function scr_stats_getName(statKey) {
         case "da": return "Defensive Ability";
 
         case "spd": return "Movement Speed";
-        case "dashCoolTime": return "Dash Cooldown";
+        case "dashRegen": return "Dash Regeneration";
         case "maxDashes": return "Max Dashes";
 
         case "maxHpPerc": return "Max Health %";
@@ -422,8 +422,8 @@ function scr_stats_formatCharStats(stats, finalStats) {
     // packs
     str = scr_stats_formatStat(str, stats, "maxStimPacks");
     str = scr_stats_formatStat(str, stats, "maxEnergyPacks");
-    str = scr_stats_formatStat(str, stats, "stimPackRegen", " p/s");
-    str = scr_stats_formatStat(str, stats, "energyPackRegen", " p/s");
+    str = scr_stats_formatStat(str, stats, "stimPackRegen", " per minute");
+    str = scr_stats_formatStat(str, stats, "energyPackRegen", " per minute");
 
 	str += "\n";
 
@@ -435,7 +435,7 @@ function scr_stats_formatCharStats(stats, finalStats) {
 	
     // movement
     str = scr_stats_formatStat(str, stats, "spd");
-    str = scr_stats_formatStat(str, stats, "dashCoolTime", " seconds");
+    str = scr_stats_formatStat(str, stats, "dashRegen", " p/s");
     str = scr_stats_formatStat(str, stats, "maxDashes");
 
 	str += "\n";

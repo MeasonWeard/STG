@@ -433,6 +433,7 @@
     {"id":{"name":"spr_headgear","path":"sprites/spr_headgear/spr_headgear.yy",},},
     {"id":{"name":"spr_icon_acidFlasks","path":"sprites/spr_icon_acidFlasks/spr_icon_acidFlasks.yy",},},
     {"id":{"name":"spr_icon_acidicBullets","path":"sprites/spr_icon_acidicBullets/spr_icon_acidicBullets.yy",},},
+    {"id":{"name":"spr_icon_adrenalGlands","path":"sprites/spr_icon_adrenalGlands/spr_icon_adrenalGlands.yy",},},
     {"id":{"name":"spr_icon_antimatter","path":"sprites/spr_icon_antimatter/spr_icon_antimatter.yy",},},
     {"id":{"name":"spr_icon_blank","path":"sprites/spr_icon_blank/spr_icon_blank.yy",},},
     {"id":{"name":"spr_icon_blob","path":"sprites/spr_icon_blob/spr_icon_blob.yy",},},
