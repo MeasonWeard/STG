@@ -471,83 +471,13 @@ function scr_char_useEnergyPack(char) {
 	
 }
 
-function scr_char_findValidPlace(inst, xx, yy) {
-
-	if (!instance_exists(inst)) return undefined;
-
-	//avoid spawning at envs
-	var found = false;
-	var inc = 0;
-	
-	while (!found and inc < 8) {
-
-		var minDist = inc * 32 + 8;
-		var maxDist = minDist + 40;
-
-		for (var tries = 0; tries < 12; tries++) {
-
-			var pt = scr_randomPointInCircleMinDist(
-				xx,
-				yy,
-				maxDist,
-				minDist
-			);
-
-			var blocked = false;
-
-			var nearby = scr_hash_getNearby(
-				global.stageController.envHash,
-				pt.xx,
-				pt.yy
-			);
-
-			var nearbyLen = array_length(nearby);
-
-			for (var i = 0; i < nearbyLen; i++) {
-
-				var env = nearby[i];
-
-				if (!instance_exists(env)) continue;
-
-				if (scr_obj_movementCollisionAt(
-					inst,
-					env,
-					pt.xx,
-					pt.yy,
-					true
-				)) {
-					blocked = true;
-					break;
-				}
-
-			}
-
-			if (!blocked) {
-
-				return {
-					px: pt.xx,
-					py: pt.yy
-				}
-				
-			}
-
-		}
-
-		inc++;
-
-	}
-	
-	return undefined;
-	
-}
-
 function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undefined, cloneGear = true) {
 	
 	if (!asset_get_type(obj) == asset_object) return noone;
 	
 	var inst = instance_create_layer(xx, yy, "Instances", obj);
 	
-	var pt = scr_char_findValidPlace(inst, xx, yy);
+	var pt = scr_obj_findValidPlace(inst, xx, yy);
 	
 	if (pt == undefined) {
 		instance_destroy(inst);
@@ -561,7 +491,6 @@ function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undef
 	if (instance_exists(source)) {
 		
 		inst.owner = source;
-		//if (faction == undefined) faction = source.faction;
 		faction = faction ?? source.faction;
 		
 	}

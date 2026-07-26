@@ -341,6 +341,7 @@ skillConstructors = {
 	
 	antimatterBlast: skill_antimatterBlast, //phys
 	teleport: skill_teleport, // phys
+	singularity: skill_singularity, //phys
 	
 	joltzmanShield: skill_joltzmanShield, //phys,
 	radioactiveBullets: skill_radioactiveBullets, //phys

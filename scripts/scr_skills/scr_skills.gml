@@ -463,7 +463,7 @@ function scr_skills_formatDescription(skillInst) {
 			var xx = gunX + lengthdir_x(dist, dir);
 			var yy = gunY + lengthdir_y(dist, dir);
 			
-			var pt = scr_char_findValidPlace(source, xx, yy);
+			var pt = scr_obj_findValidPlace(source, xx, yy);
 			
 			if (pt == undefined) return false;
 			
@@ -481,6 +481,78 @@ function scr_skills_formatDescription(skillInst) {
 			m2.image_index = source.image_index;
 			m2.alpha -= 0.1;
 			
+			return true;
+			
+		}
+	
+	}
+	
+	function skill_singularity() : skill() constructor {
+	
+		name = "Singularity";
+		key = "singularity";
+		icon = spr_icon_blank;
+		maxCharges = 1;
+		energyCost = 100;
+		cooldownTime = 12;
+		maxLevel = 9;
+		range = 380;
+		pullRange = 600;
+		txtCol = c_white;
+
+		description = "Create a miniature black hole which pulls in enemies and then";
+		description += "\nexplodes, dealing kinetic damage in an area.";
+	
+		static formatStatsDescription = function() {
+			
+			statsDescription = "Pull Range: " + string(pullRange);
+			statsDescription += "\nDamage: " + string(damage.kin) + " kinetic";
+			
+		}
+	
+		static setupFunc = function(source) {
+		
+			energyCost = 85 + level * 5;
+		
+			pullRange = 630 + (level - 1) * 15;
+			damage = new damageProfile();
+			damage.kin = 40 + (level - 1) * 18;
+		
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(range, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+			
+
+			
+			var s = instance_create_layer(xx, yy, "Instances", obj_singularity);
+			
+			var pt = scr_obj_findValidPlace(s, xx, yy);
+			
+			if (pt != undefined) {
+				s.x = pt.px;
+				s.y = pt.py;
+			}
+			
+			//scr_audio_playSoundAt(snd_teleport, pt.px, pt.py);
+			
+			s.pullRange = pullRange;
+			s.damage = damage;
+			s.faction = source.faction;
+
 			return true;
 			
 		}
