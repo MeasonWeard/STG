@@ -390,6 +390,7 @@
     {"name":"spr_icon_radiotrophy","order":23,"path":"sprites/spr_icon_radiotrophy/spr_icon_radiotrophy.yy",},
     {"name":"spr_icon_rubberBoots","order":6,"path":"sprites/spr_icon_rubberBoots/spr_icon_rubberBoots.yy",},
     {"name":"spr_icon_shieldBattery","order":22,"path":"sprites/spr_icon_shieldBattery/spr_icon_shieldBattery.yy",},
+    {"name":"spr_icon_singularity","order":30,"path":"sprites/spr_icon_singularity/spr_icon_singularity.yy",},
     {"name":"spr_icon_stimPack","order":2,"path":"sprites/spr_icon_stimPack/spr_icon_stimPack.yy",},
     {"name":"spr_icon_turret","order":8,"path":"sprites/spr_icon_turret/spr_icon_turret.yy",},
     {"name":"spr_icon_vacuumEnergy","order":29,"path":"sprites/spr_icon_vacuumEnergy/spr_icon_vacuumEnergy.yy",},

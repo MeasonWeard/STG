@@ -459,6 +459,7 @@
     {"id":{"name":"spr_icon_radiotrophy","path":"sprites/spr_icon_radiotrophy/spr_icon_radiotrophy.yy",},},
     {"id":{"name":"spr_icon_rubberBoots","path":"sprites/spr_icon_rubberBoots/spr_icon_rubberBoots.yy",},},
     {"id":{"name":"spr_icon_shieldBattery","path":"sprites/spr_icon_shieldBattery/spr_icon_shieldBattery.yy",},},
+    {"id":{"name":"spr_icon_singularity","path":"sprites/spr_icon_singularity/spr_icon_singularity.yy",},},
     {"id":{"name":"spr_icon_stimPack","path":"sprites/spr_icon_stimPack/spr_icon_stimPack.yy",},},
     {"id":{"name":"spr_icon_turret","path":"sprites/spr_icon_turret/spr_icon_turret.yy",},},
     {"id":{"name":"spr_icon_vacuumEnergy","path":"sprites/spr_icon_vacuumEnergy/spr_icon_vacuumEnergy.yy",},},

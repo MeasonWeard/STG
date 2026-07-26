@@ -491,7 +491,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		name = "Singularity";
 		key = "singularity";
-		icon = spr_icon_blank;
+		icon = spr_icon_singularity;
 		maxCharges = 1;
 		energyCost = 100;
 		cooldownTime = 12;

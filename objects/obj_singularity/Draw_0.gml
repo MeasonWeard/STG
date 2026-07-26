@@ -1,5 +1,7 @@
 draw_set_colour(c_black);
 draw_circle(x, y, size, false);
+draw_set_colour(c_white);
+draw_circle(x, y, size, true);
 
 size += sizeDir * 0.25;
 
