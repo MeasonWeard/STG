@@ -370,12 +370,12 @@ function scr_skills_formatDescription(skillInst) {
 		damage = undefined;
 	
 		description = "Unleash a barrage of magnetically suspended antimatter capsules."
-		description += "\nOn impact that capsules shatter, causing the antimatter to annihilate\nin a devastating explosion.";
+		description += "\nOn impact the capsules shatter, causing the antimatter to annihilate\nin a devastating explosion.";
 	
 		static formatStatsDescription = function() {
 	
 			statsDescription = "Projectiles: " + string(projectiles);
-			statsDescription += "\nExplosion radius: " + string(explosionRadius);
+			statsDescription += "\nExplosion Radius: " + string(explosionRadius);
 			statsDescription += "\n\nDamage: " + string(damage.kin) +" kinetic, " + string(damage.rad) + " radiation";
 	
 		}
@@ -496,7 +496,7 @@ function scr_skills_formatDescription(skillInst) {
 		name = "Flamethrower";
 		key = "flamethrower";
 		icon = spr_icon_flamethrower;
-		maxLevel = 9;
+		maxLevel = 12;
 		maxCharges = 1;
 		charges = 1;
 		energyCost = 100;
@@ -513,20 +513,18 @@ function scr_skills_formatDescription(skillInst) {
 	
 			statsDescription = "Jets: " + string(jetCount);
 			statsDescription += "\n\nDuration: " + string(life) +" seconds";
-			statsDescription += "\n\nDamage: " + string(damage.fire / damTime) +" fire p/s";
+			statsDescription += "\n\nJet Damage: " + string(damage.fire / damTime) +" fire p/s";
 			
 		}
 	
 		static setupFunc = function(source) {
-		
-			//energyCost = 50 + level * 5;
 		
 			jetCount = 4 + (level - 1) div 4;
 			life = 7.5 + 0.5 * level;
 		
 			damage = new damageProfile();
 		
-			damage.fire = 10 + 2 * level;
+			damage.fire = 8 + 2 * level;
 			damage.fire = scr_stats_applyDamageBonuses(source, damage.fire, "fire");
 
 			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
@@ -572,8 +570,8 @@ function scr_skills_formatDescription(skillInst) {
 		static formatStatsDescription = function() {
 	
 			statsDescription = "Projectiles: " + string(projectiles);
-			statsDescription += "\nPool radius: " + string(radius);
-			statsDescription += "\n\nPool duration: " + string(life) +" seconds";
+			statsDescription += "\nPool Radius: " + string(radius);
+			statsDescription += "\n\nPool Duration: " + string(life) +" seconds";
 			statsDescription += "\n\nDamage: " + string(damage.chem) +" chemical p/s";
 			
 		}
@@ -653,7 +651,7 @@ function scr_skills_formatDescription(skillInst) {
 			var chemDam = 5 + (level - 1);
 		
 			statsDescription = "Charges: " + string(maxCharges);
-			statsDescription += "\nMax spawns: " + string(maxSpawns);
+			statsDescription += "\nMax Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
 			statsDescription += "\nHP: " + string(maxHp);
 			statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
@@ -736,7 +734,7 @@ function scr_skills_formatDescription(skillInst) {
 			var chemDam = 6 * gunDamMult;
 		
 			statsDescription = "Charges: " + string(maxCharges);
-			statsDescription += "\nMax spawns: " + string(maxSpawns);
+			statsDescription += "\nMax Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
 			statsDescription += "\nHP: " + string(maxHp);
 			statsDescription += "\n\nProjectiles: 12";
@@ -1031,6 +1029,50 @@ function scr_skills_formatDescription(skillInst) {
 	
 	}
 	
+	function skill_leadCoat() : skill() constructor {
+
+		name = "Lead Coat";
+		key = "leadCoat";
+		icon = spr_icon_leadCoat;
+		txtCol = c_white;
+		maxLevel = 4;
+		
+		description = "Increases your radiation resistance.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				radRes: 4 * level
+	
+			};
+	
+		}
+	
+	}
+	
+	function skill_vacuumEnergy() : skill() constructor {
+
+		name = "Vacuum Energy";
+		key = "vacuumEnergy";
+		icon = spr_icon_vacuumEnergy;
+		txtCol = c_white;
+		maxLevel = 9;
+		
+		description = "Harness the energy of virtual particles as they emerge from the quantum vacuum.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				energyRegen: 0.25 * level
+	
+			};
+	
+		}
+	
+	}
+	
 	function skill_radioactiveBullets() :skill() constructor {
 	
 		name = "Radioactive Bullets";
@@ -1048,9 +1090,9 @@ function scr_skills_formatDescription(skillInst) {
 		
 		static formatStatsDescription = function() {
 
-			statsDescription = "Detonation chance: " + string(chance) + "%";
-			statsDescription += "\nDamage radius: " + string(radius);
-			statsDescription += "\nArea damage: " + string(damage.rad) + " radiation";
+			statsDescription = "Detonation Chance: " + string(chance) + "%";
+			statsDescription += "\nDamage Radius: " + string(radius);
+			statsDescription += "\nArea Damage: " + string(damage.rad) + " radiation";
 		
 		}
 		
@@ -1159,9 +1201,9 @@ function scr_skills_formatDescription(skillInst) {
 		
 		static formatStatsDescription = function() {
 
-			statsDescription = "Acid pool chance: " + string(chance) + "%";
-			statsDescription += "\nPool radius: " + string(radius);
-			statsDescription += "\n\nPool duration: " + string(life) +" seconds";
+			statsDescription = "Acid Pool Chance: " + string(chance) + "%";
+			statsDescription += "\nPool Radius: " + string(radius);
+			statsDescription += "\n\nPool Duration: " + string(life) +" seconds";
 			statsDescription += "\nDamage: " + string(damage.chem) + " chemical p/s";
 		
 		}
@@ -1318,7 +1360,7 @@ function scr_skills_formatDescription(skillInst) {
 		
 		static formatStatsDescription = function() {
 		
-			statsDescription = "Recharge maximum: " + string(recharge);
+			statsDescription = "Recharge Maximum: " + string(recharge);
 		
 		}
 		
@@ -1462,7 +1504,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static formatStatsDescription = function() {
 	
-			statsDescription = "Summon shield points: " + string(petShields);
+			statsDescription = "Summon Shield Points: " + string(petShields);
 	
 		}
 	
