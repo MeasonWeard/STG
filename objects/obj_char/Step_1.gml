@@ -45,6 +45,7 @@ if (setupStats) {
 	scr_data_copyInto(stats, baseStats);
 	
 	bulletFuncs = [];
+	constantFuncs = [];
 	
 	//apply class stats and passive skill stats
 	if (is_struct(charData)) {
