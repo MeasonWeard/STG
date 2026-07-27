@@ -35,6 +35,60 @@ while (width >= slotSize) {
 	width -= slotSize + slotGap;
 }
 
+storeItem = function(item) {
+
+	if (is_undefined(item)) exit;
+
+	var key;
+
+	switch (item.type) {
+
+		case itemTypes.weapon:
+		case itemTypes.gun:
+			key = "guns";
+			break;
+
+		case itemTypes.melee:
+			key = "melee";
+			break;
+
+		case itemTypes.device:
+			key = "devices";
+			break;
+
+		case itemTypes.headgear:
+			key = "headgear";
+			break;
+
+		case itemTypes.tie:
+			key = "ties";
+			break;
+
+		default:
+			exit;
+
+	}
+
+	var arr = inventory[$ key];
+	var len = array_length(arr);
+
+	// Try to reuse an empty slot
+	for (var i = 0; i < len; i++) {
+
+		if (is_undefined(arr[i])) {
+			arr[i] = item;
+			//inventory[$ key] = arr;
+			return;
+		}
+
+	}
+
+	// No empty slots
+	array_push(arr, item);
+	inventory[$ key] = arr;
+
+}
+
 //functions
 equipLeft = function(key, index) {
 
@@ -43,7 +97,7 @@ equipLeft = function(key, index) {
 	if (is_undefined(arr)) exit;
 	
 	var len = array_length(arr);
-	if (index >= len) exit;
+	if (index < 0 or index >= len) exit;
 	
 	var item = arr[index];
 	
@@ -52,10 +106,11 @@ equipLeft = function(key, index) {
 	var type = item.type;
 	
 	if (type == itemTypes.weapon or type == itemTypes.gun or type == itemTypes.melee) {
-	
-		var oldItem = global.stashController.equippedWeapons.weapon1;
-		arr[index] = oldItem;
 		
+		var oldItem = global.stashController.equippedWeapons.weapon1;
+		arr[index] = undefined;
+		
+		storeItem(oldItem);
 		global.stashController.equippedWeapons.weapon1 = item;
 	
 	}
@@ -63,8 +118,9 @@ equipLeft = function(key, index) {
 	if (type == itemTypes.device) {
 	
 		var oldItem = global.stashController.equippedGear.device1;
-		arr[index] = oldItem;
+		arr[index] = undefined;
 		
+		storeItem(oldItem);
 		global.stashController.equippedGear.device1 = item;
 	
 	}
@@ -72,8 +128,9 @@ equipLeft = function(key, index) {
 	if (type == itemTypes.headgear) {
 	
 		var oldItem = global.stashController.equippedGear.headgear;
-		arr[index] = oldItem;
+		arr[index] = undefined;
 		
+		storeItem(oldItem);
 		global.stashController.equippedGear.headgear = item;
 	
 	}
@@ -81,8 +138,9 @@ equipLeft = function(key, index) {
 	if (type == itemTypes.tie) {
 	
 		var oldItem = global.stashController.equippedGear.tie;
-		arr[index] = oldItem;
+		arr[index] = undefined;
 		
+		storeItem(oldItem);
 		global.stashController.equippedGear.tie = item;
 	
 	}
@@ -96,7 +154,7 @@ equipRight = function(key, index) {
 	if (is_undefined(arr)) exit;
 	
 	var len = array_length(arr);
-	if (index >= len) exit;
+	if (index < 0 or index >= len) exit;
 	
 	var item = arr[index];
 	
@@ -107,8 +165,9 @@ equipRight = function(key, index) {
 	if (type == itemTypes.weapon or type == itemTypes.gun or type == itemTypes.melee) {
 	
 		var oldItem = global.stashController.equippedWeapons.weapon2;
-		arr[index] = oldItem;
+		arr[index] = undefined;
 		
+		storeItem(oldItem);
 		global.stashController.equippedWeapons.weapon2 = item;
 	
 	}
@@ -116,8 +175,9 @@ equipRight = function(key, index) {
 	if (type == itemTypes.device) {
 	
 		var oldItem = global.stashController.equippedGear.device2;
-		arr[index] = oldItem;
+		arr[index] = undefined;
 		
+		storeItem(oldItem);
 		global.stashController.equippedGear.device2 = item;
 	
 	}
@@ -125,8 +185,9 @@ equipRight = function(key, index) {
 	if (type == itemTypes.headgear) {
 	
 		var oldItem = global.stashController.equippedGear.headgear;
-		arr[index] = oldItem;
+		arr[index] = undefined;
 		
+		storeItem(oldItem);
 		global.stashController.equippedGear.headgear = item;
 	
 	}
@@ -134,8 +195,9 @@ equipRight = function(key, index) {
 	if (type == itemTypes.tie) {
 	
 		var oldItem = global.stashController.equippedGear.tie;
-		arr[index] = oldItem;
+		arr[index] = undefined;
 		
+		storeItem(oldItem);
 		global.stashController.equippedGear.tie = item;
 	
 	}
@@ -149,7 +211,7 @@ scrap = function(key, index) {
 	if (is_undefined(arr)) exit;
 	
 	var len = array_length(arr);
-	if (index >= len) exit;
+	if (index < 0 or index >= len) exit;
 	
 	var item = arr[index];
 	

@@ -414,25 +414,38 @@ function scr_ui_drawTextBox(xx, yy, txt, font) {
 	var w = string_width(txt) + pad * 2;
 	var h = string_height(txt) + pad * 2;
 
+	var screenX = 0;
+	var screenY = 0;
 	var screenW = display_get_gui_width();
 	var screenH = display_get_gui_height();
 
+	if (instance_exists(global.camera)) {
+
+		var cam = view_camera[0];
+
+		screenX = camera_get_view_x(cam);
+		screenY = camera_get_view_y(cam);
+		screenW = camera_get_view_width(cam);
+		screenH = camera_get_view_height(cam);
+
+	}
+	
 	var drawX = xx;
 	var drawY = yy;
 
 	// Flip horizontally if it would leave the screen
-	if (drawX + w > screenW) {
+	if (drawX + w > screenX + screenW) {
 		drawX = xx - w;
 	}
 
 	// Flip vertically if it would leave the screen
-	if (drawY + h > screenH) {
+	if (drawY + h > screenY + screenH) {
 		drawY = yy - h;
 	}
 
 	// Final clamp in case the box is larger than the available space
-	drawX = clamp(drawX, 0, max(0, screenW - w));
-	drawY = clamp(drawY, 0, max(0, screenH - h));
+	drawX = clamp(drawX, screenX, max(screenX, screenX + screenW - w));
+	drawY = clamp(drawY, screenY, max(screenY, screenY + screenH - h));
 
 	scr_misc_resetTextAlignment();
 

@@ -8,7 +8,7 @@ if (playerExists and is_instanceof(player.equippedWeapon, weaponInst)) {
 
 //hover text
 if (hoverTxt != undefined and hoverTxtCount > 0) {
-
+	
 	scr_ui_drawTextBox(x, y, hoverTxt, hoverFont);
 	
 	hoverTxtCount--;

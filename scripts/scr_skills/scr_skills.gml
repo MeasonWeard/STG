@@ -328,6 +328,8 @@ function scr_skills_formatDescription(skillInst) {
 	if (is_struct(passives)) {
 	
 		var keys = variable_struct_get_names(passives);
+		keys = scr_stats_orderStatKeys(keys);
+		
 		var keysLen = array_length(keys);
 		
 		for (var i = 0; i < keysLen; i ++) {
@@ -390,12 +392,9 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 		
 			damage.kin = 10 + 2 * level;
-			damage.kin = scr_stats_applyDamageBonuses(source, damage.kin, "kin");
-		
 			damage.rad = 10 + 2 * level;
-			damage.rad = scr_stats_applyDamageBonuses(source, damage.rad, "rad");
-		
-			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, ["kin", "rad"]);	
 		
 		}
 	
@@ -515,8 +514,11 @@ function scr_skills_formatDescription(skillInst) {
 			energyCost = 85 + level * 5;
 		
 			pullRange = 630 + (level - 1) * 15;
+			
 			damage = new damageProfile();
+
 			damage.kin = 40 + (level - 1) * 18;
+			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
 		
 		}
 	
@@ -546,8 +548,6 @@ function scr_skills_formatDescription(skillInst) {
 				s.x = pt.px;
 				s.y = pt.py;
 			}
-			
-			//scr_audio_playSoundAt(snd_teleport, pt.px, pt.py);
 			
 			s.pullRange = pullRange;
 			s.damage = damage;
@@ -597,9 +597,7 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 		
 			damage.fire = 8 + 2 * level;
-			damage.fire = scr_stats_applyDamageBonuses(source, damage.fire, "fire");
-
-			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			damage = scr_stats_calculateSkillDamage(source, damage, ["fire"]);
 			
 		}
 	
@@ -659,9 +657,7 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 		
 			damage.chem = 6 + 2 * level;
-			damage.chem = scr_stats_applyDamageBonuses(source, damage.chem, "chem");
-
-			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
 		
 		}
 	
@@ -730,14 +726,10 @@ function scr_skills_formatDescription(skillInst) {
 			
 			damage.kin = 20 + (level - 1) * 5;
 			damage.fire = 20 + (level - 1) * 5;
+			damage = scr_stats_calculateSkillDamage(source, damage, ["fire", "kin"]);
 			
 			flameDamage.fire = 8 + (level - 1) * 4;
-			
-			damage.fire = scr_stats_applyDamageBonuses(source, damage.fire, "fire");
-			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
-			
-			flameDamage.fire = scr_stats_applyDamageBonuses(source, flameDamage.fire, "fire");
-			flameDamage = scr_stats_calculateCharDamageProfile(source, flameDamage, false);
+			flameDamage = scr_stats_calculateSkillDamage(source, damage, ["fire"]);
 			
 		}
 	
@@ -1017,8 +1009,7 @@ function scr_skills_formatDescription(skillInst) {
 		
 			damage = new damageProfile();
 			damage.elec = 25 + 10 * level;
-			damage.elec = scr_stats_applyDamageBonuses(source, damage.elec, "elec"); 
-			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			damage = scr_stats_calculateSkillDamage(source, damage, ["elec"]);
 		
 		}
 	
@@ -1248,9 +1239,7 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 		
 			damage.rad = 22 + (level - 1) * 4;
-			damage.rad = scr_stats_applyDamageBonuses(source, damage.rad, "rad");
-
-			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			damage = scr_stats_calculateSkillDamage(source, damage, ["rad"]);
 			
 			passives = {
 		
@@ -1361,9 +1350,7 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 		
 			damage.chem = 6 + 2 * level;
-			damage.chem = scr_stats_applyDamageBonuses(source, damage.chem, "chem");
-
-			damage = scr_stats_calculateCharDamageProfile(source, damage, false);
+			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
 			
 			passives = {
 		

@@ -46,7 +46,7 @@ scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 
 //var hg = new headgearInst(1, 1);
-//hg.stats.fireDam = 100;
+//hg.stats.radDamPerc = 1000;
 //gear.headgear = hg;
 
 //STATS

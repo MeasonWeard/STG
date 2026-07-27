@@ -160,11 +160,17 @@ function scr_stats_calculateDamageProfileWeapon(char, profile) {
 	
 	scr_data_structCopyInto(newStats, profile);
 	
-	newStats.damage.kin = scr_stats_applyDamageBonuses(char, newStats.damage.kin, "kin"); //scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
-	newStats.damage.fire = scr_stats_applyDamageBonuses(char, newStats.damage.fire, "fire");//scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
-	newStats.damage.chem = scr_stats_applyDamageBonuses(char, newStats.damage.chem, "chem");// scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
-	newStats.damage.elec = scr_stats_applyDamageBonuses(char, newStats.damage.elec, "elec");// scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
-	newStats.damage.rad = scr_stats_applyDamageBonuses(char, newStats.damage.rad, "rad");// scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
+	newStats.damage.kin = scr_stats_applyDamageBonuses(char, newStats.damage.kin, "kin");
+	newStats.damage.fire = scr_stats_applyDamageBonuses(char, newStats.damage.fire, "fire");
+	newStats.damage.chem = scr_stats_applyDamageBonuses(char, newStats.damage.chem, "chem");
+	newStats.damage.elec = scr_stats_applyDamageBonuses(char, newStats.damage.elec, "elec");
+	newStats.damage.rad = scr_stats_applyDamageBonuses(char, newStats.damage.rad, "rad");
+	
+	//newStats.damage.kin = scr_stats_calculateStat(newStats.damage.kin, char.stats.kinDamPerc) + char.finalStats.kinDam;
+	//newStats.damage.fire = scr_stats_calculateStat(newStats.damage.fire, char.stats.fireDamPerc) + char.finalStats.fireDam;
+	//newStats.damage.chem = scr_stats_calculateStat(newStats.damage.chem, char.stats.chemDamPerc) + char.finalStats.chemDam;
+	//newStats.damage.elec = scr_stats_calculateStat(newStats.damage.elec, char.stats.elecDamPerc) + char.finalStats.elecDam;
+	//newStats.damage.rad = scr_stats_calculateStat(newStats.damage.rad, char.stats.radDamPerc) + char.finalStats.radDam;
 	
 	var range = scr_stats_calculateDamageRange(newStats.damage.kin);
 	newStats.damage.kinMin = range.minDam;
@@ -788,5 +794,25 @@ function scr_stats_orderStatKeys(keysArray) {
 	}
 
 	return result;
+
+}
+
+function scr_stats_calculateSkillDamage(char, damage, types) {
+
+    var len = array_length(types);
+
+    for (var i = 0; i < len; i++) {
+
+        var type = types[i];
+
+        damage[$ type] = scr_stats_applyDamageBonuses(
+            char,
+            damage[$ type],
+            type
+        );
+
+    }
+
+    return scr_stats_calculateDamageProfileRanges(damage);
 
 }
