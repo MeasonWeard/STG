@@ -1,6 +1,6 @@
 if (dropOnDestroy) {
 
-	lootMaxRarity = min(1, lootMaxRarity);
+	lootMaxRarity = max(1, lootMaxRarity);
 
 	if (is_callable(destroyFunc)) destroyFunc();
 	
@@ -49,7 +49,7 @@ if (dropOnDestroy) {
 				
 				
 			} else if (obj == obj_lootOrb) {
-				
+
 				scr_loot_dropLoot(chance, lootMaxRarity, lootImproveChance, maxVal);
 			
 			} else {

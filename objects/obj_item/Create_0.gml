@@ -26,3 +26,5 @@ collectSounds = global.data.soundProfiles.collect;
 
 burstVel = 0;
 burstDir = 0;
+
+collectDelay = 32;

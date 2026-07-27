@@ -1,7 +1,7 @@
 event_inherited();
 
 //hash cell
-if (movedThisStep) {
+if (movedThisStep and solid) {
 
 	var xx = (bbox_left + bbox_right) * 0.5;
 	var yy = (bbox_top + bbox_bottom) * 0.5;

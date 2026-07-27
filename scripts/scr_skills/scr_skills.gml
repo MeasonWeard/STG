@@ -1125,6 +1125,7 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxHp = maxHp;
 			inst.gunDamMult = gunDamMult;
 			inst.baseStats.maxShield = shields;
+			inst.bulletFuncs = source.bulletFuncs;
 
 			if (instance_exists(inst)) return true;
 

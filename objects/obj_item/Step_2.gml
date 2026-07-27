@@ -13,3 +13,5 @@ prevX = x;
 prevY = y;
 
 depth = layers.physical - y;
+
+if (collectDelay > 0) collectDelay --;

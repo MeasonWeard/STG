@@ -16,4 +16,4 @@ scr_env_addDrop(self, obj_lootOrb, 10, 1);
 spawnChance = 60;
 
 lootMaxRarity = 5;
-lootImproveChance = 40;
+lootImproveChance = 35;

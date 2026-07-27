@@ -1,0 +1,6 @@
+if (setup) {
+
+	setup = false;
+
+	
+}

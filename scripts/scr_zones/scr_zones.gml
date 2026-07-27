@@ -59,7 +59,7 @@ function zone_waste() : zone() constructor {
 			//var stages = ["wasteArena1","wasteArenaLava1","wasteArenaAcid1"];
 			var halls = [stage_wasteHall1, stage_wasteHall2];//[stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
 			var sideRooms = [stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaAcid2, stage_wasteArenaLava1];
-			var endStages = ["engBoss1"];
+			var endStages = [stage_wasteBoss1];
 
 			var startX = startPos.xx;
 			var startY = startPos.yy;

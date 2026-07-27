@@ -33,5 +33,5 @@ minData = 32;
 maxData = 64;
 
 lootChance = 25;
-lootImproveChance = 35;
+lootImproveChance = 20;
 lootAmount = 2;

@@ -14,3 +14,10 @@ onGround = false;
 projCollision = true;
 
 height = 200;
+
+solid = true;
+
+smashable = false;
+smashed = false;
+prevSmashed = false;
+smashSound = snd_glassSmash;

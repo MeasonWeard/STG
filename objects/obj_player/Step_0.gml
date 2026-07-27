@@ -125,7 +125,7 @@ for (var i = 0 ; i < len; i ++) {
 	
 	if (!instance_exists(item)) continue;
 	
-	var canCollect = !is_callable(item.collectRequirements) or item.collectRequirements(self); 
+	var canCollect = (!is_callable(item.collectRequirements) or item.collectRequirements(self)) and item.collectDelay < 1; 
 		
 	var dist = point_distance(x, y, item.x, item.y);
 	

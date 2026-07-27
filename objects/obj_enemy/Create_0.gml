@@ -2,6 +2,7 @@ event_inherited();
 
 charName = "enemy";
 faction = "enemy";
+boss = false;
 
 target = global.player;
 
@@ -18,6 +19,8 @@ lootMaxRarity = 3;
 lootImproveChance = 10;
 lootChance = 2;
 lootAmount = 1;
+
+showHealthBar = true;
 
 //ai
 scr_ai_setup();

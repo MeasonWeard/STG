@@ -1,6 +1,6 @@
 depth = layers.ui - 3000;
 
-source = obj_player;
+source = noone;
 target = noone;
 
 minDist = 64;      // minimum distance from enemy

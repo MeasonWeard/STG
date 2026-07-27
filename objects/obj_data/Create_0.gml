@@ -253,6 +253,14 @@ stages = {
 		type: stageTypes.arena
 		
 	},
+	
+	wasteBoss1: {
+		
+		room: stage_wasteBoss1,
+		type: stageTypes.boss,
+		mapCol: c_lime,
+		
+	},
 
 	engHall1: {
 		

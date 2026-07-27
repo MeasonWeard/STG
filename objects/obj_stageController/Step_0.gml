@@ -102,7 +102,7 @@ if (!hub) {
 		}
 		
 		with (obj_destructible) {
-			instance_destroy();	
+			if (destroyWhenStageOver) instance_destroy();	
 		}
 		
 		rc.currentCell.cleared = true;

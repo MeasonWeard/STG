@@ -1,5 +1,20 @@
 event_inherited();
 
+if (smashable) {
+
+	image_speed = 0;
+
+	if (smashed) {
+		image_index = 1;
+		
+		if (prevSmashed == false) scr_audio_playSoundAt(smashSound, x, y, false);
+		
+	} else {
+		image_index = 0;	
+	}
+	
+}
+
 draw_self();
 
 if (global.debug) {
@@ -11,3 +26,5 @@ if (global.debug) {
 	draw_text(x, y + 20, string(hashCellX) + "," + string(hashCellY));
 	
 }
+
+prevSmashed = smashed;

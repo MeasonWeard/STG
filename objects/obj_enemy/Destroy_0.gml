@@ -15,3 +15,11 @@ if (dropOnDestroy) {
 	scr_loot_dropLoot(lootChance, lootMaxRarity, lootImproveChance, lootAmount);
 
 }
+
+if (boss) {
+
+	with(obj_enemy) {
+		hp = 0;	
+	}
+	
+}

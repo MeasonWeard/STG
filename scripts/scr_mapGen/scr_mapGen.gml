@@ -101,6 +101,7 @@ function scr_mapGen_createCell(key) {
 	newCell.visited = false;
 	newCell.cleared = false;
 	newCell.endCell = false;
+	newCell.smashables = [];
 	
 	return newCell;
 	

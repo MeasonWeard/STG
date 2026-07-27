@@ -32,17 +32,21 @@ function scr_loot_rollRarity(maxRarity, improveChance) {
 
     if (maxRarity <= 1) return 1;
 
+	if (maxRarity > 6) maxRarity = 6;
+
     var rarity = 1;
 
 	var chance = improveChance;
 	
 	while(rarity < maxRarity and scr_random_chance(chance)) {
-	
+
 		rarity ++;
-		chance *= 0.5;
+		chance *= 0.75;
+		
+		if (chance < 0.1) break;
 	
 	}
-
+	
     return rarity;
 
 }

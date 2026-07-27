@@ -179,6 +179,7 @@ function scr_stages_moveInDir(dir) {
 	var success = scr_stages_goToStage(cell);
 	
 	if (success) {
+		scr_stages_saveSmashables();
 		rc.posX = xx;
 		rc.posY = yy;
 		rc.currentCell = rc.map[xx][yy];
@@ -200,6 +201,7 @@ function scr_stages_goToCell(xx, yy) {
 	var success = scr_stages_goToStage(cell);
 	
 	if (success) {
+		scr_stages_saveSmashables();
 		rc.posX = xx;
 		rc.posY = yy;
 		rc.currentCell = rc.map[xx][yy];
@@ -207,6 +209,32 @@ function scr_stages_goToCell(xx, yy) {
 	}
 	
 	return success;
+	
+}
+
+function scr_stages_saveSmashables() {
+
+	var rc = global.runController;
+	var cell = rc.currentCell;
+	
+	var arr = [];
+	
+	with (obj_env) {
+	
+		if (!smashable) continue;
+		
+		var data = {
+			xx: x,
+			yy: y,
+			obj: object_index,
+			smashed: smashed
+		}
+		
+		array_push(arr, data);
+	
+	}
+	
+	cell.smashables = arr;
 	
 }
 

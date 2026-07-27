@@ -233,6 +233,10 @@ for (var i = 0; i < len; i++) {
 		}
 	
 		if (is_callable(env.bulletHitFunc)) env.bulletHitFunc(self, env);
+		
+		if (env.smashable) {
+			env.smashed = true;	
+		}
 	
 		exit;
 		
