@@ -1,5 +1,7 @@
 if (dropOnDestroy) {
 
+	lootMaxRarity = min(1, lootMaxRarity);
+
 	if (is_callable(destroyFunc)) destroyFunc();
 	
 	if (destroySound != undefined) scr_audio_playSoundAt(destroySound, x, y);
@@ -15,7 +17,7 @@ if (dropOnDestroy) {
 		var maxVal = item.maxVal;
 		
 		if (object_is_ancestor(obj, obj_item)) {
-		
+
 			//resources
 			if (object_is_ancestor(obj, obj_resource)) {
 				
@@ -46,6 +48,10 @@ if (dropOnDestroy) {
 				}
 				
 				
+			} else if (obj == obj_lootOrb) {
+				
+				scr_loot_dropLoot(chance, lootMaxRarity, lootImproveChance, maxVal);
+			
 			} else {
 				
 				//other items
@@ -57,14 +63,10 @@ if (dropOnDestroy) {
 				
 			}
 		
-		} else if (obj == obj_lootOrb) {
-		
-			scr_loot_dropLoot(chance, lootMaxRarity, lootImproveChance, maxVal);
-		
 		} else {
 		
 			repeat(maxVal) {
-			
+
 				if (scr_random_chance(chance)) instance_create_layer(x, y, "Instances", obj);
 			
 			}

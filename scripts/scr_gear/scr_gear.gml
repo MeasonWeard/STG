@@ -66,6 +66,9 @@ function scr_gear_formatDescription(gear) {
 	txt += "\n";
 	
 	var keys = variable_struct_get_names(stats);
+	
+	keys = scr_stats_orderStatKeys(keys);
+	
 	var keysLen = array_length(keys);
 	
 	for (var i = 0; i < keysLen; i ++) {

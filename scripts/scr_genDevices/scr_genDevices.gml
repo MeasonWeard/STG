@@ -72,7 +72,7 @@ function scr_genDevices_watch(level, rarity) {
 		var index = irandom_range_biased(0, len - 1, LOOT_BIAS, true);
 		var num = list[index];
 		
-		stats.dashCoolTime = -num;
+		stats.dashRegen = num;
 		
 	}
 	

@@ -10,4 +10,7 @@ scr_env_addDrop(self, obj_stimPack, 5, 1);
 scr_env_addDrop(self, obj_stimPack, 5, 1);
 scr_env_addDrop(self, obj_lootOrb, 10, 2);
 
-spawnChance = 35;
+spawnChance = 25;
+
+lootMaxRarity = 3;
+lootImproveChance = 25;

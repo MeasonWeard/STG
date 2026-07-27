@@ -228,7 +228,7 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "tie") {
 		
-		var func = choose(scr_genTies_physics, scr_genTies_physics); // make sure you don't repeat genTies_physics
+		var func = choose(scr_genTies_physics, scr_genTies_chemistry, scr_genTies_biology, scr_genTies_engineering);
 		
 		loot = func(level, rarity);
 		

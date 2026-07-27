@@ -33,6 +33,7 @@ function scr_stats_blankCharStats() {
 		shieldRegenPerc: 0,
 		maxEnergyPerc: 0,
 		energyRegenPerc: 0,
+		healingPerc: 0,
 	
 		//flat damage
 		kinDam: 0,
@@ -366,6 +367,7 @@ function scr_stats_getName(statKey) {
         case "shieldRegenPerc": return "Shield Regeneration %";
         case "maxEnergyPerc": return "Max Energy %";
         case "energyRegenPerc": return "Energy Regeneration %";
+		case "healingPerc" : return "Healing %";
 
         case "kinDam": return "Flat Kinetic Damage";
         case "fireDam": return "Flat Fire Damage";
@@ -394,7 +396,7 @@ function scr_stats_getName(statKey) {
         case "elecResPerc": return "Electric Resistance %";
         case "radResPerc": return "Radiation Resistance %";
 
-        default: return "...";
+        default: return "???" + statKey + "???";
 
     }
 
@@ -689,4 +691,102 @@ function scr_stats_copyResistanceMultipliers(source, dest) {
 	dest.elecResPerc = source.elecResPerc;
 	dest.radResPerc = source.radResPerc;
 	
+}
+
+function scr_stats_orderStatKeys(keysArray) {
+
+	static order = [
+
+		"maxHp",
+		"maxShield",
+		"hpRegen",
+		"shieldRegen",
+		"shieldRegenDelay",
+		"maxEnergy",
+		"energyRegen",
+
+		"maxStimPacks",
+		"maxEnergyPacks",
+		"stimPackRegen",
+		"energyPackRegen",
+
+		"oa",
+		"da",
+
+		"spd",
+		"dashRegen",
+		"maxDashes",
+
+		"maxHpPerc",
+		"maxShieldPerc",
+		"hpRegenPerc",
+		"shieldRegenPerc",
+		"maxEnergyPerc",
+		"energyRegenPerc",
+		"healingPerc",
+
+		"kinDam",
+		"fireDam",
+		"chemDam",
+		"elecDam",
+		"radDam",
+
+		"kinDamPerc",
+		"fireDamPerc",
+		"chemDamPerc",
+		"elecDamPerc",
+		"radDamPerc",
+
+		"gunDamPerc",
+		"meleeDamPerc",
+
+		"kinRes",
+		"fireRes",
+		"chemRes",
+		"elecRes",
+		"radRes",
+
+		"kinResPerc",
+		"fireResPerc",
+		"chemResPerc",
+		"elecResPerc",
+		"radResPerc"
+
+	];
+
+	static orderLen = array_length(order);
+
+	var result = [];
+
+	var keysLen = array_length(keysArray);
+
+	//Reorder the keys
+	for (var i = 0; i < orderLen; i++) {
+
+		var key = order[i];
+
+		for (var j = 0; j < keysLen; j++) {
+
+			if (keysArray[j] == key) {
+			    array_push(result, key);
+			    break;
+			}
+
+		}
+
+	}
+	
+	//Append any keys not in the ordering list
+	for (var i = 0; i < keysLen; i++) {
+
+	    var key = keysArray[i];
+
+	    if (!array_contains(result, key)) {
+	        array_push(result, key);
+	    }
+
+	}
+
+	return result;
+
 }

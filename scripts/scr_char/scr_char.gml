@@ -134,13 +134,17 @@ function scr_char_heal(char, amount) {
 
 	if (!instance_exists(char)) return 0;
 	
+	var extra = round(amount * (char.stats.healingPerc * 0.01));
+	
+	var newAmount = amount + extra;
+	
 	var missing = char.maxHp - char.hp;
 	
 	if (missing < 1) return 0;
 	
-	char.hp = min(char.hp + amount, char.maxHp);
+	char.hp = min(char.hp + newAmount, char.maxHp);
 	
-	var healed = min(amount, missing);
+	var healed = min(newAmount, missing);
 	
 	scr_ui_damageNumbers(-healed, char);
 	

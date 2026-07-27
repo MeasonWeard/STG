@@ -3,14 +3,24 @@ function scr_genTies_physics(level, rarity) {
 	var tie = new tieInst(level, rarity);
 	var stats = tie.stats;
 	
-	var keys = ["kinDamPerc","radDamPerc","maxEnergy","energyRegen","shieldRegen","shieldRegenDelay"];
+	var keys = ["kinDamPerc","radDamPerc","maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay"];
 	keys = array_concat(keys, keys);
+	
+	var low = 2 * level;
+	var high = 8 * level;
+	
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 10 * level;
+	high = 20 * level;
+	
+	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
 	repeat(rarity) {
 	
 		var key = scr_randomElementRemove(keys);
-		var low = 1;
-		var high = 2;
+		low = 1;
+		high = 2;
 		var amount = 0;
 		var integer = true;
 		
@@ -21,9 +31,9 @@ function scr_genTies_physics(level, rarity) {
 			
 		}
 		
-		if (key == "maxEnergy") {
+		if (key == "maxEnergyPerc") {
 			
-			low = level * 5;
+			low = level * 4;
 			high = low + 10;
 			
 		}
@@ -33,6 +43,13 @@ function scr_genTies_physics(level, rarity) {
 			low = level * 0.1;
 			high = low + .2;
 			integer = false;
+			
+		}
+		
+		if (key == "energyRegenPerc") {
+			
+			low = level * 4;
+			high = low + 8;
 			
 		}
 		
@@ -63,7 +80,283 @@ function scr_genTies_physics(level, rarity) {
 	
 	}
 	
-	tie.name = "Physicist Tie";
+	tie.name = "Physicist's Tie";
+	
+	return tie;
+	
+}
+
+function scr_genTies_chemistry(level, rarity) {
+
+	var tie = new tieInst(level, rarity);
+	var stats = tie.stats;
+	
+	var keys = ["chemDamPerc","fireDamPerc","energyRegen","maxHp","maxHpPerc","stimPackRegen"];
+	keys = array_concat(keys, keys);
+	
+	var low = 12 * level;
+	var high = 15 * level;
+
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 5 * level;
+	high = 10 * level;
+	
+	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	repeat(rarity) {
+	
+		var key = scr_randomElementRemove(keys);
+		low = 1;
+		high = 2;
+		var amount = 0;
+		var integer = true;
+		
+		if (key == "chemDamPerc" or key == "fireDamPerc") {
+			
+			low = level * 2;
+			high = low + 10;
+			
+		}
+		
+		if (key == "maxEnergy") {
+			
+			low = level * 5;
+			high = low + 10;
+			
+		}
+		
+		if (key == "energyRegen") {
+			
+			low = level * 0.1;
+			high = low + .2;
+			integer = false;
+			
+		}
+		
+		if (key == "maxHp") {
+			
+			low = level * 4;
+			high = low + 10;
+			
+		}
+		
+		if (key == "maxHpPerc") {
+			
+			low = level * 2;
+			high = low + 8;
+			
+		}
+		
+		if (key == "stimPackRegen") {
+			
+			low = level * 0.01;
+			high = low + 0.05;
+			integer = false;
+			
+		}
+	
+	
+		if (integer) {
+			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
+		} else {
+			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
+		}
+	
+		if (amount > 0) scr_loot_addStat(tie, key, amount);
+	
+	}
+	
+	tie.name = "Chemist's Tie";
+	
+	return tie;
+	
+}
+
+function scr_genTies_biology(level, rarity) {
+
+	var tie = new tieInst(level, rarity);
+	var stats = tie.stats;
+	
+	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","healingPerc","meleeDamPerc","da"];
+	keys = array_concat(keys, keys);
+	
+	var low = 10 * level;
+	var high = 15 * level;
+	
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 2 * level;
+	high = 8 * level;
+	
+	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	repeat(rarity) {
+	
+		var key = scr_randomElementRemove(keys);
+		low = 1;
+		high = 2;
+		var amount = 0;
+		var integer = true;
+		
+		if (key == "maxHp") {
+			
+			low = level * 5;
+			high = low + 10;
+			
+		}
+		
+		if (key == "maxHpPerc") {
+			
+			low = level * 4;
+			high = low + 10;
+			
+		}
+		
+		if (key == "hpRegen") {
+			
+			low = level * 0.1;
+			high = low + .2;
+			integer = false;
+			
+		}
+		
+		if (key == "hpRegenPerc") {
+			
+			low = level * 4;
+			high = low + 8;
+			
+		}
+		
+		if (key == "healingPerc") {
+			
+			low = level * 4;
+			high = low + 8;
+			
+		}
+		
+		if (key == "meleeDamPerc") {
+			
+			low = level * 3;
+			high = low + 10;
+			
+		}
+		
+		if (key == "da") {
+			
+			low = 2 + level * 3;
+			high = low + 10;
+			
+		}
+	
+		if (integer) {
+			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
+		} else {
+			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
+		}
+	
+		if (amount > 0) scr_loot_addStat(tie, key, amount);
+	
+	}
+	
+	tie.name = "Biologist's Tie";
+	
+	return tie;
+	
+}
+
+function scr_genTies_engineering(level, rarity) {
+
+	var tie = new tieInst(level, rarity);
+	var stats = tie.stats;
+	
+	var keys = ["elecDamPerc","kinDamPerc","energyRegenPerc","energyPackRegen","gunDamPerc","oa"];
+	
+	keys = array_concat(keys, keys);
+	
+	//only one copy of speed
+	array_push(keys, "spd");
+	
+	var low = 5 * level;
+	var high = 10 * level;
+	
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 12 * level;
+	high = 15 * level;
+	
+	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	repeat(rarity) {
+	
+		var key = scr_randomElementRemove(keys);
+		low = 1;
+		high = 2;
+		var amount = 0;
+		var integer = true;
+		
+		if (key == "elecDamPerc") {
+			
+			low = level * 2;
+			high = low + 12;
+			
+		}
+		
+		if (key == "kinDamPerc") {
+			
+			low = level * 2;
+			high = low + 8;
+			
+		}
+		
+		if (key == "energyRegenPerc") {
+			
+			low = level * 4;
+			high = low + 8;
+			
+		}
+		
+		if (key == "energyPackRegen") {
+			
+			low = level * 0.01;
+			high = low + 0.05;
+			integer = false;
+			
+		}
+		
+		if (key == "gunDamPerc") {
+			
+			low = level * 3;
+			high = low + 10;
+			
+		}
+		
+		if (key == "oa") {
+			
+			low = 2 + level * 3;
+			high = low + 10;
+			
+		}
+		
+		if (key == "spd") {
+			
+			low = 0.1;
+			high = min(1.1, low + 0.05 * level);
+			integer = false;
+			
+		}
+	
+		if (integer) {
+			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
+		} else {
+			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
+		}
+	
+		if (amount > 0) scr_loot_addStat(tie, key, amount);
+	
+	}
+	
+	tie.name = "Engineer's Tie";
 	
 	return tie;
 	

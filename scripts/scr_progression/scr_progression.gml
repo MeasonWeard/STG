@@ -21,7 +21,7 @@ function scr_progression_xpRequired(level) {
 	
 	repeat(level) {
 		
-		inc += 500;
+		inc += 250;
 		req += inc;
 		
 	}
