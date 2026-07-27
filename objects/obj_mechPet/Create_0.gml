@@ -12,6 +12,7 @@ bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
 getOwnerDamBonuses = true;
+getOwnerBulletFuncs = true;
 getOwnerOA = true;
 
 level = 1;

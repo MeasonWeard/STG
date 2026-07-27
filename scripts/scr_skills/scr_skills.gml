@@ -208,6 +208,13 @@ function scr_skills_findCharSkill(key, char, mustBeActive = false) {
 	
 	if (key == undefined) return undefined;
 	if (!instance_exists(char)) return undefined;
+	
+	if (char.pet) {
+		if (instance_exists(char.owner)) {
+			char = char.owner;	
+		}
+	}
+	
 	if (!is_struct(char.charData)) return undefined; 
 	
 	var charData = char.charData;
@@ -874,7 +881,7 @@ function scr_skills_formatDescription(skillInst) {
 			life = 6 + (level - 1) * 0.75;
 			maxSpawns = 1 + level div 3;
 			maxCharges = maxSpawns;
-			maxHp = 100 + (level - 1) * 20;
+			maxHp = 100 + (level - 1) * 15;
 			gunDamMult = 1 + (level - 1) * 0.2;
 		
 			var ga = scr_skills_findCharSkill("guardianArray", source, false);
@@ -1114,7 +1121,7 @@ function scr_skills_formatDescription(skillInst) {
 		shields = 0;
 	
 		description = "Deploy an automated stationary gun that fires until its ammo runs out.\n"
-		description += "Flat damage bonuses that apply to your weapons also apply to the\nturret's bullets.";
+		description += "Flat damage bonuses and effects that apply to your weapons also apply\nto the turret's bullets.";
 	
 		static formatStatsDescription = function() {
 	
@@ -1130,7 +1137,7 @@ function scr_skills_formatDescription(skillInst) {
 		static setupFunc = function(source) {
 		
 			energyCost = 50 + (level - 1) * 5;
-			maxHp = 200 + (level - 1) * 25;
+			maxHp = 200 + (level - 1) * 20;
 			gunDamMult = 1 + (level - 1) * 0.25;
 			shields = 0;
 		
@@ -1169,7 +1176,6 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxHp = maxHp;
 			inst.gunDamMult = gunDamMult;
 			inst.baseStats.maxShield = shields;
-			inst.bulletFuncs = source.bulletFuncs;
 
 			if (instance_exists(inst)) return true;
 
@@ -1193,8 +1199,8 @@ function scr_skills_formatDescription(skillInst) {
 		shields = 0;
 	
 		description = "Deploy a Mobile Electronic Killer to fight by your side."
-		description += "\nM.E.K gets all of your flat damage bonuses. It fights"
-		description += "\nuntil it dies, at which point it will explode.";
+		description += " Flat damage bonuses\nand effects that apply to your weapons also apply to the M.E.K's bullets.";
+		description += "\nM.E.K fights until it dies and then explodes.";
 		
 		static formatStatsDescription = function() {
 	
@@ -1244,7 +1250,6 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxHp = maxHp;
 			inst.gunDamMult = gunDamMult;
 			inst.baseStats.maxShield = shields;
-			inst.bulletFuncs = source.bulletFuncs;
 
 			if (instance_exists(inst)) return true;
 

@@ -49,6 +49,8 @@ getOwnerResBonuses = true;
 getOwnerResMults = true;
 getOwnerOA = false;
 getOwnerDA = false;
+getOwnerBulletFuncs = false;
+getOwnerConstantFuncs = false;
 
 sprites = {
 

@@ -177,7 +177,9 @@ if (setupStats) {
 		if (getOwnerResMults) scr_stats_copyResistanceMultipliers(owner.stats, stats);
 		if(getOwnerOA) stats.oa = owner.stats.oa;
 		if(getOwnerDA) stats.da = owner.stats.da;
-	
+		if(getOwnerBulletFuncs) bulletFuncs = owner.bulletFuncs;
+		if(getOwnerConstantFuncs) constantFuncs = owner.constantFuncs;
+
 	}
 	
 	//apply gear stats

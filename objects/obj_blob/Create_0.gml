@@ -18,6 +18,8 @@ target = noone;
 customGunOffset = true;
 gunYoffset = -sprite_height + 16;
 
+baseStats.spd = 5;
+
 sprites = {
 
 	left: spr_blob,
