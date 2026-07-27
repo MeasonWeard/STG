@@ -175,6 +175,8 @@ if (setupStats) {
 		if (getOwnerDamMults) scr_stats_copyDamageMultipliers(owner.stats, stats);
 		if (getOwnerResBonuses) scr_stats_copyResistanceBonuses(owner.stats, stats);
 		if (getOwnerResMults) scr_stats_copyResistanceMultipliers(owner.stats, stats);
+		if(getOwnerOA) stats.oa = owner.stats.oa;
+		if(getOwnerDA) stats.da = owner.stats.da;
 	
 	}
 	

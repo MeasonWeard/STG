@@ -376,6 +376,8 @@ skillConstructors = {
 	
 	chainLightning: skill_chainLightning, // eng
 	turret: skill_turret, //eng
+	emp: skill_EMP, //eng
+	mech: skill_mech, //end
 	
 	rubberBoots: skill_rubberBoots, //eng
 	guardianArray: skill_guardianArray, //eng

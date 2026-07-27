@@ -17,10 +17,11 @@ if (firstStep) {
 		for (var i = 0; i < nearbyLen; i++) {
 	
 			var char = nearby[i];
-			
-			if (char.faction == faction) continue;
+
 			//no need to check if the instance exists. circleDistSq checks that and returns -1 if it doesn't
 			var distSq = scr_obj_circleDistSq(x, y, radius, char);
+			
+			if (char.faction == faction) continue;
 			if (distSq < 0) continue;
 		
 			var dist = sqrt(distSq);
@@ -31,10 +32,25 @@ if (firstStep) {
 			
 			damage = scr_stats_multiplyDamageProfile(damage, mult);
 			
-			
 			scr_char_damage(char, damage, undefined, true);
 		
 		}
+		
+		nearby = scr_hash_getNearby(sc.envHash, x, y);
+		nearbyLen = array_length(nearby);
+	
+		for (var i = 0; i < nearbyLen; i++) {
+	
+			var env = nearby[i];
+			
+			//no need to check if the instance exists. circleDistSq checks that and returns -1 if it doesn't
+			var distSq = scr_obj_circleDistSq(x, y, radius, env);
+			if (distSq < 0) continue;
+		
+			if (env.smashable) env.smashed = true;
+		
+		}
+		
 	
 	}
 	

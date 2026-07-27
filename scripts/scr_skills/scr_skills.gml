@@ -984,7 +984,7 @@ function scr_skills_formatDescription(skillInst) {
 		icon = spr_icon_chainLightning;
 		maxCharges = 2;
 		charges = 2;
-		cooldownTime = 6;
+		cooldownTime = 5.5;
 		energyCost = 30;
 		range = 900;
 		chains = 1;
@@ -1036,6 +1036,59 @@ function scr_skills_formatDescription(skillInst) {
 			cl.chainList = [nearest];
 			cl.chains = chains;
 			cl.damage = damage;
+		
+			return true;
+		
+		}
+	
+	}
+	
+	function skill_EMP() : skill() constructor {
+
+		name = "EMP";
+		key = "emp";
+		icon = spr_icon_EMP;
+		maxLevel = 12;
+		maxCharges = 1;
+		cooldownTime = 4.5;
+		energyCost = 60;
+		radius = 400;
+		muchBonus = 10;
+
+		damage = undefined;
+	
+		description = "Trigger an electromagnetic pulse which deals electric damage in a circle";
+		description += "\naround you. Deals increased damage against mechanical enemies.";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Radius: " + string(radius);
+			statsDescription += "\nBonus against mech: " + string(mechBonus) + "%";
+			statsDescription += "\n\nDamage: " + string(damage.elec) + " electric";
+		
+		}
+	
+		static setupFunc = function(source) {
+		
+			energyCost = 45 + (level - 1) * 5;
+			radius = 155 + (level - 1) * 5;
+			mechBonus = 7 + (level - 1) * 3;
+			
+			damage = new damageProfile();
+			damage.elec = 27 + (level - 1) * 8;
+			damage = scr_stats_calculateSkillDamage(source, damage, ["elec"]);
+		
+		}
+	
+		static castFunc = function(source) {
+
+			if (!instance_exists(source)) return false;
+
+			var emp = instance_create_layer(source.x, source.y, "Instances", obj_EMP);
+			emp.owner = source;
+			emp.damage = damage;
+			emp.radius = radius;
+			emp.mechBonus = mechBonus;
 		
 			return true;
 		
@@ -1112,6 +1165,81 @@ function scr_skills_formatDescription(skillInst) {
 		
 			var inst = scr_char_spawnPet(obj_turret, source, undefined, xx, yy, maxSpawns);
 			inst.clips = clips;
+			inst.level = level;
+			inst.baseStats.maxHp = maxHp;
+			inst.gunDamMult = gunDamMult;
+			inst.baseStats.maxShield = shields;
+			inst.bulletFuncs = source.bulletFuncs;
+
+			if (instance_exists(inst)) return true;
+
+		}
+	
+	}
+	
+	function skill_mech() : skill() constructor {
+	
+		name = "M.E.K";
+		key = "mech";
+		icon = spr_icon_turret;
+		maxLevel = 12;
+		maxCharges = 1;
+		energyCost = 90;
+		cooldownTime = 30;
+		castCooldownTime = 0.2;
+		maxSpawns = 1;
+		maxHp = 300;
+		gunDamMult = 1;
+		shields = 0;
+	
+		description = "Deploy a Mobile Electronic Killer to fight by your side."
+		description += "\nM.E.K gets all of your flat damage bonuses. It fights"
+		description += "\nuntil it dies, at which point it will explode.";
+		
+		static formatStatsDescription = function() {
+	
+			var dam = 22 * gunDamMult;
+			
+			statsDescription = "HP: " + string(maxHp);
+			statsDescription += "\nDamage: " + string(dam) + " kinetic";
+	
+		}
+
+		static setupFunc = function(source) {
+		
+			energyCost = 90;
+			maxHp = 300 + (level - 1) * 25;
+			
+			gunDamMult = 1 + (level - 1) * 0.25;
+			shields = 0;
+		
+			var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+			if (is_struct(ga)) {
+				shields = ga.petShields;
+			}
+	
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(200, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+		
+			var existing = 0;
+		
+			var inst = scr_char_spawnPet(obj_mechPet, source, undefined, xx, yy, maxSpawns);
 			inst.level = level;
 			inst.baseStats.maxHp = maxHp;
 			inst.gunDamMult = gunDamMult;

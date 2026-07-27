@@ -311,3 +311,27 @@ function gun_plantGun(level, rarity) : gunInst(level, rarity) constructor {
 	shootSounds = global.data.soundProfiles.alienShoot;
 	
 }
+
+function gun_mechPulseRifle(level, rarity): gunInst(level, rarity) constructor {
+
+	name = "Pulse Rifle";
+	spr = spr_pulseRifle;
+	
+	auto = true;
+	range = 1400;
+	damage.kin = 22;
+	clipSize = 12;
+	fireRate = 2.8;
+	reloadTime = 2.2;
+	spd = 26;
+	minAimOff = 1.6;
+	maxAimOff = 8;
+	recoil = 4;
+	stability = 0.14;
+	shootSounds = global.data.soundProfiles.pulse;
+	
+	bonusStats = {
+		oa: 15
+	}
+
+}

@@ -47,6 +47,8 @@ getOwnerDamBonuses = false;
 getOwnerDamMults = true;
 getOwnerResBonuses = true;
 getOwnerResMults = true;
+getOwnerOA = false;
+getOwnerDA = false;
 
 sprites = {
 

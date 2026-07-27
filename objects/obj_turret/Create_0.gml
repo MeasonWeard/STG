@@ -35,6 +35,7 @@ var gun1 = new gun_turretGun(1, 1);
 scr_weapons_collectWeapon(self, gun1, false);
 
 getOwnerDamBonuses = true;
+getOwnerOA = true;
 
 findTargetIndex = scr_timeSlicing_assignTurnIndex("findTarget");
 aimIndex = scr_timeSlicing_assignTurnIndex("aim");

@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.1261678,
+  "duration":1.4693424,
   "exportDir":"",
   "name":"snd_emp2",
   "parent":{
