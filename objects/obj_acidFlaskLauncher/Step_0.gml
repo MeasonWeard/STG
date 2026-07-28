@@ -22,7 +22,7 @@ if (shootTick > 0) {
 
 	var t = (totalProjectiles - projectiles) / max(1, totalProjectiles - 1);
 	spd = lerp(maxSpd, minSpd, t);
-	var off = dirOffset + totalProjectiles * 0.5;
+	var off = dirOffset + totalProjectiles * 0.75;
 	
 	var flask = instance_create_layer(x, y, "Instances", obj_acidFlask);
 	flask.dir = dir + irandom_range(-off, off);

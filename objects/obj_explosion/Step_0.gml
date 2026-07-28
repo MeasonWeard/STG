@@ -25,14 +25,15 @@ if (firstStep) {
 			if (distSq < 0) continue;
 		
 			var dist = sqrt(distSq);
-			var falloff = 1 - (dist / radius);
-			var mult = max(0.05, falloff); 
+			
+			var progress = clamp(dist / radius, 0, 1);
+			var mult = max(0.05, power(1 - progress, 2));
 			
 			if (!variable_struct_exists(damage, "kinMin")) damage = scr_stats_calculateDamageProfileRanges(damage);
 			
-			damage = scr_stats_multiplyDamageProfile(damage, mult);
+			var finalDamage = scr_stats_multiplyDamageProfile(damage, mult);
 			
-			scr_char_damage(char, damage, undefined, true);
+			scr_char_damage(char, finalDamage, undefined, true);
 		
 		}
 		

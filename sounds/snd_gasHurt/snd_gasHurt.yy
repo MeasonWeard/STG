@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_burn3",
+  "%Name":"snd_gasHurt",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.7256236,
+  "duration":0.8243084,
   "exportDir":"",
-  "name":"snd_burn3",
+  "name":"snd_gasHurt",
   "parent":{
     "name":"SFX",
     "path":"folders/Sounds/SFX.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_burn3.wav",
+  "soundFile":"snd_gasHurt.wav",
   "volume":1.0,
 }

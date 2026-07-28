@@ -48,11 +48,15 @@ function skill() constructor {
 		if (success) {
 
 			if (maxCharges > 1) {
+				
 				charges--;
 
-				if (charges < maxCharges) {
-					cooldown = cooldownTime * 60;
-				}
+				//if (charges < maxCharges) {
+				//	cooldown = cooldownTime * 60;
+				//}
+				
+				if (cooldown == 0) cooldown = cooldownTime * 60;
+				
 			}
 			
 			else {
@@ -252,7 +256,6 @@ function scr_skills_findCharSkill(key, char, mustBeActive = false) {
 	
 }
 
-
 function scr_skills_getTotalSkillPoints() {
 
 	var points = global.gameData.playerData.level;
@@ -321,8 +324,14 @@ function scr_skills_formatDescription(skillInst) {
 	if (skillInst.energyCost > 0) txt += "\n\nEnergy cost: " + string(skillInst.energyCost);
 	
 	if (!passive) {
+		
 		txt += "\nRecharge time: " + string(skillInst.cooldownTime) + " second";
 		if (skillInst.cooldownTime > 1) txt += "s";
+		
+		if (skillInst.maxCharges > 1) {
+			txt += "\nCharges: " + string(skillInst.maxCharges);	
+		}
+		
 	}
 	
 	txt += "\n\n" + skillInst.description;
@@ -398,8 +407,8 @@ function scr_skills_formatDescription(skillInst) {
 		
 			damage = new damageProfile();
 		
-			damage.kin = 10 + 2 * level;
-			damage.rad = 10 + 2 * level;
+			damage.kin = 8 + 2 * level;
+			damage.rad = 8 + 2 * level;
 			
 			damage = scr_stats_calculateSkillDamage(source, damage, ["kin", "rad"]);	
 		
@@ -635,7 +644,7 @@ function scr_skills_formatDescription(skillInst) {
 		charges = 1;
 		energyCost = 55;
 		projectiles = 6;
-		cooldownTime = 10;
+		cooldownTime = 9;
 		radius = 50;
 		life = 4;
 	
@@ -655,15 +664,15 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static setupFunc = function(source) {
 		
-			energyCost = 50 + level * 5;
+			energyCost = 40 + level * 5;
 		
 			projectiles = 5 + level div 2;
-			radius = 38 + level * 2;
+			radius = 40 + level * 2;
 			life = 4.5 + level * 0.5;
 		
 			damage = new damageProfile();
 		
-			damage.chem = 6 + 2 * level;
+			damage.chem = 8 + 2 * level;
 			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
 		
 		}
@@ -697,16 +706,85 @@ function scr_skills_formatDescription(skillInst) {
 		}
 	
 	}
+	
+	function skill_gas() : skill() constructor {
+	
+		name = "Noxious Gas";
+		key = "gas";
+		icon = spr_icon_gas;
+		maxLevel = 9;
+		maxCharges = 4;
+		energyCost = 20;
+		maxProjectiles = 6;
+		cooldownTime = 2;
+		castCooldownTime = 0.75;
+		bioBonus = 10;
+		life = 420;
+	
+		damage = undefined;
+	
+		description = "Spray clouds of corrosive gas ahead of you. Gas clouds do";
+		description += "\nextra damage to biological enemies and ignore shields.";
+	
+		//TO DO: use extraEffects to give source a gas object pool
+	
+		static formatStatsDescription = function() {
+	
+			statsDescription = "Projectiles: " + string(maxProjectiles);
+			statsDescription += "\nBonus against bio: " + string(bioBonus) + "%";
+			statsDescription += "\n\nDamage: " + string(damage.chem * 2) + " chemical p/s";
+			
+		}
+	
+		static setupFunc = function(source) {
+		
+			cooldownTime = 3 - (level - 1) * 0.08;
+			energyCost = 18 + (level - 1) * 2;
+			maxProjectiles = 6 + (level - 1);
+
+			damage = new damageProfile();
+			
+			bioBonus = 8 + (level - 1) * 3;
+		
+			damage.chem = 6 + (level - 1) * 2;
+			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
+		
+		}
+	
+		static castFunc = function(source) {
+		
+
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+
+			var launcher = instance_create_layer(gunX, gunY, "Instances", obj_gasLauncher);
+		
+			if (instance_exists(launcher)) {
+			
+				launcher.owner = source;
+				launcher.faction = source.faction;
+				launcher.damage = damage;
+				launcher.maxProjectiles = maxProjectiles;
+				launcher.life = life;
+				launcher.bioBonus = bioBonus;
+			
+				return true;
+			
+			}
+		
+		}
+	
+	}
 
 	function skill_thermiteCharge() : skill() constructor {
 		
 		name = "Thermit Charge";
 		key = "thermiteCharge";
-		icon = spr_icon_flamethrower;
+		icon = spr_icon_thermite;
 		maxLevel = 12;
 		maxCharges = 4;
-		energyCost = 40;
-		cooldownTime = 4;
+		energyCost = 35;
+		cooldownTime = 3;
 		castCooldownTime = 0.5;
 		flameLife = 4;
 
@@ -714,14 +792,14 @@ function scr_skills_formatDescription(skillInst) {
 		flameDamage = undefined;
 	
 		description = "Deploy thermite charges that detonate and set the ground on fire.";
-		description = "Charges detonate after a 5 second countdown. Press C to detonate charges early.";
+		description += "\nCharges detonate after a 5 second countdown. Press C to detonate charges early.";
 		
 		static formatStatsDescription = function() {
-	
-			statsDescription = "Maximum Charges: " + string(maxCharges);
-			statsDescription += "\nExplosion Damage: " + string(damage.kin) + " kinetic, " + string(damage.fire) + " fire";
+			
+			statsDescription = "Burned Ground Duration: 4 seconds"
+			statsDescription += "\n\nExplosion Damage: " + string(damage.kin) + " kinetic, " + string(damage.fire) + " fire";
 			statsDescription += "\nBurned Ground Damage: " + string(flameDamage.fire * 2) + " fire p/s";
-			statsDescription += "\nBurned Ground Duration: 4 seconds"
+
 		}
 	
 		static setupFunc = function(source) {
@@ -783,8 +861,7 @@ function scr_skills_formatDescription(skillInst) {
 			var kinDam = 5 + (level - 1);
 			var chemDam = 5 + (level - 1);
 		
-			statsDescription = "Charges: " + string(maxCharges);
-			statsDescription += "\nMax Spawns: " + string(maxSpawns);
+			statsDescription = "\nMax Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
 			statsDescription += "\nHP: " + string(maxHp);
 			statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
@@ -866,8 +943,7 @@ function scr_skills_formatDescription(skillInst) {
 			var kinDam = 3 * gunDamMult;
 			var chemDam = 6 * gunDamMult;
 		
-			statsDescription = "Charges: " + string(maxCharges);
-			statsDescription += "\nMax Spawns: " + string(maxSpawns);
+			statsDescription = "\nMax Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
 			statsDescription += "\nHP: " + string(maxHp);
 			statsDescription += "\n\nProjectiles: 12";
@@ -1002,8 +1078,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static formatStatsDescription = function() {
 		
-			statsDescription = "Charges: " + string(maxCharges);
-			statsDescription += "\nTargets: " + string(chains);
+			statsDescription = "\nTargets: " + string(chains);
 			statsDescription += "\n\nDamage: " + string(damage.elec) + " electric";
 		
 		}
@@ -1065,7 +1140,7 @@ function scr_skills_formatDescription(skillInst) {
 		damage = undefined;
 	
 		description = "Trigger an electromagnetic pulse which deals electric damage in a circle";
-		description += "\naround you. Deals increased damage against mechanical enemies.";
+		description += "\naround you. Deals increased damage to mechanical enemies.";
 		
 		static formatStatsDescription = function() {
 		
@@ -1079,7 +1154,7 @@ function scr_skills_formatDescription(skillInst) {
 		
 			energyCost = 45 + (level - 1) * 5;
 			radius = 155 + (level - 1) * 5;
-			mechBonus = 7 + (level - 1) * 3;
+			mechBonus = 10 + (level - 1) * 2;
 			
 			damage = new damageProfile();
 			damage.elec = 27 + (level - 1) * 8;

@@ -37,7 +37,7 @@ deathFunc = function() {
 	
 	var ex = scr_effects_explosion(x, y, 8);
 	ex.damage = new damageProfile();
-	ex.damage.kin = 120;
+	ex.damage.kin = 90;
 	ex.faction = faction;
 	
 }
