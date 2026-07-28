@@ -448,7 +448,7 @@ function scr_skills_formatDescription(skillInst) {
 		key = "teleport";
 		icon = spr_icon_wormhole;
 		maxCharges = 1;
-		energyCost = 35;
+		energyCost = 25;
 		cooldownTime = 10;
 		maxLevel = 6;
 		range = 940;
@@ -1262,7 +1262,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		name = "M.E.K";
 		key = "mech";
-		icon = spr_icon_turret;
+		icon = spr_icon_mech;
 		maxLevel = 12;
 		maxCharges = 1;
 		energyCost = 90;
@@ -1272,6 +1272,7 @@ function scr_skills_formatDescription(skillInst) {
 		maxHp = 300;
 		gunDamMult = 1;
 		shields = 0;
+		txtCol = c_white;
 	
 		description = "Deploy a Mobile Electronic Killer to fight by your side."
 		description += " Flat damage bonuses\nand effects that apply to your weapons also apply to the M.E.K's bullets.";
@@ -1400,6 +1401,29 @@ function scr_skills_formatDescription(skillInst) {
 			passives = {
 	
 				energyRegen: 0.25 * level
+	
+			};
+	
+		}
+	
+	}
+	
+	function skill_predictiveModelling() : skill() constructor {
+
+		name = "Predictive Modelling";
+		key = "predictiveModelling";
+		icon = spr_icon_predictiveModelling;
+		txtCol = c_white;
+		maxLevel = 8;
+		
+		description = "Advanced predictive models continuously calculate incoming trajectories,"
+		description += "\nallowing you to avoid the most dangerous impacts.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				da: 5 + (level - 1) * 5
 	
 			};
 	

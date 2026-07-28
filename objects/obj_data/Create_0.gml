@@ -355,6 +355,7 @@ skillConstructors = {
 	radioactiveBullets: skill_radioactiveBullets, //phys
 	leadCoat: skill_leadCoat, //phys,
 	vacuumEnergy: skill_vacuumEnergy, //phys
+	predictiveModelling: skill_predictiveModelling, //phys
 	
 	acidFlasks: skill_acidFlasks, //chem	
 	flamethrower: skill_flamethrower, //chem

@@ -312,8 +312,15 @@ function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 	
 		var inst = scr_ui_risingNumbers(px, py, num, col);
 		
-		if (hitOutcome > 1) inst.size = 2;
-		if (hitOutcome < 1) inst.size = 0;
+		if (hitOutcome > 1) {
+			
+			inst.size = 2;
+			
+		} else if (hitOutcome < 1) {
+			
+			inst.size = 0;
+			inst.col = c_white;
+		}
 		
 	}
 	
