@@ -7,15 +7,10 @@ if (mechSetup) {
 
 	scr_audio_playSoundAt(snd_turretDeploy, x, y);
 	
-	if (level > 1) {
+	var gun1 = new gun_mechPulseRifle(1, 1);
+	gun1.damage.kin = kinDam;
 		
-		var gun1 = new gun_mechPulseRifle(1, 1);
-		gun1.damage = scr_stats_multiplyDamageProfile(gun1.damage, gunDamMult);
+	scr_weapons_collectWeapon(self, gun1, true);
 		
-		scr_weapons_collectWeapon(self, gun1, true);
-		
-	}
 	
-	
-
 }

@@ -30,8 +30,8 @@ sprites = {
 	
 }
 
-var gun1 = new gun_fungalGun (1, 1);
-scr_weapons_collectWeapon(self, gun1, false);
+kinDam = 2;
+chemDam = 4;
 
 findTargetIndex = scr_timeSlicing_assignTurnIndex("findTarget");
 aimIndex = scr_timeSlicing_assignTurnIndex("aim");

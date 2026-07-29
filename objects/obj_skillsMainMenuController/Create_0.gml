@@ -1,5 +1,11 @@
 if (instance_exists(global.player)) global.player.active = false;
 
+with (obj_char) {
+
+	if (pet) instance_destroy();
+	
+}
+
 global.skillsMainMenuController = self;
 
 playerData = global.gameData.playerData;

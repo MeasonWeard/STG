@@ -1,0 +1,1 @@
+teleportToOwner = true;

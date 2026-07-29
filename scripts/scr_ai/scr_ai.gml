@@ -580,6 +580,10 @@ function scr_ai_standardPetBehaviour() {
 function scr_ai_moveTowardsOwner() {
 
 	if (!instance_exists(owner)) exit;
+	
+	if (!instance_exists(ghost)) {
+		ghost = instance_create_layer(x, y, "Instances", obj_ghost);	
+	}
 
 	// First destination pick
 	if (firstGhostCheck) {

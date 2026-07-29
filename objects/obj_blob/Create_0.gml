@@ -28,8 +28,8 @@ sprites = {
 	
 }
 
-var gun1 = new gun_blobGun (1, 1);
-scr_weapons_collectWeapon(self, gun1, false);
+kinDam = 5;
+chemDam = 5;
 
 findTargetIndex = scr_timeSlicing_assignTurnIndex("findTarget");
 aimIndex = scr_timeSlicing_assignTurnIndex("aim");
@@ -46,3 +46,5 @@ targetReaquireDist = 110;
 
 fleshExplodeForce = 6;
 deathSounds = global.data.soundProfiles.fungusBlast;
+
+teleportToOwner = false;

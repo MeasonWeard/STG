@@ -14,8 +14,6 @@ bloodCol = #D8EA8A;
 bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
-damExtra = 1;
-
 level = 1;
 
 target = noone;
@@ -23,8 +21,7 @@ target = noone;
 baseStats.spd = 7;
 baseStats.meleeLifeSteal = 5;
 
-customGunOffset = true;
-gunYoffset = -sprite_height + 32;
+kinDam = 0;
 
 meleeRangeOffset = 8;
 
@@ -39,8 +36,8 @@ sprites = {
 	
 }
 
-var melee1 = new melee_symbiontSlash(1, 1);
-scr_weapons_collectWeapon(self, melee1, false);
+//var melee1 = new melee_symbiontSlash(1, 1);
+//scr_weapons_collectWeapon(self, melee1, false);
 
 findTargetIndex = scr_timeSlicing_assignTurnIndex("findTarget");
 aimIndex = scr_timeSlicing_assignTurnIndex("aim");
@@ -56,3 +53,5 @@ targetMaxDist = 105;
 targetReaquireDist = 115;
 
 deathSounds = global.data.soundProfiles.fleshExplod;
+
+teleportToOwner = false;

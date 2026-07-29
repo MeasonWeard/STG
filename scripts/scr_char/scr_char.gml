@@ -475,7 +475,7 @@ function scr_char_useEnergyPack(char) {
 	
 }
 
-function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undefined, cloneGear = true) {
+function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, makePersistent = false, faction = undefined, cloneGear = true) {
 	
 	if (!asset_get_type(obj) == asset_object) return noone;
 	
@@ -540,6 +540,8 @@ function scr_char_spawnPet(obj, source, life, xx, yy, maxSpawns, faction = undef
 	inst.setupStats = true;
 	inst.setupBasics = true;
 	inst.alertAllies = false;
+	
+	if (makePersistent) inst.persistent = true;
 	
 	scr_movement_updateCollisionHitBox(inst);
 	scr_movement_updateMovementHitBox(inst);

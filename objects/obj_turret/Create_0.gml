@@ -3,6 +3,7 @@ event_inherited();
 level = 1;
 life = undefined;
 clips = 2;
+ammoPerClip = 18;
 newClip = false;
 
 tags = ["mech"];
@@ -31,8 +32,7 @@ sprites = {
 	
 }
 
-var gun1 = new gun_turretGun(1, 1);
-scr_weapons_collectWeapon(self, gun1, false);
+kinDam = 8;
 
 getOwnerDamBonuses = true;
 getOwnerBulletFuncs = true;

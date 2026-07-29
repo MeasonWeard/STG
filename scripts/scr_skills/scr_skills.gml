@@ -924,13 +924,12 @@ function scr_skills_formatDescription(skillInst) {
 		life = 5;
 		maxHp = 50;
 		shields = 0;
+		kinDam = 5;
+		chemDam = 5;
 	
 		description = "Spawn blobular organisms that fight by your side.\nThough it appears to be a single creature, it is actually\na coordinated mass of microscopic lifeforms."
 
 		static formatStatsDescription = function() {
-		
-			var kinDam = 5 + (level - 1);
-			var chemDam = 5 + (level - 1);
 		
 			statsDescription = "\nMax Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
@@ -940,6 +939,9 @@ function scr_skills_formatDescription(skillInst) {
 		}
 
 		static setupFunc = function(source) {
+		
+			kinDam = 5 + (level - 1);
+			chemDam = 5 + (level - 1);
 		
 			life = 6 + (level - 1) * 0.5;
 			maxSpawns = 2 + (level - 1);
@@ -970,12 +972,14 @@ function scr_skills_formatDescription(skillInst) {
 			var xx = gunX + lengthdir_x(dist, dir);
 			var yy = gunY + lengthdir_y(dist, dir);
 		
-			var inst = scr_char_spawnPet(obj_blob, source, life, xx, yy, maxSpawns);
+			var inst = scr_char_spawnPet(obj_blob, source, life, xx, yy, maxSpawns, true);
 			
 			if (!instance_exists(inst)) return false;
 			
 			inst.life = life;
 			inst.level = level;
+			inst.kinDam = kinDam;
+			inst.chemDam = chemDam;
 			inst.baseStats.maxHp = maxHp;
 			inst.baseStats.maxShield = shields;
 
@@ -1002,16 +1006,14 @@ function scr_skills_formatDescription(skillInst) {
 		maxSpawns = 1;
 		life = 6;
 		maxHp = 100;
-		gunDamMult = 1;
+		kinDam = 3;
+		chemDam = 4;
 		shields = 0;
 	
 		description = "Spawn giant mushrooms that spew acid at your enemies";
 	
 		static formatStatsDescription = function() {
 	
-			var kinDam = 3 * gunDamMult;
-			var chemDam = 6 * gunDamMult;
-		
 			statsDescription = "\nMax Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
 			statsDescription += "\nHP: " + string(maxHp);
@@ -1021,6 +1023,9 @@ function scr_skills_formatDescription(skillInst) {
 		}
 
 		static setupFunc = function(source) {
+		
+			kinDam = 3 + (level - 1);
+			chemDam = 4 + (level - 1) * 2;
 		
 			energyCost = 30 + (level - 1) * 2;
 			life = 6 + (level - 1) * 0.75;
@@ -1062,7 +1067,8 @@ function scr_skills_formatDescription(skillInst) {
 			inst.life = life;
 			inst.level = level;
 			inst.baseStats.maxHp = maxHp;
-			inst.gunDamMult = gunDamMult;
+			inst.kinDam = kinDam;
+			inst.chemDam = chemDam;
 			inst.baseStats.maxShield = shields;
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
@@ -1088,17 +1094,15 @@ function scr_skills_formatDescription(skillInst) {
 		maxSpawns = 1;
 		maxHp = 150;
 		shields = 0;
-		damExtra = 3;
 		lifeSteal = 5;
+		kinDam = 10;
 	
 		description = "Spawn a genetically modified human-lamprey hybrid\nthat heals you when it attacks enemies.";
 		description += "\nSymbiont fights until it dies.";
 		
 		static formatStatsDescription = function() {
 	
-			var kinDam = 12 + (level - 1) * damExtra;
-
-			statsDescription += "\nHP: " + string(maxHp);
+			statsDescription = "\nHP: " + string(maxHp);
 			statsDescription += "\nLife Steal: " + string(lifeSteal) + "%";
 			statsDescription += "\nDamage: " + string(kinDam) + " kinetic";
 		
@@ -1106,6 +1110,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		static setupFunc = function(source) {
 		
+			kinDam = 10 + (level - 1) * 2;
 			energyCost = 60 + (level - 1) * 2;
 			maxHp = 125 + (level - 1) * 15;
 			lifeSteal = 7 + (level - 1) * 3;
@@ -1134,17 +1139,15 @@ function scr_skills_formatDescription(skillInst) {
 			var xx = gunX + lengthdir_x(dist, dir);
 			var yy = gunY + lengthdir_y(dist, dir);
 
-			var inst = scr_char_spawnPet(obj_symbiont, source, undefined, xx, yy, maxSpawns);
+			var inst = scr_char_spawnPet(obj_symbiont, source, undefined, xx, yy, maxSpawns, true);
 			
 			if (!instance_exists(inst)) return false;
 			
 			inst.level = level;
-			inst.damExtra = damExtra;
 			inst.baseStats.maxHp = maxHp;
 			inst.baseStats.maxShield = shields;
 			inst.baseStats.meleeLifeSteal = lifeSteal;
-
-			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+			inst.kinDam = kinDam;
 
 			if (instance_exists(inst)) return true;
 
@@ -1337,23 +1340,23 @@ function scr_skills_formatDescription(skillInst) {
 		energyCost = 50;
 		cooldownTime = 22;
 		castCooldownTime = 0.2;
-		maxSpawns = 1;
+		maxSpawns = 2;
 		clips = 2;
+		ammoPerClip = 18;
 		maxHp = 150;
-		gunDamMult = 1;
 		shields = 0;
+		kinDam = 8;
 	
 		description = "Deploy an automated stationary gun that fires until its ammo runs out.\n"
 		description += "Flat damage bonuses and effects that apply to your weapons also apply\nto the turret's bullets.";
 	
 		static formatStatsDescription = function() {
 	
-			var ammo = clips * (18 + (level - 1));
-			var dam = 8 * gunDamMult;
-	
+			var ammo = clips * ammoPerClip;
+		
 			statsDescription = "HP: " + string(maxHp);
-			statsDescription += "\nAmmo: " + string(ammo);
-			statsDescription += "\nDamage: " + string(dam) + " kinetic";
+			statsDescription += "\nAmmo: " + string(ammo) + " (" + string(clips) + " clips X " + string(ammoPerClip) + " ammo per clip)";
+			statsDescription += "\nDamage: " + string(kinDam) + " kinetic";
 	
 		}
 
@@ -1361,11 +1364,21 @@ function scr_skills_formatDescription(skillInst) {
 		
 			energyCost = 50 + (level - 1) * 5;
 			maxHp = 200 + (level - 1) * 20;
-			gunDamMult = 1 + (level - 1) * 0.25;
+			kinDam = 8 + (level - 1) + level div 5;
 			shields = 0;
 		
-			var extraClips = level div 2;
-			clips = 2 + extraClips;
+			clips = 2;
+			ammoPerClip = 18;
+
+			for (var i = 1; i <= level; i++) {
+
+			    if (i mod 3 == 0) {
+			        clips++;
+			    } else {
+			        ammoPerClip += 2;
+			    }
+
+			}
 	
 			var ga = scr_skills_findCharSkill("guardianArray", source, false);
 		
@@ -1395,9 +1408,10 @@ function scr_skills_formatDescription(skillInst) {
 		
 			var inst = scr_char_spawnPet(obj_turret, source, undefined, xx, yy, maxSpawns);
 			inst.clips = clips;
+			inst.ammoPerClip = ammoPerClip;
 			inst.level = level;
 			inst.baseStats.maxHp = maxHp;
-			inst.gunDamMult = gunDamMult;
+			inst.kinDam = kinDam;
 			inst.baseStats.maxShield = shields;
 
 			if (instance_exists(inst)) return true;
@@ -1418,7 +1432,7 @@ function scr_skills_formatDescription(skillInst) {
 		castCooldownTime = 0.2;
 		maxSpawns = 1;
 		maxHp = 300;
-		gunDamMult = 1;
+		kinDam = 22;
 		shields = 0;
 		txtCol = c_white;
 	
@@ -1428,10 +1442,8 @@ function scr_skills_formatDescription(skillInst) {
 		
 		static formatStatsDescription = function() {
 	
-			var dam = 22 * gunDamMult;
-			
 			statsDescription = "HP: " + string(maxHp);
-			statsDescription += "\nDamage: " + string(dam) + " kinetic";
+			statsDescription += "\nDamage: " + string(kinDam) + " kinetic";
 	
 		}
 
@@ -1440,7 +1452,7 @@ function scr_skills_formatDescription(skillInst) {
 			energyCost = 90;
 			maxHp = 300 + (level - 1) * 25;
 			
-			gunDamMult = 1 + (level - 1) * 0.25;
+			kinDam = 22 + (level - 1) * 2;
 			shields = 0;
 		
 			var ga = scr_skills_findCharSkill("guardianArray", source, false);
@@ -1469,10 +1481,10 @@ function scr_skills_formatDescription(skillInst) {
 		
 			var existing = 0;
 		
-			var inst = scr_char_spawnPet(obj_mechPet, source, undefined, xx, yy, maxSpawns);
+			var inst = scr_char_spawnPet(obj_mechPet, source, undefined, xx, yy, maxSpawns, true);
 			inst.level = level;
 			inst.baseStats.maxHp = maxHp;
-			inst.gunDamMult = gunDamMult;
+			inst.kinDam = kinDam;
 			inst.baseStats.maxShield = shields;
 
 			if (instance_exists(inst)) return true;

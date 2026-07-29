@@ -7,15 +7,12 @@ if (turretSetup) {
 
 	turretSetup = false;
 
-	if (level > 1) {
-
-		var gun1 = new gun_turretGun(1, 1);
-		gun1.damage = scr_stats_multiplyDamageProfile(gun1.damage, gunDamMult);
+	var gun1 = new gun_turretGun(1, 1);
+	gun1.damage.kin = kinDam;
 		
-		gun1.clipSize += (level - 1);
+	gun1.clipSize = ammoPerClip;
 	
-		scr_weapons_collectWeapon(self, gun1, true);
+	scr_weapons_collectWeapon(self, gun1, true);
 	
-	}
 
 }

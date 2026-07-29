@@ -15,6 +15,8 @@ getOwnerDamBonuses = true;
 getOwnerBulletFuncs = true;
 getOwnerOA = true;
 
+teleportToOwner = false;
+
 level = 1;
 
 target = noone;
@@ -42,8 +44,7 @@ deathFunc = function() {
 	
 }
 
-var gun1 = new gun_mechPulseRifle (1, 1);
-scr_weapons_collectWeapon(self, gun1, false);
+kinDam = 22;
 
 findTargetIndex = scr_timeSlicing_assignTurnIndex("findTarget");
 aimIndex = scr_timeSlicing_assignTurnIndex("aim");

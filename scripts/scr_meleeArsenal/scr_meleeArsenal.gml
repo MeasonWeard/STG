@@ -71,6 +71,7 @@ function melee_berthaSlash(level, rarity) : meleeInst(level, rarity) constructor
 
 	maxCharges = 3;
 	damage.kin = 12;
+	attackRate = 2.2;
 	swingSounds = global.data.soundProfiles.swish;
 	hitSounds = global.data.soundProfiles.bulletHitFlesh;
 
@@ -81,7 +82,7 @@ function melee_symbiontSlash(level, rarity) : meleeInst(level, rarity) construct
 
 	maxCharges = 6;
 	damage.kin = 10;
-	attackRate = 2.6;
+	attackRate = 1.8;
 	swingSounds = global.data.soundProfiles.swish;
 	hitSounds = global.data.soundProfiles.bulletHitFlesh;
 
