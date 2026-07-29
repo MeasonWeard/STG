@@ -648,3 +648,31 @@ function scr_char_hasTag(char, tag) {
 	return found;
 	
 }
+
+function scr_char_addStatMod(char, statKey, amount, timer, modName) {
+
+		if (!instance_exists(char)) exit;
+
+		if (!variable_instance_exists(char, modName)) variable_instance_set(char, modName, noone);
+		
+		var modVar = variable_instance_get(char, modName);
+		
+		if (!instance_exists(modVar)) {
+			
+			var statMod = instance_create_layer(x, y, "Instances", obj_statModifier);
+			
+			statMod.owner = char;
+			statMod.statKey = statKey;
+			statMod.modName = modName;
+			statMod.amount = amount;
+			statMod.timer = timer;
+
+			variable_instance_set(char, modName, statMod);
+
+		} else {
+		
+			modVar.timer = timer;
+		
+		}
+			
+}

@@ -508,7 +508,7 @@ function scr_skills_formatDescription(skillInst) {
 		key = "singularity";
 		icon = spr_icon_singularity;
 		maxCharges = 1;
-		energyCost = 100;
+		energyCost = 80;
 		cooldownTime = 12;
 		maxLevel = 9;
 		range = 380;
@@ -527,7 +527,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static setupFunc = function(source) {
 		
-			energyCost = 85 + level * 5;
+			energyCost = 75 + level * 5;
 		
 			pullRange = 630 + (level - 1) * 15;
 			
@@ -568,6 +568,77 @@ function scr_skills_formatDescription(skillInst) {
 			s.pullRange = pullRange;
 			s.damage = damage;
 			s.faction = source.faction;
+
+			return true;
+			
+		}
+	
+	}
+	
+	function skill_particleShower() : skill() constructor {
+	
+		name = "Particle Shower";
+		key = "particleShower";
+		icon = spr_icon_particleShower;
+		maxCharges = 1;
+		energyCost = 50;
+		cooldownTime = 9;
+		maxLevel = 9;
+		range = 600;
+		radius = 180;
+		duration = 6;
+		txtCol = c_white;
+
+		description = "Create a shower of subatomic particles that rains down from above.";
+		description += "\nEnemies within the area take radiation damage and have their\ndefensive ability reduced.";
+	
+		static formatStatsDescription = function() {
+			
+			statsDescription = "Enemy Defensive Ability: " + string(daReduction);
+			statsDescription += "\nParticles: " + string(particles) + " p/s ";
+			statsDescription += "\nDuration: " + string(duration) + " seconds";
+			statsDescription += "\n\nDamage: " + string(damage.rad) + " radiation";
+			
+		}
+	
+		static setupFunc = function(source) {
+		
+			energyCost = 50 + (level - 1) * 5;
+		
+			particles = 8 + (level - 1) * 2;
+			daReduction = -(10 + (level - 1) * 5);
+			
+			damage = new damageProfile();
+
+			damage.rad = 10 + (level - 1) * 2;
+			damage = scr_stats_calculateSkillDamage(source, damage, ["dam"]);
+		
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(range, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+			
+			var ps = instance_create_layer(xx, yy, "Instances", obj_particleShower);
+			
+			ps.damage = damage;
+			ps.faction = source.faction;
+			ps.daReduction = daReduction;
+			ps.particles = particles;
+			ps.duration = duration;
+			ps.radius = radius;
 
 			return true;
 			

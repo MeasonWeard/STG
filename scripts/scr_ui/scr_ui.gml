@@ -320,6 +320,7 @@ function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 			
 			inst.size = 0;
 			inst.col = c_white;
+			
 		}
 		
 	}

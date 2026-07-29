@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_shieldDamage2",
+  "%Name":"snd_particleHit2",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.3699774,
+  "duration":0.19460317,
   "exportDir":"",
-  "name":"snd_shieldDamage2",
+  "name":"snd_particleHit2",
   "parent":{
-    "name":"SFX",
-    "path":"folders/Sounds/SFX.yy",
+    "name":"Bullet Hit Sounds",
+    "path":"folders/Sounds/Bullet Hit Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_shieldDamage2.wav",
+  "soundFile":"snd_particleHit2.wav",
   "volume":1.0,
 }
