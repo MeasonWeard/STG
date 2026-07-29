@@ -83,6 +83,7 @@ function scr_projectiles_shoot(char) {
 	var faction = char.faction;
 	var oa = char.stats.oa;
 	var damageDestructibles = char.damageDestructibles;
+	var lifeSteal = char.stats.rangedLifeSteal;
 	
 	var projType = weaponStats.projectileType;
 	var spd = weaponStats.spd;
@@ -118,6 +119,8 @@ function scr_projectiles_shoot(char) {
 			proj.oa = oa;
 			proj.damageDestructibles = damageDestructibles;
 			proj.rot = choose(rot, -rot);
+			proj.lifeSteal = lifeSteal;
+			proj.source = char;
 			
 			if (rot == 0) {
 				proj.image_angle = 0;
@@ -174,6 +177,8 @@ function scr_projectiles_shoot(char) {
 				p.oa = oa;
 				p.damageDestructibles = damageDestructibles;
 				p.rot = choose(rot, -rot);
+				p.lifeSteal = lifeSteal;
+				p.source = char;
 			
 				if (rot == 0) {
 					p.image_angle = 0;

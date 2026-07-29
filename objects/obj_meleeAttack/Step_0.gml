@@ -49,7 +49,16 @@ if (instance_exists(owner)) {
 							if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
 						}
 						
-						scr_char_damage(char, damage, damageTypes.melee, false, hitOutcome);
+						var dealt = scr_char_damage(char, damage, damageTypes.melee, false, hitOutcome);
+					
+						if (lifeSteal > 0 and dealt > 0) {
+
+							var heal = (lifeSteal * 0.01) * dealt;
+							
+							if (owner.lifeStealForSelf) scr_char_heal(owner, heal);
+							if (owner.lifeStealForOwner and instance_exists(owner.owner)) scr_char_heal(owner.owner, heal);
+							
+						}
 					
 						if (char.hp <= killThreshold) char.hp = 0;
 				

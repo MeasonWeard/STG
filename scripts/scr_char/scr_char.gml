@@ -134,9 +134,9 @@ function scr_char_heal(char, amount) {
 
 	if (!instance_exists(char)) return 0;
 	
-	var extra = round(amount * (char.stats.healingPerc * 0.01));
+	var extra = amount * (char.stats.healingPerc * 0.01);
 	
-	var newAmount = amount + extra;
+	var newAmount = round(amount + extra);
 	
 	var missing = char.maxHp - char.hp;
 	

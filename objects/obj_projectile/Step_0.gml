@@ -59,7 +59,16 @@ for (var i = 0; i < len; i++) {
 		var snd = scr_audio_randomSoundFromProfile(profile);
 		if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
 		
-		scr_char_damage(char, damage, damageTypes.projectile, false, hitOutcome);
+		var dealt = scr_char_damage(char, damage, damageTypes.projectile, false, hitOutcome);
+		
+		if (lifeSteal > 0 and dealt > 0 and instance_exists(source)) {
+						
+			var heal = (lifeSteal * 0.01) * dealt;
+			
+			if (source.lifeStealForSelf) scr_char_heal(source, heal);
+			if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
+							
+		}
 		
 		if (charHitReport) audio_play_sound(snd_hitMarker, 0, false);
 		if (instance_exists(global.player) and char == global.player) audio_play_sound(snd_playerHit, 0, false);

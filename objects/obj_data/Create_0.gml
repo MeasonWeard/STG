@@ -369,7 +369,8 @@ skillConstructors = {
 	
 	fungalTurret: skill_fungalTurret, //bio
 	blob: skill_blob, //bio
-	medicalExosomes: skill_medicalExosomes, // bio
+	medicalExosomes: skill_medicalExosomes, // bio,
+	symbiont: skill_symbiont, //bio
 	
 	muscleGrowth: skill_muscleGrowth, //bio
 	homeostasis: skill_homeostasis, //bio

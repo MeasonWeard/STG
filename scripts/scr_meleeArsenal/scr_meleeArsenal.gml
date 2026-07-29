@@ -66,11 +66,22 @@ function melee_prod(level, rarity) : meleeInst(level, rarity) constructor {
 	
 }
 
-//enemy weapons
+//enemy and pet weapons
 function melee_berthaSlash(level, rarity) : meleeInst(level, rarity) constructor {
 
 	maxCharges = 3;
 	damage.kin = 12;
+	swingSounds = global.data.soundProfiles.swish;
+	hitSounds = global.data.soundProfiles.bulletHitFlesh;
+
+}
+
+//enemy weapons
+function melee_symbiontSlash(level, rarity) : meleeInst(level, rarity) constructor {
+
+	maxCharges = 6;
+	damage.kin = 10;
+	attackRate = 2.6;
 	swingSounds = global.data.soundProfiles.swish;
 	hitSounds = global.data.soundProfiles.bulletHitFlesh;
 

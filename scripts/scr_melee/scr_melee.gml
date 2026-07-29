@@ -48,6 +48,7 @@ function scr_melee_attack(char) {
 	var aimX = char.aimX;
 	var aimY = char.aimY;
 	var offset = char.meleeRangeOffset + melee.range;
+	var lifeSteal = char.stats.meleeLifeSteal;
 
 	var dir = point_direction(meleeX, meleeY, aimX, aimY);
 	
@@ -69,6 +70,7 @@ function scr_melee_attack(char) {
 	att.stopOnHit = melee.stopOnHit;
 	att.range = melee.range;
 	att.damageInRadius = melee.damageInRadius;
+	att.lifeSteal = lifeSteal;
 	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;

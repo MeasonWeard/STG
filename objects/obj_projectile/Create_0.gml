@@ -15,6 +15,7 @@ damage = 10;
 source = noone;
 faction = "none";
 aimOverTile = undefined;
+lifeSteal = 0;
 
 rangeLeft = 200;
 

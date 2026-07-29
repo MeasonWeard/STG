@@ -34,6 +34,9 @@ function scr_stats_blankCharStats() {
 		maxEnergyPerc: 0,
 		energyRegenPerc: 0,
 		healingPerc: 0,
+		
+		rangedLifeSteal: 0,
+		meleeLifeSteal: 0,
 	
 		//flat damage
 		kinDam: 0,
@@ -374,6 +377,9 @@ function scr_stats_getName(statKey) {
         case "maxEnergyPerc": return "Max Energy %";
         case "energyRegenPerc": return "Energy Regeneration %";
 		case "healingPerc" : return "Healing %";
+		
+		case "rangedLifeSteal" : return  "Ranged Life Steal";
+		case "meleeLifeSteal" : return  "Melee Life Steal";
 
         case "kinDam": return "Flat Kinetic Damage";
         case "fireDam": return "Flat Fire Damage";
@@ -730,6 +736,9 @@ function scr_stats_orderStatKeys(keysArray) {
 		"maxEnergyPerc",
 		"energyRegenPerc",
 		"healingPerc",
+		
+		"rangedLifeSteal",
+		"meleeLifeSteal",
 
 		"kinDam",
 		"fireDam",

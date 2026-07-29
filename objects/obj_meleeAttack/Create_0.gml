@@ -1,7 +1,7 @@
 owner = noone;
 damage = undefined;
 killThreshold = 0;
-
+lifeSteal = 0;
 depth = layers.effects;
 
 hitDelay = 0;

@@ -42,6 +42,8 @@ hurtTick = 0;
 
 pet = false;
 life = undefined;
+lifeStealForSelf = true;
+lifeStealForOwner = false;
 
 getOwnerDamBonuses = false;
 getOwnerDamMults = true;

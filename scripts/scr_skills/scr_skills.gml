@@ -970,8 +970,6 @@ function scr_skills_formatDescription(skillInst) {
 			var xx = gunX + lengthdir_x(dist, dir);
 			var yy = gunY + lengthdir_y(dist, dir);
 		
-			var existing = 0;
-		
 			var inst = scr_char_spawnPet(obj_blob, source, life, xx, yy, maxSpawns);
 			
 			if (!instance_exists(inst)) return false;
@@ -1066,6 +1064,85 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxHp = maxHp;
 			inst.gunDamMult = gunDamMult;
 			inst.baseStats.maxShield = shields;
+
+			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+
+			if (instance_exists(inst)) return true;
+
+		}
+	
+	}
+	
+	function skill_symbiont() : skill() constructor {
+	
+		name = "Symbiont";
+		key = "symbiont";
+		icon = spr_icon_fungalTurret;
+	
+		maxLevel = 12;
+		maxCharges = 1;
+		charges = 1;
+		energyCost = 20;
+		cooldownTime = 4;
+		castCooldownTime = 0.25;
+		maxSpawns = 1;
+		maxHp = 150;
+		shields = 0;
+		damExtra = 3;
+		lifeSteal = 5;
+	
+		description = "Spawn a genetically modified human-lamprey hybrid\nthat heals you when it attacks enemies.";
+		description += "\nSymbiont fights until it dies.";
+		
+		static formatStatsDescription = function() {
+	
+			var kinDam = 12 + (level - 1) * damExtra;
+
+			statsDescription += "\nHP: " + string(maxHp);
+			statsDescription += "\nLife Steal: " + string(lifeSteal) + "%";
+			statsDescription += "\nDamage: " + string(kinDam) + " kinetic";
+		
+		}
+
+		static setupFunc = function(source) {
+		
+			energyCost = 60 + (level - 1) * 2;
+			maxHp = 125 + (level - 1) * 15;
+			lifeSteal = 7 + (level - 1) * 3;
+		
+			var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+			if (is_struct(ga)) {
+				shields = ga.petShields;
+			}
+	
+		}
+	
+		static castFunc = function(source) {
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(200, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+
+			var inst = scr_char_spawnPet(obj_symbiont, source, undefined, xx, yy, maxSpawns);
+			
+			if (!instance_exists(inst)) return false;
+			
+			inst.level = level;
+			inst.damExtra = damExtra;
+			inst.baseStats.maxHp = maxHp;
+			inst.baseStats.maxShield = shields;
+			inst.baseStats.meleeLifeSteal = lifeSteal;
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
 
