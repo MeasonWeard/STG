@@ -361,6 +361,7 @@ skillConstructors = {
 	acidFlasks: skill_acidFlasks, //chem	
 	flamethrower: skill_flamethrower, //chem
 	thermiteCharge: skill_thermiteCharge, //chem
+	napalm: skill_napalm, //chem
 	
 	PPE: skill_PPE, //chem
 	medicalSynthesis: skill_medicalSynthesis, //chem

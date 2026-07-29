@@ -8,8 +8,6 @@ if (setup) {
 	
 	particleTick2 = particleFreq * 0.5;
 	
-	show_debug_message(particleFreq);
-	
 	var pSize = ceil(particleLife / particleFreq) * 2 + 2;
 	
 	//generate pool

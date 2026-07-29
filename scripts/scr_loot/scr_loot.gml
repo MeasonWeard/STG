@@ -204,7 +204,6 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	var type = choose("gun","melee","device","tie","headgear");
 	
 	var level = scr_loot_rollLevel(maxLevel);
-	show_debug_message(maxLevel);
 	
 	if (type == "gun") {
 		

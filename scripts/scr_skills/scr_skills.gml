@@ -243,8 +243,6 @@ function scr_skills_findCharSkill(key, char, mustBeActive = false) {
 			
             if (!is_struct(thisSkill)) continue;
 			
-			show_debug_message(thisSkill.key);
-
             if (mustBeActive and !scr_skills_isActive(thisSkill)) continue;
             if (thisSkill.key == key) return thisSkill;
 
@@ -744,7 +742,19 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 		
 			damage.chem = 8 + 2 * level;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
+
+			var damKeys = ["chem"];
+			
+			var napalm = scr_skills_findCharSkill("napalm", source);
+			
+			if (napalm != undefined) {
+				
+				damage.fire = napalm.fireDam;
+				array_push(damKeys, "fire");
+				
+			}
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 		
 		}
 	
@@ -885,14 +895,26 @@ function scr_skills_formatDescription(skillInst) {
 			damage = scr_stats_calculateSkillDamage(source, damage, ["fire", "kin"]);
 			
 			flameDamage.fire = 8 + (level - 1) * 4;
-			flameDamage = scr_stats_calculateSkillDamage(source, damage, ["fire"]);
+
+			var damKeys = ["fire"];
+			
+			var napalm = scr_skills_findCharSkill("napalm", source);
+			
+			if (napalm != undefined) {
+
+				flameDamage.chem = napalm.chemDam;
+				array_push(damKeys, "chem");
+				
+			}
+			
+			flameDamage = scr_stats_calculateSkillDamage(source, flameDamage, damKeys);
 			
 		}
 	
 		static castFunc = function(source) {
 		
 			var tc = instance_create_layer(source.x, source.y, "Instances", obj_thermiteCharge);
-	
+			show_debug_message(flameDamage);
 			tc.owner = source;
 			tc.damage = damage;
 			tc.flameDamage = flameDamage;
@@ -1616,7 +1638,6 @@ function scr_skills_formatDescription(skillInst) {
 		
 		static extraEffects = function(source) {
 			
-			//var func = scr_effects_acidicBullet;
 			var func = scr_effects_radioactiveBullet;
 			scr_char_addBulletFunc(source, func);
 			
@@ -1646,6 +1667,34 @@ function scr_skills_formatDescription(skillInst) {
 	#endregion
 
 	#region chemistry
+
+	function skill_napalm() : skill() constructor {
+
+		name = "Napalm";
+		key = "napalm";
+		icon = spr_icon_flamethrower;
+		maxLevel = 9;
+		fireDam = 4;
+		chemDam = 4;
+	
+		description = "Your acid pools deal fire damage in addition to chemical damage.";
+		description += "\nBurning ground deals chemical damage in addition to fire damage.";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Acid Pool Fire Damage: " + string(fireDam) + " p/s";
+			statsDescription += "\nBurning Ground Chemical Damage: " + string(chemDam * 2) + " p/s";
+			
+		}
+		
+		static setupFunc = function(source) {
+	
+			fireDam = 4 + (level - 1);
+			chemDam = 4 + (level - 1) * 2;
+	
+		}
+	
+	}
 
 	function skill_PPE() : skill() constructor {
 
@@ -1742,7 +1791,19 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 		
 			damage.chem = 6 + 2 * level;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
+			
+			var damKeys = ["chem"];
+			
+			var napalm = scr_skills_findCharSkill("napalm", source);
+			
+			if (napalm != undefined) {
+				
+				damage.fire = napalm.fireDam;
+				array_push(damKeys, "fire");
+				
+			}
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 			
 			passives = {
 		
@@ -1762,12 +1823,12 @@ function scr_skills_formatDescription(skillInst) {
 
 	function skill_muscleGrowth() : skill() constructor {
 
-		name = "Myostatin inhibitor";
+		name = "Myostatin Inhibitor";
 		key = "muscleGrowth";
 		icon = spr_icon_myostatinInhibitor;
-		maxLevel = 4;
+		maxLevel = 6;
 	
-		description = "Block the body's natural limit on muscle growth, greatly increasing your melee damage.";
+		description = "Block the body's natural limit on muscle growth, increasing your melee damage.";
 	
 		passives = {
 	
@@ -1779,7 +1840,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 			passives = {
 	
-				meleeDamPerc: 5 * level
+				meleeDamPerc: 5 + (level -1) * 4
 	
 			};
 	
@@ -1984,7 +2045,7 @@ function scr_skills_formatDescription(skillInst) {
 		name = "Gunsmith";
 		key = "gunsmith";
 		icon = spr_icon_gunsmith;
-		maxLevel = 4;
+		maxLevel = 6;
 	
 		description = "Modify your guns so that they deal more damage.";
 	
@@ -1998,7 +2059,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 			passives = {
 	
-				gunDamPerc: 5 * level
+				gunDamPerc: 5 + (level -1) * 4
 	
 			};
 	
@@ -2035,7 +2096,7 @@ function scr_skills_formatDescription(skillInst) {
 		name = "Shield Battery";
 		key = "shieldBattery";
 		icon = spr_icon_shieldBattery;
-		maxLevel = 5;
+		maxLevel = 6;
 
 		description = "The first point grants you +1 shield point.";
 		description += "\nEach point decreases shield regen delay\nand increases shield regen rate.";
@@ -2046,7 +2107,7 @@ function scr_skills_formatDescription(skillInst) {
 			
 				maxShield: 1,
 				shieldRegenDelay: -0.1 * level,
-				shieldRegen: 0.05 * level
+				shieldRegen: 0.04 * level
 
 			};
 	
