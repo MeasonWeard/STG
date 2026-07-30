@@ -198,6 +198,38 @@ function scr_loot_addDamage(weapon, damType, val) {
 	
 }
 
+function scr_loot_addDamageToExisting(weapon, val) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var damage = weapon.damage;
+	var valid = [];
+
+	var damageTypes = [
+		"kin",
+		"fire",
+		"chem",
+		"elec",
+		"rad"
+	];
+
+	for (var i = 0; i < array_length(damageTypes); i++) {
+
+		var key = damageTypes[i];
+
+		if (variable_struct_exists(damage, key) && damage[$ key] > 0) {
+			array_push(valid, key);
+		}
+
+	}
+
+	if (array_length(valid) == 0) exit;
+
+	var damType = valid[irandom(array_length(valid) - 1)];
+	damage[$ damType] += val;
+
+}
+
 function scr_loot_generateGenericLoot(maxLevel, rarity) {
 
 	var loot = noone;

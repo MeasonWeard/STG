@@ -28,10 +28,10 @@ function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 		
 	//ammo
 	clipSize = 24;
-	ammo = 24;
 	reloadTime = 2.2;
 	
 	//runtime data
+	ammo = 24;
 	aimOff = 0;
 	fireTick = 0;
 	reload = 0;
