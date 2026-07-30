@@ -953,7 +953,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		static formatStatsDescription = function() {
 		
-			statsDescription = "\nMax Spawns: " + string(maxSpawns);
+			statsDescription = "Max Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
 			statsDescription += "\nHP: " + string(maxHp);
 			statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
@@ -1036,11 +1036,11 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static formatStatsDescription = function() {
 	
-			statsDescription = "\nMax Spawns: " + string(maxSpawns);
+			statsDescription = "Max Spawns: " + string(maxSpawns);
 			statsDescription += "\nLife: " + string(life) + " seconds";
 			statsDescription += "\nHP: " + string(maxHp);
-			statsDescription += "\n\nProjectiles: 12";
-			statsDescription += "\nDamage: " + string(kinDam) + " kinetic, " + string(chemDam) + " chemical";
+			statsDescription += "\nProjectiles: 12";
+			statsDescription += "\n\nDamage: " + string(kinDam) + " kinetic, " + string(chemDam) + " chemical";
 		
 		}
 
@@ -1105,7 +1105,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		name = "Symbiont";
 		key = "symbiont";
-		icon = spr_icon_fungalTurret;
+		icon = spr_icon_symbiont;
 	
 		maxLevel = 12;
 		maxCharges = 1;
@@ -1124,9 +1124,9 @@ function scr_skills_formatDescription(skillInst) {
 		
 		static formatStatsDescription = function() {
 	
-			statsDescription = "\nHP: " + string(maxHp);
+			statsDescription = "HP: " + string(maxHp);
 			statsDescription += "\nLife Steal: " + string(lifeSteal) + "%";
-			statsDescription += "\nDamage: " + string(kinDam) + " kinetic";
+			statsDescription += "\n\nDamage: " + string(kinDam) + " kinetic";
 		
 		}
 
@@ -1251,7 +1251,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static formatStatsDescription = function() {
 		
-			statsDescription = "\nTargets: " + string(chains);
+			statsDescription = "Targets: " + string(chains);
 			statsDescription += "\n\nDamage: " + string(damage.elec) + " electric";
 		
 		}
@@ -1672,7 +1672,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Napalm";
 		key = "napalm";
-		icon = spr_icon_flamethrower;
+		icon = spr_icon_napalm;
 		maxLevel = 9;
 		fireDam = 4;
 		chemDam = 4;
@@ -1768,8 +1768,8 @@ function scr_skills_formatDescription(skillInst) {
 
 			statsDescription = "Acid Pool Chance: " + string(chance) + "%";
 			statsDescription += "\nPool Radius: " + string(radius);
-			statsDescription += "\n\nPool Duration: " + string(life) +" seconds";
-			statsDescription += "\nDamage: " + string(damage.chem) + " chemical p/s";
+			statsDescription += "\nPool Duration: " + string(life) +" seconds";
+			statsDescription += "\n\nDamage: " + string(damage.chem) + " chemical p/s";
 		
 		}
 		
@@ -1882,17 +1882,19 @@ function scr_skills_formatDescription(skillInst) {
 		maxLevel = 8;
 	
 		description = "Your adrenal glands produce more adrenaline and cortisole.";
-		description += "\nThe first point gives you +1 dash charge. Each point";
-		description += "\nreduces dash cooldown time.";
+		description += "\nThe first point gives you +1 dash charge. Each subsequent";
+		description += "\npoint increases dash recharge speed.";
 		
 		static setupFunc = function(source) {
 	
 			passives = {
 	
 				maxDashes: 1,
-				dashRegen: 0.02 * level
+				//dashRegen: 0.02 + 0.02 * level
 	
 			};
+	
+			if (level > 1) passives.dashRegen = 0.03 * (level - 1);
 	
 		}
 	
@@ -1984,6 +1986,30 @@ function scr_skills_formatDescription(skillInst) {
 	#endregion
 
 	#region engineering
+
+	function skill_targetingMonocle() : skill() constructor {
+
+		name = "Targeting Monocle";
+		key = "targetingMonocle";
+
+		icon = spr_icon_targetingMonocle;
+		txtCol = c_white;
+		maxLevel = 8;
+		
+		description = "An augmented reality monocle highlights enemy weak points";
+		description += "\nimproving the precision of your attacks."
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				oa: 4 + (level - 1) * 3
+	
+			};
+	
+		}
+	
+	}
 
 	function skill_rubberBoots() : skill() constructor {
 
@@ -2099,17 +2125,23 @@ function scr_skills_formatDescription(skillInst) {
 		maxLevel = 6;
 
 		description = "The first point grants you +1 shield point.";
-		description += "\nEach point decreases shield regen delay\nand increases shield regen rate.";
+		description += "\nEach subsequent point decreases shield regen delay\nand increases shield regen rate.";
 	
 		static setupFunc = function(source) {
 	
 			passives = {
 			
 				maxShield: 1,
-				shieldRegenDelay: -0.1 * level,
-				shieldRegen: 0.04 * level
+
 
 			};
+	
+			if (level > 1) {
+			
+				passives.shieldRegenDelay = -0.1 * (level - 1);
+				passives.shieldRegen = 0.05 * (level -1);
+			
+			}
 	
 		}
 	

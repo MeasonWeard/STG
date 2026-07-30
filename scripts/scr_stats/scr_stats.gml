@@ -360,14 +360,14 @@ function scr_stats_getName(statKey) {
 
         case "maxStimPacks": return "Max Stim Packs";
         case "maxEnergyPacks": return "Max Energy Packs";
-        case "stimPackRegen": return "Stim Pack Regeneration";
-        case "energyPackRegen": return "Energy Pack Regeneration";
+        case "stimPackRegen": return "Stim Pack Recharge";
+        case "energyPackRegen": return "Energy Pack Recharge";
 
         case "oa": return "Offensive Ability";
         case "da": return "Defensive Ability";
 
         case "spd": return "Movement Speed";
-        case "dashRegen": return "Dash Regeneration";
+        case "dashRegen": return "Dash Recharge";
         case "maxDashes": return "Max Dashes";
 
         case "maxHpPerc": return "Max Health %";
