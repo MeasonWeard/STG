@@ -170,7 +170,7 @@ function scr_guns_formatDescription(gun) {
 	var minAim = gun.minAimOff;
 	var maxAim = gun.maxAimOff;
 	var stability = gun.stability;
-	var recoil = gun.recoil;
+	var recoil = string_trimDecimals(gun.recoil, 2);
 	
 	txt += "\n\nBasics\n----------------\n"
 	txt += "Ammo: " + string(clipSize);

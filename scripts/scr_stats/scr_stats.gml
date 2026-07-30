@@ -825,3 +825,58 @@ function scr_stats_calculateSkillDamage(char, damage, types) {
     return scr_stats_calculateDamageProfileRanges(damage);
 
 }
+
+function scr_stats_calculateBonusStatInteger(startingStat, level) {
+
+	var low = max(1, floor(startingStat * (0.01 * level)));
+	var high = max(1, ceil(startingStat * (0.04 * level)));
+	
+	return {
+		low: low,
+		high: high
+	}
+	
+}
+
+function scr_stats_calculateBonusStatFloat(startingStat, level) {
+
+	var low = max(0.001, startingStat * (0.01 * level));
+	var high = max(0.001, startingStat * (0.04 * level));
+	
+	return {
+		low: low,
+		high: high
+	}
+	
+}
+
+function scr_stats_rollSteppedBonus(interval, maximum, level) {
+
+	static levelCap = 50;
+	static minChance = 20;
+	static maxChance = 90;
+	static levelPower = 0.5;
+	static chanceDecay = 0.75;
+
+	var totalSteps = floor(maximum / interval);
+	if (totalSteps <= 0) return 0;
+
+	var maxSteps = min(totalSteps, max(1, level + 1));
+	var steps = 1;
+
+	// Level 1 begins at minChance; levelCap reaches maxChance
+	var progress = clamp((level - 1) / (levelCap - 1), 0, 1);
+	progress = power(progress, levelPower);
+
+	var chance = lerp(minChance, maxChance, progress);
+
+	while (steps < maxSteps and scr_random_chance(chance)) {
+
+		steps++;
+		chance *= chanceDecay;
+
+	}
+
+	return steps * interval;
+	
+}

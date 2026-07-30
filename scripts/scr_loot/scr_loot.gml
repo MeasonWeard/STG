@@ -205,7 +205,7 @@ function scr_loot_addDamageToExisting(weapon, val) {
 	var damage = weapon.damage;
 	var valid = [];
 
-	var damageTypes = [
+	var damTypes = [
 		"kin",
 		"fire",
 		"chem",
@@ -213,11 +213,11 @@ function scr_loot_addDamageToExisting(weapon, val) {
 		"rad"
 	];
 
-	for (var i = 0; i < array_length(damageTypes); i++) {
+	for (var i = 0; i < array_length(damTypes); i++) {
 
-		var key = damageTypes[i];
+		var key = damTypes[i];
 
-		if (variable_struct_exists(damage, key) && damage[$ key] > 0) {
+		if (variable_struct_exists(damage, key) and damage[$ key] > 0) {
 			array_push(valid, key);
 		}
 

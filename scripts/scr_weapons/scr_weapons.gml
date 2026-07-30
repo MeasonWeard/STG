@@ -139,3 +139,97 @@ function scr_weapons_calculateBonusDamage(startingDam, level) {
 	}
 	
 }
+
+function scr_weapon_getHighestDamageType(weapon) {
+
+	if (!is_instanceof(weapon, weaponInst)) return undefined;
+
+	var damage = weapon.damage;
+	var keys = ["kin", "fire", "chem", "elec", "rad"];
+
+	var highest = -1;
+	var best = [];
+
+	for (var i = 0; i < array_length(keys); i++) {
+
+		var key = keys[i];
+		var val = damage[$ key];
+
+		if (val > highest) {
+
+			highest = val;
+			best = [key];
+
+		} else if (val == highest) {
+
+			array_push(best, key);
+
+		}
+
+	}
+
+	var key = best[irandom(array_length(best) - 1)];
+
+	return {
+		key: key,
+		val: highest
+	};
+
+}
+
+function scr_weapon_pickFromTop2DamageTypes(weapon) {
+
+	if (!is_instanceof(weapon, weaponInst)) return undefined;
+
+	var damage = weapon.damage;
+	var keys = ["kin", "fire", "chem", "elec", "rad"];
+
+	var highest = -1;
+	var second = -1;
+
+	// Find highest and second-highest non-zero values
+	for (var i = 0; i < array_length(keys); i++) {
+
+		var val = damage[$ keys[i]];
+		if (val <= 0) continue;
+
+		if (val > highest) {
+
+			second = highest;
+			highest = val;
+
+		} else if (val > second and val < highest) {
+
+			second = val;
+
+		}
+
+	}
+
+	// No non-zero damage
+	if (highest < 0) return undefined;
+
+	// Collect all damage types matching the highest or second-highest values
+	var best = [];
+
+	for (var i = 0; i < array_length(keys); i++) {
+
+		var key = keys[i];
+		var val = damage[$ key];
+
+		if (val <= 0) continue;
+
+		if (val == highest or val == second) {
+			array_push(best, key);
+		}
+
+	}
+
+	var key = best[irandom(array_length(best) - 1)];
+
+	return {
+		key: key,
+		val: damage[$ key]
+	};
+
+}

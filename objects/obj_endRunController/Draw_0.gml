@@ -203,6 +203,7 @@ if (tab == "reveal") {
 
 	//generate loot
 	var maxLevel = rc.runLevel;
+	maxLevel = 12;
 	
 	takeButton.active = true;
 	scrapAllButton.active = true;

@@ -141,7 +141,7 @@ function irandom_range_biased(minVal, maxVal, bias, biasTowardsLow = true) {
 
 }
 
-function random_range_biased(minVal, maxVal, bias, biasTowardsLow, decimalPlaces) {
+function random_range_biased(minVal, maxVal, bias, decimalPlaces = 2, biasTowardsLow = true) {
 
     var r = random(1);
 
