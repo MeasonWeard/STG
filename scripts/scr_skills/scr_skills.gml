@@ -1785,7 +1785,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 			chance = level * 2;
 	
-			radius = 38 + level * 2;
+			radius = 40 + level * 2;
 			life = 4.5 + level * 0.5;
 		
 			damage = new damageProfile();
