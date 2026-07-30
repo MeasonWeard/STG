@@ -413,6 +413,7 @@
     {"name":"spr_icon_enhancedHomeostasis","order":18,"path":"sprites/spr_icon_enhancedHomeostasis/spr_icon_enhancedHomeostasis.yy",},
     {"name":"spr_icon_exosomes","order":12,"path":"sprites/spr_icon_exosomes/spr_icon_exosomes.yy",},
     {"name":"spr_icon_flamethrower","order":11,"path":"sprites/spr_icon_flamethrower/spr_icon_flamethrower.yy",},
+    {"name":"spr_icon_flashpoint","order":40,"path":"sprites/spr_icon_flashpoint/spr_icon_flashpoint.yy",},
     {"name":"spr_icon_fungalTurret","order":7,"path":"sprites/spr_icon_fungalTurret/spr_icon_fungalTurret.yy",},
     {"name":"spr_icon_gas","order":33,"path":"sprites/spr_icon_gas/spr_icon_gas.yy",},
     {"name":"spr_icon_guardianArray","order":21,"path":"sprites/spr_icon_guardianArray/spr_icon_guardianArray.yy",},

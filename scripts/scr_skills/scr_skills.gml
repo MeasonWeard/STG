@@ -884,6 +884,7 @@ function scr_skills_formatDescription(skillInst) {
 		castCooldownTime = 0.5;
 		flameLife = 4;
 		burnRadius = 120;
+		//txtCol = c_aqua;
 
 		damage = undefined;
 		flameDamage = undefined;
@@ -1732,7 +1733,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Flashpoint";
 		key = "flashpoint";
-		icon = spr_icon_flamethrower;
+		icon = spr_icon_flashpoint;
 		maxLevel = 8;
 		damage = undefined;
 	
