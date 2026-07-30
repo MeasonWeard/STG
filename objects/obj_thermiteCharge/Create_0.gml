@@ -7,6 +7,7 @@ tick = 300;
 faction = undefined;
 damage = undefined;
 flameDamage = undefined;
+burnRadius = 5;
 
 armed = false;
 

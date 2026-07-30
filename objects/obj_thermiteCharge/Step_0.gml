@@ -18,6 +18,7 @@ if (tick <= 0) {
 	burn.damage = flameDamage;
 	burn.life = life;
 	burn.faction = faction;
+	burn.radius = burnRadius;
 	burn.image_xscale = 2.2;
 	burn.image_yscale = 2.2;
 	

@@ -367,6 +367,7 @@ skillConstructors = {
 	medicalSynthesis: skill_medicalSynthesis, //chem
 	acidicBullets: skill_acidicBullets, //chem
 	gas: skill_gas, //chem
+	flashpoint: skill_flashpoint, //chem
 	
 	fungalTurret: skill_fungalTurret, //bio
 	blob: skill_blob, //bio

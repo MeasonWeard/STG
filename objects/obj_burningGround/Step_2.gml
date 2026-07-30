@@ -7,7 +7,7 @@ if (damage.chem > 0) {
 	
 	if (!is_array(bubbles)) {
 		
-		var radius = sprite_width * 0.5;
+		//var radius = sprite_width * 0.5;
 		bubbles = [];
 		
 		repeat(9) {

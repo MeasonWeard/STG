@@ -18,6 +18,8 @@ damTime = 0.5;
 
 bubbles = undefined;
 
+radius = 15;
+
 deleteBubbles = function() {
 
 	if(!is_array(bubbles)) exit;

@@ -586,6 +586,7 @@ function scr_skills_formatDescription(skillInst) {
 		radius = 180;
 		duration = 6;
 		txtCol = c_white;
+		flashpointDam = undefined;
 
 		description = "Create a shower of subatomic particles that rains down from above.";
 		description += "\nEnemies within the area take radiation damage and have their\ndefensive ability reduced.";
@@ -610,6 +611,9 @@ function scr_skills_formatDescription(skillInst) {
 
 			damage.rad = 10 + (level - 1) * 2;
 			damage = scr_stats_calculateSkillDamage(source, damage, ["dam"]);
+			
+			var sk = scr_skills_findCharSkill("flashpoint", source);
+			if (sk != undefined) flashpointDam = sk.damage;
 		
 		}
 	
@@ -637,6 +641,17 @@ function scr_skills_formatDescription(skillInst) {
 			ps.particles = particles;
 			ps.duration = duration;
 			ps.radius = radius;
+			
+			//flashpoint
+			if (is_struct(flashpointDam)) {
+				//scr_testSound();
+				var bg = instance_create_layer(xx, yy, "Instances", obj_burningGround);
+				bg.damage = flashpointDam;
+				bg.radius = radius;
+				bg.faction = source.faction;
+				bg.life = 4;
+			
+			}
 
 			return true;
 			
@@ -868,6 +883,7 @@ function scr_skills_formatDescription(skillInst) {
 		cooldownTime = 3;
 		castCooldownTime = 0.5;
 		flameLife = 4;
+		burnRadius = 120;
 
 		damage = undefined;
 		flameDamage = undefined;
@@ -914,12 +930,13 @@ function scr_skills_formatDescription(skillInst) {
 		static castFunc = function(source) {
 		
 			var tc = instance_create_layer(source.x, source.y, "Instances", obj_thermiteCharge);
-			show_debug_message(flameDamage);
+
 			tc.owner = source;
 			tc.damage = damage;
 			tc.flameDamage = flameDamage;
 			tc.faction = source.faction;
 			tc.life = flameLife;
+			tc.burnRadius = burnRadius;
 			
 			return true;
 			
@@ -1031,6 +1048,7 @@ function scr_skills_formatDescription(skillInst) {
 		kinDam = 3;
 		chemDam = 4;
 		shields = 0;
+		flashpointDam = undefined;
 	
 		description = "Spawn giant mushrooms that spew acid at your enemies";
 	
@@ -1061,6 +1079,9 @@ function scr_skills_formatDescription(skillInst) {
 			if (is_struct(ga)) {
 				shields = ga.petShields;
 			}
+			
+			var sk = scr_skills_findCharSkill("flashpoint", source);
+			if (sk != undefined) flashpointDam = sk.damage;
 	
 		}
 	
@@ -1092,6 +1113,17 @@ function scr_skills_formatDescription(skillInst) {
 			inst.kinDam = kinDam;
 			inst.chemDam = chemDam;
 			inst.baseStats.maxShield = shields;
+			
+			//flashpoint
+			if (is_struct(flashpointDam)) {
+				//scr_testSound();
+				var bg = instance_create_layer(inst.x, inst.y, "Instances", obj_burningGround);
+				bg.damage = flashpointDam;
+				bg.radius = 120;
+				bg.faction = source.faction;
+				bg.life = 4;
+			
+			}
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
 
@@ -1251,7 +1283,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static formatStatsDescription = function() {
 		
-			statsDescription = "Targets: " + string(chains);
+			statsDescription = "Targets: " + string(chains + 1);
 			statsDescription += "\n\nDamage: " + string(damage.elec) + " electric";
 		
 		}
@@ -1309,6 +1341,7 @@ function scr_skills_formatDescription(skillInst) {
 		energyCost = 60;
 		radius = 400;
 		muchBonus = 10;
+		flashpointDam = undefined;
 
 		damage = undefined;
 	
@@ -1332,6 +1365,9 @@ function scr_skills_formatDescription(skillInst) {
 			damage = new damageProfile();
 			damage.elec = 27 + (level - 1) * 8;
 			damage = scr_stats_calculateSkillDamage(source, damage, ["elec"]);
+			
+			var sk = scr_skills_findCharSkill("flashpoint", source);
+			if (sk != undefined) flashpointDam = sk.damage;
 		
 		}
 	
@@ -1344,6 +1380,16 @@ function scr_skills_formatDescription(skillInst) {
 			emp.damage = damage;
 			emp.radius = radius;
 			emp.mechBonus = mechBonus;
+			
+			//flashpoint
+			if (is_struct(flashpointDam)) {
+				//scr_testSound();
+				var bg = instance_create_layer(source.x, source.y, "Instances", obj_burningGround);
+				bg.damage = flashpointDam;
+				bg.radius = radius;
+				bg.faction = source.faction;
+				bg.life = 4;
+			}
 		
 			return true;
 		
@@ -1368,6 +1414,7 @@ function scr_skills_formatDescription(skillInst) {
 		maxHp = 150;
 		shields = 0;
 		kinDam = 8;
+		flashpointDam = undefined;
 	
 		description = "Deploy an automated stationary gun that fires until its ammo runs out.\n"
 		description += "Flat damage bonuses and effects that apply to your weapons also apply\nto the turret's bullets.";
@@ -1407,6 +1454,9 @@ function scr_skills_formatDescription(skillInst) {
 			if (is_struct(ga)) {
 				shields = ga.petShields;
 			}
+			
+			var sk = scr_skills_findCharSkill("flashpoint", source);
+			if (sk != undefined) flashpointDam = sk.damage;
 	
 		}
 	
@@ -1435,6 +1485,17 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxHp = maxHp;
 			inst.kinDam = kinDam;
 			inst.baseStats.maxShield = shields;
+			
+			//flashpoint
+			if (is_struct(flashpointDam)) {
+				//scr_testSound();
+				var bg = instance_create_layer(inst.x, inst.y, "Instances", obj_burningGround);
+				bg.damage = flashpointDam;
+				bg.radius = 120;
+				bg.faction = source.faction;
+				bg.life = 4;
+			
+			}
 
 			if (instance_exists(inst)) return true;
 
@@ -1623,7 +1684,6 @@ function scr_skills_formatDescription(skillInst) {
 		chance = 3;
 		damage = undefined;
 		radius = 50;
-		radDam = 1;
 	
 		description = "Your projectiles deal extra radiation damage and\n";
 		description += "have a chance to detonate, dealing additonal area\nradiation damage.";
@@ -1667,6 +1727,47 @@ function scr_skills_formatDescription(skillInst) {
 	#endregion
 
 	#region chemistry
+
+	function skill_flashpoint() : skill() constructor {
+
+		name = "Flashpoint";
+		key = "flashpoint";
+		icon = spr_icon_flamethrower;
+		maxLevel = 8;
+		damage = undefined;
+	
+		description = "Certain abilities create burning ground where they are cast.";
+		description += "\n\nEffected abilites: ";
+		description += "\n- Particle Shower\n- Fungal Turret\n- Auto-Turret\n- EMP";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Bunring Ground Damage: " + string(damage.fire * 2) + " fire p/s";
+		
+		}
+		
+		static setupFunc = function(source) {
+	
+			damage = new damageProfile();
+	
+			damage.fire = 6 + (level - 1) * 2;
+
+			var damKeys = ["fire"];
+			
+			var napalm = scr_skills_findCharSkill("napalm", source);
+			
+			if (napalm != undefined) {
+
+				damage.chem = napalm.chemDam;
+				array_push(damKeys, "chem");
+				
+			}
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
+	
+		}
+		
+	}
 
 	function skill_napalm() : skill() constructor {
 
@@ -1767,9 +1868,9 @@ function scr_skills_formatDescription(skillInst) {
 		static formatStatsDescription = function() {
 
 			statsDescription = "Acid Pool Chance: " + string(chance) + "%";
-			statsDescription += "\nPool Radius: " + string(radius);
-			statsDescription += "\nPool Duration: " + string(life) +" seconds";
-			statsDescription += "\n\nDamage: " + string(damage.chem) + " chemical p/s";
+			statsDescription += "\nAcid Pool Radius: " + string(radius);
+			statsDescription += "\nAcid Pool Duration: " + string(life) +" seconds";
+			statsDescription += "\nAcid Pool Damage: " + string(damage.chem) + " chemical p/s";
 		
 		}
 		

@@ -9,5 +9,5 @@ if (!active) {
 	
 }
 
-//image_xscale = ((radius * 2) / sprite_get_width(sprite_index)) * xSide;
-//image_yscale = ((radius * 2) / sprite_get_height(sprite_index)) * ySide;
+image_xscale = ((radius * 2) / sprite_get_width(sprite_index)) * xSide;
+image_yscale = ((radius * 2) / sprite_get_height(sprite_index)) * ySide;
