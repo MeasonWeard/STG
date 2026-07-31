@@ -2,7 +2,7 @@ function scr_loot_rollLevel(maxLevel) {
 
     if (maxLevel <= 0) return 0;
 
-    var minLevel = max(1, floor(maxLevel * 0.5));
+    var minLevel = max(1, maxLevel - 7);
     var level = minLevel;
 
     var firstChance = 80;

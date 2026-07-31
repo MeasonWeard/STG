@@ -41,7 +41,7 @@ function zone_waste() : zone() constructor {
 	mapW = 12;
 	mapH = 12;
 	
-	zoneLevel = 4;
+	zoneLevel = 3;
 	
 	static generateMap = function() {
 	

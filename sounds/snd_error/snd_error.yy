@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_blaster2",
+  "%Name":"snd_error",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.33015874,
+  "duration":0.35555556,
   "exportDir":"",
-  "name":"snd_blaster2",
+  "name":"snd_error",
   "parent":{
-    "name":"Shot Sounds",
-    "path":"folders/Sounds/Shot Sounds.yy",
+    "name":"SFX",
+    "path":"folders/Sounds/SFX.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_blaster2.wav",
-  "volume":0.9,
+  "soundFile":"snd_error.wav",
+  "volume":1.0,
 }

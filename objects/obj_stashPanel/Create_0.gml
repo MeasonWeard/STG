@@ -8,6 +8,8 @@ tabDirty = true;
 
 mode = "select";
 
+playerLevel = max(1, global.gameData.playerData.level);
+
 image_speed = 0;
 
 //formatting
@@ -103,6 +105,11 @@ equipLeft = function(key, index) {
 	
 	if (is_undefined(item)) exit;
 	
+	if (item.lvl > playerLevel) {
+		audio_play_sound(snd_error, 1, false);
+		exit;
+	}
+	
 	var type = item.type;
 	
 	if (type == itemTypes.weapon or type == itemTypes.gun or type == itemTypes.melee) {
@@ -159,6 +166,11 @@ equipRight = function(key, index) {
 	var item = arr[index];
 	
 	if (is_undefined(item)) exit;
+	
+	if (item.lvl > playerLevel) {
+		audio_play_sound(snd_error, 1, false);
+		exit;
+	}
 	
 	var type = item.type;
 	
