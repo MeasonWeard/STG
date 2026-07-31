@@ -227,4 +227,3 @@ function scr_guns_formatDescription(gun) {
 	return txt;
 	
 }
-
