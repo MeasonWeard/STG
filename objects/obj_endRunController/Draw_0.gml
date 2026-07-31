@@ -202,7 +202,7 @@ if (tab == "loot") {
 if (tab == "reveal") {
 
 	//generate loot
-	var maxLevel = rc.runLevel;
+	var maxLevel = rc.runLevel + 2;
 	maxLevel = 12;
 	
 	takeButton.active = true;

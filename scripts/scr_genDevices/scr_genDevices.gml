@@ -2,28 +2,32 @@ function scr_genDevices_laserPointer(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
-
+	
+	var rarityFactor = max(0, rarity - 1);
+	var rarityMod = 1 + rarityFactor * 0.1;
+	
 	var type1 = choose("precise", "bright");
 	var type2 = choose("hot", "ionizing", "malfunctioning", "", "", "")
 	
-	//type1
-	var low = 2 + level * 2;
-	var high = 4 + level * 3;
-
+	//base oa
+	var high = ceil((level + 10) * rarityMod) + rarityFactor;
+	var low = high - 5;
+	
 	stats.oa = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
-	low = 2 + level;
-	high = 4 + level * 2;
+	//type1
+	high = max(2, round(high * 0.75));
+	low = max(1, high - 5);
 	
 	var statChange = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
 	if (type1 == "precise") scr_loot_addStat(device, "oa", statChange);
-	if (type2 == "bright") stats.da = statChange;
+	if (type1 == "bright") scr_loot_addStat(device, "da", statChange);
 	
 	//type2
-	low = round(level + level * 1.5);
-	high = round(level + 1 + level * 2.5);
-		
+	high = ceil((level * rarityMod) + 1 * rarityMod);
+	low = max(1, floor(level * 0.5) * rarityMod);
+
 	var dam = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
 	if (type2 == "hot") stats.fireDam = dam;
@@ -47,18 +51,16 @@ function scr_genDevices_watch(level, rarity) {
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
 
-	//to do: some don't have regen type
+	var rarityFactor = max(0, rarity - 1);
+	var rarityMod = 1 + rarityFactor * 0.1;
 
 	var type = choose("digital", "analog");
-	var regenType = choose("", "", "oximetric", "electroscopic");
+	var regenType = choose("oximetric", "electroscopic");
 	
 	if (type == "digital") {
-	
-		var low = 0.1 * level + 0.1;
-		var list = [low, low + 0.1, low + 0.2, low + 0.3, low + 0.4];
-		var len = array_length(list);
-		var index = irandom_range_biased(0, len - 1, LOOT_BIAS, true);
-		var num = list[index];
+		
+		var int = 0.1 * rarityMod;
+		var num = scr_stats_rollSteppedBonus(int, 3 * rarityMod, level);
 		
 		stats.spd = num;
 		
@@ -66,20 +68,17 @@ function scr_genDevices_watch(level, rarity) {
 	
 	if (type == "analog") {
 	
-		var low = 0.02 * level + 0.04;
-		var list = [low, low + 0.02, low + 0.03, low + 0.04, low + 0.05, low + 0.06, low + 0.7];
-		var len = array_length(list);
-		var index = irandom_range_biased(0, len - 1, LOOT_BIAS, true);
-		var num = list[index];
-		
+		var int = 0.01 * rarityMod;
+		var num = scr_stats_rollSteppedBonus(int, 3 * rarityMod, level);
+
 		stats.dashRegen = num;
 		
 	}
 	
 	if (regenType == "oximetric") {
 	
-		var low = 0.1 + level * 0.1;
-		var high = 0.2 + level * 0.4;
+		var low = (0.1 + level * 0.1) * rarityMod;
+		var high = (0.2 + level * 0.4) * rarityMod;
 		var regen = random_range_biased(low, high, LOOT_BIAS, true, 1);
 		
 		stats.hpRegen = regen;
@@ -88,8 +87,8 @@ function scr_genDevices_watch(level, rarity) {
 	
 	if (regenType == "electroscopic") {
 	
-		var low = 0.1 + level * 0.1;
-		var high = 0.2 + level * 0.4;
+		var low = (0.1 + level * 0.1) * rarityMod;
+		var high = (0.2 + level * 0.4) * rarityMod;
 		var regen = random_range_biased(low, high, LOOT_BIAS, true, 1);
 		
 		stats.energyRegen = regen;
@@ -113,16 +112,19 @@ function scr_genDevices_powerBank(level, rarity) {
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
 	
+	var rarityFactor = max(0, rarity - 1);
+	var rarityMod = 1 + rarityFactor * 0.1;
+	
 	var type = choose("high capacity", "fast", "dual-cell");
 	
-	var low = 0.1 + level * 0.1;
-	var high = 0.2 + level * 0.4;
+	var low = (0.1 + level * 0.1) * rarityMod;
+	var high = (0.2 + level * 0.4) * rarityMod;
 	var regen = random_range_biased(low, high, LOOT_BIAS, true, 1);
 	
 	if (type = "high capacity") {
 	
-		low = 10 * level;
-		high = 15 + 15 * level;
+		low = floor(10 * level * rarityMod);
+		high = ceil(15 + 15 * level * rarityMod);
 		
 		stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
@@ -130,6 +132,7 @@ function scr_genDevices_powerBank(level, rarity) {
 	
 	if (type == "fast") {
 	
+		//already affected by rarityMod
 		low = 0.1 * level;
 		high = 0.4 * level;
 		regen += random_range_biased(low, high, LOOT_BIAS, true, 2);
@@ -138,8 +141,8 @@ function scr_genDevices_powerBank(level, rarity) {
 	
 	if (type == "dual-cell") {
 	
-		low = 0.05 * level;
-		high = 0.2 * level;
+		low = 0.01 * level * rarityMod;
+		high = 0.03 * level * rarityMod;
 		stats.energyPackRegen = random_range_biased(low, high, LOOT_BIAS, true, 2);
 
 	}
@@ -156,3 +159,5 @@ function scr_genDevices_powerBank(level, rarity) {
 	return device;
 	
 }
+
+//to do: device that increases stim pack and health regeneration

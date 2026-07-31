@@ -11,8 +11,8 @@ function scr_genHeadgear_hardHat(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor * 2;
-		high = factor * 3;
+		low = factor * 3;
+		high = factor * 4;
 	
 		stats.kinRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
@@ -38,8 +38,8 @@ function scr_genHeadgear_weldingMask(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor * 2;
-		high = factor * 3;
+		low = factor * 3;
+		high = factor * 4;
 	
 		stats.fireRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
@@ -64,8 +64,8 @@ function scr_genHeadgear_safetyMask(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor * 2;
-		high = factor * 3;
+		low = factor * 3;
+		high = factor * 4;
 	
 		stats.chemRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
@@ -90,8 +90,8 @@ function scr_genHeadgear_arcFlashHood(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor * 2;
-		high = factor * 3;
+		low = factor * 3;
+		high = factor * 4;
 	
 		stats.elecRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
@@ -116,8 +116,8 @@ function scr_genHeadgear_leadHood(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor * 2;
-		high = factor * 3;
+		low = factor * 3;
+		high = factor * 4;
 	
 		stats.radRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
@@ -143,8 +143,8 @@ function scr_genHeadgear_respirator(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor;
-		high = factor * 2;
+		low = factor * 2;
+		high = factor * 3;
 	
 		stats.chemRes += irandom_range_biased(low, high, LOOT_BIAS);
 		stats.radRes += irandom_range_biased(low, high, LOOT_BIAS);
@@ -171,8 +171,8 @@ function scr_genHeadgear_safetyGoggles(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor;
-		high = factor * 2;
+		low = factor * 2;
+		high = factor * 3;
 	
 		stats.chemRes += irandom_range_biased(low, high, LOOT_BIAS);
 		stats.fireRes += irandom_range_biased(low, high, LOOT_BIAS);
@@ -199,8 +199,8 @@ function scr_genHeadgear_blastHelmet(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor;
-		high = factor * 2;
+		low = factor * 2;
+		high = factor * 3;
 	
 		stats.kinRes += irandom_range_biased(low, high, LOOT_BIAS);
 		stats.fireRes += irandom_range_biased(low, high, LOOT_BIAS);
@@ -227,8 +227,8 @@ function scr_genHeadgear_insulatedHood(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor;
-		high = factor * 2;
+		low = factor * 2;
+		high = factor * 3;
 	
 		stats.elecRes += irandom_range_biased(low, high, LOOT_BIAS);
 		stats.fireRes += irandom_range_biased(low, high, LOOT_BIAS);
@@ -255,8 +255,8 @@ function scr_genHeadgear_radiationVisor(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = rarity - 1;
-		low = factor;
-		high = factor * 2;
+		low = factor * 2;
+		high = factor * 3;
 	
 		stats.elecRes += irandom_range_biased(low, high, LOOT_BIAS);
 		stats.radRes += irandom_range_biased(low, high, LOOT_BIAS);
@@ -283,8 +283,8 @@ function scr_genHeadgear_dielectricHelmet(level, rarity) {
 	if (rarity > 1) {
 		
 		var factor = 10;//rarity - 1;
-		low = factor;
-		high = factor * 2;
+		low = factor * 2;
+		high = factor * 3;
 	
 		stats.kinRes += irandom_range_biased(low, high, LOOT_BIAS);
 		stats.elecRes += irandom_range_biased(low, high, LOOT_BIAS);

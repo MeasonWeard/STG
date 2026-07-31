@@ -20,7 +20,10 @@ function scr_genGuns_applyGenericBonuses(gun, level, rarity, config, bonusChance
 	};
 
 	// Initial damage bonus
-	var baseDamage = gun.damage.kin;
+	var baseDamType = scr_weapon_getHighestDamageType(gun);
+	var baseDamTypeKey = baseDamType.key;
+	var baseDamage = gun.damage[$ baseDamTypeKey];
+	
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 
@@ -28,14 +31,13 @@ function scr_genGuns_applyGenericBonuses(gun, level, rarity, config, bonusChance
 		bonusDamage = choose(0, bonusDamage);
 	}
 
-	var damType = "kin";
+	var damType = baseDamTypeKey;
 
 	if (rarity > 1) {
 		damType = scr_randomElement(config.damTypes);
 	}
 
 	scr_loot_addDamage(gun, damType, bonusDamage);
-
 
 	var standardKeys = [];
 	array_copy(standardKeys, 0, config.standardStats, 0, array_length(config.standardStats));
@@ -149,8 +151,8 @@ function scr_genGuns_applyStandardStat(gun, key, level, baseStats) {
 
 			//range = scr_stats_calculateBonusStatFloat(baseStats.blastSpread, level);
 			
-			var low = baseStats.blastSpread * 0.01;
-			var high = baseStats.blastSpread * 0.125;
+			low = baseStats.blastSpread * 0.01;
+			high = baseStats.blastSpread * 0.125;
 			
 			amount = random_range_biased(low, high, LOOT_BIAS);
 

@@ -5,8 +5,8 @@ function scr_loot_rollLevel(maxLevel) {
     var minLevel = max(1, floor(maxLevel * 0.5));
     var level = minLevel;
 
-    var firstChance = 75;
-    var finalChance = 25;
+    var firstChance = 80;
+    var finalChance = 35;
 
     var increases = maxLevel - minLevel;
 

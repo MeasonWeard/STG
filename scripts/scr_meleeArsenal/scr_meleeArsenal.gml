@@ -59,7 +59,7 @@ function melee_prod(level, rarity) : meleeInst(level, rarity) constructor {
 	attackRate = 2.8;
 	maxCharges = 8;
 	rechargeTime = 1.8;
-	killThreshold = 10;
+	killThreshold = 8;
 	
 	damage.kin = 0;
 	damage.elec = 15;

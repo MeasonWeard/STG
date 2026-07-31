@@ -174,7 +174,7 @@ function scr_melee_formatDescription(melee) {
 	var keys = variable_struct_get_names(stats);
 	var keysLen = array_length(keys);
 	
-	if (keysLen > 0) txt += "\n\nBonus Stats\n--These don't do anything yet--\n";
+	if (keysLen > 0) txt += "\n\nBonus\n----------------";
 	
 	for (var i = 0; i < keysLen; i ++) {
 	
