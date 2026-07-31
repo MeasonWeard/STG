@@ -5,19 +5,14 @@ event_inherited();
 audio_listener_position(x, y, 0);
 
 //xp
-//if (keyboard_check_pressed(ord("P"))) {
-	
-//	var eff = instance_create_layer(x, y, "Instances", obj_levelUp);
-//	eff.owner = self;
-
-//}
-
 if (instance_exists(rc)) {
 	
-	var dataCollected = rc.resources[$ "data"] ?? 0;
+	var levelUp = false;
 	
+	var dataCollected = variable_struct_exists(rc.resources, "data") ? rc.resources.data.val: 0;
+
 	if (dataCollected > xpEarned) {
-	
+
 		var newXp = dataCollected - xpEarned;
 		xpEarned = dataCollected;
 		
@@ -31,11 +26,15 @@ if (instance_exists(rc)) {
 			
 			xpRequired = scr_progression_xpRequired(level);
 			
-			var eff = instance_create_layer(x, y, "Instances", obj_levelUp);
-			eff.owner = self;
-		
 		}
 		
+	}
+	
+	if (levelUp) {
+	
+		var eff = instance_create_layer(x, y, "Instances", obj_levelUp);
+		eff.owner = self;
+	
 	}
 	
 }

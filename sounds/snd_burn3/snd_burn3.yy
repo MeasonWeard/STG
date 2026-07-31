@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.7256236,
+  "duration":0.5089796,
   "exportDir":"",
   "name":"snd_burn3",
   "parent":{

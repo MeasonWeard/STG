@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.1069387,
+  "duration":0.5089796,
   "exportDir":"",
   "name":"snd_bottleBreak4",
   "parent":{

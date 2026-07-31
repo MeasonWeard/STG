@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_powerUp",
+  "%Name":"snd_exosomes",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.4744672,
+  "duration":2.3103855,
   "exportDir":"",
-  "name":"snd_powerUp",
+  "name":"snd_exosomes",
   "parent":{
     "name":"SFX",
     "path":"folders/Sounds/SFX.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_powerUp.wav",
+  "soundFile":"snd_exosomes.wav",
   "volume":1.0,
 }

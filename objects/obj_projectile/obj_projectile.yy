@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_bullet1",
-    "path":"sprites/spr_bullet1/spr_bullet1.yy",
+    "name":"spr_bulletNormal",
+    "path":"sprites/spr_bulletNormal/spr_bulletNormal.yy",
   },
   "spriteMaskId":null,
   "visible":true,

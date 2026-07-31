@@ -14,7 +14,7 @@ function scr_genMelee_applyGenericBonuses(melee, level, rarity, config, bonusCha
 	};
 
 	// Initial damage bonus
-	var baseDamType = scr_weapon_getHighestDamageType(melee);
+	var baseDamType = scr_weapons_getHighestDamageType(melee);
 	var baseDamTypeKey = baseDamType.key;
 	var baseDamage = melee.damage[$ baseDamTypeKey];
 	
@@ -159,7 +159,7 @@ function scr_genMelee_applyBonusStat(melee, key, level) {
 
 		case "elemental":
 
-			var result = scr_weapon_pickFromTop2DamageTypes(melee);
+			var result = scr_weapons_pickFromTop2DamageTypes(melee);
 
 			if (is_undefined(result)) break;
 

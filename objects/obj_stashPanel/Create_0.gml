@@ -105,7 +105,7 @@ equipLeft = function(key, index) {
 	
 	if (is_undefined(item)) exit;
 	
-	if (item.lvl > playerLevel) {
+	if (item.lvl > playerLevel and !global.debug) {
 		audio_play_sound(snd_error, 1, false);
 		exit;
 	}
@@ -167,7 +167,7 @@ equipRight = function(key, index) {
 	
 	if (is_undefined(item)) exit;
 	
-	if (item.lvl > playerLevel) {
+	if (item.lvl > playerLevel and !global.debug) {
 		audio_play_sound(snd_error, 1, false);
 		exit;
 	}

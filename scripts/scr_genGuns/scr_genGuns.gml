@@ -20,7 +20,7 @@ function scr_genGuns_applyGenericBonuses(gun, level, rarity, config, bonusChance
 	};
 
 	// Initial damage bonus
-	var baseDamType = scr_weapon_getHighestDamageType(gun);
+	var baseDamType = scr_weapons_getHighestDamageType(gun);
 	var baseDamTypeKey = baseDamType.key;
 	var baseDamage = gun.damage[$ baseDamTypeKey];
 	
@@ -218,7 +218,7 @@ function scr_genGuns_applyBonusStat(gun, key, level) {
 
 		case "elemental":
 
-			var result = scr_weapon_pickFromTop2DamageTypes(gun);
+			var result = scr_weapons_pickFromTop2DamageTypes(gun);
 
 			if (is_undefined(result)) break;
 

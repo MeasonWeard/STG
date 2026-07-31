@@ -5,3 +5,5 @@ depth = layers.effects;
 
 drawText = true;
 txtYOff = 0;
+
+soundDelay = 16;

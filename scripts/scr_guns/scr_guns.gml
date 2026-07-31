@@ -5,7 +5,10 @@ function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 	//appearance and sound
 	shootSounds = global.data.soundProfiles.blaster;
 	reloadSound = undefined;
-	projSprite = spr_bullet1;
+	projSprite = spr_bulletNormal;
+	projImageSpeed = 1;
+	projSubimage = 0;
+	lockProjSprite = false;
 	spr = spr_blaster;
 	description = undefined;
 	rot = 0;
@@ -147,6 +150,14 @@ function scr_guns_calculateGunStats(char, gun) {
 		var dec = 1 + char.stats.gunDamPerc * 0.01;
 		newStats.damage = scr_stats_multiplyDamageProfile(newStats.damage, dec);
 	}
+	
+	//projectile
+	if (!gun.lockProjSprite) {
+		
+		gun.projImageSpeed = 0;
+		gun.projSubimage = scr_guns_projectileSubimage(gun)
+	
+	}
 
 	return newStats;
 	
@@ -224,5 +235,63 @@ function scr_guns_formatDescription(gun) {
 	}
 	
 	return txt;
+	
+}
+
+function scr_guns_projectileSubimage(gun) {
+
+	if (!is_instanceof(gun, gunInst)) return 0;
+
+	var el = undefined;
+	
+	var highest = scr_weapons_getTop2DamageTypes(gun, false);
+
+	var len = array_length(highest);
+	
+	if (len < 1) {
+		
+		return 0;
+		
+	} else if (len == 1) {
+		
+		el = highest[0];
+		
+	} else if (len > 1) {
+		
+		var first = highest[0];
+		var second = highest[1];
+		
+		var type1 = first.key;
+		var type2 = second.key;
+		
+		var val1 = first.val;
+		var val2 = second.val
+		
+		el = type1;
+		
+		show_debug_message(type1);
+		show_debug_message(type2);
+		
+		if (type1 == "kin") {
+			
+			if (val2 > val1 * 0.25) el = type2;
+			
+		}
+		
+	}
+	
+	var subImage = 0;
+	
+	switch(el) {
+	
+		case "kin": subImage = 0; break;
+		case "fire": subImage = 1; break;
+		case "chem": subImage = 2; break;
+		case "elec": subImage = 3; break;
+		case "rad": subImage = 4; break;
+		
+	}
+	
+	return subImage;
 	
 }

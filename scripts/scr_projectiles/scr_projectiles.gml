@@ -62,7 +62,7 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 
 function scr_projectiles_shootNeutral(xx, yy, dir, spd, range) {
 
-	var proj = scr_projectiles_create(xx, yy, dir, spd, range, spr_bullet1, undefined, noone, undefined);
+	var proj = scr_projectiles_create(xx, yy, dir, spd, range, spr_bulletNormal, undefined, noone, undefined);
 	return proj;
 	
 }
@@ -88,6 +88,8 @@ function scr_projectiles_shoot(char) {
 	var projType = weaponStats.projectileType;
 	var spd = weaponStats.spd;
 	var sprite = weaponStats.projSprite;
+	var subimage = weaponStats.projSubimage;
+	var imageSpeed = weaponStats.projImageSpeed;
 	var damage = weaponStats.damage;
 	var range = weaponStats.range;
 	var maxAimOff = weaponStats.maxAimOff;
@@ -114,6 +116,8 @@ function scr_projectiles_shoot(char) {
 		if (instance_exists(proj)) {
 			
 			proj.image_angle = dir;
+			proj.image_index = subimage;
+			proj.image_speed = imageSpeed;
 			proj.faction = faction;
 			proj.collisionFuncs = collisionFuncs;
 			proj.oa = oa;
@@ -121,7 +125,7 @@ function scr_projectiles_shoot(char) {
 			proj.rot = choose(rot, -rot);
 			proj.lifeSteal = lifeSteal;
 			proj.source = char;
-			
+
 			if (rot == 0) {
 				proj.image_angle = 0;
 			} else {
@@ -172,6 +176,8 @@ function scr_projectiles_shoot(char) {
 			if (p != noone) {
 				
 				p.image_angle = angle;
+				p.image_index = subimage;
+				p.image_speed = imageSpeed;
 				p.faction = faction;
 				p.collisionFuncs = collisionFuncs;
 				p.oa = oa;

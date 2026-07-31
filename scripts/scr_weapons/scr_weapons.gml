@@ -140,7 +140,7 @@ function scr_weapons_calculateBonusDamage(startingDam, level) {
 	
 }
 
-function scr_weapon_getHighestDamageType(weapon) {
+function scr_weapons_getHighestDamageType(weapon, randomiseTies = true) {
 
 	if (!is_instanceof(weapon, weaponInst)) return undefined;
 
@@ -168,7 +168,13 @@ function scr_weapon_getHighestDamageType(weapon) {
 
 	}
 
-	var key = best[irandom(array_length(best) - 1)];
+	var key;
+
+	if (randomiseTies) {
+		key = best[irandom(array_length(best) - 1)];
+	} else {
+		key = best[0];
+	}
 
 	return {
 		key: key,
@@ -177,59 +183,92 @@ function scr_weapon_getHighestDamageType(weapon) {
 
 }
 
-function scr_weapon_pickFromTop2DamageTypes(weapon) {
+function scr_weapons_getTop2DamageTypes(weapon, randomiseTies = true) {
 
-	if (!is_instanceof(weapon, weaponInst)) return undefined;
+	if (!is_instanceof(weapon, weaponInst)) return [];
 
 	var damage = weapon.damage;
 	var keys = ["kin", "fire", "chem", "elec", "rad"];
 
-	var highest = -1;
-	var second = -1;
+	var entries = [];
 
-	// Find highest and second-highest non-zero values
-	for (var i = 0; i < array_length(keys); i++) {
-
-		var val = damage[$ keys[i]];
-		if (val <= 0) continue;
-
-		if (val > highest) {
-
-			second = highest;
-			highest = val;
-
-		} else if (val > second and val < highest) {
-
-			second = val;
-
-		}
-
-	}
-
-	// No non-zero damage
-	if (highest < 0) return undefined;
-
-	// Collect all damage types matching the highest or second-highest values
-	var best = [];
-
+	// Build list of non-zero damage types
 	for (var i = 0; i < array_length(keys); i++) {
 
 		var key = keys[i];
 		var val = damage[$ key];
 
-		if (val <= 0) continue;
-
-		if (val == highest or val == second) {
-			array_push(best, key);
+		if (val > 0) {
+			array_push(entries, {
+				key: key,
+				val: val
+			});
 		}
 
 	}
 
-	var key = best[irandom(array_length(best) - 1)];
+	if (array_length(entries) == 0) return [];
 
-	return {
-		key: key,
-		val: damage[$ key]
-	};
+	var result = [];
 
+	repeat (2) {
+
+		if (array_length(entries) == 0) break;
+
+		// Find highest value remaining
+		var highest = -1;
+		var best = [];
+
+		for (var i = 0; i < array_length(entries); i++) {
+
+			var entry = entries[i];
+
+			if (entry.val > highest) {
+
+				highest = entry.val;
+				best = [entry];
+
+			} else if (entry.val == highest) {
+
+				array_push(best, entry);
+
+			}
+
+		}
+
+		// Resolve ties
+		var chosen;
+
+		if (randomiseTies) {
+			chosen = best[irandom(array_length(best) - 1)];
+		} else {
+			chosen = best[0];
+		}
+
+		array_push(result, chosen);
+
+		// Remove chosen so next iteration finds the next distinct type
+		for (var i = 0; i < array_length(entries); i++) {
+
+			if (entries[i].key == chosen.key) {
+				array_delete(entries, i, 1);
+				break;
+			}
+
+		}
+
+	}
+
+	return result;
+
+}
+
+function scr_weapons_pickFromTop2DamageTypes(weapon, randomiseTies = true) {
+
+	var top = scr_weapons_getTop2DamageTypes(weapon, randomiseTies);
+
+	if (array_length(top) == 0) return undefined;
+
+	return top[irandom(array_length(top) - 1)];
+	
 }

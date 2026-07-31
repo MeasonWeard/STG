@@ -16,10 +16,16 @@ healthBarY = camY + camH - 28;
 energyBarX = camX + camW - 220;
 energyBarY = camY + camH - 28;
 
-dashX = camX + camW * 0.33;
+xpBarX = camXmid;
+xpBarY = healthBarY + 20;
+
+lvlTxtX = camXmid;
+lvlTxtY = healthBarY - 16;
+
+dashX = camXmid - 400;
 dashY = camY + camH - 20;
 
-skillsX = camX + camW - camW * 0.33;
+skillsX = camXmid + 400;//camX + camW - camW * 0.33;
 skillsY = dashY;
 
 stimPackX = dashX + skillIconW + skillsPad;
@@ -43,6 +49,9 @@ if (instance_exists(player)) {
 	dashes = player.dashes;
 	maxDashes = player.finalStats.maxDashes;
 	dashRecharge = player.dashRecharge;
+	xp = player.xp;
+	xpReq = player.xpRequired;
+	lvl = player.level;
 
 	shieldRecharge = player.shieldRegenCounter > 0 ? true : false;
 	
@@ -155,6 +164,20 @@ energyBar.maxValue = maxEnergy;
 energyBar.x = energyBarX;
 energyBar.y = energyBarY;
 energyBar.txt = string(energy) + " / " + string(maxEnergy);
+
+xpBar.x = xpBarX;
+xpBar.y = xpBarY;
+xpBar.maxValue = xpReq;
+xpBar.value = xp;
+
+draw_circle_colour(lvlTxtX, lvlTxtY, 24, #77e3da, #77e3da, false);
+draw_set_colour(c_black);
+draw_circle(lvlTxtX, lvlTxtY, 24, true);
+draw_set_font(fnt_large);
+draw_set_halign(fa_middle);
+draw_set_valign(fa_middle);
+draw_text(lvlTxtX, lvlTxtY, string(lvl));
+
 
 if (maxShield > 0) {
 

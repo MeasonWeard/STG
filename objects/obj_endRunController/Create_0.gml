@@ -212,6 +212,8 @@ finish = function () {
 	global.hubPosX = -1;
 	global.hubPosY = -1;
 	
+	instance_destroy();
+	
 }
 
 prevPage = function() {

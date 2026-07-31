@@ -13,10 +13,10 @@ ringsToDraw = max(0, ringsToDraw);
 if (radius > 120) innerAlpha -= 0.01;
 
 draw_set_alpha(innerAlpha);
-draw_circle_colour(x, y, radius, c_white, c_fuchsia, false);
+draw_circle_colour(x, y, radius, c_white, #77e3da, false);
 
 draw_set_alpha(1);
-draw_set_colour(c_white);
+draw_set_colour(c_aqua);
 
 // i = 0 is the outermost ring
 for (var i = 0; i < ringsToDraw; i++) {

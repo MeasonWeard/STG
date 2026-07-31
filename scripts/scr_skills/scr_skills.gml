@@ -842,14 +842,13 @@ function scr_skills_formatDescription(skillInst) {
 			
 			bioBonus = 8 + (level - 1) * 3;
 		
-			damage.chem = 6 + (level - 1) * 2;
+			damage.chem = 4 + (level - 1) * 2;
 			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
 		
 		}
 	
 		static castFunc = function(source) {
 		
-
 			var gunX = source.gunX;
 			var gunY = source.gunY;
 
@@ -1253,9 +1252,7 @@ function scr_skills_formatDescription(skillInst) {
 			inst.ticks = ticks;
 			inst.range = range;
 			inst.faction = source.faction;
-			
-			scr_audio_playSoundAt(snd_powerUp, source.x, source.y);
-
+		
 			if (instance_exists(inst)) return true;
 
 		}

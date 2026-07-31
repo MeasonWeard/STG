@@ -8,7 +8,7 @@ function gun_blaster(level, rarity) : gunInst(level, rarity) constructor {
 	
 	//shootSounds = global.data.soundProfiles.blaster;
 	//reloadSound = undefined;
-	//projSprite = spr_bullet1;
+	//projSprite = spr_bulletNormal;
 	//spr = spr_gun;
 	//description = undefined;
 	
@@ -41,6 +41,7 @@ function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 
 	name = "Pistol";
 	spr = spr_pistol;
+	projSprite = spr_bulletLarge;
 	
 	auto = false;
 	range = 1000;
@@ -82,6 +83,7 @@ function gun_pulseRifle(level, rarity): gunInst(level, rarity) constructor {
 
 	name = "Pulse Rifle";
 	spr = spr_pulseRifle;
+	projSprite = spr_bulletLarge;
 	
 	auto = true;
 	range = 1400;
@@ -106,6 +108,7 @@ function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Shotgun";
 	spr = spr_shotgun;
+	projSprite = spr_bulletSmall;
 	
 	auto = false;
 	fireRate = 1.2;
@@ -129,6 +132,7 @@ function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Auto Shotgun";
 	spr = spr_autoShotgun;
+	projSprite = spr_bulletSmall;
 	
 	auto = true;
 	fireRate = 1.6;
@@ -155,6 +159,7 @@ function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Alien Orb Launcher #1"
 	
 	projSprite = spr_bullet_alienSpit;
+	lockProjSprite = true;
 	auto = false;
 	clipSize = 2;
 	fireRate = 0.8;
@@ -178,6 +183,7 @@ function gun_alienOrb2(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Alien Orb Launcher #2";
 	
 	projSprite = spr_bullet3;
+	lockProjSprite = true;
 	projectileType = projectileTypes.blast;
 	blastProjectiles = 6;
 	auto = true;
@@ -202,6 +208,7 @@ function gun_spiderGun(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Spider Gun #1"
 	
 	projSprite = spr_spiderBullet;
+	lockProjSprite = true;
 	auto = true;
 	fireRate = 4;
 	clipSize = 2;
@@ -225,6 +232,7 @@ function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Fungal Gun";
 	
 	projSprite = spr_bullet3;
+	lockProjSprite = true;
 	projectileType = projectileTypes.blast;
 	blastProjectiles = 12;
 	blastSpread = 12;
@@ -270,6 +278,7 @@ function gun_blobGun(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Blob gun"
 	
 	projSprite = spr_bullet_blobSpit;
+	lockProjSprite = true;
 	range = 200;
 	auto = false;
 	clipSize = 1;
@@ -294,6 +303,7 @@ function gun_plantGun(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Pollen Gun"
 	
 	projSprite = spr_bullet_plantSpit;
+	lockProjSprite = true;
 	auto = false;
 	clipSize = 2;
 	fireRate = 0.8;

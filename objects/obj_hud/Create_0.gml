@@ -46,6 +46,9 @@ shieldY = 0;
 stimPackX = 0;
 energyPackX = 0;
 
+lvlTxtX = 0;
+lvlTxtY = 0;
+
 //info
 posX = 0;
 posY = 0;
@@ -63,6 +66,10 @@ stimPacks = 0;
 energyPacks = 0;
 stimPackCool = 0;
 energyPackCool = 0;
+
+xp = 0;
+xpReq = 0;
+lvl = 0;
 
 shieldRecharge = false;
 
@@ -94,3 +101,9 @@ energyBar.depth = depth - 1;
 energyBar.fillCol = c_aqua;
 energyBar.leftToRight = false;
 energyBar.txtCol = c_white;
+
+xpBar = instance_create_layer(x, y, "Instances", obj_statusBar);
+xpBar.width = 800;
+xpBar.height = 10
+xpBar.depth = depth - 1;
+xpBar.fillCol = #77e3da;
