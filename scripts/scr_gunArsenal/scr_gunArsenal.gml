@@ -159,6 +159,7 @@ function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Alien Orb Launcher #1"
 	
 	projSprite = spr_bullet_alienSpit;
+	projDestroySprite = spr_bullet_alienSpitExplode;
 	lockProjSprite = true;
 	auto = false;
 	clipSize = 2;
@@ -208,6 +209,7 @@ function gun_spiderGun(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Spider Gun #1"
 	
 	projSprite = spr_spiderBullet;
+	projDestroySprite = spr_bulletExplosion2;
 	lockProjSprite = true;
 	auto = true;
 	fireRate = 4;
@@ -232,6 +234,7 @@ function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Fungal Gun";
 	
 	projSprite = spr_bullet3;
+	projDestroySprite = spr_bullet3Fade;
 	lockProjSprite = true;
 	projectileType = projectileTypes.blast;
 	blastProjectiles = 12;
@@ -303,6 +306,7 @@ function gun_plantGun(level, rarity) : gunInst(level, rarity) constructor {
 	name = "Pollen Gun"
 	
 	projSprite = spr_bullet_plantSpit;
+	projDestroySprite = spr_bullet_plantSpitExplode;
 	lockProjSprite = true;
 	auto = false;
 	clipSize = 2;

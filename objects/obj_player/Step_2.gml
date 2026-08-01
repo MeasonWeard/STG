@@ -5,7 +5,7 @@ event_inherited();
 audio_listener_position(x, y, 0);
 
 //xp
-if (instance_exists(rc)) {
+if (!sc.hub and instance_exists(rc)) {
 	
 	var levelUp = false;
 	

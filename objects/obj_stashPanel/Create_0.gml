@@ -8,7 +8,7 @@ tabDirty = true;
 
 mode = "select";
 
-playerLevel = max(1, global.gameData.playerData.level);
+playerLevel = max(0, global.gameData.playerData.level);
 
 image_speed = 0;
 

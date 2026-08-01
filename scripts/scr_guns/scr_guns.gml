@@ -6,6 +6,7 @@ function gunInst(level, rarity) : weaponInst(level, rarity) constructor {
 	shootSounds = global.data.soundProfiles.blaster;
 	reloadSound = undefined;
 	projSprite = spr_bulletNormal;
+	projDestroySprite = spr_bulletExplosion;
 	projImageSpeed = 1;
 	projSubimage = 0;
 	lockProjSprite = false;

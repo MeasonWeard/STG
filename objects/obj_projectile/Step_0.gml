@@ -77,6 +77,7 @@ for (var i = 0; i < len; i++) {
 	
 		var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
 		eff.sprite_index = destroyEffect;
+		eff.image_angle = image_angle;
 		
 		var hitTop = (dir > 180 and dir < 360 and y <= char.colTop + spd);
 		
@@ -142,6 +143,7 @@ if (damageDestructibles) {
 	
 			var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
 			eff.sprite_index = destroyEffect;
+			eff.image_angle = image_angle;
 		
 			var hitTop = (dir > 180 and dir < 360 and y <= dest.colTop + spd);
 		
@@ -227,6 +229,7 @@ for (var i = 0; i < len; i++) {
 	
 		var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
 		eff.sprite_index = destroyEffect;
+		eff.image_angle = image_angle;
 		
 		var hitTop = (dir > 180 and dir < 360 and y <= env.colTop + spd);
 		
@@ -268,6 +271,7 @@ if (x <= global.roomLeft or x >= global.roomRight or y <= global.projectileTop o
 	
 	var eff = instance_create_layer(x, y, "Instances", obj_bulletEffect);
 	eff.sprite_index = destroyEffect;
+	eff.image_angle = image_angle;
 	
 	for (var i = 0; i < funcsLen; i ++) {
 		var func = collisionFuncs[i];

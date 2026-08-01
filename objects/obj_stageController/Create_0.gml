@@ -1,5 +1,6 @@
 global.stageController = self;
 rc = scr_data_getRunController();
+ec = instance_create_layer(x, y, "Instances", obj_enemiesController);
 
 hub = false;
 setupHub = true;

@@ -88,6 +88,7 @@ function scr_projectiles_shoot(char) {
 	var projType = weaponStats.projectileType;
 	var spd = weaponStats.spd;
 	var sprite = weaponStats.projSprite;
+	var destroySprite = weaponStats.projDestroySprite;
 	var subimage = weaponStats.projSubimage;
 	var imageSpeed = weaponStats.projImageSpeed;
 	var damage = weaponStats.damage;
@@ -118,6 +119,7 @@ function scr_projectiles_shoot(char) {
 			proj.image_angle = dir;
 			proj.image_index = subimage;
 			proj.image_speed = imageSpeed;
+			proj.destroyEffect = destroySprite;
 			proj.faction = faction;
 			proj.collisionFuncs = collisionFuncs;
 			proj.oa = oa;
@@ -185,6 +187,7 @@ function scr_projectiles_shoot(char) {
 				p.rot = choose(rot, -rot);
 				p.lifeSteal = lifeSteal;
 				p.source = char;
+				p.destroyEffect = destroySprite;
 			
 				if (rot == 0) {
 					p.image_angle = 0;
