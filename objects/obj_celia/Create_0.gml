@@ -3,7 +3,7 @@ event_inherited();
 
 name = "celia";
 tags = ["bio"];
-baseStats.maxHp = 400;
+
 
 sprites = {
 
@@ -29,9 +29,22 @@ aimBias = 1.2;
 thornsDamage = new damageProfile();
 thornsDamage.chem = 8;
 
+//drops
 minData = 32;
 maxData = 64;
 
 lootChance = 25;
 lootImproveChance = 20;
 lootAmount = 2;
+
+//stats
+baseStats.maxHp = 400;
+
+levelUpFunc = function() {
+
+	baseStats.maxHp += 20;
+	
+	baseStats.chemDamPerc += 5;
+	baseStats.kinDamPerc += 10;
+	
+}

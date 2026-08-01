@@ -188,6 +188,7 @@ meleeCooldown = 0;
 
 equippedWeapon = undefined;
 equippedWeaponStats = undefined;
+setAmmo = true;
 prevWeapon = undefined;
 
 damageDestructibles = false;

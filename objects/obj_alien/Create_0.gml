@@ -10,8 +10,6 @@ deathFunc = scr_char_fleshExplosion;
 gun1 = new gun_alienOrb(1, 1);
 scr_weapons_collectWeapon(self, gun1, true);
 
-baseStats.maxHp = 60;
-
 thornsDamage = new damageProfile();
 
 thornsDamage.kin = 2;
@@ -25,4 +23,16 @@ sprites = {
 	death: spr_alien,
 	spawn: spr_alien
 	
+}
+
+//stats
+baseStats.maxHp = 60;
+
+levelUpFunc = function() {
+
+	if (level > 2) baseStats.maxHp += 5;
+	
+	baseStats.chemDamPerc += 10;
+	baseStats.kinDamPerc += 5;
+
 }

@@ -171,6 +171,7 @@ function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
 	recoil = 1.8;
 	stability = 0.08;
 	rot = 3;
+	range = 800;
 	
 	damage.kin = 2;
 	damage.chem = 3;

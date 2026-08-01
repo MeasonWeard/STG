@@ -6,7 +6,7 @@ if (active and initialSpawn) {
 	
 	repeat(spawns) {
 	
-		var obj = scr_random_weightedPick(commonList);
+		var obj = scr_random_weightedPick(enemyList);
 	
 		if (object_exists(obj)) {
 		

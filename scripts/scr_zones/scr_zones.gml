@@ -14,7 +14,7 @@ function scr_zones_startZone(zoneConstructor, extraLevel, destroyPlayer = true) 
 
 function zone() constructor {
 
-	zoneLevel = 4;
+	zoneLevel = 1;
 
 	mapW = 12;
 	mapH = 12;
@@ -41,7 +41,7 @@ function zone_waste() : zone() constructor {
 	mapW = 12;
 	mapH = 12;
 	
-	zoneLevel = 3;
+	zoneLevel = 16;
 	
 	static generateMap = function() {
 	

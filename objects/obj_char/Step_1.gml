@@ -222,14 +222,15 @@ if (setupStats) {
 	var weaponsLen = array_length(weapons);
 	
 	for (var i = 0 ; i < weaponsLen; i ++) {
-	
+		
 		var slot = weapons[i];
 		var thisWeapon = slot.weapon;
 
 		if (is_instanceof(thisWeapon, gunInst)) {
+
 			slot.stats = scr_guns_calculateGunStats(self, thisWeapon);
-			thisWeapon.ammo = slot.stats.clipSize;
-			
+			if (setAmmo) thisWeapon.ammo = slot.stats.clipSize;
+				
 		}
 		
 		if (is_instanceof(thisWeapon, meleeInst)) {
@@ -237,7 +238,10 @@ if (setupStats) {
 		}
 		
 	}
-		
+	
+	scr_weapons_equipWeapon(self, weaponIndex);
+	setAmmo = false;
+	
 }
 
 if (firstEquip) {

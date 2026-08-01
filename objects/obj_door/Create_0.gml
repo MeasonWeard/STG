@@ -23,7 +23,6 @@ textY = 0;
 
 areaDist = 64;
 
-
 //hub stuff
 openDist = 400;
 displayTagDist = 1450;

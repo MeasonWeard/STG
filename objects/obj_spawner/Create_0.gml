@@ -3,13 +3,12 @@ sc = global.stageController;
 
 groups = [];
 
-commonList = [];
+enemyList = [];
 
 setup = true;
 
 active = true;
 initialSpawn = true;
 
-minEnemies = 8;
-maxEnemies = 12;
-
+minEnemies = 2;
+maxEnemies = 4;

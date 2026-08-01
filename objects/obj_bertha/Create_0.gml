@@ -29,5 +29,14 @@ targetMinDist = 30;
 targetMaxDist = 60;
 targetReaquireDist = 90;
 
+//stats
 baseStats.maxHp = 80;
 baseStats.spd += 0.5;
+
+levelUpFunc = function() {
+
+	if (level > 2) baseStats.maxHp += 5;
+	
+	baseStats.kinDamPerc += 10;
+	
+}

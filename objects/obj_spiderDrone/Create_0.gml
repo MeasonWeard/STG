@@ -20,10 +20,19 @@ sprites.death = spr_spiderDroneDeath;
 deathSounds = [snd_droneDeath1, snd_droneDeath2];
 
 gun1 = new gun_spiderGun(1, 1);
-
 scr_weapons_collectWeapon(self, gun1, true);
 
+gunYoffset = -32;
+
+//stats
 baseStats.maxHp = 40;
 baseStats.spd = 6;
 
-gunYoffset = -32;
+levelUpFunc = function() {
+
+	if (level > 2) baseStats.maxHp += 5;
+	
+	baseStats.radDamPerc += 8;
+	baseStats.kinDamPerc += 8;
+		
+}

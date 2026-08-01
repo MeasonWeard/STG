@@ -332,16 +332,17 @@ soundProfiles = {
 
 enemyGroups = {
 
-	mutantsSmall: [[obj_bertha, 100]],
-	mutantsBig: [[obj_bertha, 100],[obj_celia,25]],
+	mutantsMinor: [[obj_bertha, 100]],
+	mutantsMajor: [[obj_bertha, 100],[obj_celia,25]],
 	
-	aliensSmall: [[obj_alien, 100]],
-	aliendsBig: [[obj_alien, 100]],
+	aliensMinor: [[obj_alien, 100]],
+	aliendsMajor: [[obj_alien, 100]],
 	
-	spidersSmall: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
-	spidersBig: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
+	spidersMinor: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
+	spidersMajor: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
 	
-	plantsSmall: [[obj_plant, 100]]
+	plantsMinor: [[obj_plant, 100]],
+	plantsMajor: [[obj_plant, 100]]
 	
 }
 

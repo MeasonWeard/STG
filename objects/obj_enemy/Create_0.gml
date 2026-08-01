@@ -22,5 +22,9 @@ lootAmount = 1;
 
 showHealthBar = true;
 
+levelUp = true;
+levelUpFunc = undefined;
+level = 0;
+
 //ai
 scr_ai_setup();

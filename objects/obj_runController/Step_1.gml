@@ -27,8 +27,6 @@ if (generateMap) {
 	posX = startX;
 	posY = startY;
 	
-
-
 	miniMap = scr_mapGen_createMiniMap(map, true);
 
 	currentCell = map[posX][posY];

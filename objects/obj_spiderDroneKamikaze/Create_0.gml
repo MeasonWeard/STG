@@ -28,11 +28,19 @@ deathFunc = function() {
 	
 }
 
-baseStats.maxHp = 40;
-baseStats.spd = 7;
-
 gunYoffset = -32;
 
 targetMinDist = 10;
 targetMaxDist = 30;
 targetReaquireDist = 40;
+
+//stats
+baseStats.maxHp = 40;
+baseStats.spd = 7;
+
+levelUpFunc = function() {
+
+	if (level > 2) baseStats.maxHp += 5;
+	explosionPower += 0.05;
+	
+}

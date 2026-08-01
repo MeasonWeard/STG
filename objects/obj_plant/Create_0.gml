@@ -10,7 +10,7 @@ deathSounds = global.data.soundProfiles.plantDeath;
 gun1 = new gun_plantGun(1, 1);
 scr_weapons_collectWeapon(self, gun1, true);
 
-baseStats.maxHp = 60;
+
 
 thornsDamage = new damageProfile();
 
@@ -25,4 +25,16 @@ sprites = {
 	death: spr_plantDeath,
 	spawn: spr_alien
 	
+}
+
+baseStats.maxHp = 60;
+
+levelUpFunc = function() {
+
+	if (level > 2) baseStats.maxHp += 5;
+	
+	baseStats.chemDamPerc += 5;
+	baseStats.kinDamPerc += 10;
+	
+
 }

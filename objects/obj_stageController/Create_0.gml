@@ -1,6 +1,6 @@
 global.stageController = self;
 rc = scr_data_getRunController();
-ec = instance_create_layer(x, y, "Instances", obj_enemiesController);
+data = global.data;
 
 hub = false;
 setupHub = true;
@@ -73,6 +73,11 @@ portalY = room_height * 0.5;
 createdArrows = false;
 stageInProgress = true;
 checkIfCleared = true;
+
+//enemies
+var eg = data.enemyGroups;
+minorGroups = [];
+majorGroups = [];
 
 //projectile pool
 projectilePool = [];
