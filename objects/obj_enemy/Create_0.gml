@@ -15,6 +15,8 @@ dropOnDestroy = true;
 minData = 8;
 maxData = 16;
 
+calculateData = true;
+
 lootMaxRarity = 3;
 lootImproveChance = 10;
 lootChance = 2;

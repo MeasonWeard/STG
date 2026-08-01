@@ -117,6 +117,7 @@ enemyHpBar.width = 400;
 enemyHpBar.height = 16;
 enemyHpBar.depth = depth -1;
 enemyHpBar.visible = false;
+enemyHpBar.txtCol = c_white;
 
 enemyEnergyBar = instance_create_layer(x, y, "Instances", obj_statusBar);
 enemyEnergyBar.width = 320;

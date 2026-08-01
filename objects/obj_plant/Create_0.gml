@@ -33,10 +33,14 @@ baseStats.fireRes = -25;
 
 levelUpFunc = function() {
 
-	baseStats.maxHp += 3;
+	if (level > 2) baseStats.maxHp += 6;
 	
-	baseStats.chemDamPerc += 5;
+	if (level mod 4 == 0) baseStats.chemDam ++;
+	if (level mod 3 == 0) baseStats.kinDam ++;
+	
+	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 10;
-	baseStats.hpRegen = 0.2;
+	
+	baseStats.hpRegen += 0.2;
 
 }

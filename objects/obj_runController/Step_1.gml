@@ -16,7 +16,11 @@ if (generateMap) {
 
 	zoneInst = new zoneConstructor();
 	
-	runLevel = zoneInst.zoneLevel + extraLevel;
+	runLevel = zoneInst.baseLevel + extraLevel;
+	
+	zoneInst.level = runLevel;
+	
+	if (is_callable(zoneInst.setup)) zoneInst.setup();
 	
 	map = zoneInst.generateMap();
 	startPos = zoneInst.startPos;

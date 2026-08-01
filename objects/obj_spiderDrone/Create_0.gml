@@ -30,10 +30,15 @@ baseStats.spd = 6;
 
 levelUpFunc = function() {
 
-	baseStats.maxHp += 2;
+	if (level > 2) baseStats.maxHp += 4;
 	
-	baseStats.radDamPerc += 8;
-	baseStats.kinDamPerc += 8;
+	if (level mod 4 == 0) {
+		baseStats.kinDam ++;
+		baseStats.radDam ++;
+	}
+	
+	baseStats.radDamPerc += 10;
+	baseStats.kinDamPerc += 10;
 	
 	if (level > 6) baseStats.maxShield = 1;
 	if (level > 12) baseStats.maxShield = 2;

@@ -8,13 +8,17 @@ function scr_zones_startZone(zoneConstructor, extraLevel, destroyPlayer = true) 
 	rc.zoneConstructor = zoneConstructor;
 	rc.extraLevel = extraLevel;
 	
-	room_goto(room_startRun);
+	//room_goto(room_startRun);
 	
 }
 
 function zone() constructor {
 
-	zoneLevel = 1;
+	name = "none";
+	portrait = spr_missing;
+
+	baseLevel = 1;
+	level = 1;
 
 	mapW = 12;
 	mapH = 12;
@@ -24,6 +28,8 @@ function zone() constructor {
 		xx: 0,
 		yy: 0
 	}
+	
+	static setup = undefined;
 
 	static generateMap = function() {
 		
@@ -38,10 +44,13 @@ function zone() constructor {
 
 function zone_waste() : zone() constructor {
 
+	name = "Waste Disposal";
+	portrait = spr_toxicCrate;
+
 	mapW = 12;
 	mapH = 12;
 	
-	zoneLevel = 3;
+	baseLevel = 3;
 	
 	static generateMap = function() {
 	

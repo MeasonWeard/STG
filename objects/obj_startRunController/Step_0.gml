@@ -1,3 +1,4 @@
+//dev controls
 if (global.devControls) {
 
 	if (keyboard_check_pressed(vk_home)) {
@@ -14,21 +15,24 @@ if (global.devControls) {
 
 	if (keyboard_check_pressed(vk_enter)) {
    
-		global.runController.generateMap = true;
-
+		room_goto(room_startRunTest);
 	
 	}
 
-	if (keyboard_check_pressed(vk_escape)) {
-   
-		game_end();
-	
-	}
-	
-	if (keyboard_check_pressed(vk_space)) {
-   
-		scr_stages_goToStage(rc.currentCell);
-	
-	}
+
+
 	
 }
+
+//controls
+if (keyboard_check_pressed(vk_escape)) {
+   
+	room_goto(stage_hub1);
+	
+}
+
+	if (keyboard_check_pressed(vk_space)) {
+	
+		if (instance_exists(rc)) scr_stages_goToStage(rc.currentCell);
+	
+	}

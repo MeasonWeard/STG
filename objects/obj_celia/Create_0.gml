@@ -44,7 +44,10 @@ levelUpFunc = function() {
 
 	baseStats.maxHp += 20;
 	
-	baseStats.chemDamPerc += 5;
+	if (level mod 4 == 0) baseStats.kinDam += 2;
+	if (level mod 3 == 0) baseStats.chemDam += 2;
+	
+	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 10;
 	
 }

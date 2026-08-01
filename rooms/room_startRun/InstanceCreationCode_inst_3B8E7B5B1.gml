@@ -3,6 +3,8 @@ sr = global.startRun;
 
 leftFunc = function() {
 
+	var prevInt = sr.intensityMod;
+	
 	sr.intensityIndex ++;
 	if (sr.intensityIndex >= sr.modValsLen) sr.intensityIndex = sr.modValsLen - 1;
 	

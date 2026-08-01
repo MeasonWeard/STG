@@ -74,7 +74,8 @@ if (playerinArea) {
 		
 		} else {
 		
-			scr_zones_startZone(zoneConstructor, 0);
+			global.selectedZone = zoneConstructor;
+			room_goto(room_startRun);
 		
 		}
 		

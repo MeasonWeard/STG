@@ -68,6 +68,12 @@ if (instance_exists(player)) {
 	
 	skills = [skill1, skill2, skill3, skill4];
 
+} else {
+
+	hp = 0;
+	energy = 0;
+	shield = 0;
+	
 }
 
 //damage flash
@@ -224,6 +230,7 @@ if (instance_exists(enemy)) {
 	enemyHpBar.visible = true;
 	enemyHpBar.value = enemyHp;
 	enemyHpBar.maxValue = enemyMaxHp;
+	enemyHpBar.txt = string(enemyHp) + " / " + string(enemyMaxHp);
 	draw_set_halign(fa_middle);
 	draw_set_valign(fa_middle);
 	draw_set_font(fnt_normal);

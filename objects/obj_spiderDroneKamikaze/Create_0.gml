@@ -40,7 +40,8 @@ baseStats.spd = 7;
 
 levelUpFunc = function() {
 
-	baseStats.maxHp += 2;
+	if (level > 2) baseStats.maxHp += 4;
+	
 	explosionPower += 0.05;
 	
 	if (level > 6) baseStats.maxShield = 1;

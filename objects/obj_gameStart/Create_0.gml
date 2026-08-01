@@ -15,9 +15,13 @@ global.devControls = true;
 
 global.stageController = noone;
 global.runController = noone;
+global.startRun = noone;
 
 global.hubPosX = 500;
 global.hubPosY = 500;
+
+global.selectedZone = undefined;
+global.selectedClass = undefined;
 
 //UH
 window_set_cursor(cr_none);
