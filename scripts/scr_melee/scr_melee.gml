@@ -181,6 +181,8 @@ function scr_melee_formatDescription(melee) {
 		var stat = keys[i];
 		var val = stats[$ stat];
 	
+		if (val == 0) continue;
+	
 		var newText = scr_stats_getName(stat);
 		newText += ": " + string(val);
 		

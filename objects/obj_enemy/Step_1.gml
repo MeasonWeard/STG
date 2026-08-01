@@ -7,20 +7,27 @@ if (levelUp and is_callable(levelUpFunc)) {
 
 	levelUp = false;
 
-	var maxLevel = instance_exists(rc) ? rc.runLevel : 10;
+	var targetLevel = 0;
+	var rc = global.runController;
 	
-	var chance = maxLevel * 10;
-	
-	while(level < maxLevel and scr_random_chance(chance)) {
-	
-		chance -= 10;
+	if (instance_exists(rc) and is_array(rc.levelWeights) and array_length(rc.levelWeights) > 0) {
 		
-		level ++;
-		levelUpFunc();
+		targetLevel = scr_random_weightedPick(rc.levelWeights);
+		
+	} else {
 	
+		targetLevel = 15;
+	
+	}
+
+	while (level < targetLevel) {
+
+		level++;
+		levelUpFunc();
+
 		setupStats = true;
 		setAmmo = true;
-	
+
 	}
 	
 }

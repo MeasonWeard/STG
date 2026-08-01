@@ -75,6 +75,8 @@ function scr_gear_formatDescription(gear) {
 	
 		var stat = keys[i];
 		var val = stats[$ stat];
+		
+		if (val == 0) continue;
 	
 		var newText = scr_stats_getName(stat);
 		newText += ": " + string(val);

@@ -32,13 +32,12 @@ targetReaquireDist = 90;
 //stats
 baseStats.maxHp = 80;
 baseStats.spd += 0.5;
-baseStats.maxShield = 5;
-baseStats.maxEnergy = 100;
 
 levelUpFunc = function() {
 
 	baseStats.maxHp += 4;
-	
 	baseStats.kinDamPerc += 10;
+	
+	if (level > 5) baseStats.spd += 0.02;
 	
 }

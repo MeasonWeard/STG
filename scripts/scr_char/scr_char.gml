@@ -69,30 +69,20 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	var rad = damage.rad > 0 ? irandom_range(damage.radMin, damage.radMax) : 0;
 	
 	//apply resistances
-	if (kin > 0 and char.finalStats.kinRes > 0) {
-		var res = irandom_range(char.finalStats.kinResMin, char.finalStats.kinResMax);
-		kin = max(1, kin - res);
-	}
+	kin = scr_char_applyResistance(kin, char.finalStats.kinRes, char.finalStats.kinResMin,
+	char.finalStats.kinResMax);
 	
-	if (fire > 0 and char.finalStats.fireRes > 0) {
-		var res = irandom_range(char.finalStats.fireResMin, char.finalStats.fireResMax);
-		fire = max(1, fire - res);
-	}
+	fire = scr_char_applyResistance(fire, char.finalStats.fireRes, char.finalStats.fireResMin,
+	char.finalStats.fireResMax);
 	
-	if (chem > 0 and char.finalStats.chemRes > 0) {
-		var res = irandom_range(char.finalStats.chemResMin, char.finalStats.chemResMax);
-		chem = max(1, chem - res);
-	}
+	chem = scr_char_applyResistance(chem, char.finalStats.chemRes, char.finalStats.chemResMin,
+	char.finalStats.chemResMax);
 	
-	if (elec > 0 and char.finalStats.elecRes > 0) {
-		var res = irandom_range(char.finalStats.elecResMin, char.finalStats.elecResMax);
-		elec = max(1, elec - res);
-	}
+	elec = scr_char_applyResistance(elec, char.finalStats.elecRes, char.finalStats.elecResMin,
+	char.finalStats.elecResMax);
 	
-	if (rad > 0 and char.finalStats.radRes > 0) {
-		var res = irandom_range(char.finalStats.radResMin, char.finalStats.radResMax);
-		rad = max(1, rad - res);
-	}
+	rad = scr_char_applyResistance(rad, char.finalStats.radRes, char.finalStats.radResMin,
+	char.finalStats.radResMax);
 	
 	//final
 	var totalDam = kin + fire + chem + elec + rad;
@@ -129,6 +119,26 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	
 	return lost;
 	
+}
+
+function scr_char_applyResistance(amount, res, resMin, resMax) {
+
+	if (amount <= 0 or res == 0) return amount;
+
+	if (res > 0) {
+
+		var reduction = irandom_range(resMin, resMax);
+		amount = max(1, amount - reduction);
+
+	} else {
+
+		var increase = round(amount * (abs(res) * 0.01));
+		amount += increase;
+
+	}
+
+	return amount;
+
 }
 
 function scr_char_heal(char, amount) {

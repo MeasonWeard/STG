@@ -107,10 +107,7 @@ function scr_genMelee_applyStandardStat(melee, key, level, baseStats) {
 		
 		case "rechargeTime":
 
-			range = scr_stats_calculateBonusStatFloat(baseStats.rechargeTime, level);
-
-			amount = -random_range_biased(range.low, range.high, LOOT_BIAS);
-			amount = clamp(amount, -baseStats.rechargeTime * 0.5, -0.01);
+			amount = -scr_stats_rollSteppedBonus(0.05, baseStats.rechargeTime * 0.5, level);
 
 		break;
 

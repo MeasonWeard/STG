@@ -6,8 +6,10 @@ gameState = "running";
 runLevel = 1;
 extraLevel = 0;
 
-generateMap = true;
 zoneConstructor = undefined;
+generateMap = true;
+generateWeights = true;
+levelWeights = [];
 
 zoneInst = undefined;
 map = undefined;

@@ -34,5 +34,8 @@ levelUpFunc = function() {
 	
 	baseStats.radDamPerc += 8;
 	baseStats.kinDamPerc += 8;
-		
+	
+	if (level > 6) baseStats.maxShield = 1;
+	if (level > 12) baseStats.maxShield = 2;
+	
 }

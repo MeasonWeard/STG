@@ -28,6 +28,8 @@ sprites = {
 }
 
 baseStats.maxHp = 60;
+baseStats.hpRegen = 2;
+baseStats.fireRes = -25;
 
 levelUpFunc = function() {
 
@@ -35,6 +37,6 @@ levelUpFunc = function() {
 	
 	baseStats.chemDamPerc += 5;
 	baseStats.kinDamPerc += 10;
-	
+	baseStats.hpRegen = 0.2;
 
 }

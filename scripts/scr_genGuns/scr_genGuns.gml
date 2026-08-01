@@ -170,7 +170,7 @@ function scr_genGuns_applyStandardStat(gun, key, level, baseStats) {
 
 		case "reloadTime":
 
-			amount = -scr_stats_rollSteppedBonus(0.1, baseStats.reloadTime * 0.5, level);
+			amount = -scr_stats_rollSteppedBonus(0.05, baseStats.reloadTime * 0.5, level);
 
 		break;
 
