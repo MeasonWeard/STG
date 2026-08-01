@@ -3,6 +3,10 @@ player = noone;
 playerExists = false;
 depth = layers.cursor;
 
+sc = noone;
+enemy = noone;
+enemyPad = 16;
+
 //settings
 showMelee = scr_data_getSetting("showMeleeOnCursor", true);
 showSkills = scr_data_getSetting("showSkillsOnCursor", true);
@@ -48,3 +52,5 @@ mode = "aim";
 hoverTxt = undefined;
 hoverTxtCount = 0;
 hoverFont = fnt_normal;
+
+enemyCheckTick = 0;

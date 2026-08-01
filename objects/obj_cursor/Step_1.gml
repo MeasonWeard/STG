@@ -28,3 +28,5 @@ if (instance_exists(player)) {
 	gunNameTick = 0;
 	
 }
+
+sc = instance_exists(global.stageController) ? global.stageController : noone;

@@ -7,7 +7,7 @@ if (levelUp and is_callable(levelUpFunc)) {
 
 	levelUp = false;
 
-	var maxLevel = rc.runLevel;
+	var maxLevel = instance_exists(rc) ? rc.runLevel : 10;
 	
 	var chance = maxLevel * 10;
 	

@@ -152,39 +152,34 @@ if (is_string(instructions) and instructionsTick > 0) {
 //minimap
 if (!sc.hub) scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, posX, posY);
 
-//health, energy and shield
+//HEALTH BAR, ENERGY BAR, XP BAR AND SHIELDS
+
+//health bar
 healthBar.value = hp;
 healthBar.maxValue = maxHp;
 healthBar.x = healthBarX;
 healthBar.y = healthBarY;
 healthBar.txt = string(hp) + " / " + string(maxHp);
 
+//energy bar
 energyBar.value = energy;
 energyBar.maxValue = maxEnergy;
 energyBar.x = energyBarX;
 energyBar.y = energyBarY;
 energyBar.txt = string(energy) + " / " + string(maxEnergy);
 
+//xp bar
 xpBar.x = xpBarX;
 xpBar.y = xpBarY;
 xpBar.maxValue = xpReq;
 xpBar.value = xp;
-
-draw_circle_colour(lvlTxtX, lvlTxtY, 24, #77e3da, #77e3da, false);
-draw_set_colour(c_black);
-draw_circle(lvlTxtX, lvlTxtY, 24, true);
-draw_set_font(fnt_large);
-draw_set_halign(fa_middle);
-draw_set_valign(fa_middle);
-draw_text(lvlTxtX, lvlTxtY, string(lvl));
-
 
 if (maxShield > 0) {
 
 	var subImage = shield > 0 ? 0 : 1;
 	
 	draw_set_font(fnt_normal);
-	draw_set_colour(c_purple);
+	draw_set_colour(c_white);
 	draw_set_halign(fa_left);
 	draw_sprite(spr_shieldIcon, subImage, shieldX, shieldY);
 	draw_text(shieldX + 24, shieldY - 8, string(shield) + "/" + string(maxShield));
@@ -197,6 +192,91 @@ if (maxShield > 0) {
 	}
 
 }
+
+//player level
+draw_circle_colour(lvlTxtX, lvlTxtY, 24, #77e3da, #77e3da, false);
+draw_set_colour(c_black);
+draw_circle(lvlTxtX, lvlTxtY, 24, true);
+draw_set_font(fnt_large);
+draw_set_halign(fa_middle);
+draw_set_valign(fa_middle);
+draw_text(lvlTxtX, lvlTxtY, string(lvl));
+
+//enemy health bar and shields
+var enemy = cursor.enemy;
+if (instance_exists(enemy)) {
+
+	var xx = camXmid;
+	var yy = camY + 40;
+
+	enemyHpBar.x = xx;
+	enemyHpBar.y = yy;
+	
+	var enemyHp = enemy.hp;
+	var enemyMaxHp = enemy.maxHp;
+	var enemyName = enemy.name;
+	var enemyLevel = enemy.level;
+	var enemyMaxShield = enemy.maxShield;
+	var enemyShield = enemy.shield;
+	var enemyMaxEnergy = enemy.maxEnergy;
+	var enemyEnergy = enemy.energy;
+
+	enemyHpBar.visible = true;
+	enemyHpBar.value = enemyHp;
+	enemyHpBar.maxValue = enemyMaxHp;
+	draw_set_halign(fa_middle);
+	draw_set_valign(fa_middle);
+	draw_set_font(fnt_normal);
+	draw_set_colour(c_white);
+	draw_text(xx, yy - 22, enemyName + "   lvl " + string(enemyLevel));
+	
+	if (enemyMaxShield > 0) {
+
+		var subImage = enemyShield > 0 ? 0 : 1;
+	
+		var esX = xx - enemyHpBar.width * 0.5 + 16;
+		var esY = yy + 26;
+	
+		draw_set_font(fnt_normal);
+		draw_set_halign(fa_left);
+		draw_sprite(spr_shieldIcon, subImage, esX, esY);
+		draw_text(esX + 16, esY, string(enemyShield) + "/" + string(enemyMaxShield));
+	
+	}
+	
+	if (enemyMaxEnergy > 0) {
+		
+		enemyEnergyBar.visible = true;
+		enemyEnergyBar.value = enemyEnergy;
+		enemyEnergyBar.maxValue = enemyMaxEnergy;
+		
+		if (enemyMaxShield > 0) {
+			
+			enemyEnergyBar.width = enemyHpBar.width - 80;
+			enemyEnergyBar.x = xx + 40;
+			enemyEnergyBar.y = yy + 20;
+			
+		} else {
+			
+			enemyEnergyBar.width = enemyHpBar.width;
+			enemyEnergyBar.x = xx;
+			enemyEnergyBar.y = yy + 20;
+		
+		}
+		
+	} else {
+		
+		enemyEnergyBar.visible = false;
+		
+	}
+	
+} else {
+
+	enemyHpBar.visible = false;
+	enemyEnergyBar.visible = false;
+}
+
+
 
 //dash
 scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashRecharge, false);

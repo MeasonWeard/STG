@@ -1,7 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
-name = "celia";
+name = "Celia";
 tags = ["bio"];
 
 

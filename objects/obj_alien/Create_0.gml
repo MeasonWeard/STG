@@ -1,6 +1,6 @@
 event_inherited();
 
-name = "alien";
+name = "Alien";
 tags = ["bio"];
 bloodCol = c_purple;
 
@@ -30,7 +30,7 @@ baseStats.maxHp = 60;
 
 levelUpFunc = function() {
 
-	if (level > 2) baseStats.maxHp += 5;
+	baseStats.maxHp += 3;
 	
 	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 5;

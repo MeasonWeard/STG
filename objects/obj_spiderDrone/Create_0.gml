@@ -30,7 +30,7 @@ baseStats.spd = 6;
 
 levelUpFunc = function() {
 
-	if (level > 2) baseStats.maxHp += 5;
+	baseStats.maxHp += 2;
 	
 	baseStats.radDamPerc += 8;
 	baseStats.kinDamPerc += 8;

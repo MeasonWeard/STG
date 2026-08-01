@@ -2,6 +2,7 @@ global.hud = self;
 player = global.player;
 sc = global.stageController;
 rc = scr_data_getRunController();
+cursor = global.cursor;
 
 hub = sc.hub;
 
@@ -31,6 +32,9 @@ healthBarY = 0;
 
 energyBarX = 0;
 energyBarY = 0;
+
+xpBarX = 0;
+xpBarY = 0;
 
 dashX = 0;
 dashY = 0;
@@ -107,3 +111,16 @@ xpBar.width = 800;
 xpBar.height = 10
 xpBar.depth = depth - 1;
 xpBar.fillCol = #77e3da;
+
+enemyHpBar = instance_create_layer(x, y, "Instances", obj_statusBar);
+enemyHpBar.width = 400;
+enemyHpBar.height = 16;
+enemyHpBar.depth = depth -1;
+enemyHpBar.visible = false;
+
+enemyEnergyBar = instance_create_layer(x, y, "Instances", obj_statusBar);
+enemyEnergyBar.width = 320;
+enemyEnergyBar.height = 14;
+enemyEnergyBar.depth = depth -1;
+enemyEnergyBar.visible = false;
+enemyEnergyBar.fillCol = c_aqua;

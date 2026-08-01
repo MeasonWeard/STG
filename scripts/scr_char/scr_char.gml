@@ -98,11 +98,13 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	var totalDam = kin + fire + chem + elec + rad;
 	
 	if (totalDam < 1) return 0;
+	
+	char.hurt = true;
 
 	if (hitOutcome != 1) totalDam = max(floor(totalDam * hitOutcome), 1);
 	
 	if (!ignoreShield and char.shield > 0) {
-	
+		
 		char.shield -= 1;
 		return 0;
 	
@@ -112,7 +114,6 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	
 	char.hp = max(char.hp - totalDam, 0);
 		
-	char.hurt = true;
 	char.hurtTick = char.shieldRegenDelay * 60;
 	
 	char.mostRecentDamage = {

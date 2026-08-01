@@ -1,6 +1,6 @@
 event_inherited();
 
-name = "bertha";
+name = "Bertha";
 tags = ["bio"];
 bloodCol = c_red;
 
@@ -32,10 +32,12 @@ targetReaquireDist = 90;
 //stats
 baseStats.maxHp = 80;
 baseStats.spd += 0.5;
+baseStats.maxShield = 5;
+baseStats.maxEnergy = 100;
 
 levelUpFunc = function() {
 
-	if (level > 2) baseStats.maxHp += 5;
+	baseStats.maxHp += 4;
 	
 	baseStats.kinDamPerc += 10;
 	
