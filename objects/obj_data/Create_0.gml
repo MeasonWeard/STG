@@ -309,6 +309,8 @@ soundProfiles = {
 	spiderShoot: [snd_spiderShoot1, snd_spiderShoot2, snd_spiderShoot3],
 	alienShoot: [snd_alienShoot1, snd_alienShoot2, snd_alienShoot3],
 	fungusBlast: [snd_fungusBlast1, snd_fungusBlast2, snd_fungusBlast3],
+	sprayGun: [snd_sprayGun1, snd_sprayGun2, snd_sprayGun3],
+	sniper: [snd_sniper1, snd_sniper2, snd_sniper3],
 	
 	//melee
 	cleaverSwing: [snd_cleaverSwing1, snd_cleaverSwing2, snd_cleaverSwing3],

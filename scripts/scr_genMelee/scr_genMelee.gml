@@ -123,6 +123,10 @@ function scr_genMelee_applyStandardStat(melee, key, level, baseStats) {
 	if (key != "dam" and amount != 0) {
 		melee[$ key] += amount;
 	}
+	
+	//limit stats
+	melee.rechargeTime = max(melee.rechargeTime, baseStats.rechargeTime * 0.25);
+	melee.attackRate = clamp(melee.attackRate, 0.1, 30);
 
 }
 

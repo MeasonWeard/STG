@@ -194,6 +194,15 @@ function scr_genGuns_applyStandardStat(gun, key, level, baseStats) {
 	if (key != "dam" and amount != 0) {
 		gun[$ key] += amount;
 	}
+	
+	//limit stats
+	gun.reloadTime = max(gun.reloadTime, baseStats.reloadTime * 0.25);
+	gun.range = min(gun.range, baseStats.range * 2);
+	gun.minAimOff = max(gun.minAimOff, 0.1);
+	gun.maxAimOff = max(gun.maxAimOff, 0.2);
+	gun.recoil = max(gun.recoil, 0);
+	gun.blastSpread = max(gun.blastSpread, 0.25);
+	gun.fireRate = clamp(gun.fireRate, 0.1, 60);
 
 }
 
@@ -709,6 +718,61 @@ function scr_genGuns_arcPulseRifle(level, rarity) {
 	
 }
 
+function scr_genGuns_sniperPulseRifle(level, rarity) {
+
+	var gun = new gun_pulseRifle(level, rarity);
+	gun.name = "Sniper Pulse Rifle";
+
+	var damTypes = ["kin","kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+
+	//
+	gun.clipSize = 1;
+	gun.reloadTime = 1.8;
+	gun.shootSounds = global.data.soundProfiles.sniper;
+	
+	if (level > 0) {
+		
+		var minOa = max(1, floor(level * 0.5));
+		var maxOa = level;
+		gun.bonusStats.oa += irandom_range(minOa, maxOa);
+		
+	}
+	
+	if (level > 0) {
+		
+		var minDam = max(1, ceil(level * 0.5));
+		var maxDam = level + 1;
+		var bonusDam = irandom_range_biased(1, minDam, maxDam);
+	
+		repeat(bonusDam) {
+	
+			var t = scr_weapons_pickFromTop2DamageTypes(gun);
+			scr_loot_addDamage(gun, t, 1);
+	
+		}
+	
+	}
+	
+	//
+	
+	var config = {
+		
+		standardStats: ["reloadTime", "dam", "range", "minAimOff"],
+
+		bonusStats: ["oa", "oa"]
+		
+	};
+	
+	if (scr_random_chance(50)) array_push(config.bonusStats, "elemental");
+	
+	if (rarity > 2) array_push(config.standardStats, "dam", "dam", "range", "reloadTime");
+	if (rarity > 3) array_push(config.standardStats, "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config, 2);
+	
+}
+
 #endregion
 
 #region //SPECIAL SHOTGUNS
@@ -734,7 +798,7 @@ function scr_genGuns_sprayShotgun(level, rarity) {
 	gun.blastProjectiles = 12;
 	gun.projSprite = spr_bulletLarge;
 	gun.range = 950;
-	gun.shootSounds = [snd_sprayGun1];
+	gun.shootSounds = global.data.soundProfiles.sprayGun;
 	
 	//name
 	var prefix = "";

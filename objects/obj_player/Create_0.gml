@@ -45,8 +45,8 @@ gear = scr_data_loadEquippedGear();
 
 var weaponsData = scr_data_loadEquippedWeapons();
 
-weaponsData.weapon1 = scr_genGuns_assassinatorAutoShotgun(6, 4);
-weaponsData.weapon2 = scr_genGuns_autoShotgun(6, 4);
+weaponsData.weapon1 = scr_genGuns_arcPulseRifle(25, 6);
+weaponsData.weapon2 = scr_genGuns_sniperPulseRifle(25, 6);
 scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 
