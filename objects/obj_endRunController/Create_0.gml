@@ -140,9 +140,43 @@ reveal = function(lootKey) {
 	
 }
 
+lock = function(index) {
+	
+	var lockedLen = array_length(locked);
+	
+	for (var i = lockedLen - 1; i > -1; i--) {
+	
+		var j = locked[i];
+		
+		if (j == index) {
+			array_delete(locked, i, 1);
+			exit;
+		}
+	
+	}
+	
+	array_push(locked, index);
+	
+}
+
 scrapRevealed = function(index) {
 	
 	var ec = global.endRunController;
+	
+	var lockedLen = array_length(locked);
+	
+	for (var i = lockedLen - 1; i > -1; i--) {
+	
+		var j = locked[i];
+		
+		if (j == index) {
+			
+			audio_play_sound(snd_error, 1, false);
+			exit;
+			
+		}
+	
+	}
 	
 	ec.revealedLoot[index] = undefined;
 	
@@ -154,8 +188,26 @@ scrapAll = function() {
 
 	var ec = global.endRunController;
 	
-	//do something in a for loop
+	//do something in a for loop for scrapped loot
 	
+	var lockedLen = array_length(locked);
+	var revealedLen = array_length(revealedLoot);
+	
+	for (var i = 0; i < lockedLen; i ++) {
+		
+		var j = locked[i];
+		
+		if (j >= revealedLen) continue;
+		
+		var item = revealedLoot[j];
+		
+		if (!is_struct(item)) continue
+		
+		array_push(takenLoot, item);
+		
+	}
+	
+	locked = [];
 	revealedLoot = [];
 	
 	ec.tab = "loot";
@@ -182,6 +234,7 @@ takeAll = function() {
 		
 	}
 	
+	locked = [];
 	revealedLoot = [];
 	
 	lootPage = 0;
@@ -234,6 +287,7 @@ uniqueLoot = rc.uniqueLoot;
 revealKey = undefined;
 revealedLoot = [];
 takenLoot = [];
+locked = [];
 
 alpha = variable_struct_exists(loot, "alpha") ? loot[$ "alpha"] : 0;
 beta = variable_struct_exists(loot, "beta") ? loot[$ "beta"] : 0;
@@ -249,7 +303,7 @@ unique = array_length(uniqueLoot);
 //gamma = 100;
 //delta = 100;
 //sigma = 100;
-//omega = 100;
+//omega = 5;
 //
 
 lootButtons = [];

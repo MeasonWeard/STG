@@ -255,7 +255,7 @@ if (tab == "reveal") {
 	
 	draw_set_font(fnt_normal);
 	draw_set_halign(fa_middle);
-	draw_text(titleX, titleY + 60, "Right click individual items to scrap one at a time.");
+	draw_text(titleX, titleY + 60, "Right click individual items to scrap one at a time. Left click to lock items from being scrapped.");
 	
 	var lootCount = array_length(revealedLoot);
 	var itemsPerPage = lootColumns * lootRows;
@@ -275,6 +275,8 @@ if (tab == "reveal") {
 		draw_set_halign(fa_middle);
 		draw_text(pageTextX, titleY + 60, "Page " + string(lootPage + 1) + "/" + string(maxPage + 1));
 	}
+	
+	var lockedLen = array_length(locked);
 
 	for (var i = startIndex; i < endIndex; i++) {
 
@@ -296,11 +298,31 @@ if (tab == "reveal") {
 			lootSlotSize,
 			fnt_large,
 			true,
-			undefined,
-			undefined,
+			lock,
+			args,
 			scrapRevealed,
 			args
 		);
+		
+		var isLocked = false;
+		
+		for (var j = 0; j < array_length(locked); j++) {
+		
+			var index = locked[j];
+			
+			if (i == index) {
+				isLocked = true;
+				break;
+			}
+		
+		}
+		
+		if (isLocked) {
+		
+			draw_sprite(spr_locked, 0, slotX + 8, slotY + 8);
+		
+		}
+		
 	}
 
 	
