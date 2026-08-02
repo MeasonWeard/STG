@@ -406,6 +406,7 @@
     {"id":{"name":"snd_spiderShoot1","path":"sounds/snd_spiderShoot1/snd_spiderShoot1.yy",},},
     {"id":{"name":"snd_spiderShoot2","path":"sounds/snd_spiderShoot2/snd_spiderShoot2.yy",},},
     {"id":{"name":"snd_spiderShoot3","path":"sounds/snd_spiderShoot3/snd_spiderShoot3.yy",},},
+    {"id":{"name":"snd_sprayGun1","path":"sounds/snd_sprayGun1/snd_sprayGun1.yy",},},
     {"id":{"name":"snd_stimPac","path":"sounds/snd_stimPac/snd_stimPac.yy",},},
     {"id":{"name":"snd_swish1","path":"sounds/snd_swish1/snd_swish1.yy",},},
     {"id":{"name":"snd_swish2","path":"sounds/snd_swish2/snd_swish2.yy",},},

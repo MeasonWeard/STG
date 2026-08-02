@@ -130,7 +130,7 @@ function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 
-	name = "Auto Shotgun";
+	name = "Auto-Shotgun";
 	spr = spr_autoShotgun;
 	projSprite = spr_bulletSmall;
 	

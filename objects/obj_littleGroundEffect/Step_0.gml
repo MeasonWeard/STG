@@ -7,3 +7,4 @@ if (die) {
 	if (image_alpha < 0.02) instance_destroy();
 	
 }
+

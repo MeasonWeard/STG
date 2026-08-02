@@ -100,6 +100,9 @@ function scr_file_createBlankSave() {
 
 	var newSave = {
 		
+		version: VERSION,
+		build: BUILD,
+		
 		timeData: {
 			gameStart: date_current_datetime(),
 			lastSave: date_current_datetime(),

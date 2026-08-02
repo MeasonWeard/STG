@@ -248,7 +248,6 @@ function scr_guns_projectileSubimage(gun) {
 	var el = undefined;
 	
 	var highest = scr_weapons_getTop2DamageTypes(gun, false);
-
 	var len = array_length(highest);
 	
 	if (len < 1) {
@@ -257,7 +256,7 @@ function scr_guns_projectileSubimage(gun) {
 		
 	} else if (len == 1) {
 		
-		el = highest[0];
+		el = highest[0].key;
 		
 	} else if (len > 1) {
 		

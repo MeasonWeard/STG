@@ -1,7 +1,36 @@
 #region //HELPER FUNCTIONS
+function scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes) {
+	
+	if (rarity < 1) {
+		return gun;
+	}
+	
+	var baseDamType = scr_weapons_getHighestDamageType(gun);
+	var baseDamTypeKey = baseDamType.key;
+	var baseDamage = gun.damage[$ baseDamTypeKey];
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+
+	if (level == 1) {
+		bonusDamage = choose(0, bonusDamage);
+	}
+
+	var damType = baseDamTypeKey;
+
+	if (rarity > 1) {
+		damType = scr_randomElement(damTypes);
+	}
+
+	scr_loot_addDamage(gun, damType, bonusDamage);
+	
+	return gun;
+	
+}
+
 function scr_genGuns_applyGenericBonuses(gun, level, rarity, config, bonusChanceMod = 1) {
 
-	if (rarity <= 1) {
+	if (rarity < 1) {
 		return gun;
 	}
 
@@ -18,26 +47,6 @@ function scr_genGuns_applyGenericBonuses(gun, level, rarity, config, bonusChance
 		blastProjectiles: gun.blastProjectiles,
 		blastSpread: gun.blastSpread
 	};
-
-	// Initial damage bonus
-	var baseDamType = scr_weapons_getHighestDamageType(gun);
-	var baseDamTypeKey = baseDamType.key;
-	var baseDamage = gun.damage[$ baseDamTypeKey];
-	
-	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
-	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
-
-	if (level == 1) {
-		bonusDamage = choose(0, bonusDamage);
-	}
-
-	var damType = baseDamTypeKey;
-
-	if (rarity > 1) {
-		damType = scr_randomElement(config.damTypes);
-	}
-
-	scr_loot_addDamage(gun, damType, bonusDamage);
 
 	var standardKeys = [];
 	array_copy(standardKeys, 0, config.standardStats, 0, array_length(config.standardStats));
@@ -234,18 +243,19 @@ function scr_genGuns_applyBonusStat(gun, key, level) {
 }
 #endregion
 
-//GUNS
+#region //GENERIC
 function scr_genGuns_blaster(level, rarity) {
 
 	var gun = new gun_blaster(level, rarity);
+
+	var damTypes = ["kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
 
 	var config = {
 		
 		standardStats: ["clipSize", "fireRate", "reloadTime", "recoil", "range"],
 
 		bonusStats: ["oa", "elemental"],
-		
-		damTypes: ["kin","kin","fire","chem","elec","rad"]
 		
 	};
 	
@@ -259,14 +269,15 @@ function scr_genGuns_blaster(level, rarity) {
 function scr_genGuns_pistol(level, rarity) {
 
 	var gun = new gun_pistol(level, rarity);
-
+	
+	var damTypes = ["kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	
 	var config = {
 		
 		standardStats: ["clipSize", "reloadTime", "recoil", "range", "maxAimOff"],
 
-		bonusStats: ["oa", "elemental"],
-		
-		damTypes: ["kin","kin","fire","chem","elec","rad"]
+		bonusStats: ["oa", "elemental"]
 		
 	};
 	
@@ -280,14 +291,15 @@ function scr_genGuns_pistol(level, rarity) {
 function scr_genGuns_smg(level, rarity) {
 
 	var gun = new gun_smg(level, rarity);
-
+	
+	var damTypes = ["kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	
 	var config = {
 		
 		standardStats: ["clipSize", "clipSize", "reloadTime", "fireRate", "fireRate", "maxAimOff"],
 
-		bonusStats: ["elemental", "moveSpeed"],
-		
-		damTypes: ["kin","kin","fire","chem","elec","rad"]
+		bonusStats: ["elemental", "moveSpeed"]
 		
 	};
 	
@@ -301,14 +313,15 @@ function scr_genGuns_smg(level, rarity) {
 function scr_genGuns_pulseRifle(level, rarity) {
 
 	var gun = new gun_pulseRifle(level, rarity);
-
+	
+	var damTypes = ["kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	
 	var config = {
 		
 		standardStats: ["clipSize", "reloadTime", "dam", "maxAimOff", "minAimOff", "recoil"],
 
-		bonusStats: ["oa", "oa"],
-		
-		damTypes: ["kin","kin","fire","chem","elec","rad"]
+		bonusStats: ["oa", "oa"]
 		
 	};
 	
@@ -325,13 +338,14 @@ function scr_genGuns_shotgun(level, rarity) {
 
 	var gun = new gun_shotgun(level, rarity);
 
+	var damTypes = ["kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	
 	var config = {
 		
 		standardStats: ["clipSize", "fireRate", "reloadTime", "blastProjectiles", "blastSpread", "range"],
 
-		bonusStats: ["da","elemental"],
-		
-		damTypes: ["kin","kin","fire","chem","elec","rad"]
+		bonusStats: ["da","elemental"]
 		
 	};
 	
@@ -345,14 +359,15 @@ function scr_genGuns_shotgun(level, rarity) {
 function scr_genGuns_autoShotgun(level, rarity) {
 
 	var gun = new gun_autoShotgun(level, rarity);
-
+	
+	var damTypes = ["kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	
 	var config = {
 		
 		standardStats: ["clipSize", "fireRate", "reloadTime", "blastProjectiles", "blastSpread", "range"],
 
-		bonusStats: ["da","elemental"],
-		
-		damTypes: ["kin","kin","fire","chem","elec","rad"]
+		bonusStats: ["da","elemental"]
 		
 	};
 	
@@ -362,3 +377,508 @@ function scr_genGuns_autoShotgun(level, rarity) {
 	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
 
 }
+#endregion
+	
+#region//SPECIAL BLASTERS
+
+function scr_genGuns_plasmaBlaster(level, rarity) {
+
+	var gun = new gun_blaster(level, rarity);
+	gun.name = "Plasma Blaster";
+
+	var baseDamage = gun.damage.kin;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.fire = halfBaseDamage;
+	gun.damage.rad = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	var damType = choose("fire", "rad");
+	
+	scr_loot_addDamage(gun, damType, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "recoil", "range"],
+
+		bonusStats: ["oa", "elemental"],
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "fireRate");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_ionBlaster(level, rarity) {
+
+	var gun = new gun_blaster(level, rarity);
+	gun.name = "Ion Blaster";
+
+	var baseDamage = gun.damage.kin;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.elec = halfBaseDamage;
+	gun.damage.rad = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	var damType = choose("elec", "rad");
+	
+	scr_loot_addDamage(gun, damType, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "recoil", "range"],
+
+		bonusStats: ["oa", "elemental"],
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "fireRate");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+
+#endregion
+
+#region //SPECIAL PISTOLS
+
+function scr_genGuns_autoPistol(level, rarity) {
+	
+	var gun = new gun_pistol(level, rarity);
+	gun.name = "";
+	
+	var dt = choose("normal", "oneType");
+	
+	if (dt == "normal") {
+		var damTypes = ["fire","chem","elec","rad"];
+		gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	}
+	
+	if (dt == "oneType") {
+	
+		var baseDamage = gun.damage.kin + 1;
+		var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+		var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+		
+		var damType = choose("kin","fire","chem","elec","rad");
+
+		gun.damage.kin = 0;
+		gun.damage[$ damType] = baseDamage + bonusDamage;
+		
+		var prefix = "";
+		
+		switch(damType) {
+		
+			case "kin": prefix = "Strong "; break;
+			case "fire": prefix = "Hot "; break;
+			case "chem": prefix = "Caustic "; break;
+			case "elec": prefix = "Charged "; break;
+			case "rad": prefix = "Fissile "; break;
+		
+		}
+		
+		gun.name += prefix;
+	
+	}
+	
+	//
+	gun.auto = true;
+	gun.clipSize = 6;
+	gun.fireRate = 9;
+	
+	gun.name += "Auto-Pistol";
+	
+	var extraDam = level div 4;
+	repeat(extraDam) {
+		
+		var t = scr_weapons_pickFromTop2DamageTypes(gun);
+		scr_loot_addDamage(gun, t, 1);
+		
+	}
+	
+	//
+	var config = {
+		
+		standardStats: ["clipSize", "clipSize", "reloadTime", "recoil", "range", "maxAimOff"],
+
+		bonusStats: ["elemental","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "maxAimOff", "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_bigPistol(level, rarity) {
+	
+	var gun = new gun_pistol(level, rarity);
+	var prefix = "";
+	gun.name = "";
+
+	var dt = choose("normal", "oneType");
+	
+	if (dt == "normal") {
+		var damTypes = ["fire","chem","elec","rad"];
+		gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	}
+	
+
+	
+	if (dt == "oneType") {
+	
+		var baseDamage = gun.damage.kin + 1;
+		var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+		var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+		
+		var damType = choose("kin","fire","chem","elec","rad");
+
+		gun.damage.kin = 0;
+		gun.damage[$ damType] = baseDamage + bonusDamage;
+		
+
+		
+		switch(damType) {
+		
+			case "kin": prefix = "Strong "; break;
+			case "fire": prefix = "Hot "; break;
+			case "chem": prefix = "Caustic "; break;
+			case "elec": prefix = "Charged "; break;
+			case "rad": prefix = "Fissile "; break;
+		
+		}
+		
+	}
+	
+	//
+	gun.clipSize = 8;
+	gun.fireRate = 3;
+	gun.reloadTime += 0.4;
+	gun.recoil += 1;
+	gun.stability -= 0.02;
+	
+	gun.name += "BIG " + prefix + "Pistol";
+	
+	var extraDam = level;
+	repeat(extraDam) {
+		
+		var t = scr_weapons_pickFromTop2DamageTypes(gun);
+		scr_loot_addDamage(gun, t, 1);
+		
+	}
+	
+	//
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "recoil", "range", "maxAimOff"],
+
+		bonusStats: ["elemental","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "maxAimOff", "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+#endregion
+
+#region //SPECIAL SMG
+
+function scr_genGuns_slagSmg(level, rarity) {
+
+	var gun = new gun_smg(level, rarity);
+	gun.name = "Slag SMG";
+
+	var baseDamage = gun.damage.kin;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.fire = halfBaseDamage;
+	gun.damage.chem = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	var damType = choose("fire", "chem");
+	
+	scr_loot_addDamage(gun, damType, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "clipSize", "reloadTime", "fireRate", "fireRate", "maxAimOff"],
+
+		bonusStats: ["elemental", "moveSpeed"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "fireRate");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_galvanicSmg(level, rarity) {
+
+	var gun = new gun_smg(level, rarity);
+	gun.name = "Galvanic SMG";
+
+	var baseDamage = gun.damage.kin;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.elec = halfBaseDamage;
+	gun.damage.chem = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	var damType = choose("elec", "chem");
+	
+	scr_loot_addDamage(gun, damType, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "clipSize", "reloadTime", "fireRate", "fireRate", "maxAimOff"],
+
+		bonusStats: ["elemental", "moveSpeed"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "fireRate");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+#endregion
+
+#region //SPECIAL PULSE RIFLES
+
+function scr_genGuns_arcPulseRifle(level, rarity) {
+
+	var gun = new gun_pulseRifle(level, rarity);
+	gun.name = "Arc Pulse Rifle";
+
+	var baseDamage = gun.damage.kin;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.fire = halfBaseDamage;
+	gun.damage.elec = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	var damType = choose("fire", "elec");
+	
+	scr_loot_addDamage(gun, damType, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "reloadTime", "dam", "maxAimOff", "minAimOff", "recoil"],
+
+		bonusStats: ["oa", "oa"]
+		
+	};
+	
+	if (scr_random_chance(50)) array_push(config.bonusStats, "elemental");
+	
+	if (rarity > 2) array_push(config.standardStats, "range");
+	if (rarity > 3) array_push(config.standardStats, "maxAimOff");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config, 2);
+	
+}
+
+#endregion
+
+#region //SPECIAL SHOTGUNS
+
+function scr_genGuns_sprayShotgun(level, rarity) {
+
+	var gun = new gun_shotgun(level, rarity);
+	gun.name = "";
+
+	//damage
+	var baseDamage = gun.damage.kin - 1;
+
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	var damType = choose("fire", "chem");
+	gun.damage.kin = 0;
+	gun.damage[$ damType] = baseDamage + bonusDamage;
+	
+	//base stats
+	gun.spd = 10;
+	gun.blastSpread = 14;
+	gun.blastProjectiles = 12;
+	gun.projSprite = spr_bulletLarge;
+	gun.range = 950;
+	gun.shootSounds = [snd_sprayGun1];
+	
+	//name
+	var prefix = "";
+	
+	switch(damType) {
+		case "fire": prefix = "Flame "; break;
+		case "chem": prefix = "Chemical "; break;
+	}
+	
+	gun.name = prefix + " Spray Shotgun";
+
+	//extra stats
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "blastProjectiles", "blastSpread", "range"],
+
+		bonusStats: ["da","elemental","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_doubleBarreledShotgun(level, rarity) {
+
+	var gun = new gun_shotgun(level, rarity);
+	gun.name = "Double-Barreled Shotgun";
+
+	var damTypes = ["kin","kin","fire","chem","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	
+	//base stats
+	gun.auto = true;
+	gun.fireRate = 20;
+	gun.clipSize = 2;
+	gun.reloadTime = 2.4;
+	gun.blastSpread = 9;
+
+	var extraDam = level div 3;
+	repeat(extraDam) {
+		
+		var t = scr_weapons_pickFromTop2DamageTypes(gun);
+		scr_loot_addDamage(gun, t, 1);
+		
+	}
+
+	//extra stats
+	var config = {
+		
+		standardStats: ["reloadTime", "reloadTime", "blastProjectiles", "blastSpread", "range"],
+
+		bonusStats: ["da","elemental","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam", "blastProjectiles");
+	if (rarity > 3) array_push(config.standardStats, "dam", "blastProjectiles");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+#endregion
+
+#region //SPECIAL AUTO-SHOTGUNS
+
+function scr_genGuns_poloniumAutoShotgun(level, rarity) {
+
+	var gun = new gun_autoShotgun(level, rarity);
+	gun.name = "Polonium Auto-Shotgun";
+
+	var baseDamage = gun.damage.kin;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.chem = halfBaseDamage;
+	gun.damage.rad = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	var damType = choose("chem", "rad");
+	
+	scr_loot_addDamage(gun, damType, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "blastProjectiles", "blastSpread", "range"],
+
+		bonusStats: ["da","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_assassinatorAutoShotgun(level, rarity) {
+
+	var gun = new gun_autoShotgun(level, rarity);
+	gun.name = "Assassinator Auto-Shotgun";
+
+	var damTypes = ["kin","kin","fire","chem","elec","elec","rad"];
+	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
+	
+	var extraDam = level div 4;
+	repeat(extraDam) {
+		
+		var t = scr_weapons_pickFromTop2DamageTypes(gun);
+		scr_loot_addDamage(gun, t, 1);
+		
+	}
+	
+	//
+	gun.fireRate = 2.3;
+	gun.clipSize = 6;
+	gun.blastProjectiles = 4;
+	gun.blastSpread = 3.5;
+	gun.range = 850;
+	gun.spd = 24;
+	gun.recoil = 2.2;
+	
+	//
+	
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "blastProjectiles", "range", "range"],
+
+		bonusStats: ["oa","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+#endregion

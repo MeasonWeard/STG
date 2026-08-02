@@ -349,6 +349,7 @@
     {"name":"snd_spiderShoot1","order":17,"path":"sounds/snd_spiderShoot1/snd_spiderShoot1.yy",},
     {"name":"snd_spiderShoot2","order":15,"path":"sounds/snd_spiderShoot2/snd_spiderShoot2.yy",},
     {"name":"snd_spiderShoot3","order":16,"path":"sounds/snd_spiderShoot3/snd_spiderShoot3.yy",},
+    {"name":"snd_sprayGun1","order":30,"path":"sounds/snd_sprayGun1/snd_sprayGun1.yy",},
     {"name":"snd_swish1","order":6,"path":"sounds/snd_swish1/snd_swish1.yy",},
     {"name":"snd_swish2","order":7,"path":"sounds/snd_swish2/snd_swish2.yy",},
     {"name":"snd_swish3","order":8,"path":"sounds/snd_swish3/snd_swish3.yy",},
