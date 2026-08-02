@@ -675,7 +675,7 @@ function scr_skills_formatDescription(skillInst) {
 		charges = 1;
 		energyCost = 55;
 		projectiles = 6;
-		cooldownTime = 9;
+		cooldownTime = 8;
 		radius = 50;
 		life = 4;
 	

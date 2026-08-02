@@ -200,7 +200,8 @@ if (tab == "loot") {
 }
 
 if (tab == "reveal") {
-
+	
+	lockDelay --;
 	//generate loot
 	var maxLevel = rc.runLevel + 2;
 	//maxLevel = 12;
@@ -234,7 +235,17 @@ if (tab == "reveal") {
 		
 		while (amount > 0) {
 		
-			var newLoot = scr_loot_generateGenericLoot(maxLevel, rarityNum);
+			var specialChance = min(25, 10 + maxLevel * 0.2);
+			var special = scr_random_chance(specialChance);
+		
+			var newLoot = noone;
+			
+			if (special) {
+				newLoot = scr_loot_generateSpecialLoot(maxLevel, rarityNum);
+			} else {
+				newLoot = scr_loot_generateGenericLoot(maxLevel, rarityNum);	
+			}
+			
 			array_push(revealedLoot, newLoot);
 			amount--;
 		
@@ -325,6 +336,10 @@ if (tab == "reveal") {
 		
 	}
 
+	
+} else {
+
+	lockDelay = 12;
 	
 }
 

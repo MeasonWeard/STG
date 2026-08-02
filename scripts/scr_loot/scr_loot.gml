@@ -230,6 +230,67 @@ function scr_loot_addDamageToExisting(weapon, val) {
 
 }
 
+function scr_loot_addDamageToExistingSpread(weapon, amount) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var damage = weapon.damage;
+	var damTypes = [
+		"kin",
+		"fire",
+		"chem",
+		"elec",
+		"rad"
+	];
+
+	var validCount = 0;
+
+	for (var i = 0; i < array_length(damTypes); i++) {
+
+		var key = damTypes[i];
+
+		if (variable_struct_exists(damage, key) and damage[$ key] > 0) {
+			validCount++;
+		}
+
+	}
+
+	if (validCount == 0) exit;
+
+	amount = round(amount);
+	if (amount <= 0) exit;
+
+	// No need to split if only one damage type exists
+	if (validCount == 1) {
+
+		scr_loot_addDamageToExisting(weapon, amount);
+		exit;
+
+	}
+
+	var chunks = [];
+	var remaining = amount;
+
+	while (remaining > 0) {
+
+		var chunk = min(remaining, irandom_range(2, 4));
+
+		array_push(chunks, chunk);
+		remaining -= chunk;
+
+	}
+
+	array_shuffle(chunks);
+
+	for (var i = 0; i < array_length(chunks); i++) {
+
+		scr_loot_addDamageToExisting(weapon, chunks[i]);
+
+	}
+
+
+}
+
 function scr_loot_generateGenericLoot(maxLevel, rarity) {
 
 	var loot = noone;
@@ -271,6 +332,73 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "headgear") {
 		
+		var func = choose(scr_genHeadgear_hardHat, scr_genHeadgear_weldingMask, scr_genHeadgear_safetyMask,
+		scr_genHeadgear_arcFlashHood, scr_genHeadgear_leadHood, scr_genHeadgear_respirator, scr_genHeadgear_safetyGoggles,
+		scr_genHeadgear_blastHelmet, scr_genHeadgear_insulatedHood, scr_genHeadgear_radiationVisor, scr_genHeadgear_dielectricHelmet);
+		
+		loot = func(level, rarity);
+		
+	}
+	
+	return loot;
+	
+}
+
+function scr_loot_generateSpecialLoot(maxLevel, rarity) {
+	
+	var loot = noone;
+	var type = choose("gun","melee","device","tie","headgear");
+	
+	var level = scr_loot_rollLevel(maxLevel);
+	
+		if (type == "gun") {
+		
+		var func = choose(
+		
+		scr_genGuns_plasmaBlaster, scr_genGuns_ionBlaster, //blasters
+		scr_genGuns_autoPistol, scr_genGuns_bigPistol, //pistols
+		scr_genGuns_slagSmg, scr_genGuns_galvanicSmg, scr_genGuns_notSoSubSmg, //smg
+		scr_genGuns_arcPulseRifle, scr_genGuns_sniperPulseRifle, //pulse rifles
+		scr_genGuns_sprayShotgun, scr_genGuns_doubleBarreledShotgun, //shotguns
+		scr_genGuns_poloniumAutoShotgun, scr_genGuns_assassinatorAutoShotgun //auto-shotgun
+		
+		);
+		
+		loot = func(level, rarity);
+		
+	}
+	
+	if (type == "melee") {
+		
+		//NOT SPECIAL YET
+		var func = choose(scr_genMelee_cleaver, scr_genMelee_hammer, scr_genMelee_prod);
+		loot = func(level, rarity);
+
+	}
+	
+	if (type == "device") {
+		
+		//NOT SPECIAL YET
+		var devType = choose("laserPointer", "watch", "powerBank");
+		if (devType == "laserPointer") loot = scr_genDevices_laserPointer(level, rarity);
+		if (devType == "watch") loot = scr_genDevices_watch(level, rarity);
+		if (devType == "powerBank") loot = scr_genDevices_powerBank(level, rarity);
+		
+	}
+	
+	if (type == "tie") {
+		
+		//NOT SPECIAL YET
+		var func = choose(scr_genTies_physics, scr_genTies_chemistry, scr_genTies_biology, 
+		scr_genTies_engineering);
+		
+		loot = func(level, rarity);
+		
+	}
+	
+	if (type == "headgear") {
+		
+		//NOT SPECIAL YET
 		var func = choose(scr_genHeadgear_hardHat, scr_genHeadgear_weldingMask, scr_genHeadgear_safetyMask,
 		scr_genHeadgear_arcFlashHood, scr_genHeadgear_leadHood, scr_genHeadgear_respirator, scr_genHeadgear_safetyGoggles,
 		scr_genHeadgear_blastHelmet, scr_genHeadgear_insulatedHood, scr_genHeadgear_radiationVisor, scr_genHeadgear_dielectricHelmet);

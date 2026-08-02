@@ -10,6 +10,7 @@ tabIndex = 0;
 tab = tabs[tabIndex];
 
 keyPressDelay = 12;
+lockDelay = 12;
 returnToHubTick = 180;
 
 //formatting
@@ -141,6 +142,8 @@ reveal = function(lootKey) {
 }
 
 lock = function(index) {
+	
+	if (lockDelay > 0) exit;
 	
 	var lockedLen = array_length(locked);
 	
@@ -303,7 +306,7 @@ unique = array_length(uniqueLoot);
 //gamma = 100;
 //delta = 100;
 //sigma = 100;
-//omega = 5;
+//omega = 50;
 //
 
 lootButtons = [];
@@ -398,7 +401,7 @@ takeButton.txt = "Take All";
 takeButton.leftFunc = takeAll;
 
 scrapAllButton = instance_create_layer(xMid + 100, titleY + 30, "Instances", obj_buttonRectangle);
-scrapAllButton.txt = "Scrap All";
+scrapAllButton.txt = "Take Locked Items";
 scrapAllButton.leftFunc = scrapAll;
 
 //page buttons
