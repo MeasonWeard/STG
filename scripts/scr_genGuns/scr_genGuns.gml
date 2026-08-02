@@ -93,9 +93,9 @@ function scr_genGuns_applyStandardStat(gun, key, level, baseStats) {
 	switch (key) {
 
 		case "dam":
-
-			low = 1 + level div 5;
-			high = 2 + ceil(level / 4);
+			//to do: based on base damage
+			low = 1 + level div 4;
+			high = 2 + ceil(level / 3);
 
 			amount = irandom_range_biased(low, high, LOOT_BIAS);
 			scr_loot_addDamageToExisting(gun, amount);
