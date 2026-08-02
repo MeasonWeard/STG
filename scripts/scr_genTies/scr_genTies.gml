@@ -1,6 +1,8 @@
+#region//GENERIC
 function scr_genTies_physics(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
+	tie.name = "Physicist's Tie";
 	var stats = tie.stats;
 	
 	var keys = ["kinDamPerc","radDamPerc","maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay"];
@@ -80,8 +82,6 @@ function scr_genTies_physics(level, rarity) {
 	
 	}
 	
-	tie.name = "Physicist's Tie";
-	
 	return tie;
 	
 }
@@ -89,6 +89,7 @@ function scr_genTies_physics(level, rarity) {
 function scr_genTies_chemistry(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
+	tie.name = "Chemist's Tie";
 	var stats = tie.stats;
 	
 	var keys = ["chemDamPerc","fireDamPerc","energyRegen","maxHp","maxHpPerc","stimPackRegen"];
@@ -167,8 +168,6 @@ function scr_genTies_chemistry(level, rarity) {
 	
 	}
 	
-	tie.name = "Chemist's Tie";
-	
 	return tie;
 	
 }
@@ -176,6 +175,7 @@ function scr_genTies_chemistry(level, rarity) {
 function scr_genTies_biology(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
+	tie.name = "Biologist's Tie";
 	var stats = tie.stats;
 	
 	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","healingPerc","meleeDamPerc","da"];
@@ -237,8 +237,8 @@ function scr_genTies_biology(level, rarity) {
 		
 		if (key == "meleeDamPerc") {
 			
-			low = level * 3;
-			high = low + 10;
+			low = level * 2;
+			high = low + 8;
 			
 		}
 		
@@ -259,8 +259,6 @@ function scr_genTies_biology(level, rarity) {
 	
 	}
 	
-	tie.name = "Biologist's Tie";
-	
 	return tie;
 	
 }
@@ -269,6 +267,7 @@ function scr_genTies_engineering(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	var stats = tie.stats;
+	tie.name = "Engineer's Tie";
 	
 	var keys = ["elecDamPerc","kinDamPerc","energyRegenPerc","energyPackRegen","gunDamPerc","oa"];
 	
@@ -326,8 +325,8 @@ function scr_genTies_engineering(level, rarity) {
 		
 		if (key == "gunDamPerc") {
 			
-			low = level * 3;
-			high = low + 10;
+			low = level * 2;
+			high = low + 8;
 			
 		}
 		
@@ -355,9 +354,114 @@ function scr_genTies_engineering(level, rarity) {
 		if (amount > 0) scr_loot_addStat(tie, key, amount);
 	
 	}
+		
+	return tie;
 	
-	tie.name = "Engineer's Tie";
+}
+#endregion
+
+#region//SPECIAL
+function scr_genTies_defenderTie(level, rarity) {
+
+	var tie = new tieInst(level, rarity);
+	tie.name = "Defender's Tie";
+	
+	var stats = tie.stats;
+	
+	var keys = ["maxHp","maxHpPerc","maxHpPerc","meleeDamPerc","meleeDamPerc","da","da"];
+	keys = array_concat(keys, keys);
+	
+	var low = 11 * level;
+	var high = 16 * level;
+	
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 2 * level;
+	high = 6 * level;
+	
+	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = level * 2;
+	high = low + 8;
+	
+	stats.meleeDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 2 + level * 3;
+	high = low + 10;
+			
+	stats.da = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	repeat(rarity - 1) {
+	
+		var key = scr_randomElementRemove(keys);
+		low = 1;
+		high = 2;
+		var amount = 0;
+		var integer = true;
+		
+		if (key == "maxHp") {
+			
+			low = level * 5;
+			high = low + 10;
+			
+		}
+		
+		if (key == "maxHpPerc") {
+			
+			low = level * 4;
+			high = low + 10;
+			
+		}
+		
+		if (key == "hpRegen") {
+			
+			low = level * 0.1;
+			high = low + .2;
+			integer = false;
+			
+		}
+		
+		if (key == "hpRegenPerc") {
+			
+			low = level * 4;
+			high = low + 8;
+			
+		}
+		
+		if (key == "healingPerc") {
+			
+			low = level * 4;
+			high = low + 8;
+			
+		}
+		
+		if (key == "meleeDamPerc") {
+			
+			low = level * 2;
+			high = low + 8;
+			
+		}
+		
+		if (key == "da") {
+			
+			low = 2 + level * 3;
+			high = low + 10;
+			
+		}
+	
+		if (integer) {
+			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
+		} else {
+			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
+		}
+	
+		if (amount > 0) scr_loot_addStat(tie, key, amount);
+	
+	}
 	
 	return tie;
 	
 }
+
+
+#endregion
