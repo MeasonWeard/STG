@@ -401,7 +401,7 @@ takeButton.txt = "Take All";
 takeButton.leftFunc = takeAll;
 
 scrapAllButton = instance_create_layer(xMid + 100, titleY + 30, "Instances", obj_buttonRectangle);
-scrapAllButton.txt = "Take Locked Items";
+scrapAllButton.txt = "Scrap all";
 scrapAllButton.leftFunc = scrapAll;
 
 //page buttons

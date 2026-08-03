@@ -483,7 +483,6 @@ function scr_weapons_applyBaseDamageAcrossTypes(weapon, damTypes, numberOfTypes)
 	if (!is_array(damTypes) or array_length(damTypes) < 1) return weapon;
 
 	var baseDamage = weapon.baseDamage;
-	//var damagePortion = round(baseDamage / numberOfTypes);
 	var keys = [];
 	
 	repeat(numberOfTypes) {
@@ -496,15 +495,190 @@ function scr_weapons_applyBaseDamageAcrossTypes(weapon, damTypes, numberOfTypes)
 	scr_weapons_clearDamage(weapon);
 	scr_weapons_addDamageToTypesSpread(weapon, baseDamage, keys);
 	
-	//var keysLen = array_length(keys);
-	
-	//for (var i = 0; i < keysLen; i ++) {
-	
-	//	var el = keys[i];
-	//	weapon.damage[$ el] = damagePortion;
-		
-	//}
-	
 	return weapon;
 	
+}
+
+function scr_weapons_addResistanceToExisting(weapon, val) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var stats = weapon.bonusStats;
+	var valid = [];
+
+	var resTypes = [
+		"kinRes",
+		"fireRes",
+		"chemRes",
+		"elecRes",
+		"radRes"
+	];
+
+	for (var i = 0; i < array_length(resTypes); i++) {
+
+		var key = resTypes[i];
+
+		if (variable_struct_exists(stats, key) and stats[$ key] > 0) {
+			array_push(valid, key);
+		}
+
+	}
+
+	if (array_length(valid) == 0) exit;
+
+	var resType = valid[irandom(array_length(valid) - 1)];
+	stats[$ resType] += val;
+
+}
+
+
+function scr_weapons_addResistanceToExistingSpread(weapon, amount) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var stats = weapon.bonusStats;
+
+	var resTypes = [
+		"kinRes",
+		"fireRes",
+		"chemRes",
+		"elecRes",
+		"radRes"
+	];
+
+	var validCount = 0;
+
+	for (var i = 0; i < array_length(resTypes); i++) {
+
+		var key = resTypes[i];
+
+		if (variable_struct_exists(stats, key) and stats[$ key] > 0) {
+			validCount++;
+		}
+
+	}
+
+	if (validCount == 0) exit;
+
+	amount = round(amount);
+	if (amount <= 0) exit;
+
+	if (validCount == 1) {
+
+		scr_weapons_addResistanceToExisting(weapon, amount);
+		exit;
+
+	}
+
+	var chunks = [];
+	var remaining = amount;
+
+	while (remaining > 0) {
+
+		var chunk = min(remaining, irandom_range(2, 4));
+
+		array_push(chunks, chunk);
+		remaining -= chunk;
+
+	}
+
+	array_shuffle(chunks);
+
+	for (var i = 0; i < array_length(chunks); i++) {
+
+		scr_weapons_addResistanceToExisting(weapon, chunks[i]);
+
+	}
+
+}
+
+
+function scr_weapons_addResistanceToTypesSpread(weapon, amount, resTypes) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+	if (!is_array(resTypes)) exit;
+
+	var stats = weapon.bonusStats;
+	var validTypes = [];
+
+	var allTypes = [
+		"kinRes",
+		"fireRes",
+		"chemRes",
+		"elecRes",
+		"radRes"
+	];
+
+	// Keep duplicates so they act as weights
+	for (var i = 0; i < array_length(resTypes); i++) {
+
+		var key = resTypes[i];
+
+		if (array_contains(allTypes, key)) {
+			array_push(validTypes, key);
+		}
+
+	}
+
+	var validCount = array_length(validTypes);
+
+	if (validCount == 0) exit;
+
+	amount = round(amount);
+	if (amount <= 0) exit;
+
+	if (validCount == 1) {
+
+		var key = validTypes[0];
+
+		if (!variable_struct_exists(stats, key)) {
+			stats[$ key] = 0;
+		}
+
+		stats[$ key] += amount;
+		exit;
+
+	}
+
+	var chunks = [];
+	var remaining = amount;
+
+	while (remaining > 0) {
+
+		var chunk = min(remaining, irandom_range(2, 4));
+
+		array_push(chunks, chunk);
+		remaining -= chunk;
+
+	}
+
+	array_shuffle(chunks);
+
+	for (var i = 0; i < array_length(chunks); i++) {
+
+		var key = validTypes[irandom(validCount - 1)];
+
+		if (!variable_struct_exists(stats, key)) {
+			stats[$ key] = 0;
+		}
+
+		stats[$ key] += chunks[i];
+
+	}
+
+}
+
+
+function scr_weapons_clearResistances(weapon) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var stats = weapon.bonusStats;
+
+	stats.kinRes = 0;
+	stats.fireRes = 0;
+	stats.chemRes = 0;
+	stats.elecRes = 0;
+	stats.radRes = 0;
+
 }

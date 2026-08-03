@@ -245,10 +245,18 @@ if (setupStats) {
 }
 
 if (firstEquip) {
+	
 	firstEquip = false;
+	
 	weaponIndex = 0;
+	
+	if (instance_exists(global.player) and id = global.player.id) {
+		weaponIndex = clamp(global.lastWeaponIndex, 0, array_length(weapons) - 1);
+	}
+	
 	scr_weapons_equipWeapon(self, weaponIndex);
 	prevWeapon = equippedWeapon;
+	
 }
 
 prevWeapon = equippedWeapon;

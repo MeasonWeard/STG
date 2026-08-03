@@ -37,12 +37,15 @@ targetReaquireDist = 40;
 //stats
 baseStats.maxHp = 40;
 baseStats.spd = 7;
+baseStats.da = 15;
 
 levelUpFunc = function() {
 
-	if (level > 2) baseStats.maxHp += 4;
+	if (level > 2) baseStats.maxHpPerc += 10;
 	
 	explosionPower += 0.05;
+	
+	baseStats.da += 1;
 	
 	if (level > 6) baseStats.maxShield = 1;
 	if (level > 12) baseStats.maxShield = 2;

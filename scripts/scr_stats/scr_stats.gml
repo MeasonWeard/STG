@@ -86,12 +86,16 @@ function damageProfile() constructor {
 	
 }
 
-function scr_stats_calculateStat(flat, perc) {
+function scr_stats_calculateStat(flat, perc, roundProduct = false) {
 
 	var dec = perc * 0.01;
 	var add = dec * flat;
 	
-	return flat + add;
+	var amount = flat + add;
+	
+	if (roundProduct) amount = round(amount);
+	
+	return amount;
 	
 }
 
@@ -291,36 +295,29 @@ function scr_stats_calculateFinalStats(stats) {
 	
 	if (!is_struct(stats)) return undefined;
 	
-	var newStats = {
-
-		//health and shields
-		maxHp: scr_stats_calculateStat(stats.maxHp, stats.maxHpPerc),
-		maxShield: scr_stats_calculateStat(stats.maxShield, stats.maxShieldPerc),
-		hpRegen: scr_stats_calculateStat(stats.hpRegen, stats.hpRegenPerc),
-		shieldRegen: scr_stats_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
-		maxEnergy: scr_stats_calculateStat(stats.maxEnergy, stats.maxEnergyPerc),
-		energyRegen: scr_stats_calculateStat(stats.energyRegen, stats.energyRegenPerc),
-		
-		//movement
-		spd: stats.spd,
-		dashRegen: stats.dashRegen,
-		maxDashes: stats.maxDashes,
-
-		//damage
-		kinDam: scr_stats_calculateStat(stats.kinDam, stats.kinDamPerc),
-		fireDam: scr_stats_calculateStat(stats.fireDam, stats.fireDamPerc),
-		chemDam: scr_stats_calculateStat(stats.chemDam, stats.chemDamPerc),
-		elecDam: scr_stats_calculateStat(stats.elecDam, stats.elecDamPerc),
-		radDam: scr_stats_calculateStat(stats.radDam, stats.radDamPerc),
+	var newStats = variable_clone(stats);
 	
-		//resistances
-		kinRes: scr_stats_calculateStat(stats.kinRes, stats.kinResPerc),
-		fireRes: scr_stats_calculateStat(stats.fireRes, stats.fireResPerc),
-		chemRes: scr_stats_calculateStat(stats.chemRes, stats.chemResPerc),
-		elecRes: scr_stats_calculateStat(stats.elecRes, stats.elecResPerc),
-		radRes: scr_stats_calculateStat(stats.radRes, stats.radResPerc),
-		
-	}
+	//health and shields
+	newStats.maxHp = scr_stats_calculateStat(stats.maxHp, stats.maxHpPerc, true);
+	newStats.maxShield = scr_stats_calculateStat(stats.maxShield, stats.maxShieldPerc, true);
+	newStats.hpRegen = scr_stats_calculateStat(stats.hpRegen, stats.hpRegenPerc);
+	newStats.shieldRegen = scr_stats_calculateStat(stats.shieldRegen, stats.shieldRegenPerc);
+	newStats.maxEnergy = scr_stats_calculateStat(stats.maxEnergy, stats.maxEnergyPerc, true);
+	newStats.energyRegen = scr_stats_calculateStat(stats.energyRegen, stats.energyRegenPerc);
+	
+	//damage
+	newStats.kinDam = scr_stats_calculateStat(stats.kinDam, stats.kinDamPerc, true);
+	newStats.fireDam = scr_stats_calculateStat(stats.fireDam, stats.fireDamPerc, true);
+	newStats.chemDam = scr_stats_calculateStat(stats.chemDam, stats.chemDamPerc, true);
+	newStats.elecDam = scr_stats_calculateStat(stats.elecDam, stats.elecDamPerc, true);
+	newStats.radDam = scr_stats_calculateStat(stats.radDam, stats.radDamPerc, true);
+	
+	//resistances
+	newStats.kinRes = scr_stats_calculateStat(stats.kinRes, stats.kinResPerc, true);
+	newStats.fireRes = scr_stats_calculateStat(stats.fireRes, stats.fireResPerc, true);
+	newStats.chemRes = scr_stats_calculateStat(stats.chemRes, stats.chemResPerc, true);
+	newStats.elecRes = scr_stats_calculateStat(stats.elecRes, stats.elecResPerc, true);
+	newStats.radRes = scr_stats_calculateStat(stats.radRes, stats.radResPerc, true);
 	
 	var range = scr_stats_calculateResistanceRange(newStats.kinRes);
 	newStats.kinResMin = range.minRes;
@@ -343,6 +340,61 @@ function scr_stats_calculateFinalStats(stats) {
 	newStats.radResMax = range.maxRes;
 	
 	return newStats;
+	
+	//if (!is_struct(stats)) return undefined;
+	
+	//var newStats = {
+
+	//	//health and shields
+	//	maxHp: scr_stats_calculateStat(stats.maxHp, stats.maxHpPerc, true),
+	//	maxShield: scr_stats_calculateStat(stats.maxShield, stats.maxShieldPerc, true),
+	//	hpRegen: scr_stats_calculateStat(stats.hpRegen, stats.hpRegenPerc),
+	//	shieldRegen: scr_stats_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
+	//	maxEnergy: scr_stats_calculateStat(stats.maxEnergy, stats.maxEnergyPerc, true),
+	//	energyRegen: scr_stats_calculateStat(stats.energyRegen, stats.energyRegenPerc),
+		
+	//	//movement
+	//	spd: stats.spd,
+	//	dashRegen: stats.dashRegen,
+	//	maxDashes: stats.maxDashes,
+
+	//	//damage
+	//	kinDam: scr_stats_calculateStat(stats.kinDam, stats.kinDamPerc, true),
+	//	fireDam: scr_stats_calculateStat(stats.fireDam, stats.fireDamPerc, true),
+	//	chemDam: scr_stats_calculateStat(stats.chemDam, stats.chemDamPerc, true),
+	//	elecDam: scr_stats_calculateStat(stats.elecDam, stats.elecDamPerc, true),
+	//	radDam: scr_stats_calculateStat(stats.radDam, stats.radDamPerc, true),
+	
+	//	//resistances
+	//	kinRes: scr_stats_calculateStat(stats.kinRes, stats.kinResPerc, true),
+	//	fireRes: scr_stats_calculateStat(stats.fireRes, stats.fireResPerc, true),
+	//	chemRes: scr_stats_calculateStat(stats.chemRes, stats.chemResPerc, true),
+	//	elecRes: scr_stats_calculateStat(stats.elecRes, stats.elecResPerc, true),
+	//	radRes: scr_stats_calculateStat(stats.radRes, stats.radResPerc, true),
+		
+	//}
+	
+	//var range = scr_stats_calculateResistanceRange(newStats.kinRes);
+	//newStats.kinResMin = range.minRes;
+	//newStats.kinResMax = range.maxRes;
+	
+	//range = scr_stats_calculateResistanceRange(newStats.fireRes);
+	//newStats.fireResMin = range.minRes;
+	//newStats.fireResMax = range.maxRes;
+	
+	//range = scr_stats_calculateResistanceRange(newStats.chemRes);
+	//newStats.chemResMin = range.minRes;
+	//newStats.chemResMax = range.maxRes;
+	
+	//range = scr_stats_calculateResistanceRange(newStats.elecRes);
+	//newStats.elecResMin = range.minRes;
+	//newStats.elecResMax = range.maxRes;
+	
+	//range = scr_stats_calculateResistanceRange(newStats.radRes);
+	//newStats.radResMin = range.minRes;
+	//newStats.radResMax = range.maxRes;
+	
+	//return newStats;
 
 }
 
@@ -414,67 +466,67 @@ function scr_stats_getName(statKey) {
 
 }
 
-function scr_stats_formatCharStats(stats, finalStats) {
+function scr_stats_formatCharStats(finalStats) {
 
     var str = "";
 
     // flat health and shields
-    str = scr_stats_formatStat(str, stats, "maxHp");
-	str = scr_stats_formatStat(str, stats, "hpRegen", " p/s");
+    str = scr_stats_formatStat(str, finalStats, "maxHp");
+	str = scr_stats_formatStat(str, finalStats, "hpRegen", " p/s");
 	str += "\n";
 	
-    str = scr_stats_formatStat(str, stats, "maxShield");
-    str = scr_stats_formatStat(str, stats, "shieldRegen", " p/s");
-	str = scr_stats_formatStat(str, stats, "shieldRegenDelay", " seconds");
+    str = scr_stats_formatStat(str, finalStats, "maxShield");
+    str = scr_stats_formatStat(str, finalStats, "shieldRegen", " p/s");
+	str = scr_stats_formatStat(str, finalStats, "shieldRegenDelay", " seconds");
 	str += "\n";
 	
-    str = scr_stats_formatStat(str, stats, "maxEnergy");
-    str = scr_stats_formatStat(str, stats, "energyRegen", " p/s");
+    str = scr_stats_formatStat(str, finalStats, "maxEnergy");
+    str = scr_stats_formatStat(str, finalStats, "energyRegen", " p/s");
 
 	str += "\n";
 
     // packs
-    str = scr_stats_formatStat(str, stats, "maxStimPacks");
-    str = scr_stats_formatStat(str, stats, "maxEnergyPacks");
-    str = scr_stats_formatStat(str, stats, "stimPackRegen", " per minute");
-    str = scr_stats_formatStat(str, stats, "energyPackRegen", " per minute");
+    str = scr_stats_formatStat(str, finalStats, "maxStimPacks");
+    str = scr_stats_formatStat(str, finalStats, "maxEnergyPacks");
+    str = scr_stats_formatStat(str, finalStats, "stimPackRegen", " per minute");
+    str = scr_stats_formatStat(str, finalStats, "energyPackRegen", " per minute");
 
 	str += "\n";
 
     // oa and da
-    str = scr_stats_formatStat(str, stats, "oa");
-    str = scr_stats_formatStat(str, stats, "da");
+    str = scr_stats_formatStat(str, finalStats, "oa");
+    str = scr_stats_formatStat(str, finalStats, "da");
 
 	str += "\n";
 	
     // movement
-    str = scr_stats_formatStat(str, stats, "spd");
-    str = scr_stats_formatStat(str, stats, "dashRegen", " p/s");
-    str = scr_stats_formatStat(str, stats, "maxDashes");
+    str = scr_stats_formatStat(str, finalStats, "spd");
+    str = scr_stats_formatStat(str, finalStats, "dashRegen", " p/s");
+    str = scr_stats_formatStat(str, finalStats, "maxDashes");
 
 	str += "\n";
 
     // flat damage
-    str = scr_stats_formatStat(str, stats, "kinDam");
-    str = scr_stats_formatStat(str, stats, "fireDam");
-    str = scr_stats_formatStat(str, stats, "chemDam");
-    str = scr_stats_formatStat(str, stats, "elecDam");
-    str = scr_stats_formatStat(str, stats, "radDam");
+    str = scr_stats_formatStat(str, finalStats, "kinDam");
+    str = scr_stats_formatStat(str, finalStats, "fireDam");
+    str = scr_stats_formatStat(str, finalStats, "chemDam");
+    str = scr_stats_formatStat(str, finalStats, "elecDam");
+    str = scr_stats_formatStat(str, finalStats, "radDam");
 	
 	str += "\n";
 	
     // damage percent increase
-    str = scr_stats_formatStat(str, stats, "kinDamPerc", "%");
-    str = scr_stats_formatStat(str, stats, "fireDamPerc", "%");
-    str = scr_stats_formatStat(str, stats, "chemDamPerc", "%");
-    str = scr_stats_formatStat(str, stats, "elecDamPerc", "%");
-    str = scr_stats_formatStat(str, stats, "radDamPerc", "%");
+    str = scr_stats_formatStat(str, finalStats, "kinDamPerc", "%");
+    str = scr_stats_formatStat(str, finalStats, "fireDamPerc", "%");
+    str = scr_stats_formatStat(str, finalStats, "chemDamPerc", "%");
+    str = scr_stats_formatStat(str, finalStats, "elecDamPerc", "%");
+    str = scr_stats_formatStat(str, finalStats, "radDamPerc", "%");
 	
 	str += "\n";
 	
 	//
-	str = scr_stats_formatStat(str, stats, "gunDamPerc", "%");
-    str = scr_stats_formatStat(str, stats, "meleeDamPerc", "%");
+	str = scr_stats_formatStat(str, finalStats, "gunDamPerc", "%");
+    str = scr_stats_formatStat(str, finalStats, "meleeDamPerc", "%");
 	
 	str += "\n";
 	

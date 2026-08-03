@@ -197,7 +197,7 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	
 	if (type == "melee") {
 		
-		var func = choose(scr_genMelee_cleaver, scr_genMelee_hammer, scr_genMelee_prod);
+		var func = choose(scr_genMelee_cleaver, scr_genMelee_hammer, scr_genMelee_prod, scr_genMelee_shieldAndBaton);
 		loot = func(level, rarity);
 
 	}
@@ -260,7 +260,9 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	if (type == "melee") {
 		
 		//NOT SPECIAL YET
-		var func = choose(scr_genMelee_cleaver, scr_genMelee_hammer, scr_genMelee_prod);
+		var func = choose(scr_genMelee_sanguivorousCleaver, scr_genMelee_bigCleaver,
+		scr_genMelee_heavyHammer, scr_genMelee_littleHammer,
+		scr_genMelee_rapidProd, scr_genMelee_longProd, scr_genMelee_aspisAndBaton);
 		loot = func(level, rarity);
 
 	}
@@ -278,7 +280,7 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	if (type == "tie") {
 		
 		//NOT SPECIAL YET
-		var func = choose(scr_genTies_physics, scr_genTies_chemistry, scr_genTies_biology, 
+		var func = choose(scr_genTies_defenderTie, scr_genTies_physics, scr_genTies_chemistry, scr_genTies_biology, 
 		scr_genTies_engineering);
 		
 		loot = func(level, rarity);

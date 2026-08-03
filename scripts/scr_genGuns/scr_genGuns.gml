@@ -684,7 +684,7 @@ function scr_genGuns_notSoSubSmg(level, rarity) {
 	gun.clipSize = 45;
 	gun.fireRate = 13;
 	gun.reloadTime = 2.2;
-	gun.bonusStats.spd = -1.2;
+	gun.bonusStats.spd = -0.8;
 	
 	var config = {
 		

@@ -23,6 +23,8 @@ global.hubPosY = 500;
 global.selectedZone = undefined;
 global.selectedClass = undefined;
 
+global.lastWeaponIndex = 0;
+
 //UH
 window_set_cursor(cr_none);
 

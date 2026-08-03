@@ -27,15 +27,18 @@ gunYoffset = -32;
 //stats
 baseStats.maxHp = 40;
 baseStats.spd = 6;
+baseStats.da = 10;
 
 levelUpFunc = function() {
 
-	if (level > 2) baseStats.maxHp += 4;
+	if (level > 2) baseStats.maxHpPerc += 10;
 	
-	if (level mod 4 == 0) {
-		baseStats.kinDam ++;
-		baseStats.radDam ++;
+	if (level mod 10 == 0) {
+			baseStats.kinDam += 1;
+			baseStats.radDam += 1;
 	}
+	
+	baseStats.da += 1;
 	
 	baseStats.radDamPerc += 10;
 	baseStats.kinDamPerc += 10;

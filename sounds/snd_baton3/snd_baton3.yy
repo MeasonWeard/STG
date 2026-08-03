@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_sniper2",
+  "%Name":"snd_baton3",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.81424034,
+  "duration":0.28882086,
   "exportDir":"",
-  "name":"snd_sniper2",
+  "name":"snd_baton3",
   "parent":{
-    "name":"Shot Sounds",
-    "path":"folders/Sounds/Shot Sounds.yy",
+    "name":"Melee Sounds",
+    "path":"folders/Sounds/Melee Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_sniper2.wav",
-  "volume":0.5,
+  "soundFile":"snd_baton3.wav",
+  "volume":1.0,
 }

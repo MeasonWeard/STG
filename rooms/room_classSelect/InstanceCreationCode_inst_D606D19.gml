@@ -11,5 +11,6 @@ hoverFunc = function() {
 	var c = global.classSelectController;
 	c.hoverHeading = "Engineering";
 	c.hoverDescription = c.engineeringTxt;
-	
+	c.hoverMajor = c.engMajor;
+	c.hoverMinor = c.engMinor;
 }

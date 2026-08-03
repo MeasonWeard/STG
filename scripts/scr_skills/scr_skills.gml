@@ -1907,7 +1907,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 			passives = {
 	
-				maxHp: 5 * level,
+				maxHp: 10 * level,
 				kinRes: level,
 				fireRes: level,
 				chemRes: level,
@@ -1959,7 +1959,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 			passives = {
 	
-				maxHp : 10 * level,
+				maxHpPerc : 5 * level,
 				hpRegen: 0.25 * level
 	
 			};

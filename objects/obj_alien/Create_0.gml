@@ -31,11 +31,13 @@ baseStats.radRes = 5;
 
 levelUpFunc = function() {
 
-	if (level > 2) baseStats.maxHp += 6;
+	if (level > 2) baseStats.maxHpPerc += 10;
 	
-	if (level mod 4 == 0) baseStats.kinDam ++;
-	if (level mod 3 == 0) baseStats.chemDam ++;
-	
+	if (level mod 10 == 0) {
+			baseStats.kinDam += 1;
+			baseStats.chemDam += 2;
+	}
+
 	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 10;
 	

@@ -3,7 +3,7 @@ col = c_lime;
 txt = "";
 
 c = global.classSelectController;
-c.descLabel = self;
+c.minorLabel = self;
 
 hAlign = fa_left;
 vAlign = fa_top;

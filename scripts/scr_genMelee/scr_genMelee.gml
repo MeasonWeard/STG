@@ -388,6 +388,100 @@ function scr_genMelee_prod(level, rarity) {
 	);
 
 }
+	
+function scr_genMelee_shieldAndBaton(level, rarity) {
+
+	var melee = new melee_shieldAndBaton(level, rarity);
+
+	//defense and resistance
+	var minDa = 10 + rarity + ceil(level * 0.5);
+	var maxDa = minDa + 10;
+	
+	melee.bonusStats.da = irandom_range_biased(minDa, maxDa, LOOT_BIAS_MILD);
+	
+	var resMin = max(0, level - 5) + rarity;
+	var resMax = 2 + level + rarity * 2;
+	var res = irandom_range_biased(resMin, resMax, LOOT_BIAS);
+	
+	if (res > 0) melee.bonusStats.kinRes = res;
+
+	if (rarity > 2) {
+		
+		var resPool = ["fireRes","chemRes","elecRes","radRes"];
+		var resTypes = [];
+		var typeAmount = irandom_range_biased(1, 4, LOOT_BIAS_MILD);
+		
+		repeat(typeAmount) {
+			var t = scr_randomElementRemove(resPool);
+			array_push(resTypes, t);
+		}
+		
+		res = irandom_range_biased(resMin, resMax, LOOT_BIAS);
+		
+		if (res > 0) {
+			
+			scr_weapons_addResistanceToTypesSpread(melee, res, resTypes);
+			
+		}
+	
+	}
+
+	//damage
+	var damTypes = ["kin"];
+	
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(4) { array_push(damTypes, "kin"); }
+		repeat(1) { array_push(damTypes, "fire"); }
+		repeat(1) { array_push(damTypes, "chem"); }
+		repeat(2) { array_push(damTypes, "elec"); }
+		repeat(1) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"attackRate",
+			"maxCharges",
+			"rechargeTime",
+		],
+
+		bonusStats: [
+			"da",
+			"da",
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"maxCharges"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+
+}	
+
 #endregion
 
 #region //SPECIAL
@@ -489,6 +583,7 @@ function scr_genMelee_bigCleaver(level, rarity) {
 	melee.size = 1.5;
 	melee.maxCharges = 5;
 	melee.rechargeTime = 1.9;
+	melee.killThreshold = 15;
 
 	var damTypes = ["kin"];
 
@@ -560,6 +655,7 @@ function scr_genMelee_heavyHammer(level, rarity) {
 	
 	melee.size = 1.25;
 	melee.attackRate = 1;
+	melee.bonusStats.spd = -0.9;
 	
 	var damTypes = ["kin"];
 
@@ -779,6 +875,174 @@ function scr_genMelee_rapidProd(level, rarity) {
 	
 }
 
+function scr_genMelee_longProd(level, rarity) {
+	
+	var melee = new melee_prod(level, rarity);
+	melee.name = "Lonnnggg Prod";
+	
+	melee.attackRate = 2.5;
+	melee.maxCharges = 6;
+	melee.size = 1.25;
+
+	var damTypes = ["elec"];
+
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(1) { array_push(damTypes, "kin"); }
+		repeat(3) { array_push(damTypes, "fire"); }
+		repeat(4) { array_push(damTypes, "elec"); }
+		repeat(2) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"maxCharges",
+			"maxCharges",
+			"rechargeTime",
+			"killThreshold",
+			"size"
+		],
+
+		bonusStats: [
+			"oa",
+			"da",
+			"elemental"
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"maxCharges",
+			"attackRate"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+	
+}
+
+#endregion
+
+#region//batons
+
+function scr_genMelee_aspisAndBaton(level, rarity) {
+
+	var melee = new melee_shieldAndBaton(level, rarity);
+	melee.name = "Aspis and Baton";
+	
+	melee.bonusStats.spd = -1;
+	melee.attackRate = 1.8;
+	melee.rechargeTime = 1.6;
+	
+	//defense and resistance
+	var minDa = 15 + rarity * 4 + ceil(level * 0.75);
+	var maxDa = minDa + 15;
+	
+	melee.bonusStats.da = irandom_range_biased(minDa, maxDa, LOOT_BIAS_MILD);
+	
+	var resMin = 2 + max(0, level - 3) + rarity * 2;
+	var resMax = 4 + level + rarity * 4;
+	var res = irandom_range_biased(resMin, resMax, LOOT_BIAS);
+	
+	if (res > 0) melee.bonusStats.kinRes = res;
+
+	if (rarity > 2) {
+		
+		var resPool = ["fireRes","chemRes","elecRes","radRes"];
+		var resTypes = [];
+		var typeAmount = irandom_range_biased(1, 4, LOOT_BIAS_MILD);
+		
+		repeat(typeAmount) {
+			var t = scr_randomElementRemove(resPool);
+			array_push(resTypes, t);
+		}
+		
+		res = irandom_range_biased(resMin, resMax, LOOT_BIAS);
+		
+		if (res > 0) {
+			
+			scr_weapons_addResistanceToTypesSpread(melee, res, resTypes);
+			
+		}
+	
+	}
+
+	//damage
+	var damTypes = ["kin"];
+	
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(4) { array_push(damTypes, "kin"); }
+		repeat(1) { array_push(damTypes, "fire"); }
+		repeat(1) { array_push(damTypes, "chem"); }
+		repeat(2) { array_push(damTypes, "elec"); }
+		repeat(1) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"attackRate",
+			"maxCharges",
+			"rechargeTime",
+		],
+
+		bonusStats: [
+			"da",
+			"da",
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"maxCharges"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+
+}	
 
 #endregion
 

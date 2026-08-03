@@ -62,11 +62,11 @@ function class_engineering(): classInst() constructor {
 	id = classes.engineering;
 	
 	majorBonuses = {
-		energyRegenPerc: 15
+		elecDamPerc: 10
 	}
 	
 	minorBonuses = {
-		elecDamPerc: 10
+		energyRegenPerc: 15
 	}
 	
 }
@@ -116,5 +116,45 @@ function scr_class_applyMinorStats(class, stats) {
 	}
 	
 	return stats;
+	
+}
+
+function scr_class_formatClassBonuses(class) {
+
+	if (!is_instanceof(class, classInst)) exit;
+	
+	var majorBonuses = class.majorBonuses;
+	var minorBonuses = class.minorBonuses;
+	
+	var keys = variable_struct_get_names(majorBonuses);
+	var len = array_length(keys);
+	
+	var majorTxt = "MAJOR BONUSES\n";
+	
+	for (var i = 0; i < len; i ++) {
+	
+		var stat = keys[i];
+
+		majorTxt = scr_stats_formatStat(majorTxt, majorBonuses, stat);
+	
+	}
+	
+	keys = variable_struct_get_names(minorBonuses);
+	len = array_length(keys);
+	
+	var minorTxt = "MINOR BONUSES\n";
+	
+	for (var i = 0; i < len; i ++) {
+	
+		var stat = keys[i];
+
+		minorTxt = scr_stats_formatStat(minorTxt, minorBonuses, stat);
+	
+	}
+	
+	return {
+		major: majorTxt,
+		minor: minorTxt
+	};
 	
 }

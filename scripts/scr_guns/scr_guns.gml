@@ -217,6 +217,9 @@ function scr_guns_formatDescription(gun) {
 	txt += damageTxt;
 	
 	var keys = variable_struct_get_names(stats);
+	
+	keys = scr_stats_orderStatKeys(keys);
+	
 	var keysLen = array_length(keys);
 	
 	if (keysLen > 0) txt += "\n\nBonus\n----------------";

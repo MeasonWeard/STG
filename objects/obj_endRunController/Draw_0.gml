@@ -266,7 +266,7 @@ if (tab == "reveal") {
 	
 	draw_set_font(fnt_normal);
 	draw_set_halign(fa_middle);
-	draw_text(titleX, titleY + 60, "Right click individual items to scrap one at a time. Left click to lock items from being scrapped.");
+	draw_text(titleX, titleY + 60, "Right click individual items to scrap one at a time. Left click to lock items. Locked items won't be scrapped.");
 	
 	var lootCount = array_length(revealedLoot);
 	var itemsPerPage = lootColumns * lootRows;
