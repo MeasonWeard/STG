@@ -1,7 +1,7 @@
 {
   "$GMSprite":"v2",
   "%Name":"spr_prodAttack",
-  "bboxMode":0,
+  "bboxMode":1,
   "bbox_bottom":19,
   "bbox_left":0,
   "bbox_right":227,

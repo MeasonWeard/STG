@@ -331,7 +331,7 @@ function scr_genMelee_prod(level, rarity) {
 
 	var melee = new melee_prod(level, rarity);
 
-	var damTypes = ["kin"];
+	var damTypes = ["elec"];
 
 	if (level > 3) {
 
@@ -706,6 +706,79 @@ function scr_genMelee_littleHammer(level, rarity) {
 	);
 	
 }
+
+#endregion
+
+#region//prods
+
+function scr_genMelee_rapidProd(level, rarity) {
+	
+	var melee = new melee_prod(level, rarity);
+	melee.name = "Rapid Prod";
+	
+	scr_weapons_setBaseDamage(melee, 10, "elec");
+	melee.attackRate = 12;
+	melee.maxCharges = 4;
+	melee.killThreshold = 4;
+	melee.rechargeTime = 1.1;
+
+	var damTypes = ["elec"];
+
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(1) { array_push(damTypes, "kin"); }
+		repeat(3) { array_push(damTypes, "fire"); }
+		repeat(4) { array_push(damTypes, "elec"); }
+		repeat(2) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"maxCharges",
+			"maxCharges",
+			"rechargeTime",
+			"killThreshold"
+		],
+
+		bonusStats: [
+			"oa",
+			"da",
+			"elemental"
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"maxCharges",
+			"attackRate"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+	
+}
+
 
 #endregion
 

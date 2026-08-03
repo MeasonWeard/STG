@@ -24,6 +24,7 @@ function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 		
 	killThreshold = 10;
 	damageInRadius = false;
+	damageInLine = false;
 
 	//runtime data
 	charges = 4;
@@ -72,6 +73,7 @@ function scr_melee_attack(char) {
 	att.stopOnHit = melee.stopOnHit;
 	att.range = melee.range;
 	att.damageInRadius = melee.damageInRadius;
+	att.damageInLine = melee.damageInLine;
 	att.lifeSteal = lifeSteal;
 	att.size = melee.size;
 	

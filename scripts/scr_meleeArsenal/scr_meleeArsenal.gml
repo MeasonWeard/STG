@@ -58,6 +58,7 @@ function melee_prod(level, rarity) : meleeInst(level, rarity) constructor {
 	damage.kin = 0;
 	damage.elec = 15;
 	baseDamage = 15;
+	damageInLine = true;
 	
 	spr = spr_prod;
 	attackSprites = [spr_prodAttack];
@@ -65,14 +66,12 @@ function melee_prod(level, rarity) : meleeInst(level, rarity) constructor {
 	hitSounds = undefined;
 	
 	stopOnHit = true;
-	range = 16;
+	range = 14;
 	
 	attackRate = 2.8;
 	maxCharges = 8;
 	rechargeTime = 1.8;
 	killThreshold = 8;
-	
-
 	
 }
 

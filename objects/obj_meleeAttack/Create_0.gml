@@ -21,5 +21,8 @@ stopOnHit = false;
 range = 0;
 
 damageInRadius = false;
+damageInLine = false;
 setRadius = true;
+setLineLength = true;
+lineLength = 0;
 radius = 0;

@@ -2,11 +2,36 @@ if (instance_exists(owner)) {
 
 	var move = true;
 
+	var meleeX = owner.gunX;
+	var meleeY = owner.gunY;
+
+	var aimX = owner.aimX;
+	var aimY = owner.aimY;
+
+	var dir = point_direction(meleeX, meleeY, aimX, aimY);
+
 	if (hitDelay < 1) {
 
 		move = !stopOnHit;
 
 		if (tick < attackFrames) {
+	
+			var lineStartX;
+			var lineStartY;
+			var lineEndX;
+			var lineEndY;
+
+			if (damageInLine) {
+
+				var lineStartOffset = owner.meleeRangeOffset + range;
+
+				lineStartX = meleeX + lengthdir_x(lineStartOffset, dir);
+				lineStartY = meleeY + lengthdir_y(lineStartOffset, dir);
+
+				lineEndX = lineStartX + lengthdir_x(lineLength, dir);
+				lineEndY = lineStartY + lengthdir_y(lineLength, dir);
+
+			}
 	
 			//chars
 			var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
@@ -30,7 +55,21 @@ if (instance_exists(owner)) {
 					var dist = point_distance(x, y, nearestX, nearestY);
 
 					if (dist <= radius) col = true;
-				
+					
+				} else if (damageInLine) {
+					
+					col = scr_physics_collisionLineRectangle(
+						lineStartX,
+						lineStartY,
+						lineEndX,
+						lineEndY,
+						char.colLeft,
+						char.colTop,
+						char.colRight,
+						char.colBottom
+					);
+					
+					
 				} else {
 				
 					col = bbox_right > char.colLeft and bbox_left < char.colRight
@@ -123,14 +162,14 @@ if (instance_exists(owner)) {
 	
 	if (move) {
 		
-		var meleeX = owner.gunX;
-		var meleeY = owner.gunY;
-		var aimX = owner.aimX;
-		var aimY = owner.aimY;
+		//var meleeX = owner.gunX;
+		//var meleeY = owner.gunY;
+		//var aimX = owner.aimX;
+		//var aimY = owner.aimY;
+		
+		//var dir = point_direction(meleeX, meleeY, aimX, aimY);
+		
 		var offset = owner.meleeRangeOffset + range;
-	
-		var dir = point_direction(meleeX, meleeY, aimX, aimY);
-	
 		var attackX = meleeX + lengthdir_x(offset, dir);
 		var attackY = meleeY + lengthdir_y(offset, dir);
 
