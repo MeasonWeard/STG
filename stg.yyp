@@ -67,7 +67,6 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":".~lock.gun DPS calculator.ods#","CopyToMask":-1,"filePath":"datafiles","name":".~lock.gun DPS calculator.ods#","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"gun DPS calculator.ods","CopyToMask":-1,"filePath":"datafiles","name":"gun DPS calculator.ods","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":".~lock.New OpenDocument Spreadsheet.ods#","CopyToMask":-1,"filePath":"datafiles/text","name":".~lock.New OpenDocument Spreadsheet.ods#","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"biology.txt","CopyToMask":-1,"filePath":"datafiles/text","name":"biology.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},

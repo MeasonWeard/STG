@@ -88,7 +88,7 @@ function scr_genMelee_applyStandardStat(melee, key, level, baseStats) {
 	switch (key) {
 
 		case "dam":
-			//IMPORTANT currently uses base damage AFTER applying leveled damage
+
 			var baseDamage = baseStats.baseDamage;
 			var bonusInt = baseDamage * 0.15;
 			var bonusMax = baseDamage;
@@ -241,7 +241,7 @@ function scr_genMelee_cleaver(level, rarity) {
 			"lifeSteal"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -302,7 +302,7 @@ function scr_genMelee_hammer(level, rarity) {
 			"elemental"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -363,7 +363,7 @@ function scr_genMelee_prod(level, rarity) {
 			"elemental"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -457,7 +457,7 @@ function scr_genMelee_shieldAndBaton(level, rarity) {
 			"da",
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -546,7 +546,7 @@ function scr_genMelee_sanguivorousCleaver(level, rarity) {
 			"elemental"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -618,7 +618,7 @@ function scr_genMelee_bigCleaver(level, rarity) {
 			"lifeSteal"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -689,7 +689,7 @@ function scr_genMelee_heavyHammer(level, rarity) {
 			"da",
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -778,7 +778,7 @@ function scr_genMelee_littleHammer(level, rarity) {
 			"elemental"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -849,7 +849,7 @@ function scr_genMelee_rapidProd(level, rarity) {
 			"elemental"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -916,7 +916,7 @@ function scr_genMelee_longProd(level, rarity) {
 			"elemental"
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
 
 	};
 
@@ -1019,7 +1019,99 @@ function scr_genMelee_aspisAndBaton(level, rarity) {
 			"da",
 		],
 
-		damTypes: damTypes
+		//damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"maxCharges"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+
+}
+
+function scr_genMelee_electrifiedBaton(level, rarity) {
+
+	var melee = new melee_shieldAndBaton(level, rarity);
+	melee.name = "Shield and Electrified Baton";
+	
+	melee.hitSounds = global.data.soundProfiles.prod; //[snd_zap];
+	
+	//defense and resistance
+	var minDa = 10 + rarity + ceil(level * 0.5);
+	var maxDa = minDa + 10;
+	
+	melee.bonusStats.da = irandom_range_biased(minDa, maxDa, LOOT_BIAS_MILD);
+	
+	var resMin = max(0, level - 5) + rarity;
+	var resMax = 2 + level + rarity * 2;
+	var res = irandom_range_biased(resMin, resMax, LOOT_BIAS);
+	
+	if (res > 0) melee.bonusStats.kinRes = res;
+
+	if (rarity > 2) {
+		
+		var resPool = ["fireRes","chemRes","elecRes","radRes"];
+		var resTypes = [];
+		var typeAmount = irandom_range_biased(1, 4, LOOT_BIAS_MILD);
+		
+		repeat(typeAmount) {
+			var t = scr_randomElementRemove(resPool);
+			array_push(resTypes, t);
+		}
+		
+		res = irandom_range_biased(resMin, resMax, LOOT_BIAS);
+		
+		if (res > 0) {
+			
+			scr_weapons_addResistanceToTypesSpread(melee, res, resTypes);
+			
+		}
+	
+	}
+
+	//damage
+	melee.damage.elec = melee.damage.kin;
+	melee.damage.kin = 4;
+	
+	repeat(rarity) {
+		if (scr_random_chance(50)) melee.damage.kin += 2;
+	}
+	
+	var damRange = scr_weapons_calculateBonusDamage(melee.baseDamage, level);
+	var bonusDam = irandom_range_biased(damRange.low, damRange.high, LOOT_BIAS);
+	scr_weapons_addDamage(melee, "elec", bonusDam);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"attackRate",
+			"maxCharges",
+			"rechargeTime",
+		],
+
+		bonusStats: [
+			"da",
+			"da",
+			"elemental"
+		],
+
+		//damTypes: damTypes
 
 	};
 

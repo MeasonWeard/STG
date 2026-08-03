@@ -262,7 +262,8 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 		//NOT SPECIAL YET
 		var func = choose(scr_genMelee_sanguivorousCleaver, scr_genMelee_bigCleaver,
 		scr_genMelee_heavyHammer, scr_genMelee_littleHammer,
-		scr_genMelee_rapidProd, scr_genMelee_longProd, scr_genMelee_aspisAndBaton);
+		scr_genMelee_rapidProd, scr_genMelee_longProd, 
+		scr_genMelee_aspisAndBaton, scr_genMelee_electrifiedBaton);
 		loot = func(level, rarity);
 
 	}
