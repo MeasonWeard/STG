@@ -43,9 +43,11 @@ function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 	spr = spr_pistol;
 	projSprite = spr_bulletLarge;
 	
+	damage.kin = 16;
+	baseDamage = 16;
+	
 	auto = false;
 	range = 1000;
-	damage.kin = 16;
 	fireRate = 6.2;
 	clipSize = 12;
 	reloadTime = 1.4;
@@ -64,6 +66,9 @@ function gun_smg(level, rarity): gunInst(level, rarity) constructor {
 	name = "SMG";
 	spr = spr_smg;
 	
+	damage.kin = 8;
+	baseDamage = 8;
+	
 	auto = true;
 	range = 1000;
 	clipSize = 32;
@@ -74,7 +79,6 @@ function gun_smg(level, rarity): gunInst(level, rarity) constructor {
 	maxAimOff = 8;
 	recoil = 1.4;
 	stability = 0.12;
-	damage.kin = 8;
 	shootSounds = global.data.soundProfiles.smg;
 
 }
@@ -85,9 +89,11 @@ function gun_pulseRifle(level, rarity): gunInst(level, rarity) constructor {
 	spr = spr_pulseRifle;
 	projSprite = spr_bulletLarge;
 	
+	damage.kin = 32;
+	baseDamage = 32;
+	
 	auto = true;
 	range = 1400;
-	damage.kin = 32;
 	clipSize = 8;
 	fireRate = 2.8;
 	reloadTime = 2.2;
@@ -110,9 +116,11 @@ function gun_shotgun(level, rarity) : gunInst(level, rarity) constructor {
 	spr = spr_shotgun;
 	projSprite = spr_bulletSmall;
 	
+	damage.kin = 10;
+	baseDamage = 10;
+	
 	auto = false;
 	fireRate = 1.2;
-	damage.kin = 10;
 	clipSize = 4;
 	reloadTime = 2.6;
 	projectileType = projectileTypes.blast;
@@ -134,9 +142,11 @@ function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 	spr = spr_autoShotgun;
 	projSprite = spr_bulletSmall;
 	
+	damage.kin = 9;
+	baseDamage = 9;
+	
 	auto = true;
 	fireRate = 1.6;
-	damage.kin = 9;
 	clipSize = 8;
 	reloadTime = 2.5;
 	projectileType = projectileTypes.blast;

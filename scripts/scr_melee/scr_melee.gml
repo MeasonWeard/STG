@@ -17,8 +17,10 @@ function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 	hitDelay = 0;
 	stopOnHit = false;
 	range = 0;
+	size = 1;
 		
 	damage.kin = 35;
+	baseDamage = 35;
 		
 	killThreshold = 10;
 	damageInRadius = false;
@@ -71,6 +73,7 @@ function scr_melee_attack(char) {
 	att.range = melee.range;
 	att.damageInRadius = melee.damageInRadius;
 	att.lifeSteal = lifeSteal;
+	att.size = melee.size;
 	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;
@@ -161,11 +164,16 @@ function scr_melee_formatDescription(melee) {
 	var charges = melee.maxCharges;
 	var rechargeTime = string_trimDecimals(melee.rechargeTime, 2);
 	var killThreshold = melee.killThreshold;
+	var size = melee.size;
 
 	txt += "\n\nAttack Rate: " + string(attackRate) + " p/s";
 	txt += "\nCharges: " + string(charges);
 	txt += "\nRecharge Time: " + string(rechargeTime) + " seconds";
 	txt += "\nKill Threshold: " + string(killThreshold);
+	
+	if (size != 1) {
+		txt += "\nAttack Area: " + " x" + string(size);	
+	}
 
 	txt += "\n\nDamage\n----------------\n";
 	

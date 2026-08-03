@@ -1,6 +1,8 @@
 function melee_cleaver(level, rarity) : meleeInst(level, rarity) constructor {
 
 	damage.kin = 25;
+	baseDamage = 25;
+	
 	attackRate = 2.4;
 	damage.kin = 35;
 	rechargeTime = 1.6;
@@ -26,6 +28,10 @@ function melee_cleaver(level, rarity) : meleeInst(level, rarity) constructor {
 function melee_hammer(level, rarity) : meleeInst(level, rarity) constructor {
 	
 	name = "Hammer";
+	
+	damage.kin = 50;
+	baseDamage = 50;
+	
 	spr = spr_hammer;
 	attackSprites = [spr_slam];
 	swingSounds = global.data.soundProfiles.swish;
@@ -41,13 +47,18 @@ function melee_hammer(level, rarity) : meleeInst(level, rarity) constructor {
 	killThreshold = 20;
 	damageInRadius = true;
 	
-	damage.kin = 50;
+
 	
 }
 
 function melee_prod(level, rarity) : meleeInst(level, rarity) constructor {
 	
 	name = "Prod";
+	
+	damage.kin = 0;
+	damage.elec = 15;
+	baseDamage = 15;
+	
 	spr = spr_prod;
 	attackSprites = [spr_prodAttack];
 	swingSounds = global.data.soundProfiles.prod;
@@ -61,8 +72,7 @@ function melee_prod(level, rarity) : meleeInst(level, rarity) constructor {
 	rechargeTime = 1.8;
 	killThreshold = 8;
 	
-	damage.kin = 0;
-	damage.elec = 15;
+
 	
 }
 

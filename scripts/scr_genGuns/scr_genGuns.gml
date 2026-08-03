@@ -5,12 +5,10 @@ function scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes) {
 		return gun;
 	}
 	
-	var baseDamType = scr_weapons_getHighestDamageType(gun);
-	var baseDamTypeKey = baseDamType.key;
-	var baseDamage = gun.damage[$ baseDamTypeKey];
-	
+	var baseDamage = gun.baseDamage;
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	var baseDamTypeKey = scr_weapons_getHighestDamageType(gun);
 
 	if (level == 1) {
 		bonusDamage = choose(0, bonusDamage);
@@ -22,7 +20,7 @@ function scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes) {
 		damType = scr_randomElement(damTypes);
 	}
 
-	scr_loot_addDamage(gun, damType, bonusDamage);
+	scr_weapons_addDamage(gun, damType, bonusDamage);
 	
 	return gun;
 	
@@ -34,12 +32,9 @@ function scr_genGuns_applyGenericBonuses(gun, level, rarity, config, bonusChance
 		return gun;
 	}
 
-	var baseDamType = scr_weapons_getHighestDamageType(gun);
-	var baseDamTypeKey = baseDamType.key;
-	var baseDamage = gun.damage[$ baseDamTypeKey];
-
 	// Store original values before modifying anything
 	var baseStats = {
+		
 		clipSize: gun.clipSize,
 		fireRate: gun.fireRate,
 		reloadTime: gun.reloadTime,
@@ -50,7 +45,8 @@ function scr_genGuns_applyGenericBonuses(gun, level, rarity, config, bonusChance
 		range: gun.range,
 		blastProjectiles: gun.blastProjectiles,
 		blastSpread: gun.blastSpread,
-		baseDamage: baseDamage
+		baseDamage: gun.baseDamage
+		
 	};
 
 	var standardKeys = [];
@@ -98,14 +94,14 @@ function scr_genGuns_applyStandardStat(gun, key, level, baseStats) {
 	switch (key) {
 
 		case "dam":
-	
+			//IMPORTANT currently uses base damage AFTER applying leveled damage
 			var baseDamage = baseStats.baseDamage;
 			var bonusInt = baseDamage * 0.15;
 			var bonusMax = baseDamage;
 			
 			amount = ceil(scr_stats_rollSteppedBonus(bonusInt, baseDamage * 2, level));
 			
-			scr_loot_addDamageToExisting(gun, amount);
+			scr_weapons_addDamageToExisting(gun, amount);
 
 		break;
 
@@ -402,7 +398,7 @@ function scr_genGuns_plasmaBlaster(level, rarity) {
 	var gun = new gun_blaster(level, rarity);
 	gun.name = "Plasma Blaster";
 
-	var baseDamage = gun.damage.kin;
+	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
 	
 	gun.damage.fire = halfBaseDamage;
@@ -412,7 +408,7 @@ function scr_genGuns_plasmaBlaster(level, rarity) {
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 	
-	scr_loot_addDamageToExistingSpread(gun, bonusDamage);
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
 	
 	var config = {
 		
@@ -434,17 +430,18 @@ function scr_genGuns_ionBlaster(level, rarity) {
 	var gun = new gun_blaster(level, rarity);
 	gun.name = "Ion Blaster";
 
-	var baseDamage = gun.damage.kin;
+	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
 	
 	gun.damage.elec = halfBaseDamage;
 	gun.damage.rad = halfBaseDamage;
 	gun.damage.kin = 0;
+	gun.spd = 24;
 	
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 	
-	scr_loot_addDamageToExistingSpread(gun, bonusDamage);
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
 	
 	var config = {
 		
@@ -480,7 +477,7 @@ function scr_genGuns_autoPistol(level, rarity) {
 	
 	if (dt == "oneType") {
 	
-		var baseDamage = gun.damage.kin + 1;
+		var baseDamage = gun.baseDamage + 1;
 		var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 		var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 		
@@ -516,7 +513,7 @@ function scr_genGuns_autoPistol(level, rarity) {
 	repeat(extraDam) {
 		
 		var t = scr_weapons_pickFromTop2DamageTypes(gun);
-		scr_loot_addDamage(gun, t, 1);
+		scr_weapons_addDamage(gun, t, 1);
 		
 	}
 	
@@ -551,7 +548,7 @@ function scr_genGuns_bigPistol(level, rarity) {
 	
 	if (dt == "oneType") {
 	
-		var baseDamage = gun.damage.kin + 1;
+		var baseDamage = gun.baseDamage + 1;
 		var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 		var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 		
@@ -578,6 +575,7 @@ function scr_genGuns_bigPistol(level, rarity) {
 	gun.reloadTime += 0.4;
 	gun.recoil += 1;
 	gun.stability -= 0.02;
+	gun.spd = 20;
 	
 	gun.name += "BIG " + prefix + "Pistol";
 	
@@ -585,7 +583,7 @@ function scr_genGuns_bigPistol(level, rarity) {
 	repeat(extraDam) {
 		
 		var t = scr_weapons_pickFromTop2DamageTypes(gun);
-		scr_loot_addDamage(gun, t, 1);
+		scr_weapons_addDamage(gun, t, 1);
 		
 	}
 	
@@ -614,17 +612,18 @@ function scr_genGuns_slagSmg(level, rarity) {
 	var gun = new gun_smg(level, rarity);
 	gun.name = "Slag SMG";
 
-	var baseDamage = gun.damage.kin;
+	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
 	
 	gun.damage.fire = halfBaseDamage;
 	gun.damage.chem = halfBaseDamage;
 	gun.damage.kin = 0;
+	gun.spd = 20;
 	
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 	
-	scr_loot_addDamageToExistingSpread(gun, bonusDamage);
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
 	
 	var config = {
 		
@@ -646,7 +645,7 @@ function scr_genGuns_galvanicSmg(level, rarity) {
 	var gun = new gun_smg(level, rarity);
 	gun.name = "Galvanic SMG";
 
-	var baseDamage = gun.damage.kin;
+	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
 	
 	gun.damage.elec = halfBaseDamage;
@@ -656,7 +655,7 @@ function scr_genGuns_galvanicSmg(level, rarity) {
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 	
-	scr_loot_addDamageToExistingSpread(gun, bonusDamage);
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
 	
 	var config = {
 		
@@ -711,7 +710,7 @@ function scr_genGuns_arcPulseRifle(level, rarity) {
 	var gun = new gun_pulseRifle(level, rarity);
 	gun.name = "Arc Pulse Rifle";
 
-	var baseDamage = gun.damage.kin;
+	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
 	
 	gun.damage.fire = halfBaseDamage;
@@ -721,7 +720,7 @@ function scr_genGuns_arcPulseRifle(level, rarity) {
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 	
-	scr_loot_addDamageToExistingSpread(gun, bonusDamage);
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
 	
 	var config = {
 		
@@ -770,7 +769,7 @@ function scr_genGuns_sniperPulseRifle(level, rarity) {
 		repeat(bonusDam) {
 	
 			var t = scr_weapons_pickFromTop2DamageTypes(gun);
-			scr_loot_addDamage(gun, t, 1);
+			scr_weapons_addDamage(gun, t, 1);
 	
 		}
 	
@@ -805,7 +804,8 @@ function scr_genGuns_sprayShotgun(level, rarity) {
 	gun.name = "";
 
 	//damage
-	var baseDamage = gun.damage.kin - 1;
+	gun.baseDamage -= 1;
+	var baseDamage = gun.baseDamage;
 
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
@@ -867,7 +867,7 @@ function scr_genGuns_doubleBarreledShotgun(level, rarity) {
 	repeat(extraDam) {
 		
 		var t = scr_weapons_pickFromTop2DamageTypes(gun);
-		scr_loot_addDamage(gun, t, 1);
+		scr_weapons_addDamage(gun, t, 1);
 		
 	}
 
@@ -896,7 +896,7 @@ function scr_genGuns_poloniumAutoShotgun(level, rarity) {
 	var gun = new gun_autoShotgun(level, rarity);
 	gun.name = "Polonium Auto-Shotgun";
 
-	var baseDamage = gun.damage.kin;
+	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
 	
 	gun.damage.chem = halfBaseDamage;
@@ -906,7 +906,7 @@ function scr_genGuns_poloniumAutoShotgun(level, rarity) {
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 	
-	scr_loot_addDamageToExistingSpread(gun, bonusDamage);
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
 	
 	var config = {
 		
@@ -935,7 +935,7 @@ function scr_genGuns_assassinatorAutoShotgun(level, rarity) {
 	repeat(extraDam) {
 		
 		var t = scr_weapons_pickFromTop2DamageTypes(gun);
-		scr_loot_addDamage(gun, t, 1);
+		scr_weapons_addDamage(gun, t, 1);
 		
 	}
 	

@@ -1,25 +1,14 @@
 #region //HELPER FUNCTIONS
-function scr_genMelee_applyGenericBonuses(melee, level, rarity, config, bonusChanceMod = 1) {
-
-	if (rarity <= 1) {
+function scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes) {
+	
+	if (rarity < 1) {
 		return melee;
 	}
-
-	// Store original values before modifying anything
-	var baseStats = {
-		attackRate: melee.attackRate,
-		maxCharges: melee.maxCharges,
-		rechargeTime: melee.rechargeTime,
-		killThreshold: melee.killThreshold
-	};
-
-	// Initial damage bonus
-	var baseDamType = scr_weapons_getHighestDamageType(melee);
-	var baseDamTypeKey = baseDamType.key;
-	var baseDamage = melee.damage[$ baseDamTypeKey];
 	
+	var baseDamage = melee.baseDamage;
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	var baseDamTypeKey = scr_weapons_getHighestDamageType(melee);
 
 	if (level == 1) {
 		bonusDamage = choose(0, bonusDamage);
@@ -28,10 +17,31 @@ function scr_genMelee_applyGenericBonuses(melee, level, rarity, config, bonusCha
 	var damType = baseDamTypeKey;
 
 	if (rarity > 1) {
-		damType = scr_randomElement(config.damTypes);
+		damType = scr_randomElement(damTypes);
 	}
 
-	scr_loot_addDamage(melee, damType, bonusDamage);
+	scr_weapons_addDamage(melee, damType, bonusDamage);
+	
+	return melee;
+	
+}
+
+function scr_genMelee_applyGenericBonuses(melee, level, rarity, config, bonusChanceMod = 1) {
+
+	if (rarity <= 1) {
+		return melee;
+	}
+
+	var baseDamage = scr_weapons_getBaseDamage(melee);
+
+	// Store original values before modifying anything
+	var baseStats = {
+		attackRate: melee.attackRate,
+		maxCharges: melee.maxCharges,
+		rechargeTime: melee.rechargeTime,
+		killThreshold: melee.killThreshold,
+		baseDamage: baseDamage
+	};
 
 	var standardKeys = [];
 	array_copy(standardKeys, 0, config.standardStats, 0, array_length(config.standardStats));
@@ -78,12 +88,14 @@ function scr_genMelee_applyStandardStat(melee, key, level, baseStats) {
 	switch (key) {
 
 		case "dam":
-
-			low = 1 + level div 5;
-			high = 2 + ceil(level / 4);
-
-			amount = irandom_range_biased(low, high, LOOT_BIAS);
-			scr_loot_addDamageToExisting(melee, amount);
+			//IMPORTANT currently uses base damage AFTER applying leveled damage
+			var baseDamage = baseStats.baseDamage;
+			var bonusInt = baseDamage * 0.15;
+			var bonusMax = baseDamage;
+			
+			amount = ceil(scr_stats_rollSteppedBonus(bonusInt, baseDamage * 2, level));
+			
+			scr_weapons_addDamageToExisting(melee, amount);
 
 		break;
 		
@@ -110,11 +122,17 @@ function scr_genMelee_applyStandardStat(melee, key, level, baseStats) {
 			amount = -scr_stats_rollSteppedBonus(0.05, baseStats.rechargeTime * 0.5, level);
 
 		break;
+		
+		case "size":
+
+			amount = scr_stats_rollSteppedBonus(0.05, 2, level);
+
+		break;
 
 		case "killThreshold":
 		
-			var inc = ceil(baseStats.killThreshold / 5);
-			amount = scr_stats_rollSteppedBonus(inc, baseStats.killThreshold * 10, level);
+			var inc = ceil(baseStats.killThreshold * 0.1);
+			amount = scr_stats_rollSteppedBonus(inc, baseStats.killThreshold * 4, level);
 
 		break;
 
@@ -127,6 +145,8 @@ function scr_genMelee_applyStandardStat(melee, key, level, baseStats) {
 	//limit stats
 	melee.rechargeTime = max(melee.rechargeTime, baseStats.rechargeTime * 0.25);
 	melee.attackRate = clamp(melee.attackRate, 0.1, 30);
+	melee.killThreshold = max(melee.killThreshold, baseStats.baseDamage * 0.5);
+	melee.size = clamp(melee.size, 0.1, 4);
 
 }
 
@@ -168,6 +188,13 @@ function scr_genMelee_applyBonusStat(melee, key, level) {
 			amount = scr_stats_rollSteppedBonus(5, 50, level);
 
 			scr_loot_addBonusStat(melee, statKey, amount);
+		
+		break;
+		
+		case "lifeSteal":
+		
+			amount = scr_stats_rollSteppedBonus(1, 20, level);
+			scr_loot_addBonusStat(melee, "meleeLifeSteal", amount);
 
 		break;
 
@@ -176,6 +203,7 @@ function scr_genMelee_applyBonusStat(melee, key, level) {
 }
 #endregion
 
+#region //GENERIC
 function scr_genMelee_cleaver(level, rarity) {
 
 	var melee = new melee_cleaver(level, rarity);
@@ -193,6 +221,8 @@ function scr_genMelee_cleaver(level, rarity) {
 		repeat(1) { array_push(damTypes, "rad"); }
 		
 	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
 
 	var config = {
 
@@ -207,7 +237,8 @@ function scr_genMelee_cleaver(level, rarity) {
 		bonusStats: [
 			"da",
 			"moveSpeed",
-			"elemental"
+			"elemental",
+			"lifeSteal"
 		],
 
 		damTypes: damTypes
@@ -252,6 +283,8 @@ function scr_genMelee_hammer(level, rarity) {
 		repeat(1) { array_push(damTypes, "rad"); }
 		
 	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
 
 	var config = {
 
@@ -298,7 +331,7 @@ function scr_genMelee_prod(level, rarity) {
 
 	var melee = new melee_prod(level, rarity);
 
-	var damTypes = ["elec"];
+	var damTypes = ["kin"];
 
 	if (level > 3) {
 
@@ -311,6 +344,8 @@ function scr_genMelee_prod(level, rarity) {
 		repeat(2) { array_push(damTypes, "rad"); }
 		
 	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
 
 	var config = {
 
@@ -353,3 +388,325 @@ function scr_genMelee_prod(level, rarity) {
 	);
 
 }
+#endregion
+
+#region //SPECIAL
+
+#region//cleavers
+function scr_genMelee_sanguivorousCleaver(level, rarity) {
+
+	var melee = new melee_cleaver(level, rarity);
+	melee.name = "Sanguivorous Cleaver";
+	
+	//
+	var minLs = 1 + floor(level * 0.25);
+	var maxLs = 1 + ceil(level * 0.75);
+	
+	var rarExtra = rarity > 2 ? 1 : 0;
+	var extraChance = rarity * 10;
+	
+	repeat(4) {
+		
+		if (scr_random_chance(extraChance)) rarExtra ++;
+		extraChance *= 0.5;
+		
+	}
+	
+	scr_weapons_setBaseDamage(melee, 20, "kin");
+	
+	melee.bonusStats.meleeLifeSteal = irandom_range_biased(minLs, maxLs, LOOT_BIAS_MILD);
+	melee.bonusStats.meleeLifeSteal += rarExtra;
+
+	melee.attackRate = 2.2;
+	//
+	
+	var damTypes = ["kin"];
+
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(4) { array_push(damTypes, "kin"); }
+		repeat(2) { array_push(damTypes, "fire"); }
+		repeat(3) { array_push(damTypes, "chem"); }
+		repeat(2) { array_push(damTypes, "elec"); }
+		repeat(1) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"attackRate",
+			"maxCharges",
+			"rechargeTime",
+			"killThreshold"
+		],
+
+		bonusStats: [
+			"da",
+			"moveSpeed",
+			"elemental"
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"rechargeTime"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+
+	
+}
+
+function scr_genMelee_bigCleaver(level, rarity) {
+
+	var melee = new melee_cleaver(level, rarity);
+	melee.name = "Big Cleaver";
+	
+	scr_weapons_setBaseDamage(melee, 30, "kin");
+
+	melee.attackRate = 2.2;
+	melee.size = 1.5;
+	melee.maxCharges = 5;
+	melee.rechargeTime = 1.9;
+
+	var damTypes = ["kin"];
+
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(4) { array_push(damTypes, "kin"); }
+		repeat(2) { array_push(damTypes, "fire"); }
+		repeat(3) { array_push(damTypes, "chem"); }
+		repeat(2) { array_push(damTypes, "elec"); }
+		repeat(1) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"maxCharges",
+			"rechargeTime",
+			"killThreshold",
+			"size"
+		],
+
+		bonusStats: [
+			"da",
+			"moveSpeed",
+			"elemental",
+			"lifeSteal"
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"rechargeTime"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+	
+}
+#endregion
+
+#region// hammers
+
+function scr_genMelee_heavyHammer(level, rarity) {
+
+	var melee = new melee_hammer(level, rarity);
+	melee.name = "Heavy Hammer";
+	
+	scr_weapons_setBaseDamage(melee, 55, "kin");
+	
+	melee.size = 1.25;
+	melee.attackRate = 1;
+	
+	var damTypes = ["kin"];
+
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(5) { array_push(damTypes, "kin"); }
+		repeat(2) { array_push(damTypes, "fire"); }
+		repeat(1) { array_push(damTypes, "chem"); }
+		repeat(1) { array_push(damTypes, "elec"); }
+		repeat(1) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	melee = scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes);
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"maxCharges",
+			"rechargeTime",
+			"killThreshold",
+			"killThreshold",
+			"size"
+		],
+
+		bonusStats: [
+			"da",
+			"da",
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"size",
+			"dam",
+			"maxCharges"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+
+}
+
+function scr_genMelee_littleHammer(level, rarity) {
+
+	var melee = new melee_hammer(level, rarity);
+	
+	scr_weapons_setBaseDamage(melee, 40, "kin");
+	melee.killThreshold = 15;
+	melee.maxCharges = 4;
+	melee.rechargeTime = 2;
+	melee.attackRate = 1.3;
+	melee.size = 0.7;
+	
+	var baseDamage = melee.baseDamage;
+	var bonusDam = scr_weapons_calculateBonusDamage(baseDamage, level);
+	
+	var damTypes = ["kin"];
+
+	if (level > 3) {
+
+		damTypes = [];
+
+		repeat(2) { array_push(damTypes, "kin"); }
+		repeat(3) { array_push(damTypes, "fire"); }
+		repeat(1) { array_push(damTypes, "chem"); }
+		repeat(3) { array_push(damTypes, "elec"); }
+		repeat(1) { array_push(damTypes, "rad"); }
+		
+	}
+	
+	var type2 = scr_randomElement(damTypes);
+	
+	if (type2 != "kin") scr_weapons_applyBaseDamageAcrossTypes(melee, ["kin", type2], 2);
+	
+	var adjectives = "";
+	
+	switch(type2) {
+		
+			case "kin": adjectives = "Strong Little "; break;
+			case "fire": adjectives = "Hot Little "; break;
+			case "chem": adjectives = "Little Caustic "; break;
+			case "elec": adjectives = "Little Charged "; break;
+			case "rad": adjectives = "Little Fissile "; break;
+		
+		}
+		
+	melee.name = adjectives + " Hammer";
+
+	var config = {
+
+		standardStats: [
+			"attackRate",
+			"attackRate",
+			"maxCharges",
+			"rechargeTime",
+			"killThreshold"
+		],
+
+		bonusStats: [
+			"da",
+			"da",
+			"oa",
+			"elemental"
+		],
+
+		damTypes: damTypes
+
+	};
+
+	if (rarity > 2) {
+		array_push(config.standardStats, "dam");
+	}
+
+	if (rarity > 3) {
+		array_push(
+			config.standardStats,
+			"dam",
+			"maxCharges"
+		);
+	}
+
+	return scr_genMelee_applyGenericBonuses(
+		melee,
+		level,
+		rarity,
+		config
+	);
+	
+}
+
+#endregion
+
+#endregion

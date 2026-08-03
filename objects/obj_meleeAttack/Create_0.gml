@@ -3,6 +3,7 @@ damage = undefined;
 killThreshold = 0;
 lifeSteal = 0;
 depth = layers.effects;
+size = 1;
 
 hitDelay = 0;
 attackFrames = 4;

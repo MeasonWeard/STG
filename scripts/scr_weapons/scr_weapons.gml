@@ -5,6 +5,7 @@ function weaponInst(level, rarity) constructor {
 	name = "none";
 	damage = new damageProfile();
 	damage.kin = 12;
+	baseDamage = 12;
 	lvl = level;
 	rar = rarity;
 	
@@ -270,5 +271,240 @@ function scr_weapons_pickFromTop2DamageTypes(weapon, randomiseTies = true) {
 	if (array_length(top) == 0) return undefined;
 
 	return top[irandom(array_length(top) - 1)];
+	
+}
+
+function scr_weapons_clearDamage(weapon) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+	
+	weapon.damage.kin = 0;
+	weapon.damage.fire = 0;
+	weapon.damage.chem = 0;
+	weapon.damage.elec = 0;
+	weapon.damage.rad = 0;
+	
+}
+
+function scr_weapons_addDamage(weapon, damType, val) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var damage = weapon.damage;
+	
+	if (!variable_struct_exists(damage, damType)) exit;
+	
+	var oldVal = 0;
+	
+	if (!is_undefined(damage[$ damType])) oldVal = damage[$ damType];
+	
+	var newVal = oldVal + val;
+	
+	damage[$ damType] = newVal;
+	
+}
+
+function scr_weapons_addDamageToExisting(weapon, val) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var damage = weapon.damage;
+	var valid = [];
+
+	var damTypes = [
+		"kin",
+		"fire",
+		"chem",
+		"elec",
+		"rad"
+	];
+
+	for (var i = 0; i < array_length(damTypes); i++) {
+
+		var key = damTypes[i];
+
+		if (variable_struct_exists(damage, key) and damage[$ key] > 0) {
+			array_push(valid, key);
+		}
+
+	}
+
+	if (array_length(valid) == 0) exit;
+
+	var damType = valid[irandom(array_length(valid) - 1)];
+	damage[$ damType] += val;
+
+}
+
+function scr_weapons_addDamageToExistingSpread(weapon, amount) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+
+	var damage = weapon.damage;
+	var damTypes = [
+		"kin",
+		"fire",
+		"chem",
+		"elec",
+		"rad"
+	];
+
+	var validCount = 0;
+
+	for (var i = 0; i < array_length(damTypes); i++) {
+
+		var key = damTypes[i];
+
+		if (variable_struct_exists(damage, key) and damage[$ key] > 0) {
+			validCount++;
+		}
+
+	}
+
+	if (validCount == 0) exit;
+
+	amount = round(amount);
+	if (amount <= 0) exit;
+
+	// No need to split if only one damage type exists
+	if (validCount == 1) {
+
+		scr_weapons_addDamageToExisting(weapon, amount);
+		exit;
+
+	}
+
+	var chunks = [];
+	var remaining = amount;
+
+	while (remaining > 0) {
+
+		var chunk = min(remaining, irandom_range(2, 4));
+
+		array_push(chunks, chunk);
+		remaining -= chunk;
+
+	}
+
+	array_shuffle(chunks);
+
+	for (var i = 0; i < array_length(chunks); i++) {
+
+		scr_weapons_addDamageToExisting(weapon, chunks[i]);
+
+	}
+
+
+}
+
+function scr_weapons_addDamageToTypesSpread(weapon, amount, damTypes) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+	if (!is_array(damTypes)) exit;
+
+	var validTypes = [];
+	var allTypes = ["kin", "fire", "chem", "elec", "rad"];
+
+	// Keep duplicates so they act as weights
+	for (var i = 0; i < array_length(damTypes); i++) {
+
+		var key = damTypes[i];
+
+		if (array_contains(allTypes, key)) {
+			array_push(validTypes, key);
+		}
+
+	}
+
+	var validCount = array_length(validTypes);
+
+	if (validCount == 0) exit;
+
+	amount = round(amount);
+
+	if (amount <= 0) exit;
+
+	// No need to split if only one type was supplied
+	if (validCount == 1) {
+
+		scr_weapons_addDamage(weapon, validTypes[0], amount);
+		exit;
+
+	}
+
+	var chunks = [];
+	var remaining = amount;
+
+	while (remaining > 0) {
+
+		var chunk = min(remaining, irandom_range(2, 4));
+
+		array_push(chunks, chunk);
+		remaining -= chunk;
+
+	}
+
+	array_shuffle(chunks);
+
+	for (var i = 0; i < array_length(chunks); i++) {
+
+		var key = validTypes[irandom(validCount - 1)];
+		scr_weapons_addDamage(weapon, key, chunks[i]);
+
+	}
+	
+}
+
+function scr_weapons_getBaseDamage(weapon) {
+	
+	if (!is_instanceof(weapon, weaponInst)) exit;
+	
+	return weapon.baseDamage;
+	
+}
+
+function scr_weapons_setBaseDamage(weapon, dam, element, clearDamage = true) {
+
+	if (!is_instanceof(weapon, weaponInst)) exit;
+	
+	if (clearDamage) scr_weapons_clearDamage(weapon);
+	
+	if (is_undefined(weapon.damage[$ element])) return false;
+	
+	weapon.damage[$ element] = dam;
+	weapon.baseDamage = dam;
+	
+	return true;
+	
+}
+
+function scr_weapons_applyBaseDamageAcrossTypes(weapon, damTypes, numberOfTypes) {
+
+	if (!is_array(damTypes) or array_length(damTypes) < 1) return weapon;
+
+	var baseDamage = weapon.baseDamage;
+	//var damagePortion = round(baseDamage / numberOfTypes);
+	var keys = [];
+	
+	repeat(numberOfTypes) {
+		
+		var key = scr_randomElementRemove(damTypes);
+		if (is_string(key)) array_push(keys, key);
+		
+	}
+	
+	scr_weapons_clearDamage(weapon);
+	scr_weapons_addDamageToTypesSpread(weapon, baseDamage, keys);
+	
+	//var keysLen = array_length(keys);
+	
+	//for (var i = 0; i < keysLen; i ++) {
+	
+	//	var el = keys[i];
+	//	weapon.damage[$ el] = damagePortion;
+		
+	//}
+	
+	return weapon;
 	
 }
