@@ -407,6 +407,8 @@ global.gameData = scr_file_loadGame(global.saveFile);
 if (global.gameData == undefined) {
 
 	global.gameData = scr_file_createBlankSave();
-	scr_file_saveGame("save0", global.gameData);
+	//scr_file_saveGame("save0", global.gameData);
+	
+	global.freshSave = true;
 	
 }

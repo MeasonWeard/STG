@@ -4,6 +4,8 @@
 randomize();
 
 //PERSISTENT INSTANCES
+global.freshSave = false;
+
 global.data = scr_obj_createExclusive(obj_data, x, y);
 global.display = scr_obj_createExclusive(obj_displayController, x, y);
 global.cursor = scr_obj_createExclusive(obj_cursor, x, y);
@@ -31,9 +33,22 @@ window_set_cursor(cr_none);
 draw_set_font(fnt_normal);
 
 //
-
-if (global.gameData.playerData.class1 == undefined) {
-	room_goto(room_classSelect);
+if (global.freshSave) {
+	
+	var ex = scr_file_findExistingSave();
+	
+	if (ex == undefined) {
+	
+		room_goto(room_classSelect);
+	
+	} else {
+	
+		room_goto(room_selectSaveFile);
+	
+	}
+	
 } else {
-	room_goto(stage_hub1);
+
+	room_goto(room_mainMenu);
+	
 }

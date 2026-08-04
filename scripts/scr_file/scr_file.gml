@@ -10,6 +10,10 @@ function scr_file_saveFile(fileName, newFile) {
 
 function scr_file_loadFile(fileName) {
 	
+	if (!file_exists(fileName)) {
+		return undefined;
+	}
+	
     var file = file_text_open_read(fileName);
     var json_string = file_text_read_string(file);
 	
@@ -190,5 +194,41 @@ function scr_file_getTextFromFile(filename) {
 
     file_text_close(file);
     return text;
+	
+}
+
+/// @function scr_file_findExistingSave()
+/// @returns {string|undefined} First existing save filename
+function scr_file_findExistingSave() {
+
+	for (var i = 0; i <= 8; i++) {
+
+		var saveFile = "save" + string(i);
+
+		if (file_exists(saveFile)) {
+			return saveFile;
+		}
+
+	}
+
+	return undefined;
+
+}
+
+function scr_file_startGame() {
+
+	if (!is_struct(global.gameData)) return false;
+
+	//settings
+	global.settingsDirty = true;
+	
+	//start
+	if (global.gameData.playerData.class1 == undefined) {
+		room_goto(room_classSelect);
+	} else {
+		room_goto(stage_hub1);
+	}
+	
+	return true;
 	
 }

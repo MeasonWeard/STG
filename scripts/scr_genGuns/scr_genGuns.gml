@@ -8,19 +8,20 @@ function scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes) {
 	var baseDamage = gun.baseDamage;
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
-	var baseDamTypeKey = scr_weapons_getHighestDamageType(gun);
+	var baseDamType = scr_weapons_getHighestDamageType(gun);
 
 	if (level == 1) {
 		bonusDamage = choose(0, bonusDamage);
 	}
 
-	var damType = baseDamTypeKey;
+	var newDamType = baseDamType;
 
 	if (rarity > 1) {
-		damType = scr_randomElement(damTypes);
+		newDamType = scr_randomElement(damTypes);
 	}
 
-	scr_weapons_addDamage(gun, damType, bonusDamage);
+	scr_weapons_addDamageToTypesSpread(gun, bonusDamage, [baseDamType, newDamType]);
+	//scr_weapons_addDamage(gun, newDamType, bonusDamage);
 	
 	return gun;
 	

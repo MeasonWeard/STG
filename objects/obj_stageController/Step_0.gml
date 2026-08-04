@@ -1,12 +1,12 @@
 if (global.devControls) {
 
-	if (keyboard_check_pressed(vk_home)) {
+	if (keyboard_check_pressed(vk_pageup)) {
    
 		scr_display_switchFullscreen();
 	
 	}
 
-	if (keyboard_check_pressed(vk_end)) {
+	if (keyboard_check_pressed(vk_pagedown)) {
    
 		scr_display_cycleResolution();
 	
@@ -18,13 +18,13 @@ if (global.devControls) {
 	
 	}
 
-	if (keyboard_check_pressed(vk_escape)) {
+	if (keyboard_check_pressed(vk_end)) {
    
 		game_end();
 	
 	}
 	
-	if (keyboard_check_pressed(vk_subtract)) {
+	if (keyboard_check_pressed(vk_home)) {
    
 		global.debug = !global.debug;
 	
@@ -38,6 +38,21 @@ if (global.devControls) {
 	
 	}
 
+}
+
+if (keyboard_check_pressed(vk_escape)) {
+
+	if (hub) {
+		
+		if (instance_exists(global.player)) instance_destroy(global.player);
+		room_goto(room_mainMenu);
+		
+	} else {
+	
+		pause();
+	
+	}
+	
 }
 
 // time slicing index update

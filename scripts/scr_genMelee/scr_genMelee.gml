@@ -8,19 +8,20 @@ function scr_genMelee_applyGenericDamage(melee, level, rarity, damTypes) {
 	var baseDamage = melee.baseDamage;
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
-	var baseDamTypeKey = scr_weapons_getHighestDamageType(melee);
+	var baseDamType = scr_weapons_getHighestDamageType(melee);
 
 	if (level == 1) {
 		bonusDamage = choose(0, bonusDamage);
 	}
 
-	var damType = baseDamTypeKey;
+	var newDamType = baseDamType;
 
 	if (rarity > 1) {
-		damType = scr_randomElement(damTypes);
+		newDamType = scr_randomElement(damTypes);
 	}
 
-	scr_weapons_addDamage(melee, damType, bonusDamage);
+	scr_weapons_addDamageToTypesSpread(melee, bonusDamage, [baseDamType, newDamType]);
+	//scr_weapons_addDamage(melee, damType, bonusDamage);
 	
 	return melee;
 	

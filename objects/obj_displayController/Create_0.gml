@@ -6,13 +6,21 @@ global.displayController = self;
 application_surface_enable(true);
 gpu_set_texfilter(true);
 
-// user setting:
 global.guiScaling = false;
 global.integerScaling = true;
 
-// user-selected window size:
-var res = global.gameData.settings.res;
-var windowed = global.gameData.settings.windowed;
+//default window size
+var res = [1920,1080];//global.gameData.settings.res;
+var windowed = true;
+
+//user selected window size
+if (variable_global_exists("gameData") and is_struct(global.gameData)) {
+	
+	res = global.gameData.settings.res;
+	windowed =  global.gameData.settings.windowed;
+	
+}
+
 var w = res[0];
 var h = res[1];
 

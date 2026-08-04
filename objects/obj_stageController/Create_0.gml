@@ -145,3 +145,11 @@ itemHash = {};
 
 //time
 time = date_datetime_string(date_current_datetime());
+
+//pause
+paused = false;
+pause = function() {
+	
+	
+	
+}
