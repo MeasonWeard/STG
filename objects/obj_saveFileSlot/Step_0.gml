@@ -21,6 +21,8 @@ if (deleting) {
 		saveFile = undefined;
 		fileLoaded = false;
 		deleting = false;
+		
+		global.selectSaveController.mode = "select";
 	
 	}
 	

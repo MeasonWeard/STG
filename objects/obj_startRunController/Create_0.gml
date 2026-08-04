@@ -7,7 +7,7 @@ rc = global.runController;
 
 if (instance_exists(rc)) instance_destroy(rc);
 
-modVals = [0,3,7,12,18,25];
+modVals = [0,1,3,7,12,18,25];
 modValsLen = array_length(modVals);
 
 intensityMod = 0;

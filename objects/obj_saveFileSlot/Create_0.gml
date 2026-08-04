@@ -35,7 +35,7 @@ createNew = function() {
 	global.saveFile = path;
 	global.gameData = scr_file_createBlankSave();
 	
-	room_goto(room_classSelect);
+	room_goto(room_createCharacter);
 	
 }
 

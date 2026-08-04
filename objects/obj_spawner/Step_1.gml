@@ -27,7 +27,7 @@ if (setup) {
 	//amount of enemies
 	var runLevel = rc.runLevel;
 	
-	minEnemies = min(8, runLevel * 2);
-	maxEnemies = min(12, runLevel * 4);
+	minEnemies = clamp(runLevel * 2, 1, 8);
+	maxEnemies = clamp(runLevel * 4, 4, 12);
 
 }

@@ -74,8 +74,10 @@ if (playerinArea) {
 		
 		} else {
 		
-			global.selectedZone = zoneConstructor;
-			room_goto(room_startRun);
+			if (zoneConstructor != undefined) {
+				global.selectedZone = zoneConstructor;
+				room_goto(room_startRun);
+			}
 		
 		}
 		

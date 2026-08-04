@@ -12,6 +12,8 @@ camYmid = camY + camH * 0.5;
 buttonGap = 128;
 topButtonY = 200;
 
+txtY = camYmid - 364;
+
 //functions
 play = function() {
 
@@ -46,7 +48,7 @@ yesButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
 noButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
 
 continueButton.x = camXmid;
-continueButton.y = camYmid - 200;
+continueButton.y = camYmid - 128;
 continueButton.txt = "Continue";
 continueButton.visibleWhenInactive = false;
 continueButton.leftFunc = play;
@@ -63,7 +65,7 @@ quitButton.visibleWhenInactive = false;
 quitButton.leftFunc = quit;
 
 yesButton.x = camXmid;
-yesButton.y = camYmid - 200 + buttonGap;
+yesButton.y = settingsButton.y;
 yesButton.txt = "Yes";
 yesButton.active = false
 yesButton.visibleWhenInactive = false;

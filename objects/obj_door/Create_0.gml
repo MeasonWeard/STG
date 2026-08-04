@@ -28,5 +28,6 @@ openDist = 400;
 displayTagDist = 1450;
 displayTag = false;
 
-zoneName = "Waste\nDisposal";
-zoneConstructor = zone_waste;
+doorText = "";
+tagText = "";
+zoneConstructor = undefined;

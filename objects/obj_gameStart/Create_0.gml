@@ -39,7 +39,7 @@ if (global.freshSave) {
 	
 	if (ex == undefined) {
 	
-		room_goto(room_classSelect);
+		room_goto(room_createCharacter);
 	
 	} else {
 	
