@@ -50,11 +50,11 @@ var weaponsData = scr_data_loadEquippedWeapons();
 scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 
-randomise();
-var dev = scr_genDevices_thermos(10, 3);
-gear.device1 = dev;
-dev = scr_genDevices_thermos(10, 3);
-gear.device2 = dev;
+//randomise();
+//var dev = scr_genDevices_thermos(5, 1);
+//gear.device1 = dev;
+//dev = scr_genDevices_thermos(5, 5);
+//gear.device2 = dev;
 
 //var hg = new headgearInst(1, 1);
 //hg.stats.radDamPerc = 1000;

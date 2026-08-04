@@ -5,7 +5,7 @@ function scr_genDevices_laserPointer(level, rarity) {
 	var stats = device.stats;
 	
 	var rarityFactor = max(0, rarity - 1);
-	var rarityMod = 1 + rarityFactor * 0.1;
+	var rarityMod = 1 + rarityFactor * 0.2;
 	
 	var type1 = choose("precise", "bright");
 	var type2 = choose("hot", "ionizing", "malfunctioning", "", "", "")
@@ -53,7 +53,7 @@ function scr_genDevices_watch(level, rarity) {
 	var stats = device.stats;
 
 	var rarityFactor = max(0, rarity - 1);
-	var rarityMod = 1 + rarityFactor * 0.1;
+	var rarityMod = 1 + rarityFactor * 0.2;
 
 	var type = choose("digital", "analog");
 	var regenType = choose("oximetric", "electroscopic");
@@ -114,7 +114,7 @@ function scr_genDevices_powerBank(level, rarity) {
 	var stats = device.stats;
 	
 	var rarityFactor = max(0, rarity - 1);
-	var rarityMod = 1 + rarityFactor * 0.1;
+	var rarityMod = 1 + rarityFactor * 0.2;
 	
 	var type = choose("high capacity", "fast", "dual-cell");
 	
@@ -167,7 +167,7 @@ function scr_genDevices_calculator(level, rarity) {
 	var stats = device.stats;
 	
 	var rarityFactor = max(0, rarity - 1);
-	var rarityMod = 1 + rarityFactor * 0.1;
+	var rarityMod = 1 + rarityFactor * 0.2;
 	
 	var type = choose("old", "sci", "prog");
 	var adj = "";
@@ -227,7 +227,7 @@ function scr_genDevices_thermos(level, rarity) {
 	var stats = device.stats;
 	
 	var rarityFactor = max(0, rarity - 1);
-	var rarityMod = 1 + rarityFactor * 0.1;
+	var rarityMod = 1 + rarityFactor * 0.2;
 	
 	var type = choose("choc", "coffee", "protein");
 	var adj = "";
