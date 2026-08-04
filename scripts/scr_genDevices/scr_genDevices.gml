@@ -1,3 +1,4 @@
+//GENERIC
 function scr_genDevices_laserPointer(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
@@ -25,7 +26,7 @@ function scr_genDevices_laserPointer(level, rarity) {
 	if (type1 == "bright") scr_loot_addStat(device, "da", statChange);
 	
 	//type2
-	high = ceil((level * rarityMod) + 1 * rarityMod);
+	high = ceil((level * rarityMod) + rarityMod);
 	low = max(1, floor(level * 0.5) * rarityMod);
 
 	var dam = irandom_range_biased(low, high, LOOT_BIAS, true);
@@ -123,8 +124,8 @@ function scr_genDevices_powerBank(level, rarity) {
 	
 	if (type = "high capacity") {
 	
-		low = floor(10 * level * rarityMod);
-		high = ceil(15 + 15 * level * rarityMod);
+		low = floor(5 * (level * 0.8) * rarityMod);
+		high = low + 15;
 		
 		stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS, true);
 	
@@ -160,4 +161,120 @@ function scr_genDevices_powerBank(level, rarity) {
 	
 }
 
-//to do: device that increases stim pack and health regeneration
+function scr_genDevices_calculator(level, rarity) {
+	
+	var device = new deviceInst(level, rarity);
+	var stats = device.stats;
+	
+	var rarityFactor = max(0, rarity - 1);
+	var rarityMod = 1 + rarityFactor * 0.1;
+	
+	var type = choose("old", "sci", "prog");
+	var adj = "";
+	
+	//base da
+	var high = ceil((level + 10) * rarityMod) + rarityFactor;
+	var low = high - 5;
+	
+	stats.da = irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+	if (type == "old") {
+		
+		adj = "Old-School";
+		
+		high = max(2, round(high * 0.75));
+		low = max(1, high - 5);
+	
+		stats.da += irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+	}
+	
+	if (type == "sci") {
+		
+		adj = "Scientific";
+		
+		high = ceil((level * rarityMod) + rarityMod);
+		low = max(1, floor(level * 0.5) * rarityMod);
+
+		stats.kinDam = irandom_range_biased(low, high, LOOT_BIAS, true);
+		
+	}
+	
+	
+	if (type == "prog") {
+		
+		adj = "Programmable";
+		
+		adj = "Scientific";
+		
+		high = ceil((level * rarityMod) + rarityMod);
+		low = max(1, floor(level * 0.5) * rarityMod);
+
+		stats.gunDamPerc = irandom_range_biased(low, high, LOOT_BIAS, true);
+		
+	}
+	
+	//name
+	device.name = adj + " Calculator";
+	
+	return device;
+	
+}
+
+function scr_genDevices_thermos(level, rarity) {
+	
+	var device = new deviceInst(level, rarity);
+	var stats = device.stats;
+	
+	var rarityFactor = max(0, rarity - 1);
+	var rarityMod = 1 + rarityFactor * 0.1;
+	
+	var type = choose("choc", "coffee", "protein");
+	var adj = "";
+	
+	//base max hp
+	var low = floor(5 * (level * 0.8) * rarityMod);
+	var high = low + 15;
+		
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS, true);
+
+	if (type == "choc") {
+		
+		adj = "Hot Chocolate";
+		
+		high = max(2, round(high * 0.75));
+		low = max(1, high - 10);
+	
+		stats.maxHp += irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+	}
+	
+	if (type == "coffee") {
+		
+		adj = "Coffee";
+		
+		low = (0.1 + level * 0.1) * rarityMod;
+		high = (0.2 + level * 0.4) * rarityMod;
+
+		stats.hpRegen = random_range_biased(low, high, LOOT_BIAS, true, 1);
+		
+	}
+	
+	
+	if (type == "protein") {
+		
+		adj = "Protein Milk";
+		
+		high = ceil((level * rarityMod) + rarityMod);
+		low = max(1, floor(level * 0.5) * rarityMod);
+
+		stats.meleeDamPerc = irandom_range_biased(low, high, LOOT_BIAS, true);
+		
+	}
+	
+	//name
+	device.name = adj + " Thermos";
+	
+	return device;
+	
+}
