@@ -4,105 +4,89 @@ function scr_genDevices_laserPointer(level, rarity) {
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
 	
+	device.name = "Laser Pointer";
+	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
 	
-	var type1 = choose("precise", "bright");
-	var type2 = choose("hot", "ionizing", "malfunctioning", "", "", "")
-	
 	//base oa
-	var high = ceil((level + 10) * rarityMod) + rarityFactor;
-	var low = high - 5;
+	var baseHigh = ceil(level + 10);
+	var baseLow = max(1, baseHigh - 5);
 	
-	stats.oa = irandom_range_biased(low, high, LOOT_BIAS, true);
+	stats.oa = irandom_range_biased(baseLow * rarityMod, baseHigh * rarityMod, LOOT_BIAS);
 	
-	//type1
-	high = max(2, round(high * 0.75));
-	low = max(1, high - 5);
+	repeat(rarity) {
+		
+		var amount = 0;
+		var stat = choose("oa", "da", "fireDam", "radDam", "elecDam");
 	
-	var statChange = irandom_range_biased(low, high, LOOT_BIAS, true);
-	
-	if (type1 == "precise") scr_loot_addStat(device, "oa", statChange);
-	if (type1 == "bright") scr_loot_addStat(device, "da", statChange);
-	
-	//type2
-	high = ceil((level * rarityMod) + rarityMod);
-	low = max(1, floor(level * 0.5) * rarityMod);
+		//precise / bright
+		if (stat == "oa" or stat == "da") {
+		
+			var high = max(2, baseHigh * 0.75);
+			var low = max(1, high - 5);
+			
+			amount = irandom_range_biased(low, high, LOOT_BIAS);
 
-	var dam = irandom_range_biased(low, high, LOOT_BIAS, true);
+		}
+		
+		if (stat == "fireDam" or stat == "radDam" or stat == "elecDam") {
+		
+			var high = (level * 0.5);
+			var low = max(1, high - 5);
+
+			amount = irandom_range_biased(low, high, LOOT_BIAS);
+			
+		}
+		
+		scr_loot_addStat(device, stat, amount);
 	
-	if (type2 == "hot") stats.fireDam = dam;
-	if (type2 == "ionizing") stats.radDam = dam;
-	if (type2 == "malfunctioning") stats.elecDam = dam;
-	
-	var name = "";
-	
-	name = append_string(name, type1, 2);
-	name = append_string(name, type2, 2);
-	name = append_string(name, "laser pointer", 2);
-	
-	device.name = name;
+	}
 	
 	return device;
-	
+
 }
 
 function scr_genDevices_watch(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
-
+	
+	device.name = "Watch";
+	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
+	
+	//base regen
+	var low = (0.1 + level * 0.1);
+	var high = (0.2 + level * 0.4);
 
-	var type = choose("digital", "analog");
-	var regenType = choose("oximetric", "electroscopic");
+	//digital / analog
+	var regenType = choose("energyRegen", "hpRegen");
 	
-	if (type == "digital") {
+	stats[$ regenType] = irandom_range_biased(low * rarityMod, high * rarityMod, LOOT_BIAS);
+	
+	var stat = choose("spd", "dashRegen");
+	
+	repeat(rarity) {
 		
-		var int = 0.1 * rarityMod;
-		var num = scr_stats_rollSteppedBonus(int, 3 * rarityMod, level);
+		var amount = 0;
 		
-		stats.spd = num;
+		if (stat == "spd") {
+			//oximetric
+			amount = scr_stats_rollSteppedBonus(0.05, 0.25, level);
+		
+		}
+		
+		if (stat == "dashRegen") {
+			//electroscopic
+			amount = scr_stats_rollSteppedBonus(0.03, 0.3, level);
+	
+		}
+		
+		scr_loot_addStat(device, stat, amount);
 		
 	}
-	
-	if (type == "analog") {
-	
-		var int = 0.01 * rarityMod;
-		var num = scr_stats_rollSteppedBonus(int, 3 * rarityMod, level);
-
-		stats.dashRegen = num;
-		
-	}
-	
-	if (regenType == "oximetric") {
-	
-		var low = (0.1 + level * 0.1) * rarityMod;
-		var high = (0.2 + level * 0.4) * rarityMod;
-		var regen = random_range_biased(low, high, LOOT_BIAS, true, 1);
-		
-		stats.hpRegen = regen;
-	
-	}
-	
-	if (regenType == "electroscopic") {
-	
-		var low = (0.1 + level * 0.1) * rarityMod;
-		var high = (0.2 + level * 0.4) * rarityMod;
-		var regen = random_range_biased(low, high, LOOT_BIAS, true, 1);
-		
-		stats.energyRegen = regen;
-	
-	}
-	
-	var name = "";
-	
-	name = append_string(name, type, 2);
-	name = append_string(name, regenType, 2);
-	name = append_string(name, "watch", 2);
-	
-	device.name = name;
 	
 	return device;
 	
@@ -118,44 +102,46 @@ function scr_genDevices_powerBank(level, rarity) {
 	
 	var type = choose("high capacity", "fast", "dual-cell");
 	
-	var low = (0.1 + level * 0.1) * rarityMod;
-	var high = (0.2 + level * 0.4) * rarityMod;
-	var regen = random_range_biased(low, high, LOOT_BIAS, true, 1);
+	var baseLow = (0.1 + level * 0.1) * rarityMod;
+	var baseHigh = (0.2 + level * 0.4) * rarityMod;
 	
-	if (type = "high capacity") {
+	stats.energyRegen = irandom_range_biased(baseHigh, baseLow, LOOT_BIAS);
 	
-		low = floor(5 * (level * 0.8) * rarityMod);
-		high = low + 15;
+	repeat(rarity) {
+	
+		var amount = 0;
+		var stat = choose("maxEnergy", "energyRegen", "energyPackRegen");
+	
+		if (stat == "maxEnergy") {
+			//high capacity
+			var low = floor(5 * (level * 0.8));
+			var high = low + 10;
+			
+			amount = irandom_range_biased(low * rarityMod, high * rarityMod, LOOT_BIAS);
 		
-		stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS, true);
+		}
+		
+		if (stat == "energyRegen") {
+			//fast
+			var high = max(0.2, baseHigh * 0.5);
+			var low = max(0.1, baseLow * 0.5);
+			
+			amount = irandom_range_biased(low, high, LOOT_BIAS);
+		
+		}
+		
+		if (stat == "energyPackRegen") {
+			//dual-cell
+			var low = 0.01 * level;
+			var high = 0.03 * level;
+			
+			amount = irandom_range_biased(low, high, LOOT_BIAS);
+			
+		}
+	
+		scr_loot_addStat(device, stat, amount);
 	
 	}
-	
-	if (type == "fast") {
-	
-		//already affected by rarityMod
-		low = 0.1 * level;
-		high = 0.4 * level;
-		regen += random_range_biased(low, high, LOOT_BIAS, true, 2);
-	
-	}
-	
-	if (type == "dual-cell") {
-	
-		low = 0.01 * level * rarityMod;
-		high = 0.03 * level * rarityMod;
-		stats.energyPackRegen = random_range_biased(low, high, LOOT_BIAS, true, 2);
-
-	}
-	
-	stats.energyRegen = regen;
-	
-	var name = "";
-	
-	name = append_string(name, type, 2);
-	name = append_string(name, "power bank", 2);
-	
-	device.name = name;
 	
 	return device;
 	
@@ -171,50 +157,75 @@ function scr_genDevices_calculator(level, rarity) {
 	
 	var type = choose("old", "sci", "prog");
 	var adj = "";
+	var typeStat = "";
 	
-	//base da
-	var high = ceil((level + 10) * rarityMod) + rarityFactor;
-	var low = high - 5;
+	//base DA
+	var baseHigh = ceil((level + 10));
+	var baseLow = max(1, baseHigh - 5);
 	
-	stats.da = irandom_range_biased(low, high, LOOT_BIAS, true);
+	stats.da = irandom_range_biased(
+		baseLow * rarityMod,
+		baseHigh * rarityMod,
+		LOOT_BIAS,
+		true
+	);
 	
-	if (type == "old") {
+	switch (type) {
 		
-		adj = "Old-School";
-		
-		high = max(2, round(high * 0.75));
-		low = max(1, high - 5);
-	
-		stats.da += irandom_range_biased(low, high, LOOT_BIAS, true);
-	
-	}
-	
-	if (type == "sci") {
-		
-		adj = "Scientific";
-		
-		high = ceil((level * rarityMod) + rarityMod);
-		low = max(1, floor(level * 0.5) * rarityMod);
-
-		stats.kinDam = irandom_range_biased(low, high, LOOT_BIAS, true);
-		
-	}
-	
-	
-	if (type == "prog") {
-		
-		adj = "Programmable";
-		
-		adj = "Scientific";
-		
-		high = ceil((level * rarityMod) + rarityMod);
-		low = max(1, floor(level * 0.5) * rarityMod);
-
-		stats.gunDamPerc = irandom_range_biased(low, high, LOOT_BIAS, true);
+		case "old":
+			adj = "Old-School";
+			typeStat = "da";
+			break;
+			
+		case "sci":
+			adj = "Scientific";
+			typeStat = "kinDam";
+			break;
+			
+		case "prog":
+			adj = "Programmable";
+			typeStat = "gunDamPerc";
+			break;
 		
 	}
 	
-	//name
+	repeat (rarity) {
+		
+		var stat = choose("da", typeStat);
+		var amount = 0;
+		
+		if (stat == "da") {
+			
+			var high = max(2, round(baseHigh * 0.75));
+			var low = max(1, high - 5);
+			
+			amount = irandom_range_biased(
+				low,
+				high,
+				LOOT_BIAS,
+				true
+			);
+			
+		}
+		
+		if (stat == "kinDam" or stat == "gunDamPerc") {
+			
+			var high = max(2, level * 0.5 + 1);
+			var low = max(1, high * 0.5);
+			
+			amount = irandom_range_biased(
+				low,
+				high,
+				LOOT_BIAS,
+				true
+			);
+			
+		}
+		
+		scr_loot_addStat(device, stat, amount);
+		
+	}
+	
 	device.name = adj + " Calculator";
 	
 	return device;
@@ -231,50 +242,209 @@ function scr_genDevices_thermos(level, rarity) {
 	
 	var type = choose("choc", "coffee", "protein");
 	var adj = "";
+	var typeStat = "";
 	
-	//base max hp
-	var low = floor(5 * (level * 0.8) * rarityMod);
-	var high = low + 15;
-		
-	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS, true);
-
-	if (type == "choc") {
-		
-		adj = "Hot Chocolate";
-		
-		high = max(2, round(high * 0.75));
-		low = max(1, high - 10);
+	//base maximum HP
+	var baseLow = floor(5 * (level * 0.8));
+	var baseHigh = baseLow + 15;
 	
-		stats.maxHp += irandom_range_biased(low, high, LOOT_BIAS, true);
+	stats.maxHp = irandom_range_biased(
+		baseLow * rarityMod,
+		baseHigh * rarityMod,
+		LOOT_BIAS,
+		true
+	);
 	
-	}
-	
-	if (type == "coffee") {
+	switch (type) {
 		
-		adj = "Coffee";
-		
-		low = (0.1 + level * 0.1) * rarityMod;
-		high = (0.2 + level * 0.4) * rarityMod;
-
-		stats.hpRegen = random_range_biased(low, high, LOOT_BIAS, true, 1);
-		
-	}
-	
-	
-	if (type == "protein") {
-		
-		adj = "Protein Milk";
-		
-		high = ceil((level * rarityMod) + rarityMod);
-		low = max(1, floor(level * 0.5) * rarityMod);
-
-		stats.meleeDamPerc = irandom_range_biased(low, high, LOOT_BIAS, true);
+		case "choc":
+			adj = "Hot Chocolate";
+			typeStat = "maxHp";
+			break;
+			
+		case "coffee":
+			adj = "Coffee";
+			typeStat = "hpRegen";
+			break;
+			
+		case "protein":
+			adj = "Protein Milk";
+			typeStat = "meleeDamPerc";
+			break;
 		
 	}
 	
-	//name
+	repeat (rarity) {
+		
+		var stat = choose("maxHp", typeStat);
+		var amount = 0;
+		
+		if (stat == "maxHp") {
+			
+			var high = max(2, round(baseHigh * 0.75));
+			var low = max(1, high - 10);
+			
+			amount = irandom_range_biased(
+				low,
+				high,
+				LOOT_BIAS,
+				true
+			);
+			
+		}
+		
+		if (stat == "hpRegen") {
+			
+			var low = (level * 0.05);
+			var high = (level * 0.15);
+			
+			amount = random_range_biased(
+				low,
+				high,
+				LOOT_BIAS,
+				true,
+				1
+			);
+			
+		}
+		
+		if (stat == "meleeDamPerc") {
+			
+			var high = max(2, ceil(level * 0.25))
+			var low = max(1, high - 5);
+			
+			amount = irandom_range_biased(
+				low,
+				high,
+				LOOT_BIAS,
+				true
+			);
+			
+		}
+		
+		scr_loot_addStat(device, stat, amount);
+		
+	}
+	
 	device.name = adj + " Thermos";
-	
 	return device;
 	
 }
+
+//function scr_genDevices_calculator(level, rarity) {
+	
+//	var device = new deviceInst(level, rarity);
+//	var stats = device.stats;
+	
+//	var rarityFactor = max(0, rarity - 1);
+//	var rarityMod = 1 + rarityFactor * 0.2;
+	
+//	var type = choose("old", "sci", "prog");
+//	var adj = "";
+	
+//	//base da
+//	var high = ceil((level + 10) * rarityMod) + rarityFactor;
+//	var low = high - 5;
+	
+//	stats.da = irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+//	if (type == "old") {
+		
+//		adj = "Old-School";
+		
+//		high = max(2, round(high * 0.75));
+//		low = max(1, high - 5);
+	
+//		stats.da += irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+//	}
+	
+//	if (type == "sci") {
+		
+//		adj = "Scientific";
+		
+//		high = ceil((level * rarityMod) + rarityMod);
+//		low = max(1, floor(level * 0.5) * rarityMod);
+
+//		stats.kinDam = irandom_range_biased(low, high, LOOT_BIAS, true);
+		
+//	}
+	
+	
+//	if (type == "prog") {
+		
+//		adj = "Programmable";
+		
+//		adj = "Scientific";
+		
+//		high = ceil((level * rarityMod) + rarityMod);
+//		low = max(1, floor(level * 0.5) * rarityMod);
+
+//		stats.gunDamPerc = irandom_range_biased(low, high, LOOT_BIAS, true);
+		
+//	}
+	
+//	//name
+//	device.name = adj + " Calculator";
+	
+//	return device;
+	
+//}
+
+//function scr_genDevices_thermos(level, rarity) {
+	
+//	var device = new deviceInst(level, rarity);
+//	var stats = device.stats;
+	
+//	var rarityFactor = max(0, rarity - 1);
+//	var rarityMod = 1 + rarityFactor * 0.2;
+	
+//	var type = choose("choc", "coffee", "protein");
+//	var adj = "";
+	
+//	//base max hp
+//	var low = floor(5 * (level * 0.8) * rarityMod);
+//	var high = low + 15;
+		
+//	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS, true);
+
+//	if (type == "choc") {
+		
+//		adj = "Hot Chocolate";
+		
+//		high = max(2, round(high * 0.75));
+//		low = max(1, high - 10);
+	
+//		stats.maxHp += irandom_range_biased(low, high, LOOT_BIAS, true);
+	
+//	}
+	
+//	if (type == "coffee") {
+		
+//		adj = "Coffee";
+		
+//		low = (0.1 + level * 0.1) * rarityMod;
+//		high = (0.2 + level * 0.4) * rarityMod;
+
+//		stats.hpRegen = random_range_biased(low, high, LOOT_BIAS, true, 1);
+		
+//	}
+	
+	
+//	if (type == "protein") {
+		
+//		adj = "Protein Milk";
+		
+//		high = ceil((level * rarityMod) + rarityMod);
+//		low = max(1, floor(level * 0.5) * rarityMod);
+
+//		stats.meleeDamPerc = irandom_range_biased(low, high, LOOT_BIAS, true);
+		
+//	}
+	
+//	//name
+//	device.name = adj + " Thermos";
+	
+//	return device;
+	
+//}

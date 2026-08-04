@@ -51,9 +51,9 @@ scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 
 //randomise();
-//var dev = scr_genDevices_thermos(5, 1);
+//var dev = scr_genDevices_thermos(15, 1);
 //gear.device1 = dev;
-//dev = scr_genDevices_thermos(5, 5);
+//dev = scr_genDevices_thermos(15, 5);
 //gear.device2 = dev;
 
 //var hg = new headgearInst(1, 1);
