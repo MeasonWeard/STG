@@ -1,4 +1,4 @@
-if (global.devControls and keyboard_check_pressed(vk_escape)) game_end();
+if (global.devControls and keyboard_check_pressed(vk_end)) game_end();
 
 if (keyPressDelay > 0) {
 	

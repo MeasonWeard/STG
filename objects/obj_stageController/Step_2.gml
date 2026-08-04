@@ -5,7 +5,7 @@ if (hub and instance_exists(global.player)) {
 	
 }
 
-if (!instance_exists(global.player)) {
+if (!paused and !instance_exists(global.player)) {
 
 	deathCountdown--;
 	

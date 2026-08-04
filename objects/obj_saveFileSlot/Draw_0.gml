@@ -7,6 +7,7 @@ if (mode == "delete") {
 	
 }
 
+draw_set_font(fnt_normal);
 draw_set_colour(col);
 scr_misc_resetTextAlignment();
 
@@ -22,7 +23,9 @@ if (!deleting) {
 		if (is_undefined(time)) time = "0:0:0";
 		if (is_undefined(level)) level = "0";
 
-		txt = name + "\n" + time + "\n" + "Level: " + level;
+		txt = name + "\n\nLevel: " + level + "\n" + time;
+		txt += "\n\nMajor Spec:\n       " + class1;
+		txt += "\n\nMinor Spec:\n       " + class2;
 		txt += mode == "select" ? "\n\nClick to load" : "\n\nWARNING: CLICK TO DELETE";
 
 	} else {

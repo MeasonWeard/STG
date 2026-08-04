@@ -148,8 +148,52 @@ time = date_datetime_string(date_current_datetime());
 
 //pause
 paused = false;
+
 pause = function() {
 	
+	if (!paused) {
+		
+		paused = true;
+		
+		var keepActive = [global.data, global.cursor];
+		var len = array_length(keepActive);
+		
+		instance_deactivate_all(true);
 	
+		for (var i = 0; i < len; i++) {
+		
+			var inst = keepActive[i];
+			
+			//if (!instance_exists(inst)) continue;
+			
+			instance_activate_object(inst);
+		
+		}
+		
+		if (layer_exists("Tiles")) {
+			layer_set_visible("Tiles", false);
+		}
+		
+		scr_obj_createExclusive(obj_pauseMenu, x, y);
+		
+	
+	} else {
+	
+		paused = false;
+		
+		with (obj_pauseMenu) {
+			instance_destroy();	
+		}
+		
+		instance_activate_all();
+		
+		if (instance_exists(global.player)) global.player.attackDelay = 12;
+		
+		if (layer_exists("Tiles")) {
+				layer_set_visible("Tiles", true);
+		}
+		
+	
+	}
 	
 }

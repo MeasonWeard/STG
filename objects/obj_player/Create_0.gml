@@ -45,8 +45,8 @@ gear = scr_data_loadEquippedGear();
 
 var weaponsData = scr_data_loadEquippedWeapons();
 
-weaponsData.weapon1 = scr_genMelee_shieldAndBaton(10, 3);
-weaponsData.weapon2 = scr_genMelee_electrifiedBaton(10, 3);
+//weaponsData.weapon1 = scr_genMelee_shieldAndBaton(10, 3);
+//weaponsData.weapon2 = scr_genMelee_electrifiedBaton(10, 3);
 scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 

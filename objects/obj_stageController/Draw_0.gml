@@ -1,6 +1,6 @@
 scr_showDevInfo();
 
-if (global.debug) {
+if (!paused and global.debug) {
 
 	draw_set_colour(c_red);
 	draw_set_alpha(0.25);

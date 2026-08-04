@@ -43,8 +43,8 @@ createNew = function() {
 name = "";
 time = "";
 level = "";
-class1 = "";
-class2 = "";
+class1 = "(not selected yet)";
+class2 = "(not selected yet)";
 
 //formatting
 textX = x + 12;

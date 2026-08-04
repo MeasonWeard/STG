@@ -1,4 +1,5 @@
 txt = "Back";
+leftKey = vk_escape;
 
 leftFunc = function() {
 
