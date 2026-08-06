@@ -8,79 +8,44 @@ function scr_genTies_physics(level, rarity) {
 	var keys = ["kinDamPerc","radDamPerc","maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay"];
 	keys = array_concat(keys, keys);
 	
-	var low = 2 * level;
-	var high = 6 * level;
+	var low = 2 * max(0.5, level);
+	var high = 6 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 14 * level;
-	high = 18 * level;
+	low = 14 * max(0.5, level);
+	high = 18 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
 	repeat(rarity) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "kinDamPerc" or key == "radDamPerc") {
-			
-			amount = scr_statRolls_rollDamage(level);
-			//low = level;
-			//high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "maxEnergyPerc") {
-			
-			amount = scr_statRolls_rollMaxEnergyPerc(level);
-			//low = level * 4;
-			//high = low + 10;
-			
+			amount = scr_statRolls_maxEnergyPerc(level);
 		}
 		
 		if (key == "energyRegen") {
-			
-			amount = scr_statRolls_rollRegen(level);
-			//low = level * 0.1;
-			//high = low + .2;
-			//integer = false;
-			
+			amount = scr_statRolls_regen(level);
 		}
 		
 		if (key == "energyRegenPerc") {
-			
-			amount = scr_statRolls_rollRegenPerc(level);
-			//low = level * 4;
-			//high = low + 8;
-			
+			amount = scr_statRolls_regenPerc(level);
 		}
 		
 		if (key == "shieldRegen") {
-			
-			low = level * 0.05;
-			high = low + .1;
-			integer = false;
-			
+			amount = scr_statRolls_shieldRegen(level);
 		}
 		
 		if (key == "shieldRegenDelay") {
-			
-			low = level * -0.015;
-			high = low - .1;
-			integer = false;
-			
+			amount = scr_statRolls_shieldRegenDelay(level);	
 		}
 	
-	
-		//if (integer) {
-		//	amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		//} else {
-		//	amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		//}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -94,77 +59,47 @@ function scr_genTies_chemistry(level, rarity) {
 	tie.name = "Chemist's Tie";
 	var stats = tie.stats;
 	
-	var keys = ["chemDamPerc","fireDamPerc","energyRegen","maxHp","maxHpPerc","stimPackRegen"];
+	var keys = ["chemDamPerc", "fireDamPerc", "energyRegen", "maxHp","maxHpPerc", "stimPackRegen", "chemRes"];
 	keys = array_concat(keys, keys);
 	
-	var low = 6 * level;
-	var high = 10 * level;
+	var low = 6 * max(0.5, level);
+	var high = 10 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 10 * level;
-	high = 14 * level;
+	low = 10 * max(0.5, level);
+	high = 14 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
 	repeat(rarity) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "chemDamPerc" or key == "fireDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
-		if (key == "maxEnergy") {
-			
-			low = level * 5;
-			high = low + 10;
-			
+		if (key == "chemRes") {
+			amount = scr_statRolls_resistance(level);
 		}
 		
 		if (key == "energyRegen") {
-			
-			low = level * 0.1;
-			high = low + .2;
-			integer = false;
-			
+			amount = scr_statRolls_regen(level);
 		}
 		
 		if (key == "maxHp") {
-			
-			low = level * 4;
-			high = low + 10;
-			
+			amount = scr_statRolls_maxHp(level);
 		}
 		
 		if (key == "maxHpPerc") {
-			
-			low = level * 2;
-			high = low + 8;
-			
+			amount = scr_statRolls_maxHpPerc(level);
 		}
 		
 		if (key == "stimPackRegen") {
-			
-			low = level * 0.01;
-			high = low + 0.05;
-			integer = false;
-			
+			amount = scr_statRolls_packRegen(level);
 		}
 	
-	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -181,79 +116,48 @@ function scr_genTies_biology(level, rarity) {
 	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","healingPerc","meleeDamPerc","da"];
 	keys = array_concat(keys, keys);
 	
-	var low = 11 * level;
-	var high = 15 * level;
+	var low = 11 * max(0.5, level);
+	var high = 15 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 5 * level;
-	high = 9 * level;
+	low = 5 * max(0.5, level);
+	high = 9 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
 	repeat(rarity) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
 		
 		if (key == "maxHp") {
-			
-			low = level * 5;
-			high = low + 10;
-			
+			amount = scr_statRolls_maxHp(level);
 		}
 		
 		if (key == "maxHpPerc") {
-			
-			low = level * 4;
-			high = low + 10;
-			
+			amount = scr_statRolls_maxHpPerc(level);
 		}
 		
 		if (key == "hpRegen") {
-			
-			low = level * 0.1;
-			high = low + .2;
-			integer = false;
-			
+			amount = scr_statRolls_regen(level);
 		}
 		
 		if (key == "hpRegenPerc") {
-			
-			low = level * 4;
-			high = low + 8;
-			
+			amount = scr_statRolls_regenPerc(level);
 		}
 		
 		if (key == "healingPerc") {
-			
-			low = level * 4;
-			high = low + 8;
-			
+			amount = scr_statRolls_healingPerc(level);
 		}
 		
 		if (key == "meleeDamPerc") {
-			
-			low = level + 2;
-			high = low + 10;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "da") {
-			
-			low = 2 + level * 3;
-			high = low + 10;
-			
+			amount = scr_statRolls_combatAbility(level);
 		}
 	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -274,80 +178,44 @@ function scr_genTies_engineering(level, rarity) {
 	//only one copy of speed
 	array_push(keys, "spd");
 	
-	var low = 6 * level;
-	var high = 10 * level;
+	var low = 6 * max(0.5, level);
+	var high = 10 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 10 * level;
-	high = 14 * level;
+	low = 10 * max(0.5, level);
+	high = 14 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
 	repeat(rarity) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
 		
-		if (key == "elecDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
-		}
-		
-		if (key == "kinDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+		if (key == "elecDamPerc" or key == "kinDamPerc") {
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "energyRegenPerc") {
-			
-			low = level * 4;
-			high = low + 8;
-			
+			amount = scr_statRolls_regenPerc(level);
 		}
 		
 		if (key == "energyPackRegen") {
-			
-			low = level * 0.01;
-			high = low + 0.05;
-			integer = false;
-			
+			amount = scr_statRolls_packRegen(level);
 		}
 		
 		if (key == "gunDamPerc") {
-			
-			low = level + 2;
-			high = low + 10;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "oa") {
-			
-			low = 2 + level * 3;
-			high = low + 10;
-			
+			amount = scr_statRolls_combatAbility(level);
 		}
 		
 		if (key == "spd") {
-			
-			low = 0.1;
-			high = min(1.1, low + 0.05 * level);
-			integer = false;
-			
+			amount = scr_statRolls_speed(level);
 		}
 	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 		
@@ -368,80 +236,48 @@ function scr_genTies_defender(level, rarity) {
 	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","meleeDamPerc","da"];
 	keys = array_concat(keys, keys);
 	
-	var low = 14 * level;
-	var high = 18 * level;
+	var low = 14 * max(0.5, level);
+	var high = 18 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 2 * level;
-	high = 6 * level;
+	low = 2 * max(0.5, level);
+	high = 6 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = level * 2;
-	high = low + 8;
-	stats.meleeDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.meleeDamPerc = scr_statRolls_damagePerc(level, 1.5);
 	
-	low = 2 + level * 3;
-	high = low + 10;		
-	stats.da = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.da = scr_statRolls_combatAbility(level, 1.5);
 	
 	repeat(rarity - 1) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "maxHp") {
-			
-			low = max(1, level) * 5;
-			high = low + 10;
-			
+			amount = scr_statRolls_maxHp(level);
 		}
 		
 		if (key == "maxHpPerc") {
-			
-			low = max(1, level);
-			high = low + 8;
-			
+			amount = scr_statRolls_maxHpPerc(level);
 		}
 		
 		if (key == "hpRegen") {
-			
-			low = max(1, level) * 0.1;
-			high = low + .2;
-			integer = false;
-			
+			amount = scr_statRolls_regen(level);
 		}
 		
 		if (key == "hpRegenPerc") {
-			
-			low = max(1, level);
-			high = low + 8;
-			
+			amount = scr_statRolls_regenPerc(level);
 		}
 			
 		if (key == "meleeDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "da") {
-			
-			low = 2 + level * 3;
-			high = low + 10;
-			
+			amount = scr_statRolls_combatAbility(level);
 		}
 	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -459,72 +295,44 @@ function scr_genTies_marksman(level, rarity) {
 	var keys = ["kinRes","kinDam","kinDamPerc","gunDamPerc","oa"];
 	keys = array_concat(keys, keys);
 	
-	var low = 7 * level;
-	var high = 11 * level;
+	var low = 7 * max(0.5, level);
+	var high = 11 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 7 * level;
-	high = 11 * level;
+	low = 7 * max(0.5, level);
+	high = 11 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = level * 2;
-	high = low + 8;
-	stats.gunDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.gunDamPerc = scr_statRolls_damagePerc(level, 1.5);
 	
-	low = 2 + level * 3;
-	high = low + 10;	
-	stats.oa = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.oa = scr_statRolls_combatAbility(level, 1.5);
 	
 	repeat(rarity - 1) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "kinRes") {
-			
-			low = max(1, level * 0.6);
-			high = low + 4;
-			
+			amount = scr_statRolls_resistance(level);	
 		}
 		
 		if (key == "kinDam") {
-			
-			low = max(1, level * 0.4);
-			high = low + 4;
-			
+			amount = scr_statRolls_damage(level);
 		}
 		
 		if (key == "kinDamPerc") {
-			
-			low = max(1, level);
-			high = low + 6;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "gunDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "oa") {
-			
-			low = 2 + level * 3;
-			high = low + 10;
-			
+			amount = scr_statRolls_combatAbility(level);
 		}
 	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -542,19 +350,17 @@ function scr_genTies_doctor(level, rarity) {
 	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","healingPerc"];
 	keys = array_concat(keys, keys);
 	
-	var low = 12 * level;
-	var high = 16 * level;
+	var low = 12 * max(0.5, level);
+	var high = 16 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 4 * level;
-	high = 8 * level;
+	low = 4 * max(0.5, level);
+	high = 8 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
 	stats.maxStimPacks = 1;
 	
-	low = 2 + level;
-	high = low + 4;
-	stats.healingPerc = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.healingPerc = scr_statRolls_healingPerc(level, 1.5);
 	
 	var rollNum = 0;
 	
@@ -562,7 +368,7 @@ function scr_genTies_doctor(level, rarity) {
 			
 		rollNum ++;
 		
-		if (rarity > 3 and rollNum == rarity - 1) {
+		if (rarity > 3 and rollNum == rarity) {
 
 			if (scr_random_chance(rarity - 1)) {
 				stats.maxStimPacks++;
@@ -572,54 +378,29 @@ function scr_genTies_doctor(level, rarity) {
 		}
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
 		
 		if (key == "maxHp") {
-			
-			low = max(1, level) * 5;
-			high = low + 10;
-			
+			amount = scr_statRolls_maxHp(level);
 		}
 		
-		if (key == "maxHpPerc") {
-			
-			low = max(1, level);
-			high = low + 8;
-			
+		if (key == "maxHpPerc") {	
+			amount = scr_statRolls_maxHpPerc(level);	
 		}
 		
 		if (key == "hpRegen") {
-			
-			low = max(1, level) * 0.1;
-			high = low + .2;
-			integer = false;
-			
+			amount = scr_statRolls_regen(level);	
 		}
 		
 		if (key == "hpRegenPerc") {
-			
-			low = max(1, level);
-			high = low + 8;
-			
+			amount = scr_statRolls_regenPerc(level);
 		}
 		
 		if (key == "healingPerc") {
-			
-			low = max(1, level * 0.5);
-			high = low + 4;
-			
+			amount = scr_statRolls_healingPerc(level);
 		}
 			
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -637,19 +418,17 @@ function scr_genTies_athlete(level, rarity) {
 	var keys = ["maxHp","hpRegen","da","dashRegen","spd"];
 	keys = array_concat(keys, keys);
 	
-	var low = 12 * level;
-	var high = 18 * level;
+	var low = 12 * max(0.5, level);
+	var high = 18 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 2 * level;
-	high = 6 * level;
+	low = 2 * max(0.5, level);
+	high = 6 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
 	stats.maxDashes = 1;
 	
-	low = 0.4 + level * 0.01;
-	high = low + .05;
-	stats.spd = random_range_biased(low, high, LOOT_BIAS);
+	stats.spd = scr_statRolls_speed(level, 1.2);
 	
 	var rollNum = 0;
 	
@@ -660,69 +439,120 @@ function scr_genTies_athlete(level, rarity) {
 		if (rarity > 3 and rollNum == rarity - 1) {
 
 			if (scr_random_chance(rarity - 1)) {
-				stats.maxStimPacks++;
+				stats.maxDashes++;
 				break;
 			}
 
 		}
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
 		
 		if (key == "maxHp") {
-			
-			low = max(1, level) * 5;
-			high = low + 10;
-			
+			amount = scr_statRolls_maxHp(level);
 		}
 			
 		if (key == "hpRegen") {
-			
-			low = max(1, level) * 0.1;
-			high = low + .2;
-			integer = false;
-			
+			amount = scr_statRolls_regen(level);
 		}
 		
 		if (key == "dashRegen") {
 			
-			low = level * 0.01;
-			high = low + 0.05;
-			integer = false;
+			amount = scr_statRolls_dashRegen(level);
 			
 		}
 		
 		if (key == "spd") {
-			
-			low = level * 0.01;
-			high = low + 0.05;
-			integer = false;
-			
+			amount = scr_statRolls_speed(level);
 		}
 		
 		if (key == "da") {
-			
-			low = 2 + level * 3;
-			high = low + 10;
-			
+			amount = scr_statRolls_combatAbility(level);
 		}
 
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
 	return tie;
 	
 }
+
+function scr_genTies_inventor(level, rarity) {
+
+	var tie = new tieInst(level, rarity);
+	tie.name = "Inventor's Tie";
+	var stats = tie.stats;
+	
+	var keys = ["maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay","gunDamPerc"];
+	keys = array_concat(keys, keys);
+	
+	if (rarity > 2) array_push(keys, "maxShield");
+	
+	var low = 2 * max(0.5, level);
+	var high = 6 * max(0.5, level);
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 14 * max(0.5, level);
+	high = 18 * max(0.5, level);
+	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	stats.maxEnergyPacks = 1;
+	
+	var rollNum = 0;
+	
+	repeat(rarity) {
+	
+		var key = scr_randomElementRemove(keys);
+		var amount = 0;
+		
+		rollNum ++;
+		
+		if (rarity > 3 and rollNum == rarity) {
+
+			if (scr_random_chance(rarity - 1)) {
+				stats.maxEnergyPacks++;
+				break;
+			}
+
+		}
+
+		if (key == "maxEnergyPerc") {
+			amount = scr_statRolls_maxEnergyPerc(level);
+		}
+		
+		if (key == "energyRegen") {
+			amount = scr_statRolls_regen(level);
+		}
+		
+		if (key == "energyRegenPerc") {
+			amount = scr_statRolls_regenPerc(level);
+		}
+		
+		if (key == "shieldRegen") {
+			amount = scr_statRolls_shieldRegen(level);
+		}
+		
+		if (key == "shieldRegenDelay") {
+			amount = scr_statRolls_shieldRegenDelay(level);	
+		}
+		
+		if (key == "gunDamPerc") {
+			amount = scr_statRolls_damagePerc(level);
+		}
+		
+		if (key == "maxShield") {
+			amount = 1;	
+		}
+	
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
+	
+	}
+	
+	return tie;
+	
+}
+
 
 function scr_genTies_pyromaniac(level, rarity) {
 
@@ -735,66 +565,39 @@ function scr_genTies_pyromaniac(level, rarity) {
 	keys = array_concat(keys, keys);
 	array_push(keys, "elecDamPerc", "radDamPerc");
 	
-	var low = 5 * level;
-	var high = 9 * level;
+	var low = 5 * max(0.5, level);
+	var high = 9 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 11 * level;
-	high = 15 * level;
+	low = 11 * max(0.5, level);
+	high = 15 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = level * 2;
-	high = low + 8;
-	stats.fireDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
-	
-	low = max(1, level * 0.3);
-	high = low + 3;
-	stats.fireDam = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.fireDamPerc = scr_statRolls_damagePerc(level, 1.5);
+	stats.fireDam =  scr_statRolls_damage(level, 1.5);
 	
 	repeat(rarity - 1) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "fireDam") {
-			
-			low = max(1, level * 0.3);
-			high = low + 4;
-			
+			amount = scr_statRolls_damage(level);
 		}
 		
 		if (key == "fireDamPerc" or key == "elecDamPerc" or key == "radDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "fireRes") {
-			
-			low = max(1, level * 0.6);
-			high = low + 4;
-			
+			amount = scr_statRolls_resistance(level);
 		}
 		
 		if (key == "fireResPerc") {
-			
-			low = level + 2;
-			high = low + 8;
-			
+			amount = scr_statRolls_resistancePerc(level);
 		}
 
-	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -813,65 +616,39 @@ function scr_genTies_ballistician(level, rarity) {
 	keys = array_concat(keys, keys);
 	array_push(keys, "chemDamPerc", "fireDamPerc");
 	
-	var low = 5 * level;
-	var high = 9 * level;
+	var low = 5 * max(0.5, level);
+	var high = 9 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 11 * level;
-	high = 15 * level;
+	low = 11 * max(0.5, level);
+	high = 15 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = level * 2;
-	high = low + 8;
-	stats.kinDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
-	
-	low = max(1, level * 0.3);
-	high = low + 3;
-	stats.kinDam = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.kinDamPerc = scr_statRolls_damagePerc(level, 1.5);
+	stats.kinDam =  scr_statRolls_damage(level, 1.5);
 	
 	repeat(rarity - 1) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "kinDam") {
-			
-			low = max(1, level * 0.3);
-			high = low + 4;
-			
+			amount = scr_statRolls_damage(level);
 		}
 		
 		if (key == "kinDamPerc" or key == "chemDamPerc" or key == "fireDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "kinRes") {
-			
-			low = max(1, level * 0.6);
-			high = low + 4;
-			
+			amount = scr_statRolls_resistance(level);
 		}
 		
 		if (key == "kinResPerc") {
-			
-			low = level + 2;
-			high = low + 8;
-			
+			amount = scr_statRolls_resistancePerc(level);
 		}
-	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -890,65 +667,39 @@ function scr_genTies_toxicologist(level, rarity) {
 	keys = array_concat(keys, keys);
 	array_push(keys, "fireDamPerc", "elecDamPerc");
 	
-	var low = 5 * level;
-	var high = 9 * level;
+	var low = 5 * max(0.5, level);
+	var high = 9 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 11 * level;
-	high = 15 * level;
+	low = 11 * max(0.5, level);
+	high = 15 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = level * 2;
-	high = low + 8;
-	stats.chemDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
-	
-	low = max(1, level * 0.3);
-	high = low + 3;
-	stats.chemDam = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.chemDamPerc = scr_statRolls_damagePerc(level, 1.5);
+	stats.chemDam =  scr_statRolls_damage(level, 1.5);
 	
 	repeat(rarity - 1) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "chemDam") {
-			
-			low = max(1, level * 0.3);
-			high = low + 4;
-			
+			amount = scr_statRolls_damage(level);
 		}
 		
 		if (key == "chemDamPerc" or key == "fireDamPerc" or key == "elecDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "chemRes") {
-			
-			low = max(1, level * 0.6);
-			high = low + 4;
-			
+			amount = scr_statRolls_resistance(level);
 		}
 		
 		if (key == "chemResPerc") {
-			
-			low = level + 2;
-			high = low + 8;
-			
+			amount = scr_statRolls_resistancePerc(level);
 		}
-	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -967,65 +718,39 @@ function scr_genTies_electromaniac(level, rarity) {
 	keys = array_concat(keys, keys);
 	array_push(keys, "radDamPerc", "kinDamPerc");
 	
-	var low = 5 * level;
-	var high = 9 * level;
+	var low = 5 * max(0.5, level);
+	var high = 9 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 11 * level;
-	high = 15 * level;
+	low = 11 * max(0.5, level);
+	high = 15 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = level * 2;
-	high = low + 8;
-	stats.elecDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
-	
-	low = max(1, level * 0.3);
-	high = low + 3;
-	stats.elecDam = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.elecDamPerc = scr_statRolls_damagePerc(level, 1.5);
+	stats.elecDam =  scr_statRolls_damage(level, 1.5);
 	
 	repeat(rarity - 1) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "elecDam") {
-			
-			low = max(1, level * 0.3);
-			high = low + 4;
-			
+			amount = scr_statRolls_damage(level);
 		}
 		
 		if (key == "elecDamPerc" or key == "radDamPerc" or key == "kinDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "elecRes") {
-			
-			low = max(1, level * 0.6);
-			high = low + 4;
-			
+			amount = scr_statRolls_resistance(level);
 		}
 		
 		if (key == "elecResPerc") {
-			
-			low = level + 2;
-			high = low + 8;
-			
+			amount = scr_statRolls_resistancePerc(level);
 		}
-	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	
@@ -1044,65 +769,39 @@ function scr_genTies_radiologist(level, rarity) {
 	keys = array_concat(keys, keys);
 	array_push(keys, "kinDamPerc", "chemDamPerc");
 	
-	var low = 5 * level;
-	var high = 9 * level;
+	var low = 5 * max(0.5, level);
+	var high = 9 * max(0.5, level);
 	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = 11 * level;
-	high = 15 * level;
+	low = 11 * max(0.5, level);
+	high = 15 * max(0.5, level);
 	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
 	
-	low = level * 2;
-	high = low + 8;
-	stats.radDamPerc = irandom_range_biased(low, high, LOOT_BIAS);
-	
-	low = max(1, level * 0.3);
-	high = low + 3;
-	stats.radDam = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.radDamPerc = scr_statRolls_damagePerc(level, 1.5);
+	stats.radDam =  scr_statRolls_damage(level, 1.5);
 	
 	repeat(rarity - 1) {
 	
 		var key = scr_randomElementRemove(keys);
-		low = 1;
-		high = 2;
 		var amount = 0;
-		var integer = true;
-		
+
 		if (key == "radDam") {
-			
-			low = max(1, level * 0.3);
-			high = low + 4;
-			
+			amount = scr_statRolls_damage(level);
 		}
 		
 		if (key == "radDamPerc" or key == "kinDamPerc" or key == "chemDamPerc") {
-			
-			low = level;
-			high = low + 8;
-			
+			amount = scr_statRolls_damagePerc(level);
 		}
 		
 		if (key == "radRes") {
-			
-			low = max(1, level * 0.6);
-			high = low + 4;
-			
+			amount = scr_statRolls_resistance(level);
 		}
 		
 		if (key == "radResPerc") {
-			
-			low = level + 2;
-			high = low + 8;
-			
+			amount = scr_statRolls_resistancePerc(level);
 		}
-	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
-	
-		if (amount > 0) scr_loot_addStat(tie, key, amount);
+
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
 	
 	}
 	

@@ -398,6 +398,7 @@ function scr_genGuns_plasmaBlaster(level, rarity) {
 
 	var gun = new gun_blaster(level, rarity);
 	gun.name = "Plasma Blaster";
+	gun.spr = spr_plasmaBlaster;
 
 	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
@@ -430,6 +431,7 @@ function scr_genGuns_ionBlaster(level, rarity) {
 
 	var gun = new gun_blaster(level, rarity);
 	gun.name = "Ion Blaster";
+	gun.spr = spr_ionBlaster;
 
 	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
@@ -612,6 +614,7 @@ function scr_genGuns_slagSmg(level, rarity) {
 
 	var gun = new gun_smg(level, rarity);
 	gun.name = "Slag SMG";
+	gun.spr = spr_slagSmg;
 
 	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);

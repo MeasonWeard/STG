@@ -276,8 +276,9 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	if (type == "device") {
 		
 		//NOT SPECIAL YET
-		var func = choose(scr_genDevices_laserPointer, scr_genDevices_watch, scr_genDevices_powerBank,
-		scr_genDevices_calculator, scr_genDevices_thermos);
+		var func = choose(scr_genDevices_magnetron, scr_genDevices_amplifier, scr_genDevices_catalystCartridge,
+		scr_genDevices_accelerant, scr_genDevices_petRock, scr_genDevices_powerRegulator, scr_genDevices_regenerativeImplant,
+		scr_genDevices_resistanceModule, scr_genDevices_firstAidKit, scr_genDevices_shieldGenerator);
 		loot = func(level, rarity);
 		
 	}
@@ -285,7 +286,7 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	if (type == "tie") {
 		
 		var func = choose(scr_genTies_defender, scr_genTies_marksman, scr_genTies_doctor,
-		scr_genTies_athlete, scr_genTies_pyromaniac, scr_genTies_ballistician,
+		scr_genTies_athlete, scr_genTies_inventor, scr_genTies_pyromaniac, scr_genTies_ballistician,
 		scr_genTies_toxicologist, scr_genTies_electromaniac, scr_genTies_radiologist);
 		
 		loot = func(level, rarity);
