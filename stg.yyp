@@ -297,6 +297,7 @@
     {"id":{"name":"scr_random","path":"scripts/scr_random/scr_random.yy",},},
     {"id":{"name":"scr_skills","path":"scripts/scr_skills/scr_skills.yy",},},
     {"id":{"name":"scr_stages","path":"scripts/scr_stages/scr_stages.yy",},},
+    {"id":{"name":"scr_statRolls","path":"scripts/scr_statRolls/scr_statRolls.yy",},},
     {"id":{"name":"scr_stats","path":"scripts/scr_stats/scr_stats.yy",},},
     {"id":{"name":"scr_timeSlicing","path":"scripts/scr_timeSlicing/scr_timeSlicing.yy",},},
     {"id":{"name":"scr_ui","path":"scripts/scr_ui/scr_ui.yy",},},

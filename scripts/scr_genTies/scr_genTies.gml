@@ -26,30 +26,34 @@ function scr_genTies_physics(level, rarity) {
 		
 		if (key == "kinDamPerc" or key == "radDamPerc") {
 			
-			low = level;
-			high = low + 8;
+			amount = scr_statRolls_rollDamage(level);
+			//low = level;
+			//high = low + 8;
 			
 		}
 		
 		if (key == "maxEnergyPerc") {
 			
-			low = level * 4;
-			high = low + 10;
+			amount = scr_statRolls_rollMaxEnergyPerc(level);
+			//low = level * 4;
+			//high = low + 10;
 			
 		}
 		
 		if (key == "energyRegen") {
 			
-			low = level * 0.1;
-			high = low + .2;
-			integer = false;
+			amount = scr_statRolls_rollRegen(level);
+			//low = level * 0.1;
+			//high = low + .2;
+			//integer = false;
 			
 		}
 		
 		if (key == "energyRegenPerc") {
 			
-			low = level * 4;
-			high = low + 8;
+			amount = scr_statRolls_rollRegenPerc(level);
+			//low = level * 4;
+			//high = low + 8;
 			
 		}
 		
@@ -70,11 +74,11 @@ function scr_genTies_physics(level, rarity) {
 		}
 	
 	
-		if (integer) {
-			amount = irandom_range_biased(low, high, LOOT_BIAS, true);
-		} else {
-			amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
-		}
+		//if (integer) {
+		//	amount = irandom_range_biased(low, high, LOOT_BIAS, true);
+		//} else {
+		//	amount = random_range_biased(low, high, LOOT_BIAS, true, 3);
+		//}
 	
 		if (amount > 0) scr_loot_addStat(tie, key, amount);
 	
