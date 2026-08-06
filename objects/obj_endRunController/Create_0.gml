@@ -301,12 +301,12 @@ omega = variable_struct_exists(loot, "omega") ? loot[$ "omega"] : 0;
 unique = array_length(uniqueLoot);
 
 //test data
-//alpha = 100;
-//beta = 100;
-//gamma = 100;
-//delta = 100;
-//sigma = 100;
-//omega = 50;
+alpha = 100;
+beta = 100;
+gamma = 100;
+delta = 100;
+sigma = 100;
+omega = 50;
 //
 
 lootButtons = [];

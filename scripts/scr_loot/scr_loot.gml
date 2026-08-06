@@ -185,6 +185,9 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 	var loot = noone;
 	var type = choose("gun","melee","device","tie","headgear");
 	
+	//only for testing
+	//type = "device";
+	
 	var level = scr_loot_rollLevel(maxLevel);
 	
 	if (type == "gun") {
@@ -237,6 +240,9 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	var loot = noone;
 	var type = choose("gun","melee","device","tie","headgear");
 	
+	//only for testing
+	//type = "device";
+	
 	var level = scr_loot_rollLevel(maxLevel);
 	
 		if (type == "gun") {
@@ -278,9 +284,9 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	
 	if (type == "tie") {
 		
-		//NOT SPECIAL YET
-		var func = choose(scr_genTies_defenderTie, scr_genTies_physics, scr_genTies_chemistry, scr_genTies_biology, 
-		scr_genTies_engineering);
+		var func = choose(scr_genTies_defender, scr_genTies_marksman, scr_genTies_doctor,
+		scr_genTies_athlete, scr_genTies_pyromaniac, scr_genTies_ballistician,
+		scr_genTies_toxicologist, scr_genTies_electromaniac, scr_genTies_radiologist);
 		
 		loot = func(level, rarity);
 		
