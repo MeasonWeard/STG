@@ -645,7 +645,7 @@ function scr_genTies_athlete(level, rarity) {
 	
 	low = 0.4 + level * 0.01;
 	high = low + .05;
-	stats.spd = irandom_range_biased(low, high, LOOT_BIAS);
+	stats.spd = random_range_biased(low, high, LOOT_BIAS);
 	
 	var rollNum = 0;
 	
