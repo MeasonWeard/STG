@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Special Ties",
-    "path":"folders/Sprites/Loot/Gear/Special Ties.yy",
+    "name":"Special",
+    "path":"folders/Sprites/Loot/Gear/Ties/Special.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

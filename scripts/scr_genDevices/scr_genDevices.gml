@@ -3,6 +3,7 @@ function scr_genDevices_laserPointer(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
+	device.spr = spr_laserPointer;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
@@ -90,6 +91,7 @@ function scr_genDevices_watch(level, rarity) {
 	var adj2 = stat == "spd" ? "Oxymetric" : "Electroscopic";
 	
 	device.name = adj1 + " " + adj2 + " Watch";
+	device.spr = adj1 == "Digital" ? spr_digitalWatch : spr_analogWatch;
 	
 	//guaranteed
 	var amount = 0;
@@ -148,6 +150,7 @@ function scr_genDevices_powerBank(level, rarity) {
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
 	device.name = "Power Bank";
+	device.spr = spr_powerBank;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
@@ -222,6 +225,7 @@ function scr_genDevices_calculator(level, rarity) {
 	
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
+	device.spr = spr_calculator;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
@@ -341,6 +345,7 @@ function scr_genDevices_thermos(level, rarity) {
 	
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
+	device.spr = spr_thermos;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
@@ -489,6 +494,7 @@ function scr_genDevices_vaporizer(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
+	device.spr = spr_vaporizer;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;

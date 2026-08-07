@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"Generic",
-    "path":"folders/Sprites/Loot/Gear/Generic.yy",
+    "path":"folders/Sprites/Loot/Gear/Devices/Generic.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
