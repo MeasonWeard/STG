@@ -31,7 +31,7 @@ function tieInst(level, rarity) : gearInst(level, rarity) constructor {
 	
 	type = itemTypes.tie;
 	name = "Tie";
-	spr = spr_tie;
+	spr = spr_tiePhysics;
 	
 }
 

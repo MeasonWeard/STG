@@ -44,7 +44,9 @@ if (global.devControls) {
 }
 
 //user controls
-if (keyboard_check_pressed(vk_escape)) {
+var c = instance_number(obj_statsPlate);
+
+if (c == 0 and keyboard_check_pressed(vk_escape)) {
 
 	if (hub) {
 		

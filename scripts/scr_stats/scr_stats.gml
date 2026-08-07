@@ -68,7 +68,10 @@ function scr_stats_blankCharStats() {
 		fireResPerc: 0,
 		chemResPerc: 0,
 		elecResPerc: 0,
-		radResPerc: 0
+		radResPerc: 0,
+		
+		projRes: 0,
+		meleeRes: 0
 	
 	};
 	
@@ -339,6 +342,14 @@ function scr_stats_calculateFinalStats(stats) {
 	newStats.radResMin = range.minRes;
 	newStats.radResMax = range.maxRes;
 	
+	range = scr_stats_calculateResistanceRange(newStats.meleeRes);
+	newStats.meleeResMin = range.minRes;
+	newStats.meleeResMax = range.maxRes;
+	
+	range = scr_stats_calculateResistanceRange(newStats.projRes);
+	newStats.projResMin = range.minRes;
+	newStats.projResMax = range.maxRes;
+	
 	return newStats;
 	
 	//if (!is_struct(stats)) return undefined;
@@ -459,6 +470,9 @@ function scr_stats_getName(statKey) {
         case "chemResPerc": return "Chemical Resistance %";
         case "elecResPerc": return "Electric Resistance %";
         case "radResPerc": return "Radiation Resistance %";
+		
+		case "meleeRes": return "Melee Resistance";
+		case "projRes": return "Projectile Resistance";
 
         default: return "???" + statKey + "???";
 
@@ -536,9 +550,101 @@ function scr_stats_formatCharStats(finalStats) {
     str = scr_stats_formatStat(str, finalStats, "chemRes");
     str = scr_stats_formatStat(str, finalStats, "elecRes");
     str = scr_stats_formatStat(str, finalStats, "radRes");
-
+	
+	str = scr_stats_formatStat(str, finalStats, "meleeRes");
+	str = scr_stats_formatStat(str, finalStats, "projRes");
+	
     return str;
 
+}
+
+function scr_stats_formatCharCore(finalStats) {
+
+	var str = "";
+
+	// health
+	str = scr_stats_formatStat(str, finalStats, "maxHp");
+	str = scr_stats_formatStat(str, finalStats, "hpRegen", " p/s");
+	str += "\n";
+
+	// shields
+	str = scr_stats_formatStat(str, finalStats, "maxShield");
+	str = scr_stats_formatStat(str, finalStats, "shieldRegen", " p/s");
+	str = scr_stats_formatStat(str, finalStats, "shieldRegenDelay", " seconds");
+	str += "\n";
+
+	// energy
+	str = scr_stats_formatStat(str, finalStats, "maxEnergy");
+	str = scr_stats_formatStat(str, finalStats, "energyRegen", " p/s");
+	str += "\n";
+
+	// packs
+	str = scr_stats_formatStat(str, finalStats, "maxStimPacks");
+	str = scr_stats_formatStat(str, finalStats, "maxEnergyPacks");
+	str = scr_stats_formatStat(str, finalStats, "stimPackRegen", " per minute");
+	str = scr_stats_formatStat(str, finalStats, "energyPackRegen", " per minute");
+	str += "\n";
+
+	// movement
+	str = scr_stats_formatStat(str, finalStats, "spd");
+	str = scr_stats_formatStat(str, finalStats, "dashRegen", " p/s");
+	str = scr_stats_formatStat(str, finalStats, "maxDashes");
+
+	return str;
+}
+
+function scr_stats_formatCharDefence(finalStats) {
+
+	var str = "";
+
+	// defensive ability
+	str = scr_stats_formatStat(str, finalStats, "da");
+	str += "\n";
+
+	// elemental resistances
+	str = scr_stats_formatStat(str, finalStats, "kinRes");
+	str = scr_stats_formatStat(str, finalStats, "fireRes");
+	str = scr_stats_formatStat(str, finalStats, "chemRes");
+	str = scr_stats_formatStat(str, finalStats, "elecRes");
+	str = scr_stats_formatStat(str, finalStats, "radRes");
+	str += "\n";
+
+	// attack-type resistances
+	str = scr_stats_formatStat(str, finalStats, "meleeRes");
+	str = scr_stats_formatStat(str, finalStats, "projRes");
+
+	return str;
+}
+
+function scr_stats_formatCharOffence(finalStats) {
+
+	var str = "";
+
+	// offensive ability
+	str = scr_stats_formatStat(str, finalStats, "oa");
+	str += "\n";
+
+	// flat damage
+	str = scr_stats_formatStat(str, finalStats, "kinDam");
+	str = scr_stats_formatStat(str, finalStats, "fireDam");
+	str = scr_stats_formatStat(str, finalStats, "chemDam");
+	str = scr_stats_formatStat(str, finalStats, "elecDam");
+	str = scr_stats_formatStat(str, finalStats, "radDam");
+	str += "\n";
+
+	// damage percentage increases
+	str = scr_stats_formatStat(str, finalStats, "kinDamPerc", "%");
+	str = scr_stats_formatStat(str, finalStats, "fireDamPerc", "%");
+	str = scr_stats_formatStat(str, finalStats, "chemDamPerc", "%");
+	str = scr_stats_formatStat(str, finalStats, "elecDamPerc", "%");
+	str = scr_stats_formatStat(str, finalStats, "radDamPerc", "%");
+	str += "\n";
+
+	// weapon damage percentage increases
+	str = scr_stats_formatStat(str, finalStats, "gunDamPerc", "%");
+	str = scr_stats_formatStat(str, finalStats, "meleeDamPerc", "%");
+
+	return str;
 }
 
 function scr_stats_formatStat(str, stats, name, appendString = undefined) {

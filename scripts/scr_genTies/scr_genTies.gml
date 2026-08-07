@@ -3,6 +3,8 @@ function scr_genTies_physics(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Physicist's Tie";
+	tie.spr = spr_tiePhysics;
+	
 	var stats = tie.stats;
 	
 	var keys = ["kinDamPerc","radDamPerc","maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay"];
@@ -57,6 +59,8 @@ function scr_genTies_chemistry(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Chemist's Tie";
+	tie.spr = spr_tieChemistry;
+	
 	var stats = tie.stats;
 	
 	var keys = ["chemDamPerc", "fireDamPerc", "energyRegen", "maxHp","maxHpPerc", "stimPackRegen", "chemRes"];
@@ -111,6 +115,8 @@ function scr_genTies_biology(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Biologist's Tie";
+	tie.spr = spr_tieBiology;
+	
 	var stats = tie.stats;
 	
 	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","healingPerc","meleeDamPerc","da"];
@@ -169,6 +175,8 @@ function scr_genTies_engineering(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	var stats = tie.stats;
+	tie.spr = spr_tieEngineering;
+	
 	tie.name = "Engineer's Tie";
 	
 	var keys = ["elecDamPerc","kinDamPerc","energyRegenPerc","energyPackRegen","gunDamPerc","oa"];
@@ -230,6 +238,7 @@ function scr_genTies_defender(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Defender's Tie";
+	tie.spr = spr_tieDefender;
 	
 	var stats = tie.stats;
 	
@@ -289,6 +298,7 @@ function scr_genTies_marksman(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Marksman's Tie";
+	tie.spr = spr_tieMarksman;
 	
 	var stats = tie.stats;
 	
@@ -344,6 +354,7 @@ function scr_genTies_doctor(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Doctor's Tie";
+	tie.spr = spr_tieDoctor;
 	
 	var stats = tie.stats;
 	
@@ -412,6 +423,7 @@ function scr_genTies_athlete(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Athlete's Tie";
+	tie.spr = spr_tieAthlete;
 	
 	var stats = tie.stats;
 	
@@ -482,9 +494,11 @@ function scr_genTies_inventor(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Inventor's Tie";
+	tie.spr = spr_tieInventor;
+	
 	var stats = tie.stats;
 	
-	var keys = ["maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay","gunDamPerc"];
+	var keys = ["maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay","gunDamPerc","energyPackRegen"];
 	keys = array_concat(keys, keys);
 	
 	if (rarity > 2) array_push(keys, "maxShield");
@@ -541,6 +555,11 @@ function scr_genTies_inventor(level, rarity) {
 			amount = scr_statRolls_damagePerc(level);
 		}
 		
+		if (key == "energyPackRegen") {
+			amount = scr_statRolls_packRegen(level);
+		}
+		
+		
 		if (key == "maxShield") {
 			amount = 1;	
 		}
@@ -553,11 +572,11 @@ function scr_genTies_inventor(level, rarity) {
 	
 }
 
-
 function scr_genTies_pyromaniac(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Pyromaniac's Tie";
+	tie.spr = spr_tiePyro;
 	
 	var stats = tie.stats;
 	
@@ -609,6 +628,7 @@ function scr_genTies_ballistician(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Ballistician's Tie";
+	tie.spr = spr_tieBall;
 	
 	var stats = tie.stats;
 	
@@ -660,6 +680,7 @@ function scr_genTies_toxicologist(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Toxicologist's Tie";
+	tie.spr = spr_tieTox;
 	
 	var stats = tie.stats;
 	
@@ -711,6 +732,7 @@ function scr_genTies_electromaniac(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Electromaniac's Tie";
+	tie.spr = spr_tieElectro;
 	
 	var stats = tie.stats;
 	
@@ -762,6 +784,7 @@ function scr_genTies_radiologist(level, rarity) {
 
 	var tie = new tieInst(level, rarity);
 	tie.name = "Radiologist's Tie";
+	tie.spr = spr_tieRadio;
 	
 	var stats = tie.stats;
 	

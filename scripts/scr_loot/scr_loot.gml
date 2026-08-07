@@ -264,18 +264,16 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	
 	if (type == "melee") {
 		
-		//NOT SPECIAL YET
-		var func = choose(scr_genMelee_sanguivorousCleaver, scr_genMelee_bigCleaver,
-		scr_genMelee_heavyHammer, scr_genMelee_littleHammer,
-		scr_genMelee_rapidProd, scr_genMelee_longProd, 
-		scr_genMelee_aspisAndBaton, scr_genMelee_electrifiedBaton);
+		var func = choose(scr_genMelee_sanguivorousCleaver, scr_genMelee_bigCleaver, scr_genMelee_toxicCleaver,
+		scr_genMelee_heavyHammer, scr_genMelee_littleHammer, scr_genMelee_flamingHammer, scr_genMelee_electricHammer,
+		scr_genMelee_rapidProd, scr_genMelee_longProd, scr_genMelee_radioactiveProd,
+		scr_genMelee_aspisAndBaton, scr_genMelee_towerShieldAndBaton, scr_genMelee_electrifiedBaton);
 		loot = func(level, rarity);
 
 	}
 	
 	if (type == "device") {
 		
-		//NOT SPECIAL YET
 		var func = choose(scr_genDevices_magnetron, scr_genDevices_amplifier, scr_genDevices_catalystCartridge,
 		scr_genDevices_accelerant, scr_genDevices_petRock, scr_genDevices_powerRegulator, scr_genDevices_regenerativeImplant,
 		scr_genDevices_resistanceModule, scr_genDevices_firstAidKit, scr_genDevices_shieldGenerator);
@@ -295,10 +293,8 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	
 	if (type == "headgear") {
 		
-		//NOT SPECIAL YET
-		var func = choose(scr_genHeadgear_hardHat, scr_genHeadgear_weldingMask, scr_genHeadgear_safetyMask,
-		scr_genHeadgear_arcFlashHood, scr_genHeadgear_leadHood, scr_genHeadgear_respirator, scr_genHeadgear_safetyGoggles,
-		scr_genHeadgear_blastHelmet, scr_genHeadgear_insulatedHood, scr_genHeadgear_radiationVisor, scr_genHeadgear_dielectricHelmet);
+		var func = choose(scr_genHeadgear_tacticalVisor, scr_genHeadgear_traumaHelmet, scr_genHeadgear_neuralInterface,
+		scr_genHeadgear_faradayCrown, scr_genHeadgear_emergencyResponseHelmet, scr_genHeadgear_hazmatHood);
 		
 		loot = func(level, rarity);
 		

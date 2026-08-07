@@ -511,7 +511,9 @@ function scr_weapons_addResistanceToExisting(weapon, val) {
 		"fireRes",
 		"chemRes",
 		"elecRes",
-		"radRes"
+		"radRes",
+		"meleeRes",
+		"projRes"
 	];
 
 	for (var i = 0; i < array_length(resTypes); i++) {
@@ -543,7 +545,9 @@ function scr_weapons_addResistanceToExistingSpread(weapon, amount) {
 		"fireRes",
 		"chemRes",
 		"elecRes",
-		"radRes"
+		"radRes",
+		"meleeRes",
+		"projRes"
 	];
 
 	var validCount = 0;
@@ -606,7 +610,9 @@ function scr_weapons_addResistanceToTypesSpread(weapon, amount, resTypes) {
 		"fireRes",
 		"chemRes",
 		"elecRes",
-		"radRes"
+		"radRes",
+		"meleeRes",
+		"projRes"
 	];
 
 	// Keep duplicates so they act as weights

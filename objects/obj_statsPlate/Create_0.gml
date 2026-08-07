@@ -3,9 +3,15 @@ player = global.player;
 data = global.data;
 depth = layers.ui2;
 
-txt = "";
+txtCore = "";
+txtDef = "";
+txtOff = "";
 
-setup = true;
+tabs = ["core", "offense", "defense"];
+tabIndex = 0;
+tab = "core";
+
+formatTick = 0;
 
 cam = view_camera[0];
 camX = camera_get_view_x(cam);
@@ -38,4 +44,4 @@ headgear = undefined;
 
 weapon = undefined;
 
-closeDelay = 12;
+keyDelay = 12;

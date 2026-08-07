@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Loot",
-    "path":"folders/Sprites/Loot.yy",
+    "name":"Generic",
+    "path":"folders/Sprites/Loot/Gear/Generic.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

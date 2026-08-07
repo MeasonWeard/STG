@@ -235,7 +235,7 @@ if (tab == "reveal") {
 		
 		while (amount > 0) {
 		
-			var specialChance = min(25, 10 + maxLevel * 0.2);
+			var specialChance = min(25, 12 + maxLevel * 0.1 + rarityNum * 0.3);
 			var special = scr_random_chance(specialChance);
 		
 			var newLoot = noone;

@@ -470,6 +470,7 @@ function scr_genGuns_autoPistol(level, rarity) {
 	
 	var gun = new gun_pistol(level, rarity);
 	gun.name = "";
+	gun.spr = spr_autoPistol;
 	
 	var dt = choose("normal", "oneType");
 	
@@ -541,6 +542,7 @@ function scr_genGuns_bigPistol(level, rarity) {
 	var gun = new gun_pistol(level, rarity);
 	var prefix = "";
 	gun.name = "";
+	gun.spr = spr_bigPistol;
 
 	var dt = choose("normal", "oneType");
 	
@@ -648,6 +650,7 @@ function scr_genGuns_galvanicSmg(level, rarity) {
 
 	var gun = new gun_smg(level, rarity);
 	gun.name = "Galvanic SMG";
+	gun.spr = spr_galvanicSmg;
 
 	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
@@ -680,6 +683,7 @@ function scr_genGuns_notSoSubSmg(level, rarity) {
 
 	var gun = new gun_smg(level, rarity);
 	gun.name = "Not-So-Sub SMG";
+	gun.spr = spr_bigSmg;
 	
 	var damTypes = ["kin","kin","fire","chem","elec","rad"];
 	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
@@ -713,6 +717,7 @@ function scr_genGuns_arcPulseRifle(level, rarity) {
 
 	var gun = new gun_pulseRifle(level, rarity);
 	gun.name = "Arc Pulse Rifle";
+	gun.spr = spr_arcPulseRifle;
 
 	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
@@ -747,6 +752,7 @@ function scr_genGuns_sniperPulseRifle(level, rarity) {
 
 	var gun = new gun_pulseRifle(level, rarity);
 	gun.name = "Sniper Pulse Rifle";
+	gun.spr = spr_sniperPulseRifle;
 
 	var damTypes = ["kin","kin","kin","fire","chem","elec","rad"];
 	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
@@ -818,6 +824,9 @@ function scr_genGuns_sprayShotgun(level, rarity) {
 	gun.damage.kin = 0;
 	gun.damage[$ damType] = baseDamage + bonusDamage;
 	
+	if (damType == "fire") gun.spr = spr_fireSprayShotgun;
+	if (damType == "chem") gun.spr = spr_chemSprayShotgun;
+	
 	//base stats
 	gun.spd = 10;
 	gun.blastSpread = 14;
@@ -856,6 +865,7 @@ function scr_genGuns_doubleBarreledShotgun(level, rarity) {
 
 	var gun = new gun_shotgun(level, rarity);
 	gun.name = "Double-Barreled Shotgun";
+	gun.spr = spr_DBshotgun;
 
 	var damTypes = ["kin","kin","fire","chem","elec","rad"];
 	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
@@ -899,7 +909,8 @@ function scr_genGuns_poloniumAutoShotgun(level, rarity) {
 
 	var gun = new gun_autoShotgun(level, rarity);
 	gun.name = "Polonium Auto-Shotgun";
-
+	gun.spr = spr_poloniumAutoShotgun;
+	
 	var baseDamage = gun.baseDamage;
 	var halfBaseDamage = ceil(baseDamage * 0.5);
 	
@@ -931,6 +942,7 @@ function scr_genGuns_assassinatorAutoShotgun(level, rarity) {
 
 	var gun = new gun_autoShotgun(level, rarity);
 	gun.name = "Assassinator Auto-Shotgun";
+	gun.spr = spr_assAutoShotgun;
 
 	var damTypes = ["kin","kin","fire","chem","elec","elec","rad"];
 	gun = scr_genGuns_applyGenericDamage(gun, level, rarity, damTypes);
