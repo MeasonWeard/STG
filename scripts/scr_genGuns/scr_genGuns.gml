@@ -843,7 +843,7 @@ function scr_genGuns_sprayShotgun(level, rarity) {
 		case "chem": prefix = "Chemical "; break;
 	}
 	
-	gun.name = prefix + " Spray Shotgun";
+	gun.name = prefix + "Spray Shotgun";
 
 	//extra stats
 	var config = {

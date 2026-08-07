@@ -1,8 +1,9 @@
 //GENERIC
-function scr_genHeadgear_hardHat(level, rarity) {
+function scr_genHeadgear_hardHat(level, rarity) { //
 
 	var headgear = new headgearInst(level, rarity);
 	var stats = headgear.stats;
+	headgear.spr = spr_hardHat;
 	
 	var low = level * 2 + 1
 	var high = level * 2 + 5;
@@ -27,10 +28,11 @@ function scr_genHeadgear_hardHat(level, rarity) {
 	
 }
 
-function scr_genHeadgear_weldingMask(level, rarity) {
+function scr_genHeadgear_weldingMask(level, rarity) { //
 
 	var headgear = new headgearInst(level, rarity);
 	var stats = headgear.stats;
+	headgear.spr = spr_weldingMask;
 	
 	var low = level * 2 + 1
 	var high = level * 2 + 5;
@@ -55,10 +57,11 @@ function scr_genHeadgear_weldingMask(level, rarity) {
 	
 }
 
-function scr_genHeadgear_safetyMask(level, rarity) {
+function scr_genHeadgear_safetyMask(level, rarity) { //
 
 	var headgear = new headgearInst(level, rarity);
 	var stats = headgear.stats;
+	headgear.spr = spr_safetyMask;
 	
 	var low = level * 2 + 1
 	var high = level * 2 + 5;
@@ -165,10 +168,11 @@ function scr_genHeadgear_respirator(level, rarity) {
 	
 }
 
-function scr_genHeadgear_safetyGoggles(level, rarity) {
+function scr_genHeadgear_safetyGoggles(level, rarity) { //
 
 	var headgear = new headgearInst(level, rarity);
 	var stats = headgear.stats;
+	headgear.spr = spr_safetyGoggles;
 	
 	var low = level;
 	var high = level + 4;

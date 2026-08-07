@@ -826,7 +826,7 @@ function scr_genMelee_littleHammer(level, rarity) {
 		
 		}
 		
-	melee.name = adjectives + " Hammer";
+	melee.name = adjectives + "Hammer";
 
 	var config = {
 

@@ -3,7 +3,6 @@ function scr_genDevices_laserPointer(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
-	device.spr = spr_laserPointer;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
@@ -18,6 +17,7 @@ function scr_genDevices_laserPointer(level, rarity) {
 	var damType = choose("fireDam", "elecDam", "radDam");
 	
 	var adj = bonusType == "oa" ? "Precise" : "Bright";
+	device.spr = adj == "Precise" ? spr_laserPointerPrecise : spr_laserPointerBright;
 	
 	device.name = adj + " Laser Pointer";
 	
@@ -543,6 +543,7 @@ function scr_genDevices_shieldGenerator(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Shield Generator";
+	device.spr = spr_shieldGenerator;
 	
 	var stats = device.stats;
 	
@@ -604,6 +605,7 @@ function scr_genDevices_firstAidKit(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "First Aid Kit";
+	device.spr = spr_firstAidKit;
 	
 	var stats = device.stats;
 	
@@ -719,6 +721,21 @@ function scr_genDevices_resistanceModule(level, rarity) {
 		rad: "Radiation"
 	};
 	
+	var sprites = {
+		kin: spr_resModKin,
+		fire: spr_resModFire,
+		chem: spr_resModChem,
+		elec: spr_resModElec,
+		rad: spr_resModRad
+	};
+	
+	var val1 = scr_stats_calculateStat(stats[$ res1], stats[$ resPerc1]);
+	var val2 = scr_stats_calculateStat(stats[$ res2], stats[$ resPerc2]);
+
+	var dominant = val1 >= val2 ? el1 : el2;
+
+	device.spr = sprites[$ dominant];
+	
 	device.name =
 		names[$ el1]
 		+ "-"
@@ -733,6 +750,7 @@ function scr_genDevices_regenerativeImplant(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Regenerative Implant";
+	device.spr = spr_regenerativeImplant;
 	
 	var stats = device.stats;
 	
@@ -789,6 +807,7 @@ function scr_genDevices_powerRegulator(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Power Regulator";
+	device.spr = spr_powerRegulator;
 	
 	var stats = device.stats;
 	
@@ -845,6 +864,7 @@ function scr_genDevices_petRock(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Pet Rock";
+	device.spr = spr_petRock;
 	
 	var stats = device.stats;
 	
@@ -896,6 +916,7 @@ function scr_genDevices_accelerant(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Accelerant";
+	device.spr = spr_accelerant;
 	
 	var stats = device.stats;
 	
@@ -948,6 +969,7 @@ function scr_genDevices_catalystCartridge(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Catalyst Cartridge";
+	device.spr = spr_catalystCartridge;
 	
 	var stats = device.stats;
 	
@@ -1000,6 +1022,7 @@ function scr_genDevices_amplifier(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Amplifier";
+	device.spr = spr_amplifier;
 	
 	var stats = device.stats;
 	
@@ -1052,6 +1075,7 @@ function scr_genDevices_magnetron(level, rarity) {
 
 	var device = new deviceInst(level, rarity);
 	device.name = "Magnetron";
+	device.spr = spr_magnetron;
 	
 	var stats = device.stats;
 	

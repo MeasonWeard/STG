@@ -27,7 +27,7 @@ gunYoffset = -32;
 //stats
 baseStats.maxHp = 40;
 baseStats.spd = 6;
-baseStats.da = 10;
+baseStats.da = 110;
 
 levelUpFunc = function() {
 

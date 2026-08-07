@@ -15,7 +15,7 @@ function deviceInst(level, rarity) : gearInst(level, rarity) constructor {
 
 	type = itemTypes.device;
 	name = "Device";
-	spr = spr_device;
+	spr = spr_powerRegulator;
 
 }
 
@@ -23,7 +23,7 @@ function headgearInst(level, rarity) : gearInst(level, rarity) constructor {
 	
 	type = itemTypes.headgear;
 	name = "Headgear";
-	spr = spr_headgear;
+	spr = spr_safetyGoggles;
 	
 }
 
@@ -62,8 +62,14 @@ function scr_gear_formatDescription(gear) {
 
 	var stats = gear.stats;
 	
+	var typeTxt = "";
+	
+	if (is_instanceof(gear, deviceInst)) typeTxt = "Device";
+	if (is_instanceof(gear, headgearInst)) typeTxt = "Headgear";
+	if (is_instanceof(gear, tieInst)) typeTxt = "Tie";
+	
 	var txt = gear.name + "     " + "lvl " + string(gear.lvl);
-	txt += "\n";
+	txt += "\n--" + typeTxt + "--\n";
 	
 	var keys = variable_struct_get_names(stats);
 	
