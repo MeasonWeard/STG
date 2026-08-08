@@ -20,3 +20,10 @@ if (tab == "main") {
 	draw_text(camXmid, txtY, txt);
 	
 }
+
+if (tab == "settings") {
+
+	var txt = "Settings";
+	draw_text(camXmid, txtY, txt);
+	
+}

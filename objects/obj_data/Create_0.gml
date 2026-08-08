@@ -27,18 +27,17 @@ array_push(resolutions, [1664, 936]);
 array_push(resolutions, [1280, 720]);
 array_push(resolutions, [1024, 576]);
 
-//settings
-global.settingsDirty = false;
-
 defaultSettings = {
 
 	windowed: false,
 	res: [1280, 720],
 	
 	showReloadOnCursor: true,
-	showMeleeOnCursor: true,
 	showSkillsOnCursor: true,
-	showAmmoOnCursor: true
+	showAmmoOnCursor: true,
+	
+	musicVolume: 1,
+	sfxVolume: 1
 	
 }
 
@@ -154,6 +153,10 @@ rarities = {
 
 colours = {
 
+	highlight: c_aqua,
+	text: c_white,
+	textHighlighted: c_aqua,
+	textClicked: c_navy,
 	windowBackground: #324E7F,
 	windowText: c_white
 	

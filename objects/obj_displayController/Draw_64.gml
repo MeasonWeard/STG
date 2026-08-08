@@ -1,7 +1,5 @@
 if (global.guiScaling and scaleGUI) {
 
-	scr_testSound();
-
 	scaleGUI = false;
 
 	var w = window_get_width();

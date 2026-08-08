@@ -91,14 +91,26 @@ function damageProfile() constructor {
 
 function scr_stats_calculateStat(flat, perc, roundProduct = false) {
 
+	if (is_undefined(flat)) flat = 0;
+	if (is_undefined(perc)) perc = 0;
+
 	var dec = perc * 0.01;
 	var add = dec * flat;
-	
+
 	var amount = flat + add;
-	
+
 	if (roundProduct) amount = round(amount);
-	
+
 	return amount;
+
+	//var dec = perc * 0.01;
+	//var add = dec * flat;
+	
+	//var amount = flat + add;
+	
+	//if (roundProduct) amount = round(amount);
+	
+	//return amount;
 	
 }
 

@@ -23,3 +23,17 @@ if (tab == "quit") {
 	noButton.active = false;
 	
 }
+
+if (tab == "settings") {
+	
+	settingsBackButton.active = true;
+	musicSlider.active = true;
+	sfxSlider.active = true;
+	
+} else {
+	
+	settingsBackButton.active = false;
+	musicSlider.active = false;
+	sfxSlider.active = false;
+	
+}

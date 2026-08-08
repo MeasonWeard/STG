@@ -93,7 +93,7 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 		char.finalStats.meleeResMax);
 		
 	} else if (type == damageTypes.projectile and char.finalStats.projRes > 0) {
-		show_debug_message("PROJ RES");
+
 		totalDam = scr_char_applyResistance(totalDam, char.finalStats.projRes, char.finalStats.projResMin,
 		char.finalStats.projResMax);
 		
@@ -141,10 +141,7 @@ function scr_char_applyResistance(amount, res, resMin, resMax) {
 
 		var reduction = irandom_range(resMin, resMax);
 		amount = max(1, amount - reduction);
-		
-		show_debug_message(string(resMin) + " - " + string(resMax));
-		show_debug_message(string(reduction));
-		
+			
 	} else {
 
 		var increase = round(amount * (abs(res) * 0.01));

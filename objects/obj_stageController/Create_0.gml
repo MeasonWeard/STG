@@ -155,7 +155,7 @@ pause = function() {
 		
 		paused = true;
 		
-		var keepActive = [global.data, global.cursor];
+		var keepActive = [global.data, global.cursor, global.audioController, global.settingsDirtyController];
 		var len = array_length(keepActive);
 		
 		instance_deactivate_all(true);

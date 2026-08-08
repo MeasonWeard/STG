@@ -21,6 +21,12 @@ play = function() {
 	
 }
 
+settings = function() {
+
+	tab = "settings";
+	
+}
+
 quit = function() {
 
 	tab = "quit";
@@ -40,12 +46,20 @@ no = function() {
 	
 }
 
+saveSettings = function() {
+
+	scr_file_saveGame(global.saveFile, global.gameData);
+	tab = "main";
+	
+}
+
 //buttons
 continueButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
 settingsButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
 quitButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
 yesButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
 noButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
+settingsBackButton = instance_create_layer(x, y, "Instances", obj_buttonRectangleLarge);
 
 continueButton.x = camXmid;
 continueButton.y = camYmid - 128;
@@ -57,6 +71,7 @@ settingsButton.x = camXmid;
 settingsButton.y = continueButton.y + buttonGap;
 settingsButton.txt = "Settings";
 settingsButton.visibleWhenInactive = false;
+settingsButton.leftFunc = settings;
 
 quitButton.x = camXmid;
 quitButton.y = settingsButton.y + buttonGap;
@@ -77,3 +92,29 @@ noButton.txt = "No";
 noButton.active = false
 noButton.visibleWhenInactive = false;
 noButton.leftFunc = no;
+
+//settings
+settingsBackButton.x = continueButton.x;
+settingsBackButton.y = continueButton.y;
+settingsBackButton.txt = "Back";
+settingsBackButton.active = false
+settingsBackButton.visibleWhenInactive = false;
+settingsBackButton.leftFunc = saveSettings;
+
+musicSlider = instance_create_layer(x, y, "Instances", obj_slider);
+musicSlider.active = false;
+musicSlider.x = camXmid - 100;
+musicSlider.y = continueButton.y + buttonGap;
+musicSlider.text = "Music Volume";
+musicSlider.setting = "musicVolume";
+musicSlider.minValue = 0;
+musicSlider.maxValue = 1;
+
+sfxSlider = instance_create_layer(x, y, "Instances", obj_slider);
+sfxSlider.active = false;
+sfxSlider.x = camXmid - 100;
+sfxSlider.y = continueButton.y + buttonGap * 2;
+sfxSlider.text = "SFX Volume";
+sfxSlider.setting = "sfxVolume";
+sfxSlider.minValue = 0;
+sfxSlider.maxValue = 1;

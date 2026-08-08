@@ -1,1 +1,1 @@
-global.settingsDirty = false;
+//global.settingsDirty = false;

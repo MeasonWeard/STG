@@ -192,7 +192,7 @@ function scr_data_setSetting(setting, value) {
 	variable_struct_set(settings, setting, value);
 	
 	global.settingsDirty = true;
-	
+
 }
 
 function scr_data_defaultSettings() {
