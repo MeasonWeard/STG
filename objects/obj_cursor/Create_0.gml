@@ -8,8 +8,12 @@ enemy = noone;
 enemyPad = 16;
 
 //settings
+settingsVersion = 0;
+
+var ammoSetting = scr_data_getSetting("showAmmo", 1);
+showAmmo = ammoSetting == 0 or ammoSetting == 2 ? true : false;
+
 showReload = scr_data_getSetting("showReloadOnCursor", true);
-showAmmo = scr_data_getSetting("showAmmoOnCursor", true);
 alwaysShowName = scr_data_getSetting("alwaysShowWeaponName", false);
 
 //formatting

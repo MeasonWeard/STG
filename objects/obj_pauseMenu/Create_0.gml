@@ -1,4 +1,5 @@
 tab = "main";
+settingsVersion = 0;
 
 //formatting
 cam = view_camera[0];
@@ -25,6 +26,18 @@ play = function() {
 settings = function() {
 
 	tab = "settings";
+	
+	with (obj_slider) {
+		delay = 18;	
+	}
+	
+	with (obj_checkBox) {
+		delay = 18;	
+	}
+	
+	with (obj_optionSelector) {
+		delay = 18;
+	}
 	
 }
 
@@ -120,12 +133,27 @@ sfxSlider.setting = "sfxVolume";
 sfxSlider.minValue = 0;
 sfxSlider.maxValue = 1;
 
+fullscreen = instance_create_layer(x, y, "Instances", obj_checkBox);
+fullscreen.setting = "fullscreen";
+fullscreen.text = "Full screen";
+fullscreen.x = camXmid - 100;
+fullscreen.y = sfxSlider.y + optionsGap;
+fullscreen.active = false;
+
+resolution = instance_create_layer(x, y, "Instances", obj_optionSelector);
+resolution.options = global.data.resolutions;
+resolution.text = "Windowed resolution";
+resolution.setting = "resIndex";
+resolution.x = camXmid - 100;
+resolution.y = fullscreen.y + optionsGap;
+resolution.active = false;
+
 showAmmo = instance_create_layer(x, y, "Instances", obj_optionSelector);
 showAmmo.options = ["Cursor and HUD","HUD","Cursor"];
 showAmmo.text = "Show ammo/charges on";
 showAmmo.setting = "showAmmo";
 showAmmo.x = camXmid - 100;
-showAmmo.y = sfxSlider.y + optionsGap;
+showAmmo.y = resolution.y + optionsGap;
 showAmmo.active = false;
 
 showReload = instance_create_layer(x, y, "Instances", obj_checkBox);

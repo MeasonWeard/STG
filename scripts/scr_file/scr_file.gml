@@ -220,7 +220,7 @@ function scr_file_startGame() {
 	if (!is_struct(global.gameData)) return false;
 
 	//settings
-	global.settingsDirty = true;
+	global.settingsVersion = -1;
 	
 	//start
 	if (global.gameData.playerData.class1 == undefined) {

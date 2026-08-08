@@ -6,7 +6,5 @@ minValue = 0;
 maxValue = 100;
 
 active = true;
-
-//prevVal = undefined;
-
-//setup = true;
+delay = 0;
+locked = false;

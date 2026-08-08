@@ -5,7 +5,8 @@ rc = scr_data_getRunController();
 cursor = global.cursor;
 
 //settings
-var ammoSetting = scr_data_getSetting("showAmmoOn", 0);
+settingsVersion = 0;
+var ammoSetting = scr_data_getSetting("showAmmoOn", 1);
 showAmmo = ammoSetting == 0 or ammoSetting == 1 ? true : false;
 
 hub = sc.hub;

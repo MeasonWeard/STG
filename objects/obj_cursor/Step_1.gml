@@ -4,9 +4,11 @@ if (variable_global_exists("player")) {
 
 }
 
-if (global.settingsDirty) {
+if (settingsVersion != global.settingsVersion) {
 
-	var ammoSetting = scr_data_getSetting("showAmmo", 0);
+	settingsVersion = global.settingsVersion;
+
+	var ammoSetting = scr_data_getSetting("showAmmo", 1);
 
 	showAmmo = ammoSetting == 0 or ammoSetting == 2 ? true : false;
 	showReload = scr_data_getSetting("showReloadOnCursor", true);

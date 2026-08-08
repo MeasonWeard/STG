@@ -173,17 +173,17 @@ function scr_data_getSetting(setting, defaultVal) {
 	
 }
 
-function scr_data_getUpdatedSetting(setting, defaultVal) {
+//function scr_data_getUpdatedSetting(setting, defaultVal, settingsVersion) {
 	
-	if (!global.settingsDirty) {
-		return undefined;
-	}
+//	if (settingsVersion == global.settingsVersion) {
+//		return undefined;
+//	}
 	
-	var newVal = scr_data_getSetting(setting, defaultVal);
+//	var newVal = scr_data_getSetting(setting, defaultVal);
 	
-	return newVal;
+//	return newVal;
 	
-}
+//}
 
 function scr_data_setSetting(setting, value) {
 	
@@ -191,7 +191,7 @@ function scr_data_setSetting(setting, value) {
 	
 	variable_struct_set(settings, setting, value);
 	
-	global.settingsDirty = true;
+	global.settingsVersion ++;
 
 }
 

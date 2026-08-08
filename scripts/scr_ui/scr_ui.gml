@@ -527,7 +527,7 @@ function scr_ui_displayTag(xx, yy, lineDist, txt, col = c_lime, font = fnt_norma
 	
 }
 
-function scr_ui_slider(setting, text, font, xx, yy, width, minValue, maxValue) {
+function scr_ui_slider(setting, text, font, xx, yy, width, minValue, maxValue, locked = false) {
 	
 	var val = scr_data_getSetting(setting, maxValue);
 	val = clamp(val, minValue, maxValue);
@@ -552,7 +552,7 @@ function scr_ui_slider(setting, text, font, xx, yy, width, minValue, maxValue) {
     normalised = clamp(normalised, 0, 1);
     
     // --- input handling ---
-    if (mouse_check_button(mb_left)) {
+    if (!locked and mouse_check_button(mb_left)) {
         if (point_in_rectangle(mx, my, left, top - 8, right, bottom + 8)) {
             var pos = clamp((mx - left) / width, 0, 1);
             var newVal = lerp(minValue, maxValue, pos);
@@ -588,7 +588,7 @@ function scr_ui_slider(setting, text, font, xx, yy, width, minValue, maxValue) {
 	
 }
 
-function scr_ui_checkBox(setting, text, font, xx, yy) {
+function scr_ui_checkBox(setting, text, font, xx, yy, locked = false) {
 	
     var val = scr_data_getSetting(setting, true);
     var boxWidth  = 24;
@@ -612,7 +612,7 @@ function scr_ui_checkBox(setting, text, font, xx, yy) {
 	var clickRight = right + 16 + textWidth;
 
     //input handling
-    if (mouse_check_button_pressed(mb_left)) {
+    if (!locked and mouse_check_button_pressed(mb_left)) {
         if (point_in_rectangle(mx, my, left, top, clickRight, bottom)) {
             scr_data_setSetting(setting, !val);
         }
@@ -644,7 +644,7 @@ function scr_ui_checkBox(setting, text, font, xx, yy) {
 	
 }
 
-function scr_ui_optionSelector(setting, options, text, font, xx, yy) {
+function scr_ui_optionSelector(setting, options, text, font, xx, yy, locked = false) {
 
 	// Get the currently selected index from settings
 	var index = scr_data_getSetting(setting, 0);
@@ -693,7 +693,7 @@ function scr_ui_optionSelector(setting, options, text, font, xx, yy) {
 	var optionX = (l_right + r_left) * 0.5;
 
 	// Input handling
-	if (mouse_check_button_pressed(mb_left)) {
+	if (!locked and mouse_check_button_pressed(mb_left)) {
 
 		// Left arrow
 		if (point_in_rectangle(mx, my, l_left, l_top, l_right, l_bottom)) {

@@ -5,17 +5,20 @@ if (global.integerScaling and refreshScaling) {
     scr_display_applyIntegerScaling();
 }
 
-if (global.settingsDirty) {
+if (settingsVersion != global.settingsVersion) {
+
+	settingsVersion = global.settingsVersion;
 
 	//default window size
 	var res = [1920,1080];//global.gameData.settings.res;
-	var windowed = true;
+	var fullscreen = true;
 	
 	//user selected window size
 	if (variable_global_exists("gameData") and is_struct(global.gameData)) {
 	
-		res = global.gameData.settings.res;
-		windowed =  global.gameData.settings.windowed;
+		var resIndex = scr_data_getSetting("resIndex", 0);
+		res = global.data.resolutions[resIndex];
+		fullscreen =  scr_data_getSetting("fullscreen", true);
 	
 	}
 
@@ -29,7 +32,7 @@ if (global.settingsDirty) {
 	display_set_gui_size(INTERNAL_WIDTH, INTERNAL_HEIGHT);
 
 	// start windowed:
-	window_set_fullscreen(!windowed);
+	window_set_fullscreen(fullscreen);
 	window_set_size(global.window_w, global.window_h);
 	window_center();
 	

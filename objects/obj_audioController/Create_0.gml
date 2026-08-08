@@ -2,6 +2,8 @@ global.audioController = self;
 
 audio_group_load(audiogroup_sfx);
 
+settingsVersion = 0;
+
 music = noone;
 ambience1 = noone;
 ambience2 = noone;

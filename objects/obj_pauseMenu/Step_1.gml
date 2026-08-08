@@ -32,6 +32,8 @@ if (tab == "settings") {
 	showAmmo.active = true;
 	showReload.active = true;
 	showName.active = true;
+	fullscreen.active = true;
+	resolution.active = true;
 	
 } else {
 	
@@ -41,5 +43,7 @@ if (tab == "settings") {
 	showAmmo.active = false;
 	showReload.active = false;
 	showName.active = false;
+	fullscreen.active = false;
+	resolution.active = false;
 	
 }

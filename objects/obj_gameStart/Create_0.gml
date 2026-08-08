@@ -14,7 +14,7 @@ global.player = noone;
 
 global.debug = false;
 global.devControls = true;
-global.settingsDirty = false;
+global.settingsVersion = 0;
 
 global.stageController = noone;
 global.runController = noone;
@@ -28,7 +28,7 @@ global.selectedClass = undefined;
 
 global.lastWeaponIndex = 0;
 
-global.settingsDirtyController = instance_create_layer(x, y, "Instances", obj_settingsDirty);
+//global.settingsDirtyController = instance_create_layer(x, y, "Instances", obj_settingsDirty);
 
 //UH
 window_set_cursor(cr_none);

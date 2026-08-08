@@ -52,7 +52,6 @@ function scr_display_setCameraView(w, h) {
 
 function scr_display_switchFullscreen() {
 
-	
 	var fs = window_get_fullscreen();
 	fs = !fs;
 	
@@ -103,5 +102,68 @@ function scr_display_refreshWindowSize() {
 	
 	global.displayController.refreshScaling = true;
 	window_set_size(global.window_w, global.window_h);
+	
+}
+
+function scr_display_setFullscreenOn() {
+
+    if (window_get_fullscreen()) exit;
+
+    window_set_fullscreen(true);
+
+    var w = window_get_width();
+    var h = window_get_height();
+
+    view_set_wport(0, w);
+    view_set_hport(0, h);
+    view_set_xport(0, 0);
+    view_set_yport(0, 0);
+
+    camera_set_view_size(view_camera[0], INTERNAL_WIDTH, INTERNAL_HEIGHT);
+
+    global.displayController.scaleGUI = true;
+
+}
+
+function scr_display_setFullscreenOff() {
+
+    if (!window_get_fullscreen()) exit;
+
+    window_set_fullscreen(false);
+
+    var w = window_get_width();
+    var h = window_get_height();
+
+    view_set_wport(0, w);
+    view_set_hport(0, h);
+    view_set_xport(0, 0);
+    view_set_yport(0, 0);
+
+    camera_set_view_size(view_camera[0], INTERNAL_WIDTH, INTERNAL_HEIGHT);
+
+    global.displayController.scaleGUI = true;
+
+}
+
+function scr_display_changeResolution() {
+
+	static data = global.data;
+	static gameData = global.gameData;
+	
+	var index = scr_data_getSetting("resIndex", 0);
+	var resolutions = data.resolutions;
+	var len = array_length(resolutions);
+	
+	if (index >= len) index = 0;
+	
+	var res = resolutions[index];
+	
+	var w = res[0];
+	var h = res[1];
+	
+	global.window_w = w;
+	global.window_h = h;
+	
+	scr_display_refreshWindowSize();
 	
 }

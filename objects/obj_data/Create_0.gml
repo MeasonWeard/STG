@@ -22,19 +22,21 @@ global.data = self;
 //display
 resolutions = [];
 resolutionIndex = 0;
-array_push(resolutions, [1920, 1080]);
-array_push(resolutions, [1664, 936]);
-array_push(resolutions, [1280, 720]);
+array_push(resolutions, [800, 450]);
 array_push(resolutions, [1024, 576]);
+array_push(resolutions, [1280, 720]);
+array_push(resolutions, [1366, 768]);
+array_push(resolutions, [1600, 900]);
+array_push(resolutions, [1920, 1080]);
 
 defaultSettings = {
 
-	windowed: false,
-	res: [1280, 720],
+	fullscreen: true,
+	resIndex: 0,
 	
 	showReloadOnCursor: true,
 	alwaysShowWeaponName: false,
-	showAmmo: 0,
+	showAmmo: 1,
 	
 	musicVolume: 1,
 	sfxVolume: 1
