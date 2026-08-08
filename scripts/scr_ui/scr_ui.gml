@@ -530,6 +530,8 @@ function scr_ui_displayTag(xx, yy, lineDist, txt, col = c_lime, font = fnt_norma
 function scr_ui_slider(setting, text, font, xx, yy, width, minValue, maxValue) {
 	
 	var val = scr_data_getSetting(setting, maxValue);
+	//val = clamp(val, minValue, maxValue);
+	
     var colours = global.data.colours;
 	
 	var prevFont = draw_get_font();
