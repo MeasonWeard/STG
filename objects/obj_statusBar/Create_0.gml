@@ -5,6 +5,7 @@ maxValue = 100;
 
 txt = "";
 txtCol = c_black;
+font = fnt_normal;
 
 width = 100;
 height = 16;

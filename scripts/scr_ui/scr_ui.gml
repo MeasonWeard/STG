@@ -530,7 +530,7 @@ function scr_ui_displayTag(xx, yy, lineDist, txt, col = c_lime, font = fnt_norma
 function scr_ui_slider(setting, text, font, xx, yy, width, minValue, maxValue) {
 	
 	var val = scr_data_getSetting(setting, maxValue);
-	//val = clamp(val, minValue, maxValue);
+	val = clamp(val, minValue, maxValue);
 	
     var colours = global.data.colours;
 	
@@ -563,7 +563,7 @@ function scr_ui_slider(setting, text, font, xx, yy, width, minValue, maxValue) {
     }
 
     // --- draw bar background ---
-    draw_set_color(c_black);
+    draw_set_color(c_navy);
     draw_rectangle(left, top, right, bottom, false);
     
     // --- draw fill ---
@@ -598,6 +598,9 @@ function scr_ui_checkBox(setting, text, font, xx, yy) {
 	var prevFont = draw_get_font();
 	var prevCol = draw_get_color();
 
+	draw_set_font(font);
+	var textWidth = string_width(text);
+
     //define bounds
     var mx = global.cursor.x;
     var my = global.cursor.y;
@@ -605,10 +608,12 @@ function scr_ui_checkBox(setting, text, font, xx, yy) {
     var top    = yy;
     var right  = xx + boxWidth;
     var bottom = yy + boxHeight;
+	
+	var clickRight = right + 16 + textWidth;
 
     //input handling
     if (mouse_check_button_pressed(mb_left)) {
-        if (point_in_rectangle(mx, my, left, top, right, bottom)) {
+        if (point_in_rectangle(mx, my, left, top, clickRight, bottom)) {
             scr_data_setSetting(setting, !val);
         }
     }
@@ -616,6 +621,8 @@ function scr_ui_checkBox(setting, text, font, xx, yy) {
     //draw checkbox
     draw_set_color(c_black);
     draw_rectangle(left, top, right, bottom, false);
+	draw_set_color(c_white);
+    draw_rectangle(left, top, right, bottom, true);
 
     if (val) {
         draw_set_color(c_aqua);
@@ -626,7 +633,6 @@ function scr_ui_checkBox(setting, text, font, xx, yy) {
 	
 	//draw text
 	draw_set_color(colours.text);
-	draw_set_font(font);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_middle);
 	draw_text(right + 16, (top + bottom) * 0.5, text);
@@ -640,78 +646,189 @@ function scr_ui_checkBox(setting, text, font, xx, yy) {
 
 function scr_ui_optionSelector(setting, options, text, font, xx, yy) {
 
-      // Get the currently selected index from settings
-    var index = scr_data_getSetting(setting, 0);
-    var len = array_length(options);
+	// Get the currently selected index from settings
+	var index = scr_data_getSetting(setting, 0);
+	var len = array_length(options);
 
-    var arrowSize = 24;
-    var spacing = 8;
+	var arrowSize = 24;
+	var spacing = 8;
+	var selectorGap = 20;
 
-    // Use centralized cursor
-    var mx = global.cursor.x;
-    var my = global.cursor.y;
+	// Use centralized cursor
+	var mx = global.cursor.x;
+	var my = global.cursor.y;
 
-    // Set font for measuring text
-    draw_set_font(font);
+	// Set font for measuring text
+	draw_set_font(font);
 
-    // Measure label text width
-    var textWidth = string_width(text);
+	// Measure label text width
+	var textWidth = string_width(text);
 
-    // Measure selected option text width
-    var optionText = string(options[index]);
-    var optionWidth = string_width(optionText);
+	// Current option text
+	var optionText = string(options[index]);
 
-    // Left arrow bounds
-    var l_left   = xx + textWidth + spacing;
-    var l_right  = l_left + arrowSize;
-    var l_top    = yy;
-    var l_bottom = yy + arrowSize;
+	// Find widest option
+	var optionWidth = 0;
 
-    // Right arrow bounds (placed after option text)
-    var r_left   = l_right + spacing + optionWidth;
-    var r_right  = r_left + arrowSize;
-    var r_top    = yy;
-    var r_bottom = yy + arrowSize;
+	for (var i = 0; i < len; i++) {
 
-    // Input handling
-    if (mouse_check_button_pressed(mb_left)) {
+		var w = string_width(string(options[i]));
+		optionWidth = max(optionWidth, w);
 
-        if (point_in_rectangle(mx, my, l_left, l_top, l_right, l_bottom)) {
-            index = (index - 1 + len) mod len;
-            scr_data_setSetting(setting, index);
-        }
+	}
 
-        if (point_in_rectangle(mx, my, r_left, r_top, r_right, r_bottom)) {
-            index = (index + 1) mod len;
-            scr_data_setSetting(setting, index);
-        }
-    }
+	// Left arrow bounds
+	var l_left = xx + textWidth + selectorGap;
+	var l_right  = l_left + arrowSize;
+	var l_top    = yy;
+	var l_bottom = yy + arrowSize;
 
-    // Hover colors
-    var leftColor  = c_black;
-    var rightColor = c_black;
-    if (point_in_rectangle(mx, my, l_left, l_top, l_right, l_bottom)) leftColor  = c_aqua;
-    if (point_in_rectangle(mx, my, r_left, r_top, r_right, r_bottom)) rightColor = c_aqua;
+	// Right arrow bounds
+	var r_left   = l_right + spacing + optionWidth + spacing;
+	var r_right  = r_left + arrowSize;
+	var r_top    = yy;
+	var r_bottom = yy + arrowSize;
 
-    // Draw label
-    draw_set_color(global.data.colours.text);
-    draw_set_halign(fa_left);
-    draw_text(xx, yy, text);
+	// Centre of the option area
+	var optionX = (l_right + r_left) * 0.5;
 
-    // Draw left arrow
-    draw_set_color(leftColor);
-    draw_text(l_left, yy, "<");
+	// Input handling
+	if (mouse_check_button_pressed(mb_left)) {
 
-    // Draw current option
-    draw_set_color(global.data.colours.text);
-    draw_text(l_right + spacing, yy, optionText);
+		// Left arrow
+		if (point_in_rectangle(mx, my, l_left, l_top, l_right, l_bottom)) {
 
-    // Draw right arrow
-    draw_set_color(rightColor);
-    draw_text(r_left, yy, " >");
+			index = (index - 1 + len) mod len;
+			scr_data_setSetting(setting, index);
 
-    // Reset alignment/color
-    draw_set_color(c_white);
-    scr_misc_resetTextAlignment();
+		}
+		// Anywhere between the arrows (excluding the left arrow)
+		else if (point_in_rectangle(mx, my, l_right, l_top, r_right, r_bottom)) {
+
+			index = (index + 1) mod len;
+			scr_data_setSetting(setting, index);
+
+		}
+
+	}
+
+	// Hover colours
+	var leftColor  = c_white;
+	var rightColor = c_white;
+
+	if (point_in_rectangle(mx, my, l_left, l_top, l_right, l_bottom))
+		leftColor = c_aqua;
+
+	if (point_in_rectangle(mx, my, r_left, r_top, r_right, r_bottom))
+		rightColor = c_aqua;
+
+	// Draw label
+	draw_set_color(global.data.colours.text);
+	draw_set_halign(fa_left);
+	draw_text(xx, yy, text);
+
+	// Draw left arrow
+	draw_set_color(leftColor);
+	draw_set_halign(fa_middle);
+	draw_text((l_left + l_right) * 0.5, yy, "<");
+
+	// Draw current option
+	draw_set_color(global.data.colours.text);
+	draw_text(optionX, yy, optionText);
+
+	// Draw right arrow
+	draw_set_color(rightColor);
+	draw_text((r_left + r_right) * 0.5, yy, ">");
+
+	// Reset alignment/colour
+	draw_set_color(c_white);
+	scr_misc_resetTextAlignment();
+
+    //// Get the currently selected index from settings
+    //var index = scr_data_getSetting(setting, 0);
+    //var len = array_length(options);
+
+    //var arrowSize = 24;
+    //var spacing = 8;
+
+    //// Use centralized cursor
+    //var mx = global.cursor.x;
+    //var my = global.cursor.y;
+
+    //// Set font for measuring text
+    //draw_set_font(font);
+
+    //// Measure label text width
+    //var textWidth = string_width(text);
+
+	//// Current option text
+	//var optionText = string(options[index]);
+
+	//// Find widest option
+	//var optionWidth = 0;
+
+	//for (var i = 0; i < len; i++) {
+	
+	//	var w = string_width(string(options[i]));
+	//	optionWidth = max(optionWidth, w);
+	
+	//}
+
+    //// Left arrow bounds
+    //var l_left   = xx + textWidth + spacing;
+    //var l_right  = l_left + arrowSize;
+    //var l_top    = yy;
+    //var l_bottom = yy + arrowSize;
+
+    //// Right arrow bounds (placed after option text)
+    //var r_left   = l_right + spacing + optionWidth + spacing;
+    //var r_right  = r_left + arrowSize;
+    //var r_top    = yy;
+    //var r_bottom = yy + arrowSize;
+	
+	//var optionX = (l_right + r_left) * 0.5;
+
+    //// Input handling
+    //if (mouse_check_button_pressed(mb_left)) {
+
+    //    if (point_in_rectangle(mx, my, l_left, l_top, l_right, l_bottom)) {
+    //        index = (index - 1 + len) mod len;
+    //        scr_data_setSetting(setting, index);
+    //    }
+
+    //    if (point_in_rectangle(mx, my, r_left, r_top, r_right, r_bottom)) {
+    //        index = (index + 1) mod len;
+    //        scr_data_setSetting(setting, index);
+    //    }
+    //}
+
+    //// Hover colors
+    //var leftColor  = c_white;
+    //var rightColor = c_white;
+    //if (point_in_rectangle(mx, my, l_left, l_top, l_right, l_bottom)) leftColor  = c_aqua;
+    //if (point_in_rectangle(mx, my, r_left, r_top, r_right, r_bottom)) rightColor = c_aqua;
+
+    //// Draw label
+    //draw_set_color(global.data.colours.text);
+    //draw_set_halign(fa_left);
+    //draw_text(xx, yy, text);
+
+    //// Draw left arrow
+    //draw_set_color(leftColor);
+    //draw_text(l_left, yy, "<");
+
+    //// Draw current option
+    //draw_set_color(global.data.colours.text);
+	//draw_set_halign(fa_middle);
+    //draw_text(optionX, yy, optionText);
+
+    //// Draw right arrow
+	//draw_set_halign(fa_left);
+    //draw_set_color(rightColor);
+    //draw_text(r_left, yy, " >");
+
+    //// Reset alignment/color
+    //draw_set_color(c_white);
+    //scr_misc_resetTextAlignment();
 	
 }

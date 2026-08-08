@@ -87,6 +87,8 @@ if (is_string(txt) and txt != "") {
 	draw_set_valign(fa_middle);
 	draw_set_colour(txtCol);
 	
+	draw_set_font(font);
+	
 	draw_text(x, y, txt);
 	
 	scr_misc_resetTextAlignment();

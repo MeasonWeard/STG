@@ -4,6 +4,10 @@ sc = global.stageController;
 rc = scr_data_getRunController();
 cursor = global.cursor;
 
+//settings
+var ammoSetting = scr_data_getSetting("showAmmoOn", 0);
+showAmmo = ammoSetting == 0 or ammoSetting == 1 ? true : false;
+
 hub = sc.hub;
 
 depth = layers.ui;
@@ -52,6 +56,16 @@ energyPackX = 0;
 
 lvlTxtX = 0;
 lvlTxtY = 0;
+
+ammoX = 0;
+ammoY = 0;
+reload = 0;
+reloadTime = 0;
+ammoCol = c_white;
+weaponName = "";
+
+ammo = 0;
+maxAmmo = 0;
 
 //info
 posX = 0;

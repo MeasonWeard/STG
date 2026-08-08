@@ -10,6 +10,7 @@ camXmid = camX + camW * 0.5;
 camYmid = camY + camH * 0.5;
 
 buttonGap = 128;
+optionsGap = 64;
 topButtonY = 200;
 
 txtY = camYmid - 364;
@@ -95,7 +96,7 @@ noButton.leftFunc = no;
 
 //settings
 settingsBackButton.x = continueButton.x;
-settingsBackButton.y = continueButton.y;
+settingsBackButton.y = continueButton.y - buttonGap;
 settingsBackButton.txt = "Back";
 settingsBackButton.active = false
 settingsBackButton.visibleWhenInactive = false;
@@ -104,7 +105,7 @@ settingsBackButton.leftFunc = saveSettings;
 musicSlider = instance_create_layer(x, y, "Instances", obj_slider);
 musicSlider.active = false;
 musicSlider.x = camXmid - 100;
-musicSlider.y = continueButton.y + buttonGap;
+musicSlider.y = continueButton.y + optionsGap;
 musicSlider.text = "Music Volume";
 musicSlider.setting = "musicVolume";
 musicSlider.minValue = 0;
@@ -113,8 +114,30 @@ musicSlider.maxValue = 1;
 sfxSlider = instance_create_layer(x, y, "Instances", obj_slider);
 sfxSlider.active = false;
 sfxSlider.x = camXmid - 100;
-sfxSlider.y = continueButton.y + buttonGap * 2;
+sfxSlider.y = musicSlider.y + optionsGap;
 sfxSlider.text = "SFX Volume";
 sfxSlider.setting = "sfxVolume";
 sfxSlider.minValue = 0;
 sfxSlider.maxValue = 1;
+
+showAmmo = instance_create_layer(x, y, "Instances", obj_optionSelector);
+showAmmo.options = ["Cursor and HUD","HUD","Cursor"];
+showAmmo.text = "Show ammo/charges on";
+showAmmo.setting = "showAmmo";
+showAmmo.x = camXmid - 100;
+showAmmo.y = sfxSlider.y + optionsGap;
+showAmmo.active = false;
+
+showReload = instance_create_layer(x, y, "Instances", obj_checkBox);
+showReload.setting = "showReloadOnCursor";
+showReload.text = "Show reload on cursor";
+showReload.x = camXmid - 100;
+showReload.y = showAmmo.y + optionsGap;
+showReload.active = false;
+
+showName = instance_create_layer(x, y, "Instances", obj_checkBox);
+showName.setting = "alwaysShowWeaponName";
+showName.text = "Always show weapon name on cursor";
+showName.x = camXmid - 100;
+showName.y = showReload.y + optionsGap;
+showName.active = false;

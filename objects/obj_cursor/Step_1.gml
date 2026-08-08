@@ -6,10 +6,11 @@ if (variable_global_exists("player")) {
 
 if (global.settingsDirty) {
 
-	showMelee = scr_data_getSetting("showMeleeOnCursor", true);
-	showSkills = scr_data_getSetting("showSkillsOnCursor", true);
-	showReload = scr_data_getSetting("showSkillsOnCursor", true);
-	showAmmo = scr_data_getSetting("showAmmoOnCursor", true);
+	var ammoSetting = scr_data_getSetting("showAmmo", 0);
+
+	showAmmo = ammoSetting == 0 or ammoSetting == 2 ? true : false;
+	showReload = scr_data_getSetting("showReloadOnCursor", true);
+	alwaysShowName = scr_data_getSetting("alwaysShowWeaponName", false);
 	
 }
 

@@ -34,6 +34,9 @@ energyPackX = stimPackX + skillIconW + skillsPad;
 shieldX = healthBarX - healthBar.width * 0.5 + 16;
 shieldY = healthBarY - 32;
 
+ammoX = camX + camW - 32;
+ammoY = energyBarY - 32;
+
 posX = instance_exists(rc) ? rc.posX : 0;
 posY = instance_exists(rc) ? rc.posY : 0;
 
@@ -67,6 +70,35 @@ if (instance_exists(player)) {
 	skill4 = player.skills.skill4;
 	
 	skills = [skill1, skill2, skill3, skill4];
+	
+	if (showAmmo and is_struct(player.equippedWeapon)) {
+	
+		var weapon = player.equippedWeapon;
+		var type = weapon.type;
+	
+		weaponName = weapon.name;
+	
+		if (type == itemTypes.gun) {
+		
+			ammo = weapon.ammo;
+			maxAmmo = weapon.clipSize;
+			reload = weapon.reload;
+			reloadTime = weapon.reloadTime;
+			ammoCol = c_white;
+		
+		}
+		
+		if (type == itemTypes.melee) {
+		
+			ammo = weapon.charges;
+			maxAmmo = weapon.maxCharges;
+			reload = weapon.recharge;
+			reloadTime = weapon.rechargeTime;
+			ammoCol = c_yellow;
+		
+		}
+	
+	}
 
 } else {
 
@@ -283,8 +315,6 @@ if (instance_exists(enemy)) {
 	enemyEnergyBar.visible = false;
 }
 
-
-
 //dash
 scr_ui_skillIconFromData(dashX, dashY, 3, spr_icon_dash, "Dash", "", dashes, dashRecharge, false);
 
@@ -306,6 +336,43 @@ for (var i = skillsLen - 1; i >= 0; i--) {
 	scr_ui_skillIcon(xx, skillsY, 2, key, thisSkill);
 
 	pos++;
+	
+}
+
+//ammo
+if (showAmmo) {
+
+	draw_set_font(fnt_large);
+	draw_set_colour(ammoCol);
+	draw_set_halign(fa_right);
+	draw_set_valign(fa_middle);
+	
+	var ammoText = string(ammo) + "  /  " + string(maxAmmo);
+	var textMax = string(maxAmmo) + "  /  " + string(maxAmmo);
+	
+	var stringW = string_width(textMax);
+	var stringH = string_height(textMax);
+	
+	draw_text(ammoX, ammoY, ammoText);
+	
+	draw_set_font(fnt_normal);
+	
+	draw_text(ammoX - stringW - 16, ammoY, weaponName);
+	
+	if (reload > 0) {
+		
+		var perc = 1 - (reload / (reloadTime * 60));
+		
+		var barRight = ammoX;
+		var barLeft = barRight - 64;
+		var barBottom = ammoY - stringH;
+		var barTop = barBottom - 8;
+
+		
+		perc *= 100;
+		draw_healthbar(barLeft, barTop, barRight, barBottom, perc, c_grey, ammoCol, ammoCol, 0, true, true);
+		
+	}
 	
 }
 

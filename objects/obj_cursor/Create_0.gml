@@ -8,10 +8,9 @@ enemy = noone;
 enemyPad = 16;
 
 //settings
-showMelee = scr_data_getSetting("showMeleeOnCursor", true);
-showSkills = scr_data_getSetting("showSkillsOnCursor", true);
 showReload = scr_data_getSetting("showReloadOnCursor", true);
 showAmmo = scr_data_getSetting("showAmmoOnCursor", true);
+alwaysShowName = scr_data_getSetting("alwaysShowWeaponName", false);
 
 //formatting
 meleeBarWidth = 48;

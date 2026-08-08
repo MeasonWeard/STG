@@ -2,6 +2,8 @@
 camX = camera_get_view_x(cam);
 camY = camera_get_view_y(cam);
 
+draw_set_font(fnt_normal);
+
 statsLeft = camX + 20;
 statsTop = camY + 20;
 statsRight = statsLeft + 400;

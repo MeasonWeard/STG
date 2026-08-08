@@ -33,8 +33,8 @@ defaultSettings = {
 	res: [1280, 720],
 	
 	showReloadOnCursor: true,
-	showSkillsOnCursor: true,
-	showAmmoOnCursor: true,
+	alwaysShowWeaponName: false,
+	showAmmo: 0,
 	
 	musicVolume: 1,
 	sfxVolume: 1

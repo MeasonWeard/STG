@@ -29,11 +29,17 @@ if (tab == "settings") {
 	settingsBackButton.active = true;
 	musicSlider.active = true;
 	sfxSlider.active = true;
+	showAmmo.active = true;
+	showReload.active = true;
+	showName.active = true;
 	
 } else {
 	
 	settingsBackButton.active = false;
 	musicSlider.active = false;
 	sfxSlider.active = false;
+	showAmmo.active = false;
+	showReload.active = false;
+	showName.active = false;
 	
 }
