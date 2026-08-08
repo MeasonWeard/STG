@@ -225,7 +225,7 @@ function scr_genDevices_calculator(level, rarity) {
 	
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
-	device.spr = spr_calculator;
+	device.spr = spr_calculatorSci;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
@@ -233,6 +233,10 @@ function scr_genDevices_calculator(level, rarity) {
 	var type = choose("old", "sci", "prog");
 	var adj = "";
 	var typeStat = "";
+	
+	if (type == "old") device.spr = spr_calculatorOld;
+	if (type == "sci") device.spr = spr_calculatorSci;
+	if (type == "prog") device.spr = spr_calculatorProg;
 	
 	//base DA
 	var baseHigh = ceil((level + 10));
@@ -345,7 +349,7 @@ function scr_genDevices_thermos(level, rarity) {
 	
 	var device = new deviceInst(level, rarity);
 	var stats = device.stats;
-	device.spr = spr_thermos;
+	device.spr = spr_thermosCoffee;
 	
 	var rarityFactor = max(0, rarity - 1);
 	var rarityMod = 1 + rarityFactor * 0.2;
@@ -353,6 +357,10 @@ function scr_genDevices_thermos(level, rarity) {
 	var type = choose("choc", "coffee", "protein");
 	var adj = "";
 	var typeStat = "";
+	
+	if (type == "choc") device.spr = spr_thermosHotChoc;
+	if (type == "coffee") device.spr = spr_thermosCoffee;
+	if (type == "protein") device.spr = spr_thermosProtein;
 	
 	//base maximum HP
 	var baseLow = max(5, floor(5 * (level * 0.8)));

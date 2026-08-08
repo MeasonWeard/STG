@@ -1,10 +1,10 @@
 {
   "$GMSprite":"v2",
-  "%Name":"spr_weldingMask",
+  "%Name":"spr_neuralInterface",
   "bboxMode":0,
-  "bbox_bottom":54,
+  "bbox_bottom":38,
   "bbox_left":0,
-  "bbox_right":42,
+  "bbox_right":55,
   "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -12,16 +12,16 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"v1","%Name":"6c7ff68c-9e67-4af3-9390-6fbb14293b5d","name":"6c7ff68c-9e67-4af3-9390-6fbb14293b5d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"d6796aea-3d0b-462c-8497-f685b8ddf5ed","name":"d6796aea-3d0b-462c-8497-f685b8ddf5ed","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
-  "height":55,
+  "height":39,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"046c430a-7f1e-4d14-b9cd-cce7a4bc1fa4","blendMode":0,"displayName":"Layer 2","isLocked":false,"name":"046c430a-7f1e-4d14-b9cd-cce7a4bc1fa4","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"421cb06e-493c-41d1-a44c-803801a26b36","blendMode":0,"displayName":"Layer 2","isLocked":false,"name":"421cb06e-493c-41d1-a44c-803801a26b36","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_weldingMask",
+  "name":"spr_neuralInterface",
   "nineSlice":null,
   "origin":4,
   "parent":{
@@ -33,7 +33,7 @@
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"v1",
-    "%Name":"spr_weldingMask",
+    "%Name":"spr_neuralInterface",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -57,7 +57,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_weldingMask",
+    "name":"spr_neuralInterface",
     "playback":1,
     "playbackSpeed":30.0,
     "playbackSpeedType":0,
@@ -69,14 +69,14 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"6c7ff68c-9e67-4af3-9390-6fbb14293b5d","path":"sprites/spr_weldingMask/spr_weldingMask.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"673da899-39b8-471e-aa1e-7c7ff99063c4","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d6796aea-3d0b-462c-8497-f685b8ddf5ed","path":"sprites/spr_neuralInterface/spr_neuralInterface.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"56ac2142-8637-4a2c-82fe-d60882bb89f1","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
     "volume":1.0,
-    "xorigin":21,
-    "yorigin":27,
+    "xorigin":28,
+    "yorigin":19,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
@@ -86,5 +86,5 @@
   },
   "type":0,
   "VTile":false,
-  "width":43,
+  "width":56,
 }

@@ -322,10 +322,11 @@ function scr_genHeadgear_dielectricHelmet(level, rarity) { //
 }
 
 //SPECIAL
-function scr_genHeadgear_tacticalVisor(level, rarity) {
+function scr_genHeadgear_tacticalVisor(level, rarity) { //
 
 	var headgear = new headgearInst(level, rarity);
 	headgear.name = "Tactical Visor";
+	headgear.spr = spr_tacticalVisor;
 	
 	var stats = headgear.stats;
 	
@@ -375,10 +376,11 @@ function scr_genHeadgear_tacticalVisor(level, rarity) {
 	
 }
 
-function scr_genHeadgear_traumaHelmet(level, rarity) {
+function scr_genHeadgear_traumaHelmet(level, rarity) { //
 
 	var headgear = new headgearInst(level, rarity);
 	headgear.name = "Trauma Helmet";
+	headgear.spr = spr_traumaHelmet;
 	
 	var stats = headgear.stats;
 	
@@ -441,10 +443,11 @@ function scr_genHeadgear_traumaHelmet(level, rarity) {
 	
 }
 
-function scr_genHeadgear_neuralInterface(level, rarity) {
+function scr_genHeadgear_neuralInterface(level, rarity) { //
 
 	var headgear = new headgearInst(level, rarity);
 	headgear.name = "Neural Interface";
+	headgear.spr = spr_neuralInterface;
 	
 	var stats = headgear.stats;
 	
