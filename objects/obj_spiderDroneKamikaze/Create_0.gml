@@ -38,6 +38,7 @@ targetReaquireDist = 40;
 baseStats.maxHp = 40;
 baseStats.spd = 7;
 baseStats.da = 115;
+baseStats.elecRes = -10;
 
 levelUpFunc = function() {
 

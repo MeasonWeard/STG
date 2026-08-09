@@ -89,8 +89,8 @@ function gun_pulseRifle(level, rarity): gunInst(level, rarity) constructor {
 	spr = spr_pulseRifle;
 	projSprite = spr_bulletLarge;
 	
-	damage.kin = 32;
-	baseDamage = 32;
+	damage.kin = 36;
+	baseDamage = 36;
 	
 	auto = true;
 	range = 1400;
