@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Wall decorations",
+    "path":"folders/Sprites/Environment/Wall decorations.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

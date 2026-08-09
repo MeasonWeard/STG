@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"Walls",
-    "path":"folders/Sprites/Environment/Walls.yy",
+    "name":"Eng",
+    "path":"folders/Sprites/Environment/Walls/Eng.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

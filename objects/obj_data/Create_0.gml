@@ -266,6 +266,14 @@ stages = {
 		mapCol: c_lime,
 		
 	},
+	
+	commArena1: {
+	
+		room: stage_commArena1,
+		type: stageTypes.arena,
+		mapCol: c_orange
+	
+	},
 
 	engHall1: {
 		
