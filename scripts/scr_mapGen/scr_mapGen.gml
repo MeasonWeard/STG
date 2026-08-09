@@ -593,3 +593,406 @@ function scr_mapGen_replaceRooms(
 	};
 
 }
+
+function scr_mapGen_generateRing(
+	map,
+	stages,
+	startPos,
+	ringW,
+	ringH
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+	
+	var stageCount = array_length(stages);
+	
+	var cellCount = 0;
+	var ringCells = [];
+	
+	if (stageCount <= 0) {
+		return {
+			map: map,
+			cellCount: 0,
+			ringCells: ringCells,
+			success: false
+		};
+	}
+	
+	var startX = startPos.xx;
+	var startY = startPos.yy;
+	var side = startPos.side;
+	
+	// Direction from map edge toward centre
+	var dx = 0;
+	var dy = 0;
+	
+	switch (side) {
+		
+		case "left":
+			dx = 1;
+		break;
+		
+		case "right":
+			dx = -1;
+		break;
+		
+		case "top":
+			dy = 1;
+		break;
+		
+		case "bottom":
+			dy = -1;
+		break;
+		
+	}
+	
+	
+	// ---------------------------------------------------------
+	// Entrance
+	//
+	// start -> hall -> ring
+	// ---------------------------------------------------------
+	
+	for (var i = 0; i < 2; i++) {
+		
+		var xx = startX + dx * i;
+		var yy = startY + dy * i;
+		
+		if (xx < 0 or xx >= mapW) continue;
+		if (yy < 0 or yy >= mapH) continue;
+		
+		var key = stages[irandom(stageCount - 1)];
+		map[xx][yy] = scr_mapGen_createCell(key);
+		
+		cellCount++;
+		
+	}
+	
+	
+	// ---------------------------------------------------------
+	// Work out rectangle position
+	// ---------------------------------------------------------
+	
+	var left;
+	var right;
+	var top;
+	var bottom;
+	
+	switch (side) {
+		
+		case "left":
+			
+			left = startX + 2;
+			right = left + ringW - 1;
+			
+			top = clamp(
+				startY - irandom(ringH - 1),
+				0,
+				mapH - ringH
+			);
+			
+			bottom = top + ringH - 1;
+			
+		break;
+		
+		
+		case "right":
+			
+			right = startX - 2;
+			left = right - ringW + 1;
+			
+			top = clamp(
+				startY - irandom(ringH - 1),
+				0,
+				mapH - ringH
+			);
+			
+			bottom = top + ringH - 1;
+			
+		break;
+		
+		
+		case "top":
+			
+			top = startY + 2;
+			bottom = top + ringH - 1;
+			
+			left = clamp(
+				startX - irandom(ringW - 1),
+				0,
+				mapW - ringW
+			);
+			
+			right = left + ringW - 1;
+			
+		break;
+		
+		
+		case "bottom":
+			
+			bottom = startY - 2;
+			top = bottom - ringH + 1;
+			
+			left = clamp(
+				startX - irandom(ringW - 1),
+				0,
+				mapW - ringW
+			);
+			
+			right = left + ringW - 1;
+			
+		break;
+		
+	}
+	
+	
+	// Make sure rectangle fits
+	if (
+		left < 0 or
+		right >= mapW or
+		top < 0 or
+		bottom >= mapH
+	) {
+		
+		return {
+			map: map,
+			cellCount: cellCount,
+			ringCells: ringCells,
+			success: false
+		};
+		
+	}
+	
+	
+	// ---------------------------------------------------------
+	// Generate top and bottom
+	// ---------------------------------------------------------
+	
+	for (var xx = left; xx <= right; xx++) {
+		
+		var key = stages[irandom(stageCount - 1)];
+		
+		map[xx][top] = scr_mapGen_createCell(key);
+		
+		array_push(ringCells, {
+			xx: xx,
+			yy: top
+		});
+		
+		cellCount++;
+		
+		
+		// Bottom
+		key = stages[irandom(stageCount - 1)];
+		
+		map[xx][bottom] = scr_mapGen_createCell(key);
+		
+		array_push(ringCells, {
+			xx: xx,
+			yy: bottom
+		});
+		
+		cellCount++;
+		
+	}
+	
+	
+	// ---------------------------------------------------------
+	// Generate left and right sides
+	//
+	// Skip corners because they were already created above
+	// ---------------------------------------------------------
+	
+	for (var yy = top + 1; yy < bottom; yy++) {
+		
+		var key = stages[irandom(stageCount - 1)];
+		
+		map[left][yy] = scr_mapGen_createCell(key);
+		
+		array_push(ringCells, {
+			xx: left,
+			yy: yy
+		});
+		
+		cellCount++;
+		
+		
+		// Right
+		key = stages[irandom(stageCount - 1)];
+		
+		map[right][yy] = scr_mapGen_createCell(key);
+		
+		array_push(ringCells, {
+			xx: right,
+			yy: yy
+		});
+		
+		cellCount++;
+		
+	}
+	
+	
+	return {
+		map: map,
+		cellCount: cellCount,
+		ringCells: ringCells,
+		//left: left,
+		//right: right,
+		//top: top,
+		//bottom: bottom,
+		success: true
+	};
+	
+}
+
+function scr_mapGen_addRingSideRooms(
+	map,
+	stages,
+	ringCells,
+	amount
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+	
+	var stageCount = array_length(stages);
+	var cellCount = 0;
+	var candidates = [];
+	
+	if (stageCount <= 0 or amount <= 0) {
+		return {
+			map: map,
+			cellCount: cellCount
+		};
+	}
+	
+	var dirs = [
+		[-1, 0],
+		[1, 0],
+		[0, -1],
+		[0, 1]
+	];
+	
+	
+	// Find possible side-room positions
+	var ringLen = array_length(ringCells);
+	
+	for (var i = 0; i < ringLen; i++) {
+		
+		var ring = ringCells[i];
+		
+		for (var d = 0; d < 4; d++) {
+			
+			var xx = ring.xx + dirs[d][0];
+			var yy = ring.yy + dirs[d][1];
+			
+			if (xx < 0 or xx >= mapW) continue;
+			if (yy < 0 or yy >= mapH) continue;
+			
+			if (!is_undefined(map[xx][yy])) continue;
+			
+			
+			// Avoid duplicate positions
+			var duplicate = false;
+			
+			for (var j = 0; j < array_length(candidates); j++) {
+				
+				if (
+					candidates[j].xx == xx and
+					candidates[j].yy == yy
+				) {
+					duplicate = true;
+					break;
+				}
+				
+			}
+			
+			if (duplicate) continue;
+			
+			array_push(candidates, {
+				xx: xx,
+				yy: yy,
+				ringX: ring.xx,
+				ringY: ring.yy
+			});
+			
+		}
+		
+	}
+	
+	
+	// ---------------------------------------------------------
+	// Place rooms one at a time
+	// ---------------------------------------------------------
+	
+	var tries = 0;
+	var maxTries = 100;
+	
+	while (
+		cellCount < amount
+		and array_length(candidates) > 0
+		and tries < maxTries
+	) {
+		
+		tries++;
+		
+		var index = irandom(array_length(candidates) - 1);
+		var candidate = candidates[index];
+		
+		array_delete(candidates, index, 1);
+		
+		var xx = candidate.xx;
+		var yy = candidate.yy;
+		
+		// Might have become occupied already
+		if (!is_undefined(map[xx][yy])) continue;
+		
+		
+		// Re-check neighbours NOW,
+		// after previous side rooms may have been placed.
+		
+		var valid = true;
+		
+		for (var d = 0; d < 4; d++) {
+			
+			var nx = xx + dirs[d][0];
+			var ny = yy + dirs[d][1];
+			
+			if (nx < 0 or nx >= mapW) continue;
+			if (ny < 0 or ny >= mapH) continue;
+			
+			if (is_undefined(map[nx][ny])) continue;
+			
+			
+			// The ring cell this room connects to is allowed
+			if (
+				nx == candidate.ringX
+				and ny == candidate.ringY
+			) {
+				continue;
+			}
+			
+			// Anything else adjacent makes this invalid
+			valid = false;
+			break;
+			
+		}
+		
+		if (!valid) continue;
+		
+		
+		var key = stages[irandom(stageCount - 1)];
+		map[xx][yy] = scr_mapGen_createCell(key);
+		
+		cellCount++;
+		
+	}
+	
+	
+	return {
+		map: map,
+		cellCount: cellCount
+	};
+	
+}

@@ -105,7 +105,7 @@ if (healed != 0) audio_play_sound(snd_medkit, 0, false);
 if (keyboard_check_pressed(ord("E"))) recharged = scr_char_useEnergyPack(self);
 if (recharged != 0) audio_play_sound(snd_recharge, 0, false);
 
-if (instance_number(obj_statsPlate) == 0 and keyboard_check_pressed(vk_tab)) {
+if (instance_number(obj_statsPlate) == 0 and (keyboard_check_pressed(vk_tab) or keyboard_check_pressed(ord("C")))) {
 	//scr_testSound();
 	var sp = instance_create_layer(x, y, "Instances", obj_statsPlate);
 	sp.owner = self;

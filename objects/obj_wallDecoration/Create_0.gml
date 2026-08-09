@@ -1,1 +1,2 @@
 owner = noone;
+findWall = true;

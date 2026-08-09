@@ -18,6 +18,8 @@ if (setupDecoration and is_array(decorationSprites)) {
 			decoration.depth = depth - 1;
 			decoration.x = x;
 			decoration.y = y - spriteYoffset;
+			decoration.owner = self;
+			decoration.findWall = false;
 	
 		}
 	

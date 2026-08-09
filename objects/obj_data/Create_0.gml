@@ -274,6 +274,14 @@ stages = {
 		mapCol: c_orange
 	
 	},
+	
+	cinema: {
+	
+		room: stage_commCinema,
+		type: stageTypes.special,
+		mapCol: c_red
+	
+	},
 
 	engHall1: {
 		
