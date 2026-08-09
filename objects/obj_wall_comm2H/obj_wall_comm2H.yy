@@ -8,8 +8,8 @@
   "name":"obj_wall_comm2H",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls",
-    "path":"folders/Objects/Environment/Walls.yy",
+    "name":"Comm",
+    "path":"folders/Objects/Environment/Walls/Comm.yy",
   },
   "parentObjectId":{
     "name":"obj_wall",

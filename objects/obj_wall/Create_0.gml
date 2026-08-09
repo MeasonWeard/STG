@@ -9,7 +9,7 @@ hashByMaskCentre = true;
 decoration = noone;
 
 decorationSprites = undefined;
-decorationChance = 50;
+decorationChance = 15;
 setupDecoration = true;
 
-spriteYoffset = 0.4;
+spriteYoffset = 58;

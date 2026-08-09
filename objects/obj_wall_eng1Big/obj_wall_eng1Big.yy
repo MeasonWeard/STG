@@ -8,8 +8,8 @@
   "name":"obj_wall_eng1Big",
   "overriddenProperties":[],
   "parent":{
-    "name":"Walls",
-    "path":"folders/Objects/Environment/Walls.yy",
+    "name":"Eng",
+    "path":"folders/Objects/Environment/Walls/Eng.yy",
   },
   "parentObjectId":{
     "name":"obj_wall",

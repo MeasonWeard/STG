@@ -123,7 +123,7 @@ function zone_commercial() : zone() constructor {
 			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
 		
 			//var stages = ["wasteArena1","wasteArenaLava1","wasteArenaAcid1"];
-			var halls = [stage_wasteHall1, stage_wasteHall2];//[stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
+			var halls = [stage_commHall1];//[stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
 			var sideRooms = [stage_commArena1];
 			var endStages = [stage_wasteBoss1];
 

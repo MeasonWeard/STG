@@ -17,7 +17,7 @@ if (setupDecoration and is_array(decorationSprites)) {
 			decoration.sprite_index = spr;
 			decoration.depth = depth - 1;
 			decoration.x = x;
-			decoration.y = y - sprite_height * spriteYoffset;
+			decoration.y = y - spriteYoffset;
 	
 		}
 	

@@ -3,9 +3,13 @@
   "%Name":"tileset_commercial",
   "autoTileSets":[],
   "macroPageTiles":{
-    "SerialiseHeight":0,
-    "SerialiseWidth":0,
-    "TileSerialiseData":[],
+    "SerialiseHeight":7,
+    "SerialiseWidth":11,
+    "TileCompressedData":[
+      8,11,12,11,0,12,11,12,0,-4,12,7,11,12,0,11,12,11,0,-3,12,11,11,12,11,0,12,11,12,0,11,12,11,-11,0,19,
+      11,12,11,0,11,12,12,0,11,12,11,12,11,12,0,12,11,12,0,-5,12,6,11,0,11,12,11,0,-3,12,
+    ],
+    "TileDataFormat":1,
   },
   "name":"tileset_commercial",
   "out_columns":10,
