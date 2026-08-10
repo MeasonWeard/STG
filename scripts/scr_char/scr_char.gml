@@ -701,3 +701,14 @@ function scr_char_addStatMod(char, statKey, amount, timer, modName) {
 		}
 			
 }
+
+function scr_char_removeAllPets() {
+
+	with(obj_char) {
+
+		if (!pet) continue;
+		instance_destroy();
+	
+	}
+	
+}

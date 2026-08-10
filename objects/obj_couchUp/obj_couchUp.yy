@@ -1,19 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_wall_commCinemaBig2",
+  "%Name":"obj_couchUp",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_wall_commCinemaBig2",
+  "name":"obj_couchUp",
   "overriddenProperties":[],
   "parent":{
-    "name":"Comm",
-    "path":"folders/Objects/Environment/Walls/Comm.yy",
+    "name":"Things",
+    "path":"folders/Objects/Environment/Things.yy",
   },
   "parentObjectId":{
-    "name":"obj_wall",
-    "path":"objects/obj_wall/obj_wall.yy",
+    "name":"obj_env",
+    "path":"objects/obj_env/obj_env.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wall_commCinemaDoor",
-    "path":"sprites/spr_wall_commCinemaDoor/spr_wall_commCinemaDoor.yy",
+    "name":"spr_couchUp",
+    "path":"sprites/spr_couchUp/spr_couchUp.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -6,7 +6,7 @@ with(obj_char) {
 
 	if (!pet) continue;
 	if (faction != other.faction) continue;
-	
+
 	persistent = false;
 	
 }

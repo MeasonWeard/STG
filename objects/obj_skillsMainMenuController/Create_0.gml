@@ -1,10 +1,5 @@
 if (instance_exists(global.player)) global.player.active = false;
-
-with (obj_char) {
-
-	if (pet) instance_destroy();
-	
-}
+scr_char_removeAllPets();
 
 global.skillsMainMenuController = self;
 

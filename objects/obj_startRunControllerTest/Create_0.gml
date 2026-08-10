@@ -1,6 +1,8 @@
 selectedZone = global.selectedZone;
 
 if (instance_exists(global.player)) instance_destroy(global.player);
+scr_char_removeAllPets();
+
 
 rc = global.runController;
 

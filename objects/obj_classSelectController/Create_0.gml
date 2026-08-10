@@ -8,13 +8,16 @@ instructionLabel = noone;
 majorLabel = noone;
 minorLabel = noone;
 
+class1 = playerData.class1;
+
 if (instance_exists(global.player)) instance_destroy(global.player);
+scr_char_removeAllPets();
 
 setup = true;
 
 showBackButton = true;
 
-classNum = is_undefined(playerData.class1) ? 1 : 2;
+classNum = is_undefined(class1) ? 1 : 2;
 
 selectedClass = undefined;
 

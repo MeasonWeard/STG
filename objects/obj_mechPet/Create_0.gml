@@ -61,7 +61,7 @@ ghost.owner = self;
 //if (!variable_instance_exists(self, "targetReaquireDist")) targetReaquireDist = 450;
 targetMinDist = 200;
 targetMaxDist = 420;
-targetReaquireDist = 650;
+targetReaquireDist = 600;
 
 deathSounds = [snd_droneDeath1, snd_droneDeath2];
 bulletHitSounds = global.data.soundProfiles.bulletHitMetal;

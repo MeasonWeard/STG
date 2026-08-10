@@ -241,6 +241,8 @@ function scr_stages_saveSmashables() {
 function scr_stages_endRun() {
 
 	if (instance_exists(global.player)) instance_destroy(global.player);
+	scr_char_removeAllPets();
+
 	
 	room_goto(room_endRun);
 	
