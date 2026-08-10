@@ -85,7 +85,8 @@ enum itemTypes {
 	gear = 4,
 	device = 5,
 	headgear = 6,
-	tie = 7
+	tie = 7,
+	coat = 8
 	
 }
 

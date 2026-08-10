@@ -30,6 +30,7 @@ if (instance_exists(player)) {
 	device2 = player.gear.device2;
 	tie = player.gear.tie;
 	headgear = player.gear.headgear;
+	coat = player.gear.coat;
 	weapon = player.equippedWeapon;
 
 }
@@ -77,6 +78,8 @@ draw_text(statsRight - pad, statsTop + pad, tabTxt);
 scr_ui_drawItemSlot(device1, gearX, gearY, 0, gearSlotSize, fnt_normal, true);
 scr_ui_drawItemSlot(device2, gearX + gearSlotGap, gearY, 0, gearSlotSize, fnt_normal, true);
 scr_ui_drawItemSlot(headgear, gearX, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
-scr_ui_drawItemSlot(tie, gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
+scr_ui_drawItemSlot(coat, gearX + gearSlotGap, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
+scr_ui_drawItemSlot(tie, gearX + gearSlotGap * 2, gearY + gearSlotGap, 0, gearSlotSize, fnt_normal, true);
 scr_ui_drawItemSlot(weapon, weaponX, weaponY, 0, gearSlotSize, fnt_normal, true);
+//scr_ui_drawItemSlot(coat, weaponX, weaponY, 0, gearSlotSize, fnt_normal, true);
 

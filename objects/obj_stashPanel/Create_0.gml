@@ -65,6 +65,10 @@ storeItem = function(item) {
 		case itemTypes.tie:
 			key = "ties";
 			break;
+			
+		case itemTypes.coat:
+			key = "coats";
+			break;
 
 		default:
 			exit;
@@ -152,6 +156,16 @@ equipLeft = function(key, index) {
 	
 	}
 	
+	if (type == itemTypes.coat) {
+	
+		var oldItem = global.stashController.equippedGear.coat;
+		arr[index] = undefined;
+		
+		storeItem(oldItem);
+		global.stashController.equippedGear.coat = item;
+	
+	}
+	
 }
 
 equipRight = function(key, index) {
@@ -211,6 +225,16 @@ equipRight = function(key, index) {
 		
 		storeItem(oldItem);
 		global.stashController.equippedGear.tie = item;
+	
+	}
+	
+	if (type == itemTypes.coat) {
+	
+		var oldItem = global.stashController.equippedGear.coat;
+		arr[index] = undefined;
+		
+		storeItem(oldItem);
+		global.stashController.equippedGear.coat = item;
 	
 	}
 	

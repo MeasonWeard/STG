@@ -187,6 +187,7 @@ if (setupStats) {
 	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);
 	if (!is_undefined(gear.tie)) scr_gear_applyStatsToChar(self, gear.tie);
 	if (!is_undefined(gear.headgear)) scr_gear_applyStatsToChar(self, gear.headgear);
+	if (!is_undefined(gear.coat)) scr_gear_applyStatsToChar(self, gear.coat);
 
 	if (!is_undefined(equippedWeapon)) scr_weapons_applyWeaponBonusesToChar(equippedWeapon, self);
 

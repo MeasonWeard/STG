@@ -35,6 +35,14 @@ function tieInst(level, rarity) : gearInst(level, rarity) constructor {
 	
 }
 
+function coatInst(level, rarity) : gearInst(level, rarity) constructor {
+
+	type = itemTypes.coat;
+	name = "Coat";
+	spr = spr_coat;
+	
+}
+
 function scr_gear_applyStatsToChar(char, gear) {
 
 	if (!instance_exists(char)) exit;
@@ -67,6 +75,7 @@ function scr_gear_formatDescription(gear) {
 	if (is_instanceof(gear, deviceInst)) typeTxt = "Device";
 	if (is_instanceof(gear, headgearInst)) typeTxt = "Headgear";
 	if (is_instanceof(gear, tieInst)) typeTxt = "Tie";
+	if (is_instanceof(gear, coatInst)) typeTxt = "Coat";
 	
 	var txt = gear.name + "     " + "lvl " + string(gear.lvl);
 	txt += "\n--" + typeTxt + "--\n";

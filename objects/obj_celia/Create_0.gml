@@ -33,7 +33,7 @@ thornsDamage.chem = 8;
 minData = 32;
 maxData = 64;
 
-lootChance = 25;
+lootChance = 6;
 lootImproveChance = 20;
 lootAmount = 2;
 

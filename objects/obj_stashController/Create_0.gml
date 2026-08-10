@@ -8,7 +8,8 @@ equippedGear = {
 	device1: undefined,
 	device2: undefined,
 	tie: undefined,
-	headgear: undefined
+	headgear: undefined,
+	coat: undefined
 	
 }
 

@@ -363,7 +363,7 @@ function scr_genDevices_thermos(level, rarity) {
 	if (type == "protein") device.spr = spr_thermosProtein;
 	
 	//base maximum HP
-	var baseLow = max(5, floor(5 * (level * 0.8)));
+	var baseLow = max(5, floor(5 * (level * 0.7)));
 	var baseHigh = baseLow + 15;
 	
 	stats.maxHp = irandom_range_biased(
@@ -397,7 +397,7 @@ function scr_genDevices_thermos(level, rarity) {
 
 	if (typeStat == "maxHp") {
 
-		var high = max(2, round(baseHigh * 0.75));
+		var high = max(2, round(baseHigh * 0.5));
 		var low = max(1, high - 10);
 
 		amount = irandom_range_biased(
@@ -448,7 +448,7 @@ function scr_genDevices_thermos(level, rarity) {
 		
 		if (stat == "maxHp") {
 			
-			var high = max(2, round(baseHigh * 0.75));
+			var high = max(2, round(baseHigh * 0.5));
 			var low = max(1, high - 10);
 			
 			amount = irandom_range_biased(

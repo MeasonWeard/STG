@@ -18,6 +18,4 @@ spawnChance = 50;
 lootMaxRarity = 5;
 lootImproveChance = 55;
 
-destroyWhenStageOver = false;
-
 createArrow = true;

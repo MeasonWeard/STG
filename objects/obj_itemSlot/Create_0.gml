@@ -18,6 +18,7 @@ unequip = function () {
 	if (item.type == itemTypes.device) invKey = "devices";
 	if (item.type == itemTypes.headgear) invKey = "headgear";
 	if (item.type == itemTypes.tie) invKey = "ties";
+	if (item.type == itemTypes.coat) invKey = "coats";
 	
 	var arr = stashController.inventory[$ invKey];
 	

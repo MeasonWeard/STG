@@ -184,6 +184,7 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 
 	var loot = noone;
 	var type = choose("gun","melee","device","tie","headgear");
+	if (scr_random_chance(7)) type = "coat";
 	
 	//only for testing
 	//type = "device";
@@ -231,6 +232,12 @@ function scr_loot_generateGenericLoot(maxLevel, rarity) {
 		
 	}
 	
+	if (type == "coat") {
+	
+		loot = scr_genCoats_generic(level, rarity);
+		
+	}
+	
 	return loot;
 	
 }
@@ -239,6 +246,7 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	
 	var loot = noone;
 	var type = choose("gun","melee","device","tie","headgear");
+	if (scr_random_chance(7)) type = "coat";
 	
 	//only for testing
 	//type = "device";
@@ -300,6 +308,12 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 		
 	}
 	
+	if (type == "coat") {
+	
+		loot = scr_genCoats_generic(level, rarity);
+		
+	}
+	
 	return loot;
 	
 }
@@ -316,6 +330,7 @@ function scr_loot_saveToStash(loot) {
 			devices: [],
 			ties: [],
 			headgear: [],
+			coats: [],
 			guns: [],
 			melee: []
 		}
@@ -337,6 +352,7 @@ function scr_loot_saveToStash(loot) {
 		if (is_instanceof(item, deviceInst)) array_push(inventory.devices, item);
 		if (is_instanceof(item, tieInst)) array_push(inventory.ties, item);
 		if (is_instanceof(item, headgearInst)) array_push(inventory.headgear, item);
+		if (is_instanceof(item, coatInst)) array_push(inventory.coats, item);
 		
 	}
 	

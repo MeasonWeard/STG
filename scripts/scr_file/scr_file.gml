@@ -132,7 +132,8 @@ function scr_file_createBlankSave() {
 				device1: undefined,
 				device2: undefined,
 				tie: undefined,
-				headgear: undefined
+				headgear: undefined,
+				coat: undefined
 	
 			},
 			
@@ -154,6 +155,7 @@ function scr_file_createBlankSave() {
 			devices: [],
 			ties: [],
 			headgear: [],
+			coats: [],
 			guns: [],
 			melee: []
 		},

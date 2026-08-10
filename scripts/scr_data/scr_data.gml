@@ -389,6 +389,10 @@ function scr_data_loadItemData(data) {
 		case itemTypes.headgear:
 			item = new headgearInst(lvl, rar);
 			break;
+			
+		case itemTypes.coat:
+			item = new coatInst(lvl, rar);
+			break;
 
 		default:
 			return undefined;
@@ -429,12 +433,14 @@ function scr_data_loadInventory() {
 	var devices = scr_data_loadItemDataArray(invData.devices);
 	var headgear = scr_data_loadItemDataArray(invData.headgear);
 	var ties = scr_data_loadItemDataArray(invData.ties);
+	var coats = scr_data_loadItemDataArray(invData.coats);
 	
 	return {
 		guns: guns,
 		melee: melee,
 		devices: devices,
 		headgear: headgear,
+		coats: coats,
 		ties: ties
 	}
 	
