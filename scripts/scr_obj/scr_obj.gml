@@ -210,6 +210,22 @@ function scr_obj_generateSeed(obj) {
 	
 }
 
+function scr_obj_randomSubimage(obj) {
+
+	if (!instance_exists(obj)) exit;
+
+	obj.image_speed = 0;
+
+	var seed = scr_obj_generateSeed(obj);
+	
+	random_set_seed(seed);
+	
+	obj.image_index = irandom_range(0, obj.image_number - 1);
+	
+	randomise();
+	
+}
+
 function scr_obj_cullByDirection(dir, inverse = false) {
 
 	var valid = false;

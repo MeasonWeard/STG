@@ -37,9 +37,9 @@ sprites = {
 
 deathFunc = function() {
 	
-	var ex = scr_effects_explosion(x, y, 8);
+	var ex = scr_effects_explosion(x, y, 8 + (level - 1) * 0.1);
 	ex.damage = new damageProfile();
-	ex.damage.kin = 90;
+	ex.damage.kin = 90 + (level - 1) * 5;
 	ex.faction = faction;
 	
 }
@@ -55,10 +55,6 @@ scr_ai_setup();
 ghost = instance_create_layer(x, y, "Instances", obj_ghost);
 ghost.owner = self;
 
-
-//if (!variable_instance_exists(self, "targetMinDist")) targetMinDist = 180;
-//if (!variable_instance_exists(self, "targetMaxDist")) targetMaxDist = 360;
-//if (!variable_instance_exists(self, "targetReaquireDist")) targetReaquireDist = 450;
 targetMinDist = 200;
 targetMaxDist = 420;
 targetReaquireDist = 600;

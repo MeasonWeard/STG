@@ -276,11 +276,27 @@ stages = {
 	
 	},
 	
-	cinema: {
+	cinema1: {
 	
-		room: stage_commCinema,
+		room: stage_commCinema1,
 		type: stageTypes.special,
 		mapCol: c_red
+	
+	},
+	
+	cinema2: {
+	
+		room: stage_commCinema2,
+		type: stageTypes.special,
+		mapCol: c_red
+	
+	},
+	
+	market1: {
+	
+		room: stage_commMarket1,
+		type: stageTypes.special,
+		mapCol: c_green
 	
 	},
 
