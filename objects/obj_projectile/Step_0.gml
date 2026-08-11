@@ -172,6 +172,26 @@ if (damageDestructibles) {
 nearby = scr_hash_getNearby(global.stageController.envHash, x, y);
 len = array_length(nearby);
 
+//
+if (checkObstruction) {
+	
+	checkObstruction = false;
+		
+	var result = scr_projectiles_checkObstruction(source, nearby);
+
+	if (result.hit) {
+
+		var env = result.env;
+		var safeX = result.xx;
+		var safeY = result.yy;
+		
+		scr_projectiles_hitEnv(self, env, safeX, safeY);
+		exit;
+
+	}
+	
+}
+
 for (var i = 0; i < len; i++) {
 	
 	var env = nearby[i];
@@ -190,16 +210,16 @@ for (var i = 0; i < len; i++) {
 	var dot = moveX * toObjX + moveY * toObjY;
 
 	if (dot < 0) continue;
-
+	
+	//skip if higher
+	if (height > env.height) {
+		keepDepth = true;
+		depth = env.depth - 1;
+		continue;
+	}
+	
 	//detect collision
 	if (point_in_rectangle(x, y, env.colLeft, env.colTop, env.colRight, env.colBottom)) {
-		
-		//skip if higher
-		if (height > env.height) {
-			keepDepth = true;
-			depth = env.depth - 1;
-			continue;
-		}
 		
 		var safeX = x;
 		var safeY = y;
@@ -221,37 +241,10 @@ for (var i = 0; i < len; i++) {
 		
 		}
 	
-		var profile = env.bulletHitSounds;
-		var snd = scr_audio_randomSoundFromProfile(profile);
-		if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
-
-		active = false;
-	
-		var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
-		eff.sprite_index = destroyEffect;
-		eff.image_angle = image_angle;
+		scr_projectiles_hitEnv(self, env, safeX, safeY);
 		
-		var hitTop = (dir > 180 and dir < 360 and y <= env.colTop + spd);
-		
-		if (hitTop) {
-			eff.depth = env.depth + 1;
-		} else {
-			eff.depth = env.depth - 1;
-		}
-
-		for (var j = 0; j < funcsLen; j ++) {
-			var func = collisionFuncs[j];
-			if (is_callable(func)) func(self);
-		}
-	
-		if (is_callable(env.bulletHitFunc)) env.bulletHitFunc(self, env);
-		
-		if (env.smashable) {
-			env.smashed = true;	
-		}
-	
 		exit;
-		
+	
 	}
 	
 }

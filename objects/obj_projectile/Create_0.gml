@@ -25,4 +25,6 @@ collisionFuncs = [];
 
 damageDestructibles = false;
 
+checkObstruction = false;
+
 oa = 100;
