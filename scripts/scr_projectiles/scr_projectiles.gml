@@ -216,8 +216,8 @@ function scr_projectiles_checkObstruction(source, nearby) {
 		return { hit: false };
 	}
 
-	var startX = source.centreX;
-	var startY = source.centreY;
+	var startX = source.x;
+	var startY = source.y;
 
 	var endX = source.gunX;
 	var endY = source.gunY;

@@ -1,11 +1,11 @@
 {
   "$GMSprite":"v2",
-  "%Name":"spr_groceryShelf",
+  "%Name":"spr_groceryFridge",
   "bboxMode":2,
   "bbox_bottom":127,
   "bbox_left":0,
   "bbox_right":191,
-  "bbox_top":82,
+  "bbox_top":61,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
@@ -13,18 +13,18 @@
   "For3D":false,
   "frames":[
     {"$GMSpriteFrame":"v1","%Name":"5ea9a029-7f70-4bd2-a1a7-0e19fc3cd3e9","name":"5ea9a029-7f70-4bd2-a1a7-0e19fc3cd3e9","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"e21140d3-fb0e-4db5-9b2a-66215782cdfd","name":"e21140d3-fb0e-4db5-9b2a-66215782cdfd","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"2bda3ccc-ce0c-4032-b8f3-94f582eac098","name":"2bda3ccc-ce0c-4032-b8f3-94f582eac098","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"d698a76e-3205-48db-adb9-51247c6201b6","name":"d698a76e-3205-48db-adb9-51247c6201b6","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":128,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"8fd93f01-dbb6-4997-95e4-6bbd050770d7","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"8fd93f01-dbb6-4997-95e4-6bbd050770d7","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
-    {"$GMImageLayer":"","%Name":"7839d430-be75-4fa5-99e0-0639314e2173","blendMode":0,"displayName":"Layer 2","isLocked":true,"name":"7839d430-be75-4fa5-99e0-0639314e2173","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"8fd93f01-dbb6-4997-95e4-6bbd050770d7","blendMode":0,"displayName":"Layer 1","isLocked":true,"name":"8fd93f01-dbb6-4997-95e4-6bbd050770d7","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"c7984554-85c8-488e-9bee-204dc26295a3","blendMode":0,"displayName":"Layer 3","isLocked":false,"name":"c7984554-85c8-488e-9bee-204dc26295a3","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"1fe11f52-bb20-444b-873a-b67fab19fa93","blendMode":0,"displayName":"Layer 2","isLocked":true,"name":"1fe11f52-bb20-444b-873a-b67fab19fa93","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_groceryShelf",
+  "name":"spr_groceryFridge",
   "nineSlice":null,
   "origin":7,
   "parent":{
@@ -36,7 +36,7 @@
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"v1",
-    "%Name":"spr_groceryShelf",
+    "%Name":"spr_groceryFridge",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -52,7 +52,7 @@
     },
     "eventStubScript":null,
     "eventToFunction":{},
-    "length":3.0,
+    "length":2.0,
     "lockOrigin":false,
     "moments":{
       "$KeyframeStore<MomentsEventKeyframe>":"",
@@ -60,7 +60,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_groceryShelf",
+    "name":"spr_groceryFridge",
     "playback":1,
     "playbackSpeed":30.0,
     "playbackSpeedType":0,
@@ -72,14 +72,11 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"5ea9a029-7f70-4bd2-a1a7-0e19fc3cd3e9","path":"sprites/spr_groceryShelf/spr_groceryShelf.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"5ea9a029-7f70-4bd2-a1a7-0e19fc3cd3e9","path":"sprites/spr_groceryFridge/spr_groceryFridge.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"8aa438f3-c75d-4e27-b6d5-17a444d7bff9","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"e21140d3-fb0e-4db5-9b2a-66215782cdfd","path":"sprites/spr_groceryShelf/spr_groceryShelf.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"8631d04e-5dff-4b17-8af4-120656222cfb","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"2bda3ccc-ce0c-4032-b8f3-94f582eac098","path":"sprites/spr_groceryShelf/spr_groceryShelf.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"6a3e17c4-2af3-4b97-a0aa-2b68b0802c0c","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d698a76e-3205-48db-adb9-51247c6201b6","path":"sprites/spr_groceryFridge/spr_groceryFridge.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"df6960e4-2f0b-45db-a222-64d87621b49d","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
