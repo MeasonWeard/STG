@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_groceryFridge",
-    "path":"sprites/spr_groceryFridge/spr_groceryFridge.yy",
+    "name":"spr_groceryFridge1",
+    "path":"sprites/spr_groceryFridge1/spr_groceryFridge1.yy",
   },
   "spriteMaskId":null,
   "visible":true,

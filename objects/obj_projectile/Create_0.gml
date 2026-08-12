@@ -29,6 +29,9 @@ checkObstruction = false;
 
 oa = 100;
 
+originX = 0;
+originY = 0;
+
 hashCellX = undefined;
 hashCellY = undefined;
 nearbyEnv =	undefined;

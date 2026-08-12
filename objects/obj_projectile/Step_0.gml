@@ -40,7 +40,12 @@ for (var k = 0; k < 9; k++) {
 		if (sourceExists and char.id == source.id) continue;
 		if (char.faction == faction) continue;
 	
-		if (point_in_rectangle(x, y, char.colLeft, char.colTop, char.colRight, char.colBottom)) {
+		var col = point_in_rectangle(nextX, nextY, char.colLeft, char.colTop, char.colRight, char.colBottom);
+	
+		//var col = scr_physics_lineIntersectsRectangle(x, y, nextX, nextY, char.colLeft,
+		//	char.colTop, char.colRight, char.colBottom);
+	
+		if (col) {
 		
 			var safeX = x;
 			var safeY = y;
@@ -128,7 +133,12 @@ if (damageDestructibles) {
 	
 		if (!instance_exists(dest)) continue;
 	
-		if (point_in_rectangle(x, y, dest.colLeft, dest.colTop, dest.colRight, dest.colBottom)) {
+		var col = point_in_rectangle(nextX, nextY, dest.colLeft, dest.colTop, dest.colRight, dest.colBottom);
+	
+		//var col = scr_physics_lineIntersectsRectangle(x, y, nextX, nextY, dest.colLeft,
+		//dest.colTop, dest.colRight, dest.colBottom);
+	
+		if (col) {
 		
 			var safeX = x;
 			var safeY = y;
@@ -191,15 +201,14 @@ if (is_undefined(nearbyEnv)) {
 }
 
 var nearby = nearbyEnv;
-
 var len = array_length(nearby);
 
-//
-if (checkObstruction) {
+//don't shoot through env
+if (checkObstruction and sourceExists) {
 	
 	checkObstruction = false;
 		
-	var result = scr_projectiles_checkObstruction(source, nearby);
+	var result = scr_projectiles_checkObstruction(source, nearby, dir);
 
 	if (result.hit) {
 
@@ -222,17 +231,6 @@ for (var i = 0; i < len; i++) {
 	if (instance_exists(source) and env.id == source.id) continue;
 	if (env.onGround) continue;
 	
-	//skip if behind
-	var centreX = (env.colLeft + env.colRight) * 0.5;
-	var centreY = (env.colTop + env.colBottom) * 0.5;
-
-	var toObjX = centreX - x;
-	var toObjY = centreY - y;
-
-	var dot = moveX * toObjX + moveY * toObjY;
-
-	if (dot < 0) continue;
-	
 	//skip if higher
 	if (height > env.height) {
 		keepDepth = true;
@@ -241,7 +239,13 @@ for (var i = 0; i < len; i++) {
 	}
 	
 	//detect collision
-	if (point_in_rectangle(x, y, env.colLeft, env.colTop, env.colRight, env.colBottom)) {
+	
+	var col = point_in_rectangle(nextX, nextY, env.colLeft, env.colTop, env.colRight, env.colBottom);
+	
+	//var col = scr_physics_lineIntersectsRectangle(x, y, nextX, nextY, env.colLeft, env.colTop,
+	//	env.colRight, env.colBottom);
+	
+	if (col) {
 		
 		var safeX = x;
 		var safeY = y;

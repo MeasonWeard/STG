@@ -226,6 +226,23 @@ function scr_obj_randomSubimage(obj) {
 	
 }
 
+function scr_obj_randomSprite(obj, sprites) {
+
+	if (!instance_exists(obj)) exit;
+	if (!is_array(sprites) or array_length(sprites) < 1) exit;
+	
+	var seed = scr_obj_generateSeed(obj);
+	
+	random_set_seed(seed);
+	
+	var spr = scr_randomElement(sprites);
+	
+	obj.sprite_index = spr;
+	
+	randomise();
+	
+}
+
 function scr_obj_cullByDirection(dir, inverse = false) {
 
 	var valid = false;

@@ -34,6 +34,9 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 	proj.source = source;
 	proj.rangeLeft = range;
 	
+	proj.originX = source.x;
+	proj.originY = source.y;
+	
 	proj.height = irandom_range(1, 100);
 	//proj.ignoreEnvTick = 1;
 	
@@ -234,7 +237,7 @@ function scr_projectiles_shoot(char) {
 	
 }
 
-function scr_projectiles_checkObstruction(source, nearby) {
+function scr_projectiles_checkObstruction(source, nearby, projectileDir) {
 	
 	if (!instance_exists(source)) {
 		return { hit: false };
@@ -246,7 +249,6 @@ function scr_projectiles_checkObstruction(source, nearby) {
 	var endX = source.gunX;
 	var endY = source.gunY;
 
-	var dir = point_direction(startX, startY, endX, endY);
 	var dist = point_distance(startX, startY, endX, endY);
 
 	if (dist <= 0) {
@@ -255,8 +257,15 @@ function scr_projectiles_checkObstruction(source, nearby) {
 
 	var len = array_length(nearby);
 
-	var moveX = lengthdir_x(1, dir);
-	var moveY = lengthdir_y(1, dir);
+	//actual direction projectile is travelling
+	var trajX = lengthdir_x(1, projectileDir);
+	var trajY = lengthdir_y(1, projectileDir);
+
+	//direction from player to gun origin
+	var gunDir = point_direction(startX, startY, endX, endY);
+
+	var moveX = lengthdir_x(1, gunDir);
+	var moveY = lengthdir_y(1, gunDir);
 
 	var safeX = startX;
 	var safeY = startY;
@@ -273,13 +282,18 @@ function scr_projectiles_checkObstruction(source, nearby) {
 			if (!instance_exists(env)) continue;
 			if (env.onGround) continue;
 			if (env.id == source.id) continue;
+
+			//ignore objects behind projectile trajectory
+			var envX = (env.colLeft + env.colRight) * 0.5;
+			var envY = (env.colTop + env.colBottom) * 0.5;
+
+			var dot = trajX * (envX - startX)
+					+ trajY * (envY - startY);
+
+			if (dot < 0) continue;
 		
 			//skip if higher
-			if (height > env.height) {
-				//keepDepth = true;
-				//depth = env.depth - 1;
-				continue;
-			}
+			if (height > env.height) continue;
 
 			if (point_in_rectangle(
 				xx, yy,
@@ -308,6 +322,79 @@ function scr_projectiles_checkObstruction(source, nearby) {
 	return {
 		hit: false
 	};
+	
+	//if (!instance_exists(source)) {
+	//	return { hit: false };
+	//}
+
+	//var startX = source.x;
+	//var startY = source.y;
+
+	//var endX = source.gunX;
+	//var endY = source.gunY;
+
+	//var dir = point_direction(startX, startY, endX, endY);
+	//var dist = point_distance(startX, startY, endX, endY);
+
+	//if (dist <= 0) {
+	//	return { hit: false };
+	//}
+
+	//var len = array_length(nearby);
+
+	//var moveX = lengthdir_x(1, dir);
+	//var moveY = lengthdir_y(1, dir);
+
+	//var safeX = startX;
+	//var safeY = startY;
+	
+	//for (var d = 1; d <= dist; d++) {
+
+	//	var xx = startX + moveX * d;
+	//	var yy = startY + moveY * d;
+
+	//	for (var i = 0; i < len; i++) {
+
+	//		var env = nearby[i];
+
+	//		if (!instance_exists(env)) continue;
+	//		if (env.onGround) continue;
+	//		if (env.id == source.id) continue;
+		
+	//		//skip if higher
+	//		if (height > env.height) {
+	//			//keepDepth = true;
+	//			//depth = env.depth - 1;
+	//			continue;
+	//		}
+
+	//		if (point_in_rectangle(
+	//			xx, yy,
+	//			env.colLeft,
+	//			env.colTop,
+	//			env.colRight,
+	//			env.colBottom
+	//		)) {
+
+	//			return {
+	//				hit: true,
+	//				env: env,
+	//				xx: safeX,
+	//				yy: safeY
+	//			};
+
+	//		}
+
+	//	}
+
+	//	safeX = xx;
+	//	safeY = yy;
+
+	//}
+
+	//return {
+	//	hit: false
+	//};
 	
 }
 
