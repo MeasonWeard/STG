@@ -1,4 +1,4 @@
-function scr_movement(blockedByEnv) {
+function scr_movement(blockedByEnv, liveEnvLookup = false) {
 
 	var moveX = xspd;
 	var moveY = yspd;
@@ -21,7 +21,8 @@ function scr_movement(blockedByEnv) {
 	//hash
 	if (blockedByEnv) {
 		
-		var nearby = scr_hash_getNearby(global.stageController.envHash, x, y);
+		var nearby = liveEnvLookup ? scr_hash_getNearby(global.stageController.envHash, x, y) : nearbyEnv;
+		
 		var len = array_length(nearby);
 		
 		//check X

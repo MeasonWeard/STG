@@ -12,6 +12,8 @@ hashByMaskCentre = false;
 hashCellX = undefined;
 hashCellY = undefined;
 
+nearbyEnv = [];
+
 xspd = 0;
 yspd = 0;
 

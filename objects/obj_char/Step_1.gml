@@ -32,6 +32,12 @@ if (setup) {
 
 	scr_hash_add(global.stageController.charHash, id, hashCellX, hashCellY);
 	
+	nearbyEnv =	scr_hash_getNearbyCell(
+		global.stageController.envHash,
+		hashCellX,
+		hashCellY
+	);
+	
 	avoidDist = ((sprite_width + sprite_height) * 0.5) * 1.2;
 	
 }

@@ -28,6 +28,8 @@ moveToSide = undefined;
 
 setMaxCharges = true;
 
+pullItemTick = 0;
+
 sprites = {
 
 	left: spr_player_1,

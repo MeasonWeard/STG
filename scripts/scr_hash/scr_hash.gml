@@ -227,3 +227,27 @@ function scr_hash_getCellAt(xx, yy) {
 	}
 	
 }
+
+function scr_hash_getNearbyCell(hash, cellX, cellY) {
+
+	var results = [];
+
+	for (var cx = cellX - 1; cx <= cellX + 1; cx++) {
+		for (var cy = cellY - 1; cy <= cellY + 1; cy++) {
+		
+			var key = scr_hash_getKey(cx, cy);
+		
+			if (!variable_struct_exists(hash, key)) continue;
+			
+			var arr = hash[$ key];
+			var len = array_length(arr);
+		
+			for (var i = 0; i < len; i++) {
+				array_push(results, arr[i]);
+			}
+		}
+	}
+	
+	return results;
+	
+}

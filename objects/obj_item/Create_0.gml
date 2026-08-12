@@ -1,3 +1,5 @@
+player = global.player;
+
 key = "item";
 type = "item";
 val = 0;

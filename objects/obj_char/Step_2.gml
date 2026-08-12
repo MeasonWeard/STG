@@ -53,32 +53,6 @@ if (is_instanceof(equippedWeapon, meleeInst)) {
 	
 }
 
-//recharge melee weapons even when in pocket
-//var weaponsLen = array_length(weapons);
-
-//for (var i = 0; i < weaponsLen; i ++) {
-	
-//	var slot = weapons[i];
-//	var melee = slot.weapon;
-	
-//	if (is_instanceof(melee, meleeInst)) {
-
-//		show_debug_message("MELEE");
-
-//		melee.attackTick --;
-	
-//		if (melee.attackTick < 0) melee.attackTick = 0;
-//		if (melee.recharge > 0) melee.recharge --;
-	
-//		if (melee.recharge <= 0) {
-//			melee.recharge = 0;
-//			melee.charges = melee.maxCharges;
-//		}
-	
-//	}
-
-//}
-
 meleeCooldown = max(0, meleeCooldown - 1);
 
 //skills
@@ -103,8 +77,30 @@ if (movedThisStep) {
 		hashCellY = newCellY;
 	
 		scr_hash_add(global.stageController.charHash, id, hashCellX, hashCellY);
+
+		nearbyEnv = scr_hash_getNearbyCell(
+			global.stageController.envHash,
+			hashCellX,
+			hashCellY
+		);
 	
 	}
+
+	//var cell = scr_hash_getCellAt(x, y);
+
+	//var newCellX = cell.xx;
+	//var newCellY = cell.yy;
+
+	//if (newCellX != hashCellX or newCellY != hashCellY) {
+	
+	//	scr_hash_remove(global.stageController.charHash, id, hashCellX, hashCellY);
+	
+	//	hashCellX = newCellX;
+	//	hashCellY = newCellY;
+	
+	//	scr_hash_add(global.stageController.charHash, id, hashCellX, hashCellY);
+	
+	//}
 	
 }
 

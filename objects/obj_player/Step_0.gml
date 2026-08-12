@@ -112,40 +112,43 @@ if (instance_number(obj_statsPlate) == 0 and (keyboard_check_pressed(vk_tab) or 
 }
 
 //items
-var pullRange = sc.stageInProgress ? ITEM_PULL_RANGE : 5000;
-var pullStrength = sc.stageInProgress ? ITEM_PULL_STRENGTH : ITEM_PULL_STRENGTH * 2;
-var hashRange = sc.stageInProgress ? 2 : 30;
+if (pullItemTick > 0) {
 
-var nearbyItems = scr_hash_getNearbyRange(global.stageController.itemHash, x, y, hashRange);
-var len = array_length(nearbyItems);
-
-for (var i = 0 ; i < len; i ++) {
-
-	var item = nearbyItems[i];
+	pullItemTick --;
 	
-	if (!instance_exists(item)) continue;
+} else {
 	
-	var canCollect = (!is_callable(item.collectRequirements) or item.collectRequirements(self)) and item.collectDelay < 1; 
-		
-	var dist = point_distance(x, y, item.x, item.y);
+	pullItemTick = 8;
 	
-	if (canCollect and dist <= pullRange) {
-		
-	    var t = 1 - dist / pullRange;
+	var pullRange = sc.stageInProgress ? ITEM_PULL_RANGE : 5000;
+	var pullStrength = sc.stageInProgress ? ITEM_PULL_STRENGTH : ITEM_PULL_STRENGTH * 2;
+	var hashRange = sc.stageInProgress ? 1 : 30;
 
-	    item.pullX = x;
-	    item.pullY = y;
-		item.pullSpd = max(1, (pullStrength * sqr(t)) * 2);
+	var nearbyItems = scr_hash_getNearbyRange(global.stageController.itemHash, x, y, hashRange);
+	var len = array_length(nearbyItems);
+
+	for (var i = 0 ; i < len; i ++) {
+
+		var item = nearbyItems[i];
+	
+		if (!instance_exists(item)) continue;
+	
+		var canCollect = (!is_callable(item.collectRequirements) or item.collectRequirements(self)) and item.collectDelay < 1; 
 		
+		var dist = point_distance(x, y, item.x, item.y);
+	
+		if (canCollect and dist <= pullRange) {
+		
+		    var t = 1 - dist / pullRange;
+
+		    item.pullX = x;
+		    item.pullY = y;
+			item.pullSpd = max(1, (pullStrength * sqr(t)) * 2);
+		
+		}
+	
 	}
-	
-	
-	if (dist <= COLLECTION_RANGE) {
-		
-		scr_items_collect(self, item);
-		
-	}
-	
+
 }
 
 //alternate use
