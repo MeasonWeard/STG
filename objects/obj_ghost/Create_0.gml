@@ -17,5 +17,11 @@ movTop = 0;
 var cell = scr_hash_getCellAt(x, y);
 hashCellX = cell.xx;
 hashCellY = cell.yy;
+testHashCellX = undefined;
+testHashCellY = undefined;
 
 scr_hash_add(global.stageController.ghostHash, id, hashCellX, hashCellY);
+
+ghostHashKeys = array_create(9);
+testHashKeys  = array_create(9);
+scr_hash_updateHashKeys(ghostHashKeys, hashCellX, hashCellY);

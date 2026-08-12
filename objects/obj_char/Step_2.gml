@@ -83,7 +83,7 @@ if (movedThisStep) {
 			hashCellX,
 			hashCellY
 		);
-	
+		
 	}
 	
 }

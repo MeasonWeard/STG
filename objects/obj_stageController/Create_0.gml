@@ -98,10 +98,16 @@ timeSlicing = {
 		steps: 4
 	},
 	
-	ghostCheck: {
+	ghostDistanceCheck: {
 		nextIndex: 0,
 		turn: 0,
-		steps: 16
+		steps: 64
+	},
+	
+	ghostOverlapCheck: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 32
 	},
 	
 	activation: {

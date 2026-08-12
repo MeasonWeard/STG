@@ -1,4 +1,3 @@
-
 if (checkIfCleared and !hub) {
 
 	checkIfCleared = false;

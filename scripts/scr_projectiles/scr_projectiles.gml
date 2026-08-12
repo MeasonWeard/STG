@@ -61,7 +61,7 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 			newCellY
 		);
 		
-		scr_hash_updateCharHashKeys(proj);
+		scr_hash_updateHashKeys(proj.charHashKeys, newCellX, newCellY);
 	
 	}
 

@@ -68,7 +68,7 @@ function scr_ai_moveTowardsPointAvoid(targetX, targetY, moveSpd, avoidDist) {
 		}
 		
 		// avoid environment
-		nearby = scr_hash_getNearby(global.stageController.envHash, x, y);
+		nearby = nearbyEnv;//scr_hash_getNearby(global.stageController.envHash, x, y);
 		len = array_length(nearby);
 
 		for (var i = 0; i < len; i++) {
@@ -211,38 +211,43 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 
 function scr_ai_ghostOverlap(char) {
 	
-	//validate
 	if (!instance_exists(char)) return false;
 	if (!instance_exists(char.ghost)) return false;
 	
-	var col = false;	
-	
 	var sourceGhost = char.ghost;
-	var xx = sourceGhost.x;
-	var yy = sourceGhost.y;
-
-	//hash
-	//TO DO: get nearby range = 2?
-	var nearby = scr_hash_getNearby(global.stageController.ghostHash, xx, yy);
-	var len = array_length(nearby);
+	var hash = global.stageController.ghostHash;
 	
-	for (var i = 0; i < len; i ++) {
-	
-		var targetGhost = nearby[i];
+	for (var k = 0; k < 9; k++) {
 		
-		if (!instance_exists(targetGhost)) continue;
-		if (targetGhost.id == sourceGhost.id) continue;
+		var key = sourceGhost.ghostHashKeys[k];
 		
-		col = scr_obj_movementCollision(sourceGhost, targetGhost, true);
-		if (col) break;
-	
+		if (!variable_struct_exists(hash, key)) continue;
+		
+		var nearby = hash[$ key];
+		var len = array_length(nearby);
+		
+		for (var i = 0; i < len; i++) {
+		
+			var targetGhost = nearby[i];
+			
+			if (!instance_exists(targetGhost)) continue;
+			if (targetGhost.id == sourceGhost.id) continue;
+			
+			if (scr_obj_movementCollision(sourceGhost, targetGhost, true)) {
+				return true;
+			}
+		
+		}
 	}
 
-	return col;
+	return false;
 	
 }
 
 function scr_ai_ghostOverlapAt(char, xx, yy) {
+	
+	if (!instance_exists(char)) return false;
+	if (!instance_exists(char.ghost)) return false;
 	
 	var g = char.ghost;
 	
@@ -254,55 +259,123 @@ function scr_ai_ghostOverlapAt(char, xx, yy) {
 	var top    = g.colTop    + offsetY;
 	var bottom = g.colBottom + offsetY;
 	
-	//TO DO: get nearby range = 2?
-	var nearby = scr_hash_getNearby(global.stageController.ghostHash, xx, yy);
-	var len = array_length(nearby);
+	var cellX = floor(xx / HASH_CELL_SIZE);
+	var cellY = floor(yy / HASH_CELL_SIZE);
 	
-	for (var i = 0; i < len; i++) {
+	var hash = global.stageController.ghostHash;
+	var keys;
+	
+	// Candidate point is in the ghost's current hash cell.
+	if (cellX == g.hashCellX and cellY == g.hashCellY) {
 		
-		var otherGhost = nearby[i];
+		keys = g.ghostHashKeys;
 		
-		if (!instance_exists(otherGhost) or otherGhost.id == g.id) {
-			continue;
+	} else {
+		
+		// Only rebuild test keys if this candidate is in a new cell
+		if (cellX != g.testHashCellX or cellY != g.testHashCellY) {
+		
+			g.testHashCellX = cellX;
+			g.testHashCellY = cellY;
+		
+			scr_hash_updateHashKeys(
+				g.testHashKeys,
+				cellX,
+				cellY
+			);
+		
 		}
+	
+		keys = g.testHashKeys;
 		
-		if (
-			right > otherGhost.colLeft
-			and left < otherGhost.colRight
-			and bottom > otherGhost.colTop
-			and top < otherGhost.colBottom
-		) {
-			return true;
+		//keys = array_create(9);
+		//scr_hash_updateHashKeys(keys, cellX, cellY);
+		
+	}
+	
+	for (var k = 0; k < 9; k++) {
+		
+		var key = keys[k];
+		
+		if (!variable_struct_exists(hash, key)) continue;
+		
+		var nearby = hash[$ key];
+		var len = array_length(nearby);
+		
+		for (var i = 0; i < len; i++) {
+			
+			var otherGhost = nearby[i];
+			
+			if (!instance_exists(otherGhost)) continue;
+			if (otherGhost.id == g.id) continue;
+			
+			if (
+				right > otherGhost.colLeft
+				and left < otherGhost.colRight
+				and bottom > otherGhost.colTop
+				and top < otherGhost.colBottom
+			) {
+				return true;
+			}
+			
 		}
 	}
 	
 	return false;
+	
 }
 
 function scr_ai_moveGhost(inst, xx, yy) {
 
-	//validate
-	if(!instance_exists(inst)) exit;
-	if(!instance_exists(inst.ghost)) exit;
+	if (!instance_exists(inst)) exit;
+	if (!instance_exists(inst.ghost)) exit;
 	
 	var thisGhost = inst.ghost;
+
+	var oldCellX = thisGhost.hashCellX;
+	var oldCellY = thisGhost.hashCellY;
+
+	var newCellX = floor(xx / HASH_CELL_SIZE);
+	var newCellY = floor(yy / HASH_CELL_SIZE);
+
+	var changedCell = (
+		newCellX != oldCellX
+		or newCellY != oldCellY
+	);
+
+	if (changedCell) {
+		scr_hash_remove(
+			global.stageController.ghostHash,
+			thisGhost.id,
+			oldCellX,
+			oldCellY
+		);
+	}
 	
-	//hash remove
-	scr_hash_remove(global.stageController.ghostHash, thisGhost.id, thisGhost.hashCellX, thisGhost.hashCellY);
-	
-	//update position
 	thisGhost.x = xx;
 	thisGhost.y = yy;
 	
 	scr_movement_updateMovementHitBox(thisGhost);
 	scr_movement_updateCollisionHitBox(thisGhost);
-	
-	//has add
-	var cell = scr_hash_getCellAt(xx, yy);
-	thisGhost.hashCellX = cell.xx;
-	thisGhost.hashCellY = cell.yy;
 
-	scr_hash_add(global.stageController.ghostHash, thisGhost.id, thisGhost.hashCellX, thisGhost.hashCellY);
+	if (changedCell) {
+
+		thisGhost.hashCellX = newCellX;
+		thisGhost.hashCellY = newCellY;
+
+		scr_hash_add(
+			global.stageController.ghostHash,
+			thisGhost.id,
+			newCellX,
+			newCellY
+		);
+
+		scr_hash_updateHashKeys(
+			thisGhost.ghostHashKeys,
+			newCellX,
+			newCellY
+		);
+	}
 	
 }
 
@@ -472,28 +545,64 @@ function scr_ai_standardAIBehaviour() {
 		);
 
 	}
+	
+	var choosePoint = false;
 
-	// Periodically check if destination is still okay
-	if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
+	if (scr_timeSlicing_isMyTurn("ghostDistanceCheck", ghostDistanceIndex)) {
 
-		var col = scr_ai_ghostOverlap(self);
+		var dx = ghost.x - target.x;
+		var dy = ghost.y - target.y;
 
 		var tooFar =
-			point_distance(ghost.x, ghost.y, target.x, target.y)
-			> targetReaquireDist;
+			dx * dx + dy * dy
+			> targetReaquireDist * targetReaquireDist;
 
-		if (col or tooFar) {
+		if (tooFar) choosePoint = true;
 
-			scr_ai_choosePointAroundTarget(
-				target,
-				targetMinDist,
-				targetMaxDist,
-				true
-			);
-
-		}
 
 	}
+
+	if (!choosePoint and scr_timeSlicing_isMyTurn("ghostOverlapCheck", ghostOverlapIndex)) {
+
+		if (scr_ai_ghostOverlap(self)) choosePoint = true;
+
+
+	}
+
+	if (choosePoint) {
+
+		scr_ai_choosePointAroundTarget(
+			target,
+			targetMinDist,
+			targetMaxDist,
+			true
+		);
+		
+	}
+
+	//// Periodically check if destination is still okay
+	//if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
+
+	//	var tooFar = point_distance(ghost.x, ghost.y, target.x, target.y) > targetReaquireDist;
+
+	//	if (tooFar or scr_ai_ghostOverlap(self)) {
+
+	//		if (tooFar) {
+	//			global.aiReacquireTooFar++;	
+	//		} else {
+	//			global.aiReacquireOverlap++;
+	//		}
+
+	//		scr_ai_choosePointAroundTarget(
+	//			target,
+	//			targetMinDist,
+	//			targetMaxDist,
+	//			true
+	//		);
+
+	//	}
+
+	//}
 
 	scr_ai_moveTowardsPointAvoid(
 		ghost.x,
@@ -507,47 +616,6 @@ function scr_ai_standardAIBehaviour() {
 		target,
 		aimOnReload
 	);
-
-	////first destination pick
-	//if (firstGhostCheck) {
-		
-	//	firstGhostCheck = false;
-		
-	//	var pt = scr_ai_choosePointAroundTarget(target, targetMinDist, targetMaxDist, true);
-
-	//}
-
-	////periodically check if destination is still okay
-	//if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
-
-	//	var col = scr_ai_ghostOverlap(self);
-	//	var tooFar = false;
-	
-	//	if (instance_exists(target)) {
-	//		tooFar = point_distance(ghost.x, ghost.y, target.x, target.y) > targetReaquireDist;
-	//	}
-	
-	//	if (col or tooFar) {
-		
-	//		var pt = scr_ai_choosePointAroundTarget(target, targetMinDist, targetMaxDist, true);
-				
-	//	}
-
-	//}
-
-	////move toward ghost
-	//if (instance_exists(target)) {
-
-	//	scr_ai_moveTowardsPointAvoid(ghost.x, ghost.y, spd, avoidDist);
-	//	scr_ai_attackTarget(self, target, aimOnReload);
-	//	//scr_ai_shootAtTarget(self, target, aimOnReload);
-
-	//} else {
-
-	//	xspd = 0;
-	//	yspd = 0;
-
-	//}
 	
 }
 
@@ -675,7 +743,8 @@ function scr_ai_setup() {
 	if (!variable_instance_exists(self, "alertAllies")) alertAllies = true;
 	
 	// Assign time-slicing indices
-	ghostCheckIndex = scr_timeSlicing_assignTurnIndex("ghostCheck");
+	ghostDistanceIndex = scr_timeSlicing_assignTurnIndex("ghostDistanceCheck");
+	ghostOverlapIndex = scr_timeSlicing_assignTurnIndex("ghostOverlapCheck");
 	aimIndex = scr_timeSlicing_assignTurnIndex("aim");
 	detectionIndex = scr_timeSlicing_assignTurnIndex("detection");
 	avoidIndex = scr_timeSlicing_assignTurnIndex("avoid");

@@ -22,6 +22,6 @@ if (newCellX != hashCellX or newCellY != hashCellY) {
 		hashCellY
 	);
 	
-	scr_hash_updateCharHashKeys(self);
+	scr_hash_updateHashKeys(charHashKeys, hashCellX, hashCellY);
 	
 }

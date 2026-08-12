@@ -252,14 +252,14 @@ function scr_hash_getNearbyCell(hash, cellX, cellY) {
 	
 }
 
-function scr_hash_updateCharHashKeys(inst) {
+function scr_hash_updateHashKeys(keyArray, cellX, cellY) {
 
 	var index = 0;
 
-	for (var cx = inst.hashCellX - 1; cx <= inst.hashCellX + 1; cx++) {
-		for (var cy = inst.hashCellY - 1; cy <= inst.hashCellY + 1; cy++) {
+	for (var cx = cellX - 1; cx <= cellX + 1; cx++) {
+		for (var cy = cellY - 1; cy <= cellY + 1; cy++) {
 
-			inst.charHashKeys[index] = scr_hash_getKey(cx, cy);
+			keyArray[index] = scr_hash_getKey(cx, cy);
 			index++;
 
 		}
