@@ -38,6 +38,8 @@ if (setup) {
 		hashCellY
 	);
 	
+	scr_hash_updateHashKeys(charHashKeys, hashCellX, hashCellY);
+	
 	avoidDist = ((sprite_width + sprite_height) * 0.5) * 1.2;
 	
 }

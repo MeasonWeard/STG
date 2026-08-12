@@ -84,6 +84,8 @@ if (movedThisStep) {
 			hashCellY
 		);
 		
+		scr_hash_updateHashKeys(charHashKeys, hashCellX, hashCellY);
+		
 	}
 	
 }

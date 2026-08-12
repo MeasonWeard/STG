@@ -206,3 +206,5 @@ mostRecentDamage = undefined;
 //ai
 hurt = false;
 alert = false;
+
+charHashKeys = array_create(9);

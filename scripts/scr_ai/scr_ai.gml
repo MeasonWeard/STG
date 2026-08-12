@@ -43,33 +43,43 @@ function scr_ai_moveTowardsPointAvoid(targetX, targetY, moveSpd, avoidDist) {
 		avoidX = 0;
 		avoidY = 0;
 
-		//avoid chars
-		var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
-		var len = array_length(nearby);
+		// avoid chars
+		var hash = global.stageController.charHash;
 
-		for (var i = 0; i < len; i++) {
+		for (var k = 0; k < 9; k++) {
 
-			var otherInst = nearby[i];
+			var key = charHashKeys[k];
 
-			if (!instance_exists(otherInst)) continue;
-			if (otherInst.id == id) continue;
-			if (otherInst.faction != faction) continue;
+			if (!variable_struct_exists(hash, key)) continue;
 
-			var d = point_distance(x, y, otherInst.x, otherInst.y);
+			var nearby = hash[$ key];
+			var len = array_length(nearby);
 
-			if (d > 0 and d < avoidDist) {
+			for (var i = 0; i < len; i++) {
 
-				var away = point_direction(otherInst.x, otherInst.y, x, y);
-				var strength = (avoidDist - d) / avoidDist;
+				var otherInst = nearby[i];
 
-				avoidX += lengthdir_x(strength, away);
-				avoidY += lengthdir_y(strength, away);
+				if (!instance_exists(otherInst)) continue;
+				if (otherInst.id == id) continue;
+				if (otherInst.faction != faction) continue;
+
+				var d = point_distance(x, y, otherInst.x, otherInst.y);
+
+				if (d > 0 and d < avoidDist) {
+					
+					var away = point_direction(otherInst.x, otherInst.y, x, y);
+					var strength = (avoidDist - d) / avoidDist;
+
+					avoidX += lengthdir_x(strength, away);
+					avoidY += lengthdir_y(strength, away);
+					
+				}
 			}
 		}
 		
 		// avoid environment
-		nearby = nearbyEnv;//scr_hash_getNearby(global.stageController.envHash, x, y);
-		len = array_length(nearby);
+		var nearby = nearbyEnv;//scr_hash_getNearby(global.stageController.envHash, x, y);
+		var len = array_length(nearby);
 
 		for (var i = 0; i < len; i++) {
 
