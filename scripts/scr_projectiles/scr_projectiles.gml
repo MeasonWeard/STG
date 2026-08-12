@@ -34,8 +34,10 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 	proj.source = source;
 	proj.rangeLeft = range;
 	
-	proj.originX = source.x;
-	proj.originY = source.y;
+	//if (instance_exists(source)) {
+	//	proj.originX = source.x;
+	//	proj.originY = source.y;
+	//}
 	
 	proj.height = irandom_range(1, 100);
 	//proj.ignoreEnvTick = 1;
@@ -323,85 +325,14 @@ function scr_projectiles_checkObstruction(source, nearby, projectileDir) {
 		hit: false
 	};
 	
-	//if (!instance_exists(source)) {
-	//	return { hit: false };
-	//}
-
-	//var startX = source.x;
-	//var startY = source.y;
-
-	//var endX = source.gunX;
-	//var endY = source.gunY;
-
-	//var dir = point_direction(startX, startY, endX, endY);
-	//var dist = point_distance(startX, startY, endX, endY);
-
-	//if (dist <= 0) {
-	//	return { hit: false };
-	//}
-
-	//var len = array_length(nearby);
-
-	//var moveX = lengthdir_x(1, dir);
-	//var moveY = lengthdir_y(1, dir);
-
-	//var safeX = startX;
-	//var safeY = startY;
-	
-	//for (var d = 1; d <= dist; d++) {
-
-	//	var xx = startX + moveX * d;
-	//	var yy = startY + moveY * d;
-
-	//	for (var i = 0; i < len; i++) {
-
-	//		var env = nearby[i];
-
-	//		if (!instance_exists(env)) continue;
-	//		if (env.onGround) continue;
-	//		if (env.id == source.id) continue;
-		
-	//		//skip if higher
-	//		if (height > env.height) {
-	//			//keepDepth = true;
-	//			//depth = env.depth - 1;
-	//			continue;
-	//		}
-
-	//		if (point_in_rectangle(
-	//			xx, yy,
-	//			env.colLeft,
-	//			env.colTop,
-	//			env.colRight,
-	//			env.colBottom
-	//		)) {
-
-	//			return {
-	//				hit: true,
-	//				env: env,
-	//				xx: safeX,
-	//				yy: safeY
-	//			};
-
-	//		}
-
-	//	}
-
-	//	safeX = xx;
-	//	safeY = yy;
-
-	//}
-
-	//return {
-	//	hit: false
-	//};
-	
 }
 
 function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 
 	if (!instance_exists(proj)) return;
 	if (!instance_exists(env)) return;
+
+	proj.active = false;
 
 	var profile = env.bulletHitSounds;
 	var snd = scr_audio_randomSoundFromProfile(profile);
@@ -420,11 +351,37 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 		);
 	}
 
-	proj.active = false;
+	var effX = hitX;
+	var effY = hitY;
+
+	var movingDown = proj.yspd > 0;
+	var movingUp = proj.yspd < 0;
+
+	var hitTop = movingDown and hitY <= env.colTop + proj.spd;
+	var hitBottom = movingUp and hitY >= env.colBottom - proj.spd;
+
+	if (hitBottom) {
+
+		var topY = env.colMiddle - 4;
+		var bottomY = hitY - 4;
+		var targetY = random_range(topY, bottomY);
+		
+		var t = (targetY - hitY) / proj.yspd;
+
+		var targetX = hitX + proj.xspd * t;
+
+		effX = clamp(targetX, env.colLeft, env.colRight);
+		effY = targetY;
+		
+	}
+
+	//move projectile to final impact position
+	proj.x = effX;
+	proj.y = effY;
 
 	var eff = instance_create_layer(
-		hitX,
-		hitY,
+		effX,
+		effY,
 		"Instances",
 		obj_bulletEffect
 	);
@@ -432,17 +389,9 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 	eff.sprite_index = proj.destroyEffect;
 	eff.image_angle = proj.image_angle;
 
-	var hitTop = (
-		proj.dir > 180
-		and proj.dir < 360
-		and proj.y <= env.colTop + proj.spd
-	);
-
-	if (hitTop) {
-		eff.depth = env.depth + 1;
-	} else {
-		eff.depth = env.depth - 1;
-	}
+	eff.depth = hitTop
+		? env.depth + 1
+		: env.depth - 1;
 
 	var funcsLen = array_length(proj.collisionFuncs);
 
@@ -453,7 +402,6 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 		if (is_callable(func)) {
 			func(proj);
 		}
-
 	}
 
 	if (is_callable(env.bulletHitFunc)) {
@@ -463,6 +411,91 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 	if (env.smashable) {
 		env.smashed = true;
 	}
+
+	//if (!instance_exists(proj)) return;
+	//if (!instance_exists(env)) return;
+
+	//proj.active = false;
+
+	//var profile = env.bulletHitSounds;
+	//var snd = scr_audio_randomSoundFromProfile(profile);
+
+	//if (snd != undefined) {
+	//	audio_play_sound_at(
+	//		snd,
+	//		proj.x,
+	//		proj.y,
+	//		0,
+	//		MIN_FALLOFF_BULLETHIT,
+	//		MAX_FALLOFF_BULLETHIT,
+	//		FALLOFF_FACTOR_BULLETHIT,
+	//		false,
+	//		0
+	//	);
+	//}
+
+	//var effX = hitX;
+	//var effY = hitY;
+
+	//// hitting from below
+	//var hitBottom = (
+	//	proj.dir > 0
+	//	and proj.dir < 180
+	//	and hitY >= env.colBottom - proj.spd
+	//);
+
+	//if (hitBottom) {
+
+	//	effY = env.colMiddle;
+
+	//	var dy = effY - hitY;
+
+	//	if (proj.yspd != 0) {
+	//		effX += dy * (proj.xspd / proj.yspd);
+	//	}
+	//}
+
+	//var eff = instance_create_layer(
+	//	effX,
+	//	effY,
+	//	"Instances",
+	//	obj_bulletEffect
+	//);
+
+	//eff.sprite_index = proj.destroyEffect;
+	//eff.image_angle = proj.image_angle;
+
+	//var hitTop = (
+	//	proj.dir > 180
+	//	and proj.dir < 360
+	//	and proj.y <= env.colTop + proj.spd
+	//);
+
+	//if (hitTop) {
+	//	eff.depth = env.depth + 1;
+	//} else {
+	//	eff.depth = env.depth - 1;
+	//}
+
+	//var funcsLen = array_length(proj.collisionFuncs);
+
+	//for (var i = 0; i < funcsLen; i++) {
+
+	//	var func = proj.collisionFuncs[i];
+
+	//	if (is_callable(func)) {
+	//		func(proj);
+	//	}
+
+	//}
+
+	//if (is_callable(env.bulletHitFunc)) {
+	//	env.bulletHitFunc(proj, env);
+	//}
+
+	//if (env.smashable) {
+	//	env.smashed = true;
+	//}
 
 }
 
