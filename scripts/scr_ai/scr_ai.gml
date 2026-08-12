@@ -135,10 +135,10 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 	var px = x;
 	var py = y;
 	
-	while (!found and inc < 18) {
+	while (!found and inc < 10) {
 	
-		var newMinDist = minDist + 32 * inc;
-		var newMaxDist = maxDist + 32 * inc;
+		var newMinDist = minDist + 64 * inc;
+		var newMaxDist = maxDist + 64 * inc;
 		
 		var dir = random(360);
 		var minSq = newMinDist * newMinDist;
@@ -579,30 +579,6 @@ function scr_ai_standardAIBehaviour() {
 		);
 		
 	}
-
-	//// Periodically check if destination is still okay
-	//if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
-
-	//	var tooFar = point_distance(ghost.x, ghost.y, target.x, target.y) > targetReaquireDist;
-
-	//	if (tooFar or scr_ai_ghostOverlap(self)) {
-
-	//		if (tooFar) {
-	//			global.aiReacquireTooFar++;	
-	//		} else {
-	//			global.aiReacquireOverlap++;
-	//		}
-
-	//		scr_ai_choosePointAroundTarget(
-	//			target,
-	//			targetMinDist,
-	//			targetMaxDist,
-	//			true
-	//		);
-
-	//	}
-
-	//}
 
 	scr_ai_moveTowardsPointAvoid(
 		ghost.x,
