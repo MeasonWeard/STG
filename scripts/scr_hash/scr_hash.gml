@@ -251,3 +251,17 @@ function scr_hash_getNearbyCell(hash, cellX, cellY) {
 	return results;
 	
 }
+
+function scr_hash_updateCharHashKeys(inst) {
+
+	var index = 0;
+
+	for (var cx = inst.hashCellX - 1; cx <= inst.hashCellX + 1; cx++) {
+		for (var cy = inst.hashCellY - 1; cy <= inst.hashCellY + 1; cy++) {
+
+			inst.charHashKeys[index] = scr_hash_getKey(cx, cy);
+			index++;
+
+		}
+	}
+}

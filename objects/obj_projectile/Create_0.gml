@@ -28,3 +28,10 @@ damageDestructibles = false;
 checkObstruction = false;
 
 oa = 100;
+
+hashCellX = undefined;
+hashCellY = undefined;
+nearbyEnv =	undefined;
+nearbyDest = undefined;
+
+charHashKeys = array_create(9);

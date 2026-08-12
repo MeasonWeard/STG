@@ -39,7 +39,31 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 	
 	proj.checkObstruction = true;
 
-	//values to always reset
+	//set neary env
+	var cell = scr_hash_getCellAt(xx, yy);
+	var newCellX = cell.xx;
+	var newCellY = cell.yy;
+
+	if (newCellX != proj.hashCellX or newCellY != proj.hashCellY) {
+	
+		proj.hashCellX = newCellX;
+		proj.hashCellY = newCellY;
+	
+		proj.nearbyEnv = scr_hash_getNearbyCell(
+			global.stageController.envHash,
+			newCellX,
+			newCellY
+		);
+		
+		proj.nearbyDest = scr_hash_getNearbyCell(
+			global.stageController.destHash,
+			newCellX,
+			newCellY
+		);
+		
+		scr_hash_updateCharHashKeys(proj);
+	
+	}
 
 	//additional data
 	if (is_struct(additionalData)) {
@@ -354,3 +378,4 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 	}
 
 }
+

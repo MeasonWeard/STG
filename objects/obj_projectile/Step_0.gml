@@ -1,6 +1,7 @@
 if (!active) exit;
 
 var funcsLen = array_length(collisionFuncs);
+var sourceExists = instance_exists(source);
 
 xspd = lengthdir_x(spd, dir);
 yspd = lengthdir_y(spd, dir);
@@ -20,90 +21,106 @@ if (rot == 0) {
 var keepDepth = false;
 
 //char collison
-var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
-var len = array_length(nearby);
+var hash = global.stageController.charHash;
 
-for (var i = 0; i < len; i++) {
+for (var k = 0; k < 9; k++) {
 	
-	var char = nearby[i];
+	var key = charHashKeys[k];
 	
-	if (!instance_exists(char)) continue;
-	if (instance_exists(source) and char.id == source.id) continue;
-	if (char.faction == faction) continue;
+	if (!variable_struct_exists(hash, key)) continue;
 	
-	if (point_in_rectangle(x, y, char.colLeft, char.colTop, char.colRight, char.colBottom)) {
+	var nearby = hash[$ key];
+	var len = array_length(nearby);
+
+	for (var i = 0; i < len; i++) {
+	
+		var char = nearby[i];
+	
+		if (!instance_exists(char)) continue;
+		if (sourceExists and char.id == source.id) continue;
+		if (char.faction == faction) continue;
+	
+		if (point_in_rectangle(x, y, char.colLeft, char.colTop, char.colRight, char.colBottom)) {
 		
-		var safeX = x;
-		var safeY = y;
-		var hitX = nextX;
-		var hitY = nextY;
+			var safeX = x;
+			var safeY = y;
+			var hitX = nextX;
+			var hitY = nextY;
 	
-		repeat (4) {
+			repeat (4) {
 		
-			var midX = (safeX + hitX) * 0.5;
-			var midY = (safeY + hitY) * 0.5;
+				var midX = (safeX + hitX) * 0.5;
+				var midY = (safeY + hitY) * 0.5;
 		
-			if (point_in_rectangle(midX, midY, char.colLeft, char.colTop, char.colRight, char.colBottom)) {
-				hitX = midX;
-				hitY = midY;
-			} else {
-				safeX = midX;
-				safeY = midY;
+				if (point_in_rectangle(midX, midY, char.colLeft, char.colTop, char.colRight, char.colBottom)) {
+					hitX = midX;
+					hitY = midY;
+				} else {
+					safeX = midX;
+					safeY = midY;
+				}
+		
 			}
 		
-		}
+			var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
 		
-		var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
+			var profile = char.shield > 0 ? shieldHitSounds : char.bulletHitSounds;
+			var snd = scr_audio_randomSoundFromProfile(profile);
+			if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
 		
-		var profile = char.shield > 0 ? shieldHitSounds : char.bulletHitSounds;
-		var snd = scr_audio_randomSoundFromProfile(profile);
-		if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
+			var dealt = scr_char_damage(char, damage, damageTypes.projectile, false, hitOutcome);
 		
-		var dealt = scr_char_damage(char, damage, damageTypes.projectile, false, hitOutcome);
-		
-		if (lifeSteal > 0 and dealt > 0 and instance_exists(source)) {
+			if (lifeSteal > 0 and dealt > 0 and sourceExists) {
 						
-			var heal = (lifeSteal * 0.01) * dealt;
+				var heal = (lifeSteal * 0.01) * dealt;
 			
-			if (source.lifeStealForSelf) scr_char_heal(source, heal);
-			if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
+				if (source.lifeStealForSelf) scr_char_heal(source, heal);
+				if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
 							
-		}
+			}
 		
-		if (charHitReport) audio_play_sound(snd_hitMarker, 0, false);
-		if (instance_exists(global.player) and char == global.player) audio_play_sound(snd_playerHit, 0, false);
+			if (charHitReport) audio_play_sound(snd_hitMarker, 0, false);
+			if (instance_exists(global.player) and char == global.player) audio_play_sound(snd_playerHit, 0, false);
 
-		active = false;
+			active = false;
 	
-		var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
-		eff.sprite_index = destroyEffect;
-		eff.image_angle = image_angle;
+			var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
+			eff.sprite_index = destroyEffect;
+			eff.image_angle = image_angle;
 		
-		var hitTop = (dir > 180 and dir < 360 and y <= char.colTop + spd);
+			var hitTop = (dir > 180 and dir < 360 and y <= char.colTop + spd);
 		
-		if (hitTop) {
-			eff.depth = char.depth + 1;
-		} else {
-			eff.depth = char.depth - 1;
-		}
+			if (hitTop) {
+				eff.depth = char.depth + 1;
+			} else {
+				eff.depth = char.depth - 1;
+			}
 		
-		for (var j = 0; j < funcsLen; j ++) {
-			var func = collisionFuncs[j];
-			if (is_callable(func)) func(self);
-		}
+			for (var j = 0; j < funcsLen; j ++) {
+				var func = collisionFuncs[j];
+				if (is_callable(func)) func(self);
+			}
 		
-		if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
+			if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
 	
-		exit;
+			exit;
 		
+		}
+	
 	}
-	
+
 }
 
+
+//destructible collision
 if (damageDestructibles) {
 
-	nearby = scr_hash_getNearby(global.stageController.destHash, x, y);
-	len = array_length(nearby);
+	if (is_undefined(nearbyDest)) {
+		nearbyDest = scr_hash_getNearby(global.stageController.destHash, x, y);
+	}
+
+	var nearby = nearbyDest;
+	var len = array_length(nearby);
 	
 	for (var i = 0; i < len; i++) {
 	
@@ -169,8 +186,13 @@ if (damageDestructibles) {
 }
 
 //env collison
-nearby = scr_hash_getNearby(global.stageController.envHash, x, y);
-len = array_length(nearby);
+if (is_undefined(nearbyEnv)) {
+	nearbyEnv = scr_hash_getNearby(global.stageController.envHash, x, y);
+}
+
+var nearby = nearbyEnv;
+
+var len = array_length(nearby);
 
 //
 if (checkObstruction) {
