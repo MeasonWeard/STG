@@ -139,10 +139,10 @@ skills = {
 };
 
 //thorns
-thornsDamage = undefined;
-thornsAttackRate = 1;
-thornsTurnIndex = -1;
-thornsSounds = global.data.soundProfiles.burn;
+//thornsDamage = undefined;
+//thornsAttackRate = 1;
+//thornsTurnIndex = -1;
+//thornsSounds = global.data.soundProfiles.burn;
 
 activationTurnIndex = -1;
 

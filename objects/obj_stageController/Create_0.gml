@@ -92,11 +92,11 @@ for (var i = 0; i < procectilePoolLen; i++) {
 //time slicing
 timeSlicing = {
 
-	thorns: {
-		nextIndex: 0,
-		turn: 0,
-		steps: 4
-	},
+	//thorns: {
+	//	nextIndex: 0,
+	//	turn: 0,
+	//	steps: 4
+	//},
 	
 	ghostDistanceCheck: {
 		nextIndex: 0,
