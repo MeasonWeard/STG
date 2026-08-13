@@ -58,7 +58,7 @@ function zone_waste() : zone() constructor {
 		var success = false;
 		var map;
 	
-		while (!success and tries < 12) {
+		while (!success and tries < 92) {
 			
 			tries ++;
 			
@@ -173,36 +173,129 @@ function zone_commercial() : zone() constructor {
 		var success = false;
 		var map;
 		
-		while (!success and tries < 24) {
+		while (!success and tries < 92) {
 			
 			tries++;
 			
 			map = scr_mapGen_createBlankMap(mapW, mapH);
 			
 			var halls = [stage_commHall1];
-			var plazas = [stage_commArena1];
-			var sideRooms = [stage_commCinema1, stage_commCinema2, stage_commMarket1, stage_commMarket2,
-			stage_commDepartment1, stage_commDepartment1];
+			var plazas = [stage_commArena1, stage_commArena2];
 			var endStages = [stage_wasteBoss1];
+			
+			var cinemas = [
+				stage_commCinema1,
+				stage_commCinema2
+			];
+			
+			var markets = [
+				stage_commMarket1,
+				stage_commMarket2
+			];
+			
+			var clothing = [
+				stage_commClothing1,
+				stage_commClothing2
+			];
 			
 			
 			// -------------------------------------------------
 			// Ring settings
 			// -------------------------------------------------
 			
-			var ringW = irandom_range(5, 7);
-			var ringH = irandom_range(5, 7);
+			var ringW = 5;
+			var ringH = 5;
+			
+			while (ringW == 5 and ringH == 5) {
+				ringW = irandom_range(5, 7);
+				ringH = irandom_range(5, 7);
+			}
 			
 			var cells = ringW * 2 + (ringH - 2) * 2;
-			
-			var high = ceil(cells * 0.5);
-			var plazaLow = max(2, high - 2);
-			var sideLow = max(2, high - 4);
-			
-			var plazaAmount = irandom_range(plazaLow, high);
-			var sideRoomAmount = irandom_range(sideLow, high);
+
+			var plazaAmount = round(cells * random_range(0.4, 0.6));
+			var sideRoomAmount = max(3, round(cells * random_range(0.3, 0.5)));
 			
 			
+			// -------------------------------------------------
+			// Side room amounts
+			// -------------------------------------------------
+			
+			// Roughly:
+			// 50% markets
+			// 40% clothing
+			// 20% cinemas
+			
+			var marketAmount = max(1, round(sideRoomAmount * 0.5));
+			var clothingAmount = max(1, round(sideRoomAmount * 0.4));
+			var cinemaAmount = max(1, sideRoomAmount - marketAmount - clothingAmount);
+			
+			if (cinemaAmount == 1 and scr_random_chance(20)) cinemaAmount = 2; 
+			
+			// Correct for rounding if total went over
+			while (
+				marketAmount
+				+ clothingAmount
+				+ cinemaAmount
+				> sideRoomAmount
+			) {
+				
+				if (marketAmount > clothingAmount and marketAmount > 1) {
+					
+					marketAmount--;
+					
+				} else if (clothingAmount > cinemaAmount and clothingAmount > 1) {
+					
+					clothingAmount--;
+					
+				} else if (cinemaAmount > 1) {
+					
+					cinemaAmount--;
+					
+				}
+				
+			}
+			
+			
+			// -------------------------------------------------
+			// Build side room set
+			// -------------------------------------------------
+			
+			var sideRooms = [];
+			
+			repeat (marketAmount) {
+				
+				array_push(
+					sideRooms,
+					markets[irandom(array_length(markets) - 1)]
+				);
+				
+			}
+			
+			repeat (clothingAmount) {
+				
+				array_push(
+					sideRooms,
+					clothing[irandom(array_length(clothing) - 1)]
+				);
+				
+			}
+			
+			repeat (cinemaAmount) {
+				
+				array_push(
+					sideRooms,
+					cinemas[irandom(array_length(cinemas) - 1)]
+				);
+				
+			}
+			
+			sideRooms = array_shuffle(sideRooms);
+			
+			
+			// -------------------------------------------------
+			// Starting position
+			// -------------------------------------------------
 			
 			// Need to start on an edge
 			startPos = scr_mapGen_randomStartingLocation(
@@ -226,8 +319,7 @@ function zone_commercial() : zone() constructor {
 			);
 			
 			if (!result.success) continue;
-				
-
+			
 			
 			// -------------------------------------------------
 			// Replace some ring halls with plazas
@@ -245,19 +337,20 @@ function zone_commercial() : zone() constructor {
 			// Add shops/side rooms inside + outside ring
 			// -------------------------------------------------
 			
-			scr_mapGen_addRingSideRooms(
+			var sideResult = scr_mapGen_addRingSideRoomsSet(
 				map,
 				sideRooms,
-				result.ringCells,
-				sideRoomAmount
+				result.ringCells
 			);
+
+			if (sideResult.cellCount < array_length(sideRooms)) continue;
 			
 			
 			// -------------------------------------------------
 			// End
 			// -------------------------------------------------
 			
-			scr_mapGen_makeFurthestEndCell(
+			scr_mapGen_makeFurthestEndCellEmpty(
 				map,
 				startPos.xx,
 				startPos.yy,
@@ -290,7 +383,7 @@ function zone_wasteTest() : zone() constructor {
 		var success = false;
 		var map;
 	
-		while (!success and tries < 12) {
+		while (!success and tries < 92) {
 			
 			tries ++;
 			

@@ -154,6 +154,127 @@ function scr_mapGen_makeFurthestEndCell(map, startX, startY, stages) {
 
 }
 
+function scr_mapGen_makeFurthestEndCellEmpty(
+	map,
+	startX,
+	startY,
+	stages
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+
+	var stageCount = array_length(stages);
+
+	if (stageCount <= 0) {
+		return {
+			success: false,
+			xx: startX,
+			yy: startY
+		};
+	}
+
+	var dirs = [
+		[-1, 0],
+		[1, 0],
+		[0, -1],
+		[0, 1]
+	];
+
+	var visited = array_create(mapW);
+
+	for (var i = 0; i < mapW; i++) {
+		visited[i] = array_create(mapH, false);
+	}
+
+	var queue = [];
+	var queueIndex = 0;
+
+	array_push(queue, {
+		xx: startX,
+		yy: startY,
+		dist: 0
+	});
+
+	visited[startX][startY] = true;
+
+	var bestX = -1;
+	var bestY = -1;
+	var bestDist = -1;
+
+	while (queueIndex < array_length(queue)) {
+
+		var current = queue[queueIndex];
+		queueIndex++;
+
+		var cx = current.xx;
+		var cy = current.yy;
+		var dist = current.dist;
+
+		for (var d = 0; d < 4; d++) {
+
+			var nx = cx + dirs[d][0];
+			var ny = cy + dirs[d][1];
+
+			if (nx < 0 or nx >= mapW) continue;
+			if (ny < 0 or ny >= mapH) continue;
+
+			var cell = map[nx][ny];
+
+			// Empty neighbour = possible end cell
+			if (is_undefined(cell)) {
+
+				var candidateDist = dist + 1;
+
+				if (candidateDist > bestDist) {
+					bestDist = candidateDist;
+					bestX = nx;
+					bestY = ny;
+				}
+
+				continue;
+			}
+
+			// Existing map cell: continue flood fill
+			if (!is_struct(cell)) continue;
+			if (visited[nx][ny]) continue;
+
+			visited[nx][ny] = true;
+
+			array_push(queue, {
+				xx: nx,
+				yy: ny,
+				dist: dist + 1
+			});
+
+		}
+
+	}
+
+	if (bestX < 0) {
+		return {
+			success: false,
+			xx: startX,
+			yy: startY
+		};
+	}
+
+	var key = stages[irandom(stageCount - 1)];
+
+	var newCell = scr_mapGen_createCell(key);
+	newCell.endCell = true;
+	newCell.mapCol = c_fuchsia;
+
+	map[bestX][bestY] = newCell;
+
+	return {
+		success: true,
+		xx: bestX,
+		yy: bestY
+	};
+
+}
+
 function scr_mapGen_randomWalk(map, stages, startX, startY, steps) {
 
 	var mapW = array_length(map);
@@ -859,6 +980,7 @@ function scr_mapGen_addRingSideRooms(
 	var stageCount = array_length(stages);
 	var cellCount = 0;
 	var candidates = [];
+	var rejected = [];
 	
 	if (stageCount <= 0 or amount <= 0) {
 		return {
@@ -875,7 +997,10 @@ function scr_mapGen_addRingSideRooms(
 	];
 	
 	
+	// ---------------------------------------------------------
 	// Find possible side-room positions
+	// ---------------------------------------------------------
+	
 	var ringLen = array_length(ringCells);
 	
 	for (var i = 0; i < ringLen; i++) {
@@ -899,8 +1024,8 @@ function scr_mapGen_addRingSideRooms(
 			for (var j = 0; j < array_length(candidates); j++) {
 				
 				if (
-					candidates[j].xx == xx and
-					candidates[j].yy == yy
+					candidates[j].xx == xx
+					and candidates[j].yy == yy
 				) {
 					duplicate = true;
 					break;
@@ -923,19 +1048,13 @@ function scr_mapGen_addRingSideRooms(
 	
 	
 	// ---------------------------------------------------------
-	// Place rooms one at a time
+	// First pass: obey adjacency rule
 	// ---------------------------------------------------------
-	
-	var tries = 0;
-	var maxTries = 100;
 	
 	while (
 		cellCount < amount
 		and array_length(candidates) > 0
-		and tries < maxTries
 	) {
-		
-		tries++;
 		
 		var index = irandom(array_length(candidates) - 1);
 		var candidate = candidates[index];
@@ -945,12 +1064,7 @@ function scr_mapGen_addRingSideRooms(
 		var xx = candidate.xx;
 		var yy = candidate.yy;
 		
-		// Might have become occupied already
 		if (!is_undefined(map[xx][yy])) continue;
-		
-		
-		// Re-check neighbours NOW,
-		// after previous side rooms may have been placed.
 		
 		var valid = true;
 		
@@ -964,7 +1078,6 @@ function scr_mapGen_addRingSideRooms(
 			
 			if (is_undefined(map[nx][ny])) continue;
 			
-			
 			// The ring cell this room connects to is allowed
 			if (
 				nx == candidate.ringX
@@ -973,14 +1086,43 @@ function scr_mapGen_addRingSideRooms(
 				continue;
 			}
 			
-			// Anything else adjacent makes this invalid
 			valid = false;
 			break;
 			
 		}
 		
-		if (!valid) continue;
+		if (!valid) {
+			array_push(rejected, candidate);
+			continue;
+		}
 		
+		var key = stages[irandom(stageCount - 1)];
+		map[xx][yy] = scr_mapGen_createCell(key);
+		
+		cellCount++;
+		
+	}
+	
+	
+	// ---------------------------------------------------------
+	// Second pass: ignore adjacency rule if necessary
+	// ---------------------------------------------------------
+	
+	while (
+		cellCount < amount
+		and array_length(rejected) > 0
+	) {
+		
+		var index = irandom(array_length(rejected) - 1);
+		var candidate = rejected[index];
+		
+		array_delete(rejected, index, 1);
+		
+		var xx = candidate.xx;
+		var yy = candidate.yy;
+		
+		// May have become occupied during first pass
+		if (!is_undefined(map[xx][yy])) continue;
 		
 		var key = stages[irandom(stageCount - 1)];
 		map[xx][yy] = scr_mapGen_createCell(key);
@@ -995,4 +1137,168 @@ function scr_mapGen_addRingSideRooms(
 		cellCount: cellCount
 	};
 	
+}
+
+function scr_mapGen_addRingSideRoomsSet(
+	map,
+	stages,
+	ringCells
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+
+	var stageCount = array_length(stages);
+	var cellCount = 0;
+	var candidates = [];
+
+	if (stageCount <= 0) {
+		return {
+			map: map,
+			cellCount: cellCount
+		};
+	}
+
+	var dirs = [
+		[-1, 0],
+		[1, 0],
+		[0, -1],
+		[0, 1]
+	];
+
+	// ---------------------------------------------------------
+	// Find possible side-room positions
+	// ---------------------------------------------------------
+
+	var ringLen = array_length(ringCells);
+
+	for (var i = 0; i < ringLen; i++) {
+
+		var ring = ringCells[i];
+
+		for (var d = 0; d < 4; d++) {
+
+			var xx = ring.xx + dirs[d][0];
+			var yy = ring.yy + dirs[d][1];
+
+			if (xx < 0 or xx >= mapW) continue;
+			if (yy < 0 or yy >= mapH) continue;
+
+			if (!is_undefined(map[xx][yy])) continue;
+
+			// Avoid duplicate positions
+			var duplicate = false;
+
+			for (var j = 0; j < array_length(candidates); j++) {
+
+				if (
+					candidates[j].xx == xx
+					and candidates[j].yy == yy
+				) {
+					duplicate = true;
+					break;
+				}
+			}
+
+			if (duplicate) continue;
+
+			array_push(candidates, {
+				xx: xx,
+				yy: yy,
+				ringX: ring.xx,
+				ringY: ring.yy
+			});
+		}
+	}
+
+	// Keep every possible position for fallback
+	var fallbackCandidates = [];
+	array_copy(fallbackCandidates, 0, candidates, 0, array_length(candidates));
+
+	var stageIndex = 0;
+
+	// ---------------------------------------------------------
+	// First pass: obey adjacency rule
+	// ---------------------------------------------------------
+
+	while (
+		stageIndex < stageCount
+		and array_length(candidates) > 0
+	) {
+
+		var index = irandom(array_length(candidates) - 1);
+		var candidate = candidates[index];
+
+		array_delete(candidates, index, 1);
+
+		var xx = candidate.xx;
+		var yy = candidate.yy;
+
+		if (!is_undefined(map[xx][yy])) continue;
+
+		var valid = true;
+
+		for (var d = 0; d < 4; d++) {
+
+			var nx = xx + dirs[d][0];
+			var ny = yy + dirs[d][1];
+
+			if (nx < 0 or nx >= mapW) continue;
+			if (ny < 0 or ny >= mapH) continue;
+
+			if (is_undefined(map[nx][ny])) continue;
+
+			// Ring cell this room connects to is allowed
+			if (
+				nx == candidate.ringX
+				and ny == candidate.ringY
+			) {
+				continue;
+			}
+
+			valid = false;
+			break;
+		}
+
+		if (!valid) continue;
+
+		map[xx][yy] = scr_mapGen_createCell(stages[stageIndex]);
+
+		stageIndex++;
+		cellCount++;
+	}
+
+	// ---------------------------------------------------------
+	// Second pass: completely ignore adjacency rule
+	// ---------------------------------------------------------
+
+	if (stageIndex < stageCount) {
+
+		fallbackCandidates = array_shuffle(fallbackCandidates);
+
+		var fallbackLen = array_length(fallbackCandidates);
+
+		for (var i = 0; i < fallbackLen; i++) {
+
+			if (stageIndex >= stageCount) break;
+
+			var candidate = fallbackCandidates[i];
+
+			var xx = candidate.xx;
+			var yy = candidate.yy;
+
+			// Already occupied by a room from first pass
+			if (!is_undefined(map[xx][yy])) continue;
+
+			map[xx][yy] = scr_mapGen_createCell(stages[stageIndex]);
+
+			stageIndex++;
+			cellCount++;
+		}
+	}
+
+	return {
+		map: map,
+		cellCount: cellCount
+	};
 }

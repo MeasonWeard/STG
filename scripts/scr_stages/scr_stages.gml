@@ -288,9 +288,9 @@ function scr_stages_inStartingCell() {
 	if (!instance_exists(global.runController)) return false;
 		
 	var startX = global.runController.startX;
-	var startY = global.runController.startX;
+	var startY = global.runController.startY;
 	var posX = global.runController.posX;
-	var posY = global.runController.posX;
+	var posY = global.runController.posY;
 		
 	return (posX == startX and posY == startY);
 	

@@ -222,6 +222,8 @@ stages = {
 	
 	},
 	
+	//waste disposal
+	
 	wasteHall1: {
 		
 		room: stage_wasteHall1,
@@ -268,9 +270,19 @@ stages = {
 		
 	},
 	
+	//commercial
+	
 	commArena1: {
 	
 		room: stage_commArena1,
+		type: stageTypes.arena,
+		mapCol: c_orange
+	
+	},
+	
+	commArena2: {
+	
+		room: stage_commArena2,
 		type: stageTypes.arena,
 		mapCol: c_orange
 	
@@ -308,13 +320,23 @@ stages = {
 	
 	},
 	
-	department1: {
+	clothing1: {
 	
-		room: stage_commDepartment1,
+		room: stage_commClothing1,
 		type: stageTypes.special,
 		mapCol: c_purple
 	
 	},
+	
+	clothing2: {
+	
+		room: stage_commClothing2,
+		type: stageTypes.special,
+		mapCol: c_purple
+	
+	},
+
+	//engineering
 
 	engHall1: {
 		
