@@ -208,7 +208,7 @@ function zone_commercial() : zone() constructor {
 			startPos = scr_mapGen_randomStartingLocation(
 				mapW,
 				mapH,
-				2,
+				3,
 				true
 			);
 			
