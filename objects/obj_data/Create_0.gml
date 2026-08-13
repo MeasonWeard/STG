@@ -307,6 +307,14 @@ stages = {
 		mapCol: c_green
 	
 	},
+	
+	department1: {
+	
+		room: stage_commDepartment1,
+		type: stageTypes.special,
+		mapCol: c_purple
+	
+	},
 
 	engHall1: {
 		

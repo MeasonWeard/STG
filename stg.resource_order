@@ -261,6 +261,7 @@
     {"name":"room_testSkills","order":6,"path":"rooms/room_testSkills/room_testSkills.yy",},
     {"name":"stage_commCinema1","order":2,"path":"rooms/stage_commCinema1/stage_commCinema1.yy",},
     {"name":"stage_commCinema2","order":3,"path":"rooms/stage_commCinema2/stage_commCinema2.yy",},
+    {"name":"stage_commDepartment1","order":6,"path":"rooms/stage_commDepartment1/stage_commDepartment1.yy",},
     {"name":"stage_commHall1","order":1,"path":"rooms/stage_commHall1/stage_commHall1.yy",},
     {"name":"stage_commMarket1","order":4,"path":"rooms/stage_commMarket1/stage_commMarket1.yy",},
     {"name":"stage_commMarket2","order":5,"path":"rooms/stage_commMarket2/stage_commMarket2.yy",},

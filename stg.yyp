@@ -317,6 +317,7 @@
     {"id":{"name":"stage_commArena1","path":"rooms/stage_commArena1/stage_commArena1.yy",},},
     {"id":{"name":"stage_commCinema1","path":"rooms/stage_commCinema1/stage_commCinema1.yy",},},
     {"id":{"name":"stage_commCinema2","path":"rooms/stage_commCinema2/stage_commCinema2.yy",},},
+    {"id":{"name":"stage_commDepartment1","path":"rooms/stage_commDepartment1/stage_commDepartment1.yy",},},
     {"id":{"name":"stage_commHall1","path":"rooms/stage_commHall1/stage_commHall1.yy",},},
     {"id":{"name":"stage_commMarket1","path":"rooms/stage_commMarket1/stage_commMarket1.yy",},},
     {"id":{"name":"stage_commMarket2","path":"rooms/stage_commMarket2/stage_commMarket2.yy",},},
@@ -874,6 +875,7 @@
     {"roomId":{"name":"stage_commCinema2","path":"rooms/stage_commCinema2/stage_commCinema2.yy",},},
     {"roomId":{"name":"stage_commMarket1","path":"rooms/stage_commMarket1/stage_commMarket1.yy",},},
     {"roomId":{"name":"stage_commMarket2","path":"rooms/stage_commMarket2/stage_commMarket2.yy",},},
+    {"roomId":{"name":"stage_commDepartment1","path":"rooms/stage_commDepartment1/stage_commDepartment1.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

@@ -181,7 +181,8 @@ function zone_commercial() : zone() constructor {
 			
 			var halls = [stage_commHall1];
 			var plazas = [stage_commArena1];
-			var sideRooms = [stage_commCinema1, stage_commCinema2, stage_commMarket1, stage_commMarket2];
+			var sideRooms = [stage_commCinema1, stage_commCinema2, stage_commMarket1, stage_commMarket2,
+			stage_commDepartment1, stage_commDepartment1];
 			var endStages = [stage_wasteBoss1];
 			
 			
