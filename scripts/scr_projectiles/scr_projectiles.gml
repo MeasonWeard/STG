@@ -362,7 +362,7 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 
 	if (hitBottom) {
 
-		var topY = env.colMiddle - 4;
+		var topY = max(env.colMiddle - 4, hitY - 64);
 		var bottomY = hitY - 4;
 		var targetY = random_range(topY, bottomY);
 		

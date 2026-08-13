@@ -299,6 +299,14 @@ stages = {
 		mapCol: c_green
 	
 	},
+	
+	market2: {
+	
+		room: stage_commMarket2,
+		type: stageTypes.special,
+		mapCol: c_green
+	
+	},
 
 	engHall1: {
 		

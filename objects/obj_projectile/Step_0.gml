@@ -284,7 +284,7 @@ rangeLeft -= spd;
 if (rangeLeft <= 0) active = false;
 
 if (x <= global.roomLeft or x >= global.roomRight or y <= global.projectileTop or y >= global.roomBottom) {
-	
+
 	x = clamp(x, global.roomLeft, global.roomRight);
 	y = clamp(y, global.projectileTop, global.roomBottom);
 	

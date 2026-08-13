@@ -1,1 +1,1 @@
-scr_obj_cullByDirection("down");
+scr_obj_cullByDirection("down", true);

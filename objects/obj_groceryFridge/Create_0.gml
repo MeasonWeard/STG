@@ -5,7 +5,7 @@ event_inherited();
 
 randomiseImage = true;
 
-var sprites = [spr_groceryFridge1, spr_groceryFridge2];
+var sprites = [spr_groceryFridge1, spr_groceryFridge2, spr_groceryFridge3];
 
 scr_obj_randomSprite(self, sprites);
 
