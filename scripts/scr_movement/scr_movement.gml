@@ -7,7 +7,7 @@ function scr_movement(blockedByEnv, liveEnvLookup = false) {
 	var prevY = y;
 	
 	movedThisStep = false;
-
+	
 	// Correct diagonal movement
 	if (moveX != 0 and moveY != 0) {
 	

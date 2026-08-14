@@ -272,17 +272,25 @@ stages = {
 	
 	//commercial
 	
-	commArena1: {
+	commPlaza1: {
 	
-		room: stage_commArena1,
+		room: stage_commPlaza1,
 		type: stageTypes.arena,
 		mapCol: c_orange
 	
 	},
 	
-	commArena2: {
+	commPlaza2: {
 	
-		room: stage_commArena2,
+		room: stage_commPlaza2,
+		type: stageTypes.arena,
+		mapCol: c_orange
+	
+	},
+	
+	commPlaza3: {
+	
+		room: stage_commPlaza3,
 		type: stageTypes.arena,
 		mapCol: c_orange
 	

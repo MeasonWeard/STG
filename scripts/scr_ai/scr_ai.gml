@@ -652,26 +652,39 @@ function scr_ai_moveTowardsOwner() {
 
 	}
 
-	// Periodically check if destination is still okay
-	if (scr_timeSlicing_isMyTurn("ghostCheck", ghostCheckIndex)) {
+	var choosePoint = false;
 
-		var col = scr_ai_ghostOverlap(self);
+	// Periodically check if destination is still okay
+	if (scr_timeSlicing_isMyTurn("ghostDistanceCheck", ghostDistanceIndex)) {
+
+		var dx = ghost.x - owner.x;
+		var dy = ghost.y - owner.y;
 
 		var tooFar =
-			point_distance(ghost.x, ghost.y, owner.x, owner.y)
-			> targetReaquireDist;
+			dx * dx + dy * dy
+			> targetReaquireDist * targetReaquireDist;
 
-		if (col or tooFar) {
+		if (tooFar) choosePoint = true;
 
-			scr_ai_choosePointAroundTarget(
-				owner,
-				targetMinDist,
-				targetMaxDist,
-				true
-			);
 
-		}
+	}
 
+	if (!choosePoint and scr_timeSlicing_isMyTurn("ghostOverlapCheck", ghostOverlapIndex)) {
+
+			if (scr_ai_ghostOverlap(self)) choosePoint = true;
+
+
+	}
+	
+	if (choosePoint) {
+
+		scr_ai_choosePointAroundTarget(
+			owner,
+			targetMinDist,
+			targetMaxDist,
+			true
+		);
+		
 	}
 
 	// Move toward ghost

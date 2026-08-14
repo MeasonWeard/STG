@@ -6,10 +6,10 @@ if (dropOnDestroy) {
 	scr_items_dropData(x, y, minData, maxData);
 
 	//drop stimpack
-	scr_items_drop(obj_stimPack, x, y, 2, undefined, true);
+	scr_items_drop(obj_stimPack, x, y, 1, undefined, true);
 
 	//drop energypack
-	scr_items_drop(obj_energyPack, x, y, 2, undefined, true);
+	scr_items_drop(obj_energyPack, x, y, 0.5, undefined, true);
 
 	//loot
 	scr_loot_dropLoot(lootChance, lootMaxRarity, lootImproveChance, lootAmount);

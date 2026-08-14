@@ -6,6 +6,6 @@ if (keyPressDelay > 0) {
 	
 } else {
 	
-	if (keyboard_check_pressed(vk_anykey) and tab != "loot" and tab != "reveal") tabIndex++;
+	if ((keyboard_check_pressed(vk_anykey) or mouse_check_button_pressed(mb_any)) and tab != "loot" and tab != "reveal") tabIndex++;
 
 }

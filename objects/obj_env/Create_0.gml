@@ -2,6 +2,8 @@ event_inherited();
 
 setup = true;
 
+canMove = false;
+
 hashCellX = undefined;
 hashCellY = undefined;
 

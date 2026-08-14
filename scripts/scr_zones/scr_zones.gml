@@ -179,8 +179,8 @@ function zone_commercial() : zone() constructor {
 			
 			map = scr_mapGen_createBlankMap(mapW, mapH);
 			
-			var halls = [stage_commHall1];
-			var plazas = [stage_commArena1, stage_commArena2];
+			var halls = [stage_commHall1, stage_commHall2];
+			var plazas = [stage_commPlaza1, stage_commPlaza2, stage_commPlaza3, stage_commPlaza4, stage_commPlaza5];
 			var endStages = [stage_wasteBoss1];
 			
 			var cinemas = [

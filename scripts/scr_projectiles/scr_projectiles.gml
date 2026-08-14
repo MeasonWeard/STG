@@ -391,7 +391,7 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 
 	eff.depth = hitTop
 		? env.depth + 1
-		: env.depth - 1;
+		: env.depth - 2;
 
 	var funcsLen = array_length(proj.collisionFuncs);
 
