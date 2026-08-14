@@ -1351,7 +1351,7 @@ function scr_skills_formatDescription(skillInst) {
 		maxCharges = 1;
 		charges = 1;
 		energyCost = 50;
-		cooldownTime = 20;
+		cooldownTime = 18;
 		castCooldownTime = 0.2;
 		maxSpawns = 2;
 		clips = 2;
