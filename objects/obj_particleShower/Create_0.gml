@@ -1,6 +1,7 @@
 owner = noone;
 faction = undefined;
 damge = undefined;
+areaDamage = undefined;
 
 charHash = global.stageController.charHash;
 
@@ -23,6 +24,11 @@ newTick = 16;
 alpha = 0;
 
 daCheckTick = 12;
+
+areaDamageTick = 0;
+
+charHashKeys = [];
+hash = global.stageController.charHash;
 
 //generate pool
 pool = [];

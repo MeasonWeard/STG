@@ -1,42 +1,46 @@
 // Inherit the parent event
 event_inherited();
 
-if (boss) showHealthBar = true;
+if (enemySetup) {
 
-if (levelUp and is_callable(levelUpFunc)) {
+	enemySetup = false;
 
-	levelUp = false;
-
-	var targetLevel = 0;
-	var rc = global.runController;
+	var lvl = level == 0 ? scr_char_rollLevel() : level;
+	var evolve = false;
 	
-	if (instance_exists(rc) and is_array(rc.levelWeights) and array_length(rc.levelWeights) > 0) {
+	if (is_real(evolveLevel) and lvl >= evolveLevel and array_length(evolutions) > 0) {
+	
+		var effLvl = clamp(lvl - evolveLevel, 0, 10);
+	
+		var dec = effLvl / 10;
+		var chance = lerp(evolveChanceMin, evolveChanceMax, dec);
 		
-		targetLevel = scr_random_weightedPick(rc.levelWeights);
+		evolve = scr_random_chance(chance);
+		
+	}
+	
+	if(evolve) {
+		
+		var obj = scr_randomElement(evolutions);
+		
+		if (object_exists(obj)) {
+		
+			var newChar = instance_create_layer(x, y, "Instances", obj);
+			newChar.levelUp = false;
+			scr_char_levelUp(newChar, lvl);
+		
+		}
+		
+		dropOnDestroy = false;
+		instance_destroy();
+		exit;
 		
 	} else {
 	
-		targetLevel = 15;
-	
-	}
-	
-	if (targetLevel > level) {
-	
-		setupStats = true;
-		setAmmo = true;
-		setupBasics = true;
-		
-	}
-
-	while (level < targetLevel) {
-
-		level++;
-		levelUpFunc();
+		scr_char_levelUp(self, lvl);
 	
 	}
 
-
-	
 }
 
 if (calculateData) {

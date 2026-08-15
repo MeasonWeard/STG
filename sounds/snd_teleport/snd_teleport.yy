@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"snd_teleport",
   "parent":{
-    "name":"Shot Sounds",
-    "path":"folders/Sounds/Shot Sounds.yy",
+    "name":"SFX",
+    "path":"folders/Sounds/SFX.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

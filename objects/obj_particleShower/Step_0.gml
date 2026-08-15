@@ -52,6 +52,43 @@ if (life < 1) {
 
 	particleTick2 ++;
 
+	//area damage
+	if (areaDamageTick > 0) {
+	
+		areaDamageTick --;
+	
+	} else {
+		
+		areaDamageTick = 60;
+		
+		for (var k = 0; k < 9; k++) {
+	
+			var key = charHashKeys[k];
+	
+			if (!variable_struct_exists(hash, key)) continue;
+	
+			var nearby = hash[$ key];
+			var len = array_length(nearby);
+		
+			for (var i = 0; i < len; i ++) {
+	
+				var char = nearby[i];
+		
+				if (!instance_exists(char)) continue;
+				if (char.faction == faction) continue;
+		
+				var dist = point_distance(x, y, char.x, char.y);
+		
+				if (dist > radius) continue;
+		
+				scr_char_damage(char, areaDamage, damageTypes.ability, true);
+				
+			}
+		
+		}
+		
+	}
+
 	//da
 	if (daCheckTick > 0) {
 
@@ -61,22 +98,32 @@ if (life < 1) {
 
 		daCheckTick = 12;
 	
-		var nearby = scr_hash_getNearby(charHash, x, y);
-		var len = array_length(nearby);
+		//var nearby = scr_hash_getNearby(charHash, x, y);
+		//var len = array_length(nearby);
+		for (var k = 0; k < 9; k++) {
 	
-		for (var i = 0; i < len; i ++) {
+			var key = charHashKeys[k];
 	
-			var char = nearby[i];
+			if (!variable_struct_exists(hash, key)) continue;
+	
+			var nearby = hash[$ key];
+			var len = array_length(nearby);
 		
-			if (!instance_exists(char)) continue;
-			if (char.faction == faction) continue;
+			for (var i = 0; i < len; i ++) {
+	
+				var char = nearby[i];
 		
-			var dist = point_distance(x, y, char.x, char.y);
+				if (!instance_exists(char)) continue;
+				if (char.faction == faction) continue;
 		
-			if (dist > radius) continue;
+				var dist = point_distance(x, y, char.x, char.y);
 		
-			scr_char_addStatMod(char, "da", daReduction, 30, "psDaMod");
+				if (dist > radius) continue;
+		
+				scr_char_addStatMod(char, "da", daReduction, 30, "psDaMod");
 				
+			}
+		
 		}
 	
 	}

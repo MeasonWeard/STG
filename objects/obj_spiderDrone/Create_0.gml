@@ -48,3 +48,8 @@ levelUpFunc = function() {
 	if (level > 12) baseStats.maxShield = 2;
 	
 }
+
+evolveLevel = 8;
+evolveChanceMin = 4;
+evolveChanceMax = 18;
+evolutions = [obj_bigSpider];

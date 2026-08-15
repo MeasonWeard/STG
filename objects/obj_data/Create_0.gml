@@ -262,9 +262,17 @@ stages = {
 		
 	},
 	
-	wasteIncinerator: {
+	wasteIncinerator1: {
 	
-		room: stage_wasteIncinerator,
+		room: stage_wasteIncinerator1,
+		mapCol: c_red,
+		type: stageTypes.special
+	
+	},
+	
+	wasteIncinerator2: {
+	
+		room: stage_wasteIncinerator2,
 		mapCol: c_red,
 		type: stageTypes.special
 	
@@ -382,6 +390,16 @@ stages = {
 	
 }
 
+elementCols = {
+
+	kin: c_yellow,
+	fire: #FF2D00,
+	chem: c_lime,
+	elec: c_aqua,
+	rad: c_purple
+	
+}
+
 soundProfiles = {
 
 	//bullet hits
@@ -434,7 +452,7 @@ enemyGroups = {
 	aliendsMajor: [[obj_alien, 100]],
 	
 	spidersMinor: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
-	spidersMajor: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
+	spidersMajor: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20],[obj_bigSpider, 20]],
 	
 	plantsMinor: [[obj_plant, 100]],
 	plantsMajor: [[obj_plant, 100]]

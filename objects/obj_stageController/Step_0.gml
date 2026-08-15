@@ -66,6 +66,9 @@ if (c == 0 and keyboard_check_pressed(vk_escape)) {
 //THINGS TO DO WHEN NOT PAUSED
 if (!paused) {
 	
+	//alert delay
+	if (alertDelay > 0) alertDelay--;
+	
 	// time slicing index update
 	var sliceKeys = variable_struct_get_names(timeSlicing);
 	var sliceKeysLen = array_length(sliceKeys);

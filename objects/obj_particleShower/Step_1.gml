@@ -2,6 +2,12 @@ if (setup) {
 	
 	setup = false;	
 	
+	var cell = scr_hash_getCellAt(x, y);
+	var xx = cell.xx;
+	var yy = cell.yy;
+	
+	scr_hash_updateHashKeys(charHashKeys, xx, yy);
+	
 	life = duration * 60;
 	
 	particleFreq = (60 / particles) * 2;

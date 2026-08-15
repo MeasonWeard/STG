@@ -4,6 +4,7 @@ killThreshold = 0;
 lifeSteal = 0;
 depth = layers.effects;
 size = 1;
+col = c_white;
 
 hitDelay = 0;
 attackFrames = 4;

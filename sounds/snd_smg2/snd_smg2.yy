@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.30331066,
+  "duration":0.50968254,
   "exportDir":"",
   "name":"snd_smg2",
   "parent":{

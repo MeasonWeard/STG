@@ -520,20 +520,21 @@ function scr_skills_formatDescription(skillInst) {
 	
 	}
 	
-	function skill_particleShower() : skill() constructor {
+function skill_particleShower() : skill() constructor {
 	
 		name = "Particle Shower";
 		key = "particleShower";
 		icon = spr_icon_particleShower;
 		maxCharges = 1;
 		energyCost = 50;
-		cooldownTime = 9;
+		cooldownTime = 8;
 		maxLevel = 9;
 		range = 600;
 		radius = 180;
 		duration = 6;
 		txtCol = c_white;
 		flashpointDam = undefined;
+		areaDamage = undefined;
 
 		description = "Create a shower of subatomic particles that rains down from above.";
 		description += "\nEnemies within the area take radiation damage and have their\ndefensive ability reduced.";
@@ -543,8 +544,8 @@ function scr_skills_formatDescription(skillInst) {
 			statsDescription = "Enemy Defensive Ability: " + string(daReduction);
 			statsDescription += "\nParticles: " + string(particles) + " p/s ";
 			statsDescription += "\nDuration: " + string(duration) + " seconds";
-			statsDescription += "\n\nDamage: " + string(damage.rad) + " radiation";
-			
+			statsDescription += "\n\nParticle Damage: " + string(damage.rad) + " radiation";
+			statsDescription += "\nArea Damage: " + string(areaDamage.rad) + " radiation p/s";
 		}
 	
 		static setupFunc = function(source) {
@@ -555,9 +556,12 @@ function scr_skills_formatDescription(skillInst) {
 			daReduction = -(10 + (level - 1) * 5);
 			
 			damage = new damageProfile();
-
 			damage.rad = 10 + (level - 1) * 2;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["dam"]);
+			damage = scr_stats_calculateSkillDamage(source, damage, ["rad"]);
+			
+			areaDamage = new damageProfile();
+			areaDamage.rad = 6 + (level - 1) * 1;
+			areaDamage = scr_stats_calculateSkillDamage(source, areaDamage, ["rad"]);
 			
 			var sk = scr_skills_findCharSkill("flashpoint", source);
 			if (sk != undefined) flashpointDam = sk.damage;
@@ -583,6 +587,7 @@ function scr_skills_formatDescription(skillInst) {
 			var ps = instance_create_layer(xx, yy, "Instances", obj_particleShower);
 			
 			ps.damage = damage;
+			ps.areaDamage = areaDamage;
 			ps.faction = source.faction;
 			ps.daReduction = daReduction;
 			ps.particles = particles;

@@ -242,15 +242,36 @@ function gun_spiderGun(level, rarity) : gunInst(level, rarity) constructor {
 
 function gun_bigSpiderGun(level, rarity) : gunInst(level, rarity) constructor {
 
-	name = "Spider Gun #2"
+	name = "Big Spider Gun"
+	
+	projSprite = spr_bulletNormal;
+	projDestroySprite = spr_bulletExplosion2;
+	auto = true;
+	fireRate = 8;
+	clipSize = 12;
+	reloadTime = 1.6;
+	spd = 16;
+	minAimOff = 2.2;
+	maxAimOff = 8;
+	recoil = 1.8;
+	stability = 0.08;
+	
+	shootSounds = [snd_electricBullet];
+	
+	damage.kin = 6;
+	
+}
+
+function gun_bigSpiderFireGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Big Spider Flame Gun"
 	
 	projectileType = projectileTypes.blast;
-	blastProjectiles = 12;
+	blastProjectiles = 6;
 	blastSpread = 14;
 	
 	projSprite = spr_bulletLarge;
 	projDestroySprite = spr_bulletExplosion2;
-	//lockProjSprite = true;
 	auto = true;
 	fireRate = 4;
 	clipSize = 2;
@@ -266,7 +287,30 @@ function gun_bigSpiderGun(level, rarity) : gunInst(level, rarity) constructor {
 	shootSounds = global.data.soundProfiles.sprayGun;
 	
 	damage.kin = 2;
-	damage.fire = 2;
+	damage.fire = 4;
+	
+}
+
+function gun_bigSpiderElectricGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Big Spider Electric Gun"
+	
+	projSprite = spr_bulletNormal;
+	projDestroySprite = spr_bulletExplosion2;
+	auto = true;
+	fireRate = 9;
+	clipSize = 12;
+	reloadTime = 1.6;
+	spd = 16;
+	minAimOff = 2.2;
+	maxAimOff = 8;
+	recoil = 1.8;
+	stability = 0.08;
+	
+	shootSounds = [snd_electricBullet];
+
+	damage.kin = 3;
+	damage.elec = 5;
 	
 }
 

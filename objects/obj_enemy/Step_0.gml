@@ -3,8 +3,7 @@ event_inherited();
 //detection
 if (!alert) {
 
-
-	if (instance_exists(target) and scr_timeSlicing_isMyTurn("detection", detectionIndex)) {
+	if (instance_exists(target) and scr_timeSlicing_isMyTurn("detection", detectionIndex) and sc.alertDelay <= 0) {
 	
 		var dist = point_distance(x, y, target.x, target.y);
 		var seen = false;

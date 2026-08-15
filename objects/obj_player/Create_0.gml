@@ -49,7 +49,7 @@ var weaponsData = scr_data_loadEquippedWeapons();
 
 //randomise();
 //weaponsData.weapon1 = scr_genMelee_aspisAndBaton(8, 2);
-//weaponsData.weapon2 = scr_genMelee_aspisAndBaton(16, 4);
+//weaponsData.weapon2 = scr_genMelee_electricHammer(16, 4);
 scr_weapons_collectWeapon(self, weaponsData.weapon1, true);
 scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 

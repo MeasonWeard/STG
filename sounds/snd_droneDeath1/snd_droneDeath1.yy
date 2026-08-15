@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.5688889,
+  "duration":1.8808163,
   "exportDir":"",
   "name":"snd_droneDeath1",
   "parent":{

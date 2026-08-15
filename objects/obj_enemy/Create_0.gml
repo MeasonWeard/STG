@@ -24,9 +24,15 @@ lootAmount = 1;
 
 showHealthBar = true;
 
+enemySetup = true;
 levelUp = true;
 levelUpFunc = undefined;
 level = 0;
+
+evolutions = [];
+evolveChanceMin = 10;
+evolveChanceMax = 50;
+evolveLevel = undefined;
 
 //ai
 scr_ai_setup();

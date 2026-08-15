@@ -9,6 +9,7 @@ function meleeInst(level, rarity) : weaponInst(level, rarity) constructor {
 	attackSprites = [spr_slashUp, spr_slashDown];
 	spr = spr_cleaver;
 	description = undefined;
+	col = c_white;
 		
 	//combat
 	attackRate = 2.8;
@@ -76,6 +77,7 @@ function scr_melee_attack(char) {
 	att.damageInLine = melee.damageInLine;
 	att.lifeSteal = lifeSteal;
 	att.size = melee.size;
+	att.col = melee.col;
 	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;
@@ -147,6 +149,24 @@ function scr_melee_calculateMeleeStats(char, melee) {
 		var dec = 1 + char.stats.meleeDamPerc * 0.01;
 		newStats.damage = scr_stats_multiplyDamageProfile(newStats.damage, dec);
 	}
+	
+	//attack col
+	var cols = global.data.elementCols;
+	var el = scr_weapons_getHighestDamageType(melee, false);
+	var elKey = el.key;
+	var col = c_white;
+	
+	switch(elKey) {
+	
+		case "kin": col = c_white; break;
+		case "fire": col = cols.fire; break;
+		case "chem": col = cols.chem; break;
+		case "elec": col = cols.elec; break;
+		case "rad": col = cols.rad; break;
+	
+	}
+	
+	melee.col = col;
 
 	return newStats;
 	

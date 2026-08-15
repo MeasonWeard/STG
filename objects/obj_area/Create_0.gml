@@ -1,3 +1,5 @@
+visible = false;
+
 setup = false;
 
 left = x;

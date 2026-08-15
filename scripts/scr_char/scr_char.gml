@@ -712,3 +712,47 @@ function scr_char_removeAllPets() {
 	}
 	
 }
+
+function scr_char_levelUp(char, targetLevel) {
+
+	if (!instance_exists(char)) exit;
+	if (!is_callable(char.levelUpFunc)) exit;
+
+	if (targetLevel > char.level) {
+	
+		char.setupStats = true;
+		char.setAmmo = true;
+		char.setupBasics = true;
+		
+	}
+
+	while (char.level < targetLevel) {
+
+		char.level++;
+		char.levelUpFunc();
+	
+	}
+	
+}
+
+function scr_char_rollLevel() {
+	
+	var rc = global.runController;
+	
+	if (!instance_exists(rc)) return 10;
+	
+	var level = 0;
+	
+	if (is_array(rc.levelWeights) and array_length(rc.levelWeights) > 0) {
+		
+		level = scr_random_weightedPick(rc.levelWeights);
+		
+	} else {
+	
+		level = 10;
+	
+	}
+	
+	return level;
+	
+}
