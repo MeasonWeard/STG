@@ -240,6 +240,36 @@ function gun_spiderGun(level, rarity) : gunInst(level, rarity) constructor {
 	
 }
 
+function gun_bigSpiderGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Spider Gun #2"
+	
+	projectileType = projectileTypes.blast;
+	blastProjectiles = 12;
+	blastSpread = 14;
+	
+	projSprite = spr_bulletLarge;
+	projDestroySprite = spr_bulletExplosion2;
+	//lockProjSprite = true;
+	auto = true;
+	fireRate = 4;
+	clipSize = 2;
+	reloadTime = 1.8;
+	spd = 10;
+	minAimOff = 2.2;
+	maxAimOff = 8;
+	recoil = 1.8;
+	stability = 0.08;
+	rot = 12;
+
+	range = 950;
+	shootSounds = global.data.soundProfiles.sprayGun;
+	
+	damage.kin = 2;
+	damage.fire = 2;
+	
+}
+
 function gun_fungalGun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Fungal Gun";
