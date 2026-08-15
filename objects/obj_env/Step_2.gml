@@ -23,3 +23,7 @@ if (movedThisStep and solid) {
 	}
 	
 }
+
+if (onGround) {
+	depth = layers.groundDecorations;
+}

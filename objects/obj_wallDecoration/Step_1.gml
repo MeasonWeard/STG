@@ -10,6 +10,8 @@ if (findWall) {
 	
 		var dist = point_distance(xx, yy, x, y - 64);
 		
+		if (dist > 150) continue;
+		
 		if (dist < closest) {
 		
 			closest = dist;
@@ -21,7 +23,7 @@ if (findWall) {
 	
 	if (instance_exists(owner)) {
 		
-		if (instance_exists(owner.decoration)) {
+		if (instance_exists(owner.decoration) and owner.decoration.natural) {
 		
 			instance_destroy(owner.decoration);
 		

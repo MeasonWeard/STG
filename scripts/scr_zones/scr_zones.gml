@@ -44,7 +44,7 @@ function zone() constructor {
 
 function zone_waste() : zone() constructor {
 
-	name = "Waste Disposal B";
+	name = "Waste Disposal A";
 	portrait = spr_toxicCrate;
 
 	mapW = 12;
@@ -66,8 +66,9 @@ function zone_waste() : zone() constructor {
 			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
 		
 			//var stages = ["wasteArena1","wasteArenaLava1","wasteArenaAcid1"];
-			var halls = [stage_wasteHall1, stage_wasteHall2];//[stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
-			var sideRooms = [stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaAcid2, stage_wasteArenaLava1];
+			var halls = [stage_wasteHall1, stage_wasteHall2];
+			var arenas = [stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaAcid2, stage_wasteArenaLava1];
+			var sideRooms = [stage_wasteIncinerator];
 			var endStages = [stage_wasteBoss1];
 
 			var startX = startPos.xx;
@@ -75,16 +76,28 @@ function zone_waste() : zone() constructor {
 
 			var mainLength = irandom_range(8, 12);
 			var sideHallAmount = irandom_range(3, 6);
-			var sideRoomsAmount = irandom_range(6, 8);
-			var replaceRoomsAmount = irandom_range(6, 8);
 			
 			var result = scr_mapGen_generateHallways(map, halls, startX, startY, mainLength, sideHallAmount, 2, 5);
 			var cellCount = result.cellCount;
 			
+			var arenasMin = ceil(cellCount * 0.1);
+			var arenasMax = arenasMin + 2;
+			
+			var sideMin = ceil(cellCount * 0.3);
+			var sideMax = arenasMin + 2;
+			
+			var arenasReplace = ceil(cellCount * 0.3);
+			
+			var sideRoomsAmount = irandom_range(sideMin, sideMax);
+			var arenasAmount = irandom_range(arenasMin, arenasMax);
+			
+			result = scr_mapGen_addSideRooms(map, arenas, arenasAmount);
+			cellCount += result.cellCount;
+			
 			result = scr_mapGen_addSideRooms(map, sideRooms, sideRoomsAmount);
 			cellCount += result.cellCount;
 			
-			result = scr_mapGen_replaceRooms(map, sideRooms, replaceRoomsAmount, stageTypes.hall);
+			result = scr_mapGen_replaceRooms(map, arenas, arenasReplace, stageTypes.hall);
 
 			success = cellCount > 20;
 			if (!success) continue;
@@ -98,64 +111,6 @@ function zone_waste() : zone() constructor {
 	}
 	
 }
-
-//function zone_commercial() : zone() constructor {
-
-//	name = "Commercial";
-//	portrait = spr_poster1;
-
-//	mapW = 12;
-//	mapH = 12;
-	
-//	baseLevel = 1;
-	
-//	static generateMap = function() {
-	
-//		var tries = 0;
-//		var success = false;
-//		var map;
-	
-//		while (!success and tries < 12) {
-			
-//			tries ++;
-			
-//			map = scr_mapGen_createBlankMap(mapW, mapH);
-//			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
-		
-//			//var stages = ["wasteArena1","wasteArenaLava1","wasteArenaAcid1"];
-//			var halls = [stage_commHall1];//[stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
-//			var plazas = [stage_commArena1];
-//			var sideRooms = [stage_commCinema];
-//			var endStages = [stage_wasteBoss1];
-
-//			var startX = startPos.xx;
-//			var startY = startPos.yy;
-
-//			var mainLength = irandom_range(8, 12);
-//			var sideHallAmount = irandom_range(3, 6);
-//			var sideRoomsAmount = irandom_range(6, 8);
-//			var replaceRoomsAmount = irandom_range(6, 8);
-			
-//			var result = scr_mapGen_generateHallways(map, halls, startX, startY, mainLength, sideHallAmount, 2, 5);
-//			var cellCount = result.cellCount;
-			
-//			result = scr_mapGen_addSideRooms(map, sideRooms, sideRoomsAmount);
-//			cellCount += result.cellCount;
-			
-//			result = scr_mapGen_replaceRooms(map, sideRooms, replaceRoomsAmount, stageTypes.hall);
-
-//			success = cellCount > 20;
-//			if (!success) continue;
-
-//			scr_mapGen_makeFurthestEndCell(map, startX, startY, endStages);
-		
-//		}
-
-//		return map;
-	
-//	}
-	
-//}
 
 function zone_commercial() : zone() constructor {
 
@@ -359,63 +314,6 @@ function zone_commercial() : zone() constructor {
 			
 			success = true;
 			
-		}
-
-		return map;
-	
-	}
-	
-}
-
-function zone_wasteTest() : zone() constructor {
-
-	name = "Waste Disposal A";
-	portrait = spr_toxicCrate;
-
-	mapW = 12;
-	mapH = 12;
-	
-	baseLevel = 1;
-	
-	static generateMap = function() {
-	
-		var tries = 0;
-		var success = false;
-		var map;
-	
-		while (!success and tries < 92) {
-			
-			tries ++;
-			
-			map = scr_mapGen_createBlankMap(mapW, mapH);
-			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
-		
-			//var stages = ["wasteArena1","wasteArenaLava1","wasteArenaAcid1"];
-			var halls = [stage_wasteHall1, stage_wasteHall2];//[stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaLava1];
-			var sideRooms = [stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaAcid2, stage_wasteArenaLava1];
-			var endStages = [stage_wasteBoss1];
-
-			var startX = startPos.xx;
-			var startY = startPos.yy;
-
-			var mainLength = irandom_range(8, 12);
-			var sideHallAmount = irandom_range(3, 6);
-			var sideRoomsAmount = irandom_range(6, 8);
-			var replaceRoomsAmount = irandom_range(6, 8);
-			
-			var result = scr_mapGen_generateHallways(map, halls, startX, startY, mainLength, sideHallAmount, 2, 5);
-			var cellCount = result.cellCount;
-			
-			result = scr_mapGen_addSideRooms(map, sideRooms, sideRoomsAmount);
-			cellCount += result.cellCount;
-			
-			result = scr_mapGen_replaceRooms(map, sideRooms, replaceRoomsAmount, stageTypes.hall);
-
-			success = cellCount > 20;
-			if (!success) continue;
-
-			scr_mapGen_makeFurthestEndCell(map, startX, startY, endStages);
-		
 		}
 
 		return map;

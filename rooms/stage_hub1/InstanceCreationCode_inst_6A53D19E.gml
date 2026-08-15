@@ -1,3 +1,3 @@
-tagText = "Waste Disposal B";
-doorText = "Waste\nDisposal\nB";
+tagText = "Waste Disposal A";
+doorText = "Waste\nDisposal\nA";
 zoneConstructor = zone_waste;

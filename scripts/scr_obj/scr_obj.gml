@@ -269,6 +269,24 @@ function scr_obj_cullByDirection(dir, inverse = false) {
 	
 }
 
+function scr_obj_cullBySeed(obj, chance, inverse = false) {
+	
+	if (!instance_exists(obj)) exit;
+
+	var seed = scr_obj_generateSeed(obj);
+	
+	random_set_seed(seed);
+	
+	var cull = scr_random_chance(chance);
+	
+	randomise();
+	
+	if (inverse) cull = !cull;
+	
+	if (cull) instance_destroy();
+	
+}
+
 function scr_obj_findValidPlace(inst, xx, yy) {
 
 	if (!instance_exists(inst)) return undefined;

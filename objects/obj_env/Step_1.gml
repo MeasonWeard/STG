@@ -48,7 +48,7 @@ if (setup) {
 	}
 	
 	if (onGround) {
-		depth = layers.ground;
+		depth = layers.groundDecorations;
 		projCollision = false;
 	}
 	

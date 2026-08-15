@@ -20,6 +20,7 @@ if (setupDecoration and is_array(decorationSprites)) {
 			decoration.y = y - spriteYoffset;
 			decoration.owner = self;
 			decoration.findWall = false;
+			decoration.natural = true;
 	
 		}
 	

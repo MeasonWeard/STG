@@ -262,6 +262,14 @@ stages = {
 		
 	},
 	
+	wasteIncinerator: {
+	
+		room: stage_wasteIncinerator,
+		mapCol: c_red,
+		type: stageTypes.special
+	
+	},
+	
 	wasteBoss1: {
 		
 		room: stage_wasteBoss1,
