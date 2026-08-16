@@ -27,3 +27,7 @@ if (movedThisStep and solid) {
 if (onGround) {
 	depth = layers.groundDecorations;
 }
+
+if (onCeiling) {
+	depth = layers.ceiling;	
+}

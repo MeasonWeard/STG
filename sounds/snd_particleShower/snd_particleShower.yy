@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.4653741,
+  "duration":2.14839,
   "exportDir":"",
   "name":"snd_particleShower",
   "parent":{
@@ -22,5 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"snd_particleShower.wav",
-  "volume":0.5,
+  "volume":1.0,
 }

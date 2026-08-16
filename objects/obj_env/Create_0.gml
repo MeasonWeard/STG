@@ -13,6 +13,7 @@ bulletHitFunc = undefined;
 blockLos = false;
 
 onGround = false;
+onCeiling = false;
 projCollision = true;
 
 height = 200;

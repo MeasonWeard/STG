@@ -53,6 +53,7 @@ enum layers {
 	projectiles = -400,
 	lighting = -700,
 	borders = -800,
+	ceiling = -5000,
 	effects = -6000,
 	ui = -9000,
 	ui2 = -10000,
@@ -274,6 +275,14 @@ stages = {
 	
 		room: stage_wasteIncinerator2,
 		mapCol: c_red,
+		type: stageTypes.special
+	
+	},
+	
+	wasteAcidRiver: {
+	
+		room: stage_wasteAcidRiver,
+		mapCol: c_green,
 		type: stageTypes.special
 	
 	},

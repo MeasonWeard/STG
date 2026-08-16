@@ -47,3 +47,5 @@ getParticle = function() {
 	return noone;
 	
 }
+
+scr_audio_playSoundAt(snd_particleShower, x, y);

@@ -4,6 +4,18 @@ if (setup) {
 
 	setup = false;
 	
+	if (onGround) {
+		depth = layers.groundDecorations;
+		projCollision = false;
+	}
+	
+	if (onCeiling) {
+		onGround = false;
+		depth = layers.effects;
+		projCollision = false;
+		solid = false;
+	}
+	
 	//hash
 	if (solid) {
 		
@@ -47,9 +59,6 @@ if (setup) {
 	
 	}
 	
-	if (onGround) {
-		depth = layers.groundDecorations;
-		projCollision = false;
-	}
+
 	
 }
