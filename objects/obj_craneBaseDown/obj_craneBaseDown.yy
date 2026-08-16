@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_craneDown",
+  "%Name":"obj_craneBaseDown",
   "eventList":[],
   "managed":true,
-  "name":"obj_craneDown",
+  "name":"obj_craneBaseDown",
   "overriddenProperties":[],
   "parent":{
     "name":"Things",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_craneDown",
-    "path":"sprites/spr_craneDown/spr_craneDown.yy",
+    "name":"spr_craneBaseDown",
+    "path":"sprites/spr_craneBaseDown/spr_craneBaseDown.yy",
   },
   "spriteMaskId":null,
   "visible":true,

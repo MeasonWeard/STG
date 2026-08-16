@@ -17,6 +17,7 @@ shieldSounds = global.data.soundProfiles.bulletHitShield;
 oa = 100;
 
 damageDestructibles = false;
+damageEnv = true;
 
 stopOnHit = false;
 range = 0;
