@@ -64,7 +64,7 @@ scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 //gear.headgear = hg;
 
 //STATS
-baseStats.maxHp = 200;
+baseStats.maxHp = 250;
 baseStats.maxEnergy = 200;
 baseStats.spd = 6;
 baseStats.maxDashes = 2;

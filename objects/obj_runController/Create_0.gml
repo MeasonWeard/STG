@@ -11,6 +11,10 @@ generateMap = true;
 generateWeights = true;
 levelWeights = [];
 
+minorGroups = [];
+majorGroups = [];
+generateGroups = true;
+
 zoneInst = undefined;
 map = undefined;
 startPos = undefined;

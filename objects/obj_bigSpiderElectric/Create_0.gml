@@ -1,7 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
-name = "Spider Drone";
+name = "Fire Spider";
 tags = ["mech"];
 bulletHitSounds = global.data.soundProfiles.bulletHitMetalHigh;
 

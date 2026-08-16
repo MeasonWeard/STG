@@ -75,3 +75,37 @@ if (generateWeights) {
 	}
 	
 }
+
+if (generateGroups) {
+
+	generateGroups = false;
+	
+	if (is_struct(zoneInst)) {
+	
+		minorGroups = [];
+
+		for (var i = 0; i < array_length(zoneInst.minorGroups); i++) {
+			
+			var group = zoneInst.minorGroups[i].calculate(runLevel);
+
+			if (array_length(group) > 0) {
+				array_push(minorGroups, group);
+			}
+
+		}
+	
+		majorGroups = [];
+
+		for (var i = 0; i < array_length(zoneInst.majorGroups); i++) {
+
+			var group = zoneInst.majorGroups[i].calculate(runLevel);
+
+			if (array_length(group) > 0) {
+				array_push(majorGroups, group);
+			}
+
+		}
+	
+	}
+	
+}

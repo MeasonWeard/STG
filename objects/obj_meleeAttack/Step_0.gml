@@ -212,13 +212,6 @@ if (instance_exists(owner)) {
 	
 	if (move) {
 		
-		//var meleeX = owner.gunX;
-		//var meleeY = owner.gunY;
-		//var aimX = owner.aimX;
-		//var aimY = owner.aimY;
-		
-		//var dir = point_direction(meleeX, meleeY, aimX, aimY);
-		
 		var offset = owner.meleeRangeOffset + range;
 		var attackX = meleeX + lengthdir_x(offset, dir);
 		var attackY = meleeY + lengthdir_y(offset, dir);

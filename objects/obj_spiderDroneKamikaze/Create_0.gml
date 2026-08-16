@@ -39,6 +39,7 @@ baseStats.maxHp = 40;
 baseStats.spd = 7;
 baseStats.da = 115;
 baseStats.elecRes = -10;
+baseStats.kinRes = 2;
 
 levelUpFunc = function() {
 

@@ -1,6 +1,11 @@
 charHash = global.stageController.charHash;
 envHash = global.stageController.envHash;
 
+charHashKeys = [];
+
+cellX = undefined;
+cellY = undefined;
+
 faction = undefined;
 
 image_speed = 0;

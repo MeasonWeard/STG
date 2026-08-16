@@ -1,3 +1,11 @@
+var cell = scr_hash_getCellAt(x, y);
+
+if (cell.xx != cellX or cell.yy != cellY) {
+	cellX = cell.xx;
+	cellY = cell.yy;
+	scr_hash_updateHashKeys(charHashKeys, cellX, cellY);	
+}
+
 //movement
 wiggleDir += wiggleStep;
 
@@ -42,36 +50,44 @@ if (damTick > 0) {
 		damTick = damTime;
 
 		var dec = 1 + bioBonus * 0.01;
-
-		var nearby = scr_hash_getNearby(charHash, x, y);
-		var len = array_length(nearby);
-	
-		for (var i = 0; i < len; i++) {
-	
-			var char = nearby[i];
 		
-			if (!instance_exists(char)) continue;
-		
-			if (char.faction == faction) continue;
+		for (var k = 0; k < 9; k++) {
 	
-			var col = scr_obj_collision(self, char, false);
+			var key = charHashKeys[k];
+	
+			if (!variable_struct_exists(charHash, key)) continue;
+	
+			var nearby = charHash[$ key];
+			var len = array_length(nearby);
+	
+			for (var i = 0; i < len; i++) {
+	
+				var char = nearby[i];
 		
-			if (col) {
+				if (!instance_exists(char)) continue;
+		
+				if (char.faction == faction) continue;
+	
+				var col = scr_obj_collision(self, char, false);
+		
+				if (col) {
 			
-				var isBio = scr_char_hasTag(char, "bio");
+					var isBio = scr_char_hasTag(char, "bio");
 			
-				var dam = isBio? scr_stats_multiplyDamageProfile(damage, dec) : damage;
+					var dam = isBio? scr_stats_multiplyDamageProfile(damage, dec) : damage;
 			
-				scr_char_damage(char, dam, undefined, true);
+					scr_char_damage(char, dam, undefined, true);
 			
-				var snd = scr_audio_randomSoundFromProfile(damSounds);
-				scr_audio_playSoundAt(snd, x, y);
+					var snd = scr_audio_randomSoundFromProfile(damSounds);
+					scr_audio_playSoundAt(snd, x, y);
 			
-				charges--;
-				life -= 22;
+					charges--;
+					life -= 22;
 				
-			}
+				}
 	
+			}
+		
 		}
 	
 	}

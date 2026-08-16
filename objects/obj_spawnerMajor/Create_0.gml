@@ -1,8 +1,8 @@
 // Inherit the parent event
 event_inherited();
 
-if (instance_exists(global.stageController)) {
+if (instance_exists(global.runController)) {
 
-	groups = global.stageController.majorGroups;
-	
+	groups = global.runController.majorGroups;
+
 }

@@ -32,6 +32,7 @@ targetReaquireDist = 90;
 //stats
 baseStats.maxHp = 80;
 baseStats.spd += 0.5;
+baseStats.radRes = 3;
 
 levelUpFunc = function() {
 
@@ -39,6 +40,7 @@ levelUpFunc = function() {
 	
 	if (level mod 10 == 0) {
 			baseStats.kinDam += 2;
+			baseStats.radRes += 2;
 	}
 	
 	baseStats.kinDamPerc += 10;
@@ -46,3 +48,8 @@ levelUpFunc = function() {
 	if (level > 5) baseStats.spd += 0.02;
 	
 }
+
+//evolveLevel = 8;
+//evolveChanceMin = 3;
+//evolveChanceMax = 12;
+//evolutions = [obj_fourGuns];

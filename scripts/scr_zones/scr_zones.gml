@@ -29,6 +29,9 @@ function zone() constructor {
 		yy: 0
 	}
 	
+	minorGroups = [];
+	majorGroups = [];
+	
 	static setup = undefined;
 
 	static generateMap = function() {
@@ -52,6 +55,10 @@ function zone_waste() : zone() constructor {
 	
 	baseLevel = 3;
 	
+	var groups = scr_spawns_testGroups();
+	minorGroups = groups.minor;
+	majorGroups = groups.major;
+
 	static generateMap = function() {
 	
 		var tries = 0;
@@ -120,6 +127,10 @@ function zone_commercial() : zone() constructor {
 	mapH = 12;
 	
 	baseLevel = 1;
+	
+	var groups = scr_spawns_testGroups();
+	minorGroups = groups.minor;
+	majorGroups = groups.major;
 	
 	static generateMap = function() {
 	

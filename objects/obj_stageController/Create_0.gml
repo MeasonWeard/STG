@@ -75,11 +75,6 @@ createdArrows = false;
 stageInProgress = true;
 checkIfCleared = true;
 
-//enemies
-var eg = data.enemyGroups;
-minorGroups = [];
-majorGroups = [];
-
 //projectile pool
 projectilePool = [];
 procectilePoolLen = 300;

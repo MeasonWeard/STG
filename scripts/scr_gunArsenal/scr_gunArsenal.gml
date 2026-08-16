@@ -262,6 +262,28 @@ function gun_bigSpiderGun(level, rarity) : gunInst(level, rarity) constructor {
 	
 }
 
+function gun_bigMutantGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Four Guns"
+	
+	projSprite = spr_bulletNormal;
+	projDestroySprite = spr_bulletExplosion2;
+	auto = true;
+	fireRate = 11;
+	clipSize = 8;
+	reloadTime = 1;
+	spd = 16;
+	minAimOff = 2.4;
+	maxAimOff = 10;
+	recoil = 2;
+	stability = 0.08;
+	
+	shootSounds = [snd_electricBullet];
+	
+	damage.kin = 5;
+	
+}
+
 function gun_bigSpiderFireGun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Big Spider Flame Gun"

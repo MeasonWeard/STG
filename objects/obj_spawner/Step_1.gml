@@ -19,7 +19,7 @@ if (setup) {
 	if (array_length(enemyList) == 0) {
 	
 		var group = scr_randomElement(groups);
-		
+	
 		enemyList = group;
 	
 	}
@@ -28,6 +28,6 @@ if (setup) {
 	var runLevel = rc.runLevel;
 	
 	minEnemies = clamp(runLevel * 2, 1, 8);
-	maxEnemies = clamp(runLevel * 4, 4, 12);
+	maxEnemies = clamp(ceil(runLevel * 3.5), 4, 12);
 
 }

@@ -1,7 +1,7 @@
 // Inherit the parent event
 event_inherited();
 
-name = "Spider Drone";
+name = "Big Spider";
 tags = ["mech"];
 bulletHitSounds = global.data.soundProfiles.bulletHitMetalHigh;
 
@@ -27,6 +27,7 @@ gunYoffset = -32;
 baseStats.maxHp = 120;
 baseStats.spd = 5;
 baseStats.elecRes = -10;
+baseStats.kinRes = 10;
 
 levelUpFunc = function() {
 
@@ -35,6 +36,7 @@ levelUpFunc = function() {
 	if (level mod 10 == 0) {
 			baseStats.kinDam += 1;
 			baseStats.radDam += 1;
+			baseStats.kinRes += 5;
 	}
 	
 	baseStats.kinDamPerc += 10;
@@ -47,7 +49,8 @@ levelUpFunc = function() {
 	
 }
 
-evolveLevel = 10;
+evolveLevel = 8;
+evolveChanceMin = 10;
 evolveChanceMax = 60;
 evolutions = [obj_bigSpiderFire, obj_bigSpiderElectric];
 

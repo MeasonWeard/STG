@@ -29,6 +29,7 @@ baseStats.maxHp = 40;
 baseStats.spd = 6;
 baseStats.da = 110;
 baseStats.elecRes = -10;
+baseStats.kinRes = 2;
 
 levelUpFunc = function() {
 
@@ -49,7 +50,7 @@ levelUpFunc = function() {
 	
 }
 
-evolveLevel = 8;
-evolveChanceMin = 4;
-evolveChanceMax = 18;
-evolutions = [obj_bigSpider];
+//evolveLevel = 8;
+//evolveChanceMin = 4;
+//evolveChanceMax = 18;
+//evolutions = [obj_bigSpider];

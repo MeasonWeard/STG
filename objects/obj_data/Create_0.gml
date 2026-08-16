@@ -452,22 +452,6 @@ soundProfiles = {
 	
 }
 
-enemyGroups = {
-
-	mutantsMinor: [[obj_bertha, 100]],
-	mutantsMajor: [[obj_bertha, 100],[obj_celia,25]],
-	
-	aliensMinor: [[obj_alien, 100]],
-	aliendsMajor: [[obj_alien, 100]],
-	
-	spidersMinor: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20]],
-	spidersMajor: [[obj_spiderDrone, 100],[obj_spiderDroneKamikaze, 20],[obj_bigSpider, 20]],
-	
-	plantsMinor: [[obj_plant, 100]],
-	plantsMajor: [[obj_plant, 100]]
-	
-}
-
 skillConstructors = {
 	
 	antimatterBlast: skill_antimatterBlast, //phys
