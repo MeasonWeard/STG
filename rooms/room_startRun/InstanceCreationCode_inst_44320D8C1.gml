@@ -3,6 +3,10 @@ hAlign = fa_middle;
 
 textGetter = function() {
 
-	return global.startRun.intensityIndex;
+	var int =  global.startRun.intensityIndex;
+	
+	if (int == 0) return "Off";
+	
+	return int;
 	
 }

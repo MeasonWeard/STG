@@ -41,6 +41,7 @@
   "HTile":false,
   "layers":[
     {"$GMImageLayer":"","%Name":"f1bc4a31-4780-44ce-8a99-ad75186900fa","blendMode":0,"displayName":"default","isLocked":false,"name":"f1bc4a31-4780-44ce-8a99-ad75186900fa","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"8731b09a-14ba-414b-b495-298317c4c305","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"8731b09a-14ba-414b-b495-298317c4c305","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_fungalTurretSpawn",
   "nineSlice":null,
