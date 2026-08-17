@@ -186,3 +186,15 @@ function scr_movement_dashDir(char, dir) {
 	char.dashes = max(0, char.dashes - 1);
 
 }
+
+function scr_movement_teleport(char, xx, yy) {
+
+	if(!instance_exists(char)) exit;
+	
+	char.x = xx;
+	char.y = yy;
+	
+	scr_movement_updateCollisionHitBox(char);
+	scr_movement_updateMovementHitBox(char);
+	
+}

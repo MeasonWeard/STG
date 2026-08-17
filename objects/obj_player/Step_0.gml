@@ -1,5 +1,7 @@
 if (!active) exit;
 
+//hp = 9999999;
+
 event_inherited();
 
 if (instance_exists(cursor)) {

@@ -11,6 +11,8 @@ var playerY =  room_height * 0.5;
 deathCountdown = 90;
 alertDelay = 30;
 checkPlayerMoveToSide = true;
+alertEnemies = 0;
+alertEnemiesNext = 0;
 
 if (instance_exists(rc) and rc.firstStage) {
 	
@@ -134,6 +136,12 @@ timeSlicing = {
 		nextIndex: 0,
 		turn: 0,
 		steps: 12
+	},
+	
+	offScreen: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 30
 	}
 	
 }

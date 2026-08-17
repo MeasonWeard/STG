@@ -167,3 +167,21 @@ function scr_showDevInfo() {
 	}
 	
 }
+
+function scr_isPointOffScreen(xx, yy, margin = 0) {
+
+	var cam = view_camera[0];
+
+	var camX = camera_get_view_x(cam);
+	var camY = camera_get_view_y(cam);
+	var camW = camera_get_view_width(cam);
+	var camH = camera_get_view_height(cam);
+
+	return (
+		xx < camX - margin
+		or xx > camX + camW + margin
+		or yy < camY - margin
+		or yy > camY + camH + margin
+	);
+
+}

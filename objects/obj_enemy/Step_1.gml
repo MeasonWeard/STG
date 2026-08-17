@@ -5,6 +5,9 @@ if (enemySetup) {
 
 	enemySetup = false;
 
+	xstart = x;
+	ystart = y;
+
 	var lvl = level == 0 ? scr_char_rollLevel() : level;
 	var evolve = false;
 	
@@ -56,3 +59,5 @@ if (calculateData) {
 	maxData = max(4, round(maxData * lvlMod * diffMod));
 	
 }
+
+if (alert or runBack) sc.alertEnemiesNext++;

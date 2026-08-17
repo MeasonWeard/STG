@@ -356,3 +356,41 @@ function scr_obj_findValidPlace(inst, xx, yy) {
 	return undefined;
 	
 }
+
+function scr_obj_offScreen(inst, margin = 0) {
+
+	if (!instance_exists(inst)) return true;
+
+	var xscale = inst.image_xscale;
+	var yscale = inst.image_yscale;
+
+	var xoff = inst.sprite_xoffset;
+	var yoff = inst.sprite_yoffset;
+
+	var x1 = inst.x - xoff * xscale;
+	var x2 = inst.x + (inst.sprite_width - xoff) * xscale;
+
+	var y1 = inst.y - yoff * yscale;
+	var y2 = inst.y + (inst.sprite_height - yoff) * yscale;
+
+	// min/max handles flipped sprites too
+	var left   = min(x1, x2);
+	var right  = max(x1, x2);
+	var top    = min(y1, y2);
+	var bottom = max(y1, y2);
+
+	var cam = view_camera[0];
+
+	var camX = camera_get_view_x(cam);
+	var camY = camera_get_view_y(cam);
+	var camW = camera_get_view_width(cam);
+	var camH = camera_get_view_height(cam);
+
+	return (
+		right < camX - margin
+		or left > camX + camW + margin
+		or bottom < camY - margin
+		or top > camY + camH + margin
+	);
+
+}

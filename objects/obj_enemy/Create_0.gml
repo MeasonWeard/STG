@@ -11,6 +11,8 @@ ghost.owner = self;
 
 dropOnDestroy = true;
 
+runBack = false;
+
 //drops
 minData = 8;
 maxData = 16;
@@ -33,6 +35,8 @@ evolutions = [];
 evolveChanceMin = 10;
 evolveChanceMax = 50;
 evolveLevel = undefined;
+
+offScreenIndex = scr_timeSlicing_assignTurnIndex("offScreen");
 
 //ai
 scr_ai_setup();

@@ -12,3 +12,4 @@ if (!paused and !instance_exists(global.player)) {
 	if (deathCountdown < 1) scr_stages_endRun();
 	
 }
+
