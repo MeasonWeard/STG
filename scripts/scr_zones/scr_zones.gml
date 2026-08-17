@@ -48,7 +48,7 @@ function zone() constructor {
 function zone_waste() : zone() constructor {
 
 	name = "Waste Disposal A";
-	portrait = spr_toxicCrate;
+	portrait = spr_wasteDisposalPortrait;
 
 	mapW = 12;
 	mapH = 12;

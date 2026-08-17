@@ -12,3 +12,11 @@ centreY = (top + bottom) * 0.5;
 
 portrait = sr.portrait;
 name = sr.zoneName;
+
+setScale = true;
+
+//formatting
+scale = 0;
+portraitX = 0;
+portraitY = 0;
+pad = 12;

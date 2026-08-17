@@ -1,7 +1,9 @@
 {
   "$GMObject":"",
   "%Name":"obj_dumpster",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_dumpster",
   "overriddenProperties":[],
@@ -31,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_dumpster",
-    "path":"sprites/spr_dumpster/spr_dumpster.yy",
+    "name":"spr_newDumpster",
+    "path":"sprites/spr_newDumpster/spr_newDumpster.yy",
   },
   "spriteMaskId":null,
   "visible":true,
