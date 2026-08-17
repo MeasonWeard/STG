@@ -169,3 +169,10 @@ showName.text = "Always show weapon name on cursor";
 showName.x = camXmid - 100;
 showName.y = showReload.y + optionsGap;
 showName.active = false;
+
+showSkills = instance_create_layer(x, y, "Instances", obj_checkBox);
+showSkills.setting = "showSkillsOnCursor";
+showSkills.text = "Show skills on cursor";
+showSkills.x = camXmid - 100;
+showSkills.y = showName.y + optionsGap;
+showSkills.active = false;

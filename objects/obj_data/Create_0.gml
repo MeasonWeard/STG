@@ -37,6 +37,7 @@ defaultSettings = {
 	resIndex: 0,
 	
 	showReloadOnCursor: true,
+	showSkillsOnCursor: false,
 	alwaysShowWeaponName: false,
 	showAmmo: 1,
 	

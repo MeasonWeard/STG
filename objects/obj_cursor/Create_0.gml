@@ -15,6 +15,7 @@ showAmmo = ammoSetting == 0 or ammoSetting == 2 ? true : false;
 
 showReload = scr_data_getSetting("showReloadOnCursor", true);
 alwaysShowName = scr_data_getSetting("alwaysShowWeaponName", false);
+showSkillsOnCursor = scr_data_getSetting("showSkillsOnCursor", false);
 
 //formatting
 meleeBarWidth = 48;
@@ -57,3 +58,11 @@ hoverTxtCount = 0;
 hoverFont = fnt_normal;
 
 enemyCheckTick = 0;
+
+skill1 = undefined;
+skill2 = undefined;
+skill3 = undefined;
+skill4 = undefined;
+
+skillRad = 4;
+skillGap = 24;

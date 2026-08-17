@@ -15,16 +15,11 @@ if (hoverTxt != undefined and hoverTxtCount > 0) {
 	
 }
 
+var rad = 8;
+
 //cursor
 if (mode == "aim") {
 	
-	var rad = 8;
-
-	// reticle
-	//draw_set_colour(c_red);
-	//draw_circle(x, y, 2, false);
-	//draw_circle(x, y, rad, true);
-
 	// common weapon display values
 	var weapon = player.equippedWeapon;
 
@@ -73,6 +68,73 @@ if (mode == "aim") {
 	draw_set_colour(c_red);
 	draw_circle(x, y, 2, false);
 	draw_circle(x, y, rad, true);
+	
+	//skills
+	if (showSkillsOnCursor) {
+	
+		var gap = rad + skillGap;
+	
+		if (is_struct(skill1)) {
+		
+			var ready = skill1.ready();
+			var fillCol = ready ? c_aqua : c_black;
+		
+			var xx = x + lengthdir_x(gap, 225);
+			var yy = y - lengthdir_y(gap, 225);
+		
+			draw_set_colour(fillCol);
+			draw_circle(xx, yy, skillRad, false);
+			draw_set_colour(c_white);
+			draw_circle(xx, yy, skillRad, true);
+		
+		}
+		
+		if (is_struct(skill2)) {
+		
+			var ready = skill2.ready();
+			var fillCol = ready ? c_aqua : c_black;
+		
+			var xx = x - lengthdir_x(gap, 225);
+			var yy = y - lengthdir_y(gap, 225);
+		
+			draw_set_colour(fillCol);
+			draw_circle(xx, yy, skillRad, false);
+			draw_set_colour(c_white);
+			draw_circle(xx, yy, skillRad, true);
+		
+		}
+		
+		if (is_struct(skill3)) {
+		
+			var ready = skill3.ready();
+			var fillCol = ready ? c_aqua : c_black;
+		
+			var xx = x + lengthdir_x(gap, 225);
+			var yy = y + lengthdir_y(gap, 225);
+		
+			draw_set_colour(fillCol);
+			draw_circle(xx, yy, skillRad, false);
+			draw_set_colour(c_white);
+			draw_circle(xx, yy, skillRad, true);
+		
+		}
+		
+		if (is_struct(skill4)) {
+		
+			var ready = skill4.ready();
+			var fillCol = ready ? c_aqua : c_black;
+		
+			var xx = x - lengthdir_x(gap, 225);
+			var yy = y + lengthdir_y(gap, 225);
+		
+			draw_set_colour(fillCol);
+			draw_circle(xx, yy, skillRad, false);
+			draw_set_colour(c_white);
+			draw_circle(xx, yy, skillRad, true);
+		
+		}
+		
+	}
 
 	// ammo / charges
 	if (showAmmo and is_instanceof(weapon, weaponInst)) {
@@ -120,7 +182,6 @@ if (mode == "aim") {
 
 	}
 
-
 	// weapon name
 	if (alwaysShowName) gunNameTick = 12;
 	
@@ -141,6 +202,9 @@ if (mode == "aim") {
 		}
 
 	}
+	
+
+	
 	
 } else {
 

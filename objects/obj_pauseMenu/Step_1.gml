@@ -34,6 +34,7 @@ if (tab == "settings") {
 	showName.active = true;
 	fullscreen.active = true;
 	resolution.active = true;
+	showSkills.active = true;
 	
 } else {
 	
@@ -45,5 +46,6 @@ if (tab == "settings") {
 	showName.active = false;
 	fullscreen.active = false;
 	resolution.active = false;
+	showSkills.active = false;
 	
 }

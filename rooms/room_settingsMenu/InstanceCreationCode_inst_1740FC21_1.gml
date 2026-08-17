@@ -1,5 +1,7 @@
 txt = "Back";
 
+leftKey = vk_escape;
+
 leftFunc = function() {
 
 	scr_file_saveGame(global.saveFile, global.gameData);
