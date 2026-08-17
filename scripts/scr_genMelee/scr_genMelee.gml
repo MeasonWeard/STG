@@ -790,8 +790,8 @@ function scr_genMelee_littleHammer(level, rarity) {
 	melee.killThreshold = 15;
 	melee.maxCharges = 4;
 	melee.rechargeTime = 2;
-	melee.attackRate = 1.3;
-	melee.size = 0.7;
+	melee.attackRate = 1.4;
+	melee.size = 0.8;
 	
 	var baseDamage = melee.baseDamage;
 	var bonusDam = scr_weapons_calculateBonusDamage(baseDamage, level);

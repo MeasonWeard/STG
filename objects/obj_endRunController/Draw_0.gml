@@ -203,7 +203,9 @@ if (tab == "loot") {
 if (tab == "reveal") {
 	
 	lockDelay --;
+	
 	//generate loot
+	
 	var maxLevel = rc.runLevel + 2;
 	//maxLevel = 12;
 	
@@ -217,52 +219,71 @@ if (tab == "reveal") {
 	
 	takeLockedButton.active = true;
 	
-	if (revealKey == "unique") {
 	
-		var len = array_length(uniqueLoot);
-		for (var i = 0; i < len; i++) {
+	if (generateLoot) {
 		
-			var lootFunc = uniqueLoot[i];
-			if (!is_callable(lootFunc)) continue;
+		generateLoot = false;
 		
-			var lvl = scr_loot_rollLevel(maxLevel);
-			var lootItem = lootFunc(lvl);
-			
-			if (!is_struct(lootItem)) continue;
-			
-			array_push(revealedLoot, lootItem);
-		
-		}
-		
-		uniqueLoot = [];
+		if (revealKey == "unique") {
 	
-	} else {
-	
-		var amount = variable_instance_get(self, revealKey);
-		var rarityNum = scr_loot_getRarityNum(revealKey);
+			var len = array_length(uniqueLoot);
+			for (var i = 0; i < len; i++) {
 		
-		while (amount > 0) {
+				var lootFunc = uniqueLoot[i];
+				if (!is_callable(lootFunc)) continue;
 		
-			var specialChance = min(25, 12 + maxLevel * 0.1 + rarityNum * 0.3);
-			var special = scr_random_chance(specialChance);
-		
-			var newLoot = noone;
+				var lvl = scr_loot_rollLevel(maxLevel);
+				var lootItem = lootFunc(lvl);
 			
-			if (special) {
-				newLoot = scr_loot_generateSpecialLoot(maxLevel, rarityNum);
-			} else {
-				newLoot = scr_loot_generateGenericLoot(maxLevel, rarityNum);	
+				if (!is_struct(lootItem)) continue;
+			
+				array_push(revealedLoot, lootItem);
+		
 			}
-			
-			array_push(revealedLoot, newLoot);
-			amount--;
 		
+			uniqueLoot = [];
+	
+		} else {
+	
+			var amount = variable_instance_get(self, revealKey);
+			var rarityNum = scr_loot_getRarityNum(revealKey);
+		
+			while (amount > 0) {
+		
+				var specialChance = min(25, 12 + maxLevel * 0.1 + rarityNum * 0.3);
+				var special = scr_random_chance(specialChance);
+		
+				var newLoot = noone;
+			
+				if (special) {
+					newLoot = scr_loot_generateSpecialLoot(maxLevel, rarityNum);
+				} else {
+					newLoot = scr_loot_generateGenericLoot(maxLevel, rarityNum);	
+				}
+			
+				array_push(revealedLoot, newLoot);
+				amount--;
+		
+			}
+	
 		}
+		
+		//lock the first 5 if no more than 5 items exist
+		//var len = array_length(revealedLoot);
+		
+		//if (len <= 5) {
+		
+		//	for (var i = 0; i < len; i++) {
+				
+		//		array_push(locked, i);
+				
+		//	}
+		
+		//}
+	
+		variable_instance_set(self, revealKey, 0);
 	
 	}
-	
-	//var setTo = lootKey == "unique" ? [] : 0;
-	variable_instance_set(self, revealKey, 0);
 	
 	//draw
 	var cap = string_capitalise(revealKey, 1);
@@ -343,6 +364,7 @@ if (tab == "reveal") {
 		if (isLocked) {
 		
 			draw_sprite(spr_locked, 0, slotX + 8, slotY + 8);
+			draw_set_colour(c_lime);
 			draw_rectangle(slotX, slotY, slotX + 128, slotY + 128, true);
 			draw_rectangle(slotX-1, slotY-1, slotX + 129, slotY + 129, true);
 		

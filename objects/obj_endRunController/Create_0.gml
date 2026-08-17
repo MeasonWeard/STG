@@ -141,6 +141,8 @@ reveal = function(lootKey) {
 	ec.revealKey = lootKey;
 	ec.tab = "reveal";
 	
+	ec.generateLoot = true;
+	
 }
 
 lock = function(index) {
@@ -305,6 +307,7 @@ revealKey = undefined;
 revealedLoot = [];
 takenLoot = [];
 locked = [];
+generateLoot = true;
 
 alpha = variable_struct_exists(loot, "alpha") ? loot[$ "alpha"] : 0;
 beta = variable_struct_exists(loot, "beta") ? loot[$ "beta"] : 0;

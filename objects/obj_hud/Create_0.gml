@@ -6,7 +6,7 @@ cursor = global.cursor;
 
 //settings
 settingsVersion = 0;
-var ammoSetting = scr_data_getSetting("showAmmoOn", 1);
+var ammoSetting = scr_data_getSetting("showAmmo", 1);
 showAmmo = ammoSetting == 0 or ammoSetting == 1 ? true : false;
 
 hub = sc.hub;

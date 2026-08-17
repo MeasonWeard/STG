@@ -260,6 +260,7 @@
     {"id":{"name":"obj_sealedCrateStack","path":"objects/obj_sealedCrateStack/obj_sealedCrateStack.yy",},},
     {"id":{"name":"obj_selectSaveController","path":"objects/obj_selectSaveController/obj_selectSaveController.yy",},},
     {"id":{"name":"obj_server","path":"objects/obj_server/obj_server.yy",},},
+    {"id":{"name":"obj_settingsController","path":"objects/obj_settingsController/obj_settingsController.yy",},},
     {"id":{"name":"obj_settingsDirty","path":"objects/obj_settingsDirty/obj_settingsDirty.yy",},},
     {"id":{"name":"obj_signDown","path":"objects/obj_signDown/obj_signDown.yy",},},
     {"id":{"name":"obj_signLeft","path":"objects/obj_signLeft/obj_signLeft.yy",},},
@@ -346,6 +347,7 @@
     {"id":{"name":"room_mainMenu","path":"rooms/room_mainMenu/room_mainMenu.yy",},},
     {"id":{"name":"room_physics","path":"rooms/room_physics/room_physics.yy",},},
     {"id":{"name":"room_selectSaveFile","path":"rooms/room_selectSaveFile/room_selectSaveFile.yy",},},
+    {"id":{"name":"room_settingsMenu","path":"rooms/room_settingsMenu/room_settingsMenu.yy",},},
     {"id":{"name":"room_skillsMainMenu","path":"rooms/room_skillsMainMenu/room_skillsMainMenu.yy",},},
     {"id":{"name":"room_startRun","path":"rooms/room_startRun/room_startRun.yy",},},
     {"id":{"name":"room_startRunTest","path":"rooms/room_startRunTest/room_startRunTest.yy",},},
@@ -973,6 +975,7 @@
     {"roomId":{"name":"stage_wasteIncinerator1","path":"rooms/stage_wasteIncinerator1/stage_wasteIncinerator1.yy",},},
     {"roomId":{"name":"stage_wasteIncinerator2","path":"rooms/stage_wasteIncinerator2/stage_wasteIncinerator2.yy",},},
     {"roomId":{"name":"stage_wasteAcidRiver","path":"rooms/stage_wasteAcidRiver/stage_wasteAcidRiver.yy",},},
+    {"roomId":{"name":"room_settingsMenu","path":"rooms/room_settingsMenu/room_settingsMenu.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

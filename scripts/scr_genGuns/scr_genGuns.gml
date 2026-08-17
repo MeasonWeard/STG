@@ -509,7 +509,7 @@ function scr_genGuns_autoPistol(level, rarity) {
 	//
 	gun.auto = true;
 	gun.clipSize = 6;
-	gun.fireRate = 9;
+	gun.fireRate = 14;
 	
 	gun.name += "Auto-Pistol";
 	
