@@ -1,4 +1,4 @@
-txt = "<";
+txt = "-";
 sr = global.startRun;
 
 leftFunc = function() {

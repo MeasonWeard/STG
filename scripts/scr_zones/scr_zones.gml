@@ -16,6 +16,7 @@ function zone() constructor {
 
 	name = "none";
 	portrait = spr_missing;
+	textCol = c_black;
 
 	baseLevel = 1;
 	level = 1;
@@ -49,6 +50,7 @@ function zone_waste() : zone() constructor {
 
 	name = "Waste Disposal A";
 	portrait = spr_wasteDisposalPortrait;
+	textCol = c_green;
 
 	mapW = 12;
 	mapH = 12;
@@ -120,8 +122,9 @@ function zone_waste() : zone() constructor {
 
 function zone_commercial() : zone() constructor {
 
-	name = "Commercial";
-	portrait = spr_poster1;
+	name = "Commercial Zone";
+	portrait = spr_commercialPortrait;
+	textCol = c_fuchsia;
 
 	mapW = 12;
 	mapH = 12;

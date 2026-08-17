@@ -4,6 +4,7 @@ data = global.data;
 
 hub = false;
 setupHub = true;
+pictureMode = false;
 
 var playerX = room_width * 0.5;
 var playerY =  room_height * 0.5;

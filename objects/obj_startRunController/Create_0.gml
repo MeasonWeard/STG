@@ -20,6 +20,7 @@ runLevel = 0;
 var tempZone = new global.selectedZone();
 
 zoneName = tempZone.name;
+titleCol = tempZone.textCol;
 portrait = tempZone.portrait;
 baseLevel = tempZone.baseLevel;
 

@@ -276,33 +276,37 @@ for (var i = 0; i < len; i++) {
 }
 
 //move
-x = nextX;
-y = nextY;
-
-rangeLeft -= spd;
-
-if (rangeLeft <= 0) active = false;
-
-if (x <= global.roomLeft or x >= global.roomRight or y <= global.projectileTop or y >= global.roomBottom) {
-
-	x = clamp(x, global.roomLeft, global.roomRight);
-	y = clamp(y, global.projectileTop, global.roomBottom);
+if (!sc.pictureMode) {
 	
-	var eff = instance_create_layer(x, y, "Instances", obj_bulletEffect);
-	eff.sprite_index = destroyEffect;
-	eff.image_angle = image_angle;
-	
-	for (var i = 0; i < funcsLen; i ++) {
-		var func = collisionFuncs[i];
-		if (is_callable(func)) func(self);
-	}
-	
-	var profile = global.data.soundProfiles.bulletHitMetal;
-	var snd = scr_audio_randomSoundFromProfile(profile);
-	if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
+	x = nextX;
+	y = nextY;
 
-	active = false;
+	rangeLeft -= spd;
+
+	if (rangeLeft <= 0) active = false;
+
+	if (x <= global.roomLeft or x >= global.roomRight or y <= global.projectileTop or y >= global.roomBottom) {
+
+		x = clamp(x, global.roomLeft, global.roomRight);
+		y = clamp(y, global.projectileTop, global.roomBottom);
+	
+		var eff = instance_create_layer(x, y, "Instances", obj_bulletEffect);
+		eff.sprite_index = destroyEffect;
+		eff.image_angle = image_angle;
+	
+		for (var i = 0; i < funcsLen; i ++) {
+			var func = collisionFuncs[i];
+			if (is_callable(func)) func(self);
+		}
+	
+		var profile = global.data.soundProfiles.bulletHitMetal;
+		var snd = scr_audio_randomSoundFromProfile(profile);
+		if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
+
+		active = false;
 		
-}
+	}
 
-if (!keepDepth) depth = -y - 32;
+	if (!keepDepth) depth = -y - 32;
+
+}

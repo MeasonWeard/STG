@@ -1,5 +1,12 @@
 event_inherited();
 
+if(global.stageController.pictureMode) {
+	xspd = 0;
+	yspd = 0;
+	exit;
+
+}
+
 var canBeAlerted = true;
 
 if (runBack) {

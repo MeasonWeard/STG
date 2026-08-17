@@ -40,6 +40,12 @@ if (global.devControls) {
 		}
 	
 	}
+	
+	if (keyboard_check_pressed(vk_add)) {
+   
+		pictureMode = !pictureMode;
+	
+	}
 
 }
 

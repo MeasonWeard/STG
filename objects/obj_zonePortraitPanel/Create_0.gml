@@ -2,12 +2,12 @@ sr = global.startRun;
 portrait = spr_missing;
 name = "";
 
-left = x;
-top = y;
-right = left + sprite_width;
-bottom = top + sprite_height;
+x = room_width * 0.5;
 
-centreX = (left + right) * 0.5;
+top = y;
+bottom = y + sprite_height;
+
+centreX = x;
 centreY = (top + bottom) * 0.5;
 
 portrait = sr.portrait;
@@ -20,3 +20,8 @@ scale = 0;
 portraitX = 0;
 portraitY = 0;
 pad = 12;
+titleH = 36;
+borderLeft = 0;
+borderRight = 0;
+borderTop = 0;
+borderBottom = 0;
