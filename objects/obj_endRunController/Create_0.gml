@@ -56,6 +56,8 @@ var spareSpace = room_width - rowLength;
 
 lootLeft = spareSpace * 0.5;
 
+confirmScrap = false;
+
 //FORMAT RESOURCES
 resTick = 15;
 resRevealed = 0;
@@ -158,38 +160,49 @@ lock = function(index) {
 	
 	}
 	
+	if (array_length(locked) >= 5) {
+		audio_play_sound(snd_error, 0, false);
+		exit;
+	}
+	
 	array_push(locked, index);
 	
 }
 
-scrapRevealed = function(index) {
+//scrapRevealed = function(index) {
 	
-	var ec = global.endRunController;
+//	var ec = global.endRunController;
 	
-	var lockedLen = array_length(locked);
+//	var lockedLen = array_length(locked);
 	
-	for (var i = lockedLen - 1; i > -1; i--) {
+//	for (var i = lockedLen - 1; i > -1; i--) {
 	
-		var j = locked[i];
+//		var j = locked[i];
 		
-		if (j == index) {
+//		if (j == index) {
 			
-			audio_play_sound(snd_error, 1, false);
-			exit;
+//			audio_play_sound(snd_error, 1, false);
+//			exit;
 			
-		}
+//		}
 	
-	}
+//	}
 	
-	ec.revealedLoot[index] = undefined;
+//	ec.revealedLoot[index] = undefined;
 	
-	audio_play_sound(snd_scrap, 0, false);
+//	audio_play_sound(snd_scrap, 0, false);
 	
-}
+//}
 
-scrapAll = function() {
+takeLocked = function() {
 
 	var ec = global.endRunController;
+	
+	
+	if (array_length(locked) == 0 and confirmScrap == false) {
+		confirmScrap = true;
+		exit;
+	}
 	
 	//do something in a for loop for scrapped loot
 	
@@ -210,41 +223,42 @@ scrapAll = function() {
 		
 	}
 	
-	locked = [];
-	revealedLoot = [];
-	
-	ec.tab = "loot";
-	
-	lootPage = 0;
-	
-	audio_play_sound(snd_scrap, 0, false);
-		
-}
-
-takeAll = function() {
-
-	var ec = global.endRunController;
-	
-	var revealedLen = array_length(revealedLoot);
-	
-	for (var i = 0; i < revealedLen; i++) {
-		
-		var entry = revealedLoot[i];
-		
-		if (!is_instanceof(entry, weaponInst) and !is_instanceof(entry, gearInst)) continue;
-		
-		array_push(takenLoot, entry);
-		
-	}
+	if (array_length(revealedLoot) > array_length(locked)) audio_play_sound(snd_scrap, 0, false);
 	
 	locked = [];
 	revealedLoot = [];
 	
+	ec.tab = "loot";
+	confirmScrap = false;
+	
 	lootPage = 0;
 	
-	ec.tab = "loot";
-		
 }
+
+//takeAll = function() {
+
+//	var ec = global.endRunController;
+	
+//	var revealedLen = array_length(revealedLoot);
+	
+//	for (var i = 0; i < revealedLen; i++) {
+		
+//		var entry = revealedLoot[i];
+		
+//		if (!is_instanceof(entry, weaponInst) and !is_instanceof(entry, gearInst)) continue;
+		
+//		array_push(takenLoot, entry);
+		
+//	}
+	
+//	locked = [];
+//	revealedLoot = [];
+	
+//	lootPage = 0;
+	
+//	ec.tab = "loot";
+		
+//}
 
 finish = function () {
 	
@@ -395,14 +409,9 @@ uniqueScrap.txt = "Scrap";
 uniqueScrap.leftFunc = scrap;
 uniqueScrap.leftArgs = ["unique"];
 
-//reveal screen buttons
-takeButton = instance_create_layer(xMid - 100, titleY + 30, "Instances", obj_buttonRectangle);
-takeButton.txt = "Take All";
-takeButton.leftFunc = takeAll;
-
-scrapAllButton = instance_create_layer(xMid + 100, titleY + 30, "Instances", obj_buttonRectangle);
-scrapAllButton.txt = "Scrap all";
-scrapAllButton.leftFunc = scrapAll;
+takeLockedButton = instance_create_layer(xMid, titleY + 30, "Instances", obj_buttonRectangle);
+takeLockedButton.txt = "Confirm";
+takeLockedButton.leftFunc = takeLocked;
 
 //page buttons
 prevPageButton = instance_create_layer(xMid + 350, titleY + 30, "Instances", obj_buttonSquare);
@@ -414,11 +423,12 @@ nextPageButton.txt = ">";
 nextPageButton.leftFunc = nextPage;
 
 pageTextX = (prevPageButton.x + nextPageButton.x) * 0.5;
+lockedTextX = titleX - 400;
 
 //deactivate all
 
 array_push(lootButtons, alphaReveal, alphaScrap, betaReveal, betaScrap, gammaReveal, gammaScrap,
-deltaReveal, deltaScrap, sigmaReveal, sigmaScrap, omegaReveal, omegaScrap, uniqueReveal, uniqueScrap, takeButton, scrapAllButton,
+deltaReveal, deltaScrap, sigmaReveal, sigmaScrap, omegaReveal, omegaScrap, uniqueReveal, uniqueScrap, takeLockedButton,
 prevPageButton, nextPageButton);
 
 var lootButtonsLen = array_length(lootButtons);

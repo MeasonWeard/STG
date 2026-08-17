@@ -1,4 +1,5 @@
 xpBar.visible = false;
+draw_set_colour(c_lime);
 
 var lootButtonsLen = array_length(lootButtons);
 for (var i = 0; i < lootButtonsLen; i ++) {
@@ -206,8 +207,15 @@ if (tab == "reveal") {
 	var maxLevel = rc.runLevel + 2;
 	//maxLevel = 12;
 	
-	takeButton.active = true;
-	scrapAllButton.active = true;
+	var instructionTxt = "Choose up to 5 items to keep. The rest will be scrapped.";
+	var instructionCol = c_lime;
+	
+	if (confirmScrap) {
+		instructionTxt = "Are you sure? You have not selected any items to keep. All items will be scrapped.";
+		instructionCol = c_red;
+	}
+	
+	takeLockedButton.active = true;
 	
 	if (revealKey == "unique") {
 	
@@ -261,12 +269,12 @@ if (tab == "reveal") {
 	
 	draw_set_halign(fa_middle);
 	draw_set_font(fnt_large);
-	draw_set_colour(c_lime);
+	draw_set_colour(instructionCol);
 	draw_text(titleX, titleY - 60, cap + " Loot");
 	
 	draw_set_font(fnt_normal);
 	draw_set_halign(fa_middle);
-	draw_text(titleX, titleY + 60, "Right click individual items to scrap one at a time. Left click to lock items. Locked items won't be scrapped.");
+	draw_text(titleX, titleY + 60, instructionTxt);
 	
 	var lootCount = array_length(revealedLoot);
 	var itemsPerPage = lootColumns * lootRows;
@@ -286,6 +294,10 @@ if (tab == "reveal") {
 		draw_set_halign(fa_middle);
 		draw_text(pageTextX, titleY + 60, "Page " + string(lootPage + 1) + "/" + string(maxPage + 1));
 	}
+	
+	var lockedTxt = "Selected: " + string(array_length(locked)) + "/5";
+	
+	draw_text(lockedTextX, titleY + 60, lockedTxt);
 	
 	var lockedLen = array_length(locked);
 
@@ -311,7 +323,7 @@ if (tab == "reveal") {
 			true,
 			lock,
 			args,
-			scrapRevealed,
+			lock,
 			args
 		);
 		
@@ -331,6 +343,8 @@ if (tab == "reveal") {
 		if (isLocked) {
 		
 			draw_sprite(spr_locked, 0, slotX + 8, slotY + 8);
+			draw_rectangle(slotX, slotY, slotX + 128, slotY + 128, true);
+			draw_rectangle(slotX-1, slotY-1, slotX + 129, slotY + 129, true);
 		
 		}
 		
