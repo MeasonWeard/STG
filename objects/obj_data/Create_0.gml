@@ -242,6 +242,14 @@ stages = {
 		
 	},
 	
+	wasteArena2: {
+		
+		room: stage_wasteArena2,
+		mapCol: c_orange,
+		type: stageTypes.arena
+		
+	},
+	
 	wasteArenaLava1: {
 		
 		room: stage_wasteArenaLava1,

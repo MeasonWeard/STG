@@ -1,4 +1,4 @@
-function scr_genCoats_generic(level, rarity){
+function scr_genCoats_generic(level, rarity) {
 
 	var coat = new coatInst(level, rarity);
 	var stats = coat.stats;
@@ -98,6 +98,29 @@ function scr_genCoats_generic(level, rarity){
 		//set stats
 		if (key != undefined and amount != 0) {
 			scr_loot_addStat(coat, key, amount);
+		}
+		
+		if (level > 4) {
+			
+			var spr = spr_coat;
+			var adj = "";
+			
+			var el = scr_gear_getHighestEffectiveResistanceType(coat, true);
+			var elKey = el.key;
+			
+			switch(elKey) {
+			
+				case "kinRes": spr = spr_coatKin; adj = "Padded " ; break;
+				case "fireRes": spr = spr_coatFire; adj = "Fire-retardant "; break;
+				case "chemRes": spr = spr_coatChem; adj = "Fluoropolymer "; break;
+				case "elecRes": spr = spr_coatElec; adj = "Insulated "; break;
+				case "radRes": spr = spr_coatRad; adj = "Lead-lined "; break;
+			
+			}
+			
+			coat.spr = spr;
+			coat.name = adj + "Coat";
+		
 		}
 
 	}

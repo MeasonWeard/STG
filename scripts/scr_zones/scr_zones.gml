@@ -75,7 +75,7 @@ function zone_waste() : zone() constructor {
 			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
 		
 			var halls = [stage_wasteHall1, stage_wasteHall2];
-			var arenas = [stage_wasteArena1, stage_wasteArenaAcid1, stage_wasteArenaAcid2, stage_wasteArenaLava1];
+			var arenas = [stage_wasteArena1, stage_wasteArena2, stage_wasteArenaAcid1, stage_wasteArenaAcid2, stage_wasteArenaLava1];
 			var sideRooms = [stage_wasteIncinerator1, stage_wasteIncinerator2, stage_wasteAcidRiver];
 			var endStages = [stage_wasteBoss1];
 
