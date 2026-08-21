@@ -19,8 +19,6 @@
     {"$GMSpriteFrame":"v1","%Name":"60d2b985-b078-4a0f-9e44-0460fc2ae507","name":"60d2b985-b078-4a0f-9e44-0460fc2ae507","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
     {"$GMSpriteFrame":"v1","%Name":"5d7371e7-88a7-460d-a61e-e1378f59ced1","name":"5d7371e7-88a7-460d-a61e-e1378f59ced1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
     {"$GMSpriteFrame":"v1","%Name":"80691a67-d9ba-46f3-9a21-7d7b65880acb","name":"80691a67-d9ba-46f3-9a21-7d7b65880acb","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"ae021978-d65d-40d7-a172-6f786a9a999e","name":"ae021978-d65d-40d7-a172-6f786a9a999e","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"v1","%Name":"81a77219-9263-4f1c-ae29-e7bce37e2cc8","name":"81a77219-9263-4f1c-ae29-e7bce37e2cc8","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
@@ -60,7 +58,7 @@
     },
     "eventStubScript":null,
     "eventToFunction":{},
-    "length":9.0,
+    "length":7.0,
     "lockOrigin":false,
     "moments":{
       "$KeyframeStore<MomentsEventKeyframe>":"",
@@ -100,12 +98,6 @@
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
                 "0":{"$SpriteFrameKeyframe":"","Id":{"name":"80691a67-d9ba-46f3-9a21-7d7b65880acb","path":"sprites/spr_hydroAlcove/spr_hydroAlcove.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"e524dc5d-ccc4-45e3-967d-ca3adf4adb3c","IsCreationKey":false,"Key":6.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"ae021978-d65d-40d7-a172-6f786a9a999e","path":"sprites/spr_hydroAlcove/spr_hydroAlcove.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"61d06a37-838f-4206-9783-ab1c76c8bc4c","IsCreationKey":false,"Key":7.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"81a77219-9263-4f1c-ae29-e7bce37e2cc8","path":"sprites/spr_hydroAlcove/spr_hydroAlcove.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"a2bfde58-d0fe-4f98-8827-3229d5ddb347","IsCreationKey":false,"Key":8.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
