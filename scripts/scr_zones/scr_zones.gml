@@ -344,7 +344,7 @@ function zone_hydro() : zone() constructor {
 	mapW = 12;
 	mapH = 12;
 	
-	baseLevel = 5;
+	baseLevel = 6;
 	
 	var groups = scr_spawns_testGroups();
 	minorGroups = groups.minor;

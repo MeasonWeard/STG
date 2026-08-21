@@ -1,1 +1,0 @@
-scr_obj_cullByDirection("right", true);
