@@ -1,0 +1,1 @@
+if (unspentPoints and sc.hub) scr_ui_displayInstructions("You have unspent skill points", 300);

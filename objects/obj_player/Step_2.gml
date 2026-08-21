@@ -34,6 +34,7 @@ if (!sc.hub and instance_exists(rc)) {
 	
 		var eff = instance_create_layer(x, y, "Instances", obj_levelUp);
 		eff.owner = self;
+		global.hud.unspentPoints = true;
 	
 	}
 	

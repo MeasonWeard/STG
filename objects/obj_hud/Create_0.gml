@@ -20,6 +20,11 @@ instructionsFlash = 0;
 
 miniMap = instance_exists(rc) ? scr_mapGen_createMiniMap(rc.map, false) : undefined;
 
+var spent = scr_progression_countSpentSkillPoints()
+var totalPoints = scr_progression_getTotalSkillPoints();
+var points = max(0, totalPoints - spent);
+unspentPoints = points > 0;
+
 //formatting
 cam = view_camera[0];
 camX = camera_get_view_x(cam);

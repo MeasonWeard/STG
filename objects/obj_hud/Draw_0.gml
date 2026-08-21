@@ -240,6 +240,13 @@ draw_set_halign(fa_middle);
 draw_set_valign(fa_middle);
 draw_text(lvlTxtX, lvlTxtY, string(lvl));
 
+if (unspentPoints) {
+	draw_set_colour(c_yellow);
+	draw_circle(lvlTxtX + 32, lvlTxtY - 32, 7, false);
+	draw_set_colour(c_white);
+	draw_circle(lvlTxtX + 32, lvlTxtY - 32, 7, true);	
+}
+
 //enemy health bar and shields
 var enemy = cursor.enemy;
 if (instance_exists(enemy)) {
