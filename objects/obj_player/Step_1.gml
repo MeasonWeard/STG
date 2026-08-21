@@ -18,7 +18,13 @@ if (is_string(moveToSide) and !sc.hub and sc.checkPlayerMoveToSide) {
 	if (moveToSide == "bottom") y = room_height - in;
 	if (moveToSide == "left") x = in;
 	if (moveToSide == "right") x = room_width - in;
-		
+
+	nearbyEnv =	scr_hash_getNearbyCell(
+		global.stageController.envHash,
+		hashCellX,
+		hashCellY
+	);
+	
 	moveToSide = undefined;
 	sc.checkPlayerMoveToSide = false;
 	

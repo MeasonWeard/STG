@@ -39,3 +39,15 @@ if (!sc.hub and instance_exists(rc)) {
 	}
 	
 }
+
+if (getNearbyEnv) {
+
+	getNearbyEnv = false;
+	
+	nearbyEnv =	scr_hash_getNearbyCell(
+		global.stageController.envHash,
+		hashCellX,
+		hashCellY
+	);
+	
+}

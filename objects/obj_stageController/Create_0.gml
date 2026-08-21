@@ -6,14 +6,20 @@ hub = false;
 setupHub = true;
 pictureMode = false;
 
-var playerX = room_width * 0.5;
-var playerY =  room_height * 0.5;
-
 deathCountdown = 90;
 alertDelay = 30;
 checkPlayerMoveToSide = true;
 alertEnemies = 0;
 alertEnemiesNext = 0;
+
+global.roomLeft = 2;
+global.roomRight = room_width - 2;
+global.roomTop = 2;
+global.roomBottom = room_height - 2;
+global.projectileTop = global.roomTop - 64;
+
+var playerX = room_width * 0.5;
+var playerY =  room_height * 0.5;
 
 if (instance_exists(rc) and rc.firstStage) {
 	
@@ -31,40 +37,35 @@ if (instance_exists(rc) and rc.firstStage) {
 
 	// Left
 	if (nearestEdge == leftDist) {
-		playerX = 10;
+		playerX = global.roomLeft;
 		playerY = room_height * 0.5;
 	}
 
 	// Right
 	else if (nearestEdge == rightDist) {
-		playerX = room_width - 10;
+		playerX = global.roomRight;
 		playerY = room_height * 0.5;
 	}
 
 	// Top
 	else if (nearestEdge == topDist) {
 		playerX = room_width * 0.5;
-		playerY = 10;
+		playerY = global.roomTop;
 	}
 
 	// Bottom
 	else {
 		playerX = room_width * 0.5;
-		playerY = room_height - 10;
+		playerY = global.roomBottom;
 	}
 	
 }
 
 if (!instance_exists(global.player)) global.player = scr_obj_createExclusive(obj_player, playerX, playerY);
+
 global.camera = scr_obj_createExclusive(obj_camera, global.player.x, global.player.y);
 global.env = scr_obj_createExclusive(obj_envDraw, 0, 0);
 global.hud = scr_obj_createExclusive(obj_hud, 0, 0);
-
-global.roomLeft = 2;
-global.roomRight = room_width - 2;
-global.roomTop = 2;
-global.roomBottom = room_height - 2;
-global.projectileTop = global.roomTop - 64;
 
 var layerId = layer_get_id("Tiles");
 layer_depth(layerId, layers.ground);
@@ -91,12 +92,6 @@ for (var i = 0; i < procectilePoolLen; i++) {
 //time slicing
 timeSlicing = {
 
-	//thorns: {
-	//	nextIndex: 0,
-	//	turn: 0,
-	//	steps: 4
-	//},
-	
 	ghostDistanceCheck: {
 		nextIndex: 0,
 		turn: 0,

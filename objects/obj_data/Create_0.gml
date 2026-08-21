@@ -379,6 +379,15 @@ stages = {
 		mapCol: c_purple
 	
 	},
+	
+	//hydroponics
+	hydroLabs1: {
+	
+		room: stage_hydroLabs1,
+		type: stageTypes.arena,
+		mapCol: c_orange
+	
+	},
 
 	//engineering
 

@@ -104,40 +104,6 @@ for (var i = len; i >= 0; i--) {
 
 }
 
-//thorns damage
-//if (is_struct(thornsDamage)) {
-	
-//	if (scr_timeSlicing_isMyTurn("thorns", thornsTurnIndex)) {
-	
-//		var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
-//		var nearbyLen = array_length(nearby);
-		
-//		for (var i = 0; i < nearbyLen; i ++) {
-		
-//			var char = nearby[i];
-			
-//			if (!instance_exists(char)) continue;
-//			if (char.id = id) continue;
-//			if (char.thornsImmunity > 0) continue;
-//			if (char.faction == faction) continue;
-			
-//			var col = scr_obj_collision(char, self, true);
-			
-//			if (col) {
-//				scr_char_damage(char, thornsDamage, undefined, true);
-//				char.thornsImmunity = round(60 * THORNS_IMMUNITY_TIME);
-//				var snd = scr_audio_randomSoundFromProfile(thornsSounds);
-//				if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
-//			}
-		
-//		}
-
-//	}
-
-//}
-
-//if (thornsImmunity > 0) thornsImmunity --;
-
 //damage and death
 if (hp < prevHp) {
 

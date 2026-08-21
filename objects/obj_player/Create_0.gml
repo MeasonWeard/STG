@@ -30,6 +30,8 @@ setMaxCharges = true;
 
 pullItemTick = 0;
 
+getNearbyEnv = true;
+
 sprites = {
 
 	left: spr_player_1,

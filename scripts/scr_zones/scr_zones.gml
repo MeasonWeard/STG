@@ -334,3 +334,77 @@ function zone_commercial() : zone() constructor {
 	}
 	
 }
+
+function zone_hydro() : zone() constructor {
+
+	name = "Hydroponics";
+	portrait = spr_acidPit;
+	textCol = c_navy;
+
+	mapW = 12;
+	mapH = 12;
+	
+	baseLevel = 5;
+	
+	var groups = scr_spawns_testGroups();
+	minorGroups = groups.minor;
+	majorGroups = groups.major;
+
+	static generateMap = function() {
+	
+		var tries = 0;
+		var success = false;
+		var map;
+	
+		while (!success and tries < 92) {
+			
+			tries ++;
+			
+			map = scr_mapGen_createBlankMap(mapW, mapH);
+			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
+		
+			var halls = [stage_hydroHall1];
+			var arenas = [stage_hydroLabs1];
+			var sideRooms = [stage_hydroLabs1];
+			var endStages = [stage_wasteBoss1];
+
+			var startX = startPos.xx;
+			var startY = startPos.yy;
+
+			var mainLength = irandom_range(8, 12);
+			var sideHallAmount = irandom_range(3, 6);
+			
+			var result = scr_mapGen_generateHallways(map, halls, startX, startY, mainLength, sideHallAmount, 2, 5);
+			var cellCount = result.cellCount;
+			
+			var arenasMin = ceil(cellCount * 0.1);
+			var arenasMax = arenasMin + 2;
+			
+			var sideMin = ceil(cellCount * 0.3);
+			var sideMax = arenasMin + 2;
+			
+			var arenasReplace = ceil(cellCount * 0.3);
+			
+			var sideRoomsAmount = irandom_range(sideMin, sideMax);
+			var arenasAmount = irandom_range(arenasMin, arenasMax);
+			
+			result = scr_mapGen_addSideRooms(map, arenas, arenasAmount);
+			cellCount += result.cellCount;
+			
+			result = scr_mapGen_addSideRooms(map, sideRooms, sideRoomsAmount);
+			cellCount += result.cellCount;
+			
+			result = scr_mapGen_replaceRooms(map, arenas, arenasReplace, stageTypes.hall);
+
+			success = cellCount > 20;
+			if (!success) continue;
+
+			scr_mapGen_makeFurthestEndCell(map, startX, startY, endStages);
+		
+		}
+
+		return map;
+	
+	}
+	
+}

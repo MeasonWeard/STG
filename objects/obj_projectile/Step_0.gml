@@ -213,11 +213,16 @@ if (checkObstruction and sourceExists) {
 	if (result.hit) {
 
 		var env = result.env;
-		var safeX = result.xx;
-		var safeY = result.yy;
 		
-		scr_projectiles_hitEnv(self, env, safeX, safeY);
-		exit;
+		if (env.projCollision) {
+		
+			var safeX = result.xx;
+			var safeY = result.yy;
+		
+			scr_projectiles_hitEnv(self, env, safeX, safeY);
+			exit;
+		
+		}
 
 	}
 	
@@ -230,6 +235,7 @@ for (var i = 0; i < len; i++) {
 	if (!instance_exists(env)) continue;
 	if (instance_exists(source) and env.id == source.id) continue;
 	if (env.onGround) continue;
+	if (!env.projCollision) continue;
 	
 	//skip if higher
 	if (height > env.height) {

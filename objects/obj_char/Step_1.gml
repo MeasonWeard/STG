@@ -15,16 +15,6 @@ if (setup) {
 		gunXoffset = 0;
 	}
 
-	//thorns
-	//if (is_struct(thornsDamage)) {
-		
-	//	thornsTurnIndex = scr_timeSlicing_assignTurnIndex("thorns");
-	//	thornsDamage = scr_stats_calculateCharDamageProfile(self, thornsDamage, false);
-		
-	//}
-	
-	//activationTurnIndex = scr_timeSlicing_assignTurnIndex("activation");
-	
 	//hash
 	var cell = scr_hash_getCellAt(x, y);
 	hashCellX = cell.xx;

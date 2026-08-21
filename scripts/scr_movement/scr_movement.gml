@@ -37,6 +37,7 @@ function scr_movement(blockedByEnv, liveEnvLookup = false) {
 			
 				if (!instance_exists(env)) continue;
 				if (env.id == id) continue;
+				if (!env.movementCollision) continue;
 			
 				if (scr_obj_movementCollision(self, env, true)) {
 					
@@ -81,6 +82,7 @@ function scr_movement(blockedByEnv, liveEnvLookup = false) {
 			
 				if (!instance_exists(env)) continue;
 				if (env.id == id) continue;
+				if (!env.movementCollision) continue;
 			
 				if (scr_obj_movementCollision(self, env, true)) {
 					

@@ -10,11 +10,13 @@ hashCellY = undefined;
 bulletHitSounds = global.data.soundProfiles.bulletHitMetal;
 bulletHitFunc = undefined;
 
-blockLos = false;
+
 
 onGround = false;
 onCeiling = false;
 projCollision = true;
+movementCollision = true;
+blockLos = false;
 
 height = 200;
 

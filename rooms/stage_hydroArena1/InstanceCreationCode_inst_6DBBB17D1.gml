@@ -1,1 +1,0 @@
-scr_obj_cullBySeed(self, 45);
