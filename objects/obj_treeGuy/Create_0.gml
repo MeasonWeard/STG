@@ -7,9 +7,10 @@ bloodCol = #325412;
 bulletHitFunc = scr_effects_bulletHitFlesh;
 deathSounds = global.data.soundProfiles.plantDeath;
 
-gun1 = new melee_tree(1, 1);
-scr_weapons_collectWeapon(self, gun1, true);
-
+w1 = new melee_tree(1, 1);
+scr_weapons_collectWeapon(self, w1, true);
+w2 = new gun_treeGun(1, 1);
+scr_weapons_collectWeapon(self, w2, false);
 
 sprites = {
 
@@ -55,3 +56,10 @@ levelUpFunc = function() {
 targetMinDist = 30;
 targetMaxDist = 60;
 targetReaquireDist = 90;
+
+minData = 32;
+maxData = 64;
+
+lootChance = 6;
+lootImproveChance = 20;
+lootAmount = 2;

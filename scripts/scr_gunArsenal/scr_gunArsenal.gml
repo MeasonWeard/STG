@@ -419,15 +419,42 @@ function gun_plantGun(level, rarity) : gunInst(level, rarity) constructor {
 	clipSize = 2;
 	fireRate = 0.8;
 	reloadTime = 1.8;
-	spd = 16;
+	spd = 14;
 	minAimOff = 2.2;
 	maxAimOff = 8;
 	recoil = 1.8;
 	stability = 0.08;
 	rot = 3;
+	range = 900;
 	
 	damage.kin = 3;
 	damage.chem = 2;
+	
+	shootSounds = global.data.soundProfiles.alienShoot;
+	
+}
+
+function gun_treeGun(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Pollen Gun 2"
+	
+	projSprite = spr_bullet_plantSpit;
+	projDestroySprite = spr_bullet_plantSpitExplode;
+	lockProjSprite = true;
+	auto = false;
+	clipSize = 4;
+	fireRate = 12;
+	reloadTime = 2;
+	spd = 14;
+	minAimOff = 2.4;
+	maxAimOff = 12;
+	recoil = 2.6;
+	stability = 0.08;
+	rot = 3;
+	range = 900;
+	
+	damage.kin = 3;
+	damage.chem = 4;
 	
 	shootSounds = global.data.soundProfiles.alienShoot;
 	

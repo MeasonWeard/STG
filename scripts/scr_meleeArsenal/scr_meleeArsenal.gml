@@ -115,8 +115,7 @@ function melee_tree(level, rarity) : meleeInst(level, rarity) constructor {
 	
 	attackSprites = [spr_slam];
 	
-	damage.kin = 12;
-	damage.chem = 4;
+	damage.kin = 14;
 	
 	attackRate = 1.2;
 	
