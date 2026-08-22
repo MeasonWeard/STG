@@ -102,14 +102,37 @@ function melee_shieldAndBaton(level, rarity) : meleeInst(level, rarity) construc
 function melee_berthaSlash(level, rarity) : meleeInst(level, rarity) constructor {
 
 	maxCharges = 3;
-	damage.kin = 12;
+	damage.kin = 8;
 	attackRate = 2.2;
 	swingSounds = global.data.soundProfiles.swish;
 	hitSounds = global.data.soundProfiles.bulletHitFlesh;
 
 }
 
-//enemy weapons
+function melee_tree(level, rarity) : meleeInst(level, rarity) constructor {
+
+	maxCharges = 2;
+	
+	attackSprites = [spr_slam];
+	
+	damage.kin = 12;
+	damage.chem = 4;
+	
+	attackRate = 1.2;
+	
+	range = 82;
+	hitDelay = 12;
+	damageInRadius = true;
+	stopOnHit = true;
+	
+	rechargeTime = 2;
+	
+	swingSounds = global.data.soundProfiles.swish;
+	hitSounds = global.data.soundProfiles.hammerHit;
+	
+}
+
+
 function melee_symbiontSlash(level, rarity) : meleeInst(level, rarity) constructor {
 
 	maxCharges = 6;

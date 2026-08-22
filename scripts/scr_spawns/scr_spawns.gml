@@ -80,7 +80,8 @@ function scr_spawns_testGroups() {
 	
 	var groupPlantsMinor = new enemyGroup();
 	groupPlantsMinor.spawns = [
-		new enemySpawn(obj_plant)
+		new enemySpawn(obj_plantGuy),
+		new enemySpawn(obj_treeGuy, 8, 20, 8, 25)
 	]
 
 	array_push(minorGroups, groupSpidersMinor);
@@ -103,7 +104,8 @@ function scr_spawns_testGroups() {
 	
 	var groupPlantsMajor = new enemyGroup();
 	groupPlantsMajor.spawns = [
-		new enemySpawn(obj_plant)
+		new enemySpawn(obj_plantGuy),
+		new enemySpawn(obj_treeGuy, 1, 10, 15, 40),
 	]
 
 	array_push(majorGroups, groupMutantsMajor);

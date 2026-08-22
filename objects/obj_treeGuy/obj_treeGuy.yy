@@ -1,6 +1,6 @@
 {
   "$GMObject":"",
-  "%Name":"obj_plant",
+  "%Name":"obj_treeGuy",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
@@ -8,7 +8,7 @@
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_plant",
+  "name":"obj_treeGuy",
   "overriddenProperties":[],
   "parent":{
     "name":"Enemies",
@@ -36,8 +36,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_plant",
-    "path":"sprites/spr_plant/spr_plant.yy",
+    "name":"spr_treeGuy",
+    "path":"sprites/spr_treeGuy/spr_treeGuy.yy",
   },
   "spriteMaskId":null,
   "visible":true,

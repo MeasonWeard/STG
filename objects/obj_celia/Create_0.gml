@@ -26,9 +26,6 @@ aimOnReload = true;
 aimAngle = 50;
 aimBias = 1.2;
 
-thornsDamage = new damageProfile();
-thornsDamage.chem = 8;
-
 //drops
 minData = 32;
 maxData = 64;
