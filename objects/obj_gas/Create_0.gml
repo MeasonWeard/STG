@@ -2,6 +2,7 @@ charHash = global.stageController.charHash;
 envHash = global.stageController.envHash;
 
 charHashKeys = [];
+nearbyEnv = [];
 
 cellX = undefined;
 cellY = undefined;

@@ -1,7 +1,7 @@
 event_inherited();
 
 name = "Four Guns";
-tags = ["bio"];
+tags = ["bio","mech"];
 bloodCol = c_red;
 
 bulletHitFunc = scr_effects_bulletHitFlesh;

@@ -58,8 +58,9 @@ if (open) {
 
 if (prevOpen != open) {
 
-	if (open == true and openSound != undefined) scr_audio_playSoundAt(openSound, x, y);
-	if (open == false and closeSound != undefined) scr_audio_playSoundAt(closeSound, x, y);
+
+	if (open == true and openSound != undefined)  audio_play_sound_at(openSound, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT * 0.5, false, 0);	
+	if (open == false and closeSound != undefined) audio_play_sound_at(closeSound, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT * 0.5, false, 0);	
 	
 }
 

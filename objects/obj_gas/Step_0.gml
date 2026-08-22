@@ -1,11 +1,3 @@
-var cell = scr_hash_getCellAt(x, y);
-
-if (cell.xx != cellX or cell.yy != cellY) {
-	cellX = cell.xx;
-	cellY = cell.yy;
-	scr_hash_updateHashKeys(charHashKeys, cellX, cellY);	
-}
-
 //movement
 wiggleDir += wiggleStep;
 
@@ -35,6 +27,20 @@ colLeft = bbox_left;
 colRight = bbox_right;
 colTop = bbox_top;
 colBottom = bbox_bottom;
+
+//cell
+var cell = scr_hash_getCellAt(x, y);
+
+if (cell.xx != cellX or cell.yy != cellY) {
+
+	cellX = cell.xx;
+	cellY = cell.yy;
+	
+	scr_hash_updateHashKeys(charHashKeys, cellX, cellY);
+	nearbyEnv = scr_hash_getNearbyCell(envHash, cellX, cellY);
+	
+}
+
 
 depth = -y - 32;
 
@@ -104,18 +110,19 @@ if (envTick > 0) {
 	
 	envTick = envTime;
 	
-	var nearby = scr_hash_getNearby(envHash, x, y);
-	var len = array_length(nearby);
+	var len = array_length(nearbyEnv);
 	
 	var col = false;
 	
 	for (var i = 0; i < len; i++) {
 	
-		var env = nearby[i];
+		var env = nearbyEnv[i];
 		if (!instance_exists(env)) continue;
 		
-		if(height > env.height) continue;
+		if (!env.projCollision) continue;
 		
+		if(height > env.height) continue;
+			
 		col = scr_obj_collision(self, env, true);
 		
 		if (col) break;

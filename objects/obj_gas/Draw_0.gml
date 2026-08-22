@@ -8,3 +8,4 @@ if (global.debug) {
 	draw_text(x, y + 42, life);
 	
 }
+
