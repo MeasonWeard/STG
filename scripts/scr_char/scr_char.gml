@@ -766,22 +766,50 @@ function scr_char_castSkill(char, sk) {
 
 	if (!instance_exists(char)) return false;
 
-	if (is_real(sk)) {
+	sk = scr_char_getSkill(char, sk);
+	
+	if (is_undefined(sk)) return false;
 
-		switch(sk) {
+	return sk.cast(char);
+	
+}
 
-			case 1 : sk = char.skills.skill1; break;
-			case 2 : sk = char.skills.skill2; break;
-			case 3 : sk = char.skills.skill3; break;
-			case 4 : sk = char.skills.skill4; break;
+/// @function scr_char_castSkillWithWarning(char, skill, warning)
+/// @description Attempts to cast one of a character's skills. Optionally delays the cast using a warning object.
+/// @param {Id.Instance} char The character casting the skill.
+/// @param {Real|Struct} sk Either a skill index from 1-4, or the skill struct directly.
+/// @param {Id.Instance} warning Warning object used to delay the cast.
+/// @returns {Bool} True if the skill was successfully cast, otherwise false.
+function scr_char_castSkillWithWarning(char, sk, warning) {
 
-			default : return false;
+	if (!instance_exists(char)) return false;
 
+	sk = scr_char_getSkill(char, sk);
+	
+	if (is_undefined(sk)) return false;
+
+	if (instance_exists(warning)) {
+
+		// Already committed to casting.
+		if (warning.active) {
+
+			if (warning.timer > 0) {
+				return false;
+			}
+
+			warning.active = false;
+
+			return sk.cast(char);
 		}
 
-	}
+		// Don't start the warning unless the skill can actually cast.
+		if (!sk.canCast(char)) return false;
 
-	if (!is_struct(sk)) return false;
+		warning.active = true;
+		warning.timer = warning.timerMax;
+
+		return false;
+	}
 
 	return sk.cast(char);
 	
@@ -791,7 +819,10 @@ function scr_char_castSkillAtDist(char, sk, targetDist, below = true, warning = 
 
 	if (!instance_exists(char)) return false;
 	if (!instance_exists(char.target)) return false;
-	if (!is_struct(sk)) return false;
+	
+	sk = scr_char_getSkill(char, sk);
+	
+	if (is_undefined(sk)) return false;
 
 	if (instance_exists(warning) and warning.active) {
 
@@ -827,5 +858,30 @@ function scr_char_castSkillAtDist(char, sk, targetDist, below = true, warning = 
 	}
 
 	return scr_char_castSkill(char, sk);
+	
+}
+
+function scr_char_getSkill(char, sk) {
+
+	if (!instance_exists(char)) return undefined;
+
+	if (is_real(sk)) {
+
+		switch(sk) {
+
+			case 1 : sk = char.skills.skill1; break;
+			case 2 : sk = char.skills.skill2; break;
+			case 3 : sk = char.skills.skill3; break;
+			case 4 : sk = char.skills.skill4; break;
+
+			default : return undefined;
+
+		}
+
+	}
+
+	if (!is_instanceof(sk, skill)) return undefined;
+	
+	return sk;
 	
 }

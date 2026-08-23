@@ -63,11 +63,19 @@ function scr_spawns_testGroups() {
 	var minorGroups = [];
 	var majorGroups = [];
 
+	//MINOR
+	
 	var groupMutantsMinor = new enemyGroup();
 	groupMutantsMinor.spawns = [
 		new enemySpawn(obj_bertha),
-		new enemySpawn(obj_celia, 10, 20, 10, 35),
+		new enemySpawn(obj_celia, 10, 20, 5, 12),
 		new enemySpawn(obj_fourGuns, 12, 25, 2, 12)
+	];
+	
+	var groupAliensMinor = new enemyGroup();
+	groupAliensMinor.spawns = [
+		new enemySpawn(obj_alien),
+		new enemySpawn(obj_bigAlien, 10, 20, 3, 12),
 	];
 	
 	var groupSpidersMinor = new enemyGroup();
@@ -75,24 +83,33 @@ function scr_spawns_testGroups() {
 	groupSpidersMinor.spawns = [
 		new enemySpawn(obj_spiderDrone),
 		new enemySpawn(obj_spiderDroneKamikaze, 3, 10, 20, 20),
-		new enemySpawn(obj_bigSpider, 8, 20, 8, 25)
+		new enemySpawn(obj_bigSpider, 8, 20, 5, 25)
 	];
 	
 	var groupPlantsMinor = new enemyGroup();
 	groupPlantsMinor.spawns = [
 		new enemySpawn(obj_plantGuy),
-		new enemySpawn(obj_treeGuy, 8, 20, 8, 25)
+		new enemySpawn(obj_treeGuy, 8, 20, 5, 25)
 	]
 
-	array_push(minorGroups, groupSpidersMinor);
 	array_push(minorGroups, groupMutantsMinor);
+	array_push(minorGroups, groupAliensMinor);
+	array_push(minorGroups, groupSpidersMinor);
 	array_push(minorGroups, groupPlantsMinor);
+	
+	//MAJOR
 	
 	var groupMutantsMajor = new enemyGroup();
 	groupMutantsMajor.spawns = [
 		new enemySpawn(obj_bertha),
 		new enemySpawn(obj_celia, 1, 10, 15, 40),
 		new enemySpawn(obj_fourGuns, 6, 18, 4, 20)
+	];
+	
+	var groupAliensMajor = new enemyGroup();
+	groupAliensMajor.spawns = [
+		new enemySpawn(obj_alien),
+		new enemySpawn(obj_bigAlien, 1, 10, 15, 40),
 	];
 	
 	var groupSpidersMajor = new enemyGroup();
@@ -109,6 +126,7 @@ function scr_spawns_testGroups() {
 	]
 
 	array_push(majorGroups, groupMutantsMajor);
+	array_push(majorGroups, groupAliensMajor);
 	array_push(majorGroups, groupSpidersMajor);
 	array_push(majorGroups, groupPlantsMajor);
 	

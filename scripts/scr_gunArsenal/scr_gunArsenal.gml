@@ -164,9 +164,9 @@ function gun_autoShotgun(level, rarity) : gunInst(level, rarity) constructor {
 
 //ENEMY AND PET GUNS
 
-function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
+function gun_alienSpit(level, rarity) : gunInst(level, rarity) constructor {
 
-	name = "Alien Orb Launcher #1"
+	name = "Alien Spit"
 	
 	projSprite = spr_bullet_alienSpit;
 	projDestroySprite = spr_bullet_alienSpitExplode;
@@ -190,7 +190,33 @@ function gun_alienOrb(level, rarity) : gunInst(level, rarity) constructor {
 	
 }
 
-function gun_alienOrb2(level, rarity) : gunInst(level, rarity) constructor {
+function gun_bigAlienSpit(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Alien Spit BIG"
+	
+	projSprite = spr_bullet_alienSpit2;
+	projDestroySprite = spr_bullet_alienSpitExplode;
+	lockProjSprite = true;
+	auto = false;
+	clipSize = 6;
+	fireRate = 20;
+	reloadTime = 1.8;
+	spd = 18;
+	minAimOff = 2.2;
+	maxAimOff = 10;
+	recoil = 1.8;
+	stability = 0.08;
+	rot = 3;
+	range = 860;
+	
+	damage.kin = 2;
+	damage.chem = 4;
+	
+	shootSounds = global.data.soundProfiles.alienShoot;
+	
+}
+
+function gun_celiaGun(level, rarity) : gunInst(level, rarity) constructor {
 
 	name = "Alien Orb Launcher #2";
 	

@@ -141,3 +141,16 @@ function melee_symbiontSlash(level, rarity) : meleeInst(level, rarity) construct
 	hitSounds = global.data.soundProfiles.bulletHitFlesh;
 
 }
+
+
+function melee_alienSlap(level, rarity) : melee_prod(level, rarity) constructor {
+
+	damage.elec = 0;
+	damage.kin = 6;
+	damage.chem = 3;
+	swingSounds = [snd_whipSwing]
+	hitSounds = [snd_whipCrack];
+	maxCharges = 6;
+	rechargeTime = 2;
+	
+}

@@ -21,7 +21,7 @@ sprites = {
 bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
-gun1 = new gun_alienOrb2(1, 1);
+gun1 = new gun_celiaGun(1, 1);
 scr_weapons_collectWeapon(self, gun1, true);
 
 aimOnReload = true;

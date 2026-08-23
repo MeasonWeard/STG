@@ -63,3 +63,8 @@ maxData = 64;
 lootChance = 6;
 lootImproveChance = 20;
 lootAmount = 2;
+
+evolveLevel = 8;
+evolveChanceMin = 15;
+evolveChanceMax = 30;
+evolutions = [obj_treeGuyHealer];

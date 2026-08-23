@@ -38,7 +38,7 @@ levelUpFunc = function() {
 	
 	if (level > 8 and level mod 4 == 0) {
 	
-		skills.skill1.level ++;
+		scr_skills_increaseLevel(self, skills.skill1);
 	
 	}
 	

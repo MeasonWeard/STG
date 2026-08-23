@@ -123,6 +123,41 @@ function skill() constructor {
 	
 }
 
+function scr_skills_setLevel(char, sk, level) {
+
+	if (!instance_exists(char)) exit;
+	
+	sk = scr_char_getSkill(char, sk);
+	
+	if (is_undefined(sk)) exit;
+	
+	var prevLvl = sk.level;
+	
+	var effLevel = min(level, sk.maxLevel);
+	
+	sk.level = effLevel;
+	
+	if (effLevel > prevLvl) sk.setupFunc(char);
+
+}
+
+function scr_skills_increaseLevel(char, sk) {
+
+	if (!instance_exists(char)) exit;
+
+	sk = scr_char_getSkill(char, sk);
+	
+	if (is_undefined(sk)) exit;
+	
+	if (sk.level < sk.maxLevel) {
+	
+		sk.level ++;
+		sk.setupFunc(char);
+		
+	}
+	
+}
+
 function scr_skills_isActive(skillInst) {
 
 	if (!is_instanceof(skillInst, skill)) return false;
@@ -684,6 +719,7 @@ function skill_particleShower() : skill() constructor {
 		cooldownTime = 8;
 		radius = 50;
 		life = 4;
+		spr = spr_acidFlask;
 	
 		damage = undefined;
 	
@@ -747,6 +783,7 @@ function skill_particleShower() : skill() constructor {
 				launcher.radius = radius;
 				launcher.faction = source.faction;
 				launcher.poolLife = life;
+				launcher.spr = spr;
 			
 				return true;
 			

@@ -21,3 +21,5 @@ shootTick = 0;
 shootDelay = 2;
 
 rot = 10;
+
+spr = spr_acidFlask;

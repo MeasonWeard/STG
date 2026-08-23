@@ -32,6 +32,7 @@ if (shootTick > 0) {
 	flask.rot = irandom_range(-8, 8);
 	flask.faction = faction;
 	flask.poolLife = poolLife;
+	flask.sprite_index = spr;
 	
 	shootTick = shootDelay;
 	

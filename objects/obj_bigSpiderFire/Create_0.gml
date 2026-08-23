@@ -29,8 +29,6 @@ baseStats.maxEnergy = 100;
 baseStats.spd = 5;
 baseStats.elecRes = -10;
 
-skills.skill1 = new skill_flamethrower();
-
 levelUpFunc = function() {
 
 	if (level > 2) {
@@ -40,7 +38,7 @@ levelUpFunc = function() {
 	
 	if (level > 8 and level mod 4 == 0) {
 	
-		skills.skill1.level ++;
+		scr_skills_increaseLevel(self, skills.skill1);
 	
 	}
 	
@@ -68,3 +66,4 @@ lootImproveChance = 20;
 lootAmount = 2;
 
 skillCheckIndex = scr_timeSlicing_assignTurnIndex("skillCheck");
+skills.skill1 = new skill_flamethrower();

@@ -31,6 +31,10 @@ if (enemySetup) {
 			var newChar = instance_create_layer(x, y, "Instances", obj);
 			newChar.levelUp = false;
 			scr_char_levelUp(newChar, lvl);
+			
+			newChar.hashCellX = hashCellX;
+			newChar.hashCellY = hashCellY;
+			array_copy(newChar.nearbyEnv, 0, nearbyEnv, 0, array_length(nearbyEnv));
 		
 		}
 		

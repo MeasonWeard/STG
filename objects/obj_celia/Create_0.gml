@@ -19,7 +19,7 @@ sprites = {
 bulletHitFunc = scr_effects_bulletHitFlesh;
 deathFunc = scr_char_fleshExplosion;
 
-gun1 = new gun_alienOrb2(1, 1);
+gun1 = new gun_celiaGun(1, 1);
 scr_weapons_collectWeapon(self, gun1, true);
 
 aimOnReload = true;
@@ -43,14 +43,30 @@ levelUpFunc = function() {
 
 	if (level > 2) baseStats.maxHpPerc += 10;
 	
+	if (level == 5) {
+		skills.skill1 = new skill_gas();
+		baseStats.maxEnergy = 60;
+		baseStats.energyRegen += 0.5;
+	}
+	
+	if (level > 5 and level mod 5 == 0) {
+		scr_skills_increaseLevel(self, skills.skill1);
+		baseStats.maxEnergy += 10;
+		baseStats.energyRegen += 1;
+	}
+	
 	if (level mod 10 == 0) {
-			baseStats.kinDam += 1;
-			baseStats.chemDam += 2;
-			baseStats.chemRes += 4;
-			baseStats.radRes += 4;
+		
+		baseStats.kinDam += 1;
+		baseStats.chemDam += 2;
+		baseStats.chemRes += 4;
+		baseStats.radRes += 4;
+		
 	}
 
 	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 10;
 	
 }
+
+skillCheckIndex = scr_timeSlicing_assignTurnIndex("skillCheck");
