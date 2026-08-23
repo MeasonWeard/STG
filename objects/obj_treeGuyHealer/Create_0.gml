@@ -51,6 +51,7 @@ levelUpFunc = function() {
 	if (level mod 4 == 0) {
 	
 		scr_skills_increaseLevel(self, 1);
+		baseStats.maxEnergy += 10;
 	
 	}
 	

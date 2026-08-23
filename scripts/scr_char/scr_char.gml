@@ -733,6 +733,13 @@ function scr_char_levelUp(char, targetLevel) {
 	
 	}
 	
+	var skills = char.skills;
+	
+	if (is_instanceof(skills.skill1, skill) and is_callable(skills.skill1.setupFunc)) skills.skill1.setupFunc(char);
+	if (is_instanceof(skills.skill2, skill) and is_callable(skills.skill2.setupFunc)) skills.skill2.setupFunc(char);
+	if (is_instanceof(skills.skill3, skill) and is_callable(skills.skill3.setupFunc)) skills.skill3.setupFunc(char);
+	if (is_instanceof(skills.skill4, skill) and is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(char);
+	
 }
 
 function scr_char_rollLevel() {

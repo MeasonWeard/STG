@@ -137,7 +137,7 @@ function scr_skills_setLevel(char, sk, level) {
 	
 	sk.level = effLevel;
 	
-	if (effLevel > prevLvl) sk.setupFunc(char);
+	//if (effLevel > prevLvl) sk.setupFunc(char);
 
 }
 
@@ -152,7 +152,7 @@ function scr_skills_increaseLevel(char, sk) {
 	if (sk.level < sk.maxLevel) {
 	
 		sk.level ++;
-		sk.setupFunc(char);
+		//sk.setupFunc(char);
 		
 	}
 	
