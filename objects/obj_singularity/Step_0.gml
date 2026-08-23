@@ -18,13 +18,13 @@ if (getCharsTick > 0) {
 		if (!instance_exists(char)) continue;
 		if (char.faction == faction) continue;
 	
-		var los = scr_physics_hasLineOfSight(x, y, char.x, char.y);
-	
-		if (!los) continue;
-	
 		var dist = point_distance(x, y, char.x, char.y);
 
 		if (dist > pullRange or dist < minPullRange) continue;
+		
+		var los = scr_physics_hasLineOfSight(x, y, char.x, char.y);
+	
+		if (!los) continue;
 	
 		array_push(chars, char);
 	
