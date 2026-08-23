@@ -4,7 +4,7 @@ function scr_genCoats_generic(level, rarity) {
 	var stats = coat.stats;
 	
 	//basic resistance
-	var points = 3 + level;
+	var points = 3 + level + (level div 3);
 	
 	var elements = ["kinRes","fireRes","chemRes","elecRes","radRes"];
 	
@@ -23,7 +23,7 @@ function scr_genCoats_generic(level, rarity) {
 		
 		var el = scr_randomElement(elements);
 		
-		scr_loot_addStat(coat, el, 1);
+		scr_loot_addStat(coat, el, 2);
 		
 	}
 	

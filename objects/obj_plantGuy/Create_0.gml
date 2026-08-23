@@ -42,5 +42,8 @@ levelUpFunc = function() {
 	baseStats.kinDamPerc += 10;
 	
 	baseStats.hpRegen += 0.15;
+	
+	baseStats.oa ++;
+	baseStats.da ++;
 
 }

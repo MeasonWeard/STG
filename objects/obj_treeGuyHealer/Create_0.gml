@@ -31,6 +31,7 @@ baseStats.fireRes = -20;
 baseStats.kinRes = 6;
 baseStats.chemRes = 6;
 baseStats.elecRes = 12;
+baseStats.da += 10;
 
 levelUpFunc = function() {
 
@@ -58,6 +59,10 @@ levelUpFunc = function() {
 	
 	baseStats.hpRegen += 0.25;
 	baseStats.energyRegen += 0.2;
+	
+	baseStats.oa ++;
+	baseStats.da ++;
+	if (level mod 3 == 0) baseStats.da ++;
 
 }
 

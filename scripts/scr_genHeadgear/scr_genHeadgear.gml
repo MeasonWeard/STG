@@ -1,3 +1,26 @@
+function scr_genHeadgear_applyBasicRes(headgear, level, rarity) {
+	
+	static elements = ["kinRes","fireRes","chemRes","elecRes","radRes"];
+	var keys = [];
+	
+	var points = level + rarity;
+	
+	repeat(points) {
+	
+		keys = array_concat(keys, elements);
+	
+	}
+	
+	repeat(points) {
+	
+		var el = scr_randomElementRemove(keys);
+		
+		scr_loot_addStat(headgear, el, 1);
+	
+	}
+	
+}
+
 //GENERIC
 function scr_genHeadgear_hardHat(level, rarity) { //
 
@@ -21,6 +44,7 @@ function scr_genHeadgear_hardHat(level, rarity) { //
 		
 	}
 	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 
 	headgear.name = "Hard Hat";
 	
@@ -51,6 +75,8 @@ function scr_genHeadgear_weldingMask(level, rarity) { //
 		
 	}
 
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
+
 	headgear.name = "Welding Mask";
 	
 	return headgear;
@@ -79,6 +105,8 @@ function scr_genHeadgear_safetyMask(level, rarity) { //
 		
 	}
 
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
+
 	headgear.name = "Safety Mask";
 	
 	return headgear;
@@ -106,6 +134,8 @@ function scr_genHeadgear_arcFlashHood(level, rarity) { //
 		stats.elecRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 
 	headgear.name = "Arc Flash Hood";
 	
@@ -134,6 +164,8 @@ function scr_genHeadgear_leadHood(level, rarity) { //
 		stats.radRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 
 	headgear.name = "Lead Hood";
 	
@@ -165,6 +197,8 @@ function scr_genHeadgear_respirator(level, rarity) { //
 		
 	}
 	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
+	
 	headgear.name = "Respirator";
 	
 	return headgear;
@@ -194,6 +228,8 @@ function scr_genHeadgear_safetyGoggles(level, rarity) { //
 		stats.fireRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 	
 	headgear.name = "Safety Goggles";
 	
@@ -225,6 +261,8 @@ function scr_genHeadgear_blastHelmet(level, rarity) { //
 		
 	}
 	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
+	
 	headgear.name = "Blast Helmet";
 	
 	return headgear;
@@ -254,6 +292,8 @@ function scr_genHeadgear_insulatedHood(level, rarity) { //
 		stats.fireRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 	
 	headgear.name = "Insulated Hood";
 	
@@ -285,6 +325,8 @@ function scr_genHeadgear_radiationVisor(level, rarity) { //
 		
 	}
 
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
+
 	headgear.name = "Radiation Visor";
 	
 	return headgear;
@@ -314,6 +356,8 @@ function scr_genHeadgear_dielectricHelmet(level, rarity) { //
 		stats.elecRes += irandom_range_biased(low, high, LOOT_BIAS);
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 	
 	headgear.name = "Dielectric Helmet";
 	
@@ -371,6 +415,8 @@ function scr_genHeadgear_tacticalVisor(level, rarity) { //
 		}
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 	
 	return headgear;
 	
@@ -438,6 +484,8 @@ function scr_genHeadgear_traumaHelmet(level, rarity) { //
 		}
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 	
 	return headgear;
 	
@@ -507,6 +555,8 @@ function scr_genHeadgear_neuralInterface(level, rarity) { //
 		
 	}
 	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
+	
 	return headgear;
 	
 }
@@ -570,6 +620,8 @@ function scr_genHeadgear_faradayCrown(level, rarity) { //
 		}
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 	
 	return headgear;
 	
@@ -639,6 +691,8 @@ function scr_genHeadgear_emergencyResponseHelmet(level, rarity) { //
 		
 	}
 	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
+	
 	return headgear;
 	
 }
@@ -702,6 +756,8 @@ function scr_genHeadgear_hazmatHood(level, rarity) { //
 		}
 		
 	}
+	
+	scr_genHeadgear_applyBasicRes(headgear, level, rarity);
 	
 	return headgear;
 	

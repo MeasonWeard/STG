@@ -1,13 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_bigToxicAlien",
+  "%Name":"obj_bigAlienRad",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":1,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_bigToxicAlien",
+  "name":"obj_bigAlienRad",
   "overriddenProperties":[],
   "parent":{
     "name":"Enemies",
@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_bigToxicAlien",
-    "path":"sprites/spr_bigToxicAlien/spr_bigToxicAlien.yy",
+    "name":"spr_bigAlienRad",
+    "path":"sprites/spr_bigAlienRad/spr_bigAlienRad.yy",
   },
   "spriteMaskId":null,
   "visible":true,

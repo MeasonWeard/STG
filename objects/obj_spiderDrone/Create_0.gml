@@ -40,7 +40,8 @@ levelUpFunc = function() {
 			baseStats.radDam += 1;
 	}
 	
-	baseStats.da += 1;
+	baseStats.da += 2;
+	baseStats.oa ++;
 	
 	baseStats.radDamPerc += 10;
 	baseStats.kinDamPerc += 10;

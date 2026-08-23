@@ -28,6 +28,7 @@ baseStats.maxHp = 120;
 baseStats.maxEnergy = 100;
 baseStats.spd = 5;
 baseStats.elecRes = -10;
+baseStats.da += 5;
 
 levelUpFunc = function() {
 
@@ -55,6 +56,9 @@ levelUpFunc = function() {
 	if (level > 12) baseStats.maxShield = 3;
 	if (level > 18) baseStats.maxShield = 4;
 	if (level > 24) baseStats.maxShield = 5;
+	
+	baseStats.oa ++;
+	baseStats.da ++;
 	
 }
 

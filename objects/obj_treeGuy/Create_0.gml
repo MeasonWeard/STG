@@ -30,10 +30,13 @@ baseStats.fireRes = -20;
 baseStats.kinRes = 6;
 baseStats.chemRes = 6;
 baseStats.elecRes = 12;
+baseStats.da += 10;
 
 levelUpFunc = function() {
 
 	if (level > 2) baseStats.maxHpPerc += 10;
+	
+
 	
 	if (level mod 10 == 0) {
 		
@@ -50,6 +53,10 @@ levelUpFunc = function() {
 	baseStats.kinDamPerc += 10;
 	
 	baseStats.hpRegen += 0.25;
+	
+	baseStats.oa ++;
+	baseStats.da ++;
+	if (level mod 3 == 0) baseStats.da ++;
 
 }
 

@@ -47,7 +47,8 @@ levelUpFunc = function() {
 	
 	explosionPower += 0.05;
 	
-	baseStats.da += 1;
+	baseStats.da += 2;
+	baseStats.oa ++;
 	
 	if (level > 6) baseStats.maxShield = 1;
 	if (level > 12) baseStats.maxShield = 2;

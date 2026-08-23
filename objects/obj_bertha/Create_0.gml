@@ -44,6 +44,9 @@ levelUpFunc = function() {
 	
 	if (level > 5) baseStats.spd += 0.02;
 	
+	baseStats.oa ++;
+	baseStats.da ++;
+	
 }
 
 //evolveLevel = 8;

@@ -30,6 +30,7 @@ baseStats.maxHp = 200;
 baseStats.maxEnergy = 60;
 baseStats.radRes = 10;
 baseStats.chemRes = 10;
+baseStats.da += 5;
 
 levelUpFunc = function() {
 
@@ -47,6 +48,9 @@ levelUpFunc = function() {
 	baseStats.kinDamPerc += 10;
 	baseStats.radResPerc += 4;
 	baseStats.chemResPerc += 4;
+	
+	baseStats.oa ++;
+	baseStats.da ++;
 	
 }
 

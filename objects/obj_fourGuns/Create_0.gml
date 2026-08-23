@@ -38,11 +38,12 @@ gunDist = 80;
 
 //stats
 baseStats.maxHp = 300;
-baseStats.kinRes = 6;
-baseStats.fireRes = 6;
-baseStats.chemRes = 6;
-baseStats.radRes = 6;
+baseStats.kinRes = 4;
+baseStats.fireRes = 4;
+baseStats.chemRes = 4;
+baseStats.radRes = 4;
 baseStats.spd += 1.5;
+baseStats.da += 15;
 
 levelUpFunc = function() {
 
@@ -52,19 +53,28 @@ levelUpFunc = function() {
 		
 			baseStats.kinDam += 2;
 			
-			baseStats.kinRes += 5;
-			baseStats.fireRes += 5;
-			baseStats.chemRes += 5;
-			baseStats.elecRes += 3;
-			baseStats.radRes += 5;
-			
+			baseStats.kinRes += 3;
+			baseStats.fireRes += 3;
+			baseStats.chemRes += 3;
+			baseStats.elecRes += 2;
+			baseStats.radRes += 3;
+				
 	}
 	
 	baseStats.kinDamPerc += 10;
 	
 	if (level > 5) baseStats.spd += 0.02;
 	
+	baseStats.oa ++;
+	baseStats.da ++;
+	if (level mod 2 == 0) baseStats.da ++;
+	
 }
 
 minData = 32;
 maxData = 64;
+
+evolveLevel = 10;
+evolveChanceMin = 10;
+evolveChanceMax = 28;
+evolutions = [obj_fourGunsPulse];

@@ -12,13 +12,22 @@ if (alert and instance_exists(target)) {
 		
 		if (skills.skill1.canCast(self)) {
 		
-			var pt = scr_randomPointInCircle(target.x, target.y, 300);
+			var dir = point_direction(x, y, target.x, target.y);
+			var overshoot = irandom_range(200, 300);
+
+			var xx = target.x + lengthdir_x(overshoot, dir);
+			var yy = target.y + lengthdir_y(overshoot, dir);
+			
+			var pt = scr_randomPointInCircle(xx, yy, 250);
+			
 			aimX = pt.xx;
 			aimY = pt.yy;
+			
 		
 		}
 		
-		scr_char_castSkillAtDist(self, skills.skill1, 800, true);
+		scr_char_castSkillAtDist(self, skills.skill1, 500, true);
+		
 	}
 	
 }

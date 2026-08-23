@@ -209,16 +209,42 @@ function gun_bigAlienSpit(level, rarity) : gunInst(level, rarity) constructor {
 	rot = 3;
 	range = 860;
 	
-	damage.kin = 2;
+	damage.kin = 3;
 	damage.chem = 4;
 	
 	shootSounds = global.data.soundProfiles.alienShoot;
 	
 }
 
+function gun_bigRadAlienSpit(level, rarity) : gunInst(level, rarity) constructor {
+
+	name = "Alien Spit RAD BIG"
+	
+	projSprite = spr_bullet_alienSpit3;
+	projDestroySprite = spr_bullet_alienSpitExplode;
+	lockProjSprite = true;
+	auto = false;
+	clipSize = 6;
+	fireRate = 20;
+	reloadTime = 1.8;
+	spd = 18;
+	minAimOff = 2.2;
+	maxAimOff = 10;
+	recoil = 1.8;
+	stability = 0.08;
+	rot = 3;
+	range = 860;
+	
+	damage.chem = 3;
+	damage.rad = 4;
+	
+	shootSounds = global.data.soundProfiles.fungusBlast;
+	
+}
+
 function gun_celiaGun(level, rarity) : gunInst(level, rarity) constructor {
 
-	name = "Alien Orb Launcher #2";
+	name = "Celia?";
 	
 	projSprite = spr_bullet3;
 	lockProjSprite = true;
@@ -295,9 +321,9 @@ function gun_bigMutantGun(level, rarity) : gunInst(level, rarity) constructor {
 	projSprite = spr_bulletNormal;
 	projDestroySprite = spr_bulletExplosion2;
 	auto = true;
-	fireRate = 11;
+	fireRate = 10;
 	clipSize = 8;
-	reloadTime = 1;
+	reloadTime = 1.5;
 	spd = 16;
 	minAimOff = 2.4;
 	maxAimOff = 10;
@@ -307,6 +333,15 @@ function gun_bigMutantGun(level, rarity) : gunInst(level, rarity) constructor {
 	shootSounds = [snd_electricBullet];
 	
 	damage.kin = 5;
+	
+}
+
+function gun_bigMutantPulseGun(level, rarity) : gun_pulseRifle(level, rarity) constructor {
+
+	name = "Four Guns"
+	
+	clipSize = 4;
+	damage.kin = 16;
 	
 }
 

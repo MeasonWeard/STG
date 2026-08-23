@@ -386,8 +386,8 @@ function scr_skills_formatDescription(skillInst) {
 		
 			damage = new damageProfile();
 		
-			damage.kin = 8 + 2 * level;
-			damage.rad = 8 + 2 * level;
+			damage.kin = 8 + (level - 1) * 2;
+			damage.rad = 8 + (level - 1) * 2;
 			
 			damage = scr_stats_calculateSkillDamage(source, damage, ["kin", "rad"]);	
 		

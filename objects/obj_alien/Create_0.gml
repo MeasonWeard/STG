@@ -37,4 +37,7 @@ levelUpFunc = function() {
 	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 10;
 	
+	baseStats.oa ++;
+	baseStats.da ++;
+	
 }

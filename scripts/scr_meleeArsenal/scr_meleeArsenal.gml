@@ -146,7 +146,7 @@ function melee_symbiontSlash(level, rarity) : meleeInst(level, rarity) construct
 function melee_alienSlap(level, rarity) : melee_prod(level, rarity) constructor {
 
 	damage.elec = 0;
-	damage.kin = 6;
+	damage.kin = 5;
 	damage.chem = 3;
 	swingSounds = [snd_whipSwing]
 	hitSounds = [snd_whipCrack];

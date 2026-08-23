@@ -28,6 +28,7 @@ sprites = {
 //stats
 baseStats.maxHp = 200;
 baseStats.radRes = 10;
+baseStats.da += 5;
 
 levelUpFunc = function() {
 
@@ -36,7 +37,6 @@ levelUpFunc = function() {
 	if (level mod 10 == 0) {
 			baseStats.kinDam += 1;
 			baseStats.chemDam += 2;
-
 	}
 
 	baseStats.maxEnergy += 4;
@@ -44,9 +44,12 @@ levelUpFunc = function() {
 	baseStats.kinDamPerc += 10;
 	baseStats.radResPerc += 4;
 	
+	baseStats.oa ++;
+	baseStats.da ++;
+	
 }
 
 evolveLevel = 8;
 evolveChanceMin = 12;
-evolveChanceMax = 28;
-evolutions = [obj_bigToxicAlien];
+evolveChanceMax = 42;
+evolutions = [obj_bigAlienToxic, obj_bigAlienRad];

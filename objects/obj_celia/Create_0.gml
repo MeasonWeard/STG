@@ -38,6 +38,7 @@ lootAmount = 2;
 baseStats.maxHp = 400;
 baseStats.chemRes = 5;
 baseStats.radRes = 5;
+baseStats.da += 10;
 
 levelUpFunc = function() {
 
@@ -66,6 +67,9 @@ levelUpFunc = function() {
 
 	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 10;
+	
+	baseStats.oa ++;
+	baseStats.da ++;
 	
 }
 
