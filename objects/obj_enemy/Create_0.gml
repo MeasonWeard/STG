@@ -27,9 +27,9 @@ lootAmount = 1;
 showHealthBar = true;
 
 enemySetup = true;
-levelUp = true;
 levelUpFunc = undefined;
 level = 0;
+inheritedLevel = undefined;
 
 evolutions = [];
 evolveChanceMin = 10;

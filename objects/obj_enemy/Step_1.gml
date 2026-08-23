@@ -8,7 +8,7 @@ if (enemySetup) {
 	xstart = x;
 	ystart = y;
 
-	var lvl = level == 0 ? scr_char_rollLevel() : level;
+	var lvl = inheritedLevel ?? scr_char_rollLevel();
 	var evolve = false;
 	
 	if (is_real(evolveLevel) and lvl >= evolveLevel and array_length(evolutions) > 0) {
@@ -29,8 +29,7 @@ if (enemySetup) {
 		if (object_exists(obj)) {
 		
 			var newChar = instance_create_layer(x, y, "Instances", obj);
-			newChar.levelUp = false;
-			scr_char_levelUp(newChar, lvl);
+			newChar.inheritedLevel = lvl;
 			
 			newChar.hashCellX = hashCellX;
 			newChar.hashCellY = hashCellY;
