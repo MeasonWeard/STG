@@ -23,7 +23,6 @@ if (alert and instance_exists(target)) {
 			aimX = pt.xx;
 			aimY = pt.yy;
 			
-		
 		}
 		
 		scr_char_castSkillAtDist(self, skills.skill1, 500, true);

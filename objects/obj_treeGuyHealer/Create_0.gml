@@ -54,6 +54,8 @@ levelUpFunc = function() {
 	
 	}
 	
+	baseStats.healingPerc += 2;
+	
 	baseStats.chemDamPerc += 5;
 	baseStats.kinDamPerc += 5;
 	

@@ -1,5 +1,6 @@
 owner = noone;
 heal = 0;
+allyHeal = 0;
 ticks = 0;
 range = 100;
 

@@ -31,7 +31,12 @@ if (instance_exists(owner)) {
 			
 			if (dist > range) continue;
 			
-			scr_char_heal(char, heal);
+			if (char.id == owner.id) {
+				scr_char_heal(char, heal);
+			} else {
+				scr_char_heal(char, allyHeal);
+			}
+			
 			
 		}
 		

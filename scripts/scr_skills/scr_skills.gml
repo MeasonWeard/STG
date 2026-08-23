@@ -1214,6 +1214,7 @@ function skill_particleShower() : skill() constructor {
 		castCooldownTime = 0.25;
 		
 		heal = 4;
+		allyHeal = 4;
 		ticks = 10;
 		range = 100;
 
@@ -1224,12 +1225,18 @@ function skill_particleShower() : skill() constructor {
 			var totalHeal = heal * ticks;
 			statsDescription = "Heals: " + string(totalHeal) + "HP over 10 seconds";
 			statsDescription += "\nRange: " + string(range);
+			
 		}
 
 		static setupFunc = function(source) {
 		
 			energyCost = 55 + level * 5;
 			heal = 4 + 2 * (level - 1);
+			
+			var dec = 1 + source.finalStats.healingPerc * 0.01;
+
+			allyHeal = ceil(heal * dec);
+			
 			range = 250 + (level - 1) * 25;
 			
 		}
@@ -1242,6 +1249,7 @@ function skill_particleShower() : skill() constructor {
 			inst.ticks = ticks;
 			inst.range = range;
 			inst.faction = source.faction;
+			inst.allyHeal = allyHeal;
 		
 			if (instance_exists(inst)) return true;
 
