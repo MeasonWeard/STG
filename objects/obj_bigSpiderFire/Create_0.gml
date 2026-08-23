@@ -25,12 +25,24 @@ gunYoffset = -32;
 
 //stats
 baseStats.maxHp = 120;
+baseStats.maxEnergy = 100;
 baseStats.spd = 5;
 baseStats.elecRes = -10;
 
+skills.skill1 = new skill_flamethrower();
+
 levelUpFunc = function() {
 
-	if (level > 2) baseStats.maxHpPerc += 10;
+	if (level > 2) {
+		baseStats.maxHpPerc += 10;
+		baseStats.maxEnergyPerc += 5;
+	}
+	
+	if (level > 8 and level mod 4 == 0) {
+	
+		skills.skill1.level ++;
+	
+	}
 	
 	if (level mod 10 == 0) {
 			baseStats.kinDam += 1;
@@ -54,3 +66,5 @@ maxData = 64;
 lootChance = 6;
 lootImproveChance = 20;
 lootAmount = 2;
+
+skillCheckIndex = scr_timeSlicing_assignTurnIndex("skillCheck");

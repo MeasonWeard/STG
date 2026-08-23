@@ -37,12 +37,10 @@ function skill() constructor {
 
 	static cast = function(source) {
 
-		if (!ready()) return false;
+		if (!canCast(source)) return false;
 		
 		if (!is_callable(castFunc)) return false;
 		
-		if (source.energy < energyCost) return false;
-
 		var success = castFunc(source);
 
 		if (success) {
@@ -50,10 +48,6 @@ function skill() constructor {
 			if (maxCharges > 1) {
 				
 				charges--;
-
-				//if (charges < maxCharges) {
-				//	cooldown = cooldownTime * 60;
-				//}
 				
 				if (cooldown == 0) cooldown = cooldownTime * 60;
 				
@@ -120,6 +114,11 @@ function skill() constructor {
 
 	}
 	
+	static canCast = function(source) {
+	
+		return ready() and source.energy >= energyCost;
+		
+	}
 
 	
 }

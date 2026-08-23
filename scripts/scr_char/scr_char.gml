@@ -756,3 +756,76 @@ function scr_char_rollLevel() {
 	return level;
 	
 }
+
+/// @function scr_char_castSkill(char, skill)
+/// @description Attempts to cast one of a character's skills.
+/// @param {Id.Instance} char The character casting the skill.
+/// @param {Real|Struct} sk Either a skill index from 1-4, or the skill struct directly.
+/// @returns {Bool} True if the skill was successfully cast, otherwise false.
+function scr_char_castSkill(char, sk) {
+
+	if (!instance_exists(char)) return false;
+
+	if (is_real(sk)) {
+
+		switch(sk) {
+
+			case 1 : sk = char.skills.skill1; break;
+			case 2 : sk = char.skills.skill2; break;
+			case 3 : sk = char.skills.skill3; break;
+			case 4 : sk = char.skills.skill4; break;
+
+			default : return false;
+
+		}
+
+	}
+
+	if (!is_struct(sk)) return false;
+
+	return sk.cast(char);
+	
+}
+
+function scr_char_castSkillAtDist(char, sk, targetDist, below = true, warning = noone) {
+
+	if (!instance_exists(char)) return false;
+	if (!instance_exists(char.target)) return false;
+	if (!is_struct(sk)) return false;
+
+	if (instance_exists(warning) and warning.active) {
+
+		if (warning.timer > 0) {
+			return false;
+		}
+
+		warning.active = false;
+
+		return scr_char_castSkill(char, sk);
+	}
+
+	if (!sk.canCast(char)) return false;
+
+	var dist = point_distance(char.x, char.y, char.target.x, char.target.y);
+
+	var cast = false;
+
+	if (below) {
+		if (dist <= targetDist) cast = true;
+	} else {
+		if (dist >= targetDist) cast = true;
+	}
+
+	if (!cast) return false;
+
+	if (instance_exists(warning)) {
+
+		warning.active = true;
+		warning.timer = warning.timerMax;
+
+		return false;
+	}
+
+	return scr_char_castSkill(char, sk);
+	
+}

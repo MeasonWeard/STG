@@ -11,4 +11,8 @@ if (alert) {
 	
 	}
 
+	if (scr_timeSlicing_isMyTurn("skillCheck", skillCheckIndex)) {
+		scr_char_castSkillAtDist(self, skills.skill1, 300, true);
+	}
+
 }

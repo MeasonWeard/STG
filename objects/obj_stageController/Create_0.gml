@@ -138,6 +138,12 @@ timeSlicing = {
 		nextIndex: 0,
 		turn: 0,
 		steps: 30
+	},
+	
+	skillCheck: {
+		nextIndex: 0,
+		turn: 0,
+		steps: 4
 	}
 	
 }

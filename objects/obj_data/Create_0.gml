@@ -210,6 +210,11 @@ resources = {
 	alienOrgan: {
 		name: "Alien Organ",
 		icon: spr_res_alienOrgan
+	},
+	
+	chip: {
+		name: "Microchip",
+		icon: spr_res_chip
 	}
 	
 }
