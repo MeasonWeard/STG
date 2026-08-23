@@ -1,13 +1,45 @@
-var nearby = scr_hash_getNearbyRange(charHash, x, y, 2);
-var nearbyLen = array_length(nearby);
+if (getCharsTick > 0) {
 
-for (var i = 0; i < nearbyLen; i++) {
+	getCharsTick--;
+	
+} else {
 
-	var char = nearby[i];
+	getCharsTick = 12;
+	
+	chars = [];
+	
+	var nearby = scr_hash_getNearbyRange(charHash, x, y, 2);
+	var nearbyLen = array_length(nearby);
+
+	for (var i = 0; i < nearbyLen; i++) {
+
+		var char = nearby[i];
+	
+		if (!instance_exists(char)) continue;
+		if (char.faction == faction) continue;
+	
+		var los = scr_physics_hasLineOfSight(x, y, char.x, char.y);
+	
+		if (!los) continue;
+	
+		var dist = point_distance(x, y, char.x, char.y);
+
+		if (dist > pullRange or dist < minPullRange) continue;
+	
+		array_push(chars, char);
+	
+	}
+	
+}
+
+var charsLen = array_length(chars);
+
+for (var i = 0; i < charsLen; i++) {
+
+	var char = chars[i];
 	
 	if (!instance_exists(char)) continue;
-	if (char.faction == faction) continue;
-	
+
 	var dist = point_distance(x, y, char.x, char.y);
 
 	if (dist > pullRange or dist < minPullRange) continue;

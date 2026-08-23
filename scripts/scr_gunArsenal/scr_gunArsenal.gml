@@ -442,7 +442,7 @@ function gun_treeGun(level, rarity) : gunInst(level, rarity) constructor {
 	projDestroySprite = spr_bullet_plantSpitExplode;
 	lockProjSprite = true;
 	auto = false;
-	clipSize = 4;
+	clipSize = 6;
 	fireRate = 12;
 	reloadTime = 2;
 	spd = 14;

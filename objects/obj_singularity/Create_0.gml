@@ -16,4 +16,8 @@ movRight = x + 25;
 movTop = y - 25;
 movBottom = y + 25;
 
+chars = [];
+
+getCharsTick = 0;
+
 scr_audio_playSoundAt(snd_singularity, x, y, false);

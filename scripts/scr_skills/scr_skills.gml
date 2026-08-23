@@ -498,7 +498,9 @@ function scr_skills_formatDescription(skillInst) {
 			var xx = gunX + lengthdir_x(dist, dir);
 			var yy = gunY + lengthdir_y(dist, dir);
 			
-
+			var los = scr_physics_hasLineOfSight(source.x, source.y, xx, yy);
+			
+			if (!los) return false;
 			
 			var s = instance_create_layer(xx, yy, "Instances", obj_singularity);
 			
