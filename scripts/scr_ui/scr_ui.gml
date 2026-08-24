@@ -49,7 +49,8 @@ function scr_ui_drawMiniMap(miniMap, cellSize, xx, yy, flashX, flashY) {
 
 		for (var my = 0; my < mapH; my++) {
 
-			var col = miniMap[mx][my];
+			var cell = miniMap[mx][my];
+			var col = cell.col;
 
 			if (flash and mx == flashX and my == flashY) {
 				col = c_white;
@@ -73,6 +74,138 @@ function scr_ui_drawMiniMap(miniMap, cellSize, xx, yy, flashX, flashY) {
 	}
 
 	draw_set_colour(c_white);
+
+}
+
+function scr_ui_drawLargeMap(miniMap, xx, yy, currentX, currentY, title = "", titleCol = c_white, instruction = "", instructionCol = c_white) {
+
+	if (!is_array(miniMap)) return undefined;
+
+	var cellSize = 32;
+	var pad = cellSize * 3;
+
+	var mapW = array_length(miniMap);
+	if (mapW <= 0) return undefined;
+
+	var mapH = array_length(miniMap[0]);
+
+	var windowW = mapW * cellSize + pad * 2;
+	var windowH = mapH * cellSize + pad * 2;
+
+	var windowLeft = xx - windowW * 0.5;
+
+	var mapLeft = windowLeft + pad;
+	var mapTop = yy + pad;
+	
+	// Window background
+	draw_set_colour(c_black);
+	draw_rectangle(
+		windowLeft,
+		yy,
+		windowLeft + windowW,
+		yy + windowH,
+		false
+	);
+
+	// Window border
+	draw_set_colour(c_white);
+	draw_rectangle(
+		windowLeft,
+		yy,
+		windowLeft + windowW,
+		yy + windowH,
+		true
+	);
+
+	// Header text
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_center);
+	draw_set_font(fnt_large);
+	
+	if (title != "") {
+
+		draw_set_colour(titleCol);
+		draw_text(xx, yy + cellSize * 1.5, title);
+
+	}
+
+	if (instruction != "") {
+
+		draw_set_colour(instructionCol);
+		draw_text(xx, mapTop + mapH * cellSize + cellSize * 1.5, instruction);
+
+	}
+
+	draw_set_halign(fa_left);
+
+	var flash = is_real(currentX) and is_real(currentY)
+		and currentX >= 0 and currentX < mapW
+		and currentY >= 0 and currentY < mapH
+		and ((current_time div 500) mod 2 == 0);
+
+	var hoverX = undefined;
+	var hoverY = undefined;
+
+	for (var mx = 0; mx < mapW; mx++) {
+
+		for (var my = 0; my < mapH; my++) {
+
+			var cell = miniMap[mx][my];
+			var col = cell.col;
+
+			var left = mapLeft + mx * cellSize;
+			var top = mapTop + my * cellSize;
+			var right = left + cellSize;
+			var bottom = top + cellSize;
+
+			if (flash and mx == currentX and my == currentY) {
+				col = c_white;
+			}
+
+			draw_set_colour(col);
+			draw_rectangle(left, top, right, bottom, false);
+
+			draw_set_colour(c_white);
+			draw_rectangle(left, top, right, bottom, true);
+			
+			if (!cell.cleared) continue;
+			
+			var hovered =
+				mouse_x >= left and
+				mouse_x < right and
+				mouse_y >= top and
+				mouse_y < bottom and
+				(mx != currentX or my != currentY);
+
+			if (hovered) {
+
+				hoverX = mx;
+				hoverY = my;
+				
+				draw_set_colour(c_fuchsia);
+
+				draw_set_alpha(0.5);
+				
+				draw_rectangle(left, top, right, bottom, false);
+
+				draw_set_alpha(1);
+
+				draw_rectangle(left, top, right, bottom, true);
+				draw_rectangle(left + 1, top + 1, right - 1, bottom - 1, true);
+				draw_rectangle(left + 2, top + 2, right - 2, bottom - 2, true);
+
+			}
+			
+		}
+
+	}
+
+	draw_set_colour(c_white);
+
+	return {
+		xx: hoverX,
+		yy: hoverY
+	};
 
 }
 

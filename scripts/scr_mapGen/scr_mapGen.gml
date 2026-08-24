@@ -75,14 +75,22 @@ function scr_mapGen_createMiniMap(map, showAll) {
 		for (var j = 0; j < mapH; j ++) {
 		
 			var cell = map[i][j];
-			miniMap[i][j] = c_black;
+			
+			miniMap[i][j] = {
+				cleared: false,
+				col: c_black
+			}
 			
 			if (is_undefined(cell) or !is_struct(cell)) continue;
 			
 			if (!showAll and !cell.discovered) continue;
 			
 			var col = cell.cleared ? c_grey : cell.mapCol;
-			miniMap[i][j] = col;
+			
+			miniMap[i][j] = {
+				cleared: cell.cleared,
+				col: col
+			}
 		
 		}
 	

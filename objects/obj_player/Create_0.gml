@@ -31,6 +31,7 @@ setMaxCharges = true;
 pullItemTick = 0;
 
 getNearbyEnv = true;
+teleport = false;
 
 sprites = {
 

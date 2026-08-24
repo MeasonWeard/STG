@@ -1,0 +1,1 @@
+if (instance_exists(tines)) instance_destroy(tines);

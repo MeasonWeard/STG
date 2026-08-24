@@ -55,13 +55,11 @@ if (hub and setupHub) {
 			}
 			
 			instance_create_layer(portalX, portalY - 12, "Instances", obj_closingPortal);
-			player.x = portalX;
-			player.y = portalY;
+			scr_movement_teleport(player, portalX, portalY);
 			
 		} else {
 			
-			player.x = global.hubPosX;
-			player.y = global.hubPosY;
+			scr_movement_teleport(player, global.hubPosX, global.hubPosY);
 			
 		}
 		

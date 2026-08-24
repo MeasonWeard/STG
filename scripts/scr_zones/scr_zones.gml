@@ -339,7 +339,7 @@ function zone_hydro() : zone() constructor {
 
 	name = "Hydroponics";
 	portrait = spr_acidPit;
-	textCol = c_navy;
+	textCol = c_aqua;
 
 	mapW = 12;
 	mapH = 12;

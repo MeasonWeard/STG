@@ -19,6 +19,7 @@ instructionsTick = 0;
 instructionsFlash = 0;
 
 miniMap = instance_exists(rc) ? scr_mapGen_createMiniMap(rc.map, false) : undefined;
+bigMap = false;
 
 var spent = scr_progression_countSpentSkillPoints()
 var totalPoints = scr_progression_getTotalSkillPoints();
@@ -36,6 +37,7 @@ camYmid = camY + camH * 0.5;
 
 mapX = camX + 32;
 mapY = camY + 32;
+bigMapY = mapY + 220;
 
 healthBarX = 0;
 healthBarY = 0;

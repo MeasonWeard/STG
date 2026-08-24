@@ -51,6 +51,7 @@ if (global.devControls) {
 
 //user controls
 var c = instance_number(obj_statsPlate);
+if (global.hud.bigMap) c++;
 
 if (c == 0 and keyboard_check_pressed(vk_escape)) {
 

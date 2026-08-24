@@ -9,6 +9,7 @@ instructionsY = camY + 64;
 
 mapX = camX + 32;
 mapY = camY + 32;
+bigMapY = mapY + 160;
 
 healthBarX = camX + 220;
 healthBarY = camY + camH - 28;
@@ -129,12 +130,7 @@ if (!firstStep) {
 			flashAlpha = 3;
 		}
 	
-	} //else if (hp > prevHp and !firstStep) {
-	
-		//flashAlpha = 1;
-		//flashCol = c_lime;
-	
-	//}
+	}
 
 	if (flashAlpha > 0) {
 
@@ -187,8 +183,49 @@ if (is_string(instructions) and instructionsTick > 0) {
 	
 }
 
-//minimap
-if (!sc.hub) scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, posX, posY);
+//maps
+if (!sc.hub) {
+	
+	if (bigMap) {
+		
+		if (instance_exists(player)) player.attackDelay = 12;
+		
+		var title = rc.zoneInst.name;
+		var titleCol = rc.zoneInst.textCol;
+		
+		var instTxt = "Click on a cleared room to teleport to it.";
+		var instCol = c_white;
+		var canTp = !sc.stageInProgress;
+		
+		if (!canTp) {
+			instTxt = "You cannot teleport until\nthe room is cleared of hostiles.";
+			instCol = c_red;
+		}
+		
+		var hover = scr_ui_drawLargeMap(miniMap, camXmid, bigMapY, posX, posY, title, titleCol, instTxt, instCol);
+		
+		if (canTp and mouse_check_button_pressed(mb_left)) {
+		
+			if (is_struct(hover)) {
+			
+				var cx = hover.xx;
+				var cy = hover.yy;
+				
+				if (is_real(cx) and is_real(cy)) {
+				
+					scr_stages_teleportToCell(cx, cy);
+				
+				}
+				
+			}
+		
+		}
+		
+	} else {
+		scr_ui_drawMiniMap(miniMap, 12, mapX, mapY, posX, posY);
+	}
+	
+}
 
 //HEALTH BAR, ENERGY BAR, XP BAR AND SHIELDS
 

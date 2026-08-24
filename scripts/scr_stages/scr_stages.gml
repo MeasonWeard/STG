@@ -212,6 +212,20 @@ function scr_stages_goToCell(xx, yy) {
 	
 }
 
+function scr_stages_teleportToCell(xx, yy) {
+
+	var player = global.player;
+	
+	if (instance_exists(player)) {
+		
+		player.attackDelay = 12;
+		player.teleport = true;
+		scr_stages_goToCell(xx, yy);
+	
+	}
+	
+}
+
 function scr_stages_saveSmashables() {
 
 	var rc = global.runController;
