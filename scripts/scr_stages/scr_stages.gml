@@ -234,6 +234,21 @@ function scr_stages_saveSmashables() {
 	
 	}
 	
+	with (obj_wallDecoration) {
+	
+		if (!smashable) continue;
+		
+		var data = {
+			xx: x,
+			yy: y,
+			obj: object_index,
+			smashed: smashed
+		}
+		
+		array_push(arr, data);
+	
+	}
+	
 	cell.smashables = arr;
 	
 }

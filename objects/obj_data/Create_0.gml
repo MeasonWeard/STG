@@ -393,6 +393,14 @@ stages = {
 		mapCol: c_orange
 	
 	},
+	
+	hydroLabs1: {
+	
+		room: stage_hydroLabs2,
+		type: stageTypes.arena,
+		mapCol: c_orange
+	
+	},
 
 	//engineering
 

@@ -49,6 +49,24 @@ if (firstStep) {
 			if (distSq < 0) continue;
 		
 			if (env.smashable) env.smashed = true;
+			
+			if (object_is_ancestor(env.object_index, obj_wall)) {
+			
+				if (instance_exists(env.decoration)) {
+			
+					var dec = env.decoration;
+
+					if (dec.smashable and !dec.smashed) {
+						
+						distSq = scr_obj_circleDistSq(x, y, radius, dec);
+						
+						if (distSq >= 0) dec.smashed = true;
+							
+					}
+		
+				}
+			
+			}
 		
 		}
 		

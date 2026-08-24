@@ -411,6 +411,22 @@ function scr_projectiles_hitEnv(proj, env, hitX, hitY) {
 	if (env.smashable) {
 		env.smashed = true;
 	}
+	
+	if (object_is_ancestor(env.object_index, obj_wall)) {
+		
+		if (instance_exists(env.decoration)) {
+			
+			var dec = env.decoration;
+			
+			if (dec.smashable and !dec.smashed) {
+	
+				dec.smashed = point_in_rectangle(proj.x, proj.y, dec.bbox_left, dec.bbox_top, dec.bbox_right, dec.bbox_bottom);
+			
+			}
+		
+		}
+		
+	}
 
 }
 

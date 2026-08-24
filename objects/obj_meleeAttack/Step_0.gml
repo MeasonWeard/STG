@@ -163,42 +163,63 @@ if (instance_exists(owner)) {
 				for (var i = 0; i < len; i ++) {
 				
 					var env = nearby[i];
+					
 					if (!instance_exists(env)) continue;
-					if (!env.smashable) continue;
 					
-					var col = false;
+					if (env.smashable) {
+					
+						var col = false;
 				
-					if (damageInRadius) {
+						if (damageInRadius) {
 				
-						var nearestX = clamp(x, env.colLeft, env.colRight);
-						var nearestY = clamp(y, env.colTop, env.colBottom);
+							var nearestX = clamp(x, env.colLeft, env.colRight);
+							var nearestY = clamp(y, env.colTop, env.colBottom);
 
-						var dist = point_distance(x, y, nearestX, nearestY);
+							var dist = point_distance(x, y, nearestX, nearestY);
 
-						if (dist <= radius) col = true;
+							if (dist <= radius) col = true;
 					
-					} else if (damageInLine) {
+						} else if (damageInLine) {
 					
-						col = scr_physics_collisionLineRectangle(
-							lineStartX,
-							lineStartY,
-							lineEndX,
-							lineEndY,
-							env.colLeft,
-							env.colTop,
-							env.colRight,
-							env.colBottom
-						);
+							col = scr_physics_collisionLineRectangle(
+								lineStartX,
+								lineStartY,
+								lineEndX,
+								lineEndY,
+								env.colLeft,
+								env.colTop,
+								env.colRight,
+								env.colBottom
+							);
 					
 					
-					} else {
+						} else {
 				
-						col = bbox_right > env.colLeft and bbox_left < env.colRight
-						and bbox_bottom > env.colTop and bbox_top < env.colBottom;
+							col = bbox_right > env.colLeft and bbox_left < env.colRight
+							and bbox_bottom > env.colTop and bbox_top < env.colBottom;
 				
+						}
+					
+						if (col) env.smashed = true;
+					
 					}
 					
-					if (col) env.smashed = true;
+					if (object_is_ancestor(env.object_index, obj_wall)) {
+		
+						if (instance_exists(env.decoration)) {
+			
+							var dec = env.decoration;
+			
+							if (dec.smashable and !dec.smashed) {
+	
+								dec.smashed  = bbox_right > dec.bbox_left and bbox_left < dec.bbox_right
+								and bbox_bottom > dec.bbox_top and bbox_top < dec.bbox_bottom;
+								
+							}
+		
+						}
+		
+					}
 				
 				}
 				

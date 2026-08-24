@@ -1,6 +1,6 @@
-if (findWall) {
+if (setup) {
 
-	findWall = false;
+	setup = false;
 
 	var closest = 9999999999;
 	var xx = x;
@@ -33,6 +33,34 @@ if (findWall) {
 		
 		depth = owner.depth - 1;
 		
+	}
+	
+		//smashable
+	if (!global.stageController.hub and smashable) {
+	
+		var smashables = global.runController.currentCell.smashables;
+		var len = array_length(smashables);
+		
+		for (var i = 0; i < len; i++) {
+		
+			var entry = smashables[i];
+			
+			if (!is_struct(entry)) continue;
+			
+			var obj = entry.obj;
+			
+			if (!obj == object_index) continue;
+			
+			var px = entry.xx;
+			var py = entry.yy;
+			
+			if (px == x and py = y) {
+				smashed = entry.smashed;
+				prevSmashed = true;
+			}
+		
+		}
+	
 	}
 	
 }

@@ -364,8 +364,8 @@ function zone_hydro() : zone() constructor {
 			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
 		
 			var halls = [stage_hydroHall1, stage_hydroHall2, stage_hydroHall3];
-			var arenas = [stage_hydroLabs1];
-			var sideRooms = [stage_hydroLabs1];
+			var arenas = [stage_hydroLabs1, stage_hydroLabs2];
+			var sideRooms = [stage_hydroLabs1, stage_hydroLabs2];
 			var endStages = [stage_wasteBoss1];
 
 			var startX = startPos.xx;
