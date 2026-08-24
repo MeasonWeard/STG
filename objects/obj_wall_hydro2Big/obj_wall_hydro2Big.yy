@@ -1,17 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_doorwayHydro1",
-  "eventList":[],
+  "%Name":"obj_wall_hydro2Big",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_doorwayHydro1",
+  "name":"obj_wall_hydro2Big",
   "overriddenProperties":[],
   "parent":{
-    "name":"Doorways",
-    "path":"folders/Objects/Environment/Doorways.yy",
+    "name":"Hydro",
+    "path":"folders/Objects/Environment/Walls/Hydro.yy",
   },
   "parentObjectId":{
-    "name":"obj_doorway",
-    "path":"objects/obj_doorway/obj_doorway.yy",
+    "name":"obj_wall",
+    "path":"objects/obj_wall/obj_wall.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -31,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wall_hydroDoorway2",
-    "path":"sprites/spr_wall_hydroDoorway2/spr_wall_hydroDoorway2.yy",
+    "name":"spr_wall_hydro2Big",
+    "path":"sprites/spr_wall_hydro2Big/spr_wall_hydro2Big.yy",
   },
   "spriteMaskId":null,
   "visible":true,
