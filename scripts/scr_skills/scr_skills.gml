@@ -2394,7 +2394,7 @@ function skill_particleShower() : skill() constructor {
 		
 			damage = new damageProfile();
 		
-			damage.elec = 8 + (level - 1) * 4;
+			damage.elec = 6 + (level - 1) * 3;
 			
 			var damKeys = ["elec"];
 			
