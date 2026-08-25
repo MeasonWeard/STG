@@ -138,8 +138,10 @@ if (!paused) {
 				}
 		
 				with (obj_destructible) {
-					if (destroyWhenStageOver) instance_destroy();	
+					if (destroyWhenStageOver) instance_destroy();
 				}
+				
+				instance_create_layer(x, y, "Instances", obj_lootCrateDestroyer);
 		
 				rc.currentCell.cleared = true;
 	

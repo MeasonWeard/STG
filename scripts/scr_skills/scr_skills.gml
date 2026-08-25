@@ -11,6 +11,7 @@ function skill() constructor {
 	statsDescription = "";
 	
 	maxLevel = 12;
+	levelReq = 1;
 	
 	passives = undefined;
 	
@@ -363,6 +364,8 @@ function scr_skills_formatDescription(skillInst) {
 		projectiles = 8;
 		cooldownTime = 12;
 		explosionRadius = 50;
+		
+		levelReq = 5;
 	
 		damage = undefined;
 	
@@ -493,6 +496,8 @@ function scr_skills_formatDescription(skillInst) {
 		range = 380;
 		pullRange = 600;
 		txtCol = c_white;
+		
+		levelReq = 5;
 
 		description = "Create a miniature black hole which pulls in enemies and then";
 		description += "\nexplodes, dealing kinetic damage in an area.";
@@ -806,6 +811,8 @@ function skill_particleShower() : skill() constructor {
 		castCooldownTime = 0.75;
 		bioBonus = 10;
 		life = 420;
+		
+		levelReq = 5;
 	
 		damage = undefined;
 	
@@ -873,7 +880,8 @@ function skill_particleShower() : skill() constructor {
 		castCooldownTime = 0.5;
 		flameLife = 4;
 		burnRadius = 120;
-		//txtCol = c_aqua;
+		
+		levelReq = 5;
 
 		damage = undefined;
 		flameDamage = undefined;
@@ -1025,6 +1033,8 @@ function skill_particleShower() : skill() constructor {
 		name = "Fungal Turret";
 		key = "fungalTurret";
 		icon = spr_icon_fungalTurret;
+		
+		levelReq = 5;
 	
 		maxLevel = 9;
 		maxCharges = 1;
@@ -1128,6 +1138,8 @@ function skill_particleShower() : skill() constructor {
 		name = "Symbiont";
 		key = "symbiont";
 		icon = spr_icon_symbiont;
+		
+		levelReq = 10;
 	
 		maxLevel = 12;
 		maxCharges = 1;
@@ -1332,6 +1344,9 @@ function skill_particleShower() : skill() constructor {
 		key = "emp";
 		icon = spr_icon_EMP;
 		maxLevel = 12;
+		
+		levelReq = 5;
+		
 		maxCharges = 1;
 		cooldownTime = 4.5;
 		energyCost = 60;
@@ -1505,6 +1520,9 @@ function skill_particleShower() : skill() constructor {
 		key = "mech";
 		icon = spr_icon_mech;
 		maxLevel = 12;
+		levelReq = 10;
+		
+		
 		maxCharges = 1;
 		energyCost = 90;
 		cooldownTime = 30;
@@ -1588,7 +1606,8 @@ function skill_particleShower() : skill() constructor {
 		txtCol = c_black;
 		maxLevel = 3;
 		
-
+		levelReq = 5;
+	
 		description = "Grants you shield points.";
 	
 		static setupFunc = function(source) {
@@ -1633,6 +1652,8 @@ function skill_particleShower() : skill() constructor {
 		txtCol = c_white;
 		maxLevel = 9;
 		
+		levelReq = 5;
+		
 		description = "Harness the energy of virtual particles as they emerge from the quantum vacuum.";
 	
 		static setupFunc = function(source) {
@@ -1672,7 +1693,7 @@ function skill_particleShower() : skill() constructor {
 	
 	function skill_radioactiveBullets() :skill() constructor {
 	
-		name = "Radioactive Bullets";
+		name = "Radioactive Weapons";
 		key = "radioactiveBullets";
 		icon = spr_icon_radioactiveBullets;
 		maxLevel = 6;
@@ -1681,7 +1702,7 @@ function skill_particleShower() : skill() constructor {
 		damage = undefined;
 		radius = 50;
 	
-		description = "Your projectiles deal extra radiation damage and\n";
+		description = "Your projectiles and melee attakcs deal extra radiation damage and\n";
 		description += "have a chance to detonate, dealing additonal area\nradiation damage.";
 		
 		static formatStatsDescription = function() {
@@ -1696,6 +1717,7 @@ function skill_particleShower() : skill() constructor {
 			
 			var func = scr_effects_radioactiveBullet;
 			scr_char_addBulletFunc(source, func);
+			scr_char_addMeleeFunc(source, func);
 			
 		}
 		
@@ -1731,6 +1753,8 @@ function skill_particleShower() : skill() constructor {
 		icon = spr_icon_flashpoint;
 		maxLevel = 8;
 		damage = undefined;
+		
+		levelReq = 10;
 	
 		description = "Certain abilities create burning ground where they are cast.";
 		description += "\n\nEffected abilites: ";
@@ -1773,6 +1797,8 @@ function skill_particleShower() : skill() constructor {
 		maxLevel = 9;
 		fireDam = 4;
 		chemDam = 4;
+		
+		levelReq = 5;
 	
 		description = "Your acid pools deal fire damage in addition to chemical damage.";
 		description += "\nBurning ground deals chemical damage in addition to fire damage.";
@@ -1829,6 +1855,8 @@ function skill_particleShower() : skill() constructor {
 		icon = spr_icon_medicalSynthesis;
 		txtCol = c_black;
 		maxLevel = 4;
+		
+		levelReq = 5;
 	
 		description = "The first point increases your maximum stim packs by 1.\nEach point increases stim pack regeneration rate.";
 	
@@ -1847,7 +1875,7 @@ function skill_particleShower() : skill() constructor {
 	
 	function skill_acidicBullets() : skill() constructor {
 
-		name = "Acidic Bullets";
+		name = "Acidic Weapons";
 		key = "acidicBullets";
 		icon = spr_icon_acidicBullets;
 		maxLevel = 6;
@@ -1858,7 +1886,7 @@ function skill_particleShower() : skill() constructor {
 		life = 5;
 		chemDam = 1;
 	
-		description = "Your projectiles deal extra chemical damage and\n";
+		description = "Your projectiles and melee attacks deal extra chemical damage and\n";
 		description += "have a chance of creating acid pools where they collide.";
 		
 		static formatStatsDescription = function() {
@@ -1875,6 +1903,7 @@ function skill_particleShower() : skill() constructor {
 			var func = scr_effects_acidicBullet;
 			
 			scr_char_addBulletFunc(source, func);
+			scr_char_addMeleeFunc(source, func);
 			
 		}
 		
@@ -1924,6 +1953,8 @@ function skill_particleShower() : skill() constructor {
 		key = "muscleGrowth";
 		icon = spr_icon_myostatinInhibitor;
 		maxLevel = 6;
+		
+		levelReq = 5;
 	
 		description = "Block the body's natural limit on muscle growth, increasing your melee damage.";
 	
@@ -1951,6 +1982,8 @@ function skill_particleShower() : skill() constructor {
 		key = "chitin";
 		icon = spr_icon_chitin;
 		maxLevel = 8;
+		
+		levelReq = 5;
 	
 		description = "You grow a chitinous exoskeleton, increasing your maximum health and all resistances.";
 	
@@ -2025,8 +2058,11 @@ function skill_particleShower() : skill() constructor {
 		key = "radiotrophy";
 		icon = spr_icon_radiotrophy;
 		maxLevel = 6;
+		
+		levelReq = 5;
+		
 		recharge = 4;
-	
+		
 		description = "Your cells absorb ionizing radiation and convert it into energy.";
 		description += "\nYou gain radiation resistance, and when you take radiation damage";
 		description += "\nyou recharge energy points.";
@@ -2169,6 +2205,8 @@ function skill_particleShower() : skill() constructor {
 		key = "gunsmith";
 		icon = spr_icon_gunsmith;
 		maxLevel = 6;
+		
+		levelReq = 5;
 	
 		description = "Modify your guns so that they deal more damage.";
 	
@@ -2197,7 +2235,8 @@ function skill_particleShower() : skill() constructor {
 		icon = spr_icon_guardianArray;
 		petShields = 1;
 		maxLevel = 3;
-	
+		levelReq = 5;
+
 		description = "Your summons get a shield.";
 	
 		static formatStatsDescription = function() {
@@ -2220,6 +2259,8 @@ function skill_particleShower() : skill() constructor {
 		key = "shieldBattery";
 		icon = spr_icon_shieldBattery;
 		maxLevel = 6;
+		levelReq = 5;
+
 
 		description = "The first point grants you +1 shield point.";
 		description += "\nEach subsequent point decreases shield regen delay\nand increases shield regen rate.";

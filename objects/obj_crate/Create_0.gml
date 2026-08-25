@@ -14,3 +14,5 @@ spawnChance = 25;
 
 lootMaxRarity = 3;
 lootImproveChance = 20;
+
+destroyWhenStageOver = true;

@@ -64,7 +64,7 @@ function scr_melee_attack(char) {
 	var snd = scr_audio_randomSoundFromProfile(melee.swingSounds);
 	if (snd != undefined) if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
 
-	att.owner = char;
+	att.source = char;
 	att.damage = stats.damage;
 	att.killThreshold = stats.killThreshold;
 	att.hitSounds = melee.hitSounds;
@@ -78,6 +78,8 @@ function scr_melee_attack(char) {
 	att.lifeSteal = lifeSteal;
 	att.size = melee.size;
 	att.col = melee.col;
+	
+	att.collisionFuncs = char.meleeFuncs;
 	
 	att.sprite_index = melee.attackSprites[melee.attackSpriteIndex];
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;

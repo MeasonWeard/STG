@@ -1,10 +1,15 @@
-owner = noone;
+source = noone;
 damage = undefined;
 killThreshold = 0;
 lifeSteal = 0;
 depth = layers.effects;
 size = 1;
 col = c_white;
+
+hitX = x;
+hitY = y;
+
+collisionFuncs = [];
 
 hitDelay = 0;
 attackFrames = 4;

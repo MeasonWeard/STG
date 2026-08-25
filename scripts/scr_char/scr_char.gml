@@ -640,6 +640,16 @@ function scr_char_addBulletFunc(char, func) {
 	
 }
 
+function scr_char_addMeleeFunc(char, func) {
+
+	if(!instance_exists(char)) exit;
+	if(!is_callable(func)) exit;
+	
+	array_push(char.meleeFuncs, func);
+
+	
+}
+
 function scr_char_addConstantFunc(char, func) {
 
 	if(!instance_exists(char)) exit;

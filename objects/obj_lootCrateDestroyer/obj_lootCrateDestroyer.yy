@@ -1,20 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_spawnerMinor",
+  "%Name":"obj_lootCrateDestroyer",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_spawnerMinor",
+  "name":"obj_lootCrateDestroyer",
   "overriddenProperties":[],
   "parent":{
     "name":"Utility",
     "path":"folders/Objects/Utility.yy",
   },
-  "parentObjectId":{
-    "name":"obj_spawner",
-    "path":"objects/obj_spawner/obj_spawner.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -32,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_spawnerMinor",
-    "path":"sprites/spr_spawnerMinor/spr_spawnerMinor.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

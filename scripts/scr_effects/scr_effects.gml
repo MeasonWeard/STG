@@ -68,13 +68,13 @@ function scr_effects_explodingProjectile(proj) {
 	
 }
 
-function scr_effects_acidicBullet(proj) {
+function scr_effects_acidicBullet(att) {
 
-	if (proj.damage.chem <= 0) exit;
+	if (att.damage.chem <= 0) exit;
 	
-	if (!instance_exists(proj.source)) exit;
+	if (!instance_exists(att.source)) exit;
 	
-	var sk = scr_skills_findCharSkill("acidicBullets", proj.source);
+	var sk = scr_skills_findCharSkill("acidicBullets", att.source);
 	
 	if (is_undefined(sk)) exit;
 	
@@ -85,22 +85,30 @@ function scr_effects_acidicBullet(proj) {
 	
 	if (!scr_random_chance(chance)) exit;
 	
-	var pool = instance_create_layer(proj.x, proj.y, "Instances", obj_acidPool);
+	var xx = att.x;
+	var yy = att.y;
+	
+	if (object_is_ancestor(att.object_index, obj_meleeAttack)) {
+		xx = att.hitX;
+		yy = att.hitY;
+	}
+	
+	var pool = instance_create_layer(xx, yy, "Instances", obj_acidPool);
 	
 	pool.damage = damage;
 	pool.radius = radius;
 	pool.life = life;
-	pool.faction = proj.source.faction;
+	pool.faction = att.source.faction;
 	
 }
 
-function scr_effects_radioactiveBullet(proj) {
+function scr_effects_radioactiveBullet(att) {
 	
-	if (proj.damage.rad <= 0) exit;
+	if (att.damage.rad <= 0) exit;
 	
-	if (!instance_exists(proj.source)) exit;
+	if (!instance_exists(att.source)) exit;
 	
-	var sk = scr_skills_findCharSkill("radioactiveBullets", proj.source);
+	var sk = scr_skills_findCharSkill("radioactiveBullets", att.source);
 	
 	if (is_undefined(sk)) exit;
 	
@@ -110,10 +118,18 @@ function scr_effects_radioactiveBullet(proj) {
 	
 	if (!scr_random_chance(chance)) exit;
 	
-	var flash = instance_create_layer(proj.x, proj.y, "Instances", obj_radiationFlash);
+	var xx = att.x;
+	var yy = att.y;
+	
+	if (object_is_ancestor(att.object_index, obj_meleeAttack)) {
+		xx = att.hitX;
+		yy = att.hitY;
+	}
+	
+	var flash = instance_create_layer(xx, yy, "Instances", obj_radiationFlash);
 	
 	flash.damage = damage;
 	flash.radius = radius;
-	flash.faction = proj.source.faction;
+	flash.faction = att.source.faction;
 	
 }

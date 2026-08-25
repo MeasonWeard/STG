@@ -22,7 +22,7 @@ if (mouseHover) {
 		//the proper way
 		if (mouse_check_button_pressed(mb_left)) {
 			
-			if (c.points > 0) {
+			if (!locked and c.points > 0) {
 				
 				var success = true;
 				
@@ -79,6 +79,10 @@ if (mouseHover) {
 					}
 				
 				}
+				
+			} else {
+				
+				audio_play_sound(snd_error, 1, false);
 				
 			}
 			

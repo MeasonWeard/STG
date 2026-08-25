@@ -1,12 +1,12 @@
-if (instance_exists(owner)) {
+if (instance_exists(source)) {
 
 	var move = true;
 
-	var meleeX = owner.gunX;
-	var meleeY = owner.gunY;
+	var meleeX = source.gunX;
+	var meleeY = source.gunY;
 
-	var aimX = owner.aimX;
-	var aimY = owner.aimY;
+	var aimX = source.aimX;
+	var aimY = source.aimY;
 
 	var dir = point_direction(meleeX, meleeY, aimX, aimY);
 
@@ -23,7 +23,7 @@ if (instance_exists(owner)) {
 
 			if (damageInLine) {
 
-				var lineStartOffset = owner.meleeRangeOffset + range;
+				var lineStartOffset = source.meleeRangeOffset + range;
 
 				lineStartX = meleeX + lengthdir_x(lineStartOffset, dir);
 				lineStartY = meleeY + lengthdir_y(lineStartOffset, dir);
@@ -36,14 +36,15 @@ if (instance_exists(owner)) {
 			//chars
 			var nearby = scr_hash_getNearby(global.stageController.charHash, x, y);
 			var len = array_length(nearby);
+			var doCollisionFuncs = false;
 
 			for (var i = 0; i < len; i++) {
 
 				var char = nearby[i];
 	
 				if (!instance_exists(char)) continue;
-				if (char.id == owner.id) continue;
-				if (char.faction == owner.faction) continue;
+				if (char.id == source.id) continue;
+				if (char.faction == source.faction) continue;
 		
 				var col = false;
 				
@@ -81,6 +82,11 @@ if (instance_exists(owner)) {
 			
 					if (!scr_melee_alreadyHit(char, self)) {
 					
+						hitX = char.x;
+						hitY = char.y;
+						
+						doCollisionFuncs = true;
+					
 						var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
 						
 						if (char.shield > 0) {
@@ -94,8 +100,8 @@ if (instance_exists(owner)) {
 
 							var heal = (lifeSteal * 0.01) * dealt;
 							
-							if (owner.lifeStealForSelf) scr_char_heal(owner, heal);
-							if (owner.lifeStealForOwner and instance_exists(owner.owner)) scr_char_heal(owner.owner, heal);
+							if (source.lifeStealForSelf) scr_char_heal(source, heal);
+							if (source.lifeStealForsource and instance_exists(source.source)) scr_char_heal(source.source, heal);
 							
 						}
 					
@@ -104,16 +110,26 @@ if (instance_exists(owner)) {
 						var snd = scr_audio_randomSoundFromProfile(hitSounds);
 						if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
 					
-
-					
 						array_push(char.meleeHitList, self);
 					
 						if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
-						
+							
 					}
 
 				}
-	
+				
+			}
+		
+			//collision functions
+			if (doCollisionFuncs) {
+					
+					var funcsLen = array_length(collisionFuncs);
+						
+					for (var j = 0; j < funcsLen; j ++) {
+						var func = collisionFuncs[j];
+						if (is_callable(func)) func(self);
+					}
+					
 			}
 		
 			//destructibles
@@ -233,7 +249,7 @@ if (instance_exists(owner)) {
 	
 	if (move) {
 		
-		var offset = owner.meleeRangeOffset + range;
+		var offset = source.meleeRangeOffset + range;
 		var attackX = meleeX + lengthdir_x(offset, dir);
 		var attackY = meleeY + lengthdir_y(offset, dir);
 

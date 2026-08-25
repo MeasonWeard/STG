@@ -9,6 +9,9 @@ thisSkill = undefined;
 
 prevLevel = -1;
 
+playerLevel = playerData.level;
+locked = true;
+
 mouseHover = false;
 
 description = "";

@@ -27,6 +27,6 @@ resMinFactor = 0.25;
 meleeHitList = [];
 
 dropOnDestroy = true;
-destroyWhenStageOver = true;
+destroyWhenStageOver = false;
 
 spawnChance = 100;

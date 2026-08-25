@@ -194,6 +194,7 @@ weaponIndex = 0;
 meleeHitList = [];
 
 bulletFuncs = [];
+meleeFuncs = [];
 constantFuncs = [];
 mostRecentDamage = undefined;
 
