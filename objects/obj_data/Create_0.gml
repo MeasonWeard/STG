@@ -458,6 +458,7 @@ soundProfiles = {
 	bulletHitFlesh: [snd_bulletHitFlesh],
 	bulletHitRock: [snd_bulletHitRock1, snd_bulletHitRock2, snd_bulletHitRock3],
 	bulletHitShield: [snd_shieldDamage1, snd_shieldDamage2, snd_shieldDamage3],
+	bulletHitGlass: [snd_bulletHitGlass1, snd_bulletHitGlass2, snd_bulletHitGlass3],
 	
 	//weaponshots
 	blaster: [snd_blaster1, snd_blaster2, snd_blaster3],
