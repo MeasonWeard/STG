@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_plantBox",
+  "%Name":"obj_treeBox",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_plantBox",
+  "name":"obj_treeBox",
   "overriddenProperties":[],
   "parent":{
     "name":"Things",
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_plantBox",
-    "path":"sprites/spr_plantBox/spr_plantBox.yy",
+    "name":"spr_treeBox",
+    "path":"sprites/spr_treeBox/spr_treeBox.yy",
   },
   "spriteMaskId":null,
   "visible":true,

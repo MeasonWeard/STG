@@ -2,7 +2,7 @@
   "$GMSprite":"v2",
   "%Name":"spr_tileset_hydro",
   "bboxMode":0,
-  "bbox_bottom":319,
+  "bbox_bottom":639,
   "bbox_left":64,
   "bbox_right":383,
   "bbox_top":0,
@@ -19,6 +19,7 @@
   "height":640,
   "HTile":false,
   "layers":[
+    {"$GMImageLayer":"","%Name":"e994936c-6439-49c0-b446-b3f3c3e05d20","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"e994936c-6439-49c0-b446-b3f3c3e05d20","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
     {"$GMImageLayer":"","%Name":"bc1b5107-c9a9-43c8-9267-51530839f859","blendMode":0,"displayName":"default","isLocked":false,"name":"bc1b5107-c9a9-43c8-9267-51530839f859","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_tileset_hydro",

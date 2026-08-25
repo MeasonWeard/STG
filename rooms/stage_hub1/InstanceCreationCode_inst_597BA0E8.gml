@@ -1,3 +1,3 @@
-tagText = "Hydroponics";
-doorText = "Hydroponics";
+tagText = "Phytotron";
+doorText = "Phytotron";
 zoneConstructor = zone_hydro;

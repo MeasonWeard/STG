@@ -401,6 +401,14 @@ stages = {
 		mapCol: c_orange
 	
 	},
+	
+	hydroGarden1: {
+	
+		room: stage_hydroGarden1,
+		type: stageTypes.arena,
+		mapCol: c_green
+	
+	},
 
 	//engineering
 

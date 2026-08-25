@@ -337,7 +337,7 @@ function zone_commercial() : zone() constructor {
 
 function zone_hydro() : zone() constructor {
 
-	name = "Hydroponics";
+	name = "Phytotron";
 	portrait = spr_acidPit;
 	textCol = c_aqua;
 
@@ -365,7 +365,7 @@ function zone_hydro() : zone() constructor {
 		
 			var halls = [stage_hydroHall1, stage_hydroHall2, stage_hydroHall3];
 			var arenas = [stage_hydroLabs1, stage_hydroLabs2];
-			var sideRooms = [stage_hydroLabs1, stage_hydroLabs2];
+			var sideRooms = [stage_hydroGarden1];
 			var endStages = [stage_wasteBoss1];
 
 			var startX = startPos.xx;

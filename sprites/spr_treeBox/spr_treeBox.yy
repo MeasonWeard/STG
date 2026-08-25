@@ -1,11 +1,11 @@
 {
   "$GMSprite":"v2",
-  "%Name":"spr_plantBox",
+  "%Name":"spr_treeBox",
   "bboxMode":2,
-  "bbox_bottom":245,
-  "bbox_left":0,
-  "bbox_right":178,
-  "bbox_top":63,
+  "bbox_bottom":236,
+  "bbox_left":-5,
+  "bbox_right":173,
+  "bbox_top":54,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
@@ -13,16 +13,17 @@
   "For3D":false,
   "frames":[
     {"$GMSpriteFrame":"v1","%Name":"890225d9-21a1-401a-940b-3f0f3ebaf1c2","name":"890225d9-21a1-401a-940b-3f0f3ebaf1c2","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"daa10eac-895b-418e-8cdb-5c5aa3440a55","name":"daa10eac-895b-418e-8cdb-5c5aa3440a55","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
-  "height":246,
+  "height":314,
   "HTile":false,
   "layers":[
     {"$GMImageLayer":"","%Name":"8060a07c-1844-49b0-bbd9-fd69ffff7edd","blendMode":0,"displayName":"Layer 1","isLocked":false,"name":"8060a07c-1844-49b0-bbd9-fd69ffff7edd","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
     {"$GMImageLayer":"","%Name":"f3375afc-4af3-4cd8-8498-d36b26f8a20a","blendMode":0,"displayName":"default","isLocked":false,"name":"f3375afc-4af3-4cd8-8498-d36b26f8a20a","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_plantBox",
+  "name":"spr_treeBox",
   "nineSlice":null,
   "origin":7,
   "parent":{
@@ -34,7 +35,7 @@
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"v1",
-    "%Name":"spr_plantBox",
+    "%Name":"spr_treeBox",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -50,7 +51,7 @@
     },
     "eventStubScript":null,
     "eventToFunction":{},
-    "length":1.0,
+    "length":2.0,
     "lockOrigin":false,
     "moments":{
       "$KeyframeStore<MomentsEventKeyframe>":"",
@@ -58,7 +59,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_plantBox",
+    "name":"spr_treeBox",
     "playback":1,
     "playbackSpeed":30.0,
     "playbackSpeedType":0,
@@ -70,14 +71,17 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"890225d9-21a1-401a-940b-3f0f3ebaf1c2","path":"sprites/spr_plantBox/spr_plantBox.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"890225d9-21a1-401a-940b-3f0f3ebaf1c2","path":"sprites/spr_treeBox/spr_treeBox.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"d79189fe-f421-43f9-b29b-79cc9ee1c32c","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"daa10eac-895b-418e-8cdb-5c5aa3440a55","path":"sprites/spr_treeBox/spr_treeBox.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"d8068488-4e59-4390-b703-966ab158227f","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,
     "volume":1.0,
-    "xorigin":89,
-    "yorigin":246,
+    "xorigin":94,
+    "yorigin":314,
   },
   "swatchColours":null,
   "swfPrecision":0.5,
@@ -87,5 +91,5 @@
   },
   "type":0,
   "VTile":false,
-  "width":179,
+  "width":189,
 }
