@@ -531,7 +531,8 @@ skillConstructors = {
 	kevlar: skill_kevlar, //eng
 	gunsmith: skill_gunsmith, //eng
 	targetingMonocle: skill_targetingMonocle, //eng
-	incendiaryBullets: skill_incendiaryBullets // eng
+	incendiaryBullets: skill_incendiaryBullets, // eng
+	electricBullets: skill_electricBullets // eng
 	
 };
 

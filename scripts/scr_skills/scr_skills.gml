@@ -1331,6 +1331,7 @@ function skill_particleShower() : skill() constructor {
 			cl.chainList = [nearest];
 			cl.chains = chains;
 			cl.damage = damage;
+			cl.faction = source.faction;
 		
 			return true;
 		
@@ -2297,7 +2298,7 @@ function skill_particleShower() : skill() constructor {
 		damage = undefined;
 		radius = 100;
 		life = 4;
-		chemDam = 1;
+		fireDam = 1;
 	
 		description = "Your projectiles and melee attacks deal extra fire damage and\n";
 		description += "have a chance of creating burning ground where they collide.";
@@ -2347,6 +2348,61 @@ function skill_particleShower() : skill() constructor {
 			passives = {
 		
 				fireDam: level
+		
+			}
+	
+		}
+	
+	}
+	
+	function skill_electricBullets() : skill() constructor {
+
+		name = "Electric Weapons";
+		key = "electricBullets";
+		icon = spr_icon_electricBullets;
+		maxLevel = 6;
+		levelReq = 10;
+		
+		chance = 3;
+		damage = undefined;
+		targets = 3;
+	
+		description = "Your projectiles and melee attacks deal extra electric damage and\n";
+		description += "have a chance of shocking nearby enemies.";
+		
+		static formatStatsDescription = function() {
+
+			statsDescription = "Shock Chance: " + string(chance) + "%";
+			statsDescription += "\nShock Damage: " + string(damage.elec * 2) + " electrical";
+			statsDescription += "\nTargets: " + string(targets);
+			
+		}
+		
+		static extraEffects = function(source) {
+			
+			var func = scr_effects_electricBullet;
+			
+			scr_char_addBulletFunc(source, func);
+			scr_char_addMeleeFunc(source, func);
+			
+		}
+		
+		static setupFunc = function(source) {
+	
+			chance = level * 2;
+			targets = 2 + level;
+		
+			damage = new damageProfile();
+		
+			damage.elec = 8 + (level - 1) * 4;
+			
+			var damKeys = ["elec"];
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
+			
+			passives = {
+		
+				elecDam: level
 		
 			}
 	

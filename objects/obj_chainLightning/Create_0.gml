@@ -1,6 +1,8 @@
 owner = noone;
 depth = layers.effects;
 
+faction = undefined;
+
 chains = 4;
 chainsDone = 0;
 

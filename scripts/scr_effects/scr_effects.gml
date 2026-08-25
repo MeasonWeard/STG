@@ -161,3 +161,33 @@ function scr_effects_radioactiveBullet(att) {
 	flash.faction = att.source.faction;
 	
 }
+
+function scr_effects_electricBullet(att) {
+		
+	if (!instance_exists(att.source)) exit;
+	
+	var sk = scr_skills_findCharSkill("electricBullets", att.source);
+	
+	if (is_undefined(sk)) exit;
+	
+	var chance = sk.chance;
+	var damage = sk.damage;
+	var targets = sk.targets;
+	
+	if (!scr_random_chance(chance)) exit;
+	
+	var xx = att.x;
+	var yy = att.y;
+	
+	if (object_is_ancestor(att.object_index, obj_meleeAttack)) {
+		xx = att.hitX;
+		yy = att.hitY;
+	}
+	
+	var shock = instance_create_layer(xx, yy, "Instances", obj_shock);
+	
+	shock.damage = damage;
+	shock.targets = targets;
+	shock.faction = att.source.faction;
+	
+}

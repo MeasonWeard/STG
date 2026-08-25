@@ -64,12 +64,15 @@ if (chainTick <= 0 and chainsDone < chains) {
 
 		if (!instance_exists(char)) continue;
 		if (char == owner) continue;
-		if (char.faction == owner.faction) continue;
+		if (char.faction == faction) continue;
 
 		var dist = point_distance(sourceX, sourceY, char.x, char.y);
 		if (dist > range) continue;
-
+	
 		var alreadyChained = false;
+		
+		var los = scr_physics_hasLineOfSight(sourceX, sourceY, char.x, char.y);
+		if (!los) continue;
 
 		for (var j = 0; j < array_length(chainList); j++) {
 			if (chainList[j] == char) {
