@@ -786,6 +786,7 @@
     {"id":{"name":"spr_icon_gas","path":"sprites/spr_icon_gas/spr_icon_gas.yy",},},
     {"id":{"name":"spr_icon_guardianArray","path":"sprites/spr_icon_guardianArray/spr_icon_guardianArray.yy",},},
     {"id":{"name":"spr_icon_gunsmith","path":"sprites/spr_icon_gunsmith/spr_icon_gunsmith.yy",},},
+    {"id":{"name":"spr_icon_incendiaryBullets","path":"sprites/spr_icon_incendiaryBullets/spr_icon_incendiaryBullets.yy",},},
     {"id":{"name":"spr_icon_joltzmanShield","path":"sprites/spr_icon_joltzmanShield/spr_icon_joltzmanShield.yy",},},
     {"id":{"name":"spr_icon_kevlar","path":"sprites/spr_icon_kevlar/spr_icon_kevlar.yy",},},
     {"id":{"name":"spr_icon_leadCoat","path":"sprites/spr_icon_leadCoat/spr_icon_leadCoat.yy",},},

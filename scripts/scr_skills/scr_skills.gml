@@ -891,9 +891,9 @@ function skill_particleShower() : skill() constructor {
 		
 		static formatStatsDescription = function() {
 			
-			statsDescription = "Burned Ground Duration: 4 seconds"
+			statsDescription = "Burning Ground Duration: 4 seconds"
 			statsDescription += "\n\nExplosion Damage: " + string(damage.kin) + " kinetic, " + string(damage.fire) + " fire";
-			statsDescription += "\nBurned Ground Damage: " + string(flameDamage.fire * 2) + " fire p/s";
+			statsDescription += "\nBurning Ground Damage: " + string(flameDamage.fire * 2) + " fire p/s";
 
 		}
 	
@@ -2279,6 +2279,75 @@ function skill_particleShower() : skill() constructor {
 				passives.shieldRegenDelay = -0.1 * (level - 1);
 				passives.shieldRegen = 0.05 * (level -1);
 			
+			}
+	
+		}
+	
+	}
+		
+	function skill_incendiaryBullets() : skill() constructor {
+
+		name = "Incendiary Weapons";
+		key = "incendiaryBullets";
+		icon = spr_icon_incendiaryBullets;
+		maxLevel = 6;
+		levelReq = 10;
+		
+		chance = 3;
+		damage = undefined;
+		radius = 100;
+		life = 4;
+		chemDam = 1;
+	
+		description = "Your projectiles and melee attacks deal extra fire damage and\n";
+		description += "have a chance of creating burning ground where they collide.";
+		
+		static formatStatsDescription = function() {
+
+			statsDescription = "Burning Ground Chance: " + string(chance) + "%";
+			statsDescription += "\nBurning Ground Radius: " + string(radius);
+			statsDescription += "\nBurning Ground Duration: " + string(life) +" seconds";
+			statsDescription += "\nBurning Ground Damage: " + string(damage.fire * 2) + " fire p/s";
+		
+		}
+		
+		static extraEffects = function(source) {
+			
+			var func = scr_effects_incendiaryBullet;
+			
+			scr_char_addBulletFunc(source, func);
+			scr_char_addMeleeFunc(source, func);
+			
+		}
+		
+		static setupFunc = function(source) {
+	
+			chance = level * 2;
+	
+			radius = 80 + level * 4;
+			life = 4;
+		
+			damage = new damageProfile();
+		
+			damage.fire = 8 + (level - 1) * 4;
+			
+			var damKeys = ["fire"];
+			
+			var napalm = scr_skills_findCharSkill("napalm", source);
+			
+			if (napalm != undefined) {
+				
+				damage.chem = napalm.chemDam;
+				array_push(damKeys, "chem");
+				
+			}
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
+			
+			passives = {
+		
+				fireDam: level
+		
 			}
 	
 		}

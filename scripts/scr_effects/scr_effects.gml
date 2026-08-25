@@ -69,8 +69,6 @@ function scr_effects_explodingProjectile(proj) {
 }
 
 function scr_effects_acidicBullet(att) {
-
-	if (att.damage.chem <= 0) exit;
 	
 	if (!instance_exists(att.source)) exit;
 	
@@ -102,10 +100,40 @@ function scr_effects_acidicBullet(att) {
 	
 }
 
+function scr_effects_incendiaryBullet(att) {
+
+	if (!instance_exists(att.source)) exit;
+	
+	var sk = scr_skills_findCharSkill("incendiaryBullets", att.source);
+	
+	if (is_undefined(sk)) exit;
+	
+	var chance = sk.chance;
+	var damage = sk.damage;
+	var radius = sk.radius;
+	var life = sk.life;
+	
+	if (!scr_random_chance(chance)) exit;
+	
+	var xx = att.x;
+	var yy = att.y;
+	
+	if (object_is_ancestor(att.object_index, obj_meleeAttack)) {
+		xx = att.hitX;
+		yy = att.hitY;
+	}
+	
+	var pool = instance_create_layer(xx, yy, "Instances", obj_burningGround);
+	
+	pool.damage = damage;
+	pool.radius = radius;
+	pool.life = life;
+	pool.faction = att.source.faction;
+	
+}
+
 function scr_effects_radioactiveBullet(att) {
-	
-	if (att.damage.rad <= 0) exit;
-	
+		
 	if (!instance_exists(att.source)) exit;
 	
 	var sk = scr_skills_findCharSkill("radioactiveBullets", att.source);

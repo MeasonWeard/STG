@@ -530,7 +530,8 @@ skillConstructors = {
 	shieldBattery: skill_shieldBattery, //eng
 	kevlar: skill_kevlar, //eng
 	gunsmith: skill_gunsmith, //eng
-	targetingMonocle: skill_targetingMonocle //eng
+	targetingMonocle: skill_targetingMonocle, //eng
+	incendiaryBullets: skill_incendiaryBullets // eng
 	
 };
 
