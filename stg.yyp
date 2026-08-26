@@ -321,6 +321,7 @@
     {"id":{"name":"obj_stashPanel","path":"objects/obj_stashPanel/obj_stashPanel.yy",},},
     {"id":{"name":"obj_statModifier","path":"objects/obj_statModifier/obj_statModifier.yy",},},
     {"id":{"name":"obj_statsPlate","path":"objects/obj_statsPlate/obj_statsPlate.yy",},},
+    {"id":{"name":"obj_statsPlateStash","path":"objects/obj_statsPlateStash/obj_statsPlateStash.yy",},},
     {"id":{"name":"obj_statusBar","path":"objects/obj_statusBar/obj_statusBar.yy",},},
     {"id":{"name":"obj_stimPack","path":"objects/obj_stimPack/obj_stimPack.yy",},},
     {"id":{"name":"obj_stimPackUse","path":"objects/obj_stimPackUse/obj_stimPackUse.yy",},},

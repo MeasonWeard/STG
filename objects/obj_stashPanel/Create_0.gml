@@ -15,6 +15,7 @@ image_speed = 0;
 //formatting
 slotSize = 96;
 slotGap = 12;
+titleGap = 48;
 
 inventory = global.stashController.inventory;
 equippedGear = global.stashController.equippedGear;
@@ -22,7 +23,7 @@ equippedWeapons = global.stashController.equippedWeapons;
 
 displayedItems = [];
 
-var height = sprite_height - slotGap * 2;
+var height = sprite_height - slotGap * 2 - titleGap;
 var width = sprite_width - slotGap * 2;
 
 rows = 0;
@@ -166,6 +167,8 @@ equipLeft = function(key, index) {
 	
 	}
 	
+	global.stashController.itemsDirty = true;
+	
 }
 
 equipRight = function(key, index) {
@@ -237,6 +240,8 @@ equipRight = function(key, index) {
 		global.stashController.equippedGear.coat = item;
 	
 	}
+	
+	global.stashController.itemsDirty = true;
 	
 }
 

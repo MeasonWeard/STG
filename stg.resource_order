@@ -267,6 +267,7 @@
     {"name":"obj_stashPanel","order":15,"path":"objects/obj_stashPanel/obj_stashPanel.yy",},
     {"name":"obj_statModifier","order":12,"path":"objects/obj_statModifier/obj_statModifier.yy",},
     {"name":"obj_statsPlate","order":4,"path":"objects/obj_statsPlate/obj_statsPlate.yy",},
+    {"name":"obj_statsPlateStash","order":23,"path":"objects/obj_statsPlateStash/obj_statsPlateStash.yy",},
     {"name":"obj_statusBar","order":2,"path":"objects/obj_statusBar/obj_statusBar.yy",},
     {"name":"obj_stimPack","order":3,"path":"objects/obj_stimPack/obj_stimPack.yy",},
     {"name":"obj_stimPackUse","order":1,"path":"objects/obj_stimPackUse/obj_stimPackUse.yy",},

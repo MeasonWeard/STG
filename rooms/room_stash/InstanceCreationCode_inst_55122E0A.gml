@@ -3,6 +3,8 @@ leftKey = vk_escape;
 
 leftFunc = function() {
 
+	if (instance_exists(global.player)) instance_destroy(global.player);
+
 	//save gear
 	global.gameData.playerData.gear = global.stashController.equippedGear;
 	global.gameData.playerData.weapons = global.stashController.equippedWeapons;

@@ -1,4 +1,3 @@
-owner = noone;
 player = global.player;
 data = global.data;
 depth = layers.ui2;

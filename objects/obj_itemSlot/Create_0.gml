@@ -6,6 +6,8 @@ item = undefined;
 slotKey = "";
 type = undefined;
 
+emptyText = "";
+
 unequip = function () {
 	
 	if (is_undefined(item)) exit;
@@ -54,5 +56,6 @@ unequip = function () {
 	
 	//refresh panel
 	global.stashPanel.tabDirty = true;
+	stashController.itemsDirty = true;
 	
 }

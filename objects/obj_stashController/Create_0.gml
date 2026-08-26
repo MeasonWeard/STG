@@ -1,8 +1,12 @@
 global.stashController = self;
 
-if (instance_exists(global.player)) instance_destroy(global.player);
+itemsDirty = false;
+
+if (instance_exists(global.player)) global.player.active = false;
 scr_char_removeAllPets();
 
+//if (instance_exists(global.player)) instance_destroy(global.player);
+//scr_char_removeAllPets();
 
 //data
 equippedGear = {

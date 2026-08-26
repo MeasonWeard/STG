@@ -6,9 +6,9 @@ if (formatTick > 0) {
 
 	formatTick = 12;
 
-	if (instance_exists(owner)) {
+	if (instance_exists(player)) {
 	
-		var finalStats = owner.finalStats;
+		var finalStats = player.finalStats;
 		
 		txtCore = scr_stats_formatCharCore(finalStats);
 		txtDef = scr_stats_formatCharDefence(finalStats);
