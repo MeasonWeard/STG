@@ -687,7 +687,7 @@ function scr_skills_formatDescription(skillInst) {
 			
 			duration = 5 + (level - 1) * 0.2;
 			
-			da = 6 + level * 6;
+			da = 6 + level * 60;
 			projRes = 4 + level * 4;
 			meleeRes = 4 + level * 4;
 		

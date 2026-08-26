@@ -67,7 +67,7 @@ for (var k = 0; k < 9; k++) {
 		
 			}
 		
-			var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
+			var hitOutcome = scr_stats_hitOutcome(oa, char.finalStats.da);
 		
 			var profile = char.shield > 0 ? shieldHitSounds : char.bulletHitSounds;
 			var snd = scr_audio_randomSoundFromProfile(profile);
