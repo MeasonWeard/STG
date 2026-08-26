@@ -1,0 +1,17 @@
+DAMAGE BONUSES
+
+Flat Damage adds a fixed amount of damage to attacks of the corresponding damage type. 
+For example, +10 Fire Damage adds 10 Fire damage to an attack.
+
+Damage % increases existing damage of the corresponding type by a percentage. 
+For example, +20% Fire Damage increases 50 Fire damage to 60.
+
+Flat Damage is added before percentage bonuses are applied, 
+so Damage % also increases any Flat Damage added to the attack.
+
+Damage Multiplier = 1 + (Damage % X 0.01)
+Damage = (Base Damage + Flat Damage) X Damage Multiplier
+
+Most skills use these same damage calculations, as do guns and melee weapons.
+Gun Damage % and Melee Damage % are applied after other damage bonuses have been calculated.
+They multiply the total resulting damage of guns and melee weapons respectively.

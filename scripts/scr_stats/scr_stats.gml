@@ -596,7 +596,11 @@ function scr_stats_formatCharCore(finalStats) {
 	str = scr_stats_formatStat(str, finalStats, "stimPackRegen", " per minute");
 	str = scr_stats_formatStat(str, finalStats, "energyPackRegen", " per minute");
 	str += "\n";
-
+	
+	//healing
+	str = scr_stats_formatStat(str, finalStats, "healingPerc");
+	str += "\n";
+	
 	// movement
 	str = scr_stats_formatStat(str, finalStats, "spd");
 	str = scr_stats_formatStat(str, finalStats, "dashRegen", " p/s");

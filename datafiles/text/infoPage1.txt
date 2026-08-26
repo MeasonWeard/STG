@@ -1,0 +1,13 @@
+CORE STATS
+
+Health determines how much damage you can take. Damage reduces your Health, and when your Health reaches 0, you lose.
+
+Energy fuels your abilities and is consumed when using skills.
+
+Shields provide protection from incoming attacks. Each Shield point completely negates all damage from a single hit,
+regardless of how much damage that hit would have dealt. Some abilities explicitly ignore Shields, allowing their 
+damage to pass through and damage your Health without consuming a Shield point.
+
+Healing % increases the amount of Health restored by healing effects. It affects Health recovered from Stim Packs and 
+Health Recharges, as well as the amount of Health you restore to allies with healing abilities.
+It does not affect Health Regeneration.

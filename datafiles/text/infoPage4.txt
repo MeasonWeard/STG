@@ -1,0 +1,20 @@
+RESISTANCES
+
+Elemental Resistance provides a random flat reduction to incoming damage of the corresponding type. 
+Each hit reduces the damage by a randomly selected amount between 20% and 100% of your Resistance, 
+rounded down. For example, 50 Fire Resistance reduces incoming Fire damage by 10-50 per hit.
+
+Minimum reduction: Resistance / 5, rounded down
+Maximum reduction: Resistance
+
+Negative Resistance represents a vulnerability rather than damage reduction. Incoming damage of the 
+corresponding type is increased by the absolute value of your negative Resistance. For example, 
+-20 Fire Resistance causes the defender to take 20% more Fire damage.
+
+Extra Damage: Incoming damage X (-Resistance / 100)
+
+Melee and Projectile Resistance are applied after all damage types have been combined, 
+reducing the total damage of Melee or Projectile attacks respectively.
+
+Resistance can never reduce incoming damage to 0. An attack will always deal at least 1 damage 
+for each elemental damage type it contains.
