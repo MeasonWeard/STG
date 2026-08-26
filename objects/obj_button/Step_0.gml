@@ -16,7 +16,7 @@ if (clickSound != undefined and playClickSound and (leftClick or rightClick)) {
 	audio_play_sound(clickSound, 0, false);
 	playClickSound = false;
 }
-
+//
 if (!leftClick and !rightClick) playClickSound = true;
 
 if (mouseHover and is_callable(hoverFunc)) hoverFunc();
