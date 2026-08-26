@@ -1,6 +1,6 @@
 if (active and instance_exists(owner)) {
 	
-	owner.stats[$ statKey] = statAfter;
+	owner.finalStats[$ statKey] = statAfter;
 
 }
 

@@ -172,6 +172,7 @@
     {"name":"obj_foodCourtStool","order":29,"path":"objects/obj_foodCourtStool/obj_foodCourtStool.yy",},
     {"name":"obj_foodCourtTable","order":28,"path":"objects/obj_foodCourtTable/obj_foodCourtTable.yy",},
     {"name":"obj_foodStall","order":5,"path":"objects/obj_foodStall/obj_foodStall.yy",},
+    {"name":"obj_forceField","order":14,"path":"objects/obj_forceField/obj_forceField.yy",},
     {"name":"obj_forkliftL","order":45,"path":"objects/obj_forkliftL/obj_forkliftL.yy",},
     {"name":"obj_forkliftR","order":44,"path":"objects/obj_forkliftR/obj_forkliftR.yy",},
     {"name":"obj_forkliftTines","order":46,"path":"objects/obj_forkliftTines/obj_forkliftTines.yy",},

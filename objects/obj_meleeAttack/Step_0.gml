@@ -87,7 +87,7 @@ if (instance_exists(source)) {
 						
 						doCollisionFuncs = true;
 					
-						var hitOutcome = scr_stats_hitOutcome(oa, char.stats.da);
+						var hitOutcome = scr_stats_hitOutcome(oa, char.finalStats.da);
 						
 						if (char.shield > 0) {
 							var snd = scr_audio_randomSoundFromProfile(shieldSounds);

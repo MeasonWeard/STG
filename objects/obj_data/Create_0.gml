@@ -500,6 +500,7 @@ skillConstructors = {
 	teleport: skill_teleport, // phys
 	singularity: skill_singularity, //phys
 	particleShower: skill_particleShower, //phys
+	forceField: skill_forceField, //phys
 	
 	joltzmanShield: skill_joltzmanShield, //phys,
 	radioactiveBullets: skill_radioactiveBullets, //phys
@@ -528,6 +529,7 @@ skillConstructors = {
 	radiotrophy: skill_radiotrophy, //bio
 	chitin: skill_chitin, //bio
 	adrenalGlands: skill_adrenalGlands, //bio
+	collagenReinforcement: skill_collagenReinforcement, //bio
 	
 	chainLightning: skill_chainLightning, // eng
 	turret: skill_turret, //eng

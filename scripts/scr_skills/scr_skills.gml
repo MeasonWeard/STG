@@ -561,7 +561,7 @@ function scr_skills_formatDescription(skillInst) {
 	
 	}
 	
-function skill_particleShower() : skill() constructor {
+	function skill_particleShower() : skill() constructor {
 	
 		name = "Particle Shower";
 		key = "particleShower";
@@ -570,6 +570,9 @@ function skill_particleShower() : skill() constructor {
 		energyCost = 50;
 		cooldownTime = 8;
 		maxLevel = 9;
+		
+		levelReq = 1;
+		
 		range = 600;
 		radius = 180;
 		duration = 6;
@@ -645,6 +648,60 @@ function skill_particleShower() : skill() constructor {
 				bg.life = 4;
 			
 			}
+
+			return true;
+			
+		}
+	
+	}
+	
+	function skill_forceField() : skill() constructor {
+	
+		name = "Force Field";
+		key = "forceField";
+		icon = spr_icon_predictiveModelling;
+		maxCharges = 1;
+		energyCost = 80;
+		cooldownTime = 12;
+		maxLevel = 6;
+		duration = 5;
+		
+		txtCol = c_white;
+		
+		da = 10;
+		projRes = 5;
+		meleeRes = 5;
+
+		description = "Create a temporary barrier that deflects attacks.";
+	
+		static formatStatsDescription = function() {
+			
+			statsDescription = "Duration: " + string(duration) + " seconds";
+			statsDescription += "\nDefensive Ability: " + string(da);
+			statsDescription += "\nProjectile Resistance: " + string(projRes);
+			statsDescription += "\nMelee Resistance: " + string(meleeRes);
+			
+		}
+	
+		static setupFunc = function(source) {
+			
+			duration = 5 + (level - 1) * 0.2;
+			
+			da = 6 + level * 6;
+			projRes = 4 + level * 4;
+			meleeRes = 4 + level * 4;
+		
+		}
+	
+		static castFunc = function(source) {
+		
+			var ff = instance_create_layer(source.x, source.y, "Instances", obj_forceField);
+			
+			ff.owner = source;
+			ff.life = duration * 60;
+			ff.da = da;
+			ff.projRes = projRes;
+			ff.meleeRes = meleeRes;
 
 			return true;
 			
@@ -2005,6 +2062,29 @@ function skill_particleShower() : skill() constructor {
 	
 	}
 	
+	function skill_collagenReinforcement() : skill() constructor {
+
+		name = "Collagen Reinforcement";
+		key = "collagenReinforcement";
+		icon = spr_icon_myostatinInhibitor;
+		maxLevel = 5;
+		
+		levelReq = 10;
+	
+		description = "Modify collagen fibres to increase tissue strength.\nIncreases melee resistance.";
+	
+		static setupFunc = function(source) {
+	
+			passives = {
+	
+				meleeRes: level * 4
+	
+			};
+	
+		}
+	
+	}
+	
 	function skill_adrenalGlands() : skill() constructor {
 
 		name = "Enlarged Adrenal Glands";
@@ -2178,9 +2258,9 @@ function skill_particleShower() : skill() constructor {
 		name = "Kevlar";
 		key = "kevlar";
 		icon = spr_icon_kevlar;
-		maxLevel = 4;
+		maxLevel = 5;
 	
-		description = "Increases your kinetic resistance.";
+		description = "Increases your kinetic resistance.\nWhen fully upgraded, increases your projectile resistance";
 	
 		passives = {
 	
@@ -2192,9 +2272,11 @@ function skill_particleShower() : skill() constructor {
 	
 			passives = {
 	
-				kinRes: 4 * level
+				kinRes: min(4 * level, 16)
 	
 			};
+			
+			if (level == maxLevel) passives.projRes = 15;
 	
 		}
 	

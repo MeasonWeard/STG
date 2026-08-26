@@ -112,7 +112,7 @@ function scr_projectiles_shoot(char) {
 	var aimX = char.aimX;
 	var aimY = char.aimY;
 	var faction = char.faction;
-	var oa = char.stats.oa;
+	var oa = char.finalStats.oa;
 	var damageDestructibles = char.damageDestructibles;
 	var lifeSteal = char.stats.rangedLifeSteal;
 	

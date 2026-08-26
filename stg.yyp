@@ -225,6 +225,7 @@
     {"id":{"name":"obj_foodCourtStool","path":"objects/obj_foodCourtStool/obj_foodCourtStool.yy",},},
     {"id":{"name":"obj_foodCourtTable","path":"objects/obj_foodCourtTable/obj_foodCourtTable.yy",},},
     {"id":{"name":"obj_foodStall","path":"objects/obj_foodStall/obj_foodStall.yy",},},
+    {"id":{"name":"obj_forceField","path":"objects/obj_forceField/obj_forceField.yy",},},
     {"id":{"name":"obj_forkliftL","path":"objects/obj_forkliftL/obj_forkliftL.yy",},},
     {"id":{"name":"obj_forkliftR","path":"objects/obj_forkliftR/obj_forkliftR.yy",},},
     {"id":{"name":"obj_forkliftTines","path":"objects/obj_forkliftTines/obj_forkliftTines.yy",},},
