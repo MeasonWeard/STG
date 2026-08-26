@@ -41,7 +41,7 @@ function scr_stats_blankCharStats() {
 		//flat damage
 		kinDam: 0,
 		fireDam: 0,
-		chemDam: 0,
+		chemDam: 0, 
 		elecDam: 0,
 		radDam: 0,
 

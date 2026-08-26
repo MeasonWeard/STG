@@ -1,0 +1,30 @@
+CONTROLS
+
+Coming soon: 
+- Custom key bindings
+- Mouse movement
+
+Move: WASD
+Dash: Space
+Use Stim Pack (Heal) : Q
+Use Energy Pack: E
+
+Attack: Left Mouse Button
+Reload: R
+Switch weapon: Mouse Wheel
+
+Skill 1: 1 or Right Mouse Button
+Skill 2: 2 or Mouse Button 4
+Skill 3: 3 or Mouse Button 5
+Skill 4: 4
+
+Pause/Menu: Escape
+Character Window: Tab or C
+
+(Run only)
+Map/Fast Travel: M
+Hub Portal: T
+
+(Hub only)
+Stash: I
+Skills: K

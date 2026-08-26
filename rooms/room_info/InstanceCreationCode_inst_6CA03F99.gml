@@ -1,5 +1,7 @@
 ic = global.infoController;
 font = fnt_large;
+hAlign = fa_middle;
+vAlign = fa_middle;
 
 textGetter = function() {
 

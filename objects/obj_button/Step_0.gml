@@ -12,7 +12,7 @@ clicked = leftClick or rightClick;
 if (leftClick) method_call(leftFunc, leftArgs);
 if (rightClick) method_call(rightFunc, rightArgs);
 
-if (clickSound != undefined and playClickSound and leftClick or rightClick) {
+if (clickSound != undefined and playClickSound and (leftClick or rightClick)) {
 	audio_play_sound(clickSound, 0, false);
 	playClickSound = false;
 }
