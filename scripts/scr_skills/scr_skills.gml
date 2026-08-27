@@ -2164,6 +2164,32 @@ function scr_skills_applyIrradiated(inst, source) {
 		}
 		
 	}
+	
+	function skill_adrenalineShot() : skill() constructor {
+
+		name = "Adrenaline Shot";
+		key = "adrenalineShot";
+		icon = spr_icon_medicalSynthesis;
+		maxLevel = 8;
+		
+		levelReq = 10;
+	
+		description = "Instantly heal.\nGain temporary movement speed and health regeneration.";
+		
+		static formatStatsDescription = function() {
+		
+			
+		
+		}
+		
+		static setupFunc = function(source) {
+	
+			instantHeal = 20 + (level - 1) * 5;
+			
+	
+		}
+		
+	}
 
 	function skill_napalm() : skill() constructor {
 
