@@ -72,6 +72,13 @@ function scr_effects_bioBomb(char) {
 	var damage = new damageProfile();
 	damage.chem = dam;
 	
+	if (variable_struct_exists(char.bioBombData, "radDamPerc")) {
+	
+		var dec = char.bioBombData.radDamPerc * 0.01;
+		damage.rad = ceil(damage.chem * dec);
+	
+	}
+	
 	var explosion = instance_create_layer(char.x, char.y, "Instances", obj_explosion);
 	
 	explosion.radius = rad;

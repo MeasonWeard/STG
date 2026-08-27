@@ -772,8 +772,8 @@ function scr_genGuns_sniperPulseRifle(level, rarity) {
 	
 	if (level > 0) {
 		
-		var minDam = max(1, ceil(level * 0.5));
-		var maxDam = level + 1;
+		var minDam = max(1, ceil(level * 0.75)) + 3;
+		var maxDam = level + 5;
 		var bonusDam = irandom_range_biased(1, minDam, maxDam);
 	
 		repeat(bonusDam) {

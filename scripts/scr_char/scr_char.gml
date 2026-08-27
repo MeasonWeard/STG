@@ -87,6 +87,15 @@ function scr_char_damage(char, damage, type, ignoreShield, hitOutcome = 1) {
 	//final
 	var totalDam = kin + fire + chem + elec + rad;
 	
+	var tp = "------------";
+	if (kin > 0) tp += "\nkin: " + string(kin);
+	if (chem > 0) tp += "\nchem: " + string(chem);
+	if (fire > 0) tp += "\nfire: " + string(fire);
+	if (elec > 0) tp += "\nelec: " + string(elec);
+	if (rad > 0) tp += "\nrad: " + string(rad);
+	
+	show_debug_message(tp);
+	
 	if (type == damageTypes.melee and char.finalStats.meleeRes > 0) {
 		
 		totalDam = scr_char_applyResistance(totalDam, char.finalStats.meleeRes, char.finalStats.meleeResMin,

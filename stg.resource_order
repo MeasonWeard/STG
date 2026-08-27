@@ -708,6 +708,7 @@
     {"name":"spr_icon_chitin","order":26,"path":"sprites/spr_icon_chitin/spr_icon_chitin.yy",},
     {"name":"spr_icon_collagen","order":44,"path":"sprites/spr_icon_collagen/spr_icon_collagen.yy",},
     {"name":"spr_icon_dash","order":1,"path":"sprites/spr_icon_dash/spr_icon_dash.yy",},
+    {"name":"spr_icon_decay","order":45,"path":"sprites/spr_icon_decay/spr_icon_decay.yy",},
     {"name":"spr_icon_electricBullets","order":42,"path":"sprites/spr_icon_electricBullets/spr_icon_electricBullets.yy",},
     {"name":"spr_icon_EMP","order":31,"path":"sprites/spr_icon_EMP/spr_icon_EMP.yy",},
     {"name":"spr_icon_energyPack","order":3,"path":"sprites/spr_icon_energyPack/spr_icon_energyPack.yy",},

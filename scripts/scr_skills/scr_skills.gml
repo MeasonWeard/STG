@@ -381,13 +381,22 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			poolRadius: poolRadius,
 			pools: pools
 		}
+		
+		var dc = scr_skills_findCharSkill("decay", source);
+			
+		if (is_struct(dc)) {
+			
+			var radDamPerc = dc.damPerc;
+			inst.bioBombData.radDamPerc = radDamPerc;
+			
+		}
 				
 		inst.deathFunc = scr_effects_bioBomb;
 			
 	}
 	
 }
-
+	
 #endregion
 
 #region ACTIVES
@@ -559,6 +568,21 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			damage = new damageProfile();
 
 			damage.kin = 40 + (level - 1) * 18;
+			
+			var damKeys = ["kin"];
+			
+			var sk = scr_skills_findCharSkill("decay", source);
+			
+			if (is_struct(sk)) {
+			
+				var damPerc = sk.damPerc;
+				var dec = damPerc * 0.01;
+				damage.rad = ceil(damage.kin * dec);
+				
+				array_push(damKeys, "rad");
+			
+			}
+			
 			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
 		
 		}
@@ -788,7 +812,21 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			damage = new damageProfile();
 		
 			damage.fire = 8 + 2 * level;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["fire"]);
+			
+			var damKeys = ["fire"];
+			
+			var sk = scr_skills_findCharSkill("decay", source);
+			
+			if (is_struct(sk)) {
+				
+				var damPerc = sk.damPerc;
+				var dec = damPerc * 0.01;
+				damage.rad = ceil(damage.fire * dec);
+				array_push(damKeys, "rad");
+			
+			}	
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 			
 		}
 	
@@ -938,7 +976,21 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			bioBonus = 8 + (level - 1) * 3;
 		
 			damage.chem = 4 + (level - 1) * 2;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["chem"]);
+			
+			var damKeys = ["chem"];
+			
+			var sk = scr_skills_findCharSkill("decay", source);
+			
+			if (is_struct(sk)) {
+			
+				var damPerc = sk.damPerc;
+				var dec = damPerc * 0.01;
+				damage.rad = ceil(damage.chem * dec);
+				array_push(damKeys, "rad");
+			
+			}	
+		
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 		
 		}
 	
@@ -1004,11 +1056,24 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			damage.kin = 20 + (level - 1) * 5;
 			damage.fire = 20 + (level - 1) * 5;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["fire", "kin"]);
+			
+			var damKeys = ["kin","fire"];
+			var sk = scr_skills_findCharSkill("decay", source);
+			
+			if (is_struct(sk)) {
+			
+				var damPerc = sk.damPerc;
+				var dec = damPerc * 0.01;
+				damage.rad = ceil(damage.kin * dec) * 2;
+				array_push(damKeys, "rad");
+			
+			}	
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 			
 			flameDamage.fire = 8 + (level - 1) * 4;
 
-			var damKeys = ["fire"];
+			damKeys = ["fire"];
 			
 			var napalm = scr_skills_findCharSkill("napalm", source);
 			
@@ -1378,7 +1443,7 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	
 	function skill_bioBomb() : skill() constructor {
 	
-		name = "Bio Bomb";
+		name = "Bio-Bomb";
 		key = "bioBomb";
 		icon = spr_icon_exosomes;
 		txtCol = c_black;
@@ -1403,6 +1468,7 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 		static setupFunc = function(source) {
 		
 			damPerc = 5 + (level - 1) * 3;
+			
 			poolRadius = 40 + level * 2;
 		    poolLife = 4.5 + level * 0.5;
 			
@@ -1461,7 +1527,20 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 		
 			damage = new damageProfile();
 			damage.elec = 25 + 10 * level;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["elec"]);
+			
+			var damKeys = ["elec"];
+			var sk = scr_skills_findCharSkill("decay", source);
+			
+			if (is_struct(sk)) {
+			
+				var damPerc = sk.damPerc;
+				var dec = damPerc * 0.01;
+				damage.rad = ceil(damage.elec * dec);
+				array_push(damKeys, "rad");
+			
+			}	
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 		
 		}
 	
@@ -1533,7 +1612,20 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			damage = new damageProfile();
 			damage.elec = 27 + (level - 1) * 8;
-			damage = scr_stats_calculateSkillDamage(source, damage, ["elec"]);
+			
+			var damKeys = ["elec"];
+			var sk = scr_skills_findCharSkill("decay", source);
+			
+			if (is_struct(sk)) {
+			
+				var damPerc = sk.damPerc;
+				var dec = damPerc * 0.01;
+				damage.rad = ceil(damage.elec * dec);
+				array_push(damKeys, "rad");
+			
+			}	
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 			
 			var sk = scr_skills_findCharSkill("flashpoint", source);
 			if (sk != undefined) flashpointDam = sk.damage;
@@ -1855,28 +1947,28 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	
 	}
 	
-	function skill_halfLife() : skill() constructor {
+	function skill_decay() : skill() constructor {
 
-		name = "Half-Life";
-		key = "halfLife";
-		icon = spr_icon_vacuumEnergy;
+		name = "Decay";
+		key = "decay";
+		icon = spr_icon_decay;
 		txtCol = c_white;
 		maxLevel = 8;
-		radDam = 4;
+		damPerc = 4;
 		
-		description = "Adds radiation damage to certain abilites.";
+		description = "Adds radiation damage to certain abilites.\The extra damage is proportional to the ability's primary damage element.";
 		description += "\n\nEffected abilites: ";
 		description += "\n- Singularity\n- Bio Bomb\n- Noxious Gas\n- Flamethrower\n- Thermite Charge\n- Chain Lightning\n- EMP";
 		//
 		static formatStatsDescription = function() {
 		
-			statsDescription = "Damage: " + string(radDam);
+			statsDescription = "Damage: " + string(damPerc) + "% of primary damage";
 		
 		}
 	
 		static setupFunc = function(source) {
 	
-			radDam = 4 * level;
+			damPerc = 8 + (level - 1) * 6;
 	
 		}
 	
