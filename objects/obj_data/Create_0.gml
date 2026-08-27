@@ -508,7 +508,8 @@ skillConstructors = {
 	leadCoat: skill_leadCoat, //phys,
 	vacuumEnergy: skill_vacuumEnergy, //phys
 	predictiveModelling: skill_predictiveModelling, //phys
-	decay: skill_decay, //phys
+	decay: skill_decay, //phys,
+	irradiated: skill_irradiated, //phys
 	
 	acidFlasks: skill_acidFlasks, //chem	
 	flamethrower: skill_flamethrower, //chem

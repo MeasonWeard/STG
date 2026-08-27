@@ -1,4 +1,4 @@
-if (instance_exists(owner)) {
+if (instance_exists(owner) and owner.active) {
 
 	x = owner.x;
 	y = owner.y + yOffset;

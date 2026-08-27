@@ -397,6 +397,27 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	
 }
 	
+function scr_skills_applyIrradiated(inst, source) {
+
+	var sk = scr_skills_findCharSkill("irradiated", source);
+	
+	if (is_struct(sk)) {
+	
+		var damage = sk.damage;
+		var freq = sk.freq;
+		var radius = sk.radius;
+	
+		var ir = instance_create_layer(source.x, source.y, "Instances", obj_irradiated);
+		
+		ir.owner = inst;
+		ir.damage = damage;
+		ir.freq = freq;
+		ir.radius = radius;
+	
+	}
+	
+}
+	
 #endregion
 
 #region ACTIVES
@@ -1111,6 +1132,8 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 
 	function skill_blob() : skill() constructor {
 	
+		//summon
+	
 		name = "Blob";
 		key = "blob";
 		icon = spr_icon_blob;
@@ -1187,6 +1210,9 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			//bio bomb
 			scr_skills_applyBioBomb(inst, source, 2);
+			
+			//irradiated
+			scr_skills_applyIrradiated(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -1195,6 +1221,8 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	}
 	
 	function skill_fungalTurret() : skill() constructor {
+	
+		//summon
 	
 		name = "Fungal Turret";
 		key = "fungalTurret";
@@ -1293,6 +1321,9 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			//bioBomb
 			scr_skills_applyBioBomb(inst, source, 3);
+			
+			//irradiated
+			scr_skills_applyIrradiated(inst, source);
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
 
@@ -1303,6 +1334,8 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	}
 	
 	function skill_symbiont() : skill() constructor {
+	
+		//summon
 	
 		name = "Symbiont";
 		key = "symbiont";
@@ -1376,6 +1409,9 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			//bioBomb
 			scr_skills_applyBioBomb(inst, source, 4);
+			
+			//irradiated
+			scr_skills_applyIrradiated(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -1660,6 +1696,8 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 
 	function skill_turret() : skill() constructor {
 	
+		//summon
+	
 		name = "Auto-Turret";
 		key = "turret";
 		icon = spr_icon_turret;
@@ -1760,6 +1798,9 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			//bioBomb
 			scr_skills_applyBioBomb(inst, source, 3);
+			
+			//irradiated
+			scr_skills_applyIrradiated(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -1839,6 +1880,9 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			//bioBomb
 			scr_skills_applyBioBomb(inst, source, 5);
+			
+			//irradiated
+			scr_skills_applyIrradiated(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -1874,6 +1918,55 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	
 			};
 	
+		}
+	
+	}
+	
+	function skill_irradiated() : skill() constructor {
+
+		name = "Irradiated";
+		key = "irradiated";
+		icon = spr_icon_vacuumEnergy;
+		txtCol = c_white;
+		maxLevel = 9;
+		
+		damage = undefined;
+		freq = 0.25;
+		radius = 100;
+		
+		levelReq = 10;
+	
+		description = "You and your summons constantly deal radiation damage to nearby enemies.\nIgnores shields.";
+	
+		static formatStatsDescription = function() {
+		
+			var secs = 1 / freq;
+			statsDescription = "Damage: " + string(damage.rad) + " radiation every " + string(secs) + " seconds";
+		
+		}
+	
+		static setupFunc = function(source) {
+
+			damage = new damageProfile();
+			damage.rad = 10 + (level - 1) * 4;
+			
+			var damTypes = ["radDam"];
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damTypes);
+			
+			freq = 0.25 + (level - 1) * 0.0125;
+			radius = 175 + (level - 1) * 10;
+	
+		}
+		
+		static extraEffects = function(source) {
+		
+			var ir = instance_create_layer(source.x, source.y, "Instances", obj_irradiated);
+			ir.owner = source;
+			ir.damage = damage;
+			ir.freq = freq;
+			ir.radius = radius;
+		
 		}
 	
 	}

@@ -252,6 +252,7 @@
     {"id":{"name":"obj_hydroWindow","path":"objects/obj_hydroWindow/obj_hydroWindow.yy",},},
     {"id":{"name":"obj_infoController","path":"objects/obj_infoController/obj_infoController.yy",},},
     {"id":{"name":"obj_intensityMetre","path":"objects/obj_intensityMetre/obj_intensityMetre.yy",},},
+    {"id":{"name":"obj_irradiated","path":"objects/obj_irradiated/obj_irradiated.yy",},},
     {"id":{"name":"obj_item","path":"objects/obj_item/obj_item.yy",},},
     {"id":{"name":"obj_itemSlot","path":"objects/obj_itemSlot/obj_itemSlot.yy",},},
     {"id":{"name":"obj_junk","path":"objects/obj_junk/obj_junk.yy",},},
