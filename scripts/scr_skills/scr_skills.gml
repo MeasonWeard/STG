@@ -1926,7 +1926,7 @@ function scr_skills_applyIrradiated(inst, source) {
 
 		name = "Irradiated";
 		key = "irradiated";
-		icon = spr_icon_vacuumEnergy;
+		icon = spr_icon_irradiated;
 		txtCol = c_white;
 		maxLevel = 9;
 		
@@ -2050,7 +2050,7 @@ function scr_skills_applyIrradiated(inst, source) {
 		damPerc = 4;
 		
 		description = "Adds radiation damage to certain abilites.\The extra damage is proportional to the ability's primary damage element.";
-		description += "\n\nEffected abilites: ";
+		description += "\n\nAffected abilites: ";
 		description += "\n- Singularity\n- Bio Bomb\n- Noxious Gas\n- Flamethrower\n- Thermite Charge\n- Chain Lightning\n- EMP";
 		//
 		static formatStatsDescription = function() {
@@ -2133,7 +2133,7 @@ function scr_skills_applyIrradiated(inst, source) {
 		levelReq = 10;
 	
 		description = "Certain abilities create burning ground where they are cast.";
-		description += "\n\nEffected abilites: ";
+		description += "\n\nAffected abilites: ";
 		description += "\n- Particle Shower\n- Fungal Turret\n- Auto-Turret\n- EMP";
 		
 		static formatStatsDescription = function() {

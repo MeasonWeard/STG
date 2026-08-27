@@ -723,6 +723,7 @@
     {"name":"spr_icon_guardianArray","order":21,"path":"sprites/spr_icon_guardianArray/spr_icon_guardianArray.yy",},
     {"name":"spr_icon_gunsmith","order":20,"path":"sprites/spr_icon_gunsmith/spr_icon_gunsmith.yy",},
     {"name":"spr_icon_incendiaryBullets","order":41,"path":"sprites/spr_icon_incendiaryBullets/spr_icon_incendiaryBullets.yy",},
+    {"name":"spr_icon_irradiated","order":46,"path":"sprites/spr_icon_irradiated/spr_icon_irradiated.yy",},
     {"name":"spr_icon_joltzmanShield","order":13,"path":"sprites/spr_icon_joltzmanShield/spr_icon_joltzmanShield.yy",},
     {"name":"spr_icon_kevlar","order":19,"path":"sprites/spr_icon_kevlar/spr_icon_kevlar.yy",},
     {"name":"spr_icon_leadCoat","order":28,"path":"sprites/spr_icon_leadCoat/spr_icon_leadCoat.yy",},
