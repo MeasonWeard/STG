@@ -21,4 +21,4 @@ formatTick = 0;
 statsLeft = x;
 statsTop = y;
 statsRight = statsLeft + 400;
-statsBottom = statsTop + 400;
+statsBottom = statsTop + 440;

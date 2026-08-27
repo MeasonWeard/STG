@@ -24,6 +24,8 @@ if (firstStep) {
 			if (char.faction == faction) continue;
 			if (distSq < 0) continue;
 		
+			if (!scr_physics_hasLineOfSight(x, y, char.x, char.y)) continue;
+		
 			var dist = sqrt(distSq);
 			
 			var progress = clamp(dist / radius, 0, 1);

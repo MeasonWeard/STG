@@ -8,6 +8,25 @@ if (setup) {
 		statAfter = statBefore + amount;
 		active = true;
 		
+		//check if this stat is a resistance
+		switch (statKey) {
+			
+			case "kinRes":
+			case "fireRes":
+			case "chemRes":
+			case "elecRes":
+			case "radRes":
+			case "meleeRes":
+			case "projRes":
+			
+				isResistance = true;
+				resMinKey = statKey + "Min";
+				resMaxKey = statKey + "Max";
+				
+			break;
+			
+		}
+		
 	}
 	
 }

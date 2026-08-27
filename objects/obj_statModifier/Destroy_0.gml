@@ -5,5 +5,14 @@ if (instance_exists(owner) and variable_struct_exists(owner.finalStats, statKey)
 	}
 	
 	owner.finalStats[$ statKey] = statBefore;
-
+	
+	if (isResistance) {
+		
+		var range = scr_stats_calculateResistanceRange(statBefore);
+		
+		owner.finalStats[$ resMinKey] = range.minRes;
+		owner.finalStats[$ resMaxKey] = range.maxRes;
+		
+	}
+	
 }

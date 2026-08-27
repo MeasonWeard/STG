@@ -347,6 +347,47 @@ function scr_skills_formatDescription(skillInst) {
 	return txt;
 	
 }
+	
+function scr_skills_applyBioBomb(inst, source, pools) {
+
+	var sk = scr_skills_findCharSkill("bioBomb", source);
+			
+	if (is_struct(sk)) {
+		
+		//check for bio
+		if (!scr_char_hasTag(inst, "bio")) {
+		
+			if (sk.level >= sk.maxLevel) {
+				
+				array_push(inst.tags, "bio");
+				
+			} else {
+			
+				exit;
+			
+			}
+		
+		}
+		
+		var damPerc = sk.damPerc;
+		var poolDam = sk.poolDam;
+		var poolLife = sk.poolLife;
+		var poolRadius = sk.poolRadius;
+				
+		inst.bioBombData = {
+			damPerc: damPerc,
+			poolDam: poolDam,
+			poolLife: poolLife,
+			poolRadius: poolRadius,
+			pools: pools
+		}
+				
+		inst.deathFunc = scr_effects_bioBomb;
+			
+	}
+	
+}
+
 #endregion
 
 #region ACTIVES
@@ -659,10 +700,10 @@ function scr_skills_formatDescription(skillInst) {
 	
 		name = "Force Field";
 		key = "forceField";
-		icon = spr_icon_predictiveModelling;
+		icon = spr_icon_forceField;
 		maxCharges = 1;
 		energyCost = 80;
-		cooldownTime = 12;
+		cooldownTime = 14;
 		maxLevel = 6;
 		duration = 5;
 		
@@ -685,9 +726,9 @@ function scr_skills_formatDescription(skillInst) {
 	
 		static setupFunc = function(source) {
 			
-			duration = 5 + (level - 1) * 0.2;
+			duration = 5 + (level - 1) * 0.4;
 			
-			da = 6 + level * 60;
+			da = 6 + level * 6;
 			projRes = 4 + level * 4;
 			meleeRes = 4 + level * 4;
 		
@@ -1078,6 +1119,9 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxShield = shields;
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+			
+			//bio bomb
+			scr_skills_applyBioBomb(inst, source, 2);
 
 			if (instance_exists(inst)) return true;
 
@@ -1181,6 +1225,9 @@ function scr_skills_formatDescription(skillInst) {
 				bg.life = 4;
 			
 			}
+			
+			//bioBomb
+			scr_skills_applyBioBomb(inst, source, 3);
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
 
@@ -1261,6 +1308,9 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxShield = shields;
 			inst.baseStats.meleeLifeSteal = lifeSteal;
 			inst.kinDam = kinDam;
+			
+			//bioBomb
+			scr_skills_applyBioBomb(inst, source, 4);
 
 			if (instance_exists(inst)) return true;
 
@@ -1302,7 +1352,7 @@ function scr_skills_formatDescription(skillInst) {
 			energyCost = 55 + level * 5;
 			heal = 4 + 2 * (level - 1);
 			
-			var dec = 1 + source.finalStats.healingPerc * 0.01;
+			var dec = 1 + source.stats.healingPerc * 0.01;
 
 			allyHeal = ceil(heal * dec);
 			
@@ -1322,6 +1372,56 @@ function scr_skills_formatDescription(skillInst) {
 		
 			if (instance_exists(inst)) return true;
 
+		}
+	
+	}
+	
+	function skill_bioBomb() : skill() constructor {
+	
+		name = "Bio Bomb";
+		key = "bioBomb";
+		icon = spr_icon_exosomes;
+		txtCol = c_black;
+	
+		maxLevel = 6;
+
+		damPerc = 5;
+		poolDam = 5;
+
+		description = "When a biological summon dies, it explodes with chemical damage proportional to its maximum health\nand leaves behind acid pools."
+		description += " When fully upgraded, non-biological summons count as biological.";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Explosion damage: " + string(damPerc) + "% of maximum health";
+			statsDescription += "\nAcid pool damage: " + string(poolDam.chem) + " chemical p/s";
+			
+			if (level >= maxLevel) statsDescription += "\n\nAll summons are biological.";
+			
+		}
+
+		static setupFunc = function(source) {
+		
+			damPerc = 5 + (level - 1) * 3;
+			poolRadius = 40 + level * 2;
+		    poolLife = 4.5 + level * 0.5;
+			
+			poolDam = new damageProfile();
+			poolDam.chem = 6 + 2 * level;
+			
+			var damKeys = ["chem"];
+			
+			var sk = scr_skills_findCharSkill("napalm", source);
+			
+			if (is_struct(sk)) {
+			
+				poolDam.fire = sk.fireDam;
+				array_push(damKeys, "fire");
+			
+			}
+			
+			poolDam = scr_stats_calculateSkillDamage(source, poolDam, damKeys);
+			
 		}
 	
 	}
@@ -1565,6 +1665,9 @@ function scr_skills_formatDescription(skillInst) {
 				bg.life = 4;
 			
 			}
+			
+			//bioBomb
+			scr_skills_applyBioBomb(inst, source, 3);
 
 			if (instance_exists(inst)) return true;
 
@@ -1641,6 +1744,9 @@ function scr_skills_formatDescription(skillInst) {
 			inst.baseStats.maxHp = maxHp;
 			inst.kinDam = kinDam;
 			inst.baseStats.maxShield = shields;
+			
+			//bioBomb
+			scr_skills_applyBioBomb(inst, source, 5);
 
 			if (instance_exists(inst)) return true;
 
@@ -2066,7 +2172,7 @@ function scr_skills_formatDescription(skillInst) {
 
 		name = "Collagen Reinforcement";
 		key = "collagenReinforcement";
-		icon = spr_icon_myostatinInhibitor;
+		icon = spr_icon_collagen;
 		maxLevel = 5;
 		
 		levelReq = 10;

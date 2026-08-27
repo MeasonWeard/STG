@@ -305,6 +305,17 @@ function scr_stats_calculateResistanceRange(res) {
 	
 }
 
+function scr_stats_updateResistanceRange(stats, key) {
+
+	var res = stats[$ key];
+
+	var range = scr_stats_calculateResistanceRange(res);
+
+	stats[$ (key + "Min")] = range.minRes;
+	stats[$ (key + "Max")] = range.maxRes;
+
+}
+
 
 function scr_stats_calculateFinalStats(stats) {
 	

@@ -10,4 +10,4 @@ meleeRes = 0;
 setup = true;
 timer = 0;
 
-scr_audio_playSoundAt(snd_armThermite, x, y);
+scr_audio_playSoundAt(snd_forceField, x, y);

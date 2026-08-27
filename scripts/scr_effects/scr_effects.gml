@@ -53,6 +53,50 @@ function scr_effects_explosion(xx, yy, strength) {
 	
 }
 
+function scr_effects_bioBomb(char) {
+	
+	if (!variable_instance_exists(char, "bioBombData")) exit;
+
+	var dat = char.bioBombData;
+	
+	var hp = char.maxHp;
+	var damPerc = dat.damPerc;
+	var pools = dat.pools;
+	var poolDam = dat.poolDam;
+	var poolLife = dat.poolLife;
+	var poolRad = dat.poolRadius;
+	
+	var dam = hp * (damPerc * 0.01);
+	var rad = clamp(10 * dam, 20, 240);
+	
+	var damage = new damageProfile();
+	damage.chem = dam;
+	
+	var explosion = instance_create_layer(char.x, char.y, "Instances", obj_explosion);
+	
+	explosion.radius = rad;
+	explosion.sounds = [snd_fleshExplode1, snd_fleshExplode2, snd_fleshExplode3];
+	explosion.damage = damage;
+	
+	explosion.faction = char.faction;
+	explosion.col = c_green;
+	
+	repeat(pools) {
+	
+		var pt = scr_randomPointInCircle(char.x, char.y, rad);
+
+		var pool = instance_create_layer(pt.xx, pt.yy, "Instances", obj_acidPool);
+		pool.faction = char.faction;
+		pool.life = poolLife;
+		pool.damage = poolDam;
+		pool.radius = poolRad;
+		
+	}
+	
+	return explosion;
+	
+}
+
 function scr_effects_explodingProjectile(proj) {
 
 	var rad = 75;

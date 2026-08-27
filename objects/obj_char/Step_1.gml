@@ -45,6 +45,15 @@ if (setupStats) {
 	bulletFuncs = [];
 	constantFuncs = [];
 	
+	//apply gear stats
+	if (!is_undefined(gear.device1)) scr_gear_applyStatsToChar(self, gear.device1);
+	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);
+	if (!is_undefined(gear.tie)) scr_gear_applyStatsToChar(self, gear.tie);
+	if (!is_undefined(gear.headgear)) scr_gear_applyStatsToChar(self, gear.headgear);
+	if (!is_undefined(gear.coat)) scr_gear_applyStatsToChar(self, gear.coat);
+
+	if (!is_undefined(equippedWeapon)) scr_weapons_applyWeaponBonusesToChar(equippedWeapon, self);
+	
 	//apply class stats and passive skill stats
 	if (is_struct(charData)) {
 		
@@ -54,97 +63,55 @@ if (setupStats) {
 		scr_class_applyMinorStats(charData.class1, stats);
 		scr_class_applyMinorStats(charData.class2, stats);
 		
-		//apply passive skills stats
-		var class1Passives = [];
-		var class2Passives = [];
-		
-		var class1 = charData.class1;
-		var class2 = charData.class2;
-		
-		//convert skill save data into skill instances
-		if (is_struct(class1)) class1.unlockedSkills = scr_skills_loadArray(class1.unlockedSkills);
-		if (is_struct(class2)) class2.unlockedSkills = scr_skills_loadArray(class2.unlockedSkills);
-		
-		//class1, setup skills, apply passives and extra effects
-		if (is_struct(class1)) {
-			
-			var unlockedSkills = charData.class1.unlockedSkills;
-			var len = array_length(unlockedSkills);
-		
-			for (var i = 0; i < len; i ++) {
-		
-				var sk = unlockedSkills[i];
-				
-				if (!is_struct(sk)) continue;
-			
-				if (is_callable(sk.setupFunc)) sk.setupFunc(self);
-				
-				//passives
-				if (is_struct(sk.passives)) {
-					
-					var keys = variable_struct_get_names(sk.passives);
-					var keysLen = array_length(keys);
-				
-					for (var j = 0; j < keysLen; j ++) {
-				
-						var key = keys[j];
-						var val = sk.passives[$ key];
-					
-						if (!variable_struct_exists(stats, key)) continue;
-		
-						stats[$ key] += val;
-				
-					}
-				
-				}
-				
-				//extra effects
-				if (is_callable(sk.extraEffects)) {
-					sk.extraEffects(self);
-				}
+		var classArray = [charData.class1, charData.class2];
 
-			}
-		}
-		
-		//class1, setup skills, apply passives and extra effects
-		if (is_struct(class2)) {
-			
-			var unlockedSkills = charData.class2.unlockedSkills;
+		for (var c = 0; c < array_length(classArray); c++) {
+	
+			var classData = classArray[c];
+			if (!is_struct(classData)) continue;
+	
+			//convert skill save data into skill instances
+			classData.unlockedSkills = scr_skills_loadArray(classData.unlockedSkills);
+	
+			var unlockedSkills = classData.unlockedSkills;
 			var len = array_length(unlockedSkills);
-		
-			for (var i = 0; i < len; i ++) {
+	
+			for (var i = 0; i < len; i++) {
 		
 				var sk = unlockedSkills[i];
-				
 				if (!is_struct(sk)) continue;
-				
-				if (is_callable(sk.setupFunc)) sk.setupFunc(self);
-				
+		
+				//setup skill
+				if (is_callable(sk.setupFunc)) {
+					sk.setupFunc(self);
+				}
+		
 				//passives
 				if (is_struct(sk.passives)) {
-					
+			
 					var keys = variable_struct_get_names(sk.passives);
 					var keysLen = array_length(keys);
-				
-					for (var j = 0; j < keysLen; j ++) {
+			
+					for (var j = 0; j < keysLen; j++) {
 				
 						var key = keys[j];
 						var val = sk.passives[$ key];
-					
+				
 						if (!variable_struct_exists(stats, key)) continue;
-		
+				
 						stats[$ key] += val;
 				
 					}
-				
+			
 				}
-				
+		
 				//extra effects
 				if (is_callable(sk.extraEffects)) {
 					sk.extraEffects(self);
 				}
-				
+		
 			}
+	
 		}
 		
 		//load active skills
@@ -180,15 +147,6 @@ if (setupStats) {
 
 	}
 	
-	//apply gear stats
-	if (!is_undefined(gear.device1)) scr_gear_applyStatsToChar(self, gear.device1);
-	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);
-	if (!is_undefined(gear.tie)) scr_gear_applyStatsToChar(self, gear.tie);
-	if (!is_undefined(gear.headgear)) scr_gear_applyStatsToChar(self, gear.headgear);
-	if (!is_undefined(gear.coat)) scr_gear_applyStatsToChar(self, gear.coat);
-
-	if (!is_undefined(equippedWeapon)) scr_weapons_applyWeaponBonusesToChar(equippedWeapon, self);
-
 	//char stats
 	finalStats = scr_stats_calculateFinalStats(stats);
 	
@@ -197,11 +155,34 @@ if (setupStats) {
 	maxEnergy = finalStats.maxEnergy;
 	shieldRegenDelay = max(0.1, stats.shieldRegenDelay);
 	
-	//make sure active skills have correct damage and shit
-	if (is_instanceof(skills.skill1, skill) and is_callable(skills.skill1.setupFunc)) skills.skill1.setupFunc(self);
-	if (is_instanceof(skills.skill2, skill) and is_callable(skills.skill2.setupFunc)) skills.skill2.setupFunc(self);
-	if (is_instanceof(skills.skill3, skill) and is_callable(skills.skill3.setupFunc)) skills.skill3.setupFunc(self);
-	if (is_instanceof(skills.skill4, skill) and is_callable(skills.skill4.setupFunc)) skills.skill4.setupFunc(self);
+	//re-run setup funcs for all skills now that final stats have been calculated
+	if (is_struct(charData)) {
+
+		var classArray = [charData.class1, charData.class2];
+	
+		for (var c = 0; c < array_length(classArray); c++) {
+		
+			var class = classArray[c];
+			if (!is_struct(class)) continue;
+		
+			var unlockedSkills = class.unlockedSkills;
+			var len = array_length(unlockedSkills);
+		
+			for (var i = 0; i < len; i++) {
+			
+				var sk = unlockedSkills[i];
+			
+				if (!is_struct(sk)) continue;
+			
+				if (is_callable(sk.setupFunc)) {
+					sk.setupFunc(self);
+				}
+			
+			}
+		
+		}
+	
+	}
 
 	if (setupBasics) {
 	

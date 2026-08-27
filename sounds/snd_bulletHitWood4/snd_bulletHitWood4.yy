@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_fleshExplode1",
+  "%Name":"snd_bulletHitWood4",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":2.3103855,
+  "duration":0.22492063,
   "exportDir":"",
-  "name":"snd_fleshExplode1",
+  "name":"snd_bulletHitWood4",
   "parent":{
-    "name":"SFX",
-    "path":"folders/Sounds/SFX.yy",
+    "name":"Bullet Hit Sounds",
+    "path":"folders/Sounds/Bullet Hit Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_fleshExplode1.wav",
+  "soundFile":"snd_bulletHitWood4.wav",
   "volume":1.0,
 }

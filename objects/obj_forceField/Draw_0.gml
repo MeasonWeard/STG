@@ -1,14 +1,16 @@
 var radius = 80;
 var innerCount = 5;
 
+var fade = clamp(life / 90, 0, 1);
+
 //background bubble
 draw_set_colour(c_blue);
-draw_set_alpha(0.15);
+draw_set_alpha(0.15 * fade);
 
 draw_circle(x, y, radius, false);
 
 //moving concentric circles
-draw_set_alpha(0.5);
+draw_set_alpha(0.5 * fade);
 
 var cycle = (current_time * 0.0005) mod 1;
 

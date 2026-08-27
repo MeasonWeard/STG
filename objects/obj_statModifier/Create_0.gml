@@ -11,3 +11,7 @@ statAfter = 0;
 active = false;
 
 timer = undefined;
+
+isResistance = false;
+resMinKey = undefined;
+resMaxKey = undefined;

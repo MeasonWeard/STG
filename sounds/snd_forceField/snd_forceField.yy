@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_fleshExplode1",
+  "%Name":"snd_forceField",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":2.3103855,
+  "duration":1.1958277,
   "exportDir":"",
-  "name":"snd_fleshExplode1",
+  "name":"snd_forceField",
   "parent":{
     "name":"SFX",
     "path":"folders/Sounds/SFX.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_fleshExplode1.wav",
+  "soundFile":"snd_forceField.wav",
   "volume":1.0,
 }

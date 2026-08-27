@@ -101,7 +101,7 @@ if (instance_exists(source)) {
 							var heal = (lifeSteal * 0.01) * dealt;
 							
 							if (source.lifeStealForSelf) scr_char_heal(source, heal);
-							if (source.lifeStealForsource and instance_exists(source.source)) scr_char_heal(source.source, heal);
+							if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
 							
 						}
 					

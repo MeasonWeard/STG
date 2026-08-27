@@ -55,7 +55,7 @@ if (global.debug) {
 	draw_set_colour(prevCol);
 	
 	draw_set_colour(c_yellow);
-	draw_text(x, y + 64, string(finalStats.da));
+	//draw_text(x, y + 64, string(finalStats.da));
 	
 	draw_text(x, y, string(nearbyEnv));
 	

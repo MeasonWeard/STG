@@ -7,5 +7,6 @@ event_inherited();
 if (global.debug) {
 
 	draw_text(x, y - 120, string(hashCellX) + "," + string(hashCellY));
+	draw_text(x, y - 300, finalStats.meleeResMin);
 
 }

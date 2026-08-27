@@ -459,6 +459,7 @@ soundProfiles = {
 	bulletHitRock: [snd_bulletHitRock1, snd_bulletHitRock2, snd_bulletHitRock3],
 	bulletHitShield: [snd_shieldDamage1, snd_shieldDamage2, snd_shieldDamage3],
 	bulletHitGlass: [snd_bulletHitGlass1, snd_bulletHitGlass2, snd_bulletHitGlass3],
+	bulletHitWood: [snd_bulletHitWood1, snd_bulletHitWood2, snd_bulletHitWood3, snd_bulletHitWood4],
 	
 	//weaponshots
 	blaster: [snd_blaster1, snd_blaster2, snd_blaster3],
@@ -523,6 +524,7 @@ skillConstructors = {
 	blob: skill_blob, //bio
 	medicalExosomes: skill_medicalExosomes, // bio,
 	symbiont: skill_symbiont, //bio
+	bioBomb: skill_bioBomb, //bio
 	
 	muscleGrowth: skill_muscleGrowth, //bio
 	homeostasis: skill_homeostasis, //bio
