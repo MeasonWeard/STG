@@ -1855,6 +1855,33 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	
 	}
 	
+	function skill_halfLife() : skill() constructor {
+
+		name = "Half-Life";
+		key = "halfLife";
+		icon = spr_icon_vacuumEnergy;
+		txtCol = c_white;
+		maxLevel = 8;
+		radDam = 4;
+		
+		description = "Adds radiation damage to certain abilites.";
+		description += "\n\nEffected abilites: ";
+		description += "\n- Singularity\n- Bio Bomb\n- Noxious Gas\n- Flamethrower\n- Thermite Charge\n- Chain Lightning\n- EMP";
+	
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Damage: " + string(radDam);
+		
+		}
+	
+		static setupFunc = function(source) {
+	
+			radDam = 4 * level;
+	
+		}
+	
+	}
+	
 	function skill_radioactiveBullets() :skill() constructor {
 	
 		name = "Radioactive Weapons";
