@@ -56,12 +56,12 @@ getOwnerConstantFuncs = false;
 
 sprites = {
 
-	left: spr_player,
-	right: spr_player,
-	up: spr_player,
-	down: spr_player,
-	spawn: spr_player,
-	death: spr_death
+	left: spr_playerM_l,
+	right: spr_playerM_r,
+	up: spr_playerM_u,
+	down: spr_playerM_d,
+	spawn: spr_playerM_d,
+	death: spr_playerM_death
 	
 }
 

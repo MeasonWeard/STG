@@ -4,7 +4,6 @@ cursor = global.cursor;
 name = "Player";
 faction = "player";
 damageDestructibles = true;
-sprites.death = spr_playerDeath;
 tags = ["bio"];
 
 attackDelay = 12;
@@ -35,12 +34,12 @@ teleport = false;
 
 sprites = {
 
-	left: spr_playerF_d,
-	right: spr_playerF_d,
-	up: spr_playerF_u,
-	down: spr_playerF_d,
-	spawn: spr_playerF_d,
-	death: spr_player_death
+	left: spr_playerM_l,
+	right: spr_playerM_r,
+	up: spr_playerM_u,
+	down: spr_playerM_d,
+	spawn: spr_playerM_d,
+	death: spr_playerM_death
 	
 }
 
