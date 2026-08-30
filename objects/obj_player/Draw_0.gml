@@ -2,6 +2,8 @@ if (!active) exit;
 
 image_alpha = sc.pictureMode ? 0 : 1;
 
+scr_char_animateUD(false);
+
 event_inherited();
 
 if (global.debug) {

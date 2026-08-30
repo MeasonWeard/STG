@@ -61,6 +61,10 @@ skillCheckIndex = scr_timeSlicing_assignTurnIndex("skillCheck");
 skills.skill1 = new skill_particleShower();
 skills.skill1.level = 2;
 
+setupIr = 3;
+
+
+
 //warning = instance_create_layer(x, y, "Instances", obj_warning);
 //warning.owner = self;
 //warning.timerMax = 18;

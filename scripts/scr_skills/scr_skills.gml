@@ -1663,7 +1663,7 @@ function scr_skills_applyIrradiated(inst, source) {
 			
 			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 			
-			var sk = scr_skills_findCharSkill("flashpoint", source);
+			sk = scr_skills_findCharSkill("flashpoint", source);
 			if (sk != undefined) flashpointDam = sk.damage;
 		
 		}
@@ -1686,6 +1686,7 @@ function scr_skills_applyIrradiated(inst, source) {
 				bg.radius = radius;
 				bg.faction = source.faction;
 				bg.life = 4;
+				
 			}
 		
 			return true;

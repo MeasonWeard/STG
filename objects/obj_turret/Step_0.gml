@@ -44,4 +44,4 @@ if (equippedWeapon.reload == 0 and newClip) {
 
 if (clips <= 0) hp = 0;
 
-scr_char_animateUPDL(false);
+scr_char_animateUDLR(false);

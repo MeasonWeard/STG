@@ -35,11 +35,11 @@ teleport = false;
 
 sprites = {
 
-	left: spr_player_2,
-	right: spr_player_2,
-	up: spr_player_2,
-	down: spr_player_2,
-	spawn: spr_player_2,
+	left: spr_playerF_d,
+	right: spr_playerF_d,
+	up: spr_playerF_u,
+	down: spr_playerF_d,
+	spawn: spr_playerF_d,
 	death: spr_player_death
 	
 }

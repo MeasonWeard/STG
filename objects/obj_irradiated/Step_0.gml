@@ -4,6 +4,7 @@ if (instance_exists(owner) and owner.active) {
 
 	x = owner.x;
 	y = owner.y - owner.sprite_height * 0.25;
+	faction = owner.faction;
 	
 } else {
 
@@ -47,6 +48,6 @@ if (tick > 0) {
 	
 	}
 	
-	scr_audio_playSoundAt(snd_burn, x, y);
+	scr_audio_playSoundAt(snd_irradiated, x, y);
 	
 }
