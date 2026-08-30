@@ -8,6 +8,7 @@ Move: WASD
 Dash: Space
 Use Stim Pack (Heal) : Q
 Use Energy Pack: E
+Interact: F
 
 Attack: Left Mouse Button
 Reload: R
