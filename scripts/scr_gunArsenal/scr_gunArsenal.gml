@@ -450,7 +450,7 @@ function gun_blobGun(level, rarity) : gunInst(level, rarity) constructor {
 	
 	projSprite = spr_bullet_blobSpit;
 	lockProjSprite = true;
-	range = 200;
+	range = 216;
 	auto = false;
 	clipSize = 1;
 	fireRate = 1.2;
