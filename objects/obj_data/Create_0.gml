@@ -515,13 +515,14 @@ skillConstructors = {
 	flamethrower: skill_flamethrower, //chem
 	thermiteCharge: skill_thermiteCharge, //chem
 	napalm: skill_napalm, //chem
+	adrenalineShot: skill_adrenalineShot, //chem
 	
 	PPE: skill_PPE, //chem
 	medicalSynthesis: skill_medicalSynthesis, //chem
 	acidicBullets: skill_acidicBullets, //chem
 	gas: skill_gas, //chem
 	flashpoint: skill_flashpoint, //chem
-	adrenalineShot: skill_adrenalineShot, //chem
+	volatile: skill_volatile, //chem
 	
 	fungalTurret: skill_fungalTurret, //bio
 	blob: skill_blob, //bio

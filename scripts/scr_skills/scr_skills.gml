@@ -417,6 +417,33 @@ function scr_skills_applyIrradiated(inst, source) {
 	}
 	
 }
+
+function scr_skills_applyVolatile(inst, source) {
+
+	var sk = scr_skills_findCharSkill("volatile", source);
+	
+	if (is_struct(sk)) {
+	
+		var chance = sk.chance;
+		var expDam = sk.expDam;
+		var expRadius = sk.expRadius;
+		var bgDam = sk.bgDam;
+		var bgLife = sk.bgLife;
+		var bgRadius = sk.bgRadius;
+
+		var vt = instance_create_layer(source.x, source.y, "Instances", obj_volatile);
+		
+		vt.chance = chance;
+		vt.owner = inst;
+		vt.expDam = expDam;
+		vt.expRadius = expRadius;
+		vt.bgDam = bgDam;
+		vt.bgLife = bgLife;
+		vt.bgRadius = bgRadius;
+	
+	}
+	
+}
 	
 #endregion
 
@@ -750,6 +777,7 @@ function scr_skills_applyIrradiated(inst, source) {
 		energyCost = 80;
 		cooldownTime = 14;
 		maxLevel = 6;
+		levelReq = 10;
 		duration = 5;
 		
 		txtCol = c_white;
@@ -1125,6 +1153,47 @@ function scr_skills_applyIrradiated(inst, source) {
 		}
 		
 	}
+	
+	function skill_adrenalineShot() : skill() constructor {
+		
+		name = "Adrenaline Shot";
+		key = "adrenalineShot";
+		icon = spr_icon_medicalSynthesis;
+		maxLevel = 8;
+		energyCost = 80;
+		cooldownTime = 16;
+		spd = 0.1;
+		meleePerc = 5;
+		heal = 30;
+
+
+		levelReq = 5;
+
+		description = "Increase your speed and melee damage for 6 seconds.\nInstantly heal.";
+		//description += "\nCharges detonate after a 5 second countdown. Press C to detonate charges early.";
+		
+		static formatStatsDescription = function() {
+			
+			//statsDescription = "Burning Ground Duration: 4 seconds"
+			//statsDescription += "\n\nExplosion Damage: " + string(damage.kin) + " kinetic, " + string(damage.fire) + " fire";
+			//statsDescription += "\nBurning Ground Damage: " + string(flameDamage.fire * 2) + " fire p/s";
+
+		}
+	
+		static setupFunc = function(source) {
+		
+			
+			
+		}
+	
+		static castFunc = function(source) {
+		
+			
+			return true;
+			
+		}
+		
+	}
 
 	#endregion
 
@@ -1213,6 +1282,7 @@ function scr_skills_applyIrradiated(inst, source) {
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -1324,6 +1394,7 @@ function scr_skills_applyIrradiated(inst, source) {
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyVolatile(inst, source);
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
 
@@ -1412,6 +1483,7 @@ function scr_skills_applyIrradiated(inst, source) {
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -1483,6 +1555,8 @@ function scr_skills_applyIrradiated(inst, source) {
 		key = "bioBomb";
 		icon = spr_icon_exosomes;
 		txtCol = c_black;
+	
+		levelReq = 10;
 	
 		maxLevel = 6;
 
@@ -1802,6 +1876,7 @@ function scr_skills_applyIrradiated(inst, source) {
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -1884,6 +1959,7 @@ function scr_skills_applyIrradiated(inst, source) {
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
 
@@ -2048,6 +2124,7 @@ function scr_skills_applyIrradiated(inst, source) {
 		icon = spr_icon_decay;
 		txtCol = c_white;
 		maxLevel = 8;
+		levelReq = 10;
 		damPerc = 4;
 		
 		description = "Adds radiation damage to certain abilites.\The extra damage is proportional to the ability's primary damage element.";
@@ -2166,28 +2243,82 @@ function scr_skills_applyIrradiated(inst, source) {
 		
 	}
 	
-	function skill_adrenalineShot() : skill() constructor {
+	function skill_volatile() : skill() constructor {
 
-		name = "Adrenaline Shot";
-		key = "adrenalineShot";
-		icon = spr_icon_medicalSynthesis;
+		name = "Volatile";
+		key = "volatile";
+		icon = spr_icon_flamethrower;
 		maxLevel = 8;
-		
 		levelReq = 10;
-	
-		description = "Instantly heal.\nGain temporary movement speed and health regeneration.";
+		
+		chance = 5;
+		bgDam = undefined;
+		bgRadius = 80;
+		bgLife = 4;
+		expDam = undefined;
+		expRadius = 40;
+		
+		description = "When you and your summons are damaged there is a chance to create";
+		description += "\na fiery explosion which leaves behind burning ground.";
 		
 		static formatStatsDescription = function() {
 		
+			statsDescription = "Chance: " + string(chance) + "%";
+			statsDescription += "\n\nExplosion Damage: " + string(expDam.fire) + " fire";
+			statsDescription += "\nExplosion Radius: " + string(expRadius);
+			statsDescription += "\nBurning Ground Damage: " + string(bgDam.fire * 2) + " fire p/s";
+			statsDescription += "\nBurning Ground Radius: " + string(bgRadius);
 			
-		
 		}
 		
 		static setupFunc = function(source) {
 	
-			instantHeal = 20 + (level - 1) * 5;
+			chance = 4 + (level - 1) * 2;
+	
+			bgRadius = 80 + level * 4;
+			bgLife = 4;
+		
+			bgDam = new damageProfile();
+		
+			bgDam.fire = 8 + (level - 1) * 4;
+			
+			var damKeys = ["fire"];
+			
+			var napalm = scr_skills_findCharSkill("napalm", source);
+			
+			if (napalm != undefined) {
+				
+				bgDam.chem = napalm.chemDam;
+				array_push(damKeys, "chem");
+				
+			}
+			
+			bgDam = scr_stats_calculateSkillDamage(source, bgDam, damKeys);
+			
+			expDam = new damageProfile();
+			
+			expDam.fire = 12 + level * 3;
+			
+			expDam = scr_stats_calculateSkillDamage(source, expDam, ["fire"]);
+			
+			expRadius = 68 + level * 4;
 			
 	
+		}
+		
+		static extraEffects = function(source) {
+		
+			var vt = instance_create_layer(source.x, source.y, "Instances", obj_volatile);
+			
+			vt.owner = source;
+			vt.chance = chance;
+			
+			vt.expDam = expDam;
+			vt.expRadius = expRadius;
+			vt.bgDam = bgDam;
+			vt.bgLife = bgLife;
+			vt.bgRadius = bgRadius;
+		
 		}
 		
 	}
