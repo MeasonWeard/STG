@@ -528,7 +528,7 @@ skillConstructors = {
 	blob: skill_blob, //bio
 	medicalExosomes: skill_medicalExosomes, // bio,
 	symbiont: skill_symbiont, //bio
-	bioBomb: skill_bioBomb, //bio
+	tendrils: skill_tendrils, //bio
 	
 	muscleGrowth: skill_muscleGrowth, //bio
 	homeostasis: skill_homeostasis, //bio
@@ -536,6 +536,9 @@ skillConstructors = {
 	chitin: skill_chitin, //bio
 	adrenalGlands: skill_adrenalGlands, //bio
 	collagenReinforcement: skill_collagenReinforcement, //bio
+	bioBomb: skill_bioBomb, //bio
+	crisper: skill_crisper, //bio
+
 	
 	chainLightning: skill_chainLightning, // eng
 	turret: skill_turret, //eng

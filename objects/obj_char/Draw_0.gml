@@ -65,7 +65,13 @@ if (global.debug) {
 	draw_set_colour(c_yellow);
 	//draw_text(x, y + 64, string(finalStats.da));
 	
-	draw_text(x, y, string(nearbyEnv));
+	
+	if (is_struct(finalStats) and variable_struct_exists(finalStats, "meleeDamPerc")) {
+	
+		draw_text(x, y + 64, "meleeDamPerc: " + string(finalStats.meleeDamPerc));
+		draw_text(x, y + 128, "gunDamPerc: " + string(finalStats.gunDamPerc));
+	
+	}
 	
 	//draw_sprite(spr_cursor1, 0, xstart, ystart);
 	//draw_text(x, y, string(x) + "," + string(y));

@@ -445,6 +445,26 @@ function scr_skills_applyVolatile(inst, source) {
 	
 }
 	
+function scr_skills_applyCrisper(inst, source) {
+
+	if (!instance_exists(inst)) exit;
+	if (!scr_char_hasTag(inst, "bio")) exit;
+
+	var sk = scr_skills_findCharSkill("crisper", source);
+	
+	if (is_struct(sk)) {
+	
+		var damPerc = sk.damPerc;
+		var hpPerc = sk.hpPerc;
+		
+		inst.baseStats.meleeDamPerc += damPerc;
+		inst.baseStats.gunDamPerc += damPerc;
+		inst.baseStats.maxHpPerc += hpPerc;
+
+	}
+	
+}
+	
 #endregion
 
 #region ACTIVES
@@ -1214,6 +1234,113 @@ function scr_skills_applyVolatile(inst, source) {
 
 	#region biology
 
+	function skill_tendrils() : skill() constructor {
+	
+		//summon
+	
+		name = "Tendrils";
+		key = "tendrils";
+		icon = spr_icon_blob;
+	
+		maxLevel = 9;
+		maxCharges = 3;
+		energyCost = 22;
+		cooldownTime = 4;
+		castCooldownTime = 0.4;
+
+		spikes = 2;
+		range = 900;
+		damage = undefined;
+
+		description = "Sneaky."
+
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Targets: " + string(spikes);
+			statsDescription += "\nDamage: " + string(damage.kin) + " kinetic";
+		
+		}
+
+		static setupFunc = function(source) {
+		
+			energyCost = 18 + (level - 1) * 2;
+			spikes = 2 + ((level - 1) div 2);
+			cooldownTime = 3.25 - (level - 1) * 0.2;
+			
+			//maxCharges = 2 + ((level - 1) div 3);
+		
+			damage = new damageProfile();
+			damage.kin = 12 + (level - 1) * 3;
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
+	
+		}
+	
+		static castFunc = function(source) {
+		
+			var targets = [];
+
+			var nearby = scr_hash_getNearby(global.stageController.charHash, source.x, source.y);
+
+			var len = array_length(nearby);
+
+			//find valid targets
+			for (var i = 0; i < len; i++) {
+
+				var char = nearby[i];
+
+				if (!instance_exists(char)) continue;
+				if (char == source) continue;
+				if (char.faction == source.faction) continue;
+
+				var dist = point_distance(source.x, source.y, char.x, char.y);
+
+				if (dist > range) continue;
+
+				if (!scr_physics_hasLineOfSight(source.x, source.y, char.x, char.y)) continue;
+
+				array_push(targets, char);
+
+			}
+
+			//randomise target order
+			targets = array_shuffle(targets);
+
+			//hit up to spikes targets
+			var hitCount = min(spikes, array_length(targets));
+
+			for (var i = 0; i < hitCount; i++) {
+
+				var target = targets[i];
+
+				if (!instance_exists(target)) continue;
+
+				var hitOutcome = scr_stats_hitOutcome(source.finalStats.oa, target.finalStats.da);
+
+				scr_char_damage(
+					target,
+					damage,
+					damageTypes.ability,
+					false,
+					hitOutcome
+				);
+
+				var randX = irandom_range(-8, 8);
+				var randY = irandom_range(-10, 14);
+				
+				var fx = instance_create_layer(target.x + randX, target.y + randY, "Instances", obj_tendrils);
+
+				fx.delay = i + 4;
+				fx.owner = source;
+
+			}
+			
+			return hitCount > 0;
+
+		}
+	
+	}
+
 	function skill_blob() : skill() constructor {
 	
 		//summon
@@ -1294,6 +1421,9 @@ function scr_skills_applyVolatile(inst, source) {
 			
 			//bio bomb
 			scr_skills_applyBioBomb(inst, source, 2);
+			
+			//crisper
+			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
@@ -1404,8 +1534,11 @@ function scr_skills_applyVolatile(inst, source) {
 			
 			}
 			
-			//bioBomb
+			//bioBomb - applies bio
 			scr_skills_applyBioBomb(inst, source, 3);
+			
+			//crisper
+			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
@@ -1493,8 +1626,11 @@ function scr_skills_applyVolatile(inst, source) {
 			inst.baseStats.meleeLifeSteal = lifeSteal;
 			inst.kinDam = kinDam;
 			
-			//bioBomb
+			//bioBomb - applies bio
 			scr_skills_applyBioBomb(inst, source, 4);
+			
+			//crisper
+			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
@@ -1564,58 +1700,6 @@ function scr_skills_applyVolatile(inst, source) {
 	
 	}
 	
-	function skill_bioBomb() : skill() constructor {
-	
-		name = "Bio-Bomb";
-		key = "bioBomb";
-		icon = spr_icon_exosomes;
-		txtCol = c_black;
-	
-		levelReq = 10;
-	
-		maxLevel = 6;
-
-		damPerc = 5;
-		poolDam = 5;
-
-		description = "When a biological summon dies, it explodes with chemical damage proportional to its maximum health\nand leaves behind acid pools."
-		description += " When fully upgraded, non-biological summons count as biological.";
-		
-		static formatStatsDescription = function() {
-		
-			statsDescription = "Explosion damage: " + string(damPerc) + "% of maximum health";
-			statsDescription += "\nAcid pool damage: " + string(poolDam.chem) + " chemical p/s";
-			
-			if (level >= maxLevel) statsDescription += "\n\nAll summons are biological.";
-			
-		}
-
-		static setupFunc = function(source) {
-		
-			damPerc = 5 + (level - 1) * 3;
-			
-			poolRadius = 40 + level * 2;
-		    poolLife = 4.5 + level * 0.5;
-			
-			poolDam = new damageProfile();
-			poolDam.chem = 6 + 2 * level;
-			
-			var damKeys = ["chem"];
-			
-			var sk = scr_skills_findCharSkill("napalm", source);
-			
-			if (is_struct(sk)) {
-			
-				poolDam.fire = sk.fireDam;
-				array_push(damKeys, "fire");
-			
-			}
-			
-			poolDam = scr_stats_calculateSkillDamage(source, poolDam, damKeys);
-			
-		}
-	
-	}
 
 	#endregion
 
@@ -1886,8 +1970,11 @@ function scr_skills_applyVolatile(inst, source) {
 			
 			}
 			
-			//bioBomb
+			//bioBomb - applies bio
 			scr_skills_applyBioBomb(inst, source, 3);
+			
+			//crisper
+			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
@@ -1969,8 +2056,11 @@ function scr_skills_applyVolatile(inst, source) {
 			inst.kinDam = kinDam;
 			inst.baseStats.maxShield = shields;
 			
-			//bioBomb
+			//bioBomb - applies bio
 			scr_skills_applyBioBomb(inst, source, 5);
+			
+			//crisper
+			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
 			scr_skills_applyIrradiated(inst, source);
@@ -2496,6 +2586,59 @@ function scr_skills_applyVolatile(inst, source) {
 
 	#region biology
 
+	function skill_bioBomb() : skill() constructor {
+	
+		name = "Bio-Bomb";
+		key = "bioBomb";
+		icon = spr_icon_exosomes;
+		txtCol = c_black;
+	
+		levelReq = 10;
+	
+		maxLevel = 6;
+
+		damPerc = 5;
+		poolDam = 5;
+
+		description = "When a biological summon dies, it explodes with chemical damage\nproportional to its maximum health and leaves behind acid pools."
+		description += "\n\nWhen fully upgraded, non-biological summons count as biological.";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Explosion damage: " + string(damPerc) + "% of maximum health";
+			statsDescription += "\nAcid pool damage: " + string(poolDam.chem) + " chemical p/s";
+			
+			if (level >= maxLevel) statsDescription += "\n\nAll summons are biological.";
+			
+		}
+
+		static setupFunc = function(source) {
+		
+			damPerc = 5 + (level - 1) * 3;
+			
+			poolRadius = 40 + level * 2;
+		    poolLife = 4.5 + level * 0.5;
+			
+			poolDam = new damageProfile();
+			poolDam.chem = 6 + 2 * level;
+			
+			var damKeys = ["chem"];
+			
+			var sk = scr_skills_findCharSkill("napalm", source);
+			
+			if (is_struct(sk)) {
+			
+				poolDam.fire = sk.fireDam;
+				array_push(damKeys, "fire");
+			
+			}
+			
+			poolDam = scr_stats_calculateSkillDamage(source, poolDam, damKeys);
+			
+		}
+	
+	}
+
 	function skill_muscleGrowth() : skill() constructor {
 
 		name = "Myostatin Inhibitor";
@@ -2520,6 +2663,33 @@ function scr_skills_applyVolatile(inst, source) {
 				meleeDamPerc: 5 + (level -1) * 4
 	
 			};
+	
+		}
+	
+	}
+	
+	function skill_crisper() : skill() constructor {
+
+		name = "Crisper";
+		key = "crisper";
+		icon = spr_icon_crisper;
+		maxLevel = 10;
+		damPerc = 8;
+		hpPerc = 8;
+	
+		description = "Edit your biological summons' genes\nto make them deadlier and crisper.";
+	
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Damage: +" + string(damPerc) + "%";
+			statsDescription += "\nHealth: +" + string(hpPerc) + "%";
+		
+		}
+	
+		static setupFunc = function(source) {
+
+			damPerc = 8 + (level - 1) * 2;
+			hpPerc = 8 + (level - 1) * 2;
 	
 		}
 	
