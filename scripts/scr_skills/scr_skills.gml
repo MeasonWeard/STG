@@ -1022,7 +1022,7 @@ function scr_skills_applyVolatile(inst, source) {
 
 			damage = new damageProfile();
 			
-			bioBonus = 8 + (level - 1) * 3;
+			bioBonus = 8 + (level - 1) * 2;
 		
 			damage.chem = 4 + (level - 1) * 2;
 			
@@ -1154,40 +1154,55 @@ function scr_skills_applyVolatile(inst, source) {
 		
 	}
 	
-	function skill_adrenalineShot() : skill() constructor {
+	function skill_combatStimulant() : skill() constructor {
 		
-		name = "Adrenaline Shot";
-		key = "adrenalineShot";
+		name = "Combat stimulant";
+		key = "combatStimulant";
 		icon = spr_icon_medicalSynthesis;
-		maxLevel = 8;
+		maxLevel = 9;
+		levelReq = 10;
 		energyCost = 80;
-		cooldownTime = 16;
+		cooldownTime = 12;
 		spd = 0.1;
-		meleePerc = 5;
+		da = 10;
+		meleeDamPerc = 5;
 		heal = 30;
+		life = 360;
 
+		levelReq = 10;
 
-		levelReq = 5;
-
-		description = "Increase your speed and melee damage for 6 seconds.\nInstantly heal.";
+		description = "Instantly heal.\nIncrease your speed, defensive ability,\nand melee damage for 6 seconds.";
 		//description += "\nCharges detonate after a 5 second countdown. Press C to detonate charges early.";
 		
 		static formatStatsDescription = function() {
 			
-			//statsDescription = "Burning Ground Duration: 4 seconds"
-			//statsDescription += "\n\nExplosion Damage: " + string(damage.kin) + " kinetic, " + string(damage.fire) + " fire";
+			statsDescription = "Instant Heal: " + string(heal);
+			statsDescription += "\nMelee Damage %: " + string(meleeDamPerc);
+			statsDescription += "\nDefensive Ability: " + string(da);
+			statsDescription += "\nMovement Speed: " + string(spd);
 			//statsDescription += "\nBurning Ground Damage: " + string(flameDamage.fire * 2) + " fire p/s";
 
 		}
 	
 		static setupFunc = function(source) {
 		
-			
+			heal = 26 + (level - 1) * 8;
+			meleeDamPerc = 8 + (level - 1) * 3
+			spd = 0.5 + (level - 1) * 0.125;
+			da = 8 + (level - 1) * 4;
 			
 		}
 	
 		static castFunc = function(source) {
 		
+			scr_char_heal(source, heal);
+			
+			scr_char_addStatMod(source, "spd", spd, life, "combatStimSpd");
+			scr_char_addStatMod(source, "meleeDamPerc", meleeDamPerc, life, "combatStimMeleeDamPerc");
+			scr_char_addStatMod(source, "da", da, life, "combatStimDa");
+
+			var eff = instance_create_layer(source.x, source.y, "Instances", obj_combatStimulant);
+			eff.owner = source;
 			
 			return true;
 			
@@ -1718,10 +1733,10 @@ function scr_skills_applyVolatile(inst, source) {
 		
 			energyCost = 45 + (level - 1) * 5;
 			radius = 155 + (level - 1) * 5;
-			mechBonus = 10 + (level - 1) * 2;
+			mechBonus = 3 + (level - 1) * 2;
 			
 			damage = new damageProfile();
-			damage.elec = 27 + (level - 1) * 8;
+			damage.elec = 31 + (level - 1) * 9;
 			
 			var damKeys = ["elec"];
 			var sk = scr_skills_findCharSkill("decay", source);

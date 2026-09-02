@@ -5,9 +5,6 @@ amount = 0;
 modName = undefined;
 statKey = undefined;
 
-statBefore = 0;
-statAfter = 0;
-
 active = false;
 
 timer = undefined;

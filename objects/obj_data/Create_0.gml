@@ -34,7 +34,7 @@ array_push(resolutions, [1920, 1080]);
 defaultSettings = {
 
 	fullscreen: true,
-	resIndex: 0,
+	resIndex: 2,
 	
 	showReloadOnCursor: true,
 	showSkillsOnCursor: false,
@@ -515,7 +515,7 @@ skillConstructors = {
 	flamethrower: skill_flamethrower, //chem
 	thermiteCharge: skill_thermiteCharge, //chem
 	napalm: skill_napalm, //chem
-	adrenalineShot: skill_adrenalineShot, //chem
+	combatStimulant: skill_combatStimulant, //chem
 	
 	PPE: skill_PPE, //chem
 	medicalSynthesis: skill_medicalSynthesis, //chem

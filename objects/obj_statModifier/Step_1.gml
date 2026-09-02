@@ -4,8 +4,7 @@ if (setup) {
 
 	if (instance_exists(owner) and variable_struct_exists(owner.finalStats, statKey)) {
 	
-		statBefore = owner.finalStats[$ statKey];
-		statAfter = statBefore + amount;
+		owner.finalStats[$ statKey] += amount;
 		active = true;
 		
 		//check if this stat is a resistance
@@ -25,6 +24,15 @@ if (setup) {
 				
 			break;
 			
+		}
+		
+		if (isResistance) {
+		
+			var range = scr_stats_calculateResistanceRange(owner.finalStats[$ statKey]);
+		
+			owner.finalStats[$ resMinKey] = range.minRes;
+			owner.finalStats[$ resMaxKey] = range.maxRes;
+		
 		}
 		
 	}

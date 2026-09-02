@@ -9,5 +9,5 @@ regardless of how much damage that hit would have dealt. Some abilities explicit
 damage to pass through and damage your Health without consuming a Shield point.
 
 Healing % increases the amount of Health restored by healing effects. It affects Health recovered from Stim Packs and 
-Health Recharges, as well as the amount of Health you restore to allies with healing abilities.
+Health Recharges, as well as the amount of Health you restore to yourself and allies with healing abilities.
 It does not affect Health Regeneration.

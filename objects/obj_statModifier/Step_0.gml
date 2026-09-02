@@ -1,15 +1,7 @@
-if (active and instance_exists(owner)) {
+if (!instance_exists(owner)) {
 	
-	owner.finalStats[$ statKey] = statAfter;
-	
-	if (isResistance) {
-		
-		var range = scr_stats_calculateResistanceRange(statAfter);
-		
-		owner.finalStats[$ resMinKey] = range.minRes;
-		owner.finalStats[$ resMaxKey] = range.maxRes;
-		
-	}
+	instance_destroy();
+	exit;
 	
 }
 

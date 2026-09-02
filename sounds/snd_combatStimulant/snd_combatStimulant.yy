@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_stimPac",
+  "%Name":"snd_combatStimulant",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.0156462,
+  "duration":3.352381,
   "exportDir":"",
-  "name":"snd_stimPac",
+  "name":"snd_combatStimulant",
   "parent":{
     "name":"SFX",
     "path":"folders/Sounds/SFX.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_stimPac.wav",
+  "soundFile":"snd_combatStimulant.wav",
   "volume":1.0,
 }
