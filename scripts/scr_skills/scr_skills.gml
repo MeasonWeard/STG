@@ -1243,44 +1243,54 @@ function scr_skills_applyCrisper(inst, source) {
 		icon = spr_icon_blob;
 	
 		maxLevel = 9;
-		maxCharges = 3;
-		energyCost = 22;
-		cooldownTime = 4;
+		levelReq = 5;
+		
+		maxCharges = 4;
+		energyCost = 16;
+		cooldownTime = 1.8;
 		castCooldownTime = 0.4;
 
-		spikes = 2;
-		range = 900;
+		spikes = 3;
+		range = 1320;
 		damage = undefined;
+		lifeSteal = 5;
 
-		description = "Sneaky."
+		description = "Unleash tendrils beneath the ground that erupt from the earth to strike enemies,\ndealing damage and stealing health."
 
 		static formatStatsDescription = function() {
 		
 			statsDescription = "Targets: " + string(spikes);
 			statsDescription += "\nDamage: " + string(damage.kin) + " kinetic";
+			statsDescription += "\nLife Steal: " + string(lifeSteal) + "%";
 		
 		}
 
 		static setupFunc = function(source) {
 		
-			energyCost = 18 + (level - 1) * 2;
-			spikes = 2 + ((level - 1) div 2);
-			cooldownTime = 3.25 - (level - 1) * 0.2;
+			energyCost = 8 + (level - 1);
 			
-			//maxCharges = 2 + ((level - 1) div 3);
+			spikes = 3 + ((level - 1) div 2);
+			cooldownTime = 1.6 - (level - 1) * 0.1;
+			lifeSteal = 1 + (level - 1) * 0.25;
 		
 			damage = new damageProfile();
-			damage.kin = 12 + (level - 1) * 3;
+			damage.kin = 18 + (level - 1) * 4;
 			
 			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
 	
 		}
 	
 		static castFunc = function(source) {
-		
+
+			var dir = point_direction(source.x, source.y, source.aimX, source.aimY);
+			var dist = min(175, point_distance(source.x, source.y, source.aimX, source.aimY));
+
+			var xx = source.x + lengthdir_x(dist, dir);
+			var yy = source.y + lengthdir_y(dist, dir);
+
 			var targets = [];
 
-			var nearby = scr_hash_getNearby(global.stageController.charHash, source.x, source.y);
+			var nearby = scr_hash_getNearby(global.stageController.charHash, xx, yy);
 
 			var len = array_length(nearby);
 
@@ -1293,7 +1303,7 @@ function scr_skills_applyCrisper(inst, source) {
 				if (char == source) continue;
 				if (char.faction == source.faction) continue;
 
-				var dist = point_distance(source.x, source.y, char.x, char.y);
+				var dist = point_distance(xx, yy, char.x, char.y);
 
 				if (dist > range) continue;
 
@@ -1306,9 +1316,11 @@ function scr_skills_applyCrisper(inst, source) {
 			//randomise target order
 			targets = array_shuffle(targets);
 
-			//hit up to spikes targets
-			var hitCount = min(spikes, array_length(targets));
+			var targetCount = array_length(targets);
+			var hitCount = min(spikes, targetCount);
+			var totalDam = 0;
 
+			//first pass - hit as many different enemies as possible
 			for (var i = 0; i < hitCount; i++) {
 
 				var target = targets[i];
@@ -1317,23 +1329,60 @@ function scr_skills_applyCrisper(inst, source) {
 
 				var hitOutcome = scr_stats_hitOutcome(source.finalStats.oa, target.finalStats.da);
 
-				scr_char_damage(
-					target,
-					damage,
-					damageTypes.ability,
-					false,
-					hitOutcome
-				);
-
+				totalDam += scr_char_damage(target, damage, damageTypes.ability, false, hitOutcome);
+				
 				var randX = irandom_range(-8, 8);
 				var randY = irandom_range(-10, 14);
-				
-				var fx = instance_create_layer(target.x + randX, target.y + randY, "Instances", obj_tendrils);
 
-				fx.delay = i + 4;
+				var fx = instance_create_layer(target.x + randX, target.y + randY, "Instances", obj_tendril);
+
 				fx.owner = source;
+				fx.target = target;
+				fx.delay = i + 4;
 
 			}
+
+			//second pass - use leftover spikes for repeat hits
+			var remaining = spikes - hitCount;
+
+			if (remaining > 0) {
+
+				targets = array_shuffle(targets);
+
+				var extraHits = min(remaining, targetCount);
+
+				for (var i = 0; i < extraHits; i++) {
+
+					var target = targets[i];
+
+					if (!instance_exists(target)) continue;
+
+					var hitOutcome = scr_stats_hitOutcome(source.finalStats.oa, target.finalStats.da);
+
+					totalDam += scr_char_damage(target, damage, damageTypes.ability, false, hitOutcome);
+
+					var randX = irandom_range(-12, 12);
+					var randY = irandom_range(-14, 18);
+
+					var fx = instance_create_layer(target.x + randX, target.y + randY, "Instances", obj_tendril);
+
+					
+					fx.owner = source;
+					fx.target = target;
+					fx.delay = hitCount + i + 4;
+
+					fx.offX = randX;
+					fx.offY = randY;
+
+				}
+
+				hitCount += extraHits;
+			}
+			
+			var dec = lifeSteal * 0.01;
+			var heal = totalDam * dec;
+			
+			scr_char_heal(source, heal);
 			
 			return hitCount > 0;
 
