@@ -1,6 +1,6 @@
 if (!active) exit;
 
-//hp = 9999999;
+hp = maxHp;
 
 event_inherited();
 

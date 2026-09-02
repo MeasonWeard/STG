@@ -46,6 +46,14 @@ if (global.devControls) {
 		pictureMode = !pictureMode;
 	
 	}
+	
+	if (keyboard_check_pressed(ord("V"))) {
+	
+		var filename = "screenshot_" + string(current_time) + ".png";
+		screen_save(filename);
+		scr_testSound();
+	
+	}
 
 }
 
