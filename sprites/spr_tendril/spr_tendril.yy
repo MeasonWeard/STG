@@ -45,8 +45,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Effects",
+    "path":"folders/Sprites/Effects.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

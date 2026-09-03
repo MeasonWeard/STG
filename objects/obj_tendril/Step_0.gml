@@ -8,7 +8,7 @@ if (delay > 0) {
 
 	image_speed = 1;
 	
-	var snd = scr_audio_randomSoundFromProfile(global.data.soundProfiles.cleaverSwing);
+	var snd = scr_audio_randomSoundFromProfile(global.data.soundProfiles.tendrils);
 	
 	if (instance_exists(target)) {
 	

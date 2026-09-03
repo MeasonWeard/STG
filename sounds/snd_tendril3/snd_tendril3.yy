@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_tendril",
+  "%Name":"snd_tendril3",
   "audioGroupId":{
     "name":"audiogroup_sfx",
     "path":"audiogroups/audiogroup_sfx",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.8707483,
+  "duration":1.1755102,
   "exportDir":"",
-  "name":"snd_tendril",
+  "name":"snd_tendril3",
   "parent":{
     "name":"SFX",
     "path":"folders/Sounds/SFX.yy",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_tendril.wav",
-  "volume":1.0,
+  "soundFile":"snd_tendril3.wav",
+  "volume":0.5,
 }

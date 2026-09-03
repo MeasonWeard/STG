@@ -1240,7 +1240,7 @@ function scr_skills_applyCrisper(inst, source) {
 	
 		name = "Tendrils";
 		key = "tendrils";
-		icon = spr_icon_blob;
+		icon = spr_icon_tendrils;
 	
 		maxLevel = 9;
 		levelReq = 5;
@@ -1256,7 +1256,8 @@ function scr_skills_applyCrisper(inst, source) {
 		lifeSteal = 5;
 
 		description = "Unleash tendrils beneath the ground that erupt from the earth to strike enemies,\ndealing damage and stealing health."
-
+		description += " Benefits from melee damage %.";
+		
 		static formatStatsDescription = function() {
 		
 			statsDescription = "Targets: " + string(spikes);
@@ -1274,9 +1275,14 @@ function scr_skills_applyCrisper(inst, source) {
 			lifeSteal = 1 + (level - 1) * 0.25;
 		
 			damage = new damageProfile();
-			damage.kin = 18 + (level - 1) * 4;
+			damage.kin = 16 + (level - 1) * 4;
 			
 			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
+			
+			if (source.stats.meleeDamPerc > 0) {
+				var dec = 1 + source.stats.meleeDamPerc * 0.01;
+				damage = scr_stats_multiplyDamageProfile(damage, dec);
+			}
 	
 		}
 	
@@ -1290,7 +1296,7 @@ function scr_skills_applyCrisper(inst, source) {
 
 			var targets = [];
 
-			var nearby = scr_hash_getNearby(global.stageController.charHash, xx, yy);
+			var nearby = scr_hash_getNearbyRange(global.stageController.charHash, xx, yy, 2);
 
 			var len = array_length(nearby);
 
