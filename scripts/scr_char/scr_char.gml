@@ -937,3 +937,98 @@ function scr_char_getSkill(char, sk) {
 	return sk;
 	
 }
+
+function scr_char_calculateWeaponStats(char, setAmmo) {
+
+	if (!instance_exists(char)) exit;
+	
+	var weapons = char.weapons;
+	var weaponsLen = array_length(weapons);
+	
+	for (var i = 0 ; i < weaponsLen; i ++) {
+		
+		var slot = weapons[i];
+		var thisWeapon = slot.weapon;
+
+		if (is_instanceof(thisWeapon, gunInst)) {
+
+			slot.stats = scr_guns_calculateGunStats(char, thisWeapon);
+			if (setAmmo) thisWeapon.ammo = slot.stats.clipSize;
+				
+		}
+		
+		if (is_instanceof(thisWeapon, meleeInst)) {
+			slot.stats = scr_melee_calculateMeleeStats(char, thisWeapon);
+		}
+		
+	}
+	
+}
+
+function scr_char_setupSkills(char, applyPassives, applyEffects) {
+
+	if (!instance_exists(char)) exit;
+	
+	var charData = char.charData;
+
+	if (is_struct(charData)) {
+		
+		var classArray = [charData.class1, charData.class2];
+
+		for (var c = 0; c < array_length(classArray); c++) {
+	
+			var classData = classArray[c];
+			if (!is_struct(classData)) continue;
+	
+			//convert skill save data into skill instances
+			classData.unlockedSkills = scr_skills_loadArray(classData.unlockedSkills);
+	
+			var unlockedSkills = classData.unlockedSkills;
+			var len = array_length(unlockedSkills);
+	
+			for (var i = 0; i < len; i++) {
+		
+				var sk = unlockedSkills[i];
+				if (!is_struct(sk)) continue;
+		
+				//setup skill
+				if (is_callable(sk.setupFunc)) {
+					sk.setupFunc(char);
+				}
+		
+				//passives
+				if (applyPassives) {
+					
+					if (is_struct(sk.passives)) {
+			
+						var keys = variable_struct_get_names(sk.passives);
+						var keysLen = array_length(keys);
+			
+						for (var j = 0; j < keysLen; j++) {
+				
+							var key = keys[j];
+							var val = sk.passives[$ key];
+				
+							if (!variable_struct_exists(stats, key)) continue;
+				
+							stats[$ key] += val;
+				
+						}
+			
+					}
+				}
+		
+				//extra effects
+				if (applyEffects) {
+					if (is_callable(sk.extraEffects)) {
+						sk.extraEffects(char);
+					}
+				}
+		
+			}
+			
+		}
+		
+	}
+	
+}

@@ -1279,6 +1279,13 @@ function scr_skills_applyCrisper(inst, source) {
 			
 			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
 			
+			var meleeDamPerc = source.finalStats.meleeDamPerc;
+			
+			if (meleeDamPerc > 0) {
+				var dec = 1 + meleeDamPerc * 0.01;
+				damage = scr_stats_multiplyDamageProfile(damage, dec);
+			}
+			
 		}
 	
 		static castFunc = function(source) {
@@ -1295,15 +1302,15 @@ function scr_skills_applyCrisper(inst, source) {
 
 			var len = array_length(nearby);
 			
-			var meleeDamPerc = source.finalStats.meleeDamPerc;
+			//var meleeDamPerc = source.finalStats.meleeDamPerc;
 			
 			var dam = damage;
 			
-			if (meleeDamPerc > 0) {
-				var dam = variable_clone(damage);
-				var dec = 1 + meleeDamPerc * 0.01;
-				dam = scr_stats_multiplyDamageProfile(dam, dec);
-			}
+			//if (meleeDamPerc > 0) {
+			//	var dam = variable_clone(damage);
+			//	var dec = 1 + meleeDamPerc * 0.01;
+			//	dam = scr_stats_multiplyDamageProfile(dam, dec);
+			//}
 
 			//find valid targets
 			for (var i = 0; i < len; i++) {

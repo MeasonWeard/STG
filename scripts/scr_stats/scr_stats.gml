@@ -136,10 +136,10 @@ function scr_stats_applyDamageBonuses(char, amount, element) {
 	var percKey = element + "DamPerc";
 	var damKey = element + "Dam";
 	
-	if (!variable_struct_exists(char.stats, percKey)) return amount;
+	if (!variable_struct_exists(char.finalStats, percKey)) return amount;
 	if (!variable_struct_exists(char.finalStats, damKey)) return amount;
 
-	var perc = char.stats[$ percKey];
+	var perc = char.finalStats[$ percKey];
 	var dam = char.finalStats[$ damKey];
 	
 	return scr_stats_calculateStat(amount, perc) + dam;

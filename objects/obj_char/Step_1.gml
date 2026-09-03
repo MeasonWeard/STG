@@ -40,7 +40,9 @@ if (setupStats) {
 	setupStats = false;
 	
 	stats = {};
+	finalStats = {};
 	scr_data_copyInto(stats, baseStats);
+	scr_data_copyInto(finalStats, baseStats);
 	
 	bulletFuncs = [];
 	constantFuncs = [];
@@ -63,57 +65,9 @@ if (setupStats) {
 		scr_class_applyMinorStats(charData.class1, stats);
 		scr_class_applyMinorStats(charData.class2, stats);
 		
-		var classArray = [charData.class1, charData.class2];
-
-		for (var c = 0; c < array_length(classArray); c++) {
-	
-			var classData = classArray[c];
-			if (!is_struct(classData)) continue;
-	
-			//convert skill save data into skill instances
-			classData.unlockedSkills = scr_skills_loadArray(classData.unlockedSkills);
-	
-			var unlockedSkills = classData.unlockedSkills;
-			var len = array_length(unlockedSkills);
-	
-			for (var i = 0; i < len; i++) {
-		
-				var sk = unlockedSkills[i];
-				if (!is_struct(sk)) continue;
-		
-				//setup skill
-				if (is_callable(sk.setupFunc)) {
-					sk.setupFunc(self);
-				}
-		
-				//passives
-				if (is_struct(sk.passives)) {
+		//set up skills, apply passives and effects
+		scr_char_setupSkills(self, true, true);
 			
-					var keys = variable_struct_get_names(sk.passives);
-					var keysLen = array_length(keys);
-			
-					for (var j = 0; j < keysLen; j++) {
-				
-						var key = keys[j];
-						var val = sk.passives[$ key];
-				
-						if (!variable_struct_exists(stats, key)) continue;
-				
-						stats[$ key] += val;
-				
-					}
-			
-				}
-		
-				//extra effects
-				if (is_callable(sk.extraEffects)) {
-					sk.extraEffects(self);
-				}
-		
-			}
-	
-		}
-		
 		//load active skills
 		var activeSkills = charData.skills;
 		
@@ -156,34 +110,8 @@ if (setupStats) {
 	shieldRegenDelay = max(0.1, stats.shieldRegenDelay);
 	
 	//re-run setup funcs for all skills now that final stats have been calculated
-	if (is_struct(charData)) {
-
-		var classArray = [charData.class1, charData.class2];
+	scr_char_setupSkills(self, false, false);
 	
-		for (var c = 0; c < array_length(classArray); c++) {
-		
-			var class = classArray[c];
-			if (!is_struct(class)) continue;
-		
-			var unlockedSkills = class.unlockedSkills;
-			var len = array_length(unlockedSkills);
-		
-			for (var i = 0; i < len; i++) {
-			
-				var sk = unlockedSkills[i];
-			
-				if (!is_struct(sk)) continue;
-			
-				if (is_callable(sk.setupFunc)) {
-					sk.setupFunc(self);
-				}
-			
-			}
-		
-		}
-	
-	}
-
 	if (setupBasics) {
 	
 		setupBasics = false;
@@ -199,26 +127,9 @@ if (setupStats) {
 	}
 	
 	//calculate weapon stats
-	var weaponsLen = array_length(weapons);
-	
-	for (var i = 0 ; i < weaponsLen; i ++) {
-		
-		var slot = weapons[i];
-		var thisWeapon = slot.weapon;
+	scr_char_calculateWeaponStats(self, setAmmo);
 
-		if (is_instanceof(thisWeapon, gunInst)) {
-
-			slot.stats = scr_guns_calculateGunStats(self, thisWeapon);
-			if (setAmmo) thisWeapon.ammo = slot.stats.clipSize;
-				
-		}
-		
-		if (is_instanceof(thisWeapon, meleeInst)) {
-			slot.stats = scr_melee_calculateMeleeStats(self, thisWeapon);
-		}
-		
-	}
-	
+	//equip
 	scr_weapons_equipWeapon(self, weaponIndex);
 	setAmmo = false;
 	

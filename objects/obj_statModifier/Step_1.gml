@@ -26,12 +26,46 @@ if (setup) {
 			
 		}
 		
+		
 		if (isResistance) {
 		
 			var range = scr_stats_calculateResistanceRange(owner.finalStats[$ statKey]);
 		
 			owner.finalStats[$ resMinKey] = range.minRes;
 			owner.finalStats[$ resMaxKey] = range.maxRes;
+		
+		} else {
+		
+		
+			switch (statKey) {
+			
+				case "kinDam":
+				case "fireDam":
+				case "chemDam":
+				case "elecDam":
+				case "radDam":
+				case "kinDamPerc":
+				case "fireDamPerc":
+				case "chemDamPerc":
+				case "elecDamPerc":
+				case "radDamPerc":
+				case "meleeDamPerc":
+				case "gunDamPerc":
+			
+					isDamage = true;
+				
+				break;
+			
+			}
+			
+			if (isDamage) {
+
+				scr_char_calculateWeaponStats(owner, false);
+				scr_char_setupSkills(owner, false, false);
+				scr_weapons_equipWeapon(owner, owner.weaponIndex);
+				
+			}
+		
 		
 		}
 		

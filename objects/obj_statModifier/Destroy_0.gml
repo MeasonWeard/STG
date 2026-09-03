@@ -15,4 +15,12 @@ if (instance_exists(owner) and active) {
 		
 	}
 	
+	if (isDamage) {
+	
+		scr_char_calculateWeaponStats(owner, false);
+		scr_char_setupSkills(owner, false, false);
+		scr_weapons_equipWeapon(owner, owner.weaponIndex);
+	
+	}
+	
 }

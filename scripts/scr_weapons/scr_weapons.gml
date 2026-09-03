@@ -25,14 +25,14 @@ function scr_weapons_collectWeapon(char, weapon, equip) {
 		
 	    slot = {
 	        weapon: weapon,
-	        stats: scr_guns_calculateGunStats(char, weapon)
+	        stats: undefined//scr_guns_calculateGunStats(char, weapon)
 	    };
 		
 	} else if (is_instanceof(weapon, meleeInst)) {
 
 		slot = {
 			weapon: weapon,
-			stats: scr_melee_calculateMeleeStats(char, weapon)
+			stats: undefined//scr_melee_calculateMeleeStats(char, weapon)
 	    };
 		
 	} else {

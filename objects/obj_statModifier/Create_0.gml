@@ -10,5 +10,7 @@ active = false;
 timer = undefined;
 
 isResistance = false;
+isDamage = false;
+
 resMinKey = undefined;
 resMaxKey = undefined;

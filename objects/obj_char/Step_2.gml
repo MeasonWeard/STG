@@ -4,7 +4,7 @@ event_inherited();
 //equippedWeaponStats = weapons[weaponIndex].stats;
 
 //gun
-if (is_instanceof(equippedWeapon, gunInst)) {
+if (is_instanceof(equippedWeapon, gunInst) and is_struct(equippedWeaponStats)) {
 
 	var gun = equippedWeapon;
 	
@@ -37,7 +37,7 @@ if (is_instanceof(equippedWeapon, gunInst)) {
 }
 
 //melee weapons
-if (is_instanceof(equippedWeapon, meleeInst)) {
+if (is_instanceof(equippedWeapon, meleeInst) and is_struct(equippedWeaponStats)) {
 
 	var melee = equippedWeapon;
 
