@@ -1256,7 +1256,7 @@ function scr_skills_applyCrisper(inst, source) {
 		lifeSteal = 5;
 
 		description = "Unleash tendrils beneath the ground that erupt from the earth to strike enemies,\ndealing damage and stealing health."
-		description += " Benefits from melee damage %.";
+		description += " Benefits from melee damage % and can crit.";
 		
 		static formatStatsDescription = function() {
 		
@@ -1279,11 +1279,6 @@ function scr_skills_applyCrisper(inst, source) {
 			
 			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
 			
-			if (source.stats.meleeDamPerc > 0) {
-				var dec = 1 + source.stats.meleeDamPerc * 0.01;
-				damage = scr_stats_multiplyDamageProfile(damage, dec);
-			}
-	
 		}
 	
 		static castFunc = function(source) {
@@ -1299,6 +1294,16 @@ function scr_skills_applyCrisper(inst, source) {
 			var nearby = scr_hash_getNearbyRange(global.stageController.charHash, xx, yy, 2);
 
 			var len = array_length(nearby);
+			
+			var meleeDamPerc = source.finalStats.meleeDamPerc;
+			
+			var dam = damage;
+			
+			if (meleeDamPerc > 0) {
+				var dam = variable_clone(damage);
+				var dec = 1 + meleeDamPerc * 0.01;
+				dam = scr_stats_multiplyDamageProfile(dam, dec);
+			}
 
 			//find valid targets
 			for (var i = 0; i < len; i++) {
@@ -1335,7 +1340,7 @@ function scr_skills_applyCrisper(inst, source) {
 
 				var hitOutcome = scr_stats_hitOutcome(source.finalStats.oa, target.finalStats.da);
 
-				totalDam += scr_char_damage(target, damage, damageTypes.ability, false, hitOutcome);
+				totalDam += scr_char_damage(target, dam, damageTypes.ability, false, hitOutcome);
 				
 				var randX = irandom_range(-8, 8);
 				var randY = irandom_range(-10, 14);
@@ -1365,7 +1370,7 @@ function scr_skills_applyCrisper(inst, source) {
 
 					var hitOutcome = scr_stats_hitOutcome(source.finalStats.oa, target.finalStats.da);
 
-					totalDam += scr_char_damage(target, damage, damageTypes.ability, false, hitOutcome);
+					totalDam += scr_char_damage(target, dam, damageTypes.ability, false, hitOutcome);
 
 					var randX = irandom_range(-12, 12);
 					var randY = irandom_range(-14, 18);

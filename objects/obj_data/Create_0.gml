@@ -405,8 +405,16 @@ stages = {
 	hydroGarden1: {
 	
 		room: stage_hydroGarden1,
-		type: stageTypes.arena,
+		type: stageTypes.special,
 		mapCol: c_green
+	
+	},
+	
+	hydroOffice1: {
+	
+		room: stage_hydroOffice1,
+		type: stageTypes.special,
+		mapCol: c_purple
 	
 	},
 

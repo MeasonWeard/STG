@@ -1,11 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"obj_desk1",
+  "%Name":"obj_officeDeskUp",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_desk1",
+  "name":"obj_officeDeskUp",
   "overriddenProperties":[],
   "parent":{
     "name":"Things",
@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_desk1",
-    "path":"sprites/spr_desk1/spr_desk1.yy",
+    "name":"spr_deskUp",
+    "path":"sprites/spr_deskUp/spr_deskUp.yy",
   },
   "spriteMaskId":null,
   "visible":true,

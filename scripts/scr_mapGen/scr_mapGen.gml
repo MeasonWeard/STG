@@ -1310,3 +1310,449 @@ function scr_mapGen_addRingSideRoomsSet(
 		cellCount: cellCount
 	};
 }
+
+function scr_mapGen_generateFacility(map, halls, arenas) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+
+	var maxTries = 100;
+
+	for (var attempt = 0; attempt < maxTries; attempt++) {
+
+		// --------------------------------
+		// BASIC SHAPE
+		// --------------------------------
+
+		var dirX = choose(-1, 1);
+		var dirY = choose(-1, 1);
+
+		var dir1X = -dirX;
+		var dir1Y = -dirY;
+
+		var dir2X = dirX;
+		var dir2Y = dirY;
+
+		var ring1W = irandom_range(3, 4);
+		var ring1H = irandom_range(3, 4);
+
+		var ring2W = irandom_range(3, 4);
+		var ring2H = irandom_range(3, 4);
+
+		// --------------------------------
+		// FIND VALID JUNCTION RANGE
+		// --------------------------------
+
+		var minJunctionX = 1;
+		var maxJunctionX = mapW - 2;
+
+		var minJunctionY = 1;
+		var maxJunctionY = mapH - 2;
+
+		// ring 1 needs extra space for start hall
+		if (dir1X < 0) {
+			minJunctionX = ring1W + 3;
+		} else {
+			maxJunctionX = mapW - ring1W - 4;
+		}
+
+		if (dir1Y < 0) {
+			minJunctionY = ring1H + 3;
+		} else {
+			maxJunctionY = mapH - ring1H - 4;
+		}
+
+		// ring 2 only needs to fit
+		if (dir2X < 0) {
+			minJunctionX = max(minJunctionX, ring2W + 1);
+		} else {
+			maxJunctionX = min(maxJunctionX, mapW - ring2W - 2);
+		}
+
+		if (dir2Y < 0) {
+			minJunctionY = max(minJunctionY, ring2H + 1);
+		} else {
+			maxJunctionY = min(maxJunctionY, mapH - ring2H - 2);
+		}
+
+		if (minJunctionX > maxJunctionX) continue;
+		if (minJunctionY > maxJunctionY) continue;
+
+		var junctionX = irandom_range(
+			minJunctionX,
+			maxJunctionX
+		);
+
+		var junctionY = irandom_range(
+			minJunctionY,
+			maxJunctionY
+		);
+
+		// --------------------------------
+		// RING EXTREMES
+		// --------------------------------
+
+		var ring1EndX = junctionX + dir1X * ring1W;
+		var ring1EndY = junctionY + dir1Y * ring1H;
+
+		var ring2EndX = junctionX + dir2X * ring2W;
+		var ring2EndY = junctionY + dir2Y * ring2H;
+
+		// --------------------------------
+		// START HALL
+		// --------------------------------
+
+		var startHorizontal = choose(true, false);
+
+		var entryX = ring1EndX;
+		var entryY = ring1EndY;
+
+		var hallDirX = 0;
+		var hallDirY = 0;
+
+		var startX = entryX;
+		var startY = entryY;
+
+		if (startHorizontal) {
+
+			hallDirX = dir1X;
+
+			if (hallDirX < 0) {
+				startX = 0;
+			} else {
+				startX = mapW - 1;
+			}
+
+		} else {
+
+			hallDirY = dir1Y;
+
+			if (hallDirY < 0) {
+				startY = 0;
+			} else {
+				startY = mapH - 1;
+			}
+
+		}
+
+		// must actually have a hallway
+		var startDist = abs(startX - entryX)
+			+ abs(startY - entryY);
+
+		if (startDist < 2) continue;
+
+		var cells = [];
+		var ringCells = [];
+
+		// --------------------------------
+		// RING 1
+		// --------------------------------
+
+		for (var xx = 0; xx <= ring1W; xx++) {
+
+			for (var yy = 0; yy <= ring1H; yy++) {
+
+				if (
+					xx != 0
+					and xx != ring1W
+					and yy != 0
+					and yy != ring1H
+				) {
+					continue;
+				}
+
+				var mapX = junctionX + dir1X * xx;
+				var mapY = junctionY + dir1Y * yy;
+
+				if (
+					mapX == junctionX
+					and mapY == junctionY
+				) {
+					continue;
+				}
+
+				var key = halls[
+					irandom(array_length(halls) - 1)
+				];
+
+				map[mapX][mapY]
+					= scr_mapGen_createCell(key);
+
+				array_push(cells, {
+					xx: mapX,
+					yy: mapY
+				});
+
+				array_push(ringCells, {
+					xx: mapX,
+					yy: mapY
+				});
+
+			}
+
+		}
+
+		// --------------------------------
+		// RING 2
+		// --------------------------------
+
+		for (var xx = 0; xx <= ring2W; xx++) {
+
+			for (var yy = 0; yy <= ring2H; yy++) {
+
+				if (
+					xx != 0
+					and xx != ring2W
+					and yy != 0
+					and yy != ring2H
+				) {
+					continue;
+				}
+
+				var mapX = junctionX + dir2X * xx;
+				var mapY = junctionY + dir2Y * yy;
+
+				if (
+					mapX == junctionX
+					and mapY == junctionY
+				) {
+					continue;
+				}
+
+				var key = halls[
+					irandom(array_length(halls) - 1)
+				];
+
+				map[mapX][mapY]
+					= scr_mapGen_createCell(key);
+
+				array_push(cells, {
+					xx: mapX,
+					yy: mapY
+				});
+
+				array_push(ringCells, {
+					xx: mapX,
+					yy: mapY
+				});
+
+			}
+
+		}
+
+		// --------------------------------
+		// ARENA JUNCTION
+		// --------------------------------
+
+		var arenaKey = arenas[
+			irandom(array_length(arenas) - 1)
+		];
+
+		map[junctionX][junctionY]
+			= scr_mapGen_createCell(arenaKey);
+
+		array_push(cells, {
+			xx: junctionX,
+			yy: junctionY
+		});
+
+		// --------------------------------
+		// START HALL
+		// --------------------------------
+
+		var hx = entryX;
+		var hy = entryY;
+
+		while (hx != startX or hy != startY) {
+
+			hx += hallDirX;
+			hy += hallDirY;
+
+			var key = halls[
+				irandom(array_length(halls) - 1)
+			];
+
+			map[hx][hy]
+				= scr_mapGen_createCell(key);
+
+			array_push(cells, {
+				xx: hx,
+				yy: hy
+			});
+
+		}
+
+		return {
+			success: true,
+
+			cellCount: array_length(cells),
+
+			startPos: {
+				xx: startX,
+				yy: startY
+			},
+
+			junction: {
+				xx: junctionX,
+				yy: junctionY
+			},
+
+			ringCells: ringCells
+		};
+
+	}
+
+	return {
+		success: false
+	};
+	
+}
+
+function scr_mapGen_addSmallHalls(
+	map,
+	halls,
+	amount,
+	minLength = 2,
+	maxLength = 3
+) {
+
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+
+	var hallCount = array_length(halls);
+
+	var added = 0;
+	var maxTries = 80;
+
+	var dirs = [
+		{xx: 1, yy: 0},
+		{xx: -1, yy: 0},
+		{xx: 0, yy: 1},
+		{xx: 0, yy: -1}
+	];
+
+	for (var n = 0; n < amount; n++) {
+
+		var success = false;
+		var tries = 0;
+
+		while (!success and tries < maxTries) {
+
+			tries++;
+
+			var originX = irandom(mapW - 1);
+			var originY = irandom(mapH - 1);
+
+			var origin = map[originX][originY];
+
+			if (is_undefined(origin)) continue;
+			if (origin.type != stageTypes.hall) continue;
+
+			var dir = dirs[irandom(3)];
+
+			var hallLength = irandom_range(
+				minLength,
+				maxLength
+			);
+
+			var newCells = [];
+			var valid = true;
+
+			for (var i = 1; i <= hallLength; i++) {
+
+				var xx = originX + dir.xx * i;
+				var yy = originY + dir.yy * i;
+
+				if (
+					xx < 1
+					or xx >= mapW - 1
+					or yy < 1
+					or yy >= mapH - 1
+				) {
+					valid = false;
+					break;
+				}
+
+				// actual hall cell must be empty
+				if (!is_undefined(map[xx][yy])) {
+					valid = false;
+					break;
+				}
+
+				// ----------------------------
+				// CHECK SIDES
+				// ----------------------------
+
+				if (dir.xx != 0) {
+
+					// horizontal hall:
+					// nothing above or below
+
+					if (!is_undefined(map[xx][yy - 1])) {
+						valid = false;
+						break;
+					}
+
+					if (!is_undefined(map[xx][yy + 1])) {
+						valid = false;
+						break;
+					}
+
+				} else {
+
+					// vertical hall:
+					// nothing left or right
+
+					if (!is_undefined(map[xx - 1][yy])) {
+						valid = false;
+						break;
+					}
+
+					if (!is_undefined(map[xx + 1][yy])) {
+						valid = false;
+						break;
+					}
+
+				}
+
+				array_push(newCells, {
+					xx: xx,
+					yy: yy
+				});
+
+			}
+
+			if (!valid) continue;
+
+			// ----------------------------
+			// PLACE HALL
+			// ----------------------------
+
+			var len = array_length(newCells);
+
+			for (var i = 0; i < len; i++) {
+
+				var cell = newCells[i];
+
+				var key = halls[
+					irandom(hallCount - 1)
+				];
+
+				map[cell.xx][cell.yy]
+					= scr_mapGen_createCell(key);
+
+			}
+
+			added += len;
+			success = true;
+
+		}
+
+	}
+
+	return {
+		map: map,
+		cellCount: added
+	};
+
+}

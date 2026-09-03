@@ -355,52 +355,130 @@ function zone_hydro() : zone() constructor {
 		var tries = 0;
 		var success = false;
 		var map;
-	
+
 		while (!success and tries < 92) {
-			
-			tries ++;
-			
+
+			tries++;
+
 			map = scr_mapGen_createBlankMap(mapW, mapH);
-			startPos = scr_mapGen_randomStartingLocation(mapW, mapH, 2, true);
-		
-			var halls = [stage_hydroHall1, stage_hydroHall2, stage_hydroHall3];
-			var arenas = [stage_hydroLabs1, stage_hydroLabs2];
-			var sideRooms = [stage_hydroGarden1];
-			var endStages = [stage_wasteBoss1];
+
+			var halls = [
+				stage_hydroHall1,
+				stage_hydroHall2,
+				stage_hydroHall3
+			];
+
+			var arenas = [
+				stage_hydroLabs1,
+				stage_hydroLabs2
+			];
+
+			var sideRooms = [
+				stage_hydroGarden1,
+				stage_hydroOffice1
+			];
+
+			var endStages = [
+				stage_wasteBoss1
+			];
+
+			// build the two rings and arena junction
+			var result = scr_mapGen_generateFacility(
+				map,
+				halls,
+				arenas
+			);
+
+			if (!result.success) continue;
+
+			startPos = result.startPos;
 
 			var startX = startPos.xx;
 			var startY = startPos.yy;
 
-			var mainLength = irandom_range(8, 12);
-			var sideHallAmount = irandom_range(3, 6);
-			
-			var result = scr_mapGen_generateHallways(map, halls, startX, startY, mainLength, sideHallAmount, 2, 5);
 			var cellCount = result.cellCount;
-			
-			var arenasMin = ceil(cellCount * 0.1);
-			var arenasMax = arenasMin + 2;
-			
-			var sideMin = ceil(cellCount * 0.3);
-			var sideMax = arenasMin + 2;
-			
-			var arenasReplace = ceil(cellCount * 0.3);
-			
-			var sideRoomsAmount = irandom_range(sideMin, sideMax);
-			var arenasAmount = irandom_range(arenasMin, arenasMax);
-			
-			result = scr_mapGen_addSideRooms(map, arenas, arenasAmount);
-			cellCount += result.cellCount;
-			
-			result = scr_mapGen_addSideRooms(map, sideRooms, sideRoomsAmount);
-			cellCount += result.cellCount;
-			
-			result = scr_mapGen_replaceRooms(map, arenas, arenasReplace, stageTypes.hall);
 
-			success = cellCount > 20;
-			if (!success) continue;
+			// ----------------------------
+			// SMALL HALLS
+			// ----------------------------
 
-			scr_mapGen_makeFurthestEndCell(map, startX, startY, endStages);
-		
+			var smallHallAmount = irandom_range(2, 4);
+
+			result = scr_mapGen_addSmallHalls(
+				map,
+				halls,
+				smallHallAmount,
+				2,
+				3
+			);
+
+			cellCount += result.cellCount;
+
+			// ----------------------------
+			// EXTRA ARENAS
+			// ----------------------------
+
+			var arenasMin = max(8, floor(cellCount * 0.35));
+			var arenasMax = max(12, ceil(cellCount * 0.5));
+
+			var arenasAmount = irandom_range(
+				arenasMin,
+				arenasMax
+			);
+
+			var arrs = 0;
+			var arenaTries = 0;
+
+			while (arrs < arenasAmount and arenaTries < 200) {
+
+				arenaTries++;
+
+				result = scr_mapGen_replaceRooms(
+					map,
+					arenas,
+					1,
+					stageTypes.hall
+				);
+
+				if (result.roomCount > 0) {
+					arrs++;
+				}
+
+			}
+			
+			// ----------------------------
+			// SIDE ROOMS
+			// ----------------------------
+
+			var sideMin = ceil(cellCount * 0.2);
+			var sideMax = sideMin + 2;
+
+			var sideAmount = irandom_range(
+				sideMin,
+				sideMax
+			);
+
+			result = scr_mapGen_addSideRooms(
+				map,
+				sideRooms,
+				sideAmount
+			);
+
+			cellCount += result.cellCount;
+
+			// ----------------------------
+			// END
+			// ----------------------------
+
+			scr_mapGen_makeFurthestEndCell(
+				map,
+				startX,
+				startY,
+				endStages
+			);
+
+			success = true;
+
 		}
 
 		return map;
