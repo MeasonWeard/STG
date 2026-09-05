@@ -1786,6 +1786,107 @@ function scr_skills_applyCrisper(inst, source) {
 
 	#region engineering
 
+	function skill_miniSpiders() : skill() constructor {
+	
+		//summon
+	
+		name = "miniSpiders";
+		key = "miniSpiders";
+		icon = spr_icon_blob;
+	
+		maxLevel = 9;
+		maxCharges = 2;
+		energyCost = 20;
+		cooldownTime = 1.2;
+		castCooldownTime = 0.2;
+		maxSpawns = 2;
+		life = 5;
+		shields = 0;
+		kinDam = 5;
+		chemDam = 5;
+	
+		description = "Spawn miniature spider drones that explode on impact with their enemies."
+		description += "\nSpiders get additional elemental damage according to your highest"
+		description += "elemental damage %";
+
+		static formatStatsDescription = function() {
+		
+			//statsDescription = "Max Spawns: " + string(maxSpawns);
+			//statsDescription += "\nLife: " + string(life) + " seconds";
+			//statsDescription += "\nHP: " + string(maxHp);
+			//statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
+		
+		}
+
+		static setupFunc = function(source) {
+		
+			kinDam = 5 + (level - 1);
+			chemDam = 5 + (level - 1);
+		
+			life = 6;
+			maxSpawns = 4 + (level - 1) * 2;
+			maxCharges = maxSpawns * 0.5;
+		
+			var ga = scr_skills_findCharSkill("guardianArray", source, false);
+		
+			if (is_struct(ga)) {
+				shields = ga.petShields;
+			}
+	
+		}
+	
+		static castFunc = function(source) {
+		
+			var el = scr_stats_getHighestDamPerc(source);
+		
+			var aimX = source.aimX;
+			var aimY = source.aimY;
+		
+			var gunX = source.gunX;
+			var gunY = source.gunY;
+		
+			var dir = point_direction(gunX, gunY, aimX, aimY);
+		
+			var aimDist = point_distance(gunX, gunY, aimX, aimY);
+			var dist = min(200, aimDist);
+		
+			var xx = gunX + lengthdir_x(dist, dir);
+			var yy = gunY + lengthdir_y(dist, dir);
+		
+			repeat(2) {
+				
+				var xOff = irandom_range(-8, 8);
+				var yOff = irandom_range(-8, 8);
+				
+				var inst = scr_char_spawnPet(obj_miniSpider, source, life, xx + xOff, yy + yOff, maxSpawns, true);
+			
+				if (!instance_exists(inst)) return false;
+			
+				inst.life = life;
+				inst.level = level;
+				inst.baseStats.maxShield = shields;
+				inst.expEl = el;
+			
+				scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
+			
+				//bio bomb
+				scr_skills_applyBioBomb(inst, source, 2);
+			
+				//crisper
+				scr_skills_applyCrisper(inst, source);
+			
+				//irradiated
+				scr_skills_applyIrradiated(inst, source);
+				scr_skills_applyVolatile(inst, source);
+			
+			}
+
+			return true;
+
+		}
+	
+	}
+
 	function skill_chainLightning() : skill() constructor {
 
 		name = "Chain Lightning";

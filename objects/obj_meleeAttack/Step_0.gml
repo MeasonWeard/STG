@@ -105,7 +105,9 @@ if (instance_exists(source)) {
 							
 						}
 					
-						if (char.hp <= killThreshold) char.hp = 0;
+						var dec = killThreshold * 0.01;
+						var threshHp = char.maxHp * dec;
+						if (char.hp <= threshHp) char.hp = 0;
 				
 						var snd = scr_audio_randomSoundFromProfile(hitSounds);
 						if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);

@@ -193,7 +193,7 @@ function scr_melee_formatDescription(melee) {
 	txt += "\n\nAttack Rate: " + string(attackRate) + " p/s";
 	txt += "\nCharges: " + string(charges);
 	txt += "\nRecharge Time: " + string(rechargeTime) + " seconds";
-	txt += "\nKill Threshold: " + string(killThreshold);
+	txt += "\nKill Threshold: " + string(killThreshold) + "% max health";
 	
 	if (size != 1) {
 		txt += "\nAttack Area: " + " x" + string(size);	

@@ -500,7 +500,8 @@ soundProfiles = {
 	collect: [snd_collect1, snd_collect2, snd_collect3],
 	bottleBreak: [snd_bottleBreak1, snd_bottleBreak2, snd_bottleBreak3, snd_bottleBreak4],
 	emp: [snd_emp1, snd_emp2, snd_emp3],
-	tendrils: [snd_tendril1, snd_tendril2, snd_tendril3]
+	tendrils: [snd_tendril1, snd_tendril2, snd_tendril3],
+	smallExplosion: [snd_smallExplosion1, snd_smallExplosion2, snd_smallExplosion3, snd_smallExplosion4]
 	
 }
 
@@ -553,6 +554,7 @@ skillConstructors = {
 	turret: skill_turret, //eng
 	emp: skill_EMP, //eng
 	mech: skill_mech, //end
+	miniSpiders: skill_miniSpiders, //eng
 	
 	rubberBoots: skill_rubberBoots, //eng
 	guardianArray: skill_guardianArray, //eng

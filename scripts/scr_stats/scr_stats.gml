@@ -1065,3 +1065,43 @@ function scr_stats_rollSteppedBonus(interval, maximum, level) {
 	return steps * interval;
 	
 }
+
+function scr_stats_getHighestDamPerc(char) {
+
+	if (!instance_exists(char)) return undefined;
+	if (!is_struct(char.stats)) return undefined;
+
+	var stats = char.stats;
+
+	var keys = [
+		"kinDamPerc",
+		"fireDamPerc",
+		"chemDamPerc",
+		"elecDamPerc",
+		"radDamPerc"
+	];
+
+	var highestKey = undefined;
+	var highestVal = -infinity;
+
+	var len = array_length(keys);
+
+	for (var i = 0; i < len; i++) {
+
+		var key = keys[i];
+
+		if (!variable_struct_exists(stats, key)) continue;
+
+		var val = stats[$ key];
+
+		if (!is_real(val)) continue;
+
+		if (val > highestVal) {
+			highestVal = val;
+			highestKey = key;
+		}
+	}
+
+	return highestKey;
+
+}

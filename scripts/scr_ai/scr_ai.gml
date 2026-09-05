@@ -201,16 +201,13 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 
 		px = clamp(px, global.roomLeft, global.roomRight);
 		py = clamp(py, global.roomTop, global.roomBottom);
+		
 	}
 	
 	if (moveGhost) {
 		scr_ai_moveGhost(self, px, py);
 	}
-	
-	//global.aiPointCalls++;
-	//global.aiPointAttempts += inc * 16 + tries + 1;
-	//global.aiPointMaxInc = max(global.aiPointMaxInc, inc);
-	
+
 	return {
 		xx: px,
 		yy: py,
@@ -254,7 +251,7 @@ function scr_ai_ghostOverlap(char) {
 	
 }
 
-function scr_ai_ghostOverlapAt(char, xx, yy) {
+function scr_ai_ghostOverlapAt(char, xx, yy, ignore = noone) {
 	
 	if (!instance_exists(char)) return false;
 	if (!instance_exists(char.ghost)) return false;
@@ -318,6 +315,7 @@ function scr_ai_ghostOverlapAt(char, xx, yy) {
 			
 			if (!instance_exists(otherGhost)) continue;
 			if (otherGhost.id == g.id) continue;
+			if (instance_exists(ignore) and otherGhost.id == ignore.id) continue;
 			
 			if (
 				right > otherGhost.colLeft
