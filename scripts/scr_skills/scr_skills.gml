@@ -1277,9 +1277,23 @@ function scr_skills_applyCrisper(inst, source) {
 			damage = new damageProfile();
 			damage.kin = 16 + (level - 1) * 4;
 			
-			damage = scr_stats_calculateSkillDamage(source, damage, ["kin"]);
+			var damKeys = ["kin"];
+			
+			var sk = scr_skills_findCharSkill("decay", source);
+			
+			if (is_struct(sk)) {
+			
+				var damPerc = sk.damPerc;
+				var dec = damPerc * 0.01;
+				damage.rad = ceil(damage.kin * dec);
+				
+				array_push(damKeys, "rad");
+			
+			}
 			
 			var meleeDamPerc = source.finalStats.meleeDamPerc;
+			
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 			
 			if (meleeDamPerc > 0) {
 				var dec = 1 + meleeDamPerc * 0.01;
@@ -2299,9 +2313,9 @@ function scr_skills_applyCrisper(inst, source) {
 		levelReq = 10;
 		damPerc = 4;
 		
-		description = "Adds radiation damage to certain abilites.\The extra damage is proportional to the ability's primary damage element.";
+		description = "Adds radiation damage to certain abilites.\nThe extra damage is proportional to the\nability's primary damage element.";
 		description += "\n\nAffected abilites: ";
-		description += "\n- Singularity\n- Bio Bomb\n- Noxious Gas\n- Flamethrower\n- Thermite Charge\n- Chain Lightning\n- EMP";
+		description += "\n- Singularity\n- Bio Bomb\n- Tendrils\n- Noxious Gas\n- Flamethrower\n- Thermite Charge\n- Chain Lightning\n- EMP";
 		//
 		static formatStatsDescription = function() {
 		

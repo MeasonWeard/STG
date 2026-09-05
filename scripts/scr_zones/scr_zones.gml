@@ -20,6 +20,9 @@ function zone() constructor {
 
 	baseLevel = 1;
 	level = 1;
+	
+	preset = false;
+	presetSeed = 123456789;
 
 	mapW = 12;
 	mapH = 12;
