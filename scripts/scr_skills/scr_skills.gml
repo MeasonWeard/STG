@@ -1797,35 +1797,33 @@ function scr_skills_applyCrisper(inst, source) {
 		maxLevel = 9;
 		maxCharges = 2;
 		energyCost = 20;
-		cooldownTime = 1.2;
-		castCooldownTime = 0.2;
+		cooldownTime = 1.5;
+		castCooldownTime = 0.25;
 		maxSpawns = 2;
-		life = 5;
+		life = 6;
 		shields = 0;
 		kinDam = 5;
 		chemDam = 5;
 	
-		description = "Spawn miniature spider drones that explode on impact with their enemies."
+		description = "Spawn 2 miniature spider drones that explode on impact with their enemies."
 		description += "\nSpiders get additional elemental damage according to your highest"
 		description += "elemental damage %";
 
+		static sounds = global.data.soundProfiles.miniSpiders;
+
 		static formatStatsDescription = function() {
 		
-			//statsDescription = "Max Spawns: " + string(maxSpawns);
-			//statsDescription += "\nLife: " + string(life) + " seconds";
-			//statsDescription += "\nHP: " + string(maxHp);
+			statsDescription = "Max Spawns: " + string(maxSpawns);
 			//statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
 		
 		}
 
 		static setupFunc = function(source) {
 		
-			kinDam = 5 + (level - 1);
-			chemDam = 5 + (level - 1);
-		
 			life = 6;
 			maxSpawns = 4 + (level - 1) * 2;
 			maxCharges = maxSpawns * 0.5;
+			cooldownTime = 1.5 - (level - 1) * 0.1;
 		
 			var ga = scr_skills_findCharSkill("guardianArray", source, false);
 		
@@ -1867,8 +1865,6 @@ function scr_skills_applyCrisper(inst, source) {
 				inst.baseStats.maxShield = shields;
 				inst.expEl = el;
 			
-				scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
-			
 				//bio bomb
 				scr_skills_applyBioBomb(inst, source, 2);
 			
@@ -1880,6 +1876,10 @@ function scr_skills_applyCrisper(inst, source) {
 				scr_skills_applyVolatile(inst, source);
 			
 			}
+			
+			var snd = scr_audio_randomSoundFromProfile(sounds);
+			
+			scr_audio_playSoundAt(snd, xx, yy);
 
 			return true;
 

@@ -24,7 +24,8 @@ explodeDist = 40;
 
 deathFunc = function() {
 
-	scr_effects_explosion(x, y, explosionPower);
+	var ex = scr_effects_explosion(x, y, explosionPower);
+	ex.faction = faction;
 	
 }
 

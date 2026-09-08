@@ -501,7 +501,8 @@ soundProfiles = {
 	bottleBreak: [snd_bottleBreak1, snd_bottleBreak2, snd_bottleBreak3, snd_bottleBreak4],
 	emp: [snd_emp1, snd_emp2, snd_emp3],
 	tendrils: [snd_tendril1, snd_tendril2, snd_tendril3],
-	smallExplosion: [snd_smallExplosion1, snd_smallExplosion2, snd_smallExplosion3, snd_smallExplosion4]
+	smallExplosion: [snd_smallExplosion1, snd_smallExplosion2, snd_smallExplosion3, snd_smallExplosion4],
+	miniSpiders: [snd_miniSpiders1, snd_miniSpiders2, snd_miniSpiders3]
 	
 }
 

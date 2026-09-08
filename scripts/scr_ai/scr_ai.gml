@@ -125,9 +125,11 @@ function scr_ai_moveTowardsPointAvoid(targetX, targetY, moveSpd, avoidDist) {
 
 }
 
-function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
+function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost, ignoreTargetGhost = false) {
 
 	if (!instance_exists(target)) return undefined;
+	
+	var ignore = ignoreTargetGhost ? target : noone;
 	
 	var tries = 0;
 	var inc = 0;
@@ -176,7 +178,7 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 			continue;
 		}
 		
-		if (!scr_ai_ghostOverlapAt(self, px, py)) {
+		if (!scr_ai_ghostOverlapAt(self, px, py, ignore)) {
 			found = true;
 			break;
 		}
@@ -216,7 +218,7 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 
 }
 
-function scr_ai_ghostOverlap(char) {
+function scr_ai_ghostOverlap(char, ignore = noone) {
 	
 	if (!instance_exists(char)) return false;
 	if (!instance_exists(char.ghost)) return false;
@@ -239,6 +241,7 @@ function scr_ai_ghostOverlap(char) {
 			
 			if (!instance_exists(targetGhost)) continue;
 			if (targetGhost.id == sourceGhost.id) continue;
+			if (instance_exists(ignore) and targetGhost.id == ignore.id) continue;
 			
 			if (scr_obj_movementCollision(sourceGhost, targetGhost, true)) {
 				return true;
@@ -549,7 +552,8 @@ function scr_ai_standardAIBehaviour() {
 			target,
 			targetMinDist,
 			targetMaxDist,
-			true
+			true,
+			ignoreTargetGhost
 		);
 
 	}
@@ -603,6 +607,54 @@ function scr_ai_standardAIBehaviour() {
 	
 }
 
+function scr_ai_suicideIntoTarget() {
+
+	if (!instance_exists(target)) {
+
+		xspd = 0;
+		yspd = 0;
+		exit;
+
+	}
+
+	// First destination pick
+	if (firstGhostCheck) {
+
+		firstGhostCheck = false;
+
+		var xx = (target.colLeft + target.colRight) * 0.5;
+		var yy = (target.colTop + target.colBottom) * 0.5;
+		
+		var pt = scr_randomPointInCircleMinDist(xx, yy, targetMaxDist, targetMinDist);
+		scr_ai_moveGhost(self, pt.xx, pt.yy);
+
+	}
+	
+	if (scr_timeSlicing_isMyTurn("ghostDistanceCheck", ghostDistanceIndex)) {
+		
+		var xx = (target.colLeft + target.colRight) * 0.5;
+		var yy = (target.colTop + target.colBottom) * 0.5;
+		
+		var pt = scr_randomPointInCircleMinDist(xx, yy, targetMaxDist, targetMinDist);
+		scr_ai_moveGhost(self, pt.xx, pt.yy);
+
+	}
+
+	scr_ai_moveTowardsPointAvoid(
+		ghost.x,
+		ghost.y,
+		spd,
+		avoidDist
+	);
+
+	scr_ai_attackTarget(
+		self,
+		target,
+		aimOnReload
+	);
+	
+}
+
 function scr_ai_standardPetBehaviour() {
 
 	if (scr_timeSlicing_isMyTurn("findTarget", findTargetIndex)) {
@@ -618,11 +670,45 @@ function scr_ai_standardPetBehaviour() {
 	
 	}
 
-	scr_ai_shootAtTarget(self, target, true);
+	scr_ai_attackTarget(
+		self,
+		target,
+		aimOnReload
+	);
 	
 	//
 	if (instance_exists(target)) {
 		scr_ai_standardAIBehaviour();
+	} else {
+		scr_ai_moveTowardsOwner();
+	}
+	
+}
+
+function scr_ai_petSuicideIntoTarget() {
+
+	if (scr_timeSlicing_isMyTurn("findTarget", findTargetIndex)) {
+	
+		if (instance_exists(target)) {
+	
+			var dist = point_distance(x, y, target.x, target.y);
+			if (dist > reTargetDist) target = noone;
+	
+		}
+	
+		if (!instance_exists(target)) target = scr_char_getNearestToSource(self, true);
+	
+	}
+
+	scr_ai_attackTarget(
+		self,
+		target,
+		aimOnReload
+	);
+	
+	//
+	if (instance_exists(target)) {
+		scr_ai_suicideIntoTarget();
 	} else {
 		scr_ai_moveTowardsOwner();
 	}
@@ -714,6 +800,7 @@ function scr_ai_setup() {
 	if (!variable_instance_exists(self, "targetMinDist")) targetMinDist = 180;
 	if (!variable_instance_exists(self, "targetMaxDist")) targetMaxDist = 360;
 	if (!variable_instance_exists(self, "targetReaquireDist")) targetReaquireDist = 450;
+	if (!variable_instance_exists(self, "ignoreTargetGhost")) ignoreTargetGhost = false;
 
 	// Detection
 	if (!variable_instance_exists(self, "detectionDist")) detectionDist = 800;
