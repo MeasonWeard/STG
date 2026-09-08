@@ -22,7 +22,7 @@ sprites = {
 sprites.death = spr_spiderDroneDeath;
 deathSounds = [snd_droneDeath1, snd_droneDeath2];
 
-explosionPower = 3;
+explosionPower = 2;
 explodeDist = 32;
 expEl = "kin";
 

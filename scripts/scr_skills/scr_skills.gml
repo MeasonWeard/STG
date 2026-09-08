@@ -1792,12 +1792,14 @@ function scr_skills_applyCrisper(inst, source) {
 	
 		name = "miniSpiders";
 		key = "miniSpiders";
-		icon = spr_icon_blob;
+		icon = spr_icon_miniSpiders;
 	
 		maxLevel = 9;
+		levelReq = 5;
+		
 		maxCharges = 2;
 		energyCost = 20;
-		cooldownTime = 1.5;
+		cooldownTime = 1.6;
 		castCooldownTime = 0.25;
 		maxSpawns = 2;
 		life = 6;
@@ -1807,14 +1809,14 @@ function scr_skills_applyCrisper(inst, source) {
 	
 		description = "Spawn 2 miniature spider drones that explode on impact with their enemies."
 		description += "\nSpiders get additional elemental damage according to your highest"
-		description += "elemental damage %";
+		description += " elemental damage %";
 
 		static sounds = global.data.soundProfiles.miniSpiders;
 
 		static formatStatsDescription = function() {
 		
 			statsDescription = "Max Spawns: " + string(maxSpawns);
-			//statsDescription += "\n\nDamage: " + string(kinDam) +" kinetic, " + string(chemDam) + " chemical";
+			statsDescription += "\nExplosion power: " + string(explosionPower);
 		
 		}
 
@@ -1823,7 +1825,8 @@ function scr_skills_applyCrisper(inst, source) {
 			life = 6;
 			maxSpawns = 4 + (level - 1) * 2;
 			maxCharges = maxSpawns * 0.5;
-			cooldownTime = 1.5 - (level - 1) * 0.1;
+			cooldownTime = 1.6 - (level - 1) * 0.1;
+			explosionPower = 2.4 + (level - 1) * 0.15;
 		
 			var ga = scr_skills_findCharSkill("guardianArray", source, false);
 		
@@ -1864,9 +1867,10 @@ function scr_skills_applyCrisper(inst, source) {
 				inst.level = level;
 				inst.baseStats.maxShield = shields;
 				inst.expEl = el;
+				inst.explosionPower = explosionPower;
 			
 				//bio bomb
-				scr_skills_applyBioBomb(inst, source, 2);
+				scr_skills_applyBioBomb(inst, source, 1);
 			
 				//crisper
 				scr_skills_applyCrisper(inst, source);

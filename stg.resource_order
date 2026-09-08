@@ -750,6 +750,7 @@
     {"name":"spr_icon_leadCoat","order":28,"path":"sprites/spr_icon_leadCoat/spr_icon_leadCoat.yy",},
     {"name":"spr_icon_mech","order":34,"path":"sprites/spr_icon_mech/spr_icon_mech.yy",},
     {"name":"spr_icon_medicalSynthesis","order":15,"path":"sprites/spr_icon_medicalSynthesis/spr_icon_medicalSynthesis.yy",},
+    {"name":"spr_icon_miniSpiders","order":49,"path":"sprites/spr_icon_miniSpiders/spr_icon_miniSpiders.yy",},
     {"name":"spr_icon_myostatinInhibitor","order":17,"path":"sprites/spr_icon_myostatinInhibitor/spr_icon_myostatinInhibitor.yy",},
     {"name":"spr_icon_napalm","order":38,"path":"sprites/spr_icon_napalm/spr_icon_napalm.yy",},
     {"name":"spr_icon_particleShower","order":36,"path":"sprites/spr_icon_particleShower/spr_icon_particleShower.yy",},

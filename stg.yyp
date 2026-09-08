@@ -842,6 +842,7 @@
     {"id":{"name":"spr_icon_leadCoat","path":"sprites/spr_icon_leadCoat/spr_icon_leadCoat.yy",},},
     {"id":{"name":"spr_icon_mech","path":"sprites/spr_icon_mech/spr_icon_mech.yy",},},
     {"id":{"name":"spr_icon_medicalSynthesis","path":"sprites/spr_icon_medicalSynthesis/spr_icon_medicalSynthesis.yy",},},
+    {"id":{"name":"spr_icon_miniSpiders","path":"sprites/spr_icon_miniSpiders/spr_icon_miniSpiders.yy",},},
     {"id":{"name":"spr_icon_myostatinInhibitor","path":"sprites/spr_icon_myostatinInhibitor/spr_icon_myostatinInhibitor.yy",},},
     {"id":{"name":"spr_icon_napalm","path":"sprites/spr_icon_napalm/spr_icon_napalm.yy",},},
     {"id":{"name":"spr_icon_particleShower","path":"sprites/spr_icon_particleShower/spr_icon_particleShower.yy",},},
