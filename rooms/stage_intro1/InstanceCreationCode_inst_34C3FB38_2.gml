@@ -2,12 +2,23 @@ scripted = true;
 
 scriptFunc = function() {
 
+
+
 	if (!variable_instance_exists(self, "trainSetup")) {
 	
 		trainSetup = false;
 		
 		trainSpeed = 2;
 		trainDecal = 0.001;
+		
+		movePlayerStart = true;
+	
+	}
+	
+	if (instance_exists(player) and movePlayerStart) {
+	
+		movePlayerStart = false;
+		scr_movement_teleport(player, room_width * 0.5 - 128, room_height * 0.5 - 120);
 	
 	}
 	
