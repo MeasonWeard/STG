@@ -3,10 +3,16 @@ event_inherited();
 
 faction = "player";
 
-player = global.player;
-
 setupDialogue = true;
+
+dialogueTarget = global.player;
+dialogueTriggerDist = 250;
 
 dialogueController = noone;
 dialogueTriggered = false;
+
+loopDialogue = false;
+repeatDialogue = true;
+continueDialogue = false;
+
 lines = [];

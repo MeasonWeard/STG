@@ -1,6 +1,7 @@
+if (!active) exit;
+
 if (!instance_exists(owner)) exit;
 if (array_length(lines) <= 0) exit;
-
 
 var text = lines[lineIndex];
 

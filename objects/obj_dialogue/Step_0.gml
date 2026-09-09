@@ -39,7 +39,7 @@ if (timer > 0) {
 
 		} else {
 
-			instance_destroy();
+			active = false;
 			exit;
 
 		}

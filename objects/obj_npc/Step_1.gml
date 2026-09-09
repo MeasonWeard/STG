@@ -1,9 +1,9 @@
 // Inherit the parent event
 event_inherited();
 
-if (setupDialogue) {
+if (setupDialogue and array_length(lines) > 0) {
 
 	setupDialogue = false;
-	scr_dialogue_createController(self);
+	scr_dialogue_setup(self);
 
 }
