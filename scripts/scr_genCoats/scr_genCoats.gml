@@ -108,14 +108,40 @@ function scr_genCoats_generic(level, rarity) {
 			var el = scr_gear_getHighestEffectiveResistanceType(coat, true);
 			var elKey = el.key;
 			
+			var bon = irandom_range(1, 3); // lol bon
+			
 			switch(elKey) {
-			
-				case "kin": spr = spr_coatKin; adj = "Padded " ; break;
-				case "fire": spr = spr_coatFire; adj = "Fire-retardant "; break;
-				case "chem": spr = spr_coatChem; adj = "Fluoropolymer "; break;
-				case "elec": spr = spr_coatElec; adj = "Insulated "; break;
-				case "rad": spr = spr_coatRad; adj = "Lead-lined "; break;
-			
+
+				case "kin":
+					spr = spr_coatKin;
+					adj = "Padded ";
+					scr_loot_addStat(coat, "kinRes", bon);
+					break;
+
+				case "fire":
+					spr = spr_coatFire;
+					adj = "Fire-retardant ";
+					scr_loot_addStat(coat, "fireRes", bon);
+					break;
+
+				case "chem":
+					spr = spr_coatChem;
+					adj = "Fluoropolymer ";
+					scr_loot_addStat(coat, "chemRes", bon);
+					break;
+
+				case "elec":
+					spr = spr_coatElec;
+					adj = "Insulated ";
+					scr_loot_addStat(coat, "elecRes", bon);
+					break;
+
+				case "rad":
+					spr = spr_coatRad;
+					adj = "Lead-lined ";
+					scr_loot_addStat(coat, "radRes", bon);
+					break;
+
 			}
 			
 			coat.spr = spr;
