@@ -154,4 +154,4 @@ if (pullItemTick > 0) {
 }
 
 //alternate use
-if (keyboard_check(ord("C"))) alternateUse = true;
+if (keyboard_check(ord("V"))) alternateUse = true;

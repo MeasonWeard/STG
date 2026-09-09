@@ -154,9 +154,13 @@ function scr_guns_calculateGunStats(char, gun) {
 	
 	//projectile
 	if (!gun.lockProjSprite) {
+
+
+		newStats.projImageSpeed = 0;
+		newStats.projSubimage = scr_guns_projectileSubimage(gun);
 		
 		gun.projImageSpeed = 0;
-		gun.projSubimage = scr_guns_projectileSubimage(gun)
+		gun.projSubimage = newStats.projSubimage;
 	
 	}
 

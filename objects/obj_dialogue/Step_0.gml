@@ -9,8 +9,6 @@ if (setup) {
 
 	setup = false;
 	
-	depth = owner.depth - 1;
-
 	lineIndex = 0;
 
 	if (array_length(lines) <= 0) {

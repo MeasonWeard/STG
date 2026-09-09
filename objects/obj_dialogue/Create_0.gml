@@ -1,3 +1,5 @@
+depth = layers.ui;
+
 owner = noone;
 
 setup = true;

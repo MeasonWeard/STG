@@ -12,6 +12,9 @@ orbitRadius = 40;
 orbitAngle = 0;
 orbitSpd = -1.6;
 
+burnChance = 0;
+burnDamage = undefined;
+
 jets = [];
 
 createJets = true;

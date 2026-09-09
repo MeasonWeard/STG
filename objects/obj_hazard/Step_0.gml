@@ -25,6 +25,8 @@ if (active) {
 				
 				scr_char_damage(char, damage, undefined, ignoreShield);
 				
+				if (is_callable(effect)) effect(char);
+				
 				var snd = scr_audio_randomSoundFromProfile(damageSounds);
 				if (snd != undefined) scr_audio_playSoundAt(snd, x, y); 
 			

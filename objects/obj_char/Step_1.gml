@@ -1,6 +1,6 @@
 event_inherited();
 
-//equip main weapon
+//change stats if weapon is swapped
 if (equippedWeapon != prevWeapon) {
 	setupStats = true;	
 }

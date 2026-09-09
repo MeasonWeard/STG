@@ -728,18 +728,18 @@ function scr_stats_hitOutcome(oa, da) {
 	
 		diff = da - oa;
 	
-		var rolls = 1 + floor(diff / 300);
+		var rolls = 1 + floor(diff / 200);
 
 		repeat (rolls) {
 
-		    var chance = min(290, diff);
+			var chance = min(190, diff);
 
-		    var roll = irandom_range(1, 300);
+			var roll = irandom_range(1, 200);
 
-		    if (roll <= chance) {
-		        outcome = 0.5;
-		        break;
-		    }
+			if (roll <= chance) {
+				outcome = 0.5;
+				break;
+			}
 
 		}
 	

@@ -1,5 +1,7 @@
 event_inherited();
 
+image_speed = 0;
+
 sprites = {
 
 	left: spr_playerF_d,

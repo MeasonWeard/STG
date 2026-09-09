@@ -169,6 +169,7 @@ function scr_melee_calculateMeleeStats(char, melee) {
 	}
 	
 	melee.col = col;
+	newStats.col = col;
 
 	return newStats;
 	

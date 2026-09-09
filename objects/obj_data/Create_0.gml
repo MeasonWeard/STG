@@ -534,6 +534,7 @@ skillConstructors = {
 	gas: skill_gas, //chem
 	flashpoint: skill_flashpoint, //chem
 	volatile: skill_volatile, //chem
+	flammable: skill_flammable, //chem
 	
 	fungalTurret: skill_fungalTurret, //bio
 	blob: skill_blob, //bio

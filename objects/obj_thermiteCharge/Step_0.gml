@@ -15,6 +15,7 @@ if (tick <= 0) {
 	ex.faction = faction;
 	
 	var burn = instance_create_layer(x, y, "Instances", obj_burningGround);
+	burn.source = owner;
 	burn.damage = flameDamage;
 	burn.life = life;
 	burn.faction = faction;

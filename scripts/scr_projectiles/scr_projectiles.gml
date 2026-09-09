@@ -34,13 +34,7 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 	proj.source = source;
 	proj.rangeLeft = range;
 	
-	//if (instance_exists(source)) {
-	//	proj.originX = source.x;
-	//	proj.originY = source.y;
-	//}
-	
 	proj.height = irandom_range(1, 100);
-	//proj.ignoreEnvTick = 1;
 	
 	proj.checkObstruction = true;
 

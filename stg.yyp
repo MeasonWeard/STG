@@ -165,6 +165,7 @@
     {"id":{"name":"obj_bloodSplatter","path":"objects/obj_bloodSplatter/obj_bloodSplatter.yy",},},
     {"id":{"name":"obj_bossSpawner","path":"objects/obj_bossSpawner/obj_bossSpawner.yy",},},
     {"id":{"name":"obj_bulletEffect","path":"objects/obj_bulletEffect/obj_bulletEffect.yy",},},
+    {"id":{"name":"obj_burn","path":"objects/obj_burn/obj_burn.yy",},},
     {"id":{"name":"obj_burningGround","path":"objects/obj_burningGround/obj_burningGround.yy",},},
     {"id":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},},
     {"id":{"name":"obj_buttonRectangle","path":"objects/obj_buttonRectangle/obj_buttonRectangle.yy",},},

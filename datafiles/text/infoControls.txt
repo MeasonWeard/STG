@@ -12,7 +12,7 @@ Interact: F
 
 Attack: Left Mouse Button
 Reload: R
-Switch weapon: Mouse Wheel
+Switch Weapon: Mouse Wheel
 
 Skill 1: 1 or Right Mouse Button
 Skill 2: 2 or Mouse Button 4

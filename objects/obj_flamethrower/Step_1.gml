@@ -17,7 +17,7 @@ if (createJets) {
 			obj_flamethrowerJet
 		);
 
-		jet.controller = id;
+		jet.controller = self;
 		jet.owner = owner;
 		jet.angleOffset = i * (360 / jetCount);
 		jet.damage = damage;
@@ -27,6 +27,19 @@ if (createJets) {
 
 		jets[i] = jet;
 
+	}
+	
+	if (instance_exists(owner)) {
+
+		var sk = scr_skills_findCharSkill("flammable", owner);
+	
+		if (sk != undefined) {
+	
+			burnChance = sk.burnChance;
+			burnDamage = sk.burnDamage;
+	
+		}
+	
 	}
 	
 }

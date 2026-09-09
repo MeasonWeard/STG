@@ -110,11 +110,11 @@ function scr_genCoats_generic(level, rarity) {
 			
 			switch(elKey) {
 			
-				case "kinRes": spr = spr_coatKin; adj = "Padded " ; break;
-				case "fireRes": spr = spr_coatFire; adj = "Fire-retardant "; break;
-				case "chemRes": spr = spr_coatChem; adj = "Fluoropolymer "; break;
-				case "elecRes": spr = spr_coatElec; adj = "Insulated "; break;
-				case "radRes": spr = spr_coatRad; adj = "Lead-lined "; break;
+				case "kin": spr = spr_coatKin; adj = "Padded " ; break;
+				case "fire": spr = spr_coatFire; adj = "Fire-retardant "; break;
+				case "chem": spr = spr_coatChem; adj = "Fluoropolymer "; break;
+				case "elec": spr = spr_coatElec; adj = "Insulated "; break;
+				case "rad": spr = spr_coatRad; adj = "Lead-lined "; break;
 			
 			}
 			

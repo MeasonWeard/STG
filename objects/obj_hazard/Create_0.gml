@@ -11,6 +11,8 @@ lifeTick = undefined;
 deathSprite = undefined;
 damageSounds = undefined;
 
+effect = undefined;
+
 charHash = global.stageController.charHash;
 
 damTick = 0;

@@ -954,7 +954,8 @@ function scr_char_calculateWeaponStats(char, setAmmo) {
 
 			slot.stats = scr_guns_calculateGunStats(char, thisWeapon);
 			if (setAmmo) thisWeapon.ammo = slot.stats.clipSize;
-				
+			
+		
 		}
 		
 		if (is_instanceof(thisWeapon, meleeInst)) {

@@ -47,13 +47,13 @@ if (global.devControls) {
 	
 	}
 	
-	if (keyboard_check_pressed(ord("V"))) {
+	//if (keyboard_check_pressed(ord("V"))) {
 	
-		var filename = "screenshot_" + string(current_time) + ".png";
-		screen_save(filename);
-		scr_testSound();
+	//	var filename = "screenshot_" + string(current_time) + ".png";
+	//	screen_save(filename);
+	//	scr_testSound();
 	
-	}
+	//}
 
 }
 

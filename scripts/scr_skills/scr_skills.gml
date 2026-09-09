@@ -775,6 +775,7 @@ function scr_skills_applyCrisper(inst, source) {
 			if (is_struct(flashpointDam)) {
 				//scr_testSound();
 				var bg = instance_create_layer(xx, yy, "Instances", obj_burningGround);
+				bg.source = source;
 				bg.damage = flashpointDam;
 				bg.radius = radius;
 				bg.faction = source.faction;
@@ -1608,6 +1609,7 @@ function scr_skills_applyCrisper(inst, source) {
 			if (is_struct(flashpointDam)) {
 				//scr_testSound();
 				var bg = instance_create_layer(inst.x, inst.y, "Instances", obj_burningGround);
+				bg.source = source;
 				bg.damage = flashpointDam;
 				bg.radius = 120;
 				bg.faction = source.faction;
@@ -2041,6 +2043,7 @@ function scr_skills_applyCrisper(inst, source) {
 			if (is_struct(flashpointDam)) {
 				//scr_testSound();
 				var bg = instance_create_layer(source.x, source.y, "Instances", obj_burningGround);
+				bg.source = source;
 				bg.damage = flashpointDam;
 				bg.radius = radius;
 				bg.faction = source.faction;
@@ -2149,6 +2152,7 @@ function scr_skills_applyCrisper(inst, source) {
 			if (is_struct(flashpointDam)) {
 				//scr_testSound();
 				var bg = instance_create_layer(inst.x, inst.y, "Instances", obj_burningGround);
+				bg.source = source;
 				bg.damage = flashpointDam;
 				bg.radius = 120;
 				bg.faction = source.faction;
@@ -2534,13 +2538,50 @@ function scr_skills_applyCrisper(inst, source) {
 		
 	}
 	
+	function skill_flammable() : skill() constructor {
+
+		name = "Flammable";
+		key = "flammable";
+		icon = spr_icon_flamethrower;
+		maxLevel = 9;
+		burnDamage = undefined;
+		burnChance = 0;
+		
+		levelReq = 10;
+	
+		description = "Burning ground and flamethrower have a chance to set";
+		description += "\nenemies on fire, causing them to take damage over time.";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Burn Chance: " + string(burnChance) + "%";
+			statsDescription += "\nDamage: " + string(burnDamage.fire * 8) + " over 8s";
+			
+		}
+		
+		static setupFunc = function(source) {
+	
+			burnChance = 12 + (level - 1) * 3;
+	
+			burnDamage = new damageProfile();
+	
+			burnDamage.fire = 6 + (level - 1) * 3;
+
+			var damKeys = ["fire"];
+	
+			burnDamage = scr_stats_calculateSkillDamage(source, burnDamage, damKeys);
+	
+		}
+		
+	}
+	
 	function skill_volatile() : skill() constructor {
 
 		name = "Volatile";
 		key = "volatile";
 		icon = spr_icon_flamethrower;
 		maxLevel = 8;
-		levelReq = 10;
+		levelReq = 5;
 		
 		chance = 5;
 		bgDam = undefined;

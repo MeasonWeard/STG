@@ -120,6 +120,7 @@
     {"name":"obj_blob","order":2,"path":"objects/obj_blob/obj_blob.yy",},
     {"name":"obj_bossSpawner","order":1,"path":"objects/obj_bossSpawner/obj_bossSpawner.yy",},
     {"name":"obj_bulletEffect","order":2,"path":"objects/obj_bulletEffect/obj_bulletEffect.yy",},
+    {"name":"obj_burn","order":16,"path":"objects/obj_burn/obj_burn.yy",},
     {"name":"obj_burningGround","order":7,"path":"objects/obj_burningGround/obj_burningGround.yy",},
     {"name":"obj_button","order":6,"path":"objects/obj_button/obj_button.yy",},
     {"name":"obj_buttonRectangle","order":7,"path":"objects/obj_buttonRectangle/obj_buttonRectangle.yy",},
