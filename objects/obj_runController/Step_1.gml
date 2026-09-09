@@ -37,6 +37,29 @@ if (generateMap) {
 	currentCell.discovered = true;
 
 	scr_stages_discoverAdjacentCells();
+	
+	//preset seeds
+	if (zoneInst.preset) {
+	
+		var presetSeed = zoneInst.presetSeed;
+	
+		for (var i = 0; i < zoneInst.mapW; i ++) {
+		
+			for (var j = 0; j < zoneInst.mapH; j ++) {
+			
+				var cell = map[i][j];
+				
+				if (!is_struct(cell)) continue;
+				
+				var newSeed = presetSeed + i + j;
+				
+				cell.seed = newSeed;
+				
+			}
+		
+		}
+	
+	}
 
 	resources = {};
 	loot = {};

@@ -49,6 +49,47 @@ function zone() constructor {
 
 }
 
+function zone_intro() : zone() constructor {
+
+	name = "Intro";
+	portrait = spr_commercialPortrait;
+	textCol = c_fuchsia;
+
+	mapW = 8;
+	mapH = 8;
+	
+	baseLevel = 1;
+	
+	preset = true;
+	
+	var groups = scr_spawns_testGroups();
+	minorGroups = groups.minor;
+	majorGroups = groups.major;
+	
+	static generateMap = function() {
+	
+		var tries = 0;
+		var success = false;
+		var map;
+		
+		map = scr_mapGen_createBlankMap(mapW, mapH);
+			
+		startPos = {
+			xx: 4,
+			yy: mapH - 1
+		}
+		
+		var stages = [stage_intro1, stage_commHall2, stage_commPlaza1, stage_commPlaza5, stage_commPlaza3];
+		var path = [0, 0, 1, 0, 1];
+		
+		scr_mapGen_presetPath(map, startPos.xx, startPos.yy, stages, path);
+			
+		return map;
+	
+	}
+	
+}
+
 function zone_waste() : zone() constructor {
 
 	name = "Waste Disposal A";
@@ -489,3 +530,4 @@ function zone_hydro() : zone() constructor {
 	}
 	
 }
+

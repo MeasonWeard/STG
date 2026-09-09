@@ -125,11 +125,9 @@ function scr_ai_moveTowardsPointAvoid(targetX, targetY, moveSpd, avoidDist) {
 
 }
 
-function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost, ignoreTargetGhost = false) {
+function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost) {
 
 	if (!instance_exists(target)) return undefined;
-	
-	var ignore = ignoreTargetGhost ? target : noone;
 	
 	var tries = 0;
 	var inc = 0;
@@ -178,7 +176,7 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost, ign
 			continue;
 		}
 		
-		if (!scr_ai_ghostOverlapAt(self, px, py, ignore)) {
+		if (!scr_ai_ghostOverlapAt(self, px, py)) {
 			found = true;
 			break;
 		}
@@ -218,7 +216,7 @@ function scr_ai_choosePointAroundTarget(target, minDist, maxDist, moveGhost, ign
 
 }
 
-function scr_ai_ghostOverlap(char, ignore = noone) {
+function scr_ai_ghostOverlap(char) {
 	
 	if (!instance_exists(char)) return false;
 	if (!instance_exists(char.ghost)) return false;
@@ -241,7 +239,6 @@ function scr_ai_ghostOverlap(char, ignore = noone) {
 			
 			if (!instance_exists(targetGhost)) continue;
 			if (targetGhost.id == sourceGhost.id) continue;
-			if (instance_exists(ignore) and targetGhost.id == ignore.id) continue;
 			
 			if (scr_obj_movementCollision(sourceGhost, targetGhost, true)) {
 				return true;
@@ -254,7 +251,7 @@ function scr_ai_ghostOverlap(char, ignore = noone) {
 	
 }
 
-function scr_ai_ghostOverlapAt(char, xx, yy, ignore = noone) {
+function scr_ai_ghostOverlapAt(char, xx, yy) {
 	
 	if (!instance_exists(char)) return false;
 	if (!instance_exists(char.ghost)) return false;
@@ -298,9 +295,6 @@ function scr_ai_ghostOverlapAt(char, xx, yy, ignore = noone) {
 	
 		keys = g.testHashKeys;
 		
-		//keys = array_create(9);
-		//scr_hash_updateHashKeys(keys, cellX, cellY);
-		
 	}
 	
 	for (var k = 0; k < 9; k++) {
@@ -318,7 +312,6 @@ function scr_ai_ghostOverlapAt(char, xx, yy, ignore = noone) {
 			
 			if (!instance_exists(otherGhost)) continue;
 			if (otherGhost.id == g.id) continue;
-			if (instance_exists(ignore) and otherGhost.id == ignore.id) continue;
 			
 			if (
 				right > otherGhost.colLeft
@@ -552,8 +545,7 @@ function scr_ai_standardAIBehaviour() {
 			target,
 			targetMinDist,
 			targetMaxDist,
-			true,
-			ignoreTargetGhost
+			true
 		);
 
 	}
@@ -800,7 +792,6 @@ function scr_ai_setup() {
 	if (!variable_instance_exists(self, "targetMinDist")) targetMinDist = 180;
 	if (!variable_instance_exists(self, "targetMaxDist")) targetMaxDist = 360;
 	if (!variable_instance_exists(self, "targetReaquireDist")) targetReaquireDist = 450;
-	if (!variable_instance_exists(self, "ignoreTargetGhost")) ignoreTargetGhost = false;
 
 	// Detection
 	if (!variable_instance_exists(self, "detectionDist")) detectionDist = 800;

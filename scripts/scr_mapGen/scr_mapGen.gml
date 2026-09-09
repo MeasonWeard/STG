@@ -1756,3 +1756,40 @@ function scr_mapGen_addSmallHalls(
 	};
 
 }
+
+function scr_mapGen_presetPath(map, startX, startY, stages, path) {
+	
+	var stagesLen = array_length(stages);
+	var pathLen = array_length(path);
+	
+	var mapW = array_length(map);
+	var mapH = array_length(map[0]);
+	
+	var xx = startX;
+	var yy = startY;
+	
+	for (var i = 0; i < stagesLen; i ++) {
+	
+		var valid = xx >= 0 and xx < mapW and yy >= 0 and yy < mapH;
+		
+		if (valid) {
+		
+			var stage = stages[i];
+			map[xx][yy] = scr_mapGen_createCell(stage);
+		
+		}
+		
+		if (i >= pathLen) continue;
+		
+		var dir = path[i];
+		
+		if (dir == 0) yy --;
+		if (dir == 1) xx ++;
+		if (dir == 2) yy ++;
+		if (dir == 3) xx --;
+	
+	}
+	
+	return map;
+	
+}

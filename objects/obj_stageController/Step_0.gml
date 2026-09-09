@@ -99,7 +99,7 @@ if (!paused) {
 	}
 
 	//stage progress
-	if (!hub) {
+	if (!hub and !scripted) {
 	
 			var enemies = instance_number(obj_enemy);
 
@@ -120,41 +120,12 @@ if (!paused) {
 
 			if (enemies == 0 and stageInProgress) {
 
-				stageInProgress = false;
+				scr_stages_completeStage();
 
-				if (rc.currentCell.endCell == true) {
-		
-					global.runController.gameState = "win";
-		
-					var midX = (global.roomRight + global.roomLeft) * 0.5;
-					var midY = (global.roomTop + global.roomBottom) * 0.5;
-
-					scr_obj_createPortal(midX, midY);
-		
-				}
-
-				with (obj_door) {
-		
-					open = true;
-		
-					var arrow = instance_create_layer(x, y, "Instances", obj_arrow);
-					arrow.target = self;
-					arrow.source = global.player;
-					arrow.text = "EXIT";
-					arrow.col = c_lime;
-		
-				}
-		
-				with (obj_destructible) {
-					if (destroyWhenStageOver) instance_destroy();
-				}
-				
-				instance_create_layer(x, y, "Instances", obj_lootCrateDestroyer);
-		
-				rc.currentCell.cleared = true;
-	
 			}
 
 	}
+	
+	if (scripted and is_callable(scriptFunc)) scriptFunc();
 
 }

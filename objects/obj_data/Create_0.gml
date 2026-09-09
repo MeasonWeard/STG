@@ -422,7 +422,7 @@ stages = {
 
 	engHall1: {
 		
-		room: stage_engHall1
+		room: stage_intro1
 		
 	},
 	

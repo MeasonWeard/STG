@@ -3,6 +3,8 @@ rc = scr_data_getRunController();
 data = global.data;
 
 hub = false;
+scripted = false;
+scriptFunc = undefined;
 setupHub = true;
 pictureMode = false;
 

@@ -2377,7 +2377,7 @@ function scr_skills_applyCrisper(inst, source) {
 	
 			passives = {
 	
-				energyRegen: 0.25 * level
+				energyRegen: 0.25 + 0.25 * level
 	
 			};
 	

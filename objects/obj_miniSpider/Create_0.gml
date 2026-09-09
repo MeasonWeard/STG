@@ -74,7 +74,6 @@ scr_ai_setup();
 ghost = instance_create_layer(x, y, "Instances", obj_ghost);
 ghost.owner = self;
 reTargetDist = 180;
-ignoreTargetGhost = true;
 
 //stats
 baseStats.maxHp = 30;
