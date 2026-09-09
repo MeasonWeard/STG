@@ -1,0 +1,1 @@
+lines = ["Hello, Mr.Freeman", "Go away now."];
