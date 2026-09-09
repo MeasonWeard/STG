@@ -10,7 +10,6 @@ if (setup) {
 	setup = false;
 	
 	depth = owner.depth - 1;
-	yOff = owner.sprite_height + 16;
 
 	lineIndex = 0;
 
@@ -20,6 +19,15 @@ if (setup) {
 	}
 
 	timer = scr_dialogue_getDuration(lines[lineIndex]);
+	
+	var dimensions = scr_dialogue_getBoxLayout(owner, lines[lineIndex], xOff, yOff);
+	
+	left = dimensions.left;
+	right = dimensions.right;
+	top = dimensions.top;
+	bottom = dimensions.bottom;
+	textX = dimensions.xx;
+	textY = dimensions.yy;
 
 }
 
@@ -47,5 +55,14 @@ if (timer > 0) {
 	}
 
 	timer = scr_dialogue_getDuration(lines[lineIndex]);
+	
+	var dimensions = scr_dialogue_getBoxLayout(owner, lines[lineIndex], xOff, yOff);
+	
+	left = dimensions.left;
+	right = dimensions.right;
+	top = dimensions.top;
+	bottom = dimensions.bottom;
+	textX = dimensions.xx;
+	textY = dimensions.yy;
 
 }

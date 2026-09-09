@@ -38,6 +38,7 @@ function scr_dialogue_start(char, loop = false) {
 	dc.lineIndex = 0;
 	dc.loop = loop;
 	dc.active = true;
+	dc.setup = true;
 
 	dc.timer = scr_dialogue_getDuration(lines[0]);
 
@@ -75,4 +76,34 @@ function scr_dialogue_getDuration(text) {
 
 	return max(minTime, words * timePerWord);
 
+}
+
+function scr_dialogue_getBoxLayout(owner, txt, xOffset = 0, yOffset = 0) {
+	
+	static pad = 8;
+	static gap = 16;
+	
+	if (!instance_exists(owner)) return undefined;
+	
+	draw_set_halign(fa_middle);
+	draw_set_valign(fa_middle);
+	draw_set_font(fnt_normal);
+	
+	var w = string_width(txt) + pad * 2;
+	var h = string_height(txt) + pad * 2;
+	
+	var xx = owner.x + xOffset;
+	
+	var bottom = owner.y - owner.sprite_height - gap + yOffset;
+	var yy = bottom - h * 0.5;
+	
+	return {
+		xx: xx,
+		yy: yy,
+		left: xx - w * 0.5,
+		right: xx + w * 0.5,
+		top: yy - h * 0.5,
+		bottom: bottom
+	};
+	
 }
