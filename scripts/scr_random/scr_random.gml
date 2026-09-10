@@ -38,6 +38,29 @@ function scr_randomElementRemove(array) {
 	
 }
 
+function scr_randomElementProgressive(array, chance, chanceLoss = 0) {
+
+	var len = array_length(array);
+
+	if (len <= 0) return undefined;
+
+	var index = 0;
+
+	while (index < len - 1) {
+
+		if (scr_random_chance(chance)) {
+			index++;
+			chance = max(0, chance - chanceLoss);
+		} else {
+			break;
+		}
+
+	}
+
+	return array[index];
+
+}
+
 function scr_randomPointInCircle(xx, yy, radius) {
 
 	var dir = random(360);

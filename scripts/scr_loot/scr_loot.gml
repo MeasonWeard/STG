@@ -310,7 +310,10 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	
 	if (type == "coat") {
 	
-		loot = scr_genCoats_generic(level, rarity);
+		var func = choose(scr_genCoats_exoskeleton, scr_genCoats_reflexCoat, scr_genCoats_barrierCoat,
+		scr_genCoats_batteryCoat, scr_genCoats_doctorsCoat);
+		
+		loot = func(level, rarity);
 		
 	}
 	
