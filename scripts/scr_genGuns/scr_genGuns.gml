@@ -427,6 +427,39 @@ function scr_genGuns_plasmaBlaster(level, rarity) {
 	
 }
 
+function scr_genGuns_arcBlaster(level, rarity) {
+
+	var gun = new gun_blaster(level, rarity);
+	gun.name = "Arc Blaster";
+	gun.spr = spr_arcBlaster;
+
+	var baseDamage = gun.baseDamage;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.fire = halfBaseDamage;
+	gun.damage.elec = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "recoil", "range"],
+
+		bonusStats: ["oa", "elemental"],
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "fireRate");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
 function scr_genGuns_ionBlaster(level, rarity) {
 
 	var gun = new gun_blaster(level, rarity);
@@ -657,6 +690,39 @@ function scr_genGuns_galvanicSmg(level, rarity) {
 	
 	gun.damage.elec = halfBaseDamage;
 	gun.damage.chem = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "clipSize", "reloadTime", "fireRate", "fireRate", "maxAimOff"],
+
+		bonusStats: ["elemental", "moveSpeed"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "fireRate");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_ionSmg(level, rarity) {
+
+	var gun = new gun_smg(level, rarity);
+	gun.name = "Ion SMG";
+	gun.spr = spr_ionSmg;
+
+	var baseDamage = gun.baseDamage;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.elec = halfBaseDamage;
+	gun.damage.rad = halfBaseDamage;
 	gun.damage.kin = 0;
 	
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
