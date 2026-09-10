@@ -1,1 +1,5 @@
 Harness the fundamental forces that govern matter and energy.
+
+- Radiation and kinetic damage
+- Energy regeration
+- Shields, movement and defense

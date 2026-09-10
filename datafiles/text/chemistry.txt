@@ -1,1 +1,5 @@
-Master volatile reactions to deal powerful Chemical and Fire damage.
+Master volatile reactions to deal powerful chemical and fire damage.
+
+- Chemical and fire damage
+- Health regeneration
+- Damage over time

@@ -3343,7 +3343,7 @@ function scr_skills_applyCrisper(inst, source) {
 		static formatStatsDescription = function() {
 
 			statsDescription = "Shock Chance: " + string(chance) + "%";
-			statsDescription += "\nShock Damage: " + string(damage.elec * 2) + " electrical";
+			statsDescription += "\nShock Damage: " + string(damage.elec * 2) + " electric";
 			statsDescription += "\nTargets: " + string(targets);
 			
 		}

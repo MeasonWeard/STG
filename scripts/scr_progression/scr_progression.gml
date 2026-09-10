@@ -15,12 +15,12 @@ function scr_progression_addXp(amount) {
 
 function scr_progression_xpRequired(level) {
 
-	var req = 800;
+	var req = 1000;
 	var inc = 0;
 
 	repeat(level) {
 
-		inc += 250;
+		inc += 200;
 		req += inc;
 
 	}

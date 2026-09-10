@@ -1,1 +1,5 @@
-Manipulate living organisms and augment your own physiology.
+Spawn living organisms and augment your own physiology.
+
+- Chemical and melee damage
+- Biological summons
+- Health, health regeneration and resistances

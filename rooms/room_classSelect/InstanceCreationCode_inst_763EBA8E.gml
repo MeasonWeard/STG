@@ -16,7 +16,7 @@ leftFunc = function() {
 	if (selectedClass == classes.biology) class = new class_biology();
 	if (selectedClass == classes.engineering) class = new class_engineering();
 	
-	class.classNum = classNum;
+	class.classNum = c.classNum;
 	
 	if (c.classNum == 1) global.gameData.playerData.class1 = class;
 	if (c.classNum == 2) global.gameData.playerData.class2 = class;

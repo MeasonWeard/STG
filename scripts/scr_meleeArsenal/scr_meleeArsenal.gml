@@ -4,7 +4,7 @@ function melee_cleaver(level, rarity) : meleeInst(level, rarity) constructor {
 	baseDamage = 25;
 	
 	attackRate = 2.4;
-	rechargeTime = 1.6;
+	rechargeTime = 1.4;
 	//appearance
 	//name = "Cleaver";
 	//swingSounds = global.data.soundProfiles.cleaverSwing;
@@ -42,11 +42,9 @@ function melee_hammer(level, rarity) : meleeInst(level, rarity) constructor {
 	
 	attackRate = 1.2;
 	maxCharges = 3;
-	rechargeTime = 2.1;
+	rechargeTime = 2;
 	killThreshold = 20;
 	damageInRadius = true;
-	
-
 	
 }
 
@@ -69,7 +67,7 @@ function melee_prod(level, rarity) : meleeInst(level, rarity) constructor {
 	
 	attackRate = 2.8;
 	maxCharges = 8;
-	rechargeTime = 1.8;
+	rechargeTime = 1.6;
 	killThreshold = 8;
 	
 }
@@ -90,7 +88,7 @@ function melee_shieldAndBaton(level, rarity) : meleeInst(level, rarity) construc
 
 	attackRate = 2.2;
 	maxCharges = 5;
-	rechargeTime = 1.5;
+	rechargeTime = 1.6;
 	killThreshold = 8;
 	
 	bonusStats.da = 10;
