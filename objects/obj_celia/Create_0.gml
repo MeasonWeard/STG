@@ -44,16 +44,22 @@ levelUpFunc = function() {
 
 	if (level > 2) baseStats.maxHpPerc += 10;
 	
-	if (level == 5) {
+	if (level == 9) {
 		skills.skill1 = new skill_gas();
 		baseStats.maxEnergy = 60;
 		baseStats.energyRegen += 0.5;
 	}
 	
 	if (level > 5 and level mod 5 == 0) {
-		scr_skills_increaseLevel(self, skills.skill1);
+		
 		baseStats.maxEnergy += 10;
 		baseStats.energyRegen += 1;
+	}
+	
+	if (level > 14 and level mod 5 == 0) {
+		
+		scr_skills_increaseLevel(self, skills.skill1);
+	
 	}
 	
 	if (level mod 10 == 0) {

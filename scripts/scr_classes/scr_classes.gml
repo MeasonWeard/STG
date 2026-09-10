@@ -3,6 +3,7 @@ function classInst() constructor {
 	name = "";
 	
 	id = -1;
+	classNum = undefined;
 	
 	majorBonuses = undefined;
 	minorBonuses = undefined;

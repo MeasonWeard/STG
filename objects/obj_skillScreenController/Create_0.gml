@@ -5,6 +5,10 @@ var spent = scr_progression_countSpentSkillPoints()
 totalPoints = scr_progression_getTotalSkillPoints();
 points = max(0, totalPoints - spent);
 
+var classNum = scr_data_safeStructGet(global.selectedClass, "classNum", 1);
+
+extraReq = classNum == 1 ? 0 : 7;
+
 back = function() {
 
 	var unlockedSkills = [];

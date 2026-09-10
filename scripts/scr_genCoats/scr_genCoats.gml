@@ -1,38 +1,40 @@
 function scr_genCoats_addBasicStats(coat, level, rarity) {
 	
-	var stats = coat.stats;
-	
-	//basic resistance
 	var points = 3 + level + (level div 3);
 	
-	var elements = ["kinRes","fireRes","chemRes","elecRes","radRes"];
+	var minSplit = ceil(points * 0.25);
+	var maxSplit = floor(points * 0.5);
 	
-	var whole = points div 5;
-	var remainder = points mod 5;
-
-	if (whole > 0) {
-		stats.kinRes = whole;
-		stats.fireRes = whole;
-		stats.chemRes = whole;
-		stats.elecRes = whole;
-		stats.radRes = whole;
+	var split = irandom_range(minSplit, maxSplit);
+	
+	var amount1 = split;
+	var amount2 = points - split;
+	
+	if (irandom(1)) {
+		
+		scr_loot_addStat(coat, "projRes", amount1);
+		scr_loot_addStat(coat, "meleeRes", amount2);
+		
+	} else {
+		
+		scr_loot_addStat(coat, "projRes", amount2);
+		scr_loot_addStat(coat, "meleeRes", amount1);
+		
 	}
 	
-	repeat(whole) {
-		
-		var el = scr_randomElement(elements);
-		
-		scr_loot_addStat(coat, el, 2);
-		
-	}
+	var effLevel = level - 4 + rarity - 1;
+	var chance = effLevel * 2;
 	
-	elements = array_shuffle(elements);
+	if (level > 4 and scr_random_chance(chance)) {
 	
-	for (var i = 0; i < remainder; i ++) {
+		var regenType = choose("hpRegen", "energyRegen");
 	
-		var el = elements[i];
+		var minAmount = effLevel * 0.05;
+		var maxAmount = effLevel * 0.1;
 		
-		scr_loot_addStat(coat, el, 1);
+		var amount = random_range_biased(minAmount, maxAmount, LOOT_BIAS);
+		
+		scr_loot_addStat(coat, regenType, amount);
 	
 	}
 	
@@ -114,17 +116,28 @@ function scr_genCoats_addRarityBonuses(coat, level, rarity) {
 	
 }
 
-function scr_genCoats_addSpecificElementResistance(coat, level, rarity) {
+function scr_genCoats_addElementResistance(coat, level, rarity) {
 	
 	var spr = spr_coat;
 	var adj = "";
-			
+	
 	var el = scr_gear_getHighestEffectiveResistanceType(coat, true);
-	var elKey = el.key;
+	var elKey;
+	
+	if (el != undefined) {
+		
+		elKey = el.key;
+		
+	} else {
+		
+		var elements = ["kin", "fire", "chem", "elec", "rad"];
+		elKey = scr_randomElement(elements);
+		
+	}
 			
 	var minBonus = floor(max(2, level * 0.5));
 	var maxBonus = minBonus + 4;
-	var bon = irandom_range(minBonus, maxBonus); // lol bon
+	var bon = irandom_range(minBonus, maxBonus);
 			
 	switch(elKey) {
 
@@ -163,13 +176,12 @@ function scr_genCoats_addSpecificElementResistance(coat, level, rarity) {
 	coat.spr = spr;
 	coat.name = adj + "Coat";
 		
-	
-	
 }
 
 function scr_genCoats_generic(level, rarity) {
 
 	var coat = new coatInst(level, rarity);
+	coat.name = "Lab Coat";
 	
 	scr_genCoats_addBasicStats(coat, level, rarity);
 	scr_genCoats_addRarityBonuses(coat, level, rarity);
@@ -177,7 +189,7 @@ function scr_genCoats_generic(level, rarity) {
 	var chance = 5 + rarity * 5 + floor(level * 0.33);
 	chance = min(chance, 55);
 		
-	if (level > 3 and scr_random_chance(chance)) scr_genCoats_addSpecificElementResistance(coat, level, rarity);
+	if (level > 3 and scr_random_chance(chance)) scr_genCoats_addElementResistance(coat, level, rarity);
 	
 	return coat;
 
@@ -201,8 +213,11 @@ function scr_genCoats_exoskeleton(level, rarity) {
 	var minBonus = max(1, floor(level * 0.45)) + rarBonus;
 	var maxBonus = minBonus + 6;
 	
-	stats.meleeRes = irandom_range_biased(minBonus, maxBonus, LOOT_BIAS);
-	stats.projRes = irandom_range_biased(minBonus, maxBonus, LOOT_BIAS);
+	var meleeRes = irandom_range_biased(minBonus, maxBonus, LOOT_BIAS);
+	var projRes = irandom_range_biased(minBonus, maxBonus, LOOT_BIAS);
+	
+	scr_loot_addStat(coat, "meleeRes", meleeRes);
+	scr_loot_addStat(coat, "projRes", projRes);
 	
 	return coat;
 	
@@ -216,7 +231,7 @@ function scr_genCoats_reflexCoat(level, rarity) {
 	coat.spr = spr_coatReflex;
 	coat.name = "Reflex Coat";
 	
-	stats.spd = 0.5;
+	scr_loot_addStat(coat, "spd", 0.5);
 	
 	scr_genCoats_addBasicStats(coat, level, rarity);
 	scr_genCoats_addRarityBonuses(coat, level, rarity);
@@ -253,7 +268,7 @@ function scr_genCoats_barrierCoat(level, rarity) {
 	coat.spr = spr_coatBarrier;
 	coat.name = "Barrier Coat";
 	
-	stats.maxShield = 1;
+	scr_loot_addStat(coat, "maxShield", 1);
 	
 	scr_genCoats_addBasicStats(coat, level, rarity);
 	
@@ -313,7 +328,7 @@ function scr_genCoats_batteryCoat(level, rarity) {
 	coat.spr = spr_coatBattery;
 	coat.name = "Capacitor Coat";
 	
-	stats.energyRegen = 0.5;
+	scr_loot_addStat(coat, "energyRegen", 0.5);
 	
 	scr_genCoats_addBasicStats(coat, level, rarity);
 	scr_genCoats_addRarityBonuses(coat, level, rarity);
@@ -358,7 +373,7 @@ function scr_genCoats_doctorsCoat(level, rarity) {
 	coat.spr = spr_coatDoctor;
 	coat.name = "Doctor's Coat";
 	
-	stats.hpRegen = 1;
+	scr_loot_addStat(coat, "hpRegen", 1);
 	
 	scr_genCoats_addBasicStats(coat, level, rarity);
 	scr_genCoats_addRarityBonuses(coat, level, rarity);

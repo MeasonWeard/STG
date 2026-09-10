@@ -70,7 +70,7 @@ baseStats.maxHp = 250;
 baseStats.maxEnergy = 200;
 baseStats.spd = 6;
 baseStats.maxDashes = 2;
-baseStats.hpRegen = 1;
+baseStats.hpRegen = 2;
 baseStats.energyRegen = 5;
 
 baseStats.maxStimPacks = 2;

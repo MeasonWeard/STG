@@ -51,6 +51,6 @@ if (setup) {
 	
 	sprite_index = thisSkill.icon;
 	
-	locked = playerLevel < thisSkill.levelReq;
+	locked = playerLevel < thisSkill.levelReq + extraReq;
 
 }

@@ -858,13 +858,13 @@ function scr_skills_applyCrisper(inst, source) {
 		charges = 1;
 		energyCost = 100;
 		jetCount = 4;
-		cooldownTime = 16;
+		cooldownTime = 15;
 		life = 8;
 		damTime = 0.5;
 	
 		damage = undefined;
 	
-		description = "Spinning fire!";
+		description = "Multiple jets of fire spin around you,\ndealing fire damage to nearby enemies.";
 	
 		static formatStatsDescription = function() {
 	
@@ -881,7 +881,7 @@ function scr_skills_applyCrisper(inst, source) {
 		
 			damage = new damageProfile();
 		
-			damage.fire = 8 + 2 * level;
+			damage.fire = 10 + 3 * level;
 			
 			var damKeys = ["fire"];
 			
@@ -1182,7 +1182,7 @@ function scr_skills_applyCrisper(inst, source) {
 		icon = spr_icon_medicalSynthesis;
 		maxLevel = 9;
 		levelReq = 10;
-		energyCost = 80;
+		energyCost = 60;
 		cooldownTime = 12;
 		spd = 0.1;
 		da = 10;
@@ -1207,7 +1207,7 @@ function scr_skills_applyCrisper(inst, source) {
 	
 		static setupFunc = function(source) {
 		
-			heal = 26 + (level - 1) * 8;
+			heal = 32 + (level - 1) * 12;
 			meleeDamPerc = 8 + (level - 1) * 3
 			spd = 0.5 + (level - 1) * 0.125;
 			da = 8 + (level - 1) * 4;

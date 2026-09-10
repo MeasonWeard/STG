@@ -299,8 +299,8 @@ function gun_bigSpiderGun(level, rarity) : gunInst(level, rarity) constructor {
 	projSprite = spr_bulletNormal;
 	projDestroySprite = spr_bulletExplosion2;
 	auto = true;
-	fireRate = 8;
-	clipSize = 12;
+	fireRate = 7;
+	clipSize = 8;
 	reloadTime = 1.6;
 	spd = 16;
 	minAimOff = 2.2;
