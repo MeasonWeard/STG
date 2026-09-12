@@ -327,7 +327,7 @@ function scr_genTies_marksman(level, rarity) {
 		}
 		
 		if (key == "kinDam") {
-			amount = scr_statRolls_damage(level);
+			amount = scr_statRolls_damage(level, 0.5);
 		}
 		
 		if (key == "kinDamPerc") {
@@ -601,7 +601,7 @@ function scr_genTies_pyromaniac(level, rarity) {
 		var amount = 0;
 
 		if (key == "fireDam") {
-			amount = scr_statRolls_damage(level);
+			amount = scr_statRolls_damage(level, 0.5);
 		}
 		
 		if (key == "fireDamPerc" or key == "elecDamPerc" or key == "radDamPerc") {
@@ -653,7 +653,7 @@ function scr_genTies_ballistician(level, rarity) {
 		var amount = 0;
 
 		if (key == "kinDam") {
-			amount = scr_statRolls_damage(level);
+			amount = scr_statRolls_damage(level, 0.5);
 		}
 		
 		if (key == "kinDamPerc" or key == "chemDamPerc" or key == "fireDamPerc") {
@@ -705,7 +705,7 @@ function scr_genTies_toxicologist(level, rarity) {
 		var amount = 0;
 
 		if (key == "chemDam") {
-			amount = scr_statRolls_damage(level);
+			amount = scr_statRolls_damage(level, 0.5);
 		}
 		
 		if (key == "chemDamPerc" or key == "fireDamPerc" or key == "elecDamPerc") {
@@ -757,7 +757,7 @@ function scr_genTies_electromaniac(level, rarity) {
 		var amount = 0;
 
 		if (key == "elecDam") {
-			amount = scr_statRolls_damage(level);
+			amount = scr_statRolls_damage(level, 0.5);
 		}
 		
 		if (key == "elecDamPerc" or key == "radDamPerc" or key == "kinDamPerc") {
@@ -809,7 +809,7 @@ function scr_genTies_radiologist(level, rarity) {
 		var amount = 0;
 
 		if (key == "radDam") {
-			amount = scr_statRolls_damage(level);
+			amount = scr_statRolls_damage(level, 0.5);
 		}
 		
 		if (key == "radDamPerc" or key == "kinDamPerc" or key == "chemDamPerc") {
