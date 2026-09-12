@@ -499,6 +499,72 @@ function scr_genGuns_ionBlaster(level, rarity) {
 
 #region //SPECIAL PISTOLS
 
+function scr_genGuns_plasmaPistol(level, rarity) {
+
+	var gun = new gun_pistol(level, rarity);
+	gun.name = "Plasma Pistol";
+	gun.spr = spr_plasmaPistol;
+	
+	var baseDamage = gun.baseDamage;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.fire = halfBaseDamage;
+	gun.damage.rad = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "reloadTime", "recoil", "range", "maxAimOff"],
+
+		bonusStats: ["oa", "elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "maxAimOff");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+
+}
+
+function scr_genGuns_poloniumPistol(level, rarity) {
+
+	var gun = new gun_pistol(level, rarity);
+	gun.name = "Polonium Pistol";
+	gun.spr = spr_poloniumPistol;
+	
+	var baseDamage = gun.baseDamage;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.chem = halfBaseDamage;
+	gun.damage.rad = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "reloadTime", "recoil", "range", "maxAimOff"],
+
+		bonusStats: ["oa", "elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "maxAimOff");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+
+}
+
 function scr_genGuns_autoPistol(level, rarity) {
 	
 	var gun = new gun_pistol(level, rarity);
@@ -518,7 +584,7 @@ function scr_genGuns_autoPistol(level, rarity) {
 		var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 		var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 		
-		var damType = choose("kin","fire","chem","elec","rad");
+		var damType = choose("kin","kin","fire","chem","elec","rad");
 
 		gun.damage.kin = 0;
 		gun.damage[$ damType] = baseDamage + bonusDamage;
@@ -590,7 +656,7 @@ function scr_genGuns_bigPistol(level, rarity) {
 		var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
 		var bonusDamage = irandom_range(damageRange.low, damageRange.high);
 		
-		var damType = choose("kin","fire","chem","elec","rad");
+		var damType = choose("kin","kin","fire","chem","elec","rad");
 
 		gun.damage.kin = 0;
 		gun.damage[$ damType] = baseDamage + bonusDamage;
@@ -814,6 +880,41 @@ function scr_genGuns_arcPulseRifle(level, rarity) {
 	
 }
 
+function scr_genGuns_plasmaPulseRifle(level, rarity) {
+
+	var gun = new gun_pulseRifle(level, rarity);
+	gun.name = "Plasma Pulse Rifle";
+	gun.spr = spr_plasmaPulseRifle;
+
+	var baseDamage = gun.baseDamage;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.fire = halfBaseDamage;
+	gun.damage.rad = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "reloadTime", "dam", "maxAimOff", "minAimOff", "recoil"],
+
+		bonusStats: ["oa", "oa"]
+		
+	};
+	
+	if (scr_random_chance(50)) array_push(config.bonusStats, "elemental");
+	
+	if (rarity > 2) array_push(config.standardStats, "range");
+	if (rarity > 3) array_push(config.standardStats, "maxAimOff");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config, 2);
+	
+}
+
 function scr_genGuns_sniperPulseRifle(level, rarity) {
 
 	var gun = new gun_pulseRifle(level, rarity);
@@ -982,6 +1083,72 @@ function scr_genGuns_poloniumAutoShotgun(level, rarity) {
 	
 	gun.damage.chem = halfBaseDamage;
 	gun.damage.rad = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "blastProjectiles", "blastSpread", "range"],
+
+		bonusStats: ["da","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_galvanicAutoShotgun(level, rarity) {
+
+	var gun = new gun_autoShotgun(level, rarity);
+	gun.name = "Galvanic Auto-Shotgun";
+	gun.spr = spr_galvanicAutoShotgun;
+	
+	var baseDamage = gun.baseDamage;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.chem = halfBaseDamage;
+	gun.damage.elec = halfBaseDamage;
+	gun.damage.kin = 0;
+	
+	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);
+	var bonusDamage = irandom_range(damageRange.low, damageRange.high);
+	
+	scr_weapons_addDamageToExistingSpread(gun, bonusDamage);
+	
+	var config = {
+		
+		standardStats: ["clipSize", "fireRate", "reloadTime", "blastProjectiles", "blastSpread", "range"],
+
+		bonusStats: ["da","elemental"]
+		
+	};
+	
+	if (rarity > 2) array_push(config.standardStats, "dam");
+	if (rarity > 3) array_push(config.standardStats, "dam", "clipSize", "reloadTime");
+	
+	return scr_genGuns_applyGenericBonuses(gun, level, rarity, config);
+	
+}
+
+function scr_genGuns_slagAutoShotgun(level, rarity) {
+
+	var gun = new gun_autoShotgun(level, rarity);
+	gun.name = "Slag Auto-Shotgun";
+	gun.spr = spr_slagAutoShotgun;
+	
+	var baseDamage = gun.baseDamage;
+	var halfBaseDamage = ceil(baseDamage * 0.5);
+	
+	gun.damage.chem = halfBaseDamage;
+	gun.damage.fire = halfBaseDamage;
 	gun.damage.kin = 0;
 	
 	var damageRange = scr_weapons_calculateBonusDamage(baseDamage, level);

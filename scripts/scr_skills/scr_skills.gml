@@ -434,6 +434,7 @@ function scr_skills_applyVolatile(inst, source) {
 		var vt = instance_create_layer(source.x, source.y, "Instances", obj_volatile);
 		
 		vt.chance = chance;
+		vt.caster = source;
 		vt.owner = inst;
 		vt.expDam = expDam;
 		vt.expRadius = expRadius;

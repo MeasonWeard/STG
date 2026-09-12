@@ -19,6 +19,7 @@ if (instance_exists(owner)) {
 			ex.col = c_orange;
 			ex.sounds = [snd_volatile];
 			
+			bg.source = caster;
 			bg.faction = faction;
 			bg.damage = bgDam;
 			bg.life = bgLife;

@@ -1,4 +1,5 @@
 owner = noone;
+caster = noone;
 chance = 4;
 faction = undefined;
 			

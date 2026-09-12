@@ -258,11 +258,11 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 		var func = choose(
 		
 		scr_genGuns_plasmaBlaster, scr_genGuns_ionBlaster, scr_genGuns_arcBlaster,//blasters
-		scr_genGuns_autoPistol, scr_genGuns_bigPistol, //pistols
+		scr_genGuns_autoPistol, scr_genGuns_bigPistol, scr_genGuns_plasmaPistol, scr_genGuns_poloniumPistol, //pistols
 		scr_genGuns_slagSmg, scr_genGuns_galvanicSmg, scr_genGuns_notSoSubSmg, scr_genGuns_ionSmg,//smg
-		scr_genGuns_arcPulseRifle, scr_genGuns_sniperPulseRifle, //pulse rifles
+		scr_genGuns_arcPulseRifle, scr_genGuns_sniperPulseRifle, scr_genGuns_plasmaPulseRifle, //pulse rifles
 		scr_genGuns_sprayShotgun, scr_genGuns_doubleBarreledShotgun, //shotguns
-		scr_genGuns_poloniumAutoShotgun, scr_genGuns_assassinatorAutoShotgun //auto-shotgun
+		scr_genGuns_poloniumAutoShotgun, scr_genGuns_assassinatorAutoShotgun, scr_genGuns_galvanicAutoShotgun, scr_genGuns_slagAutoShotgun //auto-shotgun
 		
 		);
 		
