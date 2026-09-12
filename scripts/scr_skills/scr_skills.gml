@@ -823,9 +823,9 @@ function scr_skills_applyCrisper(inst, source) {
 			
 			duration = 5 + (level - 1) * 0.4;
 			
-			da = 6 + level * 6;
-			projRes = 4 + level * 4;
-			meleeRes = 4 + level * 4;
+			da = 12 + level * 6;
+			projRes = 8 + level * 4;
+			meleeRes = 8 + level * 4;
 		
 		}
 	
@@ -2453,7 +2453,7 @@ function scr_skills_applyCrisper(inst, source) {
 		radius = 50;
 	
 		description = "Your projectiles and melee attakcs deal extra radiation damage and\n";
-		description += "have a chance to detonate, dealing additonal area\nradiation damage.";
+		description += "have a chance to detonate, dealing additonal area radiation damage.";
 		
 		static formatStatsDescription = function() {
 
