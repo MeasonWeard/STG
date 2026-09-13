@@ -2485,7 +2485,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 			passives = {
 	
-				radRes: 4 * level
+				radRes: 4 + 4 * level
 	
 			};
 	
@@ -2871,8 +2871,8 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 			passives = {
 	
-				chemRes: 3 * level,
-				fireRes: 3 * level
+				chemRes: 2 + 3 * level,
+				fireRes: 2 + 3 * level
 	
 			};
 	
@@ -3302,7 +3302,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 			passives = {
 	
-				elecRes: 4 * level
+				elecRes: 4 + 4 * level
 	
 			};
 	
