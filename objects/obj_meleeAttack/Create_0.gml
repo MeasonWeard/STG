@@ -10,6 +10,7 @@ hitX = x;
 hitY = y;
 
 collisionFuncs = [];
+missedChars = [];
 
 hitDelay = 0;
 attackFrames = 4;

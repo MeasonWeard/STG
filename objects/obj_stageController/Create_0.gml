@@ -83,8 +83,8 @@ checkIfCleared = true;
 
 //projectile pool
 projectilePool = [];
-procectilePoolLen = 300;
-for (var i = 0; i < procectilePoolLen; i++) {
+projectilePoolLen = 300;
+for (var i = 0; i < projectilePoolLen; i++) {
 
 	var newProj = instance_create_layer(0, 0, "Instances", obj_projectile);
 	array_push(projectilePool, newProj);

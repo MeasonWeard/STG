@@ -22,6 +22,7 @@ rangeLeft = 200;
 charHitReport = false;
 
 collisionFuncs = [];
+missedChars = [];
 
 damageDestructibles = false;
 

@@ -494,6 +494,7 @@ soundProfiles = {
 	plantDeath: [snd_plantDeath1, snd_plantDeath2, snd_plantDeath3],
 	
 	//sfx
+	dodge: [snd_dodge1, snd_dodge2, snd_dodge3, snd_dodge4],
 	fleshExplod: [snd_fleshExplode1, snd_fleshExplode2, snd_fleshExplode3],
 	burn: [snd_burn1, snd_burn2, snd_burn3],
 	microMissile: [snd_microMissile1, snd_microMissile2, snd_microMissile3],

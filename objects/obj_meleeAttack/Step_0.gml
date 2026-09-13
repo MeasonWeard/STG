@@ -45,6 +45,23 @@ if (instance_exists(source)) {
 				if (!instance_exists(char)) continue;
 				if (char.id == source.id) continue;
 				if (char.faction == source.faction) continue;
+				
+				var missedLen = array_length(missedChars);
+				var missed = false;
+				
+				for (var j = 0; j < missedLen; j++) {
+				
+					var missedChar = missedChars[j];
+					if (!instance_exists(missedChar)) continue;
+					
+					if (missedChar.id == char.id) {
+						missed = true;
+						break;
+					}
+				
+				}
+				
+				if (missed) continue;
 		
 				var col = false;
 				
@@ -85,36 +102,45 @@ if (instance_exists(source)) {
 						hitX = char.x;
 						hitY = char.y;
 						
-						doCollisionFuncs = true;
-					
 						var hitOutcome = scr_stats_hitOutcome(oa, char.finalStats.da);
 						
-						if (char.shield > 0) {
-							var snd = scr_audio_randomSoundFromProfile(shieldSounds);
-							if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
-						}
+						if (hitOutcome != 0) {
+							
+							doCollisionFuncs = true;
 						
-						var dealt = scr_char_damage(char, damage, damageTypes.melee, false, hitOutcome);
+							if (char.shield > 0) {
+								var snd = scr_audio_randomSoundFromProfile(shieldSounds);
+								if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
+							}
+						
+							var dealt = scr_char_damage(char, damage, damageTypes.melee, false, hitOutcome);
 					
-						if (lifeSteal > 0 and dealt > 0) {
+							if (lifeSteal > 0 and dealt > 0) {
 
-							var heal = (lifeSteal * 0.01) * dealt;
+								var heal = (lifeSteal * 0.01) * dealt;
 							
-							if (source.lifeStealForSelf) scr_char_heal(source, heal);
-							if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
+								if (source.lifeStealForSelf) scr_char_heal(source, heal);
+								if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
 							
-						}
+							}
 					
-						var dec = killThreshold * 0.01;
-						var threshHp = char.maxHp * dec;
-						if (char.hp <= threshHp) char.hp = 0;
+							var dec = killThreshold * 0.01;
+							var threshHp = char.maxHp * dec;
+							if (char.hp <= threshHp) char.hp = 0;
 				
-						var snd = scr_audio_randomSoundFromProfile(hitSounds);
-						if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
+							var snd = scr_audio_randomSoundFromProfile(hitSounds);
+							if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
 					
-						array_push(char.meleeHitList, self);
+							array_push(char.meleeHitList, self);
 					
-						if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
+							if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
+						
+						} else {
+						
+							array_push(missedChars, char);
+							scr_ui_dodgeText(char);
+						
+						}
 							
 					}
 

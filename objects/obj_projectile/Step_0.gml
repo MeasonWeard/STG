@@ -22,6 +22,7 @@ var keepDepth = false;
 
 //char collison
 var hash = global.stageController.charHash;
+var missedLen = array_length(missedChars);
 
 for (var k = 0; k < 9; k++) {
 	
@@ -39,6 +40,22 @@ for (var k = 0; k < 9; k++) {
 		if (!instance_exists(char)) continue;
 		if (sourceExists and char.id == source.id) continue;
 		if (char.faction == faction) continue;
+		
+		var missed = false;
+		
+		for (var j = 0; j < missedLen; j++) {
+		
+			var missedChar = missedChars[j];
+			if (!instance_exists(missedChar)) continue;
+			
+			if (missedChar.id == char.id) {
+				missed = true;
+				break;
+			}
+		
+		}
+		
+		if (missed) continue;
 	
 		var col = point_in_rectangle(nextX, nextY, char.colLeft, char.colTop, char.colRight, char.colBottom);
 	
@@ -69,46 +86,55 @@ for (var k = 0; k < 9; k++) {
 		
 			var hitOutcome = scr_stats_hitOutcome(oa, char.finalStats.da);
 		
-			var profile = char.shield > 0 ? shieldHitSounds : char.bulletHitSounds;
-			var snd = scr_audio_randomSoundFromProfile(profile);
-			if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
+			if (hitOutcome != 0) {
 		
-			var dealt = scr_char_damage(char, damage, damageTypes.projectile, false, hitOutcome);
+				var profile = char.shield > 0 ? shieldHitSounds : char.bulletHitSounds;
+				var snd = scr_audio_randomSoundFromProfile(profile);
+				if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF_BULLETHIT, MAX_FALLOFF_BULLETHIT, FALLOFF_FACTOR_BULLETHIT, false, 0);	
 		
-			if (lifeSteal > 0 and dealt > 0 and sourceExists) {
+				var dealt = scr_char_damage(char, damage, damageTypes.projectile, false, hitOutcome);
+		
+				if (lifeSteal > 0 and dealt > 0 and sourceExists) {
 						
-				var heal = (lifeSteal * 0.01) * dealt;
+					var heal = (lifeSteal * 0.01) * dealt;
 			
-				if (source.lifeStealForSelf) scr_char_heal(source, heal);
-				if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
+					if (source.lifeStealForSelf) scr_char_heal(source, heal);
+					if (source.lifeStealForOwner and instance_exists(source.owner)) scr_char_heal(source.owner, heal);
 							
-			}
+				}
 		
-			if (charHitReport) audio_play_sound(snd_hitMarker, 0, false);
-			if (instance_exists(global.player) and char == global.player) audio_play_sound(snd_playerHit, 0, false);
+				if (charHitReport) audio_play_sound(snd_hitMarker, 0, false);
+				if (instance_exists(global.player) and char == global.player) audio_play_sound(snd_playerHit, 0, false);
 
-			active = false;
+				active = false;
 	
-			var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
-			eff.sprite_index = destroyEffect;
-			eff.image_angle = image_angle;
+				var eff = instance_create_layer(safeX, safeY, "Instances", obj_bulletEffect);
+				eff.sprite_index = destroyEffect;
+				eff.image_angle = image_angle;
 		
-			var hitTop = (dir > 180 and dir < 360 and y <= char.colTop + spd);
+				var hitTop = (dir > 180 and dir < 360 and y <= char.colTop + spd);
 		
-			if (hitTop) {
-				eff.depth = char.depth + 1;
+				if (hitTop) {
+					eff.depth = char.depth + 1;
+				} else {
+					eff.depth = char.depth - 1;
+				}
+		
+				for (var j = 0; j < funcsLen; j ++) {
+					var func = collisionFuncs[j];
+					if (is_callable(func)) func(self);
+				}
+		
+				if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
+	
+				exit;
+			
 			} else {
-				eff.depth = char.depth - 1;
+				
+				scr_ui_dodgeText(char);
+				array_push(missedChars, char);
+				
 			}
-		
-			for (var j = 0; j < funcsLen; j ++) {
-				var func = collisionFuncs[j];
-				if (is_callable(func)) func(self);
-			}
-		
-			if (is_callable(char.bulletHitFunc)) char.bulletHitFunc(self, char);
-	
-			exit;
 		
 		}
 	

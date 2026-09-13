@@ -1,20 +1,22 @@
 OFFENSIVE ABILITY / DEFENSIVE ABILITY
 
-Offensive Ability (OA) represents your ability to land effective attacks, while Defensive Ability (DA) represents 
-your ability to avoid them. Having higher OA than your target's DA increases your chance to score Critical Hits,
-while having lower OA increases your chance to deal Glancing Blows. Likewise, increasing your DA makes enemy 
-Critical Hits less likely and Glancing Blows more likely.
+Offensive Ability (OA) represents your ability to land effective attacks, while Defensive Ability (DA) represents your ability to avoid them.
+Having higher OA than your target's DA increases your chance to score Critical Hits, while having lower OA increases the chance for your attacks
+to be Glancing Blows or Dodged entirely. Likewise, increasing your DA makes enemy Critical Hits less likely and increases your chance to reduce
+or completely avoid incoming damage.
 
-Critical Hits deal double damage. If your Critical Hit chance exceeds 100%, the excess becomes a chance to score
-a Double Critical Hit for triple damage. If it exceeds 200%, the excess becomes a chance for a Triple Critical Hit 
-for quadruple damage, and so on.
+Critical Hits deal double damage. If your Critical Hit chance exceeds 100%, the excess becomes a chance to score a Double Critical Hit for triple
+damage. If it exceeds 200%, the excess becomes a chance for a Triple Critical Hit for quadruple damage, and so on.
 
-Glancing Blows always deal half damage.
+Glancing Blows deal half damage. When a Glancing Blow is triggered, the same chance is rolled again. If successful, the attack is Dodged instead
+and deals no damage.
 
 If OA and DA are within 10 points of each other, attacks deal normal damage.
 
 Critical Hit Chance: (Attacker OA - Defender DA) / 2
-Glancing Blow Chance: (Defender DA - Attacker OA) / 3
+Defensive Outcome Chance: (Defender DA - Attacker OA) / 2
 
 For example, an OA advantage of 50 gives 50 / 2 = 25%, or a 1 in 4 chance to Crit.
-A DA advantage of 50 gives 50 / 3 = 16.7%, or roughly a 1 in 6 chance for the attack to be a Glancing Blow.
+
+A DA advantage of 50 gives 50 / 2 = 25% chance for a defensive outcome. If successful, that 25% chance is rolled again to determine whether the
+attack is Dodged instead of becoming a Glancing Blow.

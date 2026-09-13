@@ -431,6 +431,22 @@ function scr_ui_risingNumbers(xx, yy, num, col) {
 	
 }
 
+function scr_ui_dodgeText(char) {
+
+	static sounds = global.data.soundProfiles.dodge;
+
+	var col = c_white;
+
+	var px = char.x;
+	var py = char.y - char.sprite_height * 0.75;
+	
+	scr_ui_risingNumbers(px, py, "DODGE!", col);
+	
+	var snd = scr_randomElement(sounds);
+	scr_audio_playSoundAt(snd, char.x, char.y);
+	
+}
+
 function scr_ui_damageNumbers(amount, char, hitOutcome = 1) {
 
 	if (amount != 0) {

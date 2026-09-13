@@ -1,7 +1,7 @@
 function scr_projectiles_get() {
 	
 	var pool = global.stageController.projectilePool;
-	var len = global.stageController.procectilePoolLen;
+	var len = global.stageController.projectilePoolLen;
 	
 	for (var i = 0; i < len; i++) {
 		
@@ -33,6 +33,7 @@ function scr_projectiles_create(xx, yy, dir, spd, range, sprite, damage, source,
 	proj.damage = damage;
 	proj.source = source;
 	proj.rangeLeft = range;
+	proj.missedChars = [];
 	
 	proj.height = irandom_range(1, 100);
 	
