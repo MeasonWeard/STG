@@ -473,14 +473,18 @@ function scr_skills_getRadiationSicknessData(source) {
 	
 	var dat = {
 		chance: 0,
-		damage: undefined
+		damage: undefined,
+		hasDecay: false
 	}
 	
 	if (!instance_exists(source)) return dat;
 	
 	var sk = scr_skills_findCharSkill("radiationSickness", source);
+	var dc = scr_skills_findCharSkill("decay", source);
 	
 	if (!is_struct(sk)) return dat;
+	
+	if (is_struct(dc)) dat.hasDecay = true;
 	
 	dat.chance = sk.chance;
 	dat.damage = sk.damage;
@@ -638,6 +642,8 @@ function scr_skills_getRadiationSicknessData(source) {
 		range = 380;
 		pullRange = 600;
 		txtCol = c_white;
+		radSickChance = 0;
+		radSickDamage = 0;
 		
 		levelReq = 5;
 
@@ -672,6 +678,10 @@ function scr_skills_getRadiationSicknessData(source) {
 				damage.rad = ceil(damage.kin * dec);
 				
 				array_push(damKeys, "rad");
+				
+				var rs = scr_skills_getRadiationSicknessData(source);
+				radSickChance = rs.chance;
+				radSickDamage = rs.damage;
 			
 			}
 			
@@ -711,6 +721,8 @@ function scr_skills_getRadiationSicknessData(source) {
 			s.pullRange = pullRange;
 			s.damage = damage;
 			s.faction = source.faction;
+			s.radSickChance = radSickChance;
+			s.radSickDamage = radSickDamage;
 
 			return true;
 			
