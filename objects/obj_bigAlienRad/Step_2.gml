@@ -19,7 +19,7 @@ if (setupIr > 0) {
 	var irFreq = 0.25 + efflvl * 0.0125;
 	var irRadius = 175 + efflvl * 10;
 	
-	var ir = instance_create_layer(x, y, "Instances", obj_irradiated);
+	var ir = instance_create_layer(x, y, "Instances", obj_ionizingField);
 	
 	ir.damage = irDamage;
 	ir.freq = irFreq;

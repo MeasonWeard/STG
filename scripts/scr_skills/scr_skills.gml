@@ -373,8 +373,10 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 		var poolDam = sk.poolDam;
 		var poolLife = sk.poolLife;
 		var poolRadius = sk.poolRadius;
+		var caster = source;
 				
 		inst.bioBombData = {
+			caster: caster,
 			damPerc: damPerc,
 			poolDam: poolDam,
 			poolLife: poolLife,
@@ -397,9 +399,9 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 	
 }
 	
-function scr_skills_applyIrradiated(inst, source) {
+function scr_skills_applyIonizingField(inst, source) {
 
-	var sk = scr_skills_findCharSkill("irradiated", source);
+	var sk = scr_skills_findCharSkill("ionizingField", source);
 	
 	if (is_struct(sk)) {
 	
@@ -407,9 +409,10 @@ function scr_skills_applyIrradiated(inst, source) {
 		var freq = sk.freq;
 		var radius = sk.radius;
 	
-		var ir = instance_create_layer(source.x, source.y, "Instances", obj_irradiated);
+		var ir = instance_create_layer(source.x, source.y, "Instances", obj_ionizingField);
 		
 		ir.owner = inst;
+		ir.caster = source;
 		ir.damage = damage;
 		ir.freq = freq;
 		ir.radius = radius;
@@ -463,6 +466,26 @@ function scr_skills_applyCrisper(inst, source) {
 		inst.baseStats.maxHpPerc += hpPerc;
 
 	}
+	
+}
+	
+function scr_skills_getRadiationSicknessData(source) {
+	
+	var dat = {
+		chance: 0,
+		damage: undefined
+	}
+	
+	if (!instance_exists(source)) return dat;
+	
+	var sk = scr_skills_findCharSkill("radiationSickness", source);
+	
+	if (!is_struct(sk)) return dat;
+	
+	dat.chance = sk.chance;
+	dat.damage = sk.damage;
+	
+	return dat;
 	
 }
 	
@@ -1509,7 +1532,7 @@ function scr_skills_applyCrisper(inst, source) {
 			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
-			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyIonizingField(inst, source);
 			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
@@ -1625,7 +1648,7 @@ function scr_skills_applyCrisper(inst, source) {
 			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
-			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyIonizingField(inst, source);
 			scr_skills_applyVolatile(inst, source);
 
 			scr_audio_playSoundAt(snd_alienShoot2, xx, yy);
@@ -1717,7 +1740,7 @@ function scr_skills_applyCrisper(inst, source) {
 			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
-			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyIonizingField(inst, source);
 			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
@@ -1879,7 +1902,7 @@ function scr_skills_applyCrisper(inst, source) {
 				scr_skills_applyCrisper(inst, source);
 			
 				//irradiated
-				scr_skills_applyIrradiated(inst, source);
+				scr_skills_applyIonizingField(inst, source);
 				scr_skills_applyVolatile(inst, source);
 			
 			}
@@ -2168,7 +2191,7 @@ function scr_skills_applyCrisper(inst, source) {
 			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
-			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyIonizingField(inst, source);
 			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
@@ -2254,7 +2277,7 @@ function scr_skills_applyCrisper(inst, source) {
 			scr_skills_applyCrisper(inst, source);
 			
 			//irradiated
-			scr_skills_applyIrradiated(inst, source);
+			scr_skills_applyIonizingField(inst, source);
 			scr_skills_applyVolatile(inst, source);
 
 			if (instance_exists(inst)) return true;
@@ -2295,10 +2318,49 @@ function scr_skills_applyCrisper(inst, source) {
 	
 	}
 	
-	function skill_irradiated() : skill() constructor {
+	function skill_radiationSickness() : skill() constructor {
 
-		name = "Irradiated";
-		key = "irradiated";
+		name = "Radiation Sickness";
+		key = "radiationSickness";
+		icon = spr_icon_forceField;
+		maxLevel = 9;
+		damage = undefined;
+		chance = 0;
+		
+		levelReq = 10;
+	
+		description = "Certain skills have a chance of applying irradiated to";
+		description += "\nenemies, causing them to take damage over time.";
+		description += "\n\nApplies to:";
+		description += "\n- Radioactive Weapons\n- Ionizing Field\n- Any skill affected by Decay";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Irradiate Chance: " + string(chance) + "%";
+			statsDescription += "\nDamage: " + string(damage.rad * 12) + " radiation over 12s";
+			
+		}
+		
+		static setupFunc = function(source) {
+	
+			chance = 12 + (level - 1) * 3;
+	
+			damage = new damageProfile();
+	
+			damage.rad = 5 + (level - 1) * 2;
+
+			var damKeys = ["rad"];
+	
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
+	
+		}
+		
+	}
+	
+	function skill_ionizingField() : skill() constructor {
+
+		name = "Ionizing Field";
+		key = "ionizingField";
 		icon = spr_icon_irradiated;
 		txtCol = c_white;
 		maxLevel = 9;
@@ -2334,7 +2396,8 @@ function scr_skills_applyCrisper(inst, source) {
 		
 		static extraEffects = function(source) {
 		
-			var ir = instance_create_layer(source.x, source.y, "Instances", obj_irradiated);
+			var ir = instance_create_layer(source.x, source.y, "Instances", obj_ionizingField);
+			ir.caster = source;
 			ir.owner = source;
 			ir.damage = damage;
 			ir.freq = freq;
@@ -2556,7 +2619,7 @@ function scr_skills_applyCrisper(inst, source) {
 		static formatStatsDescription = function() {
 		
 			statsDescription = "Burn Chance: " + string(burnChance) + "%";
-			statsDescription += "\nDamage: " + string(burnDamage.fire * 8) + " over 8s";
+			statsDescription += "\nDamage: " + string(burnDamage.fire * 8) + " fire over 8s";
 			
 		}
 		
@@ -2571,6 +2634,43 @@ function scr_skills_applyCrisper(inst, source) {
 			var damKeys = ["fire"];
 	
 			burnDamage = scr_stats_calculateSkillDamage(source, burnDamage, damKeys);
+	
+		}
+		
+	}
+	
+	function skill_caustic() : skill() constructor {
+
+		name = "Caustic";
+		key = "caustic";
+		icon = spr_icon_acidFlasks;
+		maxLevel = 9;
+		damage = undefined;
+		chance = 0;
+		
+		levelReq = 10;
+	
+		description = "Acid pools and noxious gas have a chance to corrode";
+		description += "\nenemies, causing them to take damage over time.";
+		
+		static formatStatsDescription = function() {
+		
+			statsDescription = "Corrode Chance: " + string(chance) + "%";
+			statsDescription += "\nDamage: " + string(damage.chem * 8) + " chemical over 8s";
+			
+		}
+		
+		static setupFunc = function(source) {
+	
+			chance = 12 + (level - 1) * 3;
+	
+			damage = new damageProfile();
+	
+			damage.chem = 6 + (level - 1) * 3;
+
+			var damKeys = ["chem"];
+	
+			damage = scr_stats_calculateSkillDamage(source, damage, damKeys);
 	
 		}
 		
@@ -2644,6 +2744,7 @@ function scr_skills_applyCrisper(inst, source) {
 			var vt = instance_create_layer(source.x, source.y, "Instances", obj_volatile);
 			
 			vt.owner = source;
+			vt.caster = source;
 			vt.chance = chance;
 			
 			vt.expDam = expDam;

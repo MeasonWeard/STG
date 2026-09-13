@@ -45,6 +45,8 @@ if (tick > 0) {
 		if (!scr_physics_hasLineOfSight(x, y, char.x, char.y)) continue;
 		
 		scr_char_damage(char, damage, damageTypes.ability, true);
+		
+		if (scr_random_chance(radSickChance)) scr_effects_applyIrradiated(char, radSickDamage);
 	
 	}
 	

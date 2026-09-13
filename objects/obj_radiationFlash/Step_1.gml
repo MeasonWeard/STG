@@ -24,6 +24,8 @@ if (dealDamage) {
 			if (dist > radius) continue;
 				
 			scr_char_damage(char, damage, undefined, false);
+			
+			if (scr_random_chance(radSickChance)) scr_effects_applyIrradiated(char, radSickDamage);
 					
 		}
 		

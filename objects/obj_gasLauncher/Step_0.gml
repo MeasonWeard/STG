@@ -31,6 +31,8 @@ if (shooTick > 0) {
 	var spd = lerp(minSpd, maxSpd, perc);
 	
 	var gas = instance_create_layer(x, y, "Instances", obj_gas);
+	gas.corrodeChance = corrodeChance;
+	gas.corrodeDamage = corrodeDamage;
 	gas.faction = faction;
 	gas.dir = irandom_range(minDir, maxDir);
 	gas.life = irandom_range(minLife, maxLife);

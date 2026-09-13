@@ -4,6 +4,8 @@ dir = 0;
 spd = 0;
 rot = 0;
 
+caster = noone;
+
 damage = undefined;
 life = 4;
 radius = 10;

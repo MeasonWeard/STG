@@ -1,18 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_burn",
-  "eventList":[],
+  "%Name":"obj_dot",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_burn",
+  "name":"obj_dot",
   "overriddenProperties":[],
   "parent":{
     "name":"Skills",
     "path":"folders/Objects/Skills.yy",
   },
-  "parentObjectId":{
-    "name":"obj_dot",
-    "path":"objects/obj_dot/obj_dot.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_littleFlame",
-    "path":"sprites/spr_littleFlame/spr_littleFlame.yy",
+    "name":"spr_missing",
+    "path":"sprites/spr_missing/spr_missing.yy",
   },
   "spriteMaskId":null,
   "visible":true,

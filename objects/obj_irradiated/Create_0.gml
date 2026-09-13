@@ -1,18 +1,12 @@
-sc = global.stageController;
+// Inherit the parent event
+event_inherited();
 
-owner = noone;
-faction = undefined;
-damage = undefined;
-radius = 100;
-freq = 0.25;
+sounds = [snd_irradiated];
 
-depth = layers.effects;
+image_alpha = 0;
 
-time = 0;
-tick = 0;
-
-pulse = 0;
-
-setup = true;
-
-delay = true;
+minPulse = 8;
+maxPulse = 16;
+pulseSpeed = 0.33;
+pulse = random_range(minPulse, maxPulse);
+pulseDir = choose(-1, 1);

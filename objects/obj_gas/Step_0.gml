@@ -83,6 +83,8 @@ if (damTick > 0) {
 					var dam = isBio? scr_stats_multiplyDamageProfile(damage, dec) : damage;
 			
 					scr_char_damage(char, dam, undefined, true);
+					
+					applyCorrode(char);
 			
 					var snd = scr_audio_randomSoundFromProfile(damSounds);
 					scr_audio_playSoundAt(snd, x, y);

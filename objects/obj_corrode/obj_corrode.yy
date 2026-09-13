@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_burn",
+  "%Name":"obj_corrode",
   "eventList":[],
   "managed":true,
-  "name":"obj_burn",
+  "name":"obj_corrode",
   "overriddenProperties":[],
   "parent":{
     "name":"Skills",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_littleFlame",
-    "path":"sprites/spr_littleFlame/spr_littleFlame.yy",
+    "name":"spr_littleAcidBubbles",
+    "path":"sprites/spr_littleAcidBubbles/spr_littleAcidBubbles.yy",
   },
   "spriteMaskId":null,
   "visible":true,

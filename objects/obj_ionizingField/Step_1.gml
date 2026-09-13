@@ -8,4 +8,8 @@ if (setup) {
 	
 	if (instance_exists(owner)) faction = owner.faction;
 	
+	var sk = scr_skills_getRadiationSicknessData(caster);
+	radSickChance = sk.chance;
+	radSickDamage = sk.damage;
+	
 }

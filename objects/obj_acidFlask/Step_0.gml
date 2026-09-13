@@ -24,6 +24,7 @@ if (smashTick > 0) {
 	scr_audio_playSoundAt(snd, x, y);
 	
 	var pool = instance_create_layer(x, y, "Instances", obj_acidPool);
+	pool.caster = caster;
 	pool.life = poolLife;
 	pool.radius = radius;
 	pool.damage = damage;

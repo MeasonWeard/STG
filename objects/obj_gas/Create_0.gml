@@ -9,6 +9,8 @@ cellY = undefined;
 
 faction = undefined;
 
+launcher = noone;
+
 image_speed = 0;
 image_index = irandom_range(0, image_number - 1);
 image_alpha = 0.5 + random_range(-0.1, 0.1);
@@ -42,4 +44,16 @@ damSounds = [snd_gasHurt];
 charges = 4;
 
 height = irandom_range(25, 99);
-//rot = random_range(-2, 2);
+
+setupCorrode = true;
+corrodeChance = 0;
+corrodeDamage = undefined;
+
+applyCorrode = function(char) {
+	
+	if (corrodeChance <= 0) exit;
+	if (!scr_random_chance(corrodeChance)) exit;
+	
+	scr_effects_applyCorrode(char, corrodeDamage);
+	
+}

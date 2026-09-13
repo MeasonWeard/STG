@@ -520,13 +520,15 @@ skillConstructors = {
 	vacuumEnergy: skill_vacuumEnergy, //phys
 	predictiveModelling: skill_predictiveModelling, //phys
 	decay: skill_decay, //phys,
-	irradiated: skill_irradiated, //phys
+	ionizingField: skill_ionizingField, //phys
+	radiationSickness: skill_radiationSickness, //phys
 	
 	acidFlasks: skill_acidFlasks, //chem	
 	flamethrower: skill_flamethrower, //chem
 	thermiteCharge: skill_thermiteCharge, //chem
 	napalm: skill_napalm, //chem
 	combatStimulant: skill_combatStimulant, //chem
+	caustic: skill_caustic, //chem
 	
 	PPE: skill_PPE, //chem
 	medicalSynthesis: skill_medicalSynthesis, //chem

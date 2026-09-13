@@ -65,6 +65,7 @@ function scr_effects_bioBomb(char) {
 	var poolDam = dat.poolDam;
 	var poolLife = dat.poolLife;
 	var poolRad = dat.poolRadius;
+	var caster = dat.caster;
 	
 	var dam = hp * (damPerc * 0.01);
 	var rad = clamp(10 * dam, 20, 240);
@@ -93,6 +94,7 @@ function scr_effects_bioBomb(char) {
 		var pt = scr_randomPointInCircle(char.x, char.y, rad);
 
 		var pool = instance_create_layer(pt.xx, pt.yy, "Instances", obj_acidPool);
+		pool.caster = caster;
 		pool.faction = char.faction;
 		pool.life = poolLife;
 		pool.damage = poolDam;
@@ -128,11 +130,12 @@ function scr_effects_acidicBullet(att) {
 	if (is_undefined(sk)) exit;
 	
 	var chance = sk.chance;
+	
+	if (!scr_random_chance(chance)) exit;
+	
 	var damage = sk.damage;
 	var radius = sk.radius;
 	var life = sk.life;
-	
-	if (!scr_random_chance(chance)) exit;
 	
 	var xx = att.x;
 	var yy = att.y;
@@ -144,6 +147,7 @@ function scr_effects_acidicBullet(att) {
 	
 	var pool = instance_create_layer(xx, yy, "Instances", obj_acidPool);
 	
+	pool.caster = att.source;
 	pool.damage = damage;
 	pool.radius = radius;
 	pool.life = life;
@@ -160,11 +164,12 @@ function scr_effects_incendiaryBullet(att) {
 	if (is_undefined(sk)) exit;
 	
 	var chance = sk.chance;
+
+	if (!scr_random_chance(chance)) exit;
+	
 	var damage = sk.damage;
 	var radius = sk.radius;
 	var life = sk.life;
-	
-	if (!scr_random_chance(chance)) exit;
 	
 	var xx = att.x;
 	var yy = att.y;
@@ -192,10 +197,12 @@ function scr_effects_radioactiveBullet(att) {
 	if (is_undefined(sk)) exit;
 	
 	var chance = sk.chance;
-	var damage = sk.damage;
-	var radius = sk.radius;
 	
 	if (!scr_random_chance(chance)) exit;
+	
+	var damage = sk.damage;
+	var radius = sk.radius;
+	var radSick = scr_skills_getRadiationSicknessData(att.source);
 	
 	var xx = att.x;
 	var yy = att.y;
@@ -207,6 +214,8 @@ function scr_effects_radioactiveBullet(att) {
 	
 	var flash = instance_create_layer(xx, yy, "Instances", obj_radiationFlash);
 	
+	flash.radSickChance = radSick.chance;
+	flash.radSickDamage = radSick.damage;
 	flash.damage = damage;
 	flash.radius = radius;
 	flash.faction = att.source.faction;
@@ -222,10 +231,11 @@ function scr_effects_electricBullet(att) {
 	if (is_undefined(sk)) exit;
 	
 	var chance = sk.chance;
+
+	if (!scr_random_chance(chance)) exit;
+	
 	var damage = sk.damage;
 	var targets = sk.targets;
-	
-	if (!scr_random_chance(chance)) exit;
 	
 	var xx = att.x;
 	var yy = att.y;
@@ -240,5 +250,67 @@ function scr_effects_electricBullet(att) {
 	shock.damage = damage;
 	shock.targets = targets;
 	shock.faction = att.source.faction;
+	
+}
+
+function scr_effects_applyDot(tagString, char, damage, ticks, type = obj_dot, spr = undefined) {
+
+	if (!instance_exists(char)) exit;
+	if (!object_is_ancestor(type, obj_dot) and type != obj_dot) exit;
+	
+	if (!variable_instance_exists(char, tagString)) {
+		variable_instance_set(char, tagString, noone);
+	}
+
+	var dot = variable_instance_get(char, tagString);
+	
+	if (!instance_exists(dot)) {
+	
+		var thisDot = instance_create_layer(char.x, char.y, "Instances", type);
+	
+		variable_instance_set(char, tagString, thisDot);
+		thisDot.owner = char;
+		
+		thisDot.ticks = ticks;
+		thisDot.damage = damage;
+		if (!is_undefined(spr)) thisDot.sprite_index = spr;
+		
+		return thisDot;
+
+	} else {
+		
+		dot.ticks = ticks;
+		
+		var newDamage = scr_stats_getDamageTotal(damage);
+		var oldDamage = scr_stats_getDamageTotal(dot.damage);
+		
+		if (newDamage > oldDamage) {
+			dot.damage = damage;
+		}
+		
+		return dot;
+		
+	}
+	
+}
+
+function scr_effects_applyBurn(char, damage) {
+
+	var burn = scr_effects_applyDot("burn", char, damage, 8, obj_burn);
+	return burn;
+	
+}
+
+function scr_effects_applyCorrode(char, damage) {
+	
+	var corrode = scr_effects_applyDot("corrode", char, damage, 8, obj_corrode);
+	return corrode;
+	
+}
+
+function scr_effects_applyIrradiated(char, damage) {
+	
+	var irradiated = scr_effects_applyDot("irradiated", char, damage, 12, obj_irradiated);
+	return irradiated;
 	
 }

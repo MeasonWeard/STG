@@ -1105,3 +1105,25 @@ function scr_stats_getHighestDamPerc(char) {
 	return highestKey;
 
 }
+
+function scr_stats_getDamageTotal(damage) {
+
+	if (!is_struct(damage)) return 0;
+
+	var total = 0;
+
+	var keys = ["kin", "fire", "chem", "elec", "rad"];
+
+	for (var i = 0; i < array_length(keys); i++) {
+
+		var key = keys[i];
+
+		if (variable_struct_exists(damage, key)) {
+			total += damage[$ key];
+		}
+
+	}
+
+	return total;
+
+}

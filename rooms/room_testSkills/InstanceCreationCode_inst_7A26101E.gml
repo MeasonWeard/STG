@@ -1,1 +1,1 @@
-const = skill_irradiated;
+const = skill_ionizingField;

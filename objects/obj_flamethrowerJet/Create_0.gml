@@ -20,29 +20,8 @@ burnDamage = undefined;
 applyBurn = function(char) {
 	
 	if (burnChance <= 0) exit;
-	if (!instance_exists(char)) exit;
 	if (!scr_random_chance(burnChance)) exit;
 	
-	if (!variable_instance_exists(char, "burn")) char.burn = noone;
-	
-	if (!instance_exists(char.burn)) {
-	
-		var burn = instance_create_layer(char.x, char.y, "Instances", obj_burn);
-	
-		char.burn = burn;
-		burn.owner = char;
-		
-		burn.ticks = 8;
-		burn.damage = burnDamage;
-
-	} else {
-		
-		var burn = char.burn;
-		
-		burn.ticks = 8;
-		
-		if (burnDamage > burn.damage.fire) burn.damage = burnDamage;
-		
-	}
+	scr_effects_applyBurn(char, burnDamage);
 	
 }

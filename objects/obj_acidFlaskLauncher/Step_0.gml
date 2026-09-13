@@ -25,6 +25,7 @@ if (shootTick > 0) {
 	var off = dirOffset + totalProjectiles * 0.75;
 	
 	var flask = instance_create_layer(x, y, "Instances", obj_acidFlask);
+	flask.caster = owner;
 	flask.dir = dir + irandom_range(-off, off);
 	flask.spd = spd;
 	flask.damage = damage;

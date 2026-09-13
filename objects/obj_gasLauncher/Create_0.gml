@@ -14,4 +14,7 @@ setup = true;
 maxSpd = 2.8;
 minSpd = 2;
 
+corrodeChance = 0;
+corrodeDamage = undefined;
+
 scr_audio_playSoundAt(snd_gasBurst, x, y);
