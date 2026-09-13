@@ -3101,15 +3101,18 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 		static setupFunc = function(source) {
 	
+			var res = 1 + level + floor(level / 2);
+			var maxHp = level * 10 + ceil(level / 2) * 5;
+
 			passives = {
-	
-				maxHp: 10 * level,
-				kinRes: level,
-				fireRes: level,
-				chemRes: level,
-				elecRes: level,
-				radRes: level
-	
+
+				maxHp: maxHp,
+				kinRes: res,
+				fireRes: res,
+				chemRes: res,
+				elecRes: res,
+				radRes: res
+
 			};
 	
 		}
@@ -3178,8 +3181,8 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 			passives = {
 	
-				maxHpPerc : 5 * level,
-				hpRegen: 0.25 * level
+				maxHpPerc : 5 + (level * 3),
+				hpRegen: 0.25 + 0.25 * level
 	
 			};
 	
