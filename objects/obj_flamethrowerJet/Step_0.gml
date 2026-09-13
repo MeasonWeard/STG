@@ -5,9 +5,6 @@ if (!instance_exists(controller)) {
 	exit;
 }
 
-burnChance = controller.burnChance;
-burnDamage = controller.burnDamage;
-
 var ang = controller.orbitAngle + angleOffset;
 
 // Anchor the blade's sprite origin to the orbit circle
@@ -42,8 +39,9 @@ if (damTick > 0) {
 				
 			scr_char_damage(char, damage, undefined, false);
 			
-			applyBurn(char);
-				
+			if (scr_random_chance(burnChance)) scr_effects_applyBurn(char, burnDamage);
+			if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(char, irradiateDamage);
+			
 			var snd = scr_audio_randomSoundFromProfile(damageSounds);
 			if (snd != undefined) scr_audio_playSoundAt(snd, x, y); 
 			

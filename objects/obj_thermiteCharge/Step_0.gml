@@ -13,6 +13,8 @@ if (tick <= 0) {
 	var ex = scr_effects_explosion(x, y, 8);
 	ex.damage = damage;
 	ex.faction = faction;
+	ex.irradiateChance = irradiateChance;
+	ex.irradiateDamage = irradiateDamage;
 	
 	var burn = instance_create_layer(x, y, "Instances", obj_burningGround);
 	burn.caster = owner;

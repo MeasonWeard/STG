@@ -17,4 +17,9 @@ if (setup) {
 	
 	}
 	
+	var ir = scr_skills_getRadiationSicknessData(owner, true);
+	
+	irradiateChance = ir.chance;
+	irradiateDamage = ir.damage;
+	
 }

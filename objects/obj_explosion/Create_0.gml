@@ -20,3 +20,7 @@ firstStep = true;
 damage = undefined;
 
 faction = undefined;
+
+//dot
+irradiateChance = 0;
+irradiateDamage = undefined;

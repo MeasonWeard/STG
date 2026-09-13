@@ -34,6 +34,8 @@ if (doDamage) {
 			var dam = isMech? scr_stats_multiplyDamageProfile(damage, dec) : damage;
 			
 			scr_char_damage(char, dam, undefined, false);
+			
+			if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(char, irradiateDamage);
 		
 		}
 				

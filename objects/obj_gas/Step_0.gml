@@ -84,8 +84,9 @@ if (damTick > 0) {
 			
 					scr_char_damage(char, dam, undefined, true);
 					
-					applyCorrode(char);
-			
+					if (scr_random_chance(corrodeChance)) scr_effects_applyCorrode(char, corrodeDamage);
+					if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(char, irradiateDamage);
+					
 					var snd = scr_audio_randomSoundFromProfile(damSounds);
 					scr_audio_playSoundAt(snd, x, y);
 			

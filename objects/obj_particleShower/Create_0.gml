@@ -16,6 +16,9 @@ particleFreq = 1;
 particleTick = 0;
 particleTick2 = 0;
 
+irradiateChance = 0;
+irradiateDamage = undefined;
+
 setup = true;
 depth = layers.groundDecorations;
 

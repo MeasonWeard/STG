@@ -16,4 +16,7 @@ jitterAlpha = 3;
 
 doDamage = true;
 
+irradiateChance = 0;
+irradiateDamage = undefined;
+
 depth = layers.effects;

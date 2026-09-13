@@ -4,6 +4,8 @@ damage = new damageProfile();
 depth = layers.effects;
 image_alpha = 0.85;
 
+irradiateChance = 0;
+irradiateDamage = undefined;
 
 setup = true;
 

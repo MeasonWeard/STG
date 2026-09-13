@@ -9,8 +9,8 @@
   "name":"obj_tendril",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Skills",
+    "path":"folders/Objects/Skills.yy",
   },
   "parentObjectId":{
     "name":"obj_physical",

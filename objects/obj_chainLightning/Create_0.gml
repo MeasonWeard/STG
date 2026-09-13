@@ -27,3 +27,6 @@ chainOriginPos = [];
 firstZap = true;
 
 range = 600;
+
+irradiateChance = 0;
+irradiateDamage = undefined;

@@ -20,7 +20,7 @@ chars = [];
 
 getCharsTick = 0;
 
-radSickChance = 0;
-radSickDamage = undefined;
+irradiateChance = 0;
+irradiateDamage = undefined;
 
 scr_audio_playSoundAt(snd_singularity, x, y, false);

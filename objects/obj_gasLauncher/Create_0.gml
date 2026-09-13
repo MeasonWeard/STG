@@ -17,4 +17,7 @@ minSpd = 2;
 corrodeChance = 0;
 corrodeDamage = undefined;
 
+irradiateChance = 0;
+irradiateDamage = undefined;
+
 scr_audio_playSoundAt(snd_gasBurst, x, y);

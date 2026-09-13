@@ -14,6 +14,8 @@ orbitSpd = -1.6;
 
 burnChance = 0;
 burnDamage = undefined;
+irradiateChance = 0;
+irradiateDamage = undefined;
 
 jets = [];
 

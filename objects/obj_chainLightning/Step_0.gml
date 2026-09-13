@@ -25,6 +25,9 @@ if (firstZap) {
 
 		scr_char_damage(firstChar, damage, damageTypes.ability, false);
 		instance_create_layer(zapX, zapY, "Instances", obj_doubleZap);
+		
+		if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(firstChar, irradiateDamage);
+		
 	}
 }
 
@@ -106,6 +109,7 @@ if (chainTick <= 0 and chainsDone < chains) {
 
 		if (!is_undefined(damage)) {
 			scr_char_damage(found, damage, damageTypes.ability, false);
+			if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(found, irradiateDamage);
 		}
 		
 		damage = scr_stats_multiplyDamageProfile(damage, 0.75);

@@ -36,6 +36,8 @@ if (firstStep) {
 			var finalDamage = scr_stats_multiplyDamageProfile(damage, mult);
 			
 			scr_char_damage(char, finalDamage, undefined, true);
+			
+			if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(char, irradiateDamage);
 		
 		}
 		

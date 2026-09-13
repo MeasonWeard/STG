@@ -66,6 +66,8 @@ function scr_effects_bioBomb(char) {
 	var poolLife = dat.poolLife;
 	var poolRad = dat.poolRadius;
 	var caster = dat.caster;
+	var irradiateChance = dat.irradiateChance;
+	var irradiateDamage = dat.irradiateDamage;
 	
 	var dam = hp * (damPerc * 0.01);
 	var rad = clamp(10 * dam, 20, 240);
@@ -85,6 +87,8 @@ function scr_effects_bioBomb(char) {
 	explosion.radius = rad;
 	explosion.sounds = [snd_fleshExplode1, snd_fleshExplode2, snd_fleshExplode3];
 	explosion.damage = damage;
+	explosion.irradiateChance  = irradiateChance;
+	explosion.irradiateDamage = irradiateDamage;
 	
 	explosion.faction = char.faction;
 	explosion.col = c_green;
@@ -118,6 +122,23 @@ function scr_effects_explodingProjectile(proj) {
 	explosion.sounds = global.data.soundProfiles.microMissile;
 	explosion.damage = proj.damage;
 	explosion.faction = proj.faction;
+	
+	return explosion;
+	
+}
+
+function scr_effects_antimatter(proj) {
+
+	var irradiateChance = 0;
+	var irradiateDamage = undefined;
+	
+	if (variable_instance_exists(proj, "irradiateChance")) irradiateChance = proj.irradiateChance;
+	if (variable_instance_exists(proj, "irradiateDamage")) irradiateDamage = proj.irradiateDamage;
+	
+	var ex = scr_effects_explodingProjectile(proj);
+	
+	ex.irradiateChance = irradiateChance;
+	ex.irradiateDamage = irradiateDamage;
 	
 }
 
@@ -202,7 +223,7 @@ function scr_effects_radioactiveBullet(att) {
 	
 	var damage = sk.damage;
 	var radius = sk.radius;
-	var radSick = scr_skills_getRadiationSicknessData(att.source);
+	var radSick = scr_skills_getRadiationSicknessData(att.source, false);
 	
 	var xx = att.x;
 	var yy = att.y;
@@ -214,8 +235,8 @@ function scr_effects_radioactiveBullet(att) {
 	
 	var flash = instance_create_layer(xx, yy, "Instances", obj_radiationFlash);
 	
-	flash.radSickChance = radSick.chance;
-	flash.radSickDamage = radSick.damage;
+	flash.irradiateChance = radSick.chance;
+	flash.irradiateDamage = radSick.damage;
 	flash.damage = damage;
 	flash.radius = radius;
 	flash.faction = att.source.faction;

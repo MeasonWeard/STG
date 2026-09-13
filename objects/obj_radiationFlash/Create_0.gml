@@ -10,7 +10,7 @@ charHash = global.stageController.charHash;
 
 damageSounds = global.data.soundProfiles.emp;
 
-radSickChance = 0;
-radSickDamage = undefined;
+irradiateChance = 0;
+irradiateDamage = undefined;
 
 depth = layers.effects;

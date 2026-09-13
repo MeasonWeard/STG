@@ -45,15 +45,7 @@ charges = 4;
 
 height = irandom_range(25, 99);
 
-setupCorrode = true;
 corrodeChance = 0;
 corrodeDamage = undefined;
-
-applyCorrode = function(char) {
-	
-	if (corrodeChance <= 0) exit;
-	if (!scr_random_chance(corrodeChance)) exit;
-	
-	scr_effects_applyCorrode(char, corrodeDamage);
-	
-}
+irradiateChance = 0;
+irradiateDamage = undefined;

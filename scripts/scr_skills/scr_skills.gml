@@ -381,7 +381,9 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			poolDam: poolDam,
 			poolLife: poolLife,
 			poolRadius: poolRadius,
-			pools: pools
+			pools: pools,
+			irradiateChance: 0,
+			irradiateDamage: undefined
 		}
 		
 		var dc = scr_skills_findCharSkill("decay", source);
@@ -390,6 +392,10 @@ function scr_skills_applyBioBomb(inst, source, pools) {
 			
 			var radDamPerc = dc.damPerc;
 			inst.bioBombData.radDamPerc = radDamPerc;
+			
+			var rs = scr_skills_getRadiationSicknessData(source, true);
+			inst.bioBombData.irradiateChance = rs.chance;
+			inst.bioBombData.irradiateDamage = rs.damage;
 			
 		}
 				
@@ -469,22 +475,24 @@ function scr_skills_applyCrisper(inst, source) {
 	
 }
 	
-function scr_skills_getRadiationSicknessData(source) {
+function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 	var dat = {
 		chance: 0,
 		damage: undefined,
-		hasDecay: false
 	}
 	
 	if (!instance_exists(source)) return dat;
 	
 	var sk = scr_skills_findCharSkill("radiationSickness", source);
-	var dc = scr_skills_findCharSkill("decay", source);
+	
 	
 	if (!is_struct(sk)) return dat;
 	
-	if (is_struct(dc)) dat.hasDecay = true;
+	if (needsDecay) {
+		var dc = scr_skills_findCharSkill("decay", source);
+		if (!is_struct(dc)) return dat;
+	}
 	
 	dat.chance = sk.chance;
 	dat.damage = sk.damage;
@@ -510,20 +518,25 @@ function scr_skills_getRadiationSicknessData(source) {
 		projectiles = 8;
 		cooldownTime = 12;
 		explosionRadius = 50;
+		irradiateChance = 0;
+		irradiateDamage = undefined;
 		
 		levelReq = 5;
 	
 		damage = undefined;
 	
 		description = "Unleash a barrage of magnetically suspended antimatter capsules."
-		description += "\nOn impact the capsules shatter, causing the antimatter to annihilate\nin a devastating explosion.";
+		description += "\nCapsules damage enemies on impact and then shatter,";
+		description += "\ncausing the antimatter to annihilate in a devastating explosion.";
 	
 		static formatStatsDescription = function() {
 	
 			statsDescription = "Projectiles: " + string(projectiles);
 			statsDescription += "\nExplosion Radius: " + string(explosionRadius);
-			statsDescription += "\n\nDamage: " + string(damage.kin) +" kinetic, " + string(damage.rad) + " radiation";
-	
+			statsDescription += "\n\nCapsule Damage: " + string(damage.kin) + " kinetic, " + string(damage.rad) + " radiation";
+			statsDescription += "\nExplosion Damage: " + string(damage.kin) + " kinetic, " + string(damage.rad) + " radiation";
+
+			
 		}
 	
 		static setupFunc = function(source) {
@@ -535,10 +548,14 @@ function scr_skills_getRadiationSicknessData(source) {
 		
 			damage = new damageProfile();
 		
-			damage.kin = 8 + (level - 1) * 2;
-			damage.rad = 8 + (level - 1) * 2;
+			damage.kin = 8 + (level - 1) * 1;
+			damage.rad = 8 + (level - 1) * 1;
 			
-			damage = scr_stats_calculateSkillDamage(source, damage, ["kin", "rad"]);	
+			damage = scr_stats_calculateSkillDamage(source, damage, ["kin", "rad"]);
+			
+			var ir = scr_skills_getRadiationSicknessData(source, false);
+			irradiateChance = ir.chance;
+			irradiateDamage = ir.damage;
 		
 		}
 	
@@ -561,6 +578,8 @@ function scr_skills_getRadiationSicknessData(source) {
 				launcher.owner = source;
 				launcher.projectiles = projectiles;
 				launcher.explosionRadius = explosionRadius;
+				launcher.irradiateChance = irradiateChance;
+				launcher.irradiateDamage = irradiateDamage;
 			
 				return true;
 			
@@ -642,8 +661,8 @@ function scr_skills_getRadiationSicknessData(source) {
 		range = 380;
 		pullRange = 600;
 		txtCol = c_white;
-		radSickChance = 0;
-		radSickDamage = 0;
+		irradiateChance = 0;
+		irradiateDamage = 0;
 		
 		levelReq = 5;
 
@@ -679,9 +698,9 @@ function scr_skills_getRadiationSicknessData(source) {
 				
 				array_push(damKeys, "rad");
 				
-				var rs = scr_skills_getRadiationSicknessData(source);
-				radSickChance = rs.chance;
-				radSickDamage = rs.damage;
+				var rs = scr_skills_getRadiationSicknessData(source, true);
+				irradiateChance = rs.chance;
+				irradiateDamage = rs.damage;
 			
 			}
 			
@@ -721,8 +740,8 @@ function scr_skills_getRadiationSicknessData(source) {
 			s.pullRange = pullRange;
 			s.damage = damage;
 			s.faction = source.faction;
-			s.radSickChance = radSickChance;
-			s.radSickDamage = radSickDamage;
+			s.irradiateChance = irradiateChance;
+			s.irradiateDamage = irradiateDamage;
 
 			return true;
 			
@@ -748,6 +767,8 @@ function scr_skills_getRadiationSicknessData(source) {
 		txtCol = c_white;
 		flashpointDam = undefined;
 		areaDamage = undefined;
+		irradiateChance = 0;
+		irradiateDamage = undefined;
 
 		description = "Create a shower of subatomic particles that rains down from above.";
 		description += "\nEnemies within the area take radiation damage and have their\ndefensive ability reduced.";
@@ -778,6 +799,10 @@ function scr_skills_getRadiationSicknessData(source) {
 			
 			var sk = scr_skills_findCharSkill("flashpoint", source);
 			if (sk != undefined) flashpointDam = sk.damage;
+			
+			var ir = scr_skills_getRadiationSicknessData(source, false);
+			irradiateChance = ir.chance;
+			irradiateDamage = ir.damage;
 		
 		}
 	
@@ -806,6 +831,8 @@ function scr_skills_getRadiationSicknessData(source) {
 			ps.particles = particles;
 			ps.duration = duration;
 			ps.radius = radius;
+			ps.irradiateChance = irradiateChance;
+			ps.irradiateDamage = irradiateDamage;
 			
 			//flashpoint
 			if (is_struct(flashpointDam)) {
@@ -1136,6 +1163,8 @@ function scr_skills_getRadiationSicknessData(source) {
 		castCooldownTime = 0.5;
 		flameLife = 4;
 		burnRadius = 120;
+		irradiateChance = 0;
+		irradiateDamage = undefined;
 		
 		levelReq = 5;
 
@@ -1172,6 +1201,10 @@ function scr_skills_getRadiationSicknessData(source) {
 				var dec = damPerc * 0.01;
 				damage.rad = ceil(damage.kin * dec) * 2;
 				array_push(damKeys, "rad");
+				
+				var ir = scr_skills_getRadiationSicknessData(source, true);
+				irradiateChance = ir.chance;
+				irradiateDamage = ir.damage;
 			
 			}	
 			
@@ -1204,6 +1237,8 @@ function scr_skills_getRadiationSicknessData(source) {
 			tc.faction = source.faction;
 			tc.life = flameLife;
 			tc.burnRadius = burnRadius;
+			tc.irradiateChance = irradiateChance;
+			tc.irradiateDamage = irradiateDamage;
 			
 			return true;
 			
@@ -1291,6 +1326,9 @@ function scr_skills_getRadiationSicknessData(source) {
 		range = 1320;
 		damage = undefined;
 		lifeSteal = 5;
+		
+		irradiateChance = 0;
+		irradiateDamage = undefined;
 
 		description = "Unleash tendrils beneath the ground that erupt from the earth to strike enemies,\ndealing damage and stealing health."
 		description += " Benefits from melee damage % and can crit.";
@@ -1337,6 +1375,10 @@ function scr_skills_getRadiationSicknessData(source) {
 				damage = scr_stats_multiplyDamageProfile(damage, dec);
 			}
 			
+			var sk = scr_skills_getRadiationSicknessData(source, true);
+			irradiateChance = sk.chance;
+			irradiateDamage = sk.damage;
+			
 		}
 	
 		static castFunc = function(source) {
@@ -1353,16 +1395,8 @@ function scr_skills_getRadiationSicknessData(source) {
 
 			var len = array_length(nearby);
 			
-			//var meleeDamPerc = source.finalStats.meleeDamPerc;
-			
 			var dam = damage;
-			
-			//if (meleeDamPerc > 0) {
-			//	var dam = variable_clone(damage);
-			//	var dec = 1 + meleeDamPerc * 0.01;
-			//	dam = scr_stats_multiplyDamageProfile(dam, dec);
-			//}
-
+		
 			//find valid targets
 			for (var i = 0; i < len; i++) {
 
@@ -1399,6 +1433,8 @@ function scr_skills_getRadiationSicknessData(source) {
 				var hitOutcome = scr_stats_hitOutcome(source.finalStats.oa, target.finalStats.da);
 
 				totalDam += scr_char_damage(target, dam, damageTypes.ability, false, hitOutcome);
+				
+				if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(target, irradiateDamage);
 				
 				var randX = irandom_range(-8, 8);
 				var randY = irandom_range(-10, 14);
@@ -1940,6 +1976,8 @@ function scr_skills_getRadiationSicknessData(source) {
 		energyCost = 30;
 		range = 900;
 		chains = 1;
+		irradiateChance = 0;
+		irradiateDamage = undefined;
 	
 		damage = undefined;
 	
@@ -1970,6 +2008,10 @@ function scr_skills_getRadiationSicknessData(source) {
 				var dec = damPerc * 0.01;
 				damage.rad = ceil(damage.elec * dec);
 				array_push(damKeys, "rad");
+				
+				var ir = scr_skills_getRadiationSicknessData(source, true);
+				irradiateChance = ir.chance;
+				irradiateDamage = ir.damage;
 			
 			}	
 			
@@ -2001,6 +2043,8 @@ function scr_skills_getRadiationSicknessData(source) {
 			cl.chains = chains;
 			cl.damage = damage;
 			cl.faction = source.faction;
+			cl.irradiateChance = irradiateChance;
+			cl.irradiateDamage = irradiateDamage;
 		
 			return true;
 		
@@ -2023,6 +2067,8 @@ function scr_skills_getRadiationSicknessData(source) {
 		radius = 400;
 		muchBonus = 10;
 		flashpointDam = undefined;
+		irradiateChance = 0;
+		irradiateDamage = undefined;
 
 		damage = undefined;
 	
@@ -2055,6 +2101,10 @@ function scr_skills_getRadiationSicknessData(source) {
 				var dec = damPerc * 0.01;
 				damage.rad = ceil(damage.elec * dec);
 				array_push(damKeys, "rad");
+				
+				var ir = scr_skills_getRadiationSicknessData(source, true);
+				irradiateChance = ir.chance;
+				irradiateDamage = ir.damage;
 			
 			}	
 			
@@ -2074,6 +2124,8 @@ function scr_skills_getRadiationSicknessData(source) {
 			emp.damage = damage;
 			emp.radius = radius;
 			emp.mechBonus = mechBonus;
+			emp.irradiateChance = irradiateChance;
+			emp.irradiateDamage = irradiateDamage;
 			
 			//flashpoint
 			if (is_struct(flashpointDam)) {
@@ -2344,7 +2396,7 @@ function scr_skills_getRadiationSicknessData(source) {
 		description = "Certain skills have a chance of applying irradiated to";
 		description += "\nenemies, causing them to take damage over time.";
 		description += "\n\nApplies to:";
-		description += "\n- Radioactive Weapons\n- Ionizing Field\n- Any skill affected by Decay";
+		description += "\n- Radioactive Weapons\n- Ionizing Field\n- Particle Shower\n- Antimatter Blast\n- Any skill affected by Decay";
 		
 		static formatStatsDescription = function() {
 		

@@ -59,22 +59,24 @@ if (tick <= 0) {
 	var ex = scr_effects_explosion(x, y, 12);
 	ex.damage = damage;
 	ex.faction = faction;
+	ex.irradiateChance = irradiateChance;
+	ex.irradiateDamage = irradiateDamage;
 	
-	charsLen = array_length(chars);
+	//charsLen = array_length(chars);
 
-	for (var i = 0; i < charsLen; i++) {
+	//for (var i = 0; i < charsLen; i++) {
 
-		var char = chars[i];
+	//	var char = chars[i];
 	
-		if (!instance_exists(char)) continue;
+	//	if (!instance_exists(char)) continue;
 
-		var dist = point_distance(x, y, char.x, char.y);
+	//	var dist = point_distance(x, y, char.x, char.y);
 
-		if (dist > pullRange) continue;
+	//	if (dist > pullRange) continue;
 	
-		if (scr_random_chance(radSickChance)) scr_effects_applyIrradiated(char, radSickDamage);
+	//	if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(char, irradiateDamage);
 	
-	}
+	//}
 	
 	instance_destroy();
 	

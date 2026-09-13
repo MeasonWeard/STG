@@ -21,9 +21,11 @@ if (delay > 0) {
 		if (instance_exists(proj)) {
 	
 			proj.sprite_index = spr_antimatterBullet;
-			proj.collisionFuncs = [scr_effects_explodingProjectile];
+			proj.collisionFuncs = [scr_effects_antimatter];
 			proj.damage = damage;
 			proj.explosionRadius = explosionRadius;
+			proj.irradiateChance = irradiateChance;
+			proj.irradiateDamage = irradiateDamage;
 			
 			if (instance_exists(owner)) {
 				proj.faction = owner.faction;

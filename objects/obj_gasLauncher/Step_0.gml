@@ -33,6 +33,8 @@ if (shooTick > 0) {
 	var gas = instance_create_layer(x, y, "Instances", obj_gas);
 	gas.corrodeChance = corrodeChance;
 	gas.corrodeDamage = corrodeDamage;
+	gas.irradiateChance = irradiateChance;
+	gas.irradiateDamage = irradiateDamage;
 	gas.faction = faction;
 	gas.dir = irandom_range(minDir, maxDir);
 	gas.life = irandom_range(minLife, maxLife);

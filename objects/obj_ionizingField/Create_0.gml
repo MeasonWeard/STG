@@ -18,5 +18,5 @@ setup = true;
 
 delay = true;
 
-radSickChance = 0;
-radSickDamage = 0;
+irradiateChance = 0;
+irradiateDamage = 0;

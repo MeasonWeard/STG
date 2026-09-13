@@ -9,6 +9,9 @@ damage = undefined;
 flameDamage = undefined;
 burnRadius = 5;
 
+irradiateChance = 0;
+irradiateDamage = undefined;
+
 armed = false;
 
 life = 10;

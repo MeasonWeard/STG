@@ -46,7 +46,7 @@ if (tick > 0) {
 		
 		scr_char_damage(char, damage, damageTypes.ability, true);
 		
-		if (scr_random_chance(radSickChance)) scr_effects_applyIrradiated(char, radSickDamage);
+		if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(char, irradiateDamage);
 	
 	}
 	

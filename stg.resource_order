@@ -292,7 +292,7 @@
     {"name":"obj_stimPackUse","order":1,"path":"objects/obj_stimPackUse/obj_stimPackUse.yy",},
     {"name":"obj_symbiont","order":4,"path":"objects/obj_symbiont/obj_symbiont.yy",},
     {"name":"obj_teleportMirage","order":6,"path":"objects/obj_teleportMirage/obj_teleportMirage.yy",},
-    {"name":"obj_tendril","order":19,"path":"objects/obj_tendril/obj_tendril.yy",},
+    {"name":"obj_tendril","order":20,"path":"objects/obj_tendril/obj_tendril.yy",},
     {"name":"obj_textInput","order":22,"path":"objects/obj_textInput/obj_textInput.yy",},
     {"name":"obj_thermiteCharge","order":8,"path":"objects/obj_thermiteCharge/obj_thermiteCharge.yy",},
     {"name":"obj_ticketBoothDown","order":16,"path":"objects/obj_ticketBoothDown/obj_ticketBoothDown.yy",},

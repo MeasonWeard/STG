@@ -16,12 +16,14 @@ image_xscale = 1.2;
 
 burnChance = 0;
 burnDamage = undefined;
+irradiateChance = 0;
+irradiateDamage = undefined;
 
-applyBurn = function(char) {
+//applyBurn = function(char) {
 	
-	if (burnChance <= 0) exit;
-	if (!scr_random_chance(burnChance)) exit;
+//	if (burnChance <= 0) exit;
+//	if (!scr_random_chance(burnChance)) exit;
 	
-	scr_effects_applyBurn(char, burnDamage);
+//	scr_effects_applyBurn(char, burnDamage);
 	
-}
+//}

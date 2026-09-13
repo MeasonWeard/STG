@@ -83,6 +83,8 @@ if (life < 1) {
 		
 				scr_char_damage(char, areaDamage, damageTypes.ability, true);
 				
+				if (scr_random_chance(irradiateChance)) scr_effects_applyIrradiated(char, irradiateDamage);
+				
 			}
 		
 		}
