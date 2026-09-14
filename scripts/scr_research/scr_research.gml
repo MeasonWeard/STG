@@ -396,7 +396,7 @@ function project_shielding() : researchProject("shielding") constructor {
 		passives.maxShield = level;
 		
 		resourceCosts = {
-			data: 500 + level * level * 200
+			data: 800 + level * level * 400
 		};
 		
 	}
@@ -413,7 +413,7 @@ function project_targeting() : researchProject("targeting") constructor {
 	
 	static setupFunc = function() {
 		
-		passives.oa = level * 10;
+		passives.oa = level * 8;
 		
 		resourceCosts = {
 			data: 500 + level * level * 200
@@ -450,7 +450,7 @@ function project_conditioning() : researchProject("conditioning") constructor {
 	
 	static setupFunc = function() {
 		
-		passives.spd = level * 5;
+		passives.spd = level * 0.05;
 		
 		resourceCosts = {
 			data: 500 + level * level * 200
