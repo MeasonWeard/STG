@@ -185,3 +185,26 @@ function scr_isPointOffScreen(xx, yy, margin = 0) {
 	);
 
 }
+
+function scr_formatNumberCompact(val, decimalPlaces = 1) {
+	
+	var absVal = abs(val);
+	
+	if (absVal < 1000) return string(val);
+	
+	var d = 1000;
+	var suffix = "K";
+	
+	if (absVal >= 1000000) {
+		
+		d = 1000000;
+		suffix = "M";
+		
+	}
+	
+	var factor = power(10, decimalPlaces);
+	var formatted = round((val / d) * factor) / factor;
+	
+	return string(formatted) + suffix;
+	
+}

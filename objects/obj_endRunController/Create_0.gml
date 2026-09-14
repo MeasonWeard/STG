@@ -171,31 +171,6 @@ lock = function(index) {
 	
 }
 
-//scrapRevealed = function(index) {
-	
-//	var ec = global.endRunController;
-	
-//	var lockedLen = array_length(locked);
-	
-//	for (var i = lockedLen - 1; i > -1; i--) {
-	
-//		var j = locked[i];
-		
-//		if (j == index) {
-			
-//			audio_play_sound(snd_error, 1, false);
-//			exit;
-			
-//		}
-	
-//	}
-	
-//	ec.revealedLoot[index] = undefined;
-	
-//	audio_play_sound(snd_scrap, 0, false);
-	
-//}
-
 takeLocked = function() {
 
 	var ec = global.endRunController;
@@ -237,31 +212,6 @@ takeLocked = function() {
 	
 }
 
-//takeAll = function() {
-
-//	var ec = global.endRunController;
-	
-//	var revealedLen = array_length(revealedLoot);
-	
-//	for (var i = 0; i < revealedLen; i++) {
-		
-//		var entry = revealedLoot[i];
-		
-//		if (!is_instanceof(entry, weaponInst) and !is_instanceof(entry, gearInst)) continue;
-		
-//		array_push(takenLoot, entry);
-		
-//	}
-	
-//	locked = [];
-//	revealedLoot = [];
-	
-//	lootPage = 0;
-	
-//	ec.tab = "loot";
-		
-//}
-
 finish = function () {
 	
 	var playerData = global.gameData.playerData;
@@ -276,6 +226,21 @@ finish = function () {
 	
 	playerData.level = result.newLevel;
 	playerData.xp = result.newXp;
+	
+	//resources
+	var resKeys = variable_struct_get_names(resources);
+	var resKeysLen = array_length(resKeys);
+	
+	for (var i = 0; i < resKeysLen; i ++) {
+	
+		var key = resKeys[i];
+		
+		var res = resources[$ key];
+		var val = res.val;
+		
+		scr_research_addResource(key, val);
+	
+	}
 	
 	scr_file_saveGame(global.saveFile, global.gameData);
 	

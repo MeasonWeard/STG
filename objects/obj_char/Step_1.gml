@@ -47,6 +47,62 @@ if (setupStats) {
 	bulletFuncs = [];
 	constantFuncs = [];
 	
+	//apply research stats
+	if (id == global.player) {
+	
+		var research = global.gameData.research;
+	
+		if (is_struct(research) and is_struct(research.categories)) {
+		
+			var categories = research.categories;
+			var categoryKeys = variable_struct_get_names(categories);
+			var categoryLen = array_length(categoryKeys);
+		
+			for (var i = 0; i < categoryLen; i++) {
+			
+				var categoryKey = categoryKeys[i];
+				var category = categories[$ categoryKey];
+			
+				var projectKey = category.selected;
+			
+				if (is_undefined(projectKey)) continue;
+				if (!variable_struct_exists(category.projects, projectKey)) continue;
+			
+				var project = category.projects[$ projectKey];
+			
+				if (is_struct(project) and !is_instanceof(project, researchProject)) {
+					
+					project = scr_research_loadProject(project);
+					category.projects[$ projectKey] = project;
+					
+				}
+				
+				if (!is_instanceof(project, researchProject)) continue;
+				if (is_callable(project.setupFunc)) project.setupFunc();
+				if (!is_struct(project.passives)) continue;
+			
+				var passiveKeys = variable_struct_get_names(project.passives);
+				var passiveLen = array_length(passiveKeys);
+			
+				for (var j = 0; j < passiveLen; j++) {
+				
+					var key = passiveKeys[j];
+					var val = project.passives[$ key];
+				
+					if (variable_struct_exists(stats, key)) {
+						stats[$ key] += val;
+					} else {
+						stats[$ key] = val;
+					}
+				
+				}
+			
+			}
+		
+		}
+	
+	}
+	
 	//apply gear stats
 	if (!is_undefined(gear.device1)) scr_gear_applyStatsToChar(self, gear.device1);
 	if (!is_undefined(gear.device2)) scr_gear_applyStatsToChar(self, gear.device2);

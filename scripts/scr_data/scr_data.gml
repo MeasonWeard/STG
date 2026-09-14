@@ -219,11 +219,36 @@ function scr_data_safeStructGet(struct, key, defaultVal) {
 	
 }
 
-function scr_data_addResource(key, val) {
+function scr_data_addResourceRun(key, val) {
 	
 	if (!instance_exists(global.runController)) exit;
 	
 	var resources = global.runController.resources;
+
+	if (!variable_struct_exists(resources, key)) {
+		
+		var info = scr_data_getResourceInfo(key);
+
+		resources[$ key] = {
+			val : val,
+			icon : info.icon,
+			name : info.name
+		};
+
+		exit;
+		
+	}
+	
+	var entry = resources[$ key];
+	entry.val += val;
+	
+}
+
+function scr_data_addResourceGamedata(key, val) {
+	
+	if (!is_struct(global.gameData)) exit;
+	
+	var resources = global.gameData.resources;
 
 	if (!variable_struct_exists(resources, key)) {
 		

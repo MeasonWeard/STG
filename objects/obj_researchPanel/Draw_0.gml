@@ -1,0 +1,44 @@
+draw_self();
+
+draw_set_font(fnt_large);
+draw_set_colour(c_black);
+scr_misc_resetTextAlignment();
+
+//viewed node
+
+if (instance_exists(viewedNode) and is_struct(viewedProject)) {
+	
+	if (is_undefined(viewedNode.desc)) {
+	
+		viewedNode.desc = scr_research_formatDescription(viewedProject);
+	
+	}
+	
+	if (is_undefined(viewedNode.costs)) {
+	
+		viewedNode.costs = scr_research_formatProgress(viewedProject);
+	
+	}
+	
+	draw_sprite(viewedNode.sprite_index, 0, iconX, iconY);
+	
+	draw_text(descX, descY, viewedNode.desc);
+	
+	draw_text(costsX, costsY - 64, "Progress");
+	scr_research_drawProgress(viewedNode.costs, costsX, costsY, fnt_large);
+	
+}
+
+// researching
+
+if (is_struct(currentProject)) {
+
+	draw_set_font(fnt_large);
+	draw_set_colour(c_black);
+	scr_misc_resetTextAlignment();
+
+	if (!is_undefined(currentIcon)) draw_sprite(currentIcon, 0, currentIconX, currentIconY);
+	draw_text(currentTextX, currentTextY, "Researching:   " + currentProject.name);
+	scr_research_drawProgress(currentProgress, currentTextX + 16, currentTextY + 64, fnt_large);
+	
+}

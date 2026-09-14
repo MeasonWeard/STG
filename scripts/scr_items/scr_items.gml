@@ -42,7 +42,7 @@ function scr_items_collectResource(char, item) {
 	var key = item.key;
 	var val = item.val;
 	
-	scr_data_addResource(key, val);
+	scr_data_addResourceRun(key, val);
 	
 }
 
