@@ -94,7 +94,7 @@ function scr_genCoats_addRarityBonuses(coat, level, rarity) {
 		}
 		
 		if (key == "da") {
-			var low = level + 1 + (rarity - 1);
+			var low = floor(level * 0.75) + 1 + (rarity - 1);
 			var high = low + 4;
 			amount = irandom_range_biased(low, high, LOOT_BIAS_MILD);
 		}
@@ -237,8 +237,8 @@ function scr_genCoats_reflexCoat(level, rarity) {
 	scr_genCoats_addRarityBonuses(coat, level, rarity);
 
 	var rarBonus = min(rarity * rarity, level * 4);
-	var minBonus = max(1, floor(level * 0.6)) + rarBonus + 6;
-	var maxBonus = minBonus + rarity + 8;
+	var minBonus = level + rarBonus + 8;
+	var maxBonus = minBonus + rarity + 10;
 	
 	var amount = irandom_range_biased(minBonus, maxBonus, LOOT_BIAS);
 	

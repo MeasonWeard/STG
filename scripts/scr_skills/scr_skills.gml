@@ -1253,7 +1253,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		icon = spr_icon_medicalSynthesis;
 		maxLevel = 9;
 		levelReq = 10;
-		energyCost = 60;
+		energyCost = 55;
 		cooldownTime = 12;
 		spd = 0.1;
 		da = 10;
@@ -1268,7 +1268,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		
 		static formatStatsDescription = function() {
 			
-			statsDescription = "Instant Heal: " + string(heal);
+			statsDescription = "Instant Heal: " + string(heal) "% of max health";
 			statsDescription += "\nMelee Damage %: " + string(meleeDamPerc);
 			statsDescription += "\nDefensive Ability: " + string(da);
 			statsDescription += "\nMovement Speed: " + string(spd);
@@ -1278,7 +1278,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 		static setupFunc = function(source) {
 		
-			heal = 32 + (level - 1) * 12;
+			heal = 6 + (level - 1) * 3;
 			meleeDamPerc = 8 + (level - 1) * 3
 			spd = 0.5 + (level - 1) * 0.125;
 			da = 8 + (level - 1) * 4;
@@ -1287,7 +1287,9 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 		static castFunc = function(source) {
 		
-			scr_char_heal(source, heal);
+			var dec = heal * 0.01;
+			var amount = source.maxHp * dec;
+			scr_char_heal(source, amount);
 			
 			scr_char_addStatMod(source, "spd", spd, life, "combatStimSpd");
 			scr_char_addStatMod(source, "meleeDamPerc", meleeDamPerc, life, "combatStimMeleeDamPerc");
@@ -1318,7 +1320,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		levelReq = 5;
 		
 		maxCharges = 4;
-		energyCost = 16;
+		energyCost = 12;
 		cooldownTime = 1.8;
 		castCooldownTime = 0.4;
 
@@ -1343,7 +1345,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 
 		static setupFunc = function(source) {
 		
-			energyCost = 8 + (level - 1);
+			energyCost = 6 + (level - 1);
 			
 			spikes = 3 + ((level - 1) div 2);
 			cooldownTime = 1.6 - (level - 1) * 0.1;

@@ -61,6 +61,8 @@ scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 //gear.device1 = dev;
 //dev = scr_genDevices_thermos(15, 5);
 //gear.device2 = dev;
+//var c = scr_genCoats_reflexCoat(12, 3);
+//gear.coat = c;
 
 //var hg = new headgearInst(1, 1);
 //hg.stats.radDamPerc = 1000;
