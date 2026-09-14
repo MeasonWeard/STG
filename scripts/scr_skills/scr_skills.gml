@@ -1268,7 +1268,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		
 		static formatStatsDescription = function() {
 			
-			statsDescription = "Instant Heal: " + string(heal) "% of max health";
+			statsDescription = "Instant Heal: " + string(heal) + "% of max health";
 			statsDescription += "\nMelee Damage %: " + string(meleeDamPerc);
 			statsDescription += "\nDefensive Ability: " + string(da);
 			statsDescription += "\nMovement Speed: " + string(spd);
