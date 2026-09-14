@@ -1253,7 +1253,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		icon = spr_icon_medicalSynthesis;
 		maxLevel = 9;
 		levelReq = 10;
-		energyCost = 55;
+		energyCost = 50;
 		cooldownTime = 12;
 		spd = 0.1;
 		da = 10;
