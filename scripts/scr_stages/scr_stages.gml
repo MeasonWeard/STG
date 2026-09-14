@@ -329,6 +329,7 @@ function scr_stages_completeStage() {
 
 	var rc = global.runController;
 	var sc = global.stageController;
+	var pd = global.gameData.playerData;
 	
 	if (!instance_exists(rc) or !instance_exists(sc)) exit;
 
@@ -364,5 +365,8 @@ function scr_stages_completeStage() {
 	instance_create_layer(x, y, "Instances", obj_lootCrateDestroyer);
 		
 	rc.currentCell.cleared = true;
+	
+	if (!variable_struct_exists(pd, "clearedRooms")) pd.clearedRooms = 0;
+	pd.clearedRooms ++;
 	
 }

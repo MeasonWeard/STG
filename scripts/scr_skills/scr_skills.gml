@@ -780,6 +780,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 			statsDescription += "\nDuration: " + string(duration) + " seconds";
 			statsDescription += "\n\nParticle Damage: " + string(damage.rad) + " radiation";
 			statsDescription += "\nArea Damage: " + string(areaDamage.rad) + " radiation p/s";
+			
 		}
 	
 		static setupFunc = function(source) {

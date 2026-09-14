@@ -572,6 +572,21 @@ skillConstructors = {
 	
 };
 
+researchConstructors = {
+	
+	fixResearchStation: project_fixResearchStation,
+	
+	vitality: project_vitality,
+	shielding: project_shielding,
+	
+	targeting: project_targeting,
+	ballistics: project_ballistics,
+	
+	conditioning: project_conditioning,
+	energyRecovery: project_energyRecovery
+	
+};
+
 
 //LOAD GAME
 global.saveFile = scr_file_getLatestSave();
