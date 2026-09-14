@@ -1268,7 +1268,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		
 		static formatStatsDescription = function() {
 			
-			statsDescription = "Instant Heal: " + string(heal) + "% of max health";
+			statsDescription = "Instant Heal: " + string(heal) + " + "  + string(healPerc) + "% of max health";
 			statsDescription += "\nMelee Damage %: " + string(meleeDamPerc);
 			statsDescription += "\nDefensive Ability: " + string(da);
 			statsDescription += "\nMovement Speed: " + string(spd);
@@ -1278,7 +1278,8 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 		static setupFunc = function(source) {
 		
-			heal = 6 + (level - 1) * 3;
+			healPerc = 6 + (level - 1) * 3;
+			heal = 10 + (level - 1) * 5;
 			meleeDamPerc = 8 + (level - 1) * 3
 			spd = 0.5 + (level - 1) * 0.125;
 			da = 8 + (level - 1) * 4;
@@ -1287,8 +1288,8 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 		static castFunc = function(source) {
 		
-			var dec = heal * 0.01;
-			var amount = source.maxHp * dec;
+			var dec = healPerc * 0.01;
+			var amount = source.maxHp * dec + heal;
 			scr_char_heal(source, amount);
 			
 			scr_char_addStatMod(source, "spd", spd, life, "combatStimSpd");
