@@ -1353,7 +1353,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 			lifeSteal = 1 + (level - 1) * 0.25;
 		
 			damage = new damageProfile();
-			damage.kin = 16 + (level - 1) * 4;
+			damage.kin = 18 + (level - 1) * 5;
 			
 			var damKeys = ["kin"];
 			
