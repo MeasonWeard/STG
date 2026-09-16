@@ -594,6 +594,10 @@ researchConstructors = {
 	agility: project_agility, //bionics
 	strength: project_strength, //bionics
 	
+	armor: project_armor, //materials
+	thermochemicalResistance: project_thermochemicalResistance, //materials
+	energyResistance: project_energyResistance // materials
+	
 	//fixResearchStation: project_fixResearchStation,
 	
 	//shielding: project_shielding,

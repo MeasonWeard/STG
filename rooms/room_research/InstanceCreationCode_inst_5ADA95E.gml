@@ -17,6 +17,8 @@ leftFunc = function() {
 			
 			scr_research_levelUp(cp);
 			
+			audio_play_sound(snd_levelUp, 0, false);
+			
 			rc.reset();
 			
 		}

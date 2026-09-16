@@ -39,7 +39,6 @@ levelUpFunc = function() {
 			baseStats.chemDam += 2;
 	}
 
-	baseStats.maxEnergy += 4;
 	baseStats.chemDamPerc += 10;
 	baseStats.kinDamPerc += 10;
 	baseStats.radResPerc += 4;

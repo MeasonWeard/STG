@@ -65,6 +65,9 @@ energyPackX = 0;
 lvlTxtX = 0;
 lvlTxtY = 0;
 
+researchIconX = 0;
+researchIconY = 0;
+
 ammoX = 0;
 ammoY = 0;
 reload = 0;
@@ -147,3 +150,32 @@ enemyEnergyBar.height = 14;
 enemyEnergyBar.depth = depth -1;
 enemyEnergyBar.visible = false;
 enemyEnergyBar.fillCol = c_aqua;
+
+//research
+var researchKey = variable_struct_exists(global.gameData, "research") ? global.gameData.research.currentResearch : undefined;
+researchTxt = "No research project selected";
+researchCol = c_red;
+showResearchIcon = true;
+
+if (!is_undefined(researchKey)) {
+
+	var proj = scr_research_getProject(researchKey);
+	proj = scr_research_loadProject(proj);
+	
+	if (is_instanceof(proj, researchProject)) {
+	
+		if (scr_research_hasRequirements(proj)) {
+			
+			researchTxt = "Research project completed!";
+			researchCol = c_lime;
+		
+		} else  {
+			
+			showResearchIcon = false;
+
+		}
+		
+	}
+
+}
+

@@ -15,6 +15,8 @@ switch(tab) {
 	case "melee": title = "Melee"; break;
 	
 }
+
+draw_set_colour(c_white);
 draw_set_font(fnt_large);
 draw_set_halign(fa_left);
 draw_text(x + 20, y + 16, title);

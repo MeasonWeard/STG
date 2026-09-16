@@ -366,11 +366,12 @@ function scr_loot_saveToStash(loot) {
 function scr_loot_getScrap(item) {
 	
 	if (!is_struct(item)) return {};
-	if (!variable_struct_exists(item, "level")) return {};
-	if (!variable_struct_exists(item, "rarity")) return {};
 
-	var level = item.level;
-	var rarity = item.rarity;
+	if (!variable_struct_exists(item, "lvl")) return {};
+	if (!variable_struct_exists(item, "rar")) return {};
+	
+	var level = item.lvl;
+	var rarity = item.rar;
 
 	var rarPow = power(rarity, 2.2);
 	var effLevel = 1 + level * 0.25;
@@ -389,8 +390,8 @@ function scr_loot_getScrap(item) {
 
 		case "metals":
 		case "bio":
-			minAmount = max(1, round(value * 0.1));
-			maxAmount = max(2, round(value * 0.2));
+			minAmount = max(1, round(value * 0.075));
+			maxAmount = max(2, round(value * 0.125));
 		break;
 
 		case "fissiles":
@@ -408,5 +409,76 @@ function scr_loot_getScrap(item) {
 	scrap[$ res] = irandom_range(minAmount, maxAmount);
 
 	return scrap;
+	
+}
+
+function scr_loot_getScrapGeneric(level, rarity) {
+	
+	var rarPow = power(rarity, 2.2);
+	var effLevel = 1 + level * 0.25;
+	var value = effLevel + effLevel * rarPow;
+
+	var minPoly = max(1, round(value * 0.25));
+	var maxPoly = max(2, round(value * 0.5));
+
+	var otherRes = ["metals", "bio", "fissiles", "chip"];
+	var res = scr_randomElementProgressive(otherRes, 25, 5);
+
+	var minAmount = 1;
+	var maxAmount = 2;
+
+	switch (res) {
+
+		case "metals":
+		case "bio":
+			minAmount = max(1, round(value * 0.075));
+			maxAmount = max(2, round(value * 0.125));
+		break;
+
+		case "fissiles":
+		case "chip":
+			minAmount = max(1, round(value * 0.02));
+			maxAmount = max(2, round(value * 0.04));
+		break;
+		
+	}
+
+	var scrap = {
+		polymers: irandom_range(minPoly, maxPoly)
+	};
+
+	scrap[$ res] = irandom_range(minAmount, maxAmount);
+
+	return scrap;
+	
+}
+
+function scr_loot_formatScrap(scrap) {
+	
+	var txt = "";
+	
+	var keys = variable_struct_get_names(scrap);
+	var len = array_length(keys);
+	
+	for (var i = 0; i < len; i ++) {
+		
+		var key = keys[i];
+		var val = scrap[$ key];
+	
+		var info = global.data.resources[$ key];
+		var resName = "???";
+		
+		if (!is_undefined(info)) {
+		
+			resName = info.name;
+		
+		}
+		
+		if (i > 0) txt += "\n";
+		txt += resName + ": " + string(val);
+		
+	}
+	
+	return txt;
 	
 }

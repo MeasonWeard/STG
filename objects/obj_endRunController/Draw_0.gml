@@ -206,7 +206,6 @@ if (tab == "reveal") {
 	
 	//generate loot
 	
-	var maxLevel = rc.runLevel + 2;
 	//maxLevel = 12;
 	
 	var instructionTxt = "Choose up to 5 items to keep. The rest will be scrapped.";

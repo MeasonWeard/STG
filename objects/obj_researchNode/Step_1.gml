@@ -14,6 +14,9 @@ if (setup) {
 	var key = tempProject.key;
 
 	var branch = research.categories[$ category];
+	
+	if (is_undefined(branch)) exit;
+	
 	var projects = branch.projects;
 
 	if (variable_struct_exists(projects, key)) {
@@ -35,5 +38,6 @@ if (setup) {
 	} else {
 		active = false;	
 	}
-
+	
 }
+

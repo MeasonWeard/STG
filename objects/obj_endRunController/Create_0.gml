@@ -13,6 +13,8 @@ keyPressDelay = 12;
 lockDelay = 12;
 returnToHubTick = 180;
 
+maxLevel = rc.runLevel + 2;
+
 //formatting
 scr_misc_resetTextAlignment();
 draw_set_font(fnt_normal);
@@ -128,6 +130,18 @@ scrap = function(lootKey) {
 		exit;
 	}
 	
+	var amount = variable_instance_get(self, lootKey);
+	var rar = scr_loot_getRarityNum(lootKey);
+	var lvl = scr_loot_rollLevel(maxLevel);
+	
+	repeat(amount) {
+	
+		var scrapRes = scr_loot_getScrapGeneric(lvl, rar);
+		
+		scr_research_addResourceStruct(scrapRes);
+	
+	}
+	
 	variable_instance_set(ec.id, lootKey, 0);
 	
 	audio_play_sound(snd_scrap, 0, false);
@@ -174,41 +188,92 @@ lock = function(index) {
 takeLocked = function() {
 
 	var ec = global.endRunController;
-	
-	
+
 	if (array_length(locked) == 0 and confirmScrap == false) {
 		confirmScrap = true;
 		exit;
 	}
-	
-	//do something in a for loop for scrapped loot
-	
-	var lockedLen = array_length(locked);
+
 	var revealedLen = array_length(revealedLoot);
-	
-	for (var i = 0; i < lockedLen; i ++) {
-		
-		var j = locked[i];
-		
-		if (j >= revealedLen) continue;
-		
-		var item = revealedLoot[j];
-		
-		if (!is_struct(item)) continue
-		
-		array_push(takenLoot, item);
-		
+	var scrappedLoot = [];
+
+	for (var i = 0; i < revealedLen; i++) {
+
+		var item = revealedLoot[i];
+
+		if (!is_struct(item)) continue;
+
+		if (array_contains(locked, i)) {
+
+			array_push(takenLoot, item);
+
+		} else {
+
+			array_push(scrappedLoot, item);
+
+		}
+
 	}
-	
-	if (array_length(revealedLoot) > array_length(locked)) audio_play_sound(snd_scrap, 0, false);
-	
+
+	//scrap unlocked items
+	var scrapLen = array_length(scrappedLoot);
+
+	for (var i = 0; i < scrapLen; i++) {
+
+		var item = scrappedLoot[i];
+
+		var scrapRes = scr_loot_getScrap(item);
+		
+		scr_research_addResourceStruct(scrapRes);
+
+	}
+
+	if (scrapLen > 0) {
+		audio_play_sound(snd_scrap, 0, false);
+	}
+
 	locked = [];
 	revealedLoot = [];
-	
+
 	ec.tab = "loot";
 	confirmScrap = false;
-	
+
 	lootPage = 0;
+
+	//var ec = global.endRunController;
+
+	//if (array_length(locked) == 0 and confirmScrap == false) {
+	//	confirmScrap = true;
+	//	exit;
+	//}
+	
+	////do something in a for loop for scrapped loot
+	//var revealedLen = array_length(revealedLoot);
+	//var lockedLen = array_length(locked);
+
+	//for (var i = 0; i < lockedLen; i ++) {
+		
+	//	var j = locked[i];
+		
+	//	if (j >= revealedLen) continue;
+		
+	//	var item = revealedLoot[j];
+		
+	//	if (!is_struct(item)) continue
+		
+	//	array_push(takenLoot, item);
+		
+	//}
+	
+	//if (array_length(revealedLoot) > array_length(locked)) audio_play_sound(snd_scrap, 0, false);
+	
+	//locked = [];
+	//revealedLoot = [];
+	
+	//ec.tab = "loot";
+	//confirmScrap = false;
+	
+	//lootPage = 0;
 	
 }
 

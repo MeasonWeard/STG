@@ -18,3 +18,7 @@ if (mouseHover) {
 	}
 
 }
+
+var key = is_struct(project) ? project.key : undefined;
+var currentKey = global.gameData.research.currentResearch;
+isCurrent = key == currentKey;

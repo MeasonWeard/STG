@@ -12,3 +12,5 @@ desc = undefined;
 costs = undefined;
 
 active = false;
+
+isCurrent = false;

@@ -193,6 +193,9 @@ function scr_research_formatProgress(project) {
 	var formatted = [];
 	
 	var keys = variable_struct_get_names(resourceCosts);
+	
+	keys = scr_data_orderResourceKeys(keys);
+	
 	var len = array_length(keys);
 	
 	for (var i = 0; i < len; i++) {
@@ -231,7 +234,7 @@ function scr_research_formatProgress(project) {
 	
 }
 
-function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gap = 16) {
+function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gapY = 22, gapX = 8) {
 	
 	if (!is_array(costs)) exit;
 	
@@ -242,7 +245,10 @@ function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gap = 16) {
 	var len = array_length(costs);
 	
 	var textH = font_get_size(font);
-	var rowH = textH + gap;
+	var rowH = textH + gapY;
+	
+	var iconW = sprite_get_width(spr_res_data);
+	var iconH = sprite_get_height(spr_res_data);
 	
 	for (var i = 0; i < len; i++) {
 		
@@ -251,17 +257,10 @@ function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gap = 16) {
 		var drawX = xx;
 		var drawY = yy + i * rowH;
 		
-		if (!is_undefined(cost.icon)) {
+		draw_sprite(cost.icon, 0, drawX, drawY);
 			
-			var iconW = sprite_get_width(cost.icon);
-			var iconH = sprite_get_height(cost.icon);
+		drawX += iconW + gapX;
 			
-			draw_sprite(cost.icon, 0, drawX, drawY);
-			
-			drawX += iconW + gap;
-			
-		}
-		
 		draw_text(drawX, drawY, cost.txt);
 		
 	}
@@ -344,6 +343,24 @@ function scr_research_addResource(key, amount) {
 	
 }
 
+function scr_research_addResourceStruct(struct) {
+	
+	if (!is_struct(struct)) exit;
+
+	var keys = variable_struct_get_names(struct);
+	var len = array_length(keys);
+
+	for (var i = 0; i < len; i++) {
+
+		var key = keys[i];
+		var amount = struct[$ key];
+
+		scr_research_addResource(key, amount);
+
+	}
+	
+}
+
 function scr_research_activateProject(project) {
 	
 	if (!is_instanceof(project, researchProject)) return false;
@@ -377,7 +394,7 @@ function scr_research_getActiveProjectKey(categoryKey) {
 
 //PROJECTS
 
-//bionics
+#region //bionics
 function project_vitality() : researchProject() constructor {
 
 	name = "Vitality";
@@ -395,13 +412,13 @@ function project_vitality() : researchProject() constructor {
 		var pow = power(level, 2);
 		
 		resourceCosts = {
-			data: 300 + pow * 100,
+			data: 500 + pow * 100,
 			bio: 30 + pow * 20
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.mutantOrgan = 15 + pow * 5;
+			resourceCosts.mutantOrgan = 18 + pow * 3;
 			
 		}
 		
@@ -433,13 +450,13 @@ function project_survival() : researchProject() constructor {
 		var pow = power(level, 2);
 		
 		resourceCosts = {
-			data: 300 + pow * 100,
+			data: 500 + pow * 100,
 			bio: 30 + pow * 20
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.alienOrgan = 15 + pow * 5;
+			resourceCosts.alienOrgan = 18 + pow * 3;
 			
 		}
 		
@@ -471,11 +488,11 @@ function project_agility() : researchProject() constructor {
 		var pow = power(level, 2);
 		
 		resourceCosts = {
-			data: 300 + pow * 100,
+			data: 500 + pow * 100,
 			bio: 30 + pow * 20
 		};
 		
-		if ((level + 1) mod 3) == 0 {
+		if ((level + 1) mod 4) == 0 {
 			
 			resourceCosts.fissiles = 5 + level * 10;
 			
@@ -510,14 +527,14 @@ function project_strength() : researchProject() constructor {
 		var pow = power(level, 2);
 		
 		resourceCosts = {
-			data: 300 + pow * 100,
+			data: 500 + pow * 100,
 			bio: 30 + pow * 10,
 			metals: 20 + pow * 10
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.mutantOrgan = 15 + pow * 5;
+			resourceCosts.mutantOrgan = 18 + pow * 3;
 			
 		}
 		
@@ -531,6 +548,136 @@ function project_strength() : researchProject() constructor {
 	}
 	
 }
+
+#endregion
+
+#region //materials
+
+function project_armor() : researchProject() constructor {
+
+	name = "Armor";
+	key = "armor";
+	category = "materials";
+	icon = spr_icon_kevlar;
+
+	maxLevel = 24;
+	
+	static setupFunc = function() {
+		
+		passives.projRes = level;
+		passives.meleeRes = level;
+		if (level >= 4) passives.kinResPerc = (level div 4) * 10;
+		
+		var pow = power(level, 2);
+		
+		resourceCosts = {
+			data: 500 + pow * 100,
+			metals: 25 + pow * 20,
+			polymers: 20 + pow * 10
+		};
+		
+		if ((level + 1) mod 4) == 0 {
+			
+			resourceCosts.fissiles = 5 + level * 10;
+			
+		}
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level increases projectile and melee resistance by 1";
+		description += "\nEvery 4 levels increases kinetic resistance by 10%";
+		
+	}
+	
+}
+
+function project_thermochemicalResistance() : researchProject() constructor {
+
+	name = "Thermochemical Resistance";
+	key = "thermochemicalResistance";
+	category = "materials";
+	icon = spr_icon_kevlar;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.chemRes = level * 2;
+		passives.fireRes = level * 2;
+
+		if (level >= 3) {
+			passives.chemResPerc = (level div 3) * 5;
+			passives.fireResPerc = (level div 3) * 5;
+		}
+
+		var pow = power(level, 2);
+
+		resourceCosts = {
+			data: 500 + pow * 100,
+			metals: 25 + pow * 20,
+			polymers: 20 + pow * 10
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.fissiles = 5 + level * 10;
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases chemical and fire resistance by 2";
+		description += "\nEvery 4 levels increases chemical and fire resistance by 5%";
+
+	}
+
+}
+
+function project_energyResistance() : researchProject() constructor {
+
+	name = "Energy Resistance";
+	key = "energyResistance";
+	category = "materials";
+	icon = spr_icon_kevlar;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.elecRes = level * 2;
+		passives.radRes = level * 2;
+
+		if (level >= 3) {
+			passives.elecResPerc = (level div 3) * 5;
+			passives.radResPerc = (level div 3) * 5;
+		}
+
+		var pow = power(level, 2);
+
+		resourceCosts = {
+			data: 500 + pow * 100,
+			metals: 25 + pow * 20,
+			polymers: 20 + pow * 10
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.fissiles = 5 + level * 10;
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases electrical and radiation resistance by 2";
+		description += "\nEvery 4 levels increases electrical and radiation resistance by 5%";
+
+	}
+
+}
+
+#endregion
 
 //function project_fixResearchStation() : researchProject("fixResearchStation") constructor {
 

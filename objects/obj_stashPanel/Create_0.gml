@@ -256,6 +256,14 @@ scrap = function(key, index) {
 	
 	var item = arr[index];
 	
+	var scrapRes = scr_loot_getScrap(item);
+	var scrapTxt = scr_loot_formatScrap(scrapRes);
+	
+	scr_research_addResourceStruct(scrapRes);
+	
+	var rn = scr_ui_risingNumbers(global.cursor.x, global.cursor.y, scrapTxt, c_lime);
+	rn.depth = global.cursor.depth;
+	
 	if (is_undefined(item)) exit;
 	
 	arr[index] = undefined;

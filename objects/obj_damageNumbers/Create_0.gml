@@ -5,3 +5,5 @@ size = 1;
 
 riseSpeed = 1.2;
 life = 60;
+
+col = c_red;

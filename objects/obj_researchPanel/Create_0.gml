@@ -16,13 +16,13 @@ iconY = y + 20;
 descX = iconX;
 descY = iconY + sprite_get_height(spr_icon_blank) + 20;
 
-costsX = descX + 500;
+costsX = descX + 580;
 costsY = descY;
 
 currentProgress = undefined;
 currentIcon = undefined;
 
-currentIconX = x + 980;
+currentIconX = x + 1080;
 currentIconY = y + 20;
 currentTextX = currentIconX;
 currentTextY = currentIconY + sprite_get_height(spr_icon_blank) + 20;

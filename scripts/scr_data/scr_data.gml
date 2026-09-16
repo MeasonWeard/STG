@@ -534,3 +534,34 @@ function scr_data_loadEquipped() {
 	}
 	
 }
+
+function scr_data_orderResourceKeys(keys) {
+
+	var order = ["data", "bio", "metals", "polymers", "fissiles"];
+	var sorted = [];
+
+	//add resources in preferred order
+	for (var i = 0; i < array_length(order); i++) {
+
+		var key = order[i];
+
+		if (array_contains(keys, key)) {
+			array_push(sorted, key);
+		}
+
+	}
+
+	//add remaining resources
+	for (var i = 0; i < array_length(keys); i++) {
+
+		var key = keys[i];
+
+		if (!array_contains(order, key)) {
+			array_push(sorted, key);
+		}
+
+	}
+
+	return sorted;
+
+}

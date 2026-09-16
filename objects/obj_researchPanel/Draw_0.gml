@@ -38,7 +38,8 @@ if (is_struct(currentProject)) {
 	scr_misc_resetTextAlignment();
 
 	if (!is_undefined(currentIcon)) draw_sprite(currentIcon, 0, currentIconX, currentIconY);
-	draw_text(currentTextX, currentTextY, "Researching:   " + currentProject.name);
+	var lvl = currentProject.level + 1;
+	draw_text(currentTextX, currentTextY, "Researching:   " + currentProject.name + "  -   level " + string(lvl));
 	scr_research_drawProgress(currentProgress, currentTextX + 16, currentTextY + 64, fnt_large);
 	
 }

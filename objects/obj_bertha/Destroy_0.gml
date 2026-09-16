@@ -1,8 +1,3 @@
 event_inherited();
 
-var val = choose(1,2);
-
-scr_items_drop(obj_res_bio, x, y, 10, val, true, level * 2, 1);
-scr_items_drop(obj_res_mutantOrgan, x, y, 1, val, true, level * 2, 1);
-
-scr_items_drop(obj_res_fissiles, x, y, 0.25, 1, true, level, 1);
+scr_char_standardDrops(self, obj_res_bio, obj_res_mutantOrgan, 0);

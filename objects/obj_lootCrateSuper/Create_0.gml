@@ -11,6 +11,13 @@ scr_env_addDrop(self, obj_res_metals, 66, 28);
 scr_env_addDrop(self, obj_res_bio, 66, 28);
 scr_env_addDrop(self, obj_res_polymers, polyChance * 0.5, 28);
 
+var lvlMod = 1 + rc.runLevel * 0.05;
+var chance = 2 * lvlMod;
+scr_env_addDrop(self, obj_res_alienOrgan, chance, 1);
+scr_env_addDrop(self, obj_res_mutantOrgan, chance, 1);
+scr_env_addDrop(self, obj_res_pollen, chance, 1);
+scr_env_addDrop(self, obj_res_chip, chance, 1);
+
 var fissChance = 8 + rc.runLevel;
 var fissVal = scr_random_chance(fissChance * 0.25) ? 5 : 3;
 scr_env_addDrop(self, obj_res_fissiles, fissChance, fissVal);

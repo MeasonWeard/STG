@@ -1033,3 +1033,72 @@ function scr_char_setupSkills(char, applyPassives, applyEffects) {
 	}
 	
 }
+
+function scr_char_standardDrops(char, commonRes, uncommonRes, size = 0) {
+
+	var val = 1;
+	var lvl = char.level;
+	
+	var xx = char.x;
+	var yy = char.y;
+	
+	var commonChance = 12;
+	var rareChance = 8;
+
+	var extraCommonChance = 4;
+	var extraRareChance = 2;
+	
+	var fissilesChance = 0.25;
+	var extraFissilesChance = lvl * 0.5;
+	
+	var polyChance = 1 + lvl * 0.25;
+	var maxPoly = lvl * (1 + size * 1.5);
+	var poly = irandom_range(1, maxPoly);
+	
+	if (size == 0) {
+		
+		val = choose(1,2);
+		
+		commonChance += 1 + lvl * 0.2;
+		rareChance += lvl * 0.1;
+		
+		extraCommonChance = lvl * 4;
+		extraRareChance = lvl;
+			
+	}
+	
+	if (size == 1) {
+		
+		val = choose(2,3)
+		
+		commonChance += 2 + lvl * 0.22;
+		rareChance += 1 + lvl * 0.14;
+		
+		extraCommonChance = lvl * 6;
+		extraRareChance = lvl * 2;
+		
+		fissilesChance = 1;
+		
+	}
+	
+	if (size == 2) {
+		
+		val = choose(3,4)
+		
+		commonChance += 3 + lvl * 0.24;
+		rareChance += 2 + lvl * 0.16;
+		
+		extraCommonChance = lvl * 8;
+		extraRareChance = lvl * 4;
+		
+		fissilesChance = 2;
+		
+	}
+	
+	scr_items_drop(commonRes, xx, yy, commonChance, val, true, extraCommonChance, 1);
+	scr_items_drop(uncommonRes, xx, yy, rareChance, 1, true, extraRareChance, 1);
+	scr_items_drop(obj_res_polymers, xx, yy, polyChance, poly, true);
+
+	scr_items_drop(obj_res_fissiles, char.x, char.y, fissilesChance, 1, true, extraFissilesChance, 1);
+	
+}

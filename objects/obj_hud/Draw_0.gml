@@ -23,6 +23,9 @@ xpBarY = healthBarY + 20;
 lvlTxtX = camXmid;
 lvlTxtY = healthBarY - 16;
 
+researchIconX = lvlTxtX - 128;
+researchIconY = lvlTxtY - 64;
+
 dashX = camXmid - 400;
 dashY = camY + camH - 20;
 
@@ -282,6 +285,16 @@ if (unspentPoints) {
 	draw_circle(lvlTxtX + 32, lvlTxtY - 32, 7, false);
 	draw_set_colour(c_white);
 	draw_circle(lvlTxtX + 32, lvlTxtY - 32, 7, true);	
+}
+
+//research
+if (showResearchIcon) {
+
+	draw_sprite(spr_researchIcon, 0, researchIconX, researchIconY);
+	draw_set_colour(researchCol);
+	draw_set_halign(fa_left);
+	draw_text(researchIconX + 40, researchIconY, researchTxt);
+	
 }
 
 //enemy health bar and shields

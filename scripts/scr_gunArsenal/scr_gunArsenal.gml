@@ -43,12 +43,12 @@ function gun_pistol(level, rarity): gunInst(level, rarity) constructor {
 	spr = spr_pistol;
 	projSprite = spr_bulletLarge;
 	
-	damage.kin = 16;
-	baseDamage = 16;
+	damage.kin = 18;
+	baseDamage = 18;
 	
 	auto = false;
 	range = 1000;
-	fireRate = 6.2;
+	fireRate = 6.3;
 	clipSize = 12;
 	reloadTime = 1.4;
 	spd = 22;
