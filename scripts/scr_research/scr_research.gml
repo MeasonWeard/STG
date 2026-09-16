@@ -401,7 +401,7 @@ function project_vitality() : researchProject() constructor {
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.fissiles = 15 + pow * 5;
+			resourceCosts.mutantOrgan = 15 + pow * 5;
 			
 		}
 		
@@ -434,12 +434,12 @@ function project_survival() : researchProject() constructor {
 		
 		resourceCosts = {
 			data: 300 + pow * 100,
-			alienOrgan: 30 + pow * 20
+			bio: 30 + pow * 20
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.fissiles = 15 + pow * 5;
+			resourceCosts.alienOrgan = 15 + pow * 5;
 			
 		}
 		
@@ -477,7 +477,7 @@ function project_agility() : researchProject() constructor {
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.fissiles = 15 + pow * 5;
+			resourceCosts.fissiles = 10 + pow * 4;
 			
 		}
 		
@@ -511,13 +511,13 @@ function project_strength() : researchProject() constructor {
 		
 		resourceCosts = {
 			data: 300 + pow * 100,
-			bio: 20 + pow * 10,
+			bio: 30 + pow * 10,
 			metals: 20 + pow * 10
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.fissiles = 15 + pow * 5;
+			resourceCosts.mutantOrgan = 15 + pow * 5;
 			
 		}
 		
