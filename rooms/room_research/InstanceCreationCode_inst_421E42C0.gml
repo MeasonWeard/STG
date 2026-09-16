@@ -1,1 +1,0 @@
-projectConstructor = project_ballistics;

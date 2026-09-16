@@ -574,16 +574,17 @@ skillConstructors = {
 
 researchConstructors = {
 	
-	fixResearchStation: project_fixResearchStation,
+	vitality: project_vitality, //bionics
 	
-	vitality: project_vitality,
-	shielding: project_shielding,
+	//fixResearchStation: project_fixResearchStation,
 	
-	targeting: project_targeting,
-	ballistics: project_ballistics,
+	//shielding: project_shielding,
 	
-	conditioning: project_conditioning,
-	energyRecovery: project_energyRecovery
+	//targeting: project_targeting,
+	//ballistics: project_ballistics,
+	
+	//conditioning: project_conditioning,
+	//energyRecovery: project_energyRecovery
 	
 };
 

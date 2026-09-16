@@ -18,21 +18,28 @@ if (!variable_struct_exists(categories, "meta")) categories.meta = {
 
 };
 
-if (!variable_struct_exists(categories, "survival")) categories.survival = {
+if (!variable_struct_exists(categories, "bionics")) categories.bionics = {
 
 	projects: {},
 	selected: undefined
 
 };
 
-if (!variable_struct_exists(categories, "combat")) categories.combat = {
+if (!variable_struct_exists(categories, "materials")) categories.materials = {
 
 	projects: {},
 	selected: undefined
 
 };
 
-if (!variable_struct_exists(categories, "utility")) categories.utility = {
+if (!variable_struct_exists(categories, "energy")) categories.energy = {
+
+	projects: {},
+	selected: undefined
+
+};
+
+if (!variable_struct_exists(categories, "systems")) categories.systems = {
 
 	projects: {},
 	selected: undefined

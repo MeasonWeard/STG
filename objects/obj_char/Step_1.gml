@@ -50,8 +50,9 @@ if (setupStats) {
 	//apply research stats
 	if (id == global.player) {
 	
-		var research = global.gameData.research;
-	
+		var research = undefined;
+		if (variable_struct_exists(global.gameData, "research")) research = global.gameData.research;
+		
 		if (is_struct(research) and is_struct(research.categories)) {
 		
 			var categories = research.categories;

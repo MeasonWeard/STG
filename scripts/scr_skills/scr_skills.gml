@@ -1379,7 +1379,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 				damage = scr_stats_multiplyDamageProfile(damage, dec);
 			}
 			
-			var sk = scr_skills_getRadiationSicknessData(source, true);
+			sk = scr_skills_getRadiationSicknessData(source, true);
 			irradiateChance = sk.chance;
 			irradiateDamage = sk.damage;
 			
@@ -1410,7 +1410,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 				if (char == source) continue;
 				if (char.faction == source.faction) continue;
 
-				var dist = point_distance(xx, yy, char.x, char.y);
+				dist = point_distance(xx, yy, char.x, char.y);
 
 				if (dist > range) continue;
 

@@ -1,10 +1,12 @@
-function researchProject(_key) constructor {
+function researchProject() constructor {
 
-	key = _key;
+	key = "none";
 	name = "none";
 	icon = spr_icon_energyPack;
 	
 	category = "meta";
+	
+	description = "";
 
 	level = 0;
 	maxLevel = 5;
@@ -16,11 +18,24 @@ function researchProject(_key) constructor {
 	
 	requiredResearch = ["fixResearchStation"];
 
-	static setupFunc = function() {};
+	static setupFunc = undefined;
+	static formatDescription = undefined;
 	
 }
 
 function scr_research_loadProject(savedProject) {
+
+	if (!is_struct(savedProject)) {
+		
+		return undefined;
+		
+	}
+	
+	if (!variable_struct_exists(savedProject, "key")) {
+		
+		return undefined;
+		
+	}
 
 	var const = variable_struct_get(
 		global.data.researchConstructors,
@@ -110,7 +125,7 @@ function scr_research_formatDescription(project) {
 	project.level = currentLevel;
 	project.setupFunc();
 	
-	var txt = project.name + "   lvl " + string(currentLevel) + "\n\n";
+	var txt = project.name + "   lvl " + string(currentLevel) + " / " + string(project.maxLevel) + "\n\n";
 	
 	var keys = variable_struct_get_names(nextPassives);
 	keys = scr_stats_orderStatKeys(keys);
@@ -143,6 +158,20 @@ function scr_research_formatDescription(project) {
 		
 		if (i < keysLen - 1) txt += "\n";
 		
+	}
+	
+	if (is_callable(project.formatDescription)) {
+		
+		project.description = "";
+		
+		project.formatDescription();
+	
+	}
+	
+	if (!is_undefined(project.description) and project.description != "") {
+	
+		txt += "\n\n" + project.description;
+	
 	}
 	
 	return txt;
@@ -202,7 +231,7 @@ function scr_research_formatProgress(project) {
 	
 }
 
-function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gap = 6) {
+function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gap = 16) {
 	
 	if (!is_array(costs)) exit;
 	
@@ -348,131 +377,171 @@ function scr_research_getActiveProjectKey(categoryKey) {
 
 //PROJECTS
 
-function project_fixResearchStation() : researchProject("fixResearchStation") constructor {
+//bionics
 
-	name = "Repair Research Station";
-	category = "meta";
-	
-	requiredResearch = [];
-	
-	static setupFunc = function() {
-		
-		passives = {};
-		
-		resourceCosts = {
-			metals: 100,
-			polymers: 50,
-			fissiles: 1
-		};
-		
-	}
-		
-}
-
-function project_vitality() : researchProject("vitality") constructor {
+function project_vitality() : researchProject() constructor {
 
 	name = "Vitality";
-	category = "survival";
+	category = "bionics";
+	key = "vitality";
+	
+	maxLevel = 10;
 	
 	static setupFunc = function() {
 		
-		passives.maxHp = level * 25;
+		passives.maxHp = level * 10;
+		if (level >= 3) passives.hpRegen = level div 3;
+		
+		var pow = power(level, 3);
 		
 		resourceCosts = {
-			data: 500 + level * level * 200
+			data: 300 + pow * 100,
+			bio: 100 + pow * 40
 		};
+		
+		if ((level + 1) mod 3) == 0 {
+			
+			resourceCosts.fissiles = level * 50;
+			
+		}
 		
 	}
-		
-}
-
-function project_shielding() : researchProject("shielding") constructor {
-
-	name = "Shielding";
-	category = "survival";
 	
-	static setupFunc = function() {
-		
-		passives.maxShield = level;
-		
-		resourceCosts = {
-			data: 800 + level * level * 400
-		};
-		
-	}
-		
-}
-
-
-//COMBAT
-
-function project_targeting() : researchProject("targeting") constructor {
-
-	name = "Targeting";
-	category = "combat";
+	static formatDescription = function() {
 	
-	static setupFunc = function() {
-		
-		passives.oa = level * 8;
-		
-		resourceCosts = {
-			data: 500 + level * level * 200
-		};
+		if (level < 3) description = "- Level 3: 1 Health Regeneration";
+		if (level < 6) description += "\n- Level 6: 2 Health Regeneration";
+		if (level < 9) description += "\n- Level 9: 3 Health Regeneration";
 		
 	}
 	
 }
 
-function project_ballistics() : researchProject("ballistics") constructor {
+//function project_fixResearchStation() : researchProject("fixResearchStation") constructor {
 
-	name = "Ballistics";
-	category = "combat";
+//	name = "Repair Research Station";
+//	category = "meta";
 	
-	static setupFunc = function() {
-		
-		passives.gunDamPerc = level * 5;
-		
-		resourceCosts = {
-			data: 500 + level * level * 200
-		};
-		
-	}
+//	requiredResearch = [];
 	
-}
+//	static setupFunc = function() {
+		
+//		passives = {};
+		
+//		resourceCosts = {
+//			metals: 100,
+//			polymers: 50,
+//			fissiles: 1
+//		};
+		
+//	}
+		
+//}
 
+//function project_vitality() : researchProject("vitality") constructor {
 
-//UTILITY
-
-function project_conditioning() : researchProject("conditioning") constructor {
-
-	name = "Conditioning";
-	category = "utility";
+//	name = "Vitality";
+//	category = "survival";
 	
-	static setupFunc = function() {
+//	static setupFunc = function() {
 		
-		passives.spd = level * 0.05;
+//		passives.maxHp = level * 25;
 		
-		resourceCosts = {
-			data: 500 + level * level * 200
-		};
+//		resourceCosts = {
+//			data: 500 + level * level * 200
+//		};
 		
-	}
-	
-}
+//	}
+		
+//}
 
-function project_energyRecovery() : researchProject("energyRecovery") constructor {
+//function project_shielding() : researchProject("shielding") constructor {
 
-	name = "Energy Recovery";
-	category = "utility";
+//	name = "Shielding";
+//	category = "survival";
 	
-	static setupFunc = function() {
+//	static setupFunc = function() {
 		
-		passives.energyRegen = level * 0.05;
+//		passives.maxShield = level;
 		
-		resourceCosts = {
-			data: 500 + level * level * 200
-		};
+//		resourceCosts = {
+//			data: 800 + level * level * 400
+//		};
 		
-	}
+//	}
+		
+//}
+
+
+////COMBAT
+
+//function project_targeting() : researchProject("targeting") constructor {
+
+//	name = "Targeting";
+//	category = "combat";
 	
-}
+//	static setupFunc = function() {
+		
+//		passives.oa = level * 8;
+		
+//		resourceCosts = {
+//			data: 500 + level * level * 200
+//		};
+		
+//	}
+	
+//}
+
+//function project_ballistics() : researchProject("ballistics") constructor {
+
+//	name = "Ballistics";
+//	category = "combat";
+	
+//	static setupFunc = function() {
+		
+//		passives.gunDamPerc = level * 5;
+		
+//		resourceCosts = {
+//			data: 500 + level * level * 200
+//		};
+		
+//	}
+	
+//}
+
+
+////UTILITY
+
+//function project_conditioning() : researchProject("conditioning") constructor {
+
+//	name = "Conditioning";
+//	category = "utility";
+	
+//	static setupFunc = function() {
+		
+//		passives.spd = level * 0.05;
+		
+//		resourceCosts = {
+//			data: 500 + level * level * 200
+//		};
+		
+//	}
+	
+//}
+
+//function project_energyRecovery() : researchProject("energyRecovery") constructor {
+
+//	name = "Energy Recovery";
+//	category = "utility";
+	
+//	static setupFunc = function() {
+		
+//		passives.energyRegen = level * 0.05;
+		
+//		resourceCosts = {
+//			data: 500 + level * level * 200
+//		};
+		
+//	}
+	
+//}
