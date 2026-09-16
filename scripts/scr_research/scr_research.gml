@@ -392,7 +392,7 @@ function project_vitality() : researchProject() constructor {
 		passives.maxHp = level * 10;
 		if (level >= 3) passives.hpRegen = (level div 3) * 0.5;
 		
-		var pow = power(level, 3);
+		var pow = power(level, 2);
 		
 		resourceCosts = {
 			data: 300 + pow * 100,
@@ -430,7 +430,7 @@ function project_survival() : researchProject() constructor {
 		passives.hpRegen = level * 0.3;
 		if (level >= 3) passives.healingPerc = (level div 3) * 5;
 		
-		var pow = power(level, 3);
+		var pow = power(level, 2);
 		
 		resourceCosts = {
 			data: 300 + pow * 100,
@@ -468,7 +468,7 @@ function project_agility() : researchProject() constructor {
 		passives.da = level * 5;
 		if (level >= 4) passives.dashRegen = (level div 4) * 0.02;
 		
-		var pow = power(level, 3);
+		var pow = power(level, 2);
 		
 		resourceCosts = {
 			data: 300 + pow * 100,
@@ -477,7 +477,7 @@ function project_agility() : researchProject() constructor {
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.fissiles = 10 + pow * 4;
+			resourceCosts.fissiles = 5 + level * 10;
 			
 		}
 		
@@ -507,7 +507,7 @@ function project_strength() : researchProject() constructor {
 		passives.meleeDamPerc = level * 3;
 		if (level >= 3) passives.da = (level div 3) * 10;
 		
-		var pow = power(level, 3);
+		var pow = power(level, 2);
 		
 		resourceCosts = {
 			data: 300 + pow * 100,

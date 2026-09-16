@@ -362,3 +362,51 @@ function scr_loot_saveToStash(loot) {
 	return true;
 	
 }
+
+function scr_loot_getScrap(item) {
+	
+	if (!is_struct(item)) return {};
+	if (!variable_struct_exists(item, "level")) return {};
+	if (!variable_struct_exists(item, "rarity")) return {};
+
+	var level = item.level;
+	var rarity = item.rarity;
+
+	var rarPow = power(rarity, 2.2);
+	var effLevel = 1 + level * 0.25;
+	var value = effLevel + effLevel * rarPow;
+
+	var minPoly = max(1, round(value * 0.25));
+	var maxPoly = max(2, round(value * 0.5));
+
+	var otherRes = ["metals", "bio", "fissiles", "chip"];
+	var res = scr_randomElementProgressive(otherRes, 25, 5);
+
+	var minAmount = 1;
+	var maxAmount = 2;
+
+	switch (res) {
+
+		case "metals":
+		case "bio":
+			minAmount = max(1, round(value * 0.1));
+			maxAmount = max(2, round(value * 0.2));
+		break;
+
+		case "fissiles":
+		case "chip":
+			minAmount = max(1, round(value * 0.02));
+			maxAmount = max(2, round(value * 0.04));
+		break;
+		
+	}
+
+	var scrap = {
+		polymers: irandom_range(minPoly, maxPoly)
+	};
+
+	scrap[$ res] = irandom_range(minAmount, maxAmount);
+
+	return scrap;
+	
+}
