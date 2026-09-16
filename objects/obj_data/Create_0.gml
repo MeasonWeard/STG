@@ -575,6 +575,9 @@ skillConstructors = {
 researchConstructors = {
 	
 	vitality: project_vitality, //bionics
+	survival: project_survival, //bionics
+	agility: project_agility, //bionics
+	strength: project_strength, //bionics
 	
 	//fixResearchStation: project_fixResearchStation,
 	

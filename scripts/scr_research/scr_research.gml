@@ -378,30 +378,30 @@ function scr_research_getActiveProjectKey(categoryKey) {
 //PROJECTS
 
 //bionics
-
 function project_vitality() : researchProject() constructor {
 
 	name = "Vitality";
-	category = "bionics";
 	key = "vitality";
-	
-	maxLevel = 10;
+	category = "bionics";
+	icon = spr_icon_enhancedHomeostasis;
+
+	maxLevel = 24;
 	
 	static setupFunc = function() {
 		
 		passives.maxHp = level * 10;
-		if (level >= 3) passives.hpRegen = level div 3;
+		if (level >= 3) passives.hpRegen = (level div 3) * 0.5;
 		
 		var pow = power(level, 3);
 		
 		resourceCosts = {
 			data: 300 + pow * 100,
-			bio: 100 + pow * 40
+			bio: 30 + pow * 20
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.fissiles = level * 50;
+			resourceCosts.fissiles = 15 + pow * 5;
 			
 		}
 		
@@ -409,9 +409,124 @@ function project_vitality() : researchProject() constructor {
 	
 	static formatDescription = function() {
 	
-		if (level < 3) description = "- Level 3: 1 Health Regeneration";
-		if (level < 6) description += "\n- Level 6: 2 Health Regeneration";
-		if (level < 9) description += "\n- Level 9: 3 Health Regeneration";
+		description = "Each level increases maximum health by 10";
+		description += "\nEvery 3 levels increases health regeneration by 0.4";
+		
+	}
+	
+}
+
+function project_survival() : researchProject() constructor {
+
+	name = "Survival";
+	key = "survival";
+	category = "bionics";
+	icon = spr_icon_enhancedHomeostasis;
+
+	maxLevel = 24;
+	
+	static setupFunc = function() {
+		
+		passives.hpRegen = level * 0.3;
+		if (level >= 3) passives.healingPerc = (level div 3) * 5;
+		
+		var pow = power(level, 3);
+		
+		resourceCosts = {
+			data: 300 + pow * 100,
+			alienOrgan: 30 + pow * 20
+		};
+		
+		if ((level + 1) mod 3) == 0 {
+			
+			resourceCosts.fissiles = 15 + pow * 5;
+			
+		}
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level increases health regeneration by 0.3";
+		description += "\nEvery 3 levels increases healing % by 5";
+		
+	}
+	
+}
+
+function project_agility() : researchProject() constructor {
+
+	name = "Agility";
+	key = "agility";
+	category = "bionics";
+	icon = spr_icon_enhancedHomeostasis;
+
+	maxLevel = 24;
+	
+	static setupFunc = function() {
+		
+		passives.da = level * 5;
+		if (level >= 4) passives.dashRegen = (level div 4) * 0.02;
+		
+		var pow = power(level, 3);
+		
+		resourceCosts = {
+			data: 300 + pow * 100,
+			bio: 30 + pow * 20
+		};
+		
+		if ((level + 1) mod 3) == 0 {
+			
+			resourceCosts.fissiles = 15 + pow * 5;
+			
+		}
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level increases DA by 5";
+		description += "\nEvery 4 levels increases dash regen by .02";
+		if (level < 12) description += "\nLevel 12: 1 + dash charge";
+		
+	}
+	
+}
+
+function project_strength() : researchProject() constructor {
+
+	name = "Strength";
+	key = "strength";
+	category = "bionics";
+	icon = spr_icon_enhancedHomeostasis;
+
+	maxLevel = 24;
+	
+	static setupFunc = function() {
+		
+		passives.meleeDamPerc = level * 3;
+		if (level >= 3) passives.da = (level div 3) * 10;
+		
+		var pow = power(level, 3);
+		
+		resourceCosts = {
+			data: 300 + pow * 100,
+			bio: 20 + pow * 10,
+			metals: 20 + pow * 10
+		};
+		
+		if ((level + 1) mod 3) == 0 {
+			
+			resourceCosts.fissiles = 15 + pow * 5;
+			
+		}
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level increases melee damage % by 3";
+		description += "\nEvery 3 levels increases DA by 10";
 		
 	}
 	
