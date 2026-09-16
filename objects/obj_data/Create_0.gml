@@ -185,11 +185,6 @@ resources = {
 		icon: spr_res_data
 	},
 	
-	metals: {
-		name: "Metals",
-		icon: spr_res_metals
-	},
-	
 	polymers: {
 		name: "Polymers",
 		icon: spr_res_polymers
@@ -202,11 +197,17 @@ resources = {
 	
 	//common
 
+	metals: {
+		name: "Metals",
+		icon: spr_res_metals
+	},
+	
 	bio: {
 		name: "Bio Waste",
 		icon: spr_res_bio
 	},
 	
+	//uncommon
 	alienOrgan: {
 		name: "Alien Organ",
 		icon: spr_res_alienOrgan
@@ -215,7 +216,21 @@ resources = {
 	chip: {
 		name: "Microchip",
 		icon: spr_res_chip
+	},
+	
+	pollen: {
+		name: "Mutant Pollen",
+		icon: spr_res_pollen
+	},
+	
+	mutantOrgan: {
+		name: "Mutant Organ",
+		icon: spr_res_mutantOrgan
 	}
+	
+	//rare
+	
+	
 	
 }
 

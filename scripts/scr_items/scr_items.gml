@@ -60,9 +60,22 @@ function scr_items_spawn(obj, xx, yy, val, burst) {
 	
 }
 
-function scr_items_drop(obj, xx, yy, chance, val, burst) {
+function scr_items_drop(obj, xx, yy, chance, val, burst, extraChance = 0, extraVal = 1) {
 
 	if (!scr_random_chance(chance)) return noone;
+	
+	if (extraChance >= 100) {
+		
+		var guaranteed = extraChance div 100;
+		
+		val += guaranteed * extraVal;
+		extraChance = extraChance mod 100;
+		
+	}
+	
+	if (extraChance > 0 and scr_random_chance(extraChance)) {
+		val += extraVal;
+	}
 
 	var inst = scr_items_spawn(obj, xx, yy, val, burst);
 	
