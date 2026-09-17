@@ -527,7 +527,7 @@ function project_agility() : researchProject() constructor {
 	
 		description = "Each level increases DA by 5";
 		description += "\nEvery 4 levels increases dash regen by .02";
-		if (level < 12) description += "\nLevel 12: 1 + dash charge";
+		if (level < 12) description += "\nLevel 12: + 1 dash charge";
 		
 	}
 	
@@ -585,9 +585,13 @@ function project_armor() : researchProject() constructor {
 	
 	static setupFunc = function() {
 		
-		passives.projRes = level;
-		passives.meleeRes = level;
-		if (level >= 4) passives.kinResPerc = (level div 4) * 10;
+		passives.kinRes = level * 1;
+		
+		if (level >= 4) {
+			passives.projRes = (level div 4) * 2;
+			passives.meleeRes = (level div 4) * 2;
+			
+		}
 		
 		resourceCosts = {
 			data: scr_research_dataReq(level),
@@ -605,8 +609,8 @@ function project_armor() : researchProject() constructor {
 	
 	static formatDescription = function() {
 	
-		description = "Each level increases projectile and melee resistance by 1";
-		description += "\nEvery 4 levels increases kinetic resistance by 10%";
+		description = "Each level increases kinetic resistance by 1";
+		description += "\nEvery 4 levels increases projectile and melee resistances by 2";
 		
 	}
 	
@@ -623,8 +627,8 @@ function project_thermochemicalResistance() : researchProject() constructor {
 
 	static setupFunc = function() {
 
-		passives.chemRes = level * 2;
-		passives.fireRes = level * 2;
+		passives.chemRes = level 
+		passives.fireRes = level;
 
 		if (level >= 3) {
 			passives.chemResPerc = (level div 3) * 5;
@@ -645,7 +649,7 @@ function project_thermochemicalResistance() : researchProject() constructor {
 
 	static formatDescription = function() {
 
-		description = "Each level increases chemical and fire resistance by 2";
+		description = "Each level increases chemical and fire resistance by 1";
 		description += "\nEvery 3 levels increases chemical and fire resistance by 5%";
 
 	}
@@ -663,8 +667,8 @@ function project_energyResistance() : researchProject() constructor {
 
 	static setupFunc = function() {
 
-		passives.elecRes = level * 2;
-		passives.radRes = level * 2;
+		passives.elecRes = level;
+		passives.radRes = level;
 
 		if (level >= 3) {
 			passives.elecResPerc = (level div 3) * 5;
@@ -685,7 +689,7 @@ function project_energyResistance() : researchProject() constructor {
 
 	static formatDescription = function() {
 
-		description = "Each level increases electrical and radiation resistance by 2";
+		description = "Each level increases electrical and radiation resistance by 1";
 		description += "\nEvery 3 levels increases electrical and radiation resistance by 5%";
 
 	}
@@ -954,6 +958,69 @@ function project_cycling() : researchProject() constructor {
 		description = "Each level increases energy regeneration by 0.3";
 		description += "\nEvery 3 levels increases energy pack regen by .05";
 		
+	}
+	
+}
+
+function project_stabilization() : researchProject() constructor {
+
+	name = "Stabilization";
+	key = "stabilization";
+	category = "energy";
+	icon = spr_icon_shieldBattery;
+
+	maxLevel = 24;
+	
+	static setupFunc = function() {
+		
+		passives.shieldRegenDelay = level * -0.022;
+
+		resourceCosts = {
+			data: scr_research_dataReq(level),
+			fissiles: scr_research_resReq(6, level)
+		};
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level decreases shield regen delay by 0.022s";
+		
+	}
+	
+}
+
+function project_reconstitution() : researchProject() constructor {
+
+	name = "Reconstitution";
+	key = "reconstitution";
+	category = "energy";
+	icon = spr_icon_guardianArray;
+
+	maxLevel = 24;
+	
+	static setupFunc = function() {
+		
+		passives.shieldRegen = level * 0.05;
+		if (level >= 6) passives.maxShield = (level div 6);
+		
+		resourceCosts = {
+			data: scr_research_dataReq(level),
+			fissiles: scr_research_resReq(6, level)
+		};
+		
+		if ((level + 1) mod 6) == 0 {
+			
+			resourceCosts.chip = scr_research_resReq(44, level, 6)
+			
+		}
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level decreases increases shield regen by .05";
+		description += "\nEvery 6 levels increases max shield by 1.";
 	}
 	
 }
