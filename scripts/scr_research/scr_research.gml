@@ -392,6 +392,34 @@ function scr_research_getActiveProjectKey(categoryKey) {
 	
 }
 
+function scr_research_dataReq(level, modifier = undefined) {
+
+	var dataReq = 800 + power(level, 2) * 80
+	
+	if (is_real(modifier)) round(dataReq * modifier);
+	
+	return dataReq;
+	
+}
+
+function scr_research_resReq(initial, level, interval = 1, modifier = undefined) {
+
+	var amount = initial;
+
+	var effLevel = max(0, ((level + 1) div interval) - 1);
+
+	var pow = effLevel * effLevel;
+	var dec = pow * 0.1;
+	var extra = round(initial * dec);
+
+	amount = initial + extra;
+
+	if (is_real(modifier)) amount = round(amount * modifier);
+
+	return amount;
+
+}
+
 //PROJECTS
 
 #region //bionics
@@ -409,16 +437,14 @@ function project_vitality() : researchProject() constructor {
 		passives.maxHp = level * 10;
 		if (level >= 3) passives.hpRegen = (level div 3) * 0.5;
 		
-		var pow = power(level, 2);
-		
 		resourceCosts = {
-			data: 500 + pow * 100,
-			bio: 30 + pow * 20
+			data: scr_research_dataReq(level),
+			bio: scr_research_resReq(30, level)
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.mutantOrgan = 18 + pow * 3;
+			resourceCosts.mutantOrgan = scr_research_resReq(16, level, 3)
 			
 		}
 		
@@ -447,16 +473,14 @@ function project_survival() : researchProject() constructor {
 		passives.hpRegen = level * 0.3;
 		if (level >= 3) passives.healingPerc = (level div 3) * 5;
 		
-		var pow = power(level, 2);
-		
 		resourceCosts = {
-			data: 500 + pow * 100,
-			bio: 30 + pow * 20
+			data: scr_research_dataReq(level),
+			bio: scr_research_resReq(30, level)
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.alienOrgan = 18 + pow * 3;
+			resourceCosts.alienOrgan = scr_research_resReq(16, level, 3)
 			
 		}
 		
@@ -485,16 +509,14 @@ function project_agility() : researchProject() constructor {
 		passives.da = level * 5;
 		if (level >= 4) passives.dashRegen = (level div 4) * 0.02;
 		
-		var pow = power(level, 2);
-		
 		resourceCosts = {
-			data: 500 + pow * 100,
-			bio: 30 + pow * 20
+			data: scr_research_dataReq(level),
+			bio: scr_research_resReq(30, level)
 		};
 		
 		if ((level + 1) mod 4) == 0 {
 			
-			resourceCosts.fissiles = 5 + level * 10;
+			resourceCosts.fissiles = scr_research_resReq(10, level, 4)
 			
 		}
 		
@@ -524,17 +546,15 @@ function project_strength() : researchProject() constructor {
 		passives.meleeDamPerc = level * 3;
 		if (level >= 3) passives.da = (level div 3) * 10;
 		
-		var pow = power(level, 2);
-		
 		resourceCosts = {
-			data: 500 + pow * 100,
-			bio: 30 + pow * 10,
-			metals: 20 + pow * 10
+			data: scr_research_dataReq(level),
+			bio: scr_research_resReq(16, level),
+			metals: scr_research_resReq(16, level)
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.mutantOrgan = 18 + pow * 3;
+			resourceCosts.mutantOrgan = scr_research_resReq(16, level, 3)
 			
 		}
 		
@@ -568,17 +588,15 @@ function project_armor() : researchProject() constructor {
 		passives.meleeRes = level;
 		if (level >= 4) passives.kinResPerc = (level div 4) * 10;
 		
-		var pow = power(level, 2);
-		
 		resourceCosts = {
-			data: 500 + pow * 100,
-			metals: 25 + pow * 10,
-			polymers: 20 + pow * 10
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(22, level),
+			polymers: scr_research_resReq(22, level)
 		};
 		
 		if ((level + 1) mod 4) == 0 {
 			
-			resourceCosts.fissiles = 5 + level * 10;
+			resourceCosts.fissiles = scr_research_resReq(10, level, 3)
 			
 		}
 		
@@ -612,16 +630,14 @@ function project_thermochemicalResistance() : researchProject() constructor {
 			passives.fireResPerc = (level div 3) * 5;
 		}
 
-		var pow = power(level, 2);
-
 		resourceCosts = {
-			data: 500 + pow * 100,
-			metals: 25 + pow * 10,
-			polymers: 20 + pow * 10
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(22, level),
+			polymers: scr_research_resReq(22, level)
 		};
 
 		if ((level + 1) mod 3 == 0) {
-			resourceCosts.fissiles = 5 + level * 10;
+			resourceCosts.fissiles = scr_research_resReq(8, level, 3)
 		}
 
 	}
@@ -654,16 +670,14 @@ function project_energyResistance() : researchProject() constructor {
 			passives.radResPerc = (level div 3) * 5;
 		}
 
-		var pow = power(level, 2);
-
 		resourceCosts = {
-			data: 500 + pow * 100,
-			metals: 25 + pow * 10,
-			polymers: 20 + pow * 10
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(22, level),
+			polymers: scr_research_resReq(22, level)
 		};
 
 		if ((level + 1) mod 3 == 0) {
-			resourceCosts.fissiles = 5 + level * 10;
+			resourceCosts.fissiles = scr_research_resReq(8, level, 3)
 		}
 
 	}
@@ -694,16 +708,14 @@ function project_chemicalAffinity() : researchProject() constructor {
 			passives.chemResPerc = (level div 3) * 5;
 		}
 
-		var pow = power(level, 2);
-
 		resourceCosts = {
-			data: 500 + pow * 100,
-			bio: 25 + pow * 10,
-			polymers: 20 + pow * 10
+			data: scr_research_dataReq(level),
+			bio: scr_research_resReq(22, level),
+			polymers: scr_research_resReq(22, level)
 		};
 
 		if ((level + 1) mod 3 == 0) {
-			resourceCosts.pollen = 18 + pow * 3;
+			resourceCosts.pollen = scr_research_resReq(16, level, 3);
 		}
 
 	}
@@ -734,16 +746,14 @@ function project_fireAffinity() : researchProject() constructor {
 			passives.fireResPerc = (level div 3) * 5;
 		}
 
-		var pow = power(level, 2);
-
 		resourceCosts = {
-			data: 500 + pow * 100,
-			bio: 25 + pow * 10,
-			polymers: 20 + pow * 10
+			data: scr_research_dataReq(level),
+			bio: scr_research_resReq(22, level),
+			polymers: scr_research_resReq(22, level)
 		};
 
 		if ((level + 1) mod 3 == 0) {
-			resourceCosts.pollen = 18 + pow * 3;
+			resourceCosts.pollen = scr_research_resReq(16, level, 3)
 		}
 
 	}
@@ -774,15 +784,13 @@ function project_alloys() : researchProject() constructor {
 			passives.kinResPerc = (level div 3) * 5;
 		}
 
-		var pow = power(level, 2);
-
 		resourceCosts = {
-			data: 500 + pow * 100,
-			metals: 30 + pow * 20
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(30, level)
 		};
 
 		if ((level + 1) mod 3 == 0) {
-			resourceCosts.fissiles = 5 + level * 10;
+			resourceCosts.fissiles = scr_research_resReq(8, level, 3)
 		}
 
 	}
@@ -817,15 +825,13 @@ function project_voltage() : researchProject() constructor {
 			passives.elecResPerc = (level div 3) * 5;
 		}
 
-		var pow = power(level, 2);
-
 		resourceCosts = {
-			data: 500 + pow * 100,
-			metals: 30 + pow * 20
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(30, level)
 		};
 
 		if ((level + 1) mod 3 == 0) {
-			resourceCosts.chip = 18 + pow * 3;
+			resourceCosts.chip = scr_research_resReq(16, level, 3)
 		}
 
 	}
@@ -856,16 +862,14 @@ function project_fission() : researchProject() constructor {
 			passives.radResPerc = (level div 3) * 5;
 		}
 
-		var pow = power(level, 2);
-
 		resourceCosts = {
-			data: 500 + pow * 100,
-			metals: 30 + pow * 20,
-			fissiles: level * 2
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(30, level),
+			fissiles: scr_research_resReq(4, level)
 		};
 
 		if ((level + 1) mod 3 == 0) {
-			resourceCosts.chip = 16 + round(pow * 2.66);
+			resourceCosts.chip = scr_research_resReq(16, level, 3)
 		}
 
 	}
@@ -894,17 +898,15 @@ function project_capacitance() : researchProject() constructor {
 		
 		if (level >= 3) passives.energyRegen = (level div 3) * 0.5;
 		
-		var pow = power(level, 2);
-		
 		resourceCosts = {
-			data: 500 + pow * 100,
-			metals: 20 + pow * 10,
-			polymers: 20 + pow * 10
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(22, level),
+			polymers: scr_research_resReq(22, level)
 		};
 		
 		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.chip = 18 + pow * 3;
+			resourceCosts.chip = scr_research_resReq(16, level, 3)
 			
 		}
 		
@@ -914,6 +916,42 @@ function project_capacitance() : researchProject() constructor {
 	
 		description = "Each level increases maximum energy by 10";
 		description += "\nEvery 3 levels increases energy regeneration by 0.4";
+		
+	}
+	
+}
+
+function project_cycling() : researchProject() constructor {
+
+	name = "Cycling";
+	key = "cycling";
+	category = "energy";
+	icon = spr_icon_energyPack;
+
+	maxLevel = 24;
+	
+	static setupFunc = function() {
+		
+		passives.energyRegen = level * 0.3;
+		if (level >= 3) passives.energyPackRegen = (level div 3) * 0.05;
+		
+		resourceCosts = {
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(30, level)
+		};
+		
+		if ((level + 1) mod 3) == 0 {
+			
+			resourceCosts.chip = scr_research_resReq(16, level, 3)
+			
+		}
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level increases energy regeneration by 0.3";
+		description += "\nEvery 3 levels increases energy pack regen by .05";
 		
 	}
 	

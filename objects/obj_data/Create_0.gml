@@ -603,7 +603,8 @@ researchConstructors = {
 	
 	voltage: project_voltage, //energy
 	fission: project_fission, //energy
-	capacitance: project_capacitance // energy
+	capacitance: project_capacitance, // energy
+	cycling: project_cycling //energy
 	
 	//fixResearchStation: project_fixResearchStation,
 	
