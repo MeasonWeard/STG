@@ -48,7 +48,7 @@ if (!variable_struct_exists(categories, "systems")) categories.systems = {
 
 //
 delay = 2;
-setupViewedNode = false;
+setupViewedNode = true;
 viewedNode = noone;
 viewedProject = undefined;
 panel = noone;

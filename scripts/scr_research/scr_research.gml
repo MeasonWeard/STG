@@ -147,13 +147,17 @@ function scr_research_formatDescription(project) {
 		txt += "- " + statTxt + ": ";
 		
 		if (currentLevel <= 0) {
-			
+
 			txt += string(nextVal);
-			
-		} else {
-			
+
+		} else if (nextVal != currentVal) {
+
 			txt += string(currentVal) + " > " + string(nextVal);
-			
+
+		} else {
+
+			txt += string(currentVal);
+
 		}
 		
 		if (i < keysLen - 1) txt += "\n";
@@ -507,7 +511,7 @@ function project_agility() : researchProject() constructor {
 	static setupFunc = function() {
 		
 		passives.da = level * 5;
-		if (level >= 4) passives.dashRegen = (level div 4) * 0.02;
+		if (level >= 4) passives.dashRegen = (level div 4) * 0.03;
 		if (level >= 12) passives.maxDashes = 1;
 		
 		resourceCosts = {
@@ -526,7 +530,7 @@ function project_agility() : researchProject() constructor {
 	static formatDescription = function() {
 	
 		description = "Each level increases DA by 5";
-		description += "\nEvery 4 levels increases dash regen by .02";
+		description += "\nEvery 4 levels increases dash regen by .03";
 		if (level < 12) description += "\nLevel 12: + 1 dash charge";
 		
 	}
@@ -587,9 +591,9 @@ function project_armor() : researchProject() constructor {
 		
 		passives.kinRes = level * 1;
 		
-		if (level >= 4) {
-			passives.projRes = (level div 4) * 2;
-			passives.meleeRes = (level div 4) * 2;
+		if (level >= 3) {
+			passives.projRes = (level div 3) * 2;
+			passives.meleeRes = (level div 3) * 2;
 			
 		}
 		
@@ -599,9 +603,9 @@ function project_armor() : researchProject() constructor {
 			polymers: scr_research_resReq(22, level)
 		};
 		
-		if ((level + 1) mod 4) == 0 {
+		if ((level + 1) mod 3) == 0 {
 			
-			resourceCosts.fissiles = scr_research_resReq(10, level, 4)
+			resourceCosts.fissiles = scr_research_resReq(10, level, 3)
 			
 		}
 		
@@ -610,7 +614,7 @@ function project_armor() : researchProject() constructor {
 	static formatDescription = function() {
 	
 		description = "Each level increases kinetic resistance by 1";
-		description += "\nEvery 4 levels increases projectile and melee resistances by 2";
+		description += "\nEvery 3 levels increases projectile and melee resistances by 2";
 		
 	}
 	
@@ -1023,6 +1027,120 @@ function project_reconstitution() : researchProject() constructor {
 		description += "\nEvery 6 levels increases max shield by 1.";
 	}
 	
+}
+
+#endregion
+
+#region // systems
+
+function project_tactics() : researchProject() constructor {
+
+	name = "Tactics";
+	key = "tactics";
+	category = "systems";
+	icon = spr_icon_targetingMonocle;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.oa = level * 5;
+
+		if (level >= 3) {
+			passives.gunDamPerc = (level div 3) * 6;
+		}
+
+		resourceCosts = {
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(16, level),
+			bio: scr_research_resReq(16, level)
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.chip = scr_research_resReq(16, level, 3)
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases OA by 5";
+		description += "\nEvery 3 levels increases gun damage by 6%";
+
+	}
+
+}
+
+function project_combatAnalysis() : researchProject() constructor {
+
+	name = "Combat Analysis";
+	key = "combatAnalysis";
+	category = "systems";
+	icon = spr_icon_targetingMonocle;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.oa = level * 3;
+		passives.da = level * 3;
+
+		resourceCosts = {
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(18, level),
+			bio: scr_research_resReq(18, level)
+		};
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases OA and DA by 3";
+
+	}
+
+}
+
+function project_vitalSystems() : researchProject() constructor {
+
+	name = "Vital Systems";
+	key = "vitalSystems";
+	category = "systems";
+	icon = spr_icon_targetingMonocle;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.maxHp = level * 5;
+		passives.maxEnergy = level * 5;
+		
+		if (level >= 4) {
+			passives.maxHpPerc = (level div 4) * 5;
+			passives.maxEnergyPerc = (level div 4) * 5;
+		}
+
+		resourceCosts = {
+			data: scr_research_dataReq(level),
+			metals: scr_research_resReq(18, level),
+			bio: scr_research_resReq(18, level)
+		};
+		
+		
+		if ((level + 1) mod 4 == 0) {
+			resourceCosts.chip = scr_research_resReq(8, level, 4)
+			resourceCosts.alienOrgan = scr_research_resReq(8, level, 4)
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases max health and max energy by 5";
+		description = "Every 4 levels increases max health and max energy by 5%";
+
+	}
+
 }
 
 #endregion

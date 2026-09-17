@@ -604,7 +604,13 @@ researchConstructors = {
 	voltage: project_voltage, //energy
 	fission: project_fission, //energy
 	capacitance: project_capacitance, // energy
-	cycling: project_cycling //energy
+	cycling: project_cycling, //energy
+	stabilization: project_stabilization, //energy
+	reconstitution: project_reconstitution, //energy
+	
+	tactics: project_tactics, //systems
+	combatAnalysis: project_combatAnalysis, //systems
+	vitalSystems: project_vitalSystems, //systems
 	
 	//fixResearchStation: project_fixResearchStation,
 	
