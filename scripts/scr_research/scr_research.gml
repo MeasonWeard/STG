@@ -677,6 +677,86 @@ function project_energyResistance() : researchProject() constructor {
 
 }
 
+function project_chemicalAffinity() : researchProject() constructor {
+
+	name = "Chemical Affinity";
+	key = "chemicalAffinity";
+	category = "materials";
+	icon = spr_icon_acidFlasks;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.chemDamPerc = level * 3;
+
+		if (level >= 3) {
+			passives.chemResPerc = (level div 3) * 5;
+		}
+
+		var pow = power(level, 2);
+
+		resourceCosts = {
+			data: 500 + pow * 100,
+			bio: 25 + pow * 20,
+			polymers: 20 + pow * 10
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.pollen = 18 + pow * 3;
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases chemical damage by 3%";
+		description += "\nEvery 4 levels increases chemical resistance by 5%";
+
+	}
+
+}
+
+function project_fireAffinity() : researchProject() constructor {
+
+	name = "Fire Affinity";
+	key = "fireAffinity";
+	category = "materials";
+	icon = spr_icon_flamethrower;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.fireDamPerc = level * 3;
+
+		if (level >= 3) {
+			passives.fireResPerc = (level div 3) * 5;
+		}
+
+		var pow = power(level, 2);
+
+		resourceCosts = {
+			data: 500 + pow * 100,
+			bio: 25 + pow * 20,
+			polymers: 20 + pow * 10
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.pollen = 18 + pow * 3;
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases fire damage by 3%";
+		description += "\nEvery 4 levels increases fire resistance by 5%";
+
+	}
+
+}
+
 #endregion
 
 //function project_fixResearchStation() : researchProject("fixResearchStation") constructor {

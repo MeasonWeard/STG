@@ -596,7 +596,9 @@ researchConstructors = {
 	
 	armor: project_armor, //materials
 	thermochemicalResistance: project_thermochemicalResistance, //materials
-	energyResistance: project_energyResistance // materials
+	energyResistance: project_energyResistance, // materials
+	chemicalAffinity: project_chemicalAffinity, //materials
+	fireAffinity: project_fireAffinity, //materials
 	
 	//fixResearchStation: project_fixResearchStation,
 	
