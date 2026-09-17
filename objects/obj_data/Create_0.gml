@@ -599,6 +599,11 @@ researchConstructors = {
 	energyResistance: project_energyResistance, // materials
 	chemicalAffinity: project_chemicalAffinity, //materials
 	fireAffinity: project_fireAffinity, //materials
+	alloys: project_alloys, //materials
+	
+	voltage: project_voltage, //energy
+	fission: project_fission, //energy
+	capacitance: project_capacitance // energy
 	
 	//fixResearchStation: project_fixResearchStation,
 	

@@ -572,7 +572,7 @@ function project_armor() : researchProject() constructor {
 		
 		resourceCosts = {
 			data: 500 + pow * 100,
-			metals: 25 + pow * 20,
+			metals: 25 + pow * 10,
 			polymers: 20 + pow * 10
 		};
 		
@@ -616,7 +616,7 @@ function project_thermochemicalResistance() : researchProject() constructor {
 
 		resourceCosts = {
 			data: 500 + pow * 100,
-			metals: 25 + pow * 20,
+			metals: 25 + pow * 10,
 			polymers: 20 + pow * 10
 		};
 
@@ -658,7 +658,7 @@ function project_energyResistance() : researchProject() constructor {
 
 		resourceCosts = {
 			data: 500 + pow * 100,
-			metals: 25 + pow * 20,
+			metals: 25 + pow * 10,
 			polymers: 20 + pow * 10
 		};
 
@@ -679,7 +679,7 @@ function project_energyResistance() : researchProject() constructor {
 
 function project_chemicalAffinity() : researchProject() constructor {
 
-	name = "Chemical Affinity";
+	name = "Reactants";
 	key = "chemicalAffinity";
 	category = "materials";
 	icon = spr_icon_acidFlasks;
@@ -698,7 +698,7 @@ function project_chemicalAffinity() : researchProject() constructor {
 
 		resourceCosts = {
 			data: 500 + pow * 100,
-			bio: 25 + pow * 20,
+			bio: 25 + pow * 10,
 			polymers: 20 + pow * 10
 		};
 
@@ -719,7 +719,7 @@ function project_chemicalAffinity() : researchProject() constructor {
 
 function project_fireAffinity() : researchProject() constructor {
 
-	name = "Fire Affinity";
+	name = "Pyrophorics";
 	key = "fireAffinity";
 	category = "materials";
 	icon = spr_icon_flamethrower;
@@ -738,7 +738,7 @@ function project_fireAffinity() : researchProject() constructor {
 
 		resourceCosts = {
 			data: 500 + pow * 100,
-			bio: 25 + pow * 20,
+			bio: 25 + pow * 10,
 			polymers: 20 + pow * 10
 		};
 
@@ -755,6 +755,168 @@ function project_fireAffinity() : researchProject() constructor {
 
 	}
 
+}
+
+function project_alloys() : researchProject() constructor {
+
+	name = "Alloys";
+	key = "alloys";
+	category = "materials";
+	icon = spr_icon_kevlar;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.kinDamPerc = level * 3;
+
+		if (level >= 3) {
+			passives.kinResPerc = (level div 3) * 5;
+		}
+
+		var pow = power(level, 2);
+
+		resourceCosts = {
+			data: 500 + pow * 100,
+			metals: 30 + pow * 20
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.fissiles = 5 + level * 10;
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases kinetic damage by 3%";
+		description += "\nEvery 4 levels increases kinetic resistance by 5%";
+
+	}
+
+}
+
+#endregion
+
+#region // energy
+
+function project_voltage() : researchProject() constructor {
+
+	name = "Voltage";
+	key = "voltage";
+	category = "energy";
+	icon = spr_icon_chainLightning;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.elecDamPerc = level * 3;
+
+		if (level >= 3) {
+			passives.elecResPerc = (level div 3) * 5;
+		}
+
+		var pow = power(level, 2);
+
+		resourceCosts = {
+			data: 500 + pow * 100,
+			metals: 30 + pow * 20
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.chip = 18 + pow * 3;
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases electric damage by 3%";
+		description += "\nEvery 4 levels increases electric resistance by 5%";
+
+	}
+
+}
+
+function project_fission() : researchProject() constructor {
+
+	name = "Fission";
+	key = "fission";
+	category = "energy";
+	icon = spr_icon_radioactiveBullets;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.radDamPerc = level * 3;
+
+		if (level >= 3) {
+			passives.radResPerc = (level div 3) * 5;
+		}
+
+		var pow = power(level, 2);
+
+		resourceCosts = {
+			data: 500 + pow * 100,
+			metals: 30 + pow * 20,
+			fissiles: level * 2
+		};
+
+		if ((level + 1) mod 3 == 0) {
+			resourceCosts.chip = 16 + round(pow * 2.66);
+		}
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases radiation damage by 3%";
+		description += "\nEvery 4 levels increases radiation resistance by 5%";
+
+	}
+
+}
+
+function project_capacitance() : researchProject() constructor {
+
+	name = "Capacitance";
+	key = "capacitance";
+	category = "energy";
+	icon = spr_icon_energyPack;
+
+	maxLevel = 24;
+
+	static setupFunc = function() {
+
+		passives.maxEnergy = 10 * level;
+		
+		if (level >= 3) passives.energyRegen = (level div 3) * 0.5;
+		
+		var pow = power(level, 2);
+		
+		resourceCosts = {
+			data: 500 + pow * 100,
+			metals: 20 + pow * 10,
+			polymers: 20 + pow * 10
+		};
+		
+		if ((level + 1) mod 3) == 0 {
+			
+			resourceCosts.chip = 18 + pow * 3;
+			
+		}
+		
+	}
+	
+	static formatDescription = function() {
+	
+		description = "Each level increases maximum energy by 10";
+		description += "\nEvery 3 levels increases energy regeneration by 0.4";
+		
+	}
+	
 }
 
 #endregion
