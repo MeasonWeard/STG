@@ -396,7 +396,7 @@ function scr_research_dataReq(level, modifier = undefined) {
 
 	var dataReq = 800 + power(level, 2) * 80
 	
-	if (is_real(modifier)) round(dataReq * modifier);
+	if (is_real(modifier)) dataReq = round(dataReq * modifier);
 	
 	return dataReq;
 	
@@ -453,7 +453,7 @@ function project_vitality() : researchProject() constructor {
 	static formatDescription = function() {
 	
 		description = "Each level increases maximum health by 10";
-		description += "\nEvery 3 levels increases health regeneration by 0.4";
+		description += "\nEvery 3 levels increases health regeneration by 0.5";
 		
 	}
 	
@@ -508,6 +508,7 @@ function project_agility() : researchProject() constructor {
 		
 		passives.da = level * 5;
 		if (level >= 4) passives.dashRegen = (level div 4) * 0.02;
+		if (level >= 12) passives.maxDashes = 1;
 		
 		resourceCosts = {
 			data: scr_research_dataReq(level),
@@ -596,7 +597,7 @@ function project_armor() : researchProject() constructor {
 		
 		if ((level + 1) mod 4) == 0 {
 			
-			resourceCosts.fissiles = scr_research_resReq(10, level, 3)
+			resourceCosts.fissiles = scr_research_resReq(10, level, 4)
 			
 		}
 		
@@ -645,7 +646,7 @@ function project_thermochemicalResistance() : researchProject() constructor {
 	static formatDescription = function() {
 
 		description = "Each level increases chemical and fire resistance by 2";
-		description += "\nEvery 4 levels increases chemical and fire resistance by 5%";
+		description += "\nEvery 3 levels increases chemical and fire resistance by 5%";
 
 	}
 
@@ -685,7 +686,7 @@ function project_energyResistance() : researchProject() constructor {
 	static formatDescription = function() {
 
 		description = "Each level increases electrical and radiation resistance by 2";
-		description += "\nEvery 4 levels increases electrical and radiation resistance by 5%";
+		description += "\nEvery 3 levels increases electrical and radiation resistance by 5%";
 
 	}
 
@@ -723,7 +724,7 @@ function project_chemicalAffinity() : researchProject() constructor {
 	static formatDescription = function() {
 
 		description = "Each level increases chemical damage by 3%";
-		description += "\nEvery 4 levels increases chemical resistance by 5%";
+		description += "\nEvery 3 levels increases chemical resistance by 5%";
 
 	}
 
@@ -761,7 +762,7 @@ function project_fireAffinity() : researchProject() constructor {
 	static formatDescription = function() {
 
 		description = "Each level increases fire damage by 3%";
-		description += "\nEvery 4 levels increases fire resistance by 5%";
+		description += "\nEvery 3 levels increases fire resistance by 5%";
 
 	}
 
@@ -798,7 +799,7 @@ function project_alloys() : researchProject() constructor {
 	static formatDescription = function() {
 
 		description = "Each level increases kinetic damage by 3%";
-		description += "\nEvery 4 levels increases kinetic resistance by 5%";
+		description += "\nEvery 3 levels increases kinetic resistance by 5%";
 
 	}
 
@@ -839,7 +840,7 @@ function project_voltage() : researchProject() constructor {
 	static formatDescription = function() {
 
 		description = "Each level increases electric damage by 3%";
-		description += "\nEvery 4 levels increases electric resistance by 5%";
+		description += "\nEvery 3 levels increases electric resistance by 5%";
 
 	}
 
@@ -877,7 +878,7 @@ function project_fission() : researchProject() constructor {
 	static formatDescription = function() {
 
 		description = "Each level increases radiation damage by 3%";
-		description += "\nEvery 4 levels increases radiation resistance by 5%";
+		description += "\nEvery 3 levels increases radiation resistance by 5%";
 
 	}
 
@@ -915,7 +916,7 @@ function project_capacitance() : researchProject() constructor {
 	static formatDescription = function() {
 	
 		description = "Each level increases maximum energy by 10";
-		description += "\nEvery 3 levels increases energy regeneration by 0.4";
+		description += "\nEvery 3 levels increases energy regeneration by 0.5";
 		
 	}
 	
@@ -959,131 +960,3 @@ function project_cycling() : researchProject() constructor {
 
 #endregion
 
-//function project_fixResearchStation() : researchProject("fixResearchStation") constructor {
-
-//	name = "Repair Research Station";
-//	category = "meta";
-	
-//	requiredResearch = [];
-	
-//	static setupFunc = function() {
-		
-//		passives = {};
-		
-//		resourceCosts = {
-//			metals: 100,
-//			polymers: 50,
-//			fissiles: 1
-//		};
-		
-//	}
-		
-//}
-
-//function project_vitality() : researchProject("vitality") constructor {
-
-//	name = "Vitality";
-//	category = "survival";
-	
-//	static setupFunc = function() {
-		
-//		passives.maxHp = level * 25;
-		
-//		resourceCosts = {
-//			data: 500 + level * level * 200
-//		};
-		
-//	}
-		
-//}
-
-//function project_shielding() : researchProject("shielding") constructor {
-
-//	name = "Shielding";
-//	category = "survival";
-	
-//	static setupFunc = function() {
-		
-//		passives.maxShield = level;
-		
-//		resourceCosts = {
-//			data: 800 + level * level * 400
-//		};
-		
-//	}
-		
-//}
-
-
-////COMBAT
-
-//function project_targeting() : researchProject("targeting") constructor {
-
-//	name = "Targeting";
-//	category = "combat";
-	
-//	static setupFunc = function() {
-		
-//		passives.oa = level * 8;
-		
-//		resourceCosts = {
-//			data: 500 + level * level * 200
-//		};
-		
-//	}
-	
-//}
-
-//function project_ballistics() : researchProject("ballistics") constructor {
-
-//	name = "Ballistics";
-//	category = "combat";
-	
-//	static setupFunc = function() {
-		
-//		passives.gunDamPerc = level * 5;
-		
-//		resourceCosts = {
-//			data: 500 + level * level * 200
-//		};
-		
-//	}
-	
-//}
-
-
-////UTILITY
-
-//function project_conditioning() : researchProject("conditioning") constructor {
-
-//	name = "Conditioning";
-//	category = "utility";
-	
-//	static setupFunc = function() {
-		
-//		passives.spd = level * 0.05;
-		
-//		resourceCosts = {
-//			data: 500 + level * level * 200
-//		};
-		
-//	}
-	
-//}
-
-//function project_energyRecovery() : researchProject("energyRecovery") constructor {
-
-//	name = "Energy Recovery";
-//	category = "utility";
-	
-//	static setupFunc = function() {
-		
-//		passives.energyRegen = level * 0.05;
-		
-//		resourceCosts = {
-//			data: 500 + level * level * 200
-//		};
-		
-//	}
-	
-//}
