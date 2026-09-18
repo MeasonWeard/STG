@@ -11,13 +11,13 @@ function researchProject() constructor {
 	level = 0;
 	maxLevel = 5;
 
-	progress = {};
+	//progress = {};
 
 	passives = {};
-	resourceCosts = undefined;
+	//resourceCosts = undefined;
 	
-	//progress = 0;
-	//dataRequired = 0;
+	progress = 0;
+	dataRequired = 0;
 	resourceValues = {}
 	
 	requiredResearch = ["fixResearchStation"];
@@ -54,7 +54,7 @@ function scr_research_loadProject(savedProject) {
 
 	loadedProject.level = savedProject.level;
 	
-	if (variable_struct_exists(savedProject, "progress") and is_struct(savedProject.progress)) {
+	if (variable_struct_exists(savedProject, "progress") and is_real(savedProject.progress)) {
 		loadedProject.progress = savedProject.progress;
 	}
 
@@ -67,29 +67,34 @@ function scr_research_loadProject(savedProject) {
 function scr_research_hasRequirements(project) {
 	
 	if (!is_instanceof(project, researchProject)) return false;
-	if (!is_struct(project.progress)) project.progress = {}
-	if (!is_struct(project.resourceCosts)) project.setupFunc();
-	if (!is_struct(project.resourceCosts)) return false;
+	if (project.level >= project.maxLevel) return false;
+
+	return project.progress >= project.dataRequired;
 	
-	var keys = variable_struct_get_names(project.resourceCosts);
-	var len = array_length(keys);
+	//if (!is_instanceof(project, researchProject)) return false;
+	//if (!is_struct(project.progress)) project.progress = {}
+	//if (!is_struct(project.resourceCosts)) project.setupFunc();
+	//if (!is_struct(project.resourceCosts)) return false;
 	
-	for (var i = 0; i < len; i++) {
-		
-		var key = keys[i];
-		var required = project.resourceCosts[$ key];
-		
-		var current = 0;
-		
-		if (variable_struct_exists(project.progress, key)) {
-			current = project.progress[$ key];
-		}
-		
-		if (current < required) return false;
-		
-	}
+	//var keys = variable_struct_get_names(project.resourceCosts);
+	//var len = array_length(keys);
 	
-	return true;
+	//for (var i = 0; i < len; i++) {
+		
+	//	var key = keys[i];
+	//	var required = project.resourceCosts[$ key];
+		
+	//	var current = 0;
+		
+	//	if (variable_struct_exists(project.progress, key)) {
+	//		current = project.progress[$ key];
+	//	}
+		
+	//	if (current < required) return false;
+		
+	//}
+	
+	//return true;
 	
 }
 
@@ -97,16 +102,34 @@ function scr_research_levelUp(project) {
 	
 	if (!is_instanceof(project, researchProject)) return false;
 	if (project.level >= project.maxLevel) return false;
-	
+
 	if (!scr_research_hasRequirements(project)) return false;
-	
+
+	project.progress -= project.dataRequired;
+
 	project.level ++;
 	project.setupFunc();
-	project.progress = {};
-	
-	if (project.level >= project.maxLevel) global.gameData.research.currentResearch = undefined;
-	
+
+	if (project.level >= project.maxLevel) {
+
+		global.gameData.research.currentResearch = undefined;
+
+	}
+
 	return true;
+	
+	//if (!is_instanceof(project, researchProject)) return false;
+	//if (project.level >= project.maxLevel) return false;
+	
+	//if (!scr_research_hasRequirements(project)) return false;
+	
+	//project.level ++;
+	//project.setupFunc();
+	//project.progress = {};
+	
+	//if (project.level >= project.maxLevel) global.gameData.research.currentResearch = undefined;
+	
+	//return true;
 	
 }
 
@@ -189,68 +212,62 @@ function scr_research_formatDescription(project) {
 function scr_research_formatProgress(project) {
 	
 	if (!is_instanceof(project, researchProject)) return [];
-	
-	var resourceCosts = project.resourceCosts;
-	var progress = project.progress;
-	
-	if (!is_struct(resourceCosts)) return [];
-	if (!is_struct(progress)) return [];
-	
+
+	var resourceValues = project.resourceValues;
+	if (!is_struct(resourceValues)) return [];
+
 	var resourceData = global.data.resources;
-	
 	var formatted = [];
-	
-	var keys = variable_struct_get_names(resourceCosts);
-	
+
+	//data progress
+	array_push(formatted, {
+
+		txt: "Data:   "
+			+ scr_formatNumberCompact(project.progress)
+			+ " / "
+			+ scr_formatNumberCompact(project.dataRequired),
+
+		icon: resourceData.data.icon
+
+	});
+
+	//contributing resources
+	var keys = variable_struct_get_names(resourceValues);
 	keys = scr_data_orderResourceKeys(keys);
-	
+
 	var len = array_length(keys);
-	
+
 	for (var i = 0; i < len; i++) {
-		
+
 		var key = keys[i];
-		var required = resourceCosts[$ key];
-		
-		var current = 0;
-		
-		if (variable_struct_exists(progress, key)) {
-			current = progress[$ key];
-		}
-		
-		var icon = undefined;
-		var name = "none";
-		
-		if (variable_struct_exists(resourceData, key)) {
-			
-			var info = resourceData[$ key];
-			icon = info.icon;
-			name = info.name;
-			
-		}
-		
-		var currentString = scr_formatNumberCompact(current);
-		var requiredString = scr_formatNumberCompact(required);
-		
+		var value = resourceValues[$ key];
+
+		if (!variable_struct_exists(resourceData, key)) continue;
+
+		var info = resourceData[$ key];
+
 		array_push(formatted, {
-			txt: name + ":   " + currentString + " / " + requiredString,
-			icon: icon
+
+			txt: info.name + ":   +" + string(value) + " Data",
+			icon: info.icon
+
 		});
-		
+
 	}
-	
+
 	return formatted;
 	
 }
 
-function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gapY = 22, gapX = 8) {
+function scr_research_drawProgress(resources, xx, yy, font = fnt_normal, gapY = 22, gapX = 8) {
 	
-	if (!is_array(costs)) exit;
+	if (!is_array(resources)) exit;
 	
 	draw_set_font(font);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_middle);
 	
-	var len = array_length(costs);
+	var len = array_length(resources);
 	
 	var textH = font_get_size(font);
 	var rowH = textH + gapY;
@@ -260,16 +277,16 @@ function scr_research_drawProgress(costs, xx, yy, font = fnt_normal, gapY = 22, 
 	
 	for (var i = 0; i < len; i++) {
 		
-		var cost = costs[i];
+		var res = resources[i];
 		
 		var drawX = xx;
 		var drawY = yy + i * rowH;
 		
-		draw_sprite(cost.icon, 0, drawX, drawY);
+		draw_sprite(res.icon, 0, drawX, drawY);
 			
 		drawX += iconW + gapX;
 			
-		draw_text(drawX, drawY, cost.txt);
+		draw_text(drawX, drawY, res.txt);
 		
 	}
 	
@@ -307,47 +324,95 @@ function scr_research_addResource(key, amount) {
 	
 	var research = global.gameData.research;
 	var currentKey = research.currentResearch;
-	
+
 	if (is_undefined(currentKey)) {
-		
+
 		scr_data_addResourceGamedata(key, amount);
 		return;
-		
+
 	}
-	
+
 	var project = scr_research_getProject(currentKey);
-	
+
 	if (!is_instanceof(project, researchProject)) {
-		
+
 		scr_data_addResourceGamedata(key, amount);
 		return;
-		
+
 	}
-	
-	if (!variable_struct_exists(project.resourceCosts, key)) {
-		
+
+	//completed projects cannot receive more progress
+	if (project.level >= project.maxLevel) {
+
 		scr_data_addResourceGamedata(key, amount);
 		return;
+
+	}
+
+	//data always contributes
+	if (key == "data") {
+
+		project.progress += amount;
+		return;
+
+	}
+
+	//check whether this resource contributes
+	if (!variable_struct_exists(project.resourceValues, key)) {
+
+		scr_data_addResourceGamedata(key, amount);
+		return;
+
+	}
+
+	//convert resource into data
+	var value = project.resourceValues[$ key];
+
+	project.progress += amount * value;
+	
+	//var research = global.gameData.research;
+	//var currentKey = research.currentResearch;
+	
+	//if (is_undefined(currentKey)) {
 		
-	}
+	//	scr_data_addResourceGamedata(key, amount);
+	//	return;
+		
+	//}
 	
-	if (!variable_struct_exists(project.progress, key)) {
-		project.progress[$ key] = 0;
-	}
+	//var project = scr_research_getProject(currentKey);
 	
-	var required = project.resourceCosts[$ key];
-	var current = project.progress[$ key];
+	//if (!is_instanceof(project, researchProject)) {
+		
+	//	scr_data_addResourceGamedata(key, amount);
+	//	return;
+		
+	//}
 	
-	var remaining = max(0, required - current);
-	var contributed = min(amount, remaining);
+	//if (!variable_struct_exists(project.resourceCosts, key)) {
+		
+	//	scr_data_addResourceGamedata(key, amount);
+	//	return;
+		
+	//}
 	
-	project.progress[$ key] += contributed;
+	//if (!variable_struct_exists(project.progress, key)) {
+	//	project.progress[$ key] = 0;
+	//}
 	
-	var leftover = amount - contributed;
+	//var required = project.resourceCosts[$ key];
+	//var current = project.progress[$ key];
 	
-	if (leftover > 0) {
-		scr_data_addResourceGamedata(key, leftover);
-	}
+	//var remaining = max(0, required - current);
+	//var contributed = min(amount, remaining);
+	
+	//project.progress[$ key] += contributed;
+	
+	//var leftover = amount - contributed;
+	
+	//if (leftover > 0) {
+	//	scr_data_addResourceGamedata(key, leftover);
+	//}
 	
 }
 
@@ -402,7 +467,7 @@ function scr_research_getActiveProjectKey(categoryKey) {
 
 function scr_research_dataReq(level, modifier = undefined) {
 
-	var dataReq = 800 + power(level, 2) * 80
+	var dataReq = 1000 + power(level, 2) * 150
 	
 	if (is_real(modifier)) dataReq = round(dataReq * modifier);
 	
@@ -410,23 +475,23 @@ function scr_research_dataReq(level, modifier = undefined) {
 	
 }
 
-function scr_research_resReq(initial, level, interval = 1, modifier = undefined) {
+//function scr_research_resReq(initial, level, interval = 1, modifier = undefined) {
 
-	var amount = initial;
+//	var amount = initial;
 
-	var effLevel = max(0, ((level + 1) div interval) - 1);
+//	var effLevel = max(0, ((level + 1) div interval) - 1);
 
-	var pow = effLevel * effLevel;
-	var dec = pow * 0.1;
-	var extra = round(initial * dec);
+//	var pow = effLevel * effLevel;
+//	var dec = pow * 0.1;
+//	var extra = round(initial * dec);
 
-	amount = initial + extra;
+//	amount = initial + extra;
 
-	if (is_real(modifier)) amount = round(amount * modifier);
+//	if (is_real(modifier)) amount = round(amount * modifier);
 
-	return amount;
+//	return amount;
 
-}
+//}
 
 //PROJECTS
 
@@ -448,16 +513,7 @@ function project_vitality() : researchProject() constructor {
 		passives.maxHp = level * 10;
 		if (level >= 3) passives.hpRegen = (level div 3) * 0.5;
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			bio: scr_research_resReq(30, level)
-		};
-		
-		if ((level + 1) mod 3) == 0 {
-			
-			resourceCosts.mutantOrgan = scr_research_resReq(16, level, 3)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -487,16 +543,7 @@ function project_survival() : researchProject() constructor {
 		passives.hpRegen = level * 0.3;
 		if (level >= 3) passives.healingPerc = (level div 3) * 5;
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			bio: scr_research_resReq(30, level)
-		};
-		
-		if ((level + 1) mod 3) == 0 {
-			
-			resourceCosts.alienOrgan = scr_research_resReq(16, level, 3)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -519,7 +566,7 @@ function project_agility() : researchProject() constructor {
 	maxLevel = 24;
 	
 	resourceValues.bio = COMMON_RES_VAL;
-	resourceValues.mutantOrgan = RARE_RES_VAL;
+	resourceValues.mutantOrgan = UNCOMMON_RES_VAL;
 	
 	static setupFunc = function() {
 		
@@ -527,16 +574,7 @@ function project_agility() : researchProject() constructor {
 		if (level >= 4) passives.dashRegen = (level div 4) * 0.03;
 		if (level >= 12) passives.maxDashes = 1;
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			bio: scr_research_resReq(30, level)
-		};
-		
-		if ((level + 1) mod 4) == 0 {
-			
-			resourceCosts.fissiles = scr_research_resReq(10, level, 4)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -567,17 +605,7 @@ function project_strength() : researchProject() constructor {
 		passives.meleeDamPerc = level * 3;
 		if (level >= 3) passives.da = (level div 3) * 10;
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			bio: scr_research_resReq(16, level),
-			metals: scr_research_resReq(16, level)
-		};
-		
-		if ((level + 1) mod 3) == 0 {
-			
-			resourceCosts.mutantOrgan = scr_research_resReq(16, level, 3)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -616,17 +644,7 @@ function project_armor() : researchProject() constructor {
 			
 		}
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(22, level),
-			polymers: scr_research_resReq(22, level)
-		};
-		
-		if ((level + 1) mod 3) == 0 {
-			
-			resourceCosts.fissiles = scr_research_resReq(10, level, 3)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -661,15 +679,7 @@ function project_thermochemicalResistance() : researchProject() constructor {
 			passives.fireResPerc = (level div 3) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(22, level),
-			polymers: scr_research_resReq(22, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.fissiles = scr_research_resReq(8, level, 3)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -704,15 +714,7 @@ function project_energyResistance() : researchProject() constructor {
 			passives.radResPerc = (level div 3) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(22, level),
-			polymers: scr_research_resReq(22, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.fissiles = scr_research_resReq(8, level, 3)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -745,15 +747,7 @@ function project_chemicalAffinity() : researchProject() constructor {
 			passives.chemResPerc = (level div 3) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			bio: scr_research_resReq(22, level),
-			polymers: scr_research_resReq(22, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.pollen = scr_research_resReq(16, level, 3);
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -786,15 +780,7 @@ function project_fireAffinity() : researchProject() constructor {
 			passives.fireResPerc = (level div 3) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			bio: scr_research_resReq(22, level),
-			polymers: scr_research_resReq(22, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.pollen = scr_research_resReq(16, level, 3)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -827,14 +813,7 @@ function project_alloys() : researchProject() constructor {
 			passives.kinResPerc = (level div 3) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(30, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.fissiles = scr_research_resReq(8, level, 3)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -871,14 +850,7 @@ function project_voltage() : researchProject() constructor {
 			passives.elecResPerc = (level div 3) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(30, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.chip = scr_research_resReq(16, level, 3)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -911,15 +883,7 @@ function project_fission() : researchProject() constructor {
 			passives.radResPerc = (level div 3) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(30, level),
-			fissiles: scr_research_resReq(4, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.chip = scr_research_resReq(16, level, 3)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -950,17 +914,7 @@ function project_capacitance() : researchProject() constructor {
 		
 		if (level >= 3) passives.energyRegen = (level div 3) * 0.5;
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(22, level),
-			polymers: scr_research_resReq(22, level)
-		};
-		
-		if ((level + 1) mod 3) == 0 {
-			
-			resourceCosts.chip = scr_research_resReq(16, level, 3)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -990,16 +944,7 @@ function project_cycling() : researchProject() constructor {
 		passives.energyRegen = level * 0.3;
 		if (level >= 3) passives.energyPackRegen = (level div 3) * 0.05;
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(30, level)
-		};
-		
-		if ((level + 1) mod 3) == 0 {
-			
-			resourceCosts.chip = scr_research_resReq(16, level, 3)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -1028,10 +973,7 @@ function project_stabilization() : researchProject() constructor {
 		
 		passives.shieldRegenDelay = level * -0.022;
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			fissiles: scr_research_resReq(6, level)
-		};
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -1060,16 +1002,7 @@ function project_reconstitution() : researchProject() constructor {
 		passives.shieldRegen = level * 0.05;
 		if (level >= 6) passives.maxShield = (level div 6);
 		
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			fissiles: scr_research_resReq(6, level)
-		};
-		
-		if ((level + 1) mod 6) == 0 {
-			
-			resourceCosts.chip = scr_research_resReq(44, level, 6)
-			
-		}
+		dataRequired = scr_research_dataReq(level);
 		
 	}
 	
@@ -1105,15 +1038,7 @@ function project_tactics() : researchProject() constructor {
 			passives.gunDamPerc = (level div 3) * 6;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(16, level),
-			bio: scr_research_resReq(16, level)
-		};
-
-		if ((level + 1) mod 3 == 0) {
-			resourceCosts.chip = scr_research_resReq(16, level, 3)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -1143,11 +1068,7 @@ function project_combatAnalysis() : researchProject() constructor {
 		passives.oa = level * 3;
 		passives.da = level * 3;
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(18, level),
-			bio: scr_research_resReq(18, level)
-		};
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
@@ -1181,17 +1102,7 @@ function project_vitalSystems() : researchProject() constructor {
 			passives.maxEnergyPerc = (level div 4) * 5;
 		}
 
-		resourceCosts = {
-			data: scr_research_dataReq(level),
-			metals: scr_research_resReq(18, level),
-			bio: scr_research_resReq(18, level)
-		};
-		
-		
-		if ((level + 1) mod 4 == 0) {
-			resourceCosts.chip = scr_research_resReq(8, level, 4)
-			resourceCosts.alienOrgan = scr_research_resReq(8, level, 4)
-		}
+		dataRequired = scr_research_dataReq(level);
 
 	}
 
