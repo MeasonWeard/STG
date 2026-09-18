@@ -20,6 +20,9 @@ global.data = self;
 #macro ITEM_PULL_STRENGTH 16
 #macro MAX_DATA_DROPS 12
 #macro FRAME_TIME 1 / 60
+#macro COMMON_RES_VAL 20
+#macro UNCOMMON_RES_VAL 80
+#macro RARE_RES_VAL 320
 
 //display
 resolutions = [];

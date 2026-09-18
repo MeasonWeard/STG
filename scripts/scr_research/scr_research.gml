@@ -16,6 +16,10 @@ function researchProject() constructor {
 	passives = {};
 	resourceCosts = undefined;
 	
+	//progress = 0;
+	//dataRequired = 0;
+	//resourceValues = {}
+	
 	requiredResearch = ["fixResearchStation"];
 
 	static setupFunc = undefined;
@@ -436,6 +440,9 @@ function project_vitality() : researchProject() constructor {
 
 	maxLevel = 24;
 	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.mutantOrgan = UNCOMMON_RES_VAL;
+	
 	static setupFunc = function() {
 		
 		passives.maxHp = level * 10;
@@ -472,6 +479,9 @@ function project_survival() : researchProject() constructor {
 
 	maxLevel = 24;
 	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.alienOrgan = UNCOMMON_RES_VAL;
+	
 	static setupFunc = function() {
 		
 		passives.hpRegen = level * 0.3;
@@ -507,6 +517,9 @@ function project_agility() : researchProject() constructor {
 	icon = spr_icon_enhancedHomeostasis;
 
 	maxLevel = 24;
+	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.mutantOrgan = RARE_RES_VAL;
 	
 	static setupFunc = function() {
 		
@@ -545,6 +558,9 @@ function project_strength() : researchProject() constructor {
 	icon = spr_icon_enhancedHomeostasis;
 
 	maxLevel = 24;
+	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.metals = COMMON_RES_VAL;
 	
 	static setupFunc = function() {
 		
@@ -587,6 +603,9 @@ function project_armor() : researchProject() constructor {
 
 	maxLevel = 24;
 	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.polymers = COMMON_RES_VAL;
+	
 	static setupFunc = function() {
 		
 		passives.kinRes = level * 1;
@@ -628,6 +647,9 @@ function project_thermochemicalResistance() : researchProject() constructor {
 	icon = spr_icon_kevlar;
 
 	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.polymers = COMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -668,6 +690,9 @@ function project_energyResistance() : researchProject() constructor {
 	icon = spr_icon_kevlar;
 
 	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.polymers = COMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -708,6 +733,9 @@ function project_chemicalAffinity() : researchProject() constructor {
 	icon = spr_icon_acidFlasks;
 
 	maxLevel = 24;
+	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.pollen = UNCOMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -746,6 +774,9 @@ function project_fireAffinity() : researchProject() constructor {
 	icon = spr_icon_flamethrower;
 
 	maxLevel = 24;
+	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.pollen = UNCOMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -784,6 +815,9 @@ function project_alloys() : researchProject() constructor {
 	icon = spr_icon_kevlar;
 
 	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.fissiles = RARE_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -825,6 +859,9 @@ function project_voltage() : researchProject() constructor {
 	icon = spr_icon_chainLightning;
 
 	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.chip = UNCOMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -862,6 +899,9 @@ function project_fission() : researchProject() constructor {
 	icon = spr_icon_radioactiveBullets;
 
 	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.fissiles = RARE_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -900,6 +940,9 @@ function project_capacitance() : researchProject() constructor {
 	icon = spr_icon_energyPack;
 
 	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.polymers = COMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -939,6 +982,9 @@ function project_cycling() : researchProject() constructor {
 
 	maxLevel = 24;
 	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.chip = UNCOMMON_RES_VAL;
+	
 	static setupFunc = function() {
 		
 		passives.energyRegen = level * 0.3;
@@ -975,6 +1021,9 @@ function project_stabilization() : researchProject() constructor {
 
 	maxLevel = 24;
 	
+	resourceValues.polymers = COMMON_RES_VAL;
+	resourceValues.fissiles = RARE_RES_VAL;
+	
 	static setupFunc = function() {
 		
 		passives.shieldRegenDelay = level * -0.022;
@@ -1002,6 +1051,9 @@ function project_reconstitution() : researchProject() constructor {
 	icon = spr_icon_guardianArray;
 
 	maxLevel = 24;
+	
+	resourceValues.fissiles = RARE_RES_VAL;
+	resourceValues.chip = UNCOMMON_RES_VAL;
 	
 	static setupFunc = function() {
 		
@@ -1041,6 +1093,9 @@ function project_tactics() : researchProject() constructor {
 	icon = spr_icon_targetingMonocle;
 
 	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.chip = UNCOMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -1079,6 +1134,9 @@ function project_combatAnalysis() : researchProject() constructor {
 	icon = spr_icon_targetingMonocle;
 
 	maxLevel = 24;
+	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.chip = UNCOMMON_RES_VAL;
 
 	static setupFunc = function() {
 
@@ -1109,6 +1167,9 @@ function project_vitalSystems() : researchProject() constructor {
 	icon = spr_icon_targetingMonocle;
 
 	maxLevel = 24;
+	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.metals = COMMON_RES_VAL;
 
 	static setupFunc = function() {
 
