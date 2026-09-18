@@ -18,7 +18,7 @@ function researchProject() constructor {
 	
 	//progress = 0;
 	//dataRequired = 0;
-	//resourceValues = {}
+	resourceValues = {}
 	
 	requiredResearch = ["fixResearchStation"];
 
