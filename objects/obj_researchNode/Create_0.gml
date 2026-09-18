@@ -9,7 +9,8 @@ research = global.researchController.research;
 mouseHover = false;
 
 desc = undefined;
-costs = undefined;
+cont = undefined;
+progress = 0;
 
 active = false;
 

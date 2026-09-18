@@ -12,7 +12,7 @@ if (instance_exists(rc)) {
 
 	if (is_struct(currentProject) and currentProject != prevCurrentProject) {
 
-		currentProgress = scr_research_formatProgress(currentProject);
+		currentProgress = currentProject.progress;
 		currentIcon = currentProject.icon;
 	
 	}

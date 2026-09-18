@@ -71,31 +71,6 @@ function scr_research_hasRequirements(project) {
 
 	return project.progress >= project.dataRequired;
 	
-	//if (!is_instanceof(project, researchProject)) return false;
-	//if (!is_struct(project.progress)) project.progress = {}
-	//if (!is_struct(project.resourceCosts)) project.setupFunc();
-	//if (!is_struct(project.resourceCosts)) return false;
-	
-	//var keys = variable_struct_get_names(project.resourceCosts);
-	//var len = array_length(keys);
-	
-	//for (var i = 0; i < len; i++) {
-		
-	//	var key = keys[i];
-	//	var required = project.resourceCosts[$ key];
-		
-	//	var current = 0;
-		
-	//	if (variable_struct_exists(project.progress, key)) {
-	//		current = project.progress[$ key];
-	//	}
-		
-	//	if (current < required) return false;
-		
-	//}
-	
-	//return true;
-	
 }
 
 function scr_research_levelUp(project) {
@@ -117,20 +92,7 @@ function scr_research_levelUp(project) {
 	}
 
 	return true;
-	
-	//if (!is_instanceof(project, researchProject)) return false;
-	//if (project.level >= project.maxLevel) return false;
-	
-	//if (!scr_research_hasRequirements(project)) return false;
-	
-	//project.level ++;
-	//project.setupFunc();
-	//project.progress = {};
-	
-	//if (project.level >= project.maxLevel) global.gameData.research.currentResearch = undefined;
-	
-	//return true;
-	
+		
 }
 
 function scr_research_formatDescription(project) {
@@ -209,8 +171,29 @@ function scr_research_formatDescription(project) {
 	
 }
 
-function scr_research_formatProgress(project) {
-	
+function scr_research_drawProgress(project, xx, yy, font = fnt_normal, gapX = 8) {
+
+	if (!is_instanceof(project, researchProject)) exit;
+
+	draw_set_font(font);
+	draw_set_halign(fa_left);
+	draw_set_valign(fa_middle);
+
+	var iconW = sprite_get_width(spr_res_data);
+
+	var current = scr_formatNumberCompact(project.progress);
+	var required = scr_formatNumberCompact(project.dataRequired);
+
+	var txt = "Data:   " + current + " / " + required;
+
+	draw_sprite(spr_res_data, 0, xx, yy);
+
+	draw_text(xx + iconW + gapX, yy, txt);
+
+}
+
+function scr_research_formatContributingResources(project) {
+
 	if (!is_instanceof(project, researchProject)) return [];
 
 	var resourceValues = project.resourceValues;
@@ -219,19 +202,15 @@ function scr_research_formatProgress(project) {
 	var resourceData = global.data.resources;
 	var formatted = [];
 
-	//data progress
+	//data always contributes 1
 	array_push(formatted, {
 
-		txt: "Data:   "
-			+ scr_formatNumberCompact(project.progress)
-			+ " / "
-			+ scr_formatNumberCompact(project.dataRequired),
-
+		txt: resourceData.data.name + ":   +1 Data",
 		icon: resourceData.data.icon
 
 	});
 
-	//contributing resources
+	//other contributing resources
 	var keys = variable_struct_get_names(resourceValues);
 	keys = scr_data_orderResourceKeys(keys);
 
@@ -240,10 +219,11 @@ function scr_research_formatProgress(project) {
 	for (var i = 0; i < len; i++) {
 
 		var key = keys[i];
-		var value = resourceValues[$ key];
 
+		if (key == "data") continue;
 		if (!variable_struct_exists(resourceData, key)) continue;
 
+		var value = resourceValues[$ key];
 		var info = resourceData[$ key];
 
 		array_push(formatted, {
@@ -256,40 +236,39 @@ function scr_research_formatProgress(project) {
 	}
 
 	return formatted;
-	
+
 }
 
-function scr_research_drawProgress(resources, xx, yy, font = fnt_normal, gapY = 22, gapX = 8) {
-	
+function scr_research_drawContributingResources(resources, xx, yy, font = fnt_normal, gapY = 22, gapX = 8) {
+
 	if (!is_array(resources)) exit;
-	
+
 	draw_set_font(font);
 	draw_set_halign(fa_left);
 	draw_set_valign(fa_middle);
-	
+
 	var len = array_length(resources);
-	
+
 	var textH = font_get_size(font);
 	var rowH = textH + gapY;
-	
+
 	var iconW = sprite_get_width(spr_res_data);
-	var iconH = sprite_get_height(spr_res_data);
-	
+
 	for (var i = 0; i < len; i++) {
-		
+
 		var res = resources[i];
-		
+
 		var drawX = xx;
 		var drawY = yy + i * rowH;
-		
+
 		draw_sprite(res.icon, 0, drawX, drawY);
-			
+
 		drawX += iconW + gapX;
-			
+
 		draw_text(drawX, drawY, res.txt);
-		
+
 	}
-	
+
 }
 
 function scr_research_getProject(key) {
@@ -369,51 +348,7 @@ function scr_research_addResource(key, amount) {
 	var value = project.resourceValues[$ key];
 
 	project.progress += amount * value;
-	
-	//var research = global.gameData.research;
-	//var currentKey = research.currentResearch;
-	
-	//if (is_undefined(currentKey)) {
 		
-	//	scr_data_addResourceGamedata(key, amount);
-	//	return;
-		
-	//}
-	
-	//var project = scr_research_getProject(currentKey);
-	
-	//if (!is_instanceof(project, researchProject)) {
-		
-	//	scr_data_addResourceGamedata(key, amount);
-	//	return;
-		
-	//}
-	
-	//if (!variable_struct_exists(project.resourceCosts, key)) {
-		
-	//	scr_data_addResourceGamedata(key, amount);
-	//	return;
-		
-	//}
-	
-	//if (!variable_struct_exists(project.progress, key)) {
-	//	project.progress[$ key] = 0;
-	//}
-	
-	//var required = project.resourceCosts[$ key];
-	//var current = project.progress[$ key];
-	
-	//var remaining = max(0, required - current);
-	//var contributed = min(amount, remaining);
-	
-	//project.progress[$ key] += contributed;
-	
-	//var leftover = amount - contributed;
-	
-	//if (leftover > 0) {
-	//	scr_data_addResourceGamedata(key, leftover);
-	//}
-	
 }
 
 function scr_research_addResourceStruct(struct) {
@@ -467,31 +402,13 @@ function scr_research_getActiveProjectKey(categoryKey) {
 
 function scr_research_dataReq(level, modifier = undefined) {
 
-	var dataReq = 1000 + power(level, 2) * 150
+	var dataReq = 1000 + power(level, 2.4) * 160
 	
 	if (is_real(modifier)) dataReq = round(dataReq * modifier);
 	
 	return dataReq;
 	
 }
-
-//function scr_research_resReq(initial, level, interval = 1, modifier = undefined) {
-
-//	var amount = initial;
-
-//	var effLevel = max(0, ((level + 1) div interval) - 1);
-
-//	var pow = effLevel * effLevel;
-//	var dec = pow * 0.1;
-//	var extra = round(initial * dec);
-
-//	amount = initial + extra;
-
-//	if (is_real(modifier)) amount = round(amount * modifier);
-
-//	return amount;
-
-//}
 
 //PROJECTS
 
@@ -651,7 +568,7 @@ function project_armor() : researchProject() constructor {
 	static formatDescription = function() {
 	
 		description = "Each level increases kinetic resistance by 1";
-		description += "\nEvery 3 levels increases projectile and melee resistances by 2";
+		description += "\nEvery 3 levels increases projectile and melee\nresistances by 2";
 		
 	}
 	
@@ -685,8 +602,8 @@ function project_thermochemicalResistance() : researchProject() constructor {
 
 	static formatDescription = function() {
 
-		description = "Each level increases chemical and fire resistance by 1";
-		description += "\nEvery 3 levels increases chemical and fire resistance by 5%";
+		description = "Each level increases chemical and fire\nresistance by 1";
+		description += "\nEvery 3 levels increases chemical and\nfire resistance by 5%";
 
 	}
 
@@ -720,8 +637,8 @@ function project_energyResistance() : researchProject() constructor {
 
 	static formatDescription = function() {
 
-		description = "Each level increases electrical and radiation resistance by 1";
-		description += "\nEvery 3 levels increases electrical and radiation resistance by 5%";
+		description = "Each level increases electrical and radiation\nresistance by 1";
+		description += "\nEvery 3 levels increases electrical and\nradiation resistance by 5%";
 
 	}
 
@@ -872,7 +789,7 @@ function project_fission() : researchProject() constructor {
 
 	maxLevel = 24;
 	
-	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.alienOrgan = UNCOMMON_RES_VAL;
 	resourceValues.fissiles = RARE_RES_VAL;
 
 	static setupFunc = function() {
@@ -1108,8 +1025,8 @@ function project_vitalSystems() : researchProject() constructor {
 
 	static formatDescription = function() {
 
-		description = "Each level increases max health and max energy by 5";
-		description = "Every 4 levels increases max health and max energy by 5%";
+		description = "Each level increases max health and max energy\nby 5.";
+		description += " Every 4 levels increases max health\nand max energy by 5%";
 
 	}
 

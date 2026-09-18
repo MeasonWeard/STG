@@ -14,9 +14,9 @@ if (instance_exists(viewedNode) and is_struct(viewedProject)) {
 	
 	}
 	
-	if (is_undefined(viewedNode.costs)) {
+	if (is_undefined(viewedNode.cont)) {
 	
-		viewedNode.costs = scr_research_formatProgress(viewedProject);
+		viewedNode.cont = scr_research_formatContributingResources(viewedProject);
 	
 	}
 	
@@ -24,8 +24,11 @@ if (instance_exists(viewedNode) and is_struct(viewedProject)) {
 	
 	draw_text(descX, descY, viewedNode.desc);
 	
-	draw_text(costsX, costsY - 64, "Progress");
-	scr_research_drawProgress(viewedNode.costs, costsX, costsY, fnt_large);
+	draw_text(progX, progY - 64, "Progress:");
+	scr_research_drawProgress(viewedProject, progX, progY, fnt_large);
+	draw_text(progX, progY + 64, "Contributing Resources:");
+	scr_research_drawContributingResources(viewedNode.cont, progX, progY + 128, fnt_large);
+	
 	
 }
 
@@ -40,6 +43,6 @@ if (is_struct(currentProject)) {
 	if (!is_undefined(currentIcon)) draw_sprite(currentIcon, 0, currentIconX, currentIconY);
 	var lvl = currentProject.level + 1;
 	draw_text(currentTextX, currentTextY, "Researching:   " + currentProject.name + "  -   level " + string(lvl));
-	scr_research_drawProgress(currentProgress, currentTextX + 16, currentTextY + 64, fnt_large);
+	scr_research_drawProgress(currentProject, currentTextX + 16, currentTextY + 64, fnt_large);
 	
 }
