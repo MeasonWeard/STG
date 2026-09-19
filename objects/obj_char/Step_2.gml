@@ -17,7 +17,7 @@ if (is_instanceof(equippedWeapon, gunInst) and is_struct(equippedWeaponStats)) {
     //reload
     if (gun.reload > 0) {
 		
-        gun.reload--;
+        gun.reload -= reloadSpeed;
 
         if (gun.reload <= 0) {
 			
@@ -44,7 +44,8 @@ if (is_instanceof(equippedWeapon, meleeInst) and is_struct(equippedWeaponStats))
 	melee.attackTick --;
 	
 	if (melee.attackTick < 0) melee.attackTick = 0;
-	if (melee.recharge > 0) melee.recharge --;
+	
+	if (melee.recharge > 0) melee.recharge -= meleeRechargeSpeed;
 	
 	if (melee.recharge <= 0) {
 		melee.recharge = 0;

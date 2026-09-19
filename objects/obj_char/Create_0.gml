@@ -177,6 +177,9 @@ gunY = centreY;
 aimX = x;
 aimY = y;
 
+reloadSpeed = 1;
+meleeRechargeSpeed = 1;
+
 meleeRangeOffset = 0;
 
 meleeCooldown = 0;

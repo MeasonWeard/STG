@@ -52,9 +52,14 @@ function scr_stats_blankCharStats() {
 		elecDamPerc: 0,
 		radDamPerc: 0,
 		
-		//
+		//gun and melee stats
 		gunDamPerc: 0,
 		meleeDamPerc: 0,
+		
+		reloadSpeed: 0,
+		gunFireRate: 0,
+		meleeAttackSpeed: 0,
+		meleeRechargeSpeed: 0,
 	
 		//flat resistances
 		kinRes: 0,
@@ -374,61 +379,6 @@ function scr_stats_calculateFinalStats(stats) {
 	newStats.projResMax = range.maxRes;
 	
 	return newStats;
-	
-	//if (!is_struct(stats)) return undefined;
-	
-	//var newStats = {
-
-	//	//health and shields
-	//	maxHp: scr_stats_calculateStat(stats.maxHp, stats.maxHpPerc, true),
-	//	maxShield: scr_stats_calculateStat(stats.maxShield, stats.maxShieldPerc, true),
-	//	hpRegen: scr_stats_calculateStat(stats.hpRegen, stats.hpRegenPerc),
-	//	shieldRegen: scr_stats_calculateStat(stats.shieldRegen, stats.shieldRegenPerc),
-	//	maxEnergy: scr_stats_calculateStat(stats.maxEnergy, stats.maxEnergyPerc, true),
-	//	energyRegen: scr_stats_calculateStat(stats.energyRegen, stats.energyRegenPerc),
-		
-	//	//movement
-	//	spd: stats.spd,
-	//	dashRegen: stats.dashRegen,
-	//	maxDashes: stats.maxDashes,
-
-	//	//damage
-	//	kinDam: scr_stats_calculateStat(stats.kinDam, stats.kinDamPerc, true),
-	//	fireDam: scr_stats_calculateStat(stats.fireDam, stats.fireDamPerc, true),
-	//	chemDam: scr_stats_calculateStat(stats.chemDam, stats.chemDamPerc, true),
-	//	elecDam: scr_stats_calculateStat(stats.elecDam, stats.elecDamPerc, true),
-	//	radDam: scr_stats_calculateStat(stats.radDam, stats.radDamPerc, true),
-	
-	//	//resistances
-	//	kinRes: scr_stats_calculateStat(stats.kinRes, stats.kinResPerc, true),
-	//	fireRes: scr_stats_calculateStat(stats.fireRes, stats.fireResPerc, true),
-	//	chemRes: scr_stats_calculateStat(stats.chemRes, stats.chemResPerc, true),
-	//	elecRes: scr_stats_calculateStat(stats.elecRes, stats.elecResPerc, true),
-	//	radRes: scr_stats_calculateStat(stats.radRes, stats.radResPerc, true),
-		
-	//}
-	
-	//var range = scr_stats_calculateResistanceRange(newStats.kinRes);
-	//newStats.kinResMin = range.minRes;
-	//newStats.kinResMax = range.maxRes;
-	
-	//range = scr_stats_calculateResistanceRange(newStats.fireRes);
-	//newStats.fireResMin = range.minRes;
-	//newStats.fireResMax = range.maxRes;
-	
-	//range = scr_stats_calculateResistanceRange(newStats.chemRes);
-	//newStats.chemResMin = range.minRes;
-	//newStats.chemResMax = range.maxRes;
-	
-	//range = scr_stats_calculateResistanceRange(newStats.elecRes);
-	//newStats.elecResMin = range.minRes;
-	//newStats.elecResMax = range.maxRes;
-	
-	//range = scr_stats_calculateResistanceRange(newStats.radRes);
-	//newStats.radResMin = range.minRes;
-	//newStats.radResMax = range.maxRes;
-	
-	//return newStats;
 
 }
 
@@ -481,6 +431,11 @@ function scr_stats_getName(statKey) {
 		
 		case "gunDamPerc": return "Gun Damage %";
         case "meleeDamPerc": return "Melee Damage %";
+		
+		case "reloadSpeed": return "Reload Speed";
+		case "gunFireRate": return "Gun Fire Rate";
+		case "meleeAttackSpeed": return "Melee Attack Speed";
+		case "meleeRechargeSpeed": return "Melee Recharge Speed";
 
         case "kinRes": return "Kinetic Resistance";
         case "fireRes": return "Fire Resistance";
@@ -670,6 +625,13 @@ function scr_stats_formatCharOffence(finalStats) {
 	// weapon damage percentage increases
 	str = scr_stats_formatStat(str, finalStats, "gunDamPerc", "%");
 	str = scr_stats_formatStat(str, finalStats, "meleeDamPerc", "%");
+	
+	str += "\n";
+	// attack and reload speed
+	str = scr_stats_formatStat(str, finalStats, "reloadSpeed", "%");
+	str = scr_stats_formatStat(str, finalStats, "gunFireRate", "%");
+	str = scr_stats_formatStat(str, finalStats, "meleeAttackSpeed", "%");
+	str = scr_stats_formatStat(str, finalStats, "meleeRechargeSpeed", "%");
 
 	return str;
 }

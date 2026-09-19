@@ -166,6 +166,11 @@ if (setupStats) {
 	maxEnergy = finalStats.maxEnergy;
 	shieldRegenDelay = max(0.1, stats.shieldRegenDelay);
 	
+	reloadSpeed = 1;
+	meleeRechargeSpeed = 1;
+	if (finalStats.reloadSpeed != 0) reloadSpeed += finalStats.reloadSpeed * 0.01;
+	if (finalStats.meleeRechargeSpeed != 0) meleeRechargeSpeed += finalStats.meleeRechargeSpeed * 0.01;
+	
 	//re-run setup funcs for all skills now that final stats have been calculated
 	scr_char_setupSkills(self, false, false);
 	
