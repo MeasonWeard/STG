@@ -1,4 +1,4 @@
 // Inherit the parent event
 event_inherited();
 
-if (keyboard_check_pressed(ord("N"))) useFunc();
+if (keyboard_check_pressed(ord("H"))) useFunc();

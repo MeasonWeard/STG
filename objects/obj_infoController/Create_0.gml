@@ -11,5 +11,4 @@ text = [page1Text, page2Text, page3Text, page4Text, page5Text];
 pageIndex = 0;
 pages = array_length(text);
 
-
 xx = x + sprite_width * 0.5;

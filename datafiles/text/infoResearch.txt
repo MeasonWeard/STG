@@ -1,0 +1,12 @@
+RESEARCH
+
+Research projects provide stat upgrades to your character.
+You can select only one research project at a time to receive research progress.
+Resarch progresses automatically as you collect resources during a run and when scrapping loot.
+Collected data and contributing resources are directed towards your selected project instead of your inventory.
+
+You can activate the bonuses of one project from each research category. You will gain the bonuses of each
+activated project.
+
+The project you're currently researching does not need to be activated, allowing you to work towards new
+upgrades while continuing to benefit from previously completed research.

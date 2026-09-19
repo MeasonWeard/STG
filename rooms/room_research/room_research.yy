@@ -40,6 +40,7 @@
     {"name":"inst_5FD05F73","path":"rooms/room_research/room_research.yy",},
     {"name":"inst_4FCA3B13","path":"rooms/room_research/room_research.yy",},
     {"name":"inst_587E7F17","path":"rooms/room_research/room_research.yy",},
+    {"name":"inst_60653019","path":"rooms/room_research/room_research.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -78,6 +79,7 @@
         {"$GMRInstance":"v4","%Name":"inst_5FD05F73","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5FD05F73","objectId":{"name":"obj_researchNode","path":"objects/obj_researchNode/obj_researchNode.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":736.0,"y":896.0,},
         {"$GMRInstance":"v4","%Name":"inst_4FCA3B13","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_4FCA3B13","objectId":{"name":"obj_researchNode","path":"objects/obj_researchNode/obj_researchNode.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":832.0,"y":608.0,},
         {"$GMRInstance":"v4","%Name":"inst_587E7F17","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_587E7F17","objectId":{"name":"obj_researchNode","path":"objects/obj_researchNode/obj_researchNode.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":832.0,"y":896.0,},
+        {"$GMRInstance":"v4","%Name":"inst_60653019","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_60653019","objectId":{"name":"obj_buttonRectangle","path":"objects/obj_buttonRectangle/obj_buttonRectangle.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":112.0,"y":192.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4279828480,"depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],

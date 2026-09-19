@@ -4,21 +4,22 @@ draw_self();
 if (isCurrent) {
 
 	var borderCol = c_lime;
-	
+
 	draw_set_colour(borderCol);
+
 	var in = 1;
-	var alpha = 0.62;
-	
+	var alpha = 0.55 + sin(current_time * 0.006) * 0.2;
+
 	repeat(5) {
 
 		draw_set_alpha(alpha);
 
 		draw_rectangle(x + in, y + in, x + 64 - in, y + 64 - in, true);
-		draw_rectangle(x-1 + in, y-1 + in, x + 65 - in, y + 65 - in, true);
-		
+		draw_rectangle(x - 1 + in, y - 1 + in, x + 65 - in, y + 65 - in, true);
+
 		in ++;
 		alpha -= 0.09;
-		
+
 	}
 
 	draw_set_alpha(1);
@@ -32,6 +33,8 @@ if (active == true) {
 	draw_set_colour(borderCol);
 	draw_rectangle(x, y, x + 64, y + 64, true);
 	draw_rectangle(x-1, y-1, x + 65, y + 65, true);
+	draw_rectangle(x-2, y-2, x + 66, y + 66, true);
+	draw_rectangle(x-3, y-3, x + 67, y + 67, true);
 	
 } else {
 
