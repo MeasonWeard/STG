@@ -488,10 +488,15 @@ function project_agility() : researchProject() constructor {
 	static setupFunc = function() {
 		
 		passives.da = level * 5;
-		if (level >= 4) passives.dashRegen = (level div 4) * 0.03;
+		
+		if (level >= 4) {
+			passives.dashRegen = (level div 4) * 0.03;
+			passives.meleeAttackSpeed = (level div 4) * 3;
+		}
+		
 		if (level >= 12) passives.maxDashes = 1;
 		
-		dataRequired = scr_research_dataReq(level);
+		dataRequired = scr_research_dataReq(level, 1.1);
 		
 	}
 	
@@ -499,6 +504,7 @@ function project_agility() : researchProject() constructor {
 	
 		description = "Each level increases DA by 5";
 		description += "\nEvery 4 levels increases dash regen by .03";
+		description += "\nand melee attack speed by 3%";
 		if (level < 12) description += "\nLevel 12: + 1 dash charge";
 		
 	}
@@ -520,9 +526,13 @@ function project_strength() : researchProject() constructor {
 	static setupFunc = function() {
 		
 		passives.meleeDamPerc = level * 3;
-		if (level >= 3) passives.da = (level div 3) * 10;
 		
-		dataRequired = scr_research_dataReq(level);
+		if (level >= 3) {
+			passives.da = (level div 3) * 10;
+			passives.meleeRechargeSpeed = (level div 3) * 3
+		}
+		
+		dataRequired = scr_research_dataReq(level, 1.1);
 		
 	}
 	
@@ -530,7 +540,7 @@ function project_strength() : researchProject() constructor {
 	
 		description = "Each level increases melee damage % by 3";
 		description += "\nEvery 3 levels increases DA by 10";
-		
+		description += "\nAnd melee recharge speed by 3%";
 	}
 	
 }

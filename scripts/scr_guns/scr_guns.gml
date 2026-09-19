@@ -62,7 +62,13 @@ function scr_guns_shoot(char) {
 		var snd = scr_audio_randomSoundFromProfile(profile);
 		if (snd != undefined) audio_play_sound_at(snd, char.x, char.y, 0, 200, 1600, 1, false, 0);
 		
-		gun.fireTick = 60 / weaponStats.fireRate;
+		//TO DO: pre-factor this in weaponStats
+		var fr = weaponStats.fireRate;
+		
+		var dec = char.finalStats.gunFireRate * 0.01;
+		if (dec != 0) fr = (1 + dec) * fr;
+		
+		gun.fireTick = 60 / fr;
 		
 		gun.ammo --;
 		

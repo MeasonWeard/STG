@@ -60,7 +60,7 @@ scr_weapons_collectWeapon(self, weaponsData.weapon2, false);
 //var dev = scr_genDevices_thermos(15, 1);
 //gear.device1 = dev;
 //dev = scr_genDevices_thermos(15, 5);
-//dev.stats.meleeRechargeSpeed = 300;
+//dev.stats.meleeAttackSpeed = 200;
 //gear.device2 = dev;
 //var c = scr_genCoats_reflexCoat(12, 3);
 //gear.coat = c;

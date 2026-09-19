@@ -85,11 +85,17 @@ function scr_melee_attack(char) {
 	melee.attackSpriteIndex = melee.attackSpriteIndex + 1;
 	if (melee.attackSpriteIndex > array_length(melee.attackSprites) - 1) melee.attackSpriteIndex = 0;
 	
-	melee.attackTick = 60 / stats.attackRate;
+	//TO DO: pre-factor in weapon stats
+	var ar = stats.attackRate;
+		
+	var dec = char.finalStats.meleeAttackSpeed * 0.01;
+	if (dec != 0) ar = (1 + dec) * ar;
+	
+	melee.attackTick = 60 / ar;
 	melee.charges --;
 	melee.recharge = stats.rechargeTime * 60;
 	
-	char.meleeCooldown = round(60 / stats.attackRate) + 4;
+	char.meleeCooldown = 60 / stats.attackRate + 4;
 	
 	att.image_angle = dir;
 	
