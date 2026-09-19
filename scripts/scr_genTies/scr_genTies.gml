@@ -242,7 +242,7 @@ function scr_genTies_defender(level, rarity) {
 	
 	var stats = tie.stats;
 	
-	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","meleeDamPerc","da"];
+	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","meleeDamPerc","meleeRechargeSpeed","da"];
 	keys = array_concat(keys, keys);
 	
 	var low = 14 * max(0.5, level);
@@ -282,7 +282,75 @@ function scr_genTies_defender(level, rarity) {
 			amount = scr_statRolls_damagePerc(level);
 		}
 		
+		if (key == "meleeRechargeSpeed") {
+			amount = scr_statRolls_reloadSpeed(level);
+		}
+		
 		if (key == "da") {
+			amount = scr_statRolls_combatAbility(level);
+		}
+	
+		if (amount != 0)  scr_loot_addStat(tie, key, amount);
+	
+	}
+	
+	return tie;
+	
+}
+
+function scr_genTies_warrior(level, rarity) {
+
+	var tie = new tieInst(level, rarity);
+	tie.name = "Warriors's Tie";
+	tie.spr = spr_tieDefender;
+	
+	var stats = tie.stats;
+	
+	var keys = ["maxHp","maxHpPerc","hpRegen","hpRegenPerc","meleeDamPerc","meleeAttackSpeed","oa"];
+	keys = array_concat(keys, keys);
+	
+	var low = 14 * max(0.5, level);
+	var high = 18 * max(0.5, level);
+	stats.maxHp = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	low = 2 * max(0.5, level);
+	high = 6 * max(0.5, level);
+	stats.maxEnergy = irandom_range_biased(low, high, LOOT_BIAS);
+	
+	stats.meleeDamPerc = scr_statRolls_damagePerc(level, 1.5);
+	
+	stats.oa = scr_statRolls_combatAbility(level, 1.5);
+	
+	repeat(rarity - 1) {
+	
+		var key = scr_randomElementRemove(keys);
+		var amount = 0;
+
+		if (key == "maxHp") {
+			amount = scr_statRolls_maxHp(level);
+		}
+		
+		if (key == "maxHpPerc") {
+			amount = scr_statRolls_maxHpPerc(level);
+		}
+		
+		if (key == "hpRegen") {
+			amount = scr_statRolls_regen(level);
+		}
+		
+		if (key == "hpRegenPerc") {
+			amount = scr_statRolls_regenPerc(level);
+		}
+			
+		if (key == "meleeDamPerc") {
+			amount = scr_statRolls_damagePerc(level);
+		}
+		
+		if (key == "meleeAttackSpeed") {
+			amount = scr_statRolls_attackRate(level);
+		}
+		
+		if (key == "oa") {
 			amount = scr_statRolls_combatAbility(level);
 		}
 	
@@ -302,7 +370,7 @@ function scr_genTies_marksman(level, rarity) {
 	
 	var stats = tie.stats;
 	
-	var keys = ["kinRes","kinDam","kinDamPerc","gunDamPerc","oa"];
+	var keys = ["kinRes","kinDam","kinDamPerc","gunDamPerc","reloadSpeed","oa"];
 	keys = array_concat(keys, keys);
 	
 	var low = 7 * max(0.5, level);
@@ -336,6 +404,10 @@ function scr_genTies_marksman(level, rarity) {
 		
 		if (key == "gunDamPerc") {
 			amount = scr_statRolls_damagePerc(level);
+		}
+		
+		if (key == "reloadSpeed") {
+			amount = scr_statRolls_reloadSpeed(level);
 		}
 		
 		if (key == "oa") {
@@ -498,7 +570,7 @@ function scr_genTies_inventor(level, rarity) {
 	
 	var stats = tie.stats;
 	
-	var keys = ["maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay","gunDamPerc","energyPackRegen"];
+	var keys = ["maxEnergyPerc","energyRegen","energyRegenPerc","shieldRegen","shieldRegenDelay","gunDamPerc","energyPackRegen","gunFireRate"];
 	keys = array_concat(keys, keys);
 	
 	if (rarity > 2) array_push(keys, "maxShield");
@@ -559,6 +631,9 @@ function scr_genTies_inventor(level, rarity) {
 			amount = scr_statRolls_packRegen(level);
 		}
 		
+		if (key == "gunFireRate") {
+			amount = scr_statRolls_attackRate(level);
+		}
 		
 		if (key == "maxShield") {
 			amount = 1;	

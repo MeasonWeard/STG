@@ -1323,7 +1323,7 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		
 		maxCharges = 4;
 		energyCost = 12;
-		cooldownTime = 1.8;
+		cooldownTime = 1.6;
 		castCooldownTime = 0.4;
 
 		spikes = 3;
@@ -3045,8 +3045,9 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		
 		levelReq = 5;
 	
-		description = "Block the body's natural limit on muscle growth, increasing your melee damage.";
-	
+		description = "Block the body's natural limit on muscle growth, increasing\nyour melee damage";
+		description += " and melee recharge speed.";
+		
 		passives = {
 	
 			meleeDamPerc: 5
@@ -3057,7 +3058,8 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 			passives = {
 	
-				meleeDamPerc: 5 + (level -1) * 4
+				meleeDamPerc: 5 + (level -1) * 4,
+				meleeRechargeSpeed: level * 2
 	
 			};
 	
@@ -3352,8 +3354,9 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 		
 		levelReq = 5;
 	
-		description = "Modify your guns so that they deal more damage.";
-	
+		description = "Modify your guns so that they deal more damage";
+		description += "\nand fire faster.";
+		
 		passives = {
 	
 			gunDamPerc: 5
@@ -3364,7 +3367,8 @@ function scr_skills_getRadiationSicknessData(source, needsDecay) {
 	
 			passives = {
 	
-				gunDamPerc: 5 + (level -1) * 4
+				gunDamPerc: 5 + (level - 1) * 4,
+				gunFireRate: level * 2
 	
 			};
 	

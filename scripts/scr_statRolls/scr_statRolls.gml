@@ -52,8 +52,8 @@ function scr_statRolls_regen(level, modVal = 1) {
 		low,
 		high,
 		LOOT_BIAS,
-		true,
-		3
+		3,
+		true
 	);
 	
 	return amount * modVal;
@@ -80,8 +80,8 @@ function scr_statRolls_shieldRegen(level, modVal = 1) {
 		low,
 		high,
 		LOOT_BIAS,
-		true,
-		3
+		3,
+		true
 	);
 	
 	return amount * modVal;
@@ -97,8 +97,8 @@ function scr_statRolls_shieldRegenDelay(level, modVal = 1) {
 		low,
 		high,
 		LOOT_BIAS,
-		true,
-		3
+		3,
+		true
 	);
 	
 	return amount * modVal;
@@ -136,8 +136,8 @@ function scr_statRolls_speed(level, modVal = 1) {
 		low,
 		high,
 		LOOT_BIAS,
-		true,
-		3
+		3,
+		true
 	);
 	
 	return amount * modVal;
@@ -197,8 +197,8 @@ function scr_statRolls_packRegen(level, modVal = 1) {
 		low,
 		high,
 		LOOT_BIAS,
-		true,
-		3
+		3,
+		true
 	);
 	
 	return amount * modVal;
@@ -214,8 +214,42 @@ function scr_statRolls_dashRegen(level, modVal = 1) {
 		low,
 		high,
 		LOOT_BIAS,
-		true,
-		3
+		3,
+		true
+	);
+	
+	return amount * modVal;
+	
+}
+
+function scr_statRolls_attackRate(level, modVal = 1) {
+
+	var low = level * 0.1;
+	var high = level * 0.2;
+	
+	var amount = random_range_biased(
+		low,
+		high,
+		LOOT_BIAS,
+		3,
+		true
+	);
+	
+	return amount * modVal;
+	
+}
+
+function scr_statRolls_reloadSpeed(level, modVal = 1) {
+
+	var low = level * 0.1;
+	var high = level * 0.2;
+	
+	var amount = random_range_biased(
+		low,
+		high,
+		LOOT_BIAS,
+		3,
+		true
 	);
 	
 	return amount * modVal;

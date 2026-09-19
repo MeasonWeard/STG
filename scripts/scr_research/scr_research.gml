@@ -529,7 +529,7 @@ function project_strength() : researchProject() constructor {
 		
 		if (level >= 3) {
 			passives.da = (level div 3) * 10;
-			passives.meleeRechargeSpeed = (level div 3) * 3
+			passives.meleeRechargeSpeed = (level div 3) * 2
 		}
 		
 		dataRequired = scr_research_dataReq(level, 1.1);
@@ -540,7 +540,7 @@ function project_strength() : researchProject() constructor {
 	
 		description = "Each level increases melee damage % by 3";
 		description += "\nEvery 3 levels increases DA by 10";
-		description += "\nAnd melee recharge speed by 3%";
+		description += "\nAnd melee recharge speed by 2%";
 	}
 	
 }
@@ -561,18 +561,20 @@ function project_concentration() : researchProject() constructor {
 
 		passives.oa = level * 6;
 		
-		//if (level >= 3) {
-		//	passives.stimPackRegen = (level div 3) * 0.04;
-		//}
+		if (level >= 3) {
+			passives.reloadSpeed = (level div 3) * 2;
+		}
 
 		dataRequired = scr_research_dataReq(level, 1.1);
+
 
 	}
 
 	static formatDescription = function() {
 
 		description = "Each level increases OA by 6";
-
+		description += "\nEvery 3 levels increases\ngun reload speed by 2%";
+		
 	}
 
 }
@@ -1102,6 +1104,34 @@ function project_lifeSupport() : researchProject() constructor {
 
 		description = "Each level increases health regen by 0.2.";
 		description += "\nEvery 4 levels increases stim pack regen\nby .04";
+
+	}
+
+}
+
+function project_mechanics() : researchProject() constructor {
+
+	name = "Mechanics";
+	key = "mechanics";
+	category = "systems";
+	icon = spr_icon_gunsmith;
+
+	maxLevel = 24;
+	
+	resourceValues.metals = COMMON_RES_VAL;
+	resourceValues.polymers = COMMON_RES_VAL;
+
+	static setupFunc = function() {
+
+		passives.gunFireRate = level;
+		
+		dataRequired = scr_research_dataReq(level, 1.1);
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases gun fire rate by 1%";
 
 	}
 

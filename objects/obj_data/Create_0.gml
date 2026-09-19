@@ -616,16 +616,7 @@ researchConstructors = {
 	combatAnalysis: project_combatAnalysis, //systems
 	vitalSystems: project_vitalSystems,
 	lifeSupport: project_lifeSupport,//systems
-	
-	//fixResearchStation: project_fixResearchStation,
-	
-	//shielding: project_shielding,
-	
-	//targeting: project_targeting,
-	//ballistics: project_ballistics,
-	
-	//conditioning: project_conditioning,
-	//energyRecovery: project_energyRecovery
+	mechanics: project_mechanics, //systems
 	
 };
 
