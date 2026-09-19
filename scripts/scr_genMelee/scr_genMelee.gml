@@ -1199,13 +1199,13 @@ function scr_genMelee_aspisAndBaton(level, rarity) {
 	melee.name = "Aspis and Baton";
 	melee.spr = spr_aspis;
 	
-	melee.bonusStats.spd = -1;
+	melee.bonusStats.spd = -0.8;
 	melee.attackRate = 1.8;
 	melee.rechargeTime = 1.6;
 	
 	//defense and resistance
-	var minDa = 15 + rarity * 4 + ceil(level * 0.75);
-	var maxDa = minDa + 15;
+	var minDa = 12 + rarity * 2 + ceil(level * 0.75);
+	var maxDa = minDa + 12;
 	
 	melee.bonusStats.da = irandom_range_biased(minDa, maxDa, LOOT_BIAS_MILD);
 	
@@ -1302,13 +1302,13 @@ function scr_genMelee_towerShieldAndBaton(level, rarity) {
 	melee.name = "Tower Shield and Baton";
 	melee.spr = spr_towerShield;
 	
-	melee.bonusStats.spd = -1;
+	melee.bonusStats.spd = -0.8;
 	melee.attackRate = 1.8;
 	melee.rechargeTime = 1.6;
 	
 	//defense and resistance
-	var minDa = 15 + rarity * 4 + ceil(level * 0.75);
-	var maxDa = minDa + 15;
+	var minDa = 12 + rarity * 2 + ceil(level * 0.75);
+	var maxDa = minDa + 12;
 	
 	melee.bonusStats.da = irandom_range_biased(minDa, maxDa, LOOT_BIAS_MILD);
 	
@@ -1373,8 +1373,6 @@ function scr_genMelee_towerShieldAndBaton(level, rarity) {
 			"da",
 			"da",
 		],
-
-		//damTypes: damTypes
 
 	};
 

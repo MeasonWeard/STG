@@ -29,3 +29,4 @@ Hub Portal: T
 (Hub only)
 Stash: I
 Skills: K
+Research: N

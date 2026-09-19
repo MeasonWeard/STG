@@ -742,7 +742,7 @@ function scr_stats_hitOutcome(oa, da) {
 				
 				roll = irandom_range(1, 200);
 				
-				if (roll <= chance) outcome = 0;
+				if (roll <= chance * 0.75) outcome = 0;
 				
 				break;
 			}

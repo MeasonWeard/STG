@@ -309,7 +309,7 @@ function scr_genDevices_calculator(level, rarity) {
 		
 		if (stat == "da") {
 			
-			var high = max(2, round(baseHigh * 0.75));
+			var high = max(2, round(baseHigh * 0.5));
 			var low = max(1, high - 5);
 			
 			amount = irandom_range_biased(

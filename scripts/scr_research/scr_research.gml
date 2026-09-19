@@ -402,7 +402,7 @@ function scr_research_getActiveProjectKey(categoryKey) {
 
 function scr_research_dataReq(level, modifier = undefined) {
 
-	var dataReq = 2000 + power(level, 2.4) * 160
+	var dataReq = 2000 + round(power(level, 2.6) * 160);
 	
 	if (is_real(modifier)) dataReq = round(dataReq * modifier);
 	
