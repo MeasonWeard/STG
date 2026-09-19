@@ -535,6 +535,38 @@ function project_strength() : researchProject() constructor {
 	
 }
 
+function project_concentration() : researchProject() constructor {
+
+	name = "Concentration";
+	key = "concentration";
+	category = "bionics";
+	icon = spr_icon_enhancedHomeostasis;
+
+	maxLevel = 24;
+	
+	resourceValues.bio = COMMON_RES_VAL;
+	resourceValues.chip = UNCOMMON_RES_VAL;
+
+	static setupFunc = function() {
+
+		passives.oa = level * 6;
+		
+		//if (level >= 3) {
+		//	passives.stimPackRegen = (level div 3) * 0.04;
+		//}
+
+		dataRequired = scr_research_dataReq(level, 1.1);
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases OA by 6";
+
+	}
+
+}
+
 #endregion
 
 #region //materials
@@ -925,7 +957,7 @@ function project_reconstitution() : researchProject() constructor {
 	
 	static formatDescription = function() {
 	
-		description = "Each level decreases increases shield regen by .05";
+		description = "Each level increases shield regen by .05";
 		description += "\nEvery 6 levels increases max shield by 1.";
 	}
 	
@@ -1027,6 +1059,39 @@ function project_vitalSystems() : researchProject() constructor {
 
 		description = "Each level increases max health and max energy\nby 5.";
 		description += " Every 4 levels increases max health\nand max energy by 5%";
+
+	}
+
+}
+
+function project_lifeSupport() : researchProject() constructor {
+
+	name = "Life Support";
+	key = "lifeSupport";
+	category = "systems";
+	icon = spr_icon_stimPack;
+
+	maxLevel = 24;
+	
+	resourceValues.alienOrgan = UNCOMMON_RES_VAL;
+	resourceValues.pollen = UNCOMMON_RES_VAL;
+
+	static setupFunc = function() {
+
+		passives.hpRegen = level * 0.2;
+		
+		if (level >= 3) {
+			passives.stimPackRegen = (level div 3) * 0.04;
+		}
+
+		dataRequired = scr_research_dataReq(level);
+
+	}
+
+	static formatDescription = function() {
+
+		description = "Each level increases health regen by 0.2.";
+		description += "\nEvery 4 levels increases stim pack regen\nby .04";
 
 	}
 

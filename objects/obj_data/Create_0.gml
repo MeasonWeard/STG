@@ -20,9 +20,9 @@ global.data = self;
 #macro ITEM_PULL_STRENGTH 16
 #macro MAX_DATA_DROPS 12
 #macro FRAME_TIME 1 / 60
-#macro COMMON_RES_VAL 20
-#macro UNCOMMON_RES_VAL 80
-#macro RARE_RES_VAL 320
+#macro COMMON_RES_VAL 16
+#macro UNCOMMON_RES_VAL 64
+#macro RARE_RES_VAL 256
 
 //display
 resolutions = [];
@@ -596,6 +596,7 @@ researchConstructors = {
 	survival: project_survival, //bionics
 	agility: project_agility, //bionics
 	strength: project_strength, //bionics
+	concentration: project_concentration, //bionics
 	
 	armor: project_armor, //materials
 	thermochemicalResistance: project_thermochemicalResistance, //materials
@@ -613,7 +614,8 @@ researchConstructors = {
 	
 	tactics: project_tactics, //systems
 	combatAnalysis: project_combatAnalysis, //systems
-	vitalSystems: project_vitalSystems, //systems
+	vitalSystems: project_vitalSystems,
+	lifeSupport: project_lifeSupport,//systems
 	
 	//fixResearchStation: project_fixResearchStation,
 	
