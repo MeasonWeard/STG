@@ -49,24 +49,24 @@ if (global.devControls) {
 	
 }
 
-//screenshot
-if (keyboard_check_pressed(vk_f12)) {
+////screenshot
+//if (keyboard_check_pressed(vk_f12)) {
 	
-	var count = instance_number(obj_screenshot);
+//	var count = instance_number(obj_screenshot);
 	
-	if (count == 0) {
+//	if (count == 0) {
 	
-		var filename = "screenshot_" + string(current_time) + ".png";
-		screen_save(filename);
-		audio_play_sound(snd_screenshot, 0, false);
+//		var filename = "screenshot_" + string(current_time) + ".png";
+//		screen_save(filename);
+//		audio_play_sound(snd_screenshot, 0, false);
 	
-		var sr = instance_create_layer(x, y, "Instances", obj_screenshot);
+//		var sr = instance_create_layer(x, y, "Instances", obj_screenshot);
 	
-		sr.filename = filename;
+//		sr.filename = filename;
 	
-	}
+//	}
 	
-}
+//}
 
 //user controls
 var c = instance_number(obj_statsPlate);

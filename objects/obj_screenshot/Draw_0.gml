@@ -22,6 +22,8 @@ if (tick < 25) {
 	
 	}
 	
+	draw_set_alpha(1);
+	
 }
 
 if (tick <= 0) {

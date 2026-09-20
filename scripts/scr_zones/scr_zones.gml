@@ -534,8 +534,8 @@ function zone_hydro() : zone() constructor {
 function zone_engineering() : zone() constructor {
 
 	name = "Engineering";
-	portrait = spr_acidPit;
-	textCol = c_blue;
+	portrait = spr_engPortrait;
+	textCol = #070799;
 
 	mapW = 12;
 	mapH = 12;

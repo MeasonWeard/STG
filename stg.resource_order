@@ -725,6 +725,7 @@
     {"name":"spr_electrifiedBaton","order":2,"path":"sprites/spr_electrifiedBaton/spr_electrifiedBaton.yy",},
     {"name":"spr_emergencyResponseHelmet","order":12,"path":"sprites/spr_emergencyResponseHelmet/spr_emergencyResponseHelmet.yy",},
     {"name":"spr_engDoor","order":36,"path":"sprites/spr_engDoor/spr_engDoor.yy",},
+    {"name":"spr_engPortrait","order":4,"path":"sprites/spr_engPortrait/spr_engPortrait.yy",},
     {"name":"spr_faradayCrown","order":13,"path":"sprites/spr_faradayCrown/spr_faradayCrown.yy",},
     {"name":"spr_fireHydrant","order":21,"path":"sprites/spr_fireHydrant/spr_fireHydrant.yy",},
     {"name":"spr_fireSprayShotgun","order":10,"path":"sprites/spr_fireSprayShotgun/spr_fireSprayShotgun.yy",},

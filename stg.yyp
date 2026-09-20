@@ -818,6 +818,7 @@
     {"id":{"name":"spr_emergencyResponseHelmet","path":"sprites/spr_emergencyResponseHelmet/spr_emergencyResponseHelmet.yy",},},
     {"id":{"name":"spr_energyPack","path":"sprites/spr_energyPack/spr_energyPack.yy",},},
     {"id":{"name":"spr_engDoor","path":"sprites/spr_engDoor/spr_engDoor.yy",},},
+    {"id":{"name":"spr_engPortrait","path":"sprites/spr_engPortrait/spr_engPortrait.yy",},},
     {"id":{"name":"spr_faradayCrown","path":"sprites/spr_faradayCrown/spr_faradayCrown.yy",},},
     {"id":{"name":"spr_fireHydrant","path":"sprites/spr_fireHydrant/spr_fireHydrant.yy",},},
     {"id":{"name":"spr_fireSprayShotgun","path":"sprites/spr_fireSprayShotgun/spr_fireSprayShotgun.yy",},},
