@@ -62,7 +62,7 @@ function zone_intro() : zone() constructor {
 	
 	preset = true;
 	
-	var groups = scr_spawns_testGroups();
+	var groups = scr_spawns_standardGroups("aliens");
 	minorGroups = groups.minor;
 	majorGroups = groups.major;
 	
@@ -101,7 +101,7 @@ function zone_waste() : zone() constructor {
 	
 	baseLevel = 3;
 	
-	var groups = scr_spawns_testGroups();
+	var groups = scr_spawns_standardGroups("mutants", 3);
 	minorGroups = groups.minor;
 	majorGroups = groups.major;
 
@@ -175,7 +175,7 @@ function zone_commercial() : zone() constructor {
 	
 	baseLevel = 1;
 	
-	var groups = scr_spawns_testGroups();
+	var groups = scr_spawns_standardGroups("aliens", 3);
 	minorGroups = groups.minor;
 	majorGroups = groups.major;
 	
@@ -390,7 +390,7 @@ function zone_hydro() : zone() constructor {
 	
 	baseLevel = 6;
 	
-	var groups = scr_spawns_testGroups();
+	var groups = scr_spawns_standardGroups("plants", 3);
 	minorGroups = groups.minor;
 	majorGroups = groups.major;
 
@@ -531,3 +531,150 @@ function zone_hydro() : zone() constructor {
 	
 }
 
+function zone_engineering() : zone() constructor {
+
+	name = "Engineering";
+	portrait = spr_acidPit;
+	textCol = c_blue;
+
+	mapW = 12;
+	mapH = 12;
+	
+	baseLevel = 8;
+	
+	var groups = scr_spawns_standardGroups("spiders", 3);
+	minorGroups = groups.minor;
+	majorGroups = groups.major;
+
+	static generateMap = function() {
+	
+		var tries = 0;
+		var success = false;
+		var map;
+
+		while (!success and tries < 92) {
+
+			tries++;
+
+			map = scr_mapGen_createBlankMap(mapW, mapH);
+
+			var halls = [
+				stage_engHall1,
+			];
+
+			var arenas = [
+				stage_engMachines,
+			];
+
+			var sideRooms = [
+				stage_engMachines,
+			];
+
+			var endStages = [
+				stage_wasteBoss1
+			];
+
+			// build the two rings and arena junction
+			var result = scr_mapGen_generateFacility(
+				map,
+				halls,
+				arenas
+			);
+
+			if (!result.success) continue;
+
+			startPos = result.startPos;
+
+			var startX = startPos.xx;
+			var startY = startPos.yy;
+
+			var cellCount = result.cellCount;
+
+			// ----------------------------
+			// SMALL HALLS
+			// ----------------------------
+
+			var smallHallAmount = irandom_range(2, 4);
+
+			result = scr_mapGen_addSmallHalls(
+				map,
+				halls,
+				smallHallAmount,
+				2,
+				3
+			);
+
+			cellCount += result.cellCount;
+
+			// ----------------------------
+			// EXTRA ARENAS
+			// ----------------------------
+
+			var arenasMin = max(8, floor(cellCount * 0.35));
+			var arenasMax = max(12, ceil(cellCount * 0.5));
+
+			var arenasAmount = irandom_range(
+				arenasMin,
+				arenasMax
+			);
+
+			var arrs = 0;
+			var arenaTries = 0;
+
+			while (arrs < arenasAmount and arenaTries < 200) {
+
+				arenaTries++;
+
+				result = scr_mapGen_replaceRooms(
+					map,
+					arenas,
+					1,
+					stageTypes.hall
+				);
+
+				if (result.roomCount > 0) {
+					arrs++;
+				}
+
+			}
+			
+			// ----------------------------
+			// SIDE ROOMS
+			// ----------------------------
+
+			var sideMin = ceil(cellCount * 0.2);
+			var sideMax = sideMin + 2;
+
+			var sideAmount = irandom_range(
+				sideMin,
+				sideMax
+			);
+
+			result = scr_mapGen_addSideRooms(
+				map,
+				sideRooms,
+				sideAmount
+			);
+
+			cellCount += result.cellCount;
+
+			// ----------------------------
+			// END
+			// ----------------------------
+
+			scr_mapGen_makeFurthestEndCell(
+				map,
+				startX,
+				startY,
+				endStages
+			);
+
+			success = true;
+
+		}
+
+		return map;
+	
+	}
+	
+}

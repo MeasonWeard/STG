@@ -240,41 +240,6 @@ takeLocked = function() {
 
 	lootPage = 0;
 
-	//var ec = global.endRunController;
-
-	//if (array_length(locked) == 0 and confirmScrap == false) {
-	//	confirmScrap = true;
-	//	exit;
-	//}
-	
-	////do something in a for loop for scrapped loot
-	//var revealedLen = array_length(revealedLoot);
-	//var lockedLen = array_length(locked);
-
-	//for (var i = 0; i < lockedLen; i ++) {
-		
-	//	var j = locked[i];
-		
-	//	if (j >= revealedLen) continue;
-		
-	//	var item = revealedLoot[j];
-		
-	//	if (!is_struct(item)) continue
-		
-	//	array_push(takenLoot, item);
-		
-	//}
-	
-	//if (array_length(revealedLoot) > array_length(locked)) audio_play_sound(snd_scrap, 0, false);
-	
-	//locked = [];
-	//revealedLoot = [];
-	
-	//ec.tab = "loot";
-	//confirmScrap = false;
-	
-	//lootPage = 0;
-	
 }
 
 finish = function () {

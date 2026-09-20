@@ -355,6 +355,22 @@ stages = {
 	
 	},
 	
+	commPlaza4: {
+	
+		room: stage_commPlaza4,
+		type: stageTypes.arena,
+		mapCol: c_orange
+	
+	},
+		
+	commPlaza5: {
+	
+		room: stage_commPlaza5,
+		type: stageTypes.arena,
+		mapCol: c_orange
+	
+	},
+	
 	cinema1: {
 	
 		room: stage_commCinema1,
@@ -440,20 +456,15 @@ stages = {
 
 	engHall1: {
 		
-		room: stage_intro1
+		room: stage_engHall1,
 		
 	},
 	
-	engHall2: {
+	engMachines: {
 		
-		room: stage_engHall2
-		
-	},
-	
-	engComputerRoom: {
-		
-		room: stage_engComputerRoom,
-		type: stageTypes.arena
+		room: stage_engMachines,
+		type: stageTypes.arena,
+		mapCol: c_orange
 		
 	},
 	

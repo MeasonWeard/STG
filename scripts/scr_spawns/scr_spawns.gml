@@ -58,7 +58,7 @@ function enemyGroup(groupName = "none", groupSpawns = []) constructor {
 
 }
 
-function scr_spawns_testGroups() {
+function scr_spawns_standardGroups(mainGroup = undefined, prominence = 1) {
 
 	var minorGroups = [];
 	var majorGroups = [];
@@ -97,6 +97,23 @@ function scr_spawns_testGroups() {
 	array_push(minorGroups, groupSpidersMinor);
 	array_push(minorGroups, groupPlantsMinor);
 	
+	if (is_string(mainGroup)) {
+	
+		repeat(prominence) {
+	
+			switch(mainGroup) {
+		
+				case "mutants": array_push(minorGroups, groupMutantsMinor); break;
+				case "aliens": array_push(minorGroups, groupAliensMinor); break;
+				case "spiders": array_push(minorGroups, groupSpidersMinor); break;
+				case "plants": array_push(minorGroups, groupPlantsMinor); break;
+			
+			}
+		
+		}
+	
+	}
+	
 	//MAJOR
 	
 	var groupMutantsMajor = new enemyGroup();
@@ -129,6 +146,23 @@ function scr_spawns_testGroups() {
 	array_push(majorGroups, groupAliensMajor);
 	array_push(majorGroups, groupSpidersMajor);
 	array_push(majorGroups, groupPlantsMajor);
+	
+	if (is_string(mainGroup)) {
+	
+		repeat(prominence) {
+	
+			switch(mainGroup) {
+		
+				case "mutants": array_push(majorGroups, groupMutantsMajor); break;
+				case "aliens": array_push(majorGroups, groupAliensMajor); break;
+				case "spiders": array_push(majorGroups, groupSpidersMajor); break;
+				case "plants": array_push(majorGroups, groupPlantsMajor); break;
+			
+			}
+	
+		}
+	
+	}
 	
 	return {
 		minor: minorGroups,
