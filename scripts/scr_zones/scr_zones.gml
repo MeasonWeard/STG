@@ -52,7 +52,7 @@ function zone() constructor {
 function zone_intro() : zone() constructor {
 
 	name = "Intro";
-	portrait = spr_commercialPortrait;
+	portrait = spr_commercialPortrait2;
 	textCol = c_fuchsia;
 
 	mapW = 8;
@@ -167,7 +167,7 @@ function zone_waste() : zone() constructor {
 function zone_commercial() : zone() constructor {
 
 	name = "Commercial Zone";
-	portrait = spr_commercialPortrait;
+	portrait = spr_commercialPortrait2;
 	textCol = c_fuchsia;
 
 	mapW = 12;
@@ -382,7 +382,7 @@ function zone_commercial() : zone() constructor {
 function zone_hydro() : zone() constructor {
 
 	name = "Phytotron";
-	portrait = spr_acidPit;
+	portrait = spr_phytoPortrait;
 	textCol = c_aqua;
 
 	mapW = 12;

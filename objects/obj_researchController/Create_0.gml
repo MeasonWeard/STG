@@ -75,5 +75,4 @@ reset = function() {
 	rc.panel.prevCurrentProject = undefined;
 	rc.panel.currentProject = undefined;
 
-	
 }

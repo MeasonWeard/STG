@@ -47,14 +47,25 @@ if (global.devControls) {
 	
 	}
 	
-	//if (keyboard_check_pressed(ord("V"))) {
-	
-	//	var filename = "screenshot_" + string(current_time) + ".png";
-	//	screen_save(filename);
-	//	scr_testSound();
-	
-	//}
+}
 
+//screenshot
+if (keyboard_check_pressed(vk_f12)) {
+	
+	var count = instance_number(obj_screenshot);
+	
+	if (count == 0) {
+	
+		var filename = "screenshot_" + string(current_time) + ".png";
+		screen_save(filename);
+		audio_play_sound(snd_screenshot, 0, false);
+	
+		var sr = instance_create_layer(x, y, "Instances", obj_screenshot);
+	
+		sr.filename = filename;
+	
+	}
+	
 }
 
 //user controls

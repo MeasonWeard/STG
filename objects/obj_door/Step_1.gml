@@ -1,4 +1,4 @@
-if (!sc.hub and side == "top" and initialiseDoors) {
+if (!hub and side == "top" and initialiseDoors) {
 
 	initialiseDoors = false;
 

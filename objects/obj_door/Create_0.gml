@@ -31,3 +31,11 @@ displayTag = false;
 doorText = "";
 tagText = "";
 zoneConstructor = undefined;
+
+hub = false;
+
+if (instance_exists(sc)) {
+
+	hub = sc.hub;
+	
+}

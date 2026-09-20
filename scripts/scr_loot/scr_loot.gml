@@ -291,7 +291,7 @@ function scr_loot_generateSpecialLoot(maxLevel, rarity) {
 	
 	if (type == "tie") {
 		
-		var func = choose(scr_genTies_defender, scr_genTies_marksman, scr_genTies_doctor,
+		var func = choose(scr_genTies_defender, scr_genTies_warrior, scr_genTies_marksman, scr_genTies_doctor,
 		scr_genTies_athlete, scr_genTies_inventor, scr_genTies_pyromaniac, scr_genTies_ballistician,
 		scr_genTies_toxicologist, scr_genTies_electromaniac, scr_genTies_radiologist);
 		

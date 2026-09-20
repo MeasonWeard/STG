@@ -211,7 +211,7 @@ takeLocked = function() {
 
 			array_push(scrappedLoot, item);
 
-		}//
+		}
 
 	}
 
