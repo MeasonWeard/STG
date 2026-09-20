@@ -462,7 +462,7 @@ stages = {
 	
 	engMachines: {
 		
-		room: stage_engMachines,
+		room: stage_engMachines1,
 		type: stageTypes.arena,
 		mapCol: c_orange
 		
