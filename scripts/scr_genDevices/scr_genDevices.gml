@@ -77,8 +77,8 @@ function scr_genDevices_watch(level, rarity) {
 	var rarityMod = 1 + rarityFactor * 0.2;
 	
 	//base regen
-	var low = (0.1 + level * 0.1);
-	var high = (0.2 + level * 0.4);
+	var low = 0.1 + level * 0.05;
+	var high = 0.2 + level * 0.15;
 
 	//digital / analog
 	var regenType = choose("energyRegen", "hpRegen");

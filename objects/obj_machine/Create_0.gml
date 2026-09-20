@@ -2,5 +2,3 @@
 event_inherited();
 
 blockLos = true;
-
-scr_obj_randomSubimage(self);
