@@ -569,7 +569,8 @@ function zone_engineering() : zone() constructor {
 			];
 
 			var sideRooms = [
-				stage_engReactor,
+				stage_engReactor1,
+				stage_engReactor2
 			];
 
 			var endStages = [

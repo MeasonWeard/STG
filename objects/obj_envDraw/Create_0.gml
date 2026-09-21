@@ -14,3 +14,6 @@ drawWalls = true;
 
 depth = layers.ground;
 
+bg = global.stageController.backgroundSprite;
+
+setupBg = true;

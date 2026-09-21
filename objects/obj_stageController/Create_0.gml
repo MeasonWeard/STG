@@ -2,6 +2,10 @@ global.stageController = self;
 rc = scr_data_getRunController();
 data = global.data;
 
+backgroundSprite = undefined;
+backgroundSkybox = false;
+backgroundParallax = 0.75;
+
 hub = false;
 scripted = false;
 scriptFunc = undefined;

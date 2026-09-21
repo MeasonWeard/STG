@@ -54,6 +54,7 @@ enum layers {
 	physical = 0,
 	decorations = 800,
 	ground = 900,
+	background = 950,
 	groundDecorations = 800,
 	hazards = 700,
 	projectiles = -400,
@@ -476,11 +477,19 @@ stages = {
 		
 	},
 	
-	engReactor: {
+	engReactor1: {
 		
-		room: stage_engReactor,
+		room: stage_engReactor1,
 		type: stageTypes.arena,
 		mapCol: c_navy
+		
+	},
+	
+	engReactor2: {
+		
+		room: stage_engReactor2,
+		type: stageTypes.arena,
+		mapCol: c_red
 		
 	},
 	

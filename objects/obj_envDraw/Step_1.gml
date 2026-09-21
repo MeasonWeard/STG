@@ -1,3 +1,16 @@
+bg = global.stageController.backgroundSprite;
+
+if (!is_undefined(bg) and setupBg) {
+	
+	setupBg = false;
+	
+	var bgd = instance_create_layer(0, 0, "Instances", obj_bgDraw);
+	bgd.spr = bg;
+	bgd.skybox = global.stageController.backgroundSkybox;
+	bgd.parallax = global.stageController.backgroundParallax;
+	
+}
+
 if (buildWallList) {
 
 	buildWallList = false;
