@@ -43,6 +43,22 @@ sprites = {
 	
 }
 
+hairColour = #141414;
+skinColour = #70412D;
+
+if (variable_struct_exists(charData, "hairColour")) {
+	hairColour = charData.hairColour;
+}
+
+if (variable_struct_exists(charData, "skinColour")) {
+	skinColour = charData.skinColour;
+}
+
+hairColourUniform = shader_get_uniform(shader_player, "hairColour");
+skinColourUniform = shader_get_uniform(shader_player, "skinColour");
+texelSizeUniform = shader_get_uniform(shader_player, "texelSize");
+spriteUVUniform = shader_get_uniform(shader_player, "spriteUV");
+
 //EQUIPMENT
 
 gear = scr_data_loadEquippedGear();

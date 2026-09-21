@@ -6,5 +6,6 @@ leftKey = vk_escape;
 leftFunc = function() {
 
 	room_goto(room_mainMenu);
+	global.gameData = undefined;
 	
 }

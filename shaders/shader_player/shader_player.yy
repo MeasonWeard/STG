@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"shader_player",
+  "name":"shader_player",
+  "parent":{
+    "name":"stg",
+    "path":"stg.yyp",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

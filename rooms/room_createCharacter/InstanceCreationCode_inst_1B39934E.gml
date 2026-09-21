@@ -17,6 +17,11 @@ leftFunc = function() {
 		exit;	
 	}
 	
+	with (obj_playerCreator) {
+		global.gameData.playerData.skinColour = skinColour;
+		global.gameData.playerData.hairColour = hairColour;
+	}
+	
 	global.gameData.playerData.name = name;
 	room_goto(room_classSelect);
 	

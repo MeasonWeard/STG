@@ -468,6 +468,22 @@ stages = {
 		
 	},
 	
+	engMachines2: {
+		
+		room: stage_engMachines2,
+		type: stageTypes.arena,
+		mapCol: c_orange
+		
+	},
+	
+	engReactor: {
+		
+		room: stage_engReactor,
+		type: stageTypes.arena,
+		mapCol: c_navy
+		
+	},
+	
 	engBoss1: {
 		
 		room: stage_engBoss1,
