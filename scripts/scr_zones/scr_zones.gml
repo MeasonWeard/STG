@@ -560,7 +560,8 @@ function zone_engineering() : zone() constructor {
 
 			var halls = [
 				stage_engHall1,
-				stage_engHall2
+				stage_engHall2,
+				stage_engHall3
 			];
 
 			var arenas = [

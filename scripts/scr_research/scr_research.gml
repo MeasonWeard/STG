@@ -304,8 +304,11 @@ function scr_research_addResource(key, amount) {
 	var research = global.gameData.research;
 	var currentKey = research.currentResearch;
 
-	if (is_undefined(currentKey)) {
+	show_debug_message("current key: " + currentKey);
 
+	if (is_undefined(currentKey)) {
+		
+		show_debug_message("no key");
 		scr_data_addResourceGamedata(key, amount);
 		return;
 
@@ -313,7 +316,9 @@ function scr_research_addResource(key, amount) {
 
 	var project = scr_research_getProject(currentKey);
 
-	if (!is_instanceof(project, researchProject)) {
+	if (!is_struct(project)) {
+
+		show_debug_message("not a project");
 
 		scr_data_addResourceGamedata(key, amount);
 		return;
@@ -323,6 +328,7 @@ function scr_research_addResource(key, amount) {
 	//completed projects cannot receive more progress
 	if (project.level >= project.maxLevel) {
 
+		show_debug_message("level maxed");
 		scr_data_addResourceGamedata(key, amount);
 		return;
 
@@ -331,6 +337,7 @@ function scr_research_addResource(key, amount) {
 	//data always contributes
 	if (key == "data") {
 
+		show_debug_message("adding to project");
 		project.progress += amount;
 		return;
 
@@ -339,6 +346,7 @@ function scr_research_addResource(key, amount) {
 	//check whether this resource contributes
 	if (!variable_struct_exists(project.resourceValues, key)) {
 
+		show_debug_message("doesn't contribute");
 		scr_data_addResourceGamedata(key, amount);
 		return;
 
@@ -346,6 +354,8 @@ function scr_research_addResource(key, amount) {
 
 	//convert resource into data
 	var value = project.resourceValues[$ key];
+
+	show_debug_message("adding to project");
 
 	project.progress += amount * value;
 		
