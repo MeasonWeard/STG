@@ -58,10 +58,10 @@ enum layers {
 	groundDecorations = 800,
 	hazards = 700,
 	projectiles = -400,
-	lighting = -700,
 	borders = -800,
 	ceiling = -5000,
 	effects = -6000,
+	lighting = -7000,
 	ui = -9000,
 	ui2 = -10000,
 	cursor = -11000 

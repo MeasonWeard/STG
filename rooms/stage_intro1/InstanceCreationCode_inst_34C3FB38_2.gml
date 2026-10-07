@@ -3,7 +3,6 @@ scripted = true;
 scriptFunc = function() {
 
 
-
 	if (!variable_instance_exists(self, "trainSetup")) {
 	
 		trainSetup = false;
@@ -12,6 +11,8 @@ scriptFunc = function() {
 		trainDecal = 0.001;
 		
 		movePlayerStart = true;
+		
+		alarmLighting = noone;
 	
 	}
 	
@@ -29,7 +30,10 @@ scriptFunc = function() {
 		scr_stages_completeStage();
 	}
 	
-	if (trainSpeed <= 1) trainDecal = 0.01;
+	if (trainSpeed <= 1) {
+		trainDecal = 0.01;
+		if (alarmLighting == noone) alarmLighting =  instance_create_layer(x, y, "Instances", obj_alarmLighting);
+	}
 
 	with(obj_trainWindow) {
 	
