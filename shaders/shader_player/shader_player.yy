@@ -3,8 +3,8 @@
   "%Name":"shader_player",
   "name":"shader_player",
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Shaders",
+    "path":"folders/Shaders.yy",
   },
   "resourceType":"GMShader",
   "resourceVersion":"2.0",

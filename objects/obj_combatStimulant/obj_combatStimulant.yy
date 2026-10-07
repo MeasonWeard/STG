@@ -11,8 +11,8 @@
   "name":"obj_combatStimulant",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Skills",
+    "path":"folders/Objects/Skills.yy",
   },
   "parentObjectId":null,
   "persistent":false,

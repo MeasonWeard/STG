@@ -10,8 +10,8 @@
   "name":"obj_researchPanel",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"UI",
+    "path":"folders/Sprites/UI.yy",
   },
   "parentObjectId":null,
   "persistent":false,

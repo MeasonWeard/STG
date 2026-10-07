@@ -10,8 +10,8 @@
   "name":"obj_warning",
   "overriddenProperties":[],
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Effects",
+    "path":"folders/Objects/Effects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

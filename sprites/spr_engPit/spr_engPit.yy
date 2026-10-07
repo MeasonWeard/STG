@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"stg",
-    "path":"stg.yyp",
+    "name":"Skyboxes",
+    "path":"folders/Sprites/Environment/Skyboxes.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
