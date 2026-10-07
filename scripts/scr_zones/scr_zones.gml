@@ -79,7 +79,7 @@ function zone_intro() : zone() constructor {
 			yy: mapH - 1
 		}
 		
-		var stages = [stage_intro1, stage_intro2];
+		var stages = [stage_intro1, stage_intro2, stage_intro2];
 		var path = [0, 0, 1, 0, 1];
 		
 		scr_mapGen_presetPath(map, startPos.xx, startPos.yy, stages, path);

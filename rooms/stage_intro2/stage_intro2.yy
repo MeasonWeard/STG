@@ -18,7 +18,7 @@
         {"$GMRInstance":"v4","%Name":"inst_249ECC6C1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_249ECC6C1","objectId":{"name":"obj_door_hydro","path":"objects/obj_door_hydro/obj_door_hydro.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":288.0,"y":-288.0,},
         {"$GMRInstance":"v4","%Name":"inst_25C117_1","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_25C117_1","objectId":{"name":"obj_bgWall_hydro2","path":"objects/obj_bgWall_hydro2/obj_bgWall_hydro2.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":128.0,"y":0.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
-    {"$GMRTileLayer":"","%Name":"Tiles","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":52,"SerialiseWidth":52,"TileCompressedData":[-2704,2,],"TileDataFormat":1,},"tilesetId":{"name":"tileset_engineering","path":"tilesets/tileset_engineering/tileset_engineering.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+    {"$GMRTileLayer":"","%Name":"Tiles","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":48,"SerialiseWidth":48,"TileCompressedData":[-2304,2,],"TileDataFormat":1,},"tilesetId":{"name":"tileset_engineering","path":"tilesets/tileset_engineering/tileset_engineering.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4278190080,"depth":1000,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":true,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
   "name":"stage_intro2",
@@ -37,10 +37,10 @@
   "resourceType":"GMRoom",
   "resourceVersion":"2.0",
   "roomSettings":{
-    "Height":3328,
+    "Height":3072,
     "inheritRoomSettings":false,
     "persistent":false,
-    "Width":3328,
+    "Width":3072,
   },
   "sequenceId":null,
   "views":[

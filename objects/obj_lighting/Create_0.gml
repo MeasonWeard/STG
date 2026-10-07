@@ -9,11 +9,13 @@ camXmid = camX + camW * 0.5;
 camYmid = camY + camH * 0.5;
 
 cols = [c_red, c_blue, c_green];
+alphas = [];
 
 transitionFreq = 1;
 transitionSmoothness = 1;
 
-transitionPos = 0;
+colPos = 0;
+alphaPos = 0;
 
 alpha = 0.3;
 

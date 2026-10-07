@@ -6,11 +6,13 @@ camYmid = camY + camH * 0.5;
 x = camX;
 y = camY;
 
-var len = array_length(cols);
+var colLen = array_length(cols);
+var alphaLen = array_length(alphas);
 
-if (len > 0) {
+if (colLen > 0) {
+    colPos = (colPos + transitionFreq / 60) mod colLen;
+}
 
-    transitionPos += transitionFreq / 60;
-    transitionPos = transitionPos mod len;
-
+if (alphaLen > 0) {
+    alphaPos = (alphaPos + transitionFreq / 60) mod alphaLen;
 }

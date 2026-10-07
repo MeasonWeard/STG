@@ -1,6 +1,8 @@
 // Inherit the parent event
 event_inherited();
 
-cols = [c_red, c_blue];
+cols = [c_red];
 
-alpha = 0.3;
+alphas = [0.05, 0.5];
+
+transitionSmoothness = 0.5;

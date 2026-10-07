@@ -39,6 +39,8 @@ if (global.devControls) {
 			hp = 0;
 		}
 	
+		scr_stages_completeStage();
+	
 	}
 	
 	if (keyboard_check_pressed(vk_add)) {
