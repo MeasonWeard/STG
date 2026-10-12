@@ -49,6 +49,12 @@ if (global.devControls) {
 	
 	}
 	
+	if (keyboard_check_pressed(vk_subtract)) {
+   
+		if (instance_exists(global.player)) global.player.hp -= 50;
+	
+	}
+	
 }
 
 ////screenshot
@@ -120,14 +126,7 @@ if (!paused) {
 
 				createdArrows = true;
 	
-				with(obj_enemy) {
-	
-					var arrow = instance_create_layer(0, 0, "Instances", obj_arrow);
-					arrow.target = self;
-					arrow.source = global.player;
-					arrow.col = c_red;
-	
-				}
+				scr_obj_createEnemyArrows();
 	
 			}
 

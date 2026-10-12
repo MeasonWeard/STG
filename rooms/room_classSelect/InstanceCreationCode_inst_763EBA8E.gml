@@ -23,7 +23,19 @@ leftFunc = function() {
 	
 	scr_file_saveGame(global.saveFile, global.gameData);
 	
-	room_goto(stage_hub1);
+	if (c.classNum == 1) {
+		
+		room_goto(room_chooseTutorial);
+		
+	} else {
+		
+		if (selectedClass == classes.physics) room_goto(room_physics);
+		if (selectedClass == classes.chemistry) room_goto(room_chemistry);
+		if (selectedClass == classes.biology) room_goto(room_biology);
+		if (selectedClass == classes.engineering) room_goto(room_engineering);
+		
+	}
+	
 	
 }
 

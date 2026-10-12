@@ -145,6 +145,12 @@ if (hp <= 0) {
 	var snd = scr_audio_randomSoundFromProfile(deathSounds);
 	if (snd != undefined) audio_play_sound_at(snd, x, y, 0, MIN_FALLOFF, MAX_FALLOFF, FALLOFF_FACTOR, false, 0);
 	
+	if (id == global.player.id) {
+	
+		if (instance_exists(global.runController)) global.runController.gameState = "fail";
+	
+	}
+	
 	instance_destroy();
 	
 }

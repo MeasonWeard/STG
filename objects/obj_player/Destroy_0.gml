@@ -1,7 +1,5 @@
 event_inherited();
 
-if (instance_exists(global.runController)) global.runController.gameState = "fail";
-
 with(obj_char) {
 
 	if (!pet) continue;

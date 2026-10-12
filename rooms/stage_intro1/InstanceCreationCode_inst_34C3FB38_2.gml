@@ -1,4 +1,5 @@
 scripted = true;
+txt = "WASD = move\nSpace = dash";
 
 scriptFunc = function() {
 
@@ -13,6 +14,8 @@ scriptFunc = function() {
 		movePlayerStart = true;
 		
 		alarmLighting = noone;
+		
+		scr_ui_displayInstructions(txt, 22);
 	
 	}
 	
@@ -31,8 +34,14 @@ scriptFunc = function() {
 	}
 	
 	if (trainSpeed <= 1) {
+		
 		trainDecal = 0.01;
-		if (alarmLighting == noone) alarmLighting =  instance_create_layer(x, y, "Instances", obj_alarmLighting);
+		
+		if (alarmLighting == noone) {
+			alarmLighting =  instance_create_layer(x, y, "Instances", obj_alarmLighting);
+			scr_audio_setAmbience(1, snd_alarm1, true);
+		}
+		
 	}
 
 	with(obj_trainWindow) {

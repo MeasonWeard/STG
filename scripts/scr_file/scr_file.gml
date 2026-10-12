@@ -138,7 +138,7 @@ function scr_file_createBlankSave() {
 			},
 			
 			weapons: {
-				weapon1: new gun_blaster(0, 1),
+				weapon1: undefined, //new gun_blaster(0, 1),
 				weapon2: undefined
 			},
 			
@@ -161,6 +161,10 @@ function scr_file_createBlankSave() {
 		},
 		
 		resources: {},
+		
+		progress: {
+			completedTutorial: false,
+		}
 		
 	};
 	
@@ -226,9 +230,23 @@ function scr_file_startGame() {
 	
 	//start
 	if (global.gameData.playerData.class1 == undefined) {
+		
 		room_goto(room_classSelect);
+		
 	} else {
-		room_goto(stage_hub1);
+		
+		var completedTutorial = scr_data_checkProgress("completedTutorial", true, false);
+		
+		if (completedTutorial) {
+			
+			room_goto(stage_hub1);
+			
+		} else {
+			
+			room_goto(room_chooseTutorial);
+			
+		}
+		
 	}
 	
 	return true;

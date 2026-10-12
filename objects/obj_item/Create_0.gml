@@ -4,7 +4,8 @@ key = "item";
 type = "item";
 val = 0;
 
-pickupRange = 300;
+pull = true;
+maxPullRange = undefined;
 depth = layers.physical - y;
 
 setup = true;

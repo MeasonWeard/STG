@@ -565,3 +565,44 @@ function scr_data_orderResourceKeys(keys) {
 	return sorted;
 
 }
+
+function scr_data_getProgress(key, defValue = undefined) {
+	
+	var gameData = global.gameData;
+	
+	if (!variable_struct_exists(gameData, "progress")) gameData.progress = {};
+	
+	var progress = gameData.progress;
+	
+	if (!variable_struct_exists(progress, key)) {
+	
+		variable_struct_set(progress, key, defValue);
+		return defValue;
+	
+	}
+	
+	return variable_struct_get(progress, key);
+	
+}
+
+function scr_data_setProgress(key, value) {
+	
+	var gameData = global.gameData;
+	
+	if (!variable_struct_exists(gameData, "progress")) gameData.progress = {};
+	
+	var progress = gameData.progress;
+	
+	variable_struct_set(progress, key, value);
+	
+}
+
+function scr_data_checkProgress(key, value, defValue = undefined) {
+
+	var current = scr_data_getProgress(key, defValue);
+
+	if (is_undefined(current)) return false;
+
+	return current == value;
+
+}

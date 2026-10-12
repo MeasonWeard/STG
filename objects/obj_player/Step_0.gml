@@ -138,8 +138,12 @@ if (pullItemTick > 0) {
 		var canCollect = (!is_callable(item.collectRequirements) or item.collectRequirements(self)) and item.collectDelay < 1; 
 		
 		var dist = point_distance(x, y, item.x, item.y);
+		
+		if (is_real(item.maxPullRange)) {
+			pullRange = min(pullRange, item.maxPullRange);	
+		}
 	
-		if (canCollect and dist <= pullRange) {
+		if (item.pull and canCollect and dist <= pullRange) {
 		
 		    var t = 1 - dist / pullRange;
 

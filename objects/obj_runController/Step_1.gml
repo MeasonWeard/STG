@@ -19,6 +19,8 @@ if (generateMap) {
 	runLevel = zoneInst.baseLevel + extraLevel;
 	
 	zoneInst.level = runLevel;
+
+	restartOnDeath = zoneInst.restartOnDeath;
 	
 	if (is_callable(zoneInst.setup)) zoneInst.setup();
 	

@@ -1,6 +1,6 @@
 function scr_zones_startZone(zoneConstructor, extraLevel, destroyPlayer = true) {
 
-	if (instance_exists(global.player)) instance_destroy(global.player);
+	if (destroyPlayer and instance_exists(global.player)) instance_destroy(global.player);
 	
 	global.runController = scr_obj_createExclusive(obj_runController, 0, 0);
 	var rc = global.runController;
@@ -23,6 +23,8 @@ function zone() constructor {
 	
 	preset = false;
 	presetSeed = 123456789;
+	
+	restartOnDeath = false;
 
 	mapW = 12;
 	mapH = 12;
@@ -46,14 +48,18 @@ function zone() constructor {
 		return map;
 		
 	}
+	
+	static winFunc = undefined;
 
 }
 
 function zone_intro() : zone() constructor {
 
 	name = "Intro";
-	portrait = spr_commercialPortrait2;
-	textCol = c_fuchsia;
+	portrait = spr_poster1;
+	textCol = c_white;
+	
+	restartOnDeath = true;
 
 	mapW = 8;
 	mapH = 8;
@@ -62,7 +68,7 @@ function zone_intro() : zone() constructor {
 	
 	preset = true;
 	
-	var groups = scr_spawns_standardGroups("aliens");
+	var groups = scr_spawns_introGroups();
 	minorGroups = groups.minor;
 	majorGroups = groups.major;
 	
@@ -79,12 +85,19 @@ function zone_intro() : zone() constructor {
 			yy: mapH - 1
 		}
 		
-		var stages = [stage_intro1, stage_intro2, stage_intro2];
-		var path = [0, 0, 1, 0, 1];
+		var stages = [stage_intro1, stage_intro2, stage_intro3, stage_intro4];
+		var path = [0, 0, 0, 3, 3];
 		
 		scr_mapGen_presetPath(map, startPos.xx, startPos.yy, stages, path);
 			
 		return map;
+	
+	}
+	
+	static winFunc = function() {
+	
+		global.gameData.playerData.weapons.weapon1 = new gun_blaster(0, 1);
+		scr_data_setProgress("completedTutorial", true);
 	
 	}
 	

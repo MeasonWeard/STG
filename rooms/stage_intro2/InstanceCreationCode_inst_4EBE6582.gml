@@ -1,0 +1,1 @@
+weapon = new gun_blaster(0, 1);

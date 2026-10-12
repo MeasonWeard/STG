@@ -11,6 +11,8 @@ scripted = false;
 scriptFunc = undefined;
 setupHub = true;
 pictureMode = false;
+restartOnDeath = instance_exists(rc) ? rc.restartOnDeath : false;
+restart = false;
 
 deathCountdown = 90;
 alertDelay = 30;

@@ -5,6 +5,7 @@ sc = noone;
 gameState = "running";
 runLevel = 1;
 extraLevel = 0;
+restartOnDeath = false;
 
 zoneConstructor = undefined;
 generateMap = true;

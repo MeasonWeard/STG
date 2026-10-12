@@ -3,6 +3,10 @@ gameData = global.gameData;
 rc = global.runController;
 global.endRunController = self;
 
+scr_audio_stopMusic();
+scr_audio_stopAmbience(1);
+scr_audio_stopAmbience(2);
+
 resources = rc.resources;
 
 tabs = ["resources", "xp", "loot","continue"];

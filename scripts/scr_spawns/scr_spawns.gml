@@ -170,3 +170,35 @@ function scr_spawns_standardGroups(mainGroup = undefined, prominence = 1) {
 	}
 	
 }
+
+function scr_spawns_introGroups() {
+
+	var minorGroups = [];
+	var majorGroups = [];
+
+	//MINOR
+	
+	var groupAliensMinor = new enemyGroup();
+	groupAliensMinor.spawns = [
+		new enemySpawn(obj_alien),
+		new enemySpawn(obj_bigAlien, 10, 20, 3, 12),
+	];
+	
+	array_push(minorGroups, groupAliensMinor);
+	
+	//MAJOR
+	
+	var groupAliensMajor = new enemyGroup();
+	groupAliensMajor.spawns = [
+		new enemySpawn(obj_alien),
+		new enemySpawn(obj_bigAlien, 1, 10, 15, 40),
+	];
+	
+	array_push(majorGroups, groupAliensMajor);
+
+	return {
+		minor: minorGroups,
+		major: majorGroups
+	}
+	
+}

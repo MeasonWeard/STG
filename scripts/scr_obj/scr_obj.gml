@@ -394,3 +394,16 @@ function scr_obj_offScreen(inst, margin = 0) {
 	);
 
 }
+
+function scr_obj_createEnemyArrows() {
+
+	with(obj_enemy) {
+	
+		var arrow = instance_create_layer(0, 0, "Instances", obj_arrow);
+		arrow.target = self;
+		arrow.source = global.player;
+		arrow.col = c_red;
+	
+	}
+
+}

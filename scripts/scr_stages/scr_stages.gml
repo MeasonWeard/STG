@@ -271,8 +271,18 @@ function scr_stages_endRun() {
 
 	if (instance_exists(global.player)) instance_destroy(global.player);
 	scr_char_removeAllPets();
-
 	
+	if (instance_exists(global.runController)) {
+		
+		var rc = global.runController;
+	
+		if (rc.gameState == "win" and is_callable(rc.zoneInst.winFunc)) {
+			
+			rc.zoneInst.winFunc();
+		}
+	
+	}
+
 	room_goto(room_endRun);
 	
 }
@@ -322,6 +332,15 @@ function scr_stages_inStartingCell() {
 	var posY = global.runController.posY;
 		
 	return (posX == startX and posY == startY);
+	
+}
+
+function scr_stages_restartStage() {
+	
+	var rc = global.runController;
+	if (!instance_exists(rc)) exit;
+	
+	rc.generateMap = true;
 	
 }
 
